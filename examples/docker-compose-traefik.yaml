@@ -1,0 +1,24 @@
+services:
+  frontend:
+    container_name: flavormate_webapp
+    image: ghcr.io/flavormate/flavormate-webapp
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flavormate_webapp.rule=(Host(`app.example.com`))"
+      - "traefik.http.routers.flavormate_webapp.tls=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.services.flavormate_webapp.loadbalancer.server.port=8080"
+    networks:
+      - proxy
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -so /dev/null http://localhost:8080/ || exit 1" ]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+
+networks:
+  proxy:
+    external: true
