@@ -27,8 +27,6 @@ class HighlightsClient extends APageableClient<Highlight> {
     final response =
         await httpClient.get('$baseURL/list/${filter.name}?$params');
 
-    HighlightMapper.fromMap(response.data!['content'][0]);
-
     return Pageable.fromMap(response.data!, parser);
   }
 }

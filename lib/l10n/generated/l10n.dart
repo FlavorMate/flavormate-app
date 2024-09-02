@@ -1006,6 +1006,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Logout'**
   String get btn_logout;
+
+  /// No description provided for @c_dashboard_highlights_no_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No highlights found!'**
+  String get c_dashboard_highlights_no_title;
+
+  /// No description provided for @c_dashboard_highlights_no_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please create a recipe'**
+  String get c_dashboard_highlights_no_subtitle;
+
+  /// No description provided for @c_dashboard_latest_recipes_no_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No recipes found!'**
+  String get c_dashboard_latest_recipes_no_title;
+
+  /// No description provided for @c_dashboard_latest_recipes_no_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please create a recipe'**
+  String get c_dashboard_latest_recipes_no_subtitle;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

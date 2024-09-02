@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dashboard/empty_message.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_carousel.dart';
@@ -33,25 +34,34 @@ class LatestRecipeViewer extends ConsumerWidget {
       padding: 4,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TText(
-              L10n.of(context).c_dashboard_latest,
-              TextStyles.displaySmall,
-              color: TextColor.onPrimaryContainer,
+          SizedBox(
+            height: 60,
+            child: Center(
+              child: TText(
+                L10n.of(context).c_dashboard_latest,
+                TextStyles.displaySmall,
+                color: TextColor.onPrimaryContainer,
+              ),
             ),
           ),
-          RStruct(
-            provider,
-            (_, highlights) => TCarousel(
-              height: 400,
-              slides:
-                  highlights.content.map((l) => getSlide(context, l)).toList(),
-            ),
-            loadingChild: const SizedBox(
-              height: 400,
-              width: double.infinity,
-              child: Center(child: CircularProgressIndicator()),
+          SizedBox(
+            height: 400,
+            width: double.infinity,
+            child: RStruct(
+              provider,
+              (_, latestRecipes) => latestRecipes.page.empty
+                  ? EmptyMessage(
+                      title:
+                          L10n.of(context).c_dashboard_latest_recipes_no_title,
+                      subtitle: L10n.of(context)
+                          .c_dashboard_latest_recipes_no_subtitle,
+                    )
+                  : TCarousel(
+                      height: 400,
+                      slides: latestRecipes.content
+                          .map((l) => getSlide(context, l))
+                          .toList(),
+                    ),
             ),
           ),
         ],

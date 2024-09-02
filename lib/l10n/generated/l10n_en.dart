@@ -465,4 +465,16 @@ class L10nEn extends L10n {
 
   @override
   String get btn_logout => 'Logout';
+
+  @override
+  String get c_dashboard_highlights_no_title => 'No highlights found!';
+
+  @override
+  String get c_dashboard_highlights_no_subtitle => 'Please create a recipe';
+
+  @override
+  String get c_dashboard_latest_recipes_no_title => 'No recipes found!';
+
+  @override
+  String get c_dashboard_latest_recipes_no_subtitle => 'Please create a recipe';
 }

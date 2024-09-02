@@ -465,4 +465,16 @@ class L10nDe extends L10n {
 
   @override
   String get btn_logout => 'Abmelden';
+
+  @override
+  String get c_dashboard_highlights_no_title => 'Keine Highlights gefunden!';
+
+  @override
+  String get c_dashboard_highlights_no_subtitle => 'Bitte erstelle ein Rezept';
+
+  @override
+  String get c_dashboard_latest_recipes_no_title => 'Keine Rezepte gefunden!';
+
+  @override
+  String get c_dashboard_latest_recipes_no_subtitle => 'Bitte erstelle ein Rezept';
 }
