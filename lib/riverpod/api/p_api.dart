@@ -12,7 +12,7 @@ part 'p_api.g.dart';
 class PApi extends _$PApi {
   @override
   ApiClient build() {
-    final server = ref.watch(pServerProvider) ?? 'http://localhost:8095';
+    final server = ref.watch(pServerProvider) ?? '';
     final token = ref.watch(pTokensProvider);
     final auth = ref.read(pAuthStateProvider.notifier);
 

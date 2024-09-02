@@ -24,7 +24,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   void initState() {
     ref.listenManual(pServerProvider, fireImmediately: true, (_, value) {
-      if (value == null) return;
+      if (value == null || _serverController.text.isNotEmpty) return;
       _serverController.text = value;
     });
     super.initState();
