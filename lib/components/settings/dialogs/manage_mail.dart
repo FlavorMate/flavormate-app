@@ -47,6 +47,7 @@ class _ManageMailState extends State<ManageMail> {
                       border: const OutlineInputBorder(),
                       label: Text(L10n.of(context).d_settings_manage_mail_old),
                     ),
+                    autocorrect: false,
                     validator: (value) {
                       if (UValidator.isEmpty(value)) {
                         return L10n.of(context).v_isEmpty;
@@ -68,6 +69,7 @@ class _ManageMailState extends State<ManageMail> {
                     border: const OutlineInputBorder(),
                     label: Text(L10n.of(context).d_settings_manage_mail_new),
                   ),
+                  autocorrect: false,
                   validator: (value) {
                     if (UValidator.isEmpty(value)) {
                       return L10n.of(context).v_isEmpty;
@@ -86,6 +88,7 @@ class _ManageMailState extends State<ManageMail> {
                     border: const OutlineInputBorder(),
                     label: Text(L10n.of(context).d_settings_manage_mail_new_2),
                   ),
+                  autocorrect: false,
                   validator: (value) {
                     if (UValidator.isEmpty(value)) {
                       return L10n.of(context).v_isEmpty;

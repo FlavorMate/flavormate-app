@@ -47,6 +47,7 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
                     label: Text(L10n.of(context)
                         .d_admin_user_management_create_displayName),
                   ),
+                  autocorrect: false,
                   validator: (value) {
                     if (UValidator.isEmpty(value)) {
                       return L10n.of(context).v_isEmpty;
@@ -62,6 +63,7 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
                     label: Text(L10n.of(context)
                         .d_admin_user_management_create_username),
                   ),
+                  autocorrect: false,
                   validator: (value) {
                     if (UValidator.isEmpty(value)) {
                       return L10n.of(context).v_isEmpty;
@@ -93,6 +95,7 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
                     label: Text(
                         L10n.of(context).d_admin_user_management_create_mail),
                   ),
+                  autocorrect: false,
                   validator: (value) {
                     if (UValidator.isEmpty(value)) {
                       return L10n.of(context).v_isEmpty;
