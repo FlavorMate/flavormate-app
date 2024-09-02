@@ -39,6 +39,7 @@ class SettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userProvider = ref.watch(pUserProvider);
     final infoProvider = ref.watch(pPackageInfoProvider);
+    final serverProvider = ref.watch(pServerProvider);
     return TResponsive(
       child: Column(
         children: [
@@ -56,47 +57,63 @@ class SettingsPage extends ConsumerWidget {
                     ),
                     child: TRow(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      space: PADDING * 2,
+                      space: PADDING,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(BORDER_RADIUS),
-                          child: user.avatar != null
-                              ? TImage(
-                                  imageSrc: user.avatar
-                                      ?.path(context.read(pServerProvider)!),
-                                  height: 64,
-                                  width: 64,
-                                )
-                              : Container(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer,
-                                  height: 64,
-                                  width: 64,
-                                  child: Center(
-                                    child: TText(
-                                      user.displayName[0],
-                                      TextStyles.headlineLarge,
-                                      color: TextColor.onPrimaryContainer,
+                        Expanded(
+                          flex: 1,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.circular(BORDER_RADIUS),
+                              child: user.avatar != null
+                                  ? TImage(
+                                      imageSrc: user.avatar?.path(
+                                          context.read(pServerProvider)!),
+                                      height: 64,
+                                      width: 64,
+                                    )
+                                  : Container(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primaryContainer,
+                                      height: 64,
+                                      width: 64,
+                                      child: Center(
+                                        child: TText(
+                                          user.displayName[0],
+                                          TextStyles.headlineLarge,
+                                          color: TextColor.onPrimaryContainer,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
+                            ),
+                          ),
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TText(
-                              user.displayName,
-                              TextStyles.titleLarge,
-                              color: TextColor.filledButton,
-                            ),
-                            const SizedBox(height: PADDING / 2),
-                            TText(
-                              '@${user.username}',
-                              TextStyles.titleSmall,
-                              color: TextColor.filledButton,
-                            ),
-                          ],
+                        Expanded(
+                          flex: 2,
+                          child: TColumn(
+                            space: PADDING / 2,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TText(
+                                user.displayName,
+                                TextStyles.titleLarge,
+                                color: TextColor.filledButton,
+                              ),
+                              TText(
+                                '@${user.username}',
+                                TextStyles.titleSmall,
+                                color: TextColor.filledButton,
+                              ),
+                              TText(
+                                '☁ ${serverProvider!}',
+                                TextStyles.bodySmall,
+                                color: TextColor.filledButton,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
