@@ -55,6 +55,7 @@ class _NoConnectionPageState extends ConsumerState<NoConnectionPage> {
             TText(
               L10n.of(context).p_no_connection_subtitle,
               TextStyles.titleSmall,
+              textAlign: TextAlign.center,
             ),
             FilledButton(
               onPressed: () => ref.read(pAuthStateProvider.notifier).logout(),
