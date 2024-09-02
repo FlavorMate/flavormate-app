@@ -231,5 +231,8 @@
   "cat_17": "Auflauf",
   "cat_30": "Früchte",
   "cat_6": "Kuchen",
-  "cat_22": "Rösten"
+  "cat_22": "Rösten",
+  "p_no_connection_title": "Keine Verbindung zum Server",
+  "p_no_connection_subtitle": "Bitte probiere es später nochmal oder wechsle den Server",
+  "btn_logout": "Abmelden"
 }

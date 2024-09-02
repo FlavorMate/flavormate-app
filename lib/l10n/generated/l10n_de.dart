@@ -660,4 +660,13 @@ class L10nDe extends L10n {
 
   @override
   String get cat_22 => 'Rösten';
+
+  @override
+  String get p_no_connection_title => 'Keine Verbindung zum Server';
+
+  @override
+  String get p_no_connection_subtitle => 'Bitte probiere es später nochmal oder wechsle den Server';
+
+  @override
+  String get btn_logout => 'Abmelden';
 }

@@ -8,6 +8,7 @@ import 'package:flavormate/pages/library/_id.dart';
 import 'package:flavormate/pages/library/index.dart';
 import 'package:flavormate/pages/login/login_page.dart';
 import 'package:flavormate/pages/more/index.dart';
+import 'package:flavormate/pages/no_connection/index.dart';
 import 'package:flavormate/pages/recipe/index.dart';
 import 'package:flavormate/pages/recipes/index.dart';
 import 'package:flavormate/pages/settings/index.dart';
@@ -153,8 +154,15 @@ var routes = [
   GoRoute(
     path: '/admin/user',
     name: 'user_management',
-    pageBuilder: (context, state) => NoTransitionPage(
+    pageBuilder: (context, state) => const NoTransitionPage(
       child: UserManagementPage(),
+    ),
+  ),
+  GoRoute(
+    path: '/no_connection',
+    name: 'no_connection',
+    pageBuilder: (context, state) => const NoTransitionPage(
+      child: NoConnectionPage(),
     ),
   ),
 ];

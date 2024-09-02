@@ -660,4 +660,13 @@ class L10nEn extends L10n {
 
   @override
   String get cat_22 => 'Roast';
+
+  @override
+  String get p_no_connection_title => 'No connection to the server';
+
+  @override
+  String get p_no_connection_subtitle => 'Please try again later or switch the server';
+
+  @override
+  String get btn_logout => 'Logout';
 }

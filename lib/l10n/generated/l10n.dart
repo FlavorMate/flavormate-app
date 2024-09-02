@@ -1396,6 +1396,24 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Roast'**
   String get cat_22;
+
+  /// No description provided for @p_no_connection_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No connection to the server'**
+  String get p_no_connection_title;
+
+  /// No description provided for @p_no_connection_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again later or switch the server'**
+  String get p_no_connection_subtitle;
+
+  /// No description provided for @btn_logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get btn_logout;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
