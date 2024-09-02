@@ -24,8 +24,10 @@ class _NoConnectionPageState extends ConsumerState<NoConnectionPage> {
   @override
   void initState() {
     timer = Timer.periodic(const Duration(seconds: 5), (_) async {
-      await ref.read(pApiProvider).userClient.getUser();
-      ref.read(pGoRouterProvider).goNamed('home');
+      try {
+        await ref.read(pApiProvider).userClient.getUser();
+        ref.read(pGoRouterProvider).goNamed('home');
+      } catch (_) {}
     });
 
     super.initState();

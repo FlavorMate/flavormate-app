@@ -22,6 +22,7 @@ import 'package:flavormate/models/story.dart';
 import 'package:flavormate/models/tag/tag.dart';
 import 'package:flavormate/models/user/token.dart';
 import 'package:flavormate/models/user/user.dart';
+import 'package:flavormate/utils/u_go_router.dart';
 
 typedef ApiClientException = DioException;
 typedef ApiClientResponse<T> = Response<T>;
@@ -52,8 +53,12 @@ _interceptors(InterceptorMethods handlers) => InterceptorsWrapper(
         // you can resolve a `Response` object using `handler.resolve(response)`.
 
         if (error.type == DioExceptionType.connectionError) {
-          handlers.onNoConnection();
-          return;
+          if (!['/login', '/no_connection'].contains(currentRoute())) {
+            handlers.onNoConnection();
+            return;
+          } else {
+            return handler.next(error);
+          }
         }
 
         if (error.response?.statusCode == 401) {
