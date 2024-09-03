@@ -6,7 +6,8 @@ This is the Project for the FlavorMate frontend, which is written in Flutter.
 
 ### Android
 
-Download the App from the PlayStore (once it's in the public beta) or download the apk from the releases tab.
+Download the App from the [PlayStore (beta)](https://play.google.com/store/apps/details?id=de.flavormate) or download
+the apk from the releases tab.
 
 ### iOS
 
