@@ -2,35 +2,50 @@ import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 extension EDuration on Duration {
-  String beautify(BuildContext context) {
-    String twoDigits(int n) {
-      if (n == 0) return '';
-      if (n >= 10) return '$n';
-      return '0$n';
-    }
+  String _twoDigits(int n) {
+    if (n == 0) return '';
+    if (n >= 10) return '$n';
+    return '0$n';
+  }
 
+  String beautify(BuildContext context) {
     List<String> parts = [];
 
     if (inDays != 0) {
       parts.add('$inDays ${L10n.of(context).e_duration_day}');
     }
 
-    String twoDigitHours = twoDigits(inHours.remainder(24));
+    String twoDigitHours = _twoDigits(inHours.remainder(24));
     if (twoDigitHours.isNotEmpty) {
       parts.add('$twoDigitHours ${L10n.of(context).e_duration_hour}');
     }
 
-    String twoDigitMinutes = twoDigits(inMinutes.remainder(60));
+    String twoDigitMinutes = _twoDigits(inMinutes.remainder(60));
     if (twoDigitMinutes.isNotEmpty) {
       parts.add('$twoDigitMinutes ${L10n.of(context).e_duration_minute}');
     }
 
-    String twoDigitSeconds = twoDigits(inSeconds.remainder(60));
+    String twoDigitSeconds = _twoDigits(inSeconds.remainder(60));
     if (twoDigitSeconds.isNotEmpty) {
       parts.add('$twoDigitSeconds ${L10n.of(context).e_duration_second}');
     }
 
     return parts.join(' ');
+  }
+
+  String beautify2(BuildContext context) {
+    final list = [];
+    int days = inDays;
+    int hours = inHours.remainder(24);
+    int minutes = inMinutes.remainder(60);
+    int seconds = inSeconds.remainder(60);
+
+    list.add('$days ${L10n.of(context).e_duration_day}');
+    list.add('$hours ${L10n.of(context).e_duration_hour}');
+    list.add('$minutes ${L10n.of(context).e_duration_minute}');
+    list.add('$seconds ${L10n.of(context).e_duration_second}');
+
+    return list.join(' - ');
   }
 
   String toISO8601() {
