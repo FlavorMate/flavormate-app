@@ -1,6 +1,14 @@
 extension EString on String {
-  String shorten({int length = 48}) {
-    if (this.length <= length) {
+  String shorten({int length = 48, int deep = 0}) {
+    final newLine = indexOf(RegExp(r'[\r\n]'));
+
+    if (newLine >= 0) {
+      return substring(0, newLine).shorten(deep: deep + 1);
+    }
+
+    if (this.length <= length && deep != 0) {
+      return '$this...';
+    } else if (this.length <= length) {
       return this;
     } else {
       var spaceAtIndex = indexOf(RegExp(r'\s'), length);
