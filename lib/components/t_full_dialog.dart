@@ -1,4 +1,5 @@
 import 'package:flavormate/components/t_app_bar.dart';
+import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +24,7 @@ class TFullDialog extends StatelessWidget {
     return Dialog.fullscreen(
       child: Scaffold(
         appBar: TAppBar(title: title),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(PADDING),
-            child: child,
-          ),
-        ),
+        body: TResponsive(child: child),
         bottomNavigationBar: SafeArea(
           child: Container(
             height: 64,
