@@ -1,6 +1,8 @@
+import 'package:flavormate/extensions/e_string.dart';
+
 abstract class UValidator {
   static bool isEmpty(String? input) {
-    return (input == null || input.isEmpty);
+    return EString.isEmpty(input);
   }
 
   static bool isMail(String input) {
@@ -20,5 +22,9 @@ abstract class UValidator {
         RegExp(r'(?=.*[A-Z])(?=.*[!@#.$&*-])(?=.*[0-9])(?=.*[a-z])');
 
     return passwordRegex.hasMatch(input);
+  }
+
+  static bool isNumber(String input) {
+    return int.tryParse(input) != null;
   }
 }
