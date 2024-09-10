@@ -121,15 +121,11 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
   }
 
   void createIngredient() {
-    setState(() {
-      _ingredientGroup.ingredients.add(
-        IngredientDraft(
-          amount: 0,
-          unit: null,
-          label: '',
-        ),
-      );
-    });
+    final ingredient = IngredientDraft(amount: 0, label: '');
+
+    setState(() => _ingredientGroup.ingredients.add(ingredient));
+
+    openIngredient(ingredient);
   }
 
   void deleteIngredient(IngredientDraft group) {

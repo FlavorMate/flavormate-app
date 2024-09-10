@@ -124,9 +124,11 @@ class _DInstructionGroupState extends State<DInstructionGroup> {
   }
 
   void createInstruction() {
-    setState(() {
-      _instructionGroup.instructions.add(InstructionDraft(label: ''));
-    });
+    final instruction = InstructionDraft(label: '');
+
+    setState(() => _instructionGroup.instructions.add(instruction));
+
+    openInstruction(instruction);
   }
 
   void deleteInstruction(InstructionDraft group) {

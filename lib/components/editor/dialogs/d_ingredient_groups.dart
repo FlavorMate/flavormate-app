@@ -109,9 +109,11 @@ class _DIngredientGroupsState extends State<DIngredientGroups> {
   }
 
   void createGroup() {
-    setState(() {
-      _ingredientGroups.add(IngredientGroupDraft('', []));
-    });
+    final ingredientGroup = IngredientGroupDraft(ingredients: []);
+
+    setState(() => _ingredientGroups.add(ingredientGroup));
+
+    openGroup(ingredientGroup);
   }
 
   void deleteGroup(IngredientGroupDraft group) {

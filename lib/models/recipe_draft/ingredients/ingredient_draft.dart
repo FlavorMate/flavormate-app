@@ -12,8 +12,8 @@ class IngredientDraft with IngredientDraftMappable {
 
   IngredientDraft({
     required this.amount,
-    required this.unit,
     required this.label,
+    this.unit,
   });
 
   bool get isValid => amount != 0 && label.isNotEmpty;
