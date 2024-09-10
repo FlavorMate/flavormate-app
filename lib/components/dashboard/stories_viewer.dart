@@ -1,6 +1,7 @@
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_carousel.dart';
+import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_slide.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -18,6 +19,7 @@ class StoriesViewer extends ConsumerWidget {
   TSlide getSlide(BuildContext context, Story story) => TSlide(
         imageSrc: story.recipe.coverUrl,
         title: story.label,
+        type: TImageType.network,
         date: story.createdOn,
         onTap: () => context.pushNamed(
           'recipe',

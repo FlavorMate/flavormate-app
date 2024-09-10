@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class TImageLabel extends StatelessWidget {
   final String? imageSrc;
+  final TImageType type;
   final double height;
   final String? title;
   final double radius;
@@ -10,6 +11,7 @@ class TImageLabel extends StatelessWidget {
 
   const TImageLabel({
     required this.imageSrc,
+    required this.type,
     required this.height,
     this.title,
     this.radius = 8,
@@ -26,7 +28,10 @@ class TImageLabel extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(radius),
-            child: TImage(imageSrc: imageSrc),
+            child: TImage(
+              imageSrc: imageSrc,
+              type: type,
+            ),
           ),
           if (title != null)
             Align(

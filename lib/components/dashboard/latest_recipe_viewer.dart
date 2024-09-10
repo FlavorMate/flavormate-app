@@ -2,6 +2,7 @@ import 'package:flavormate/components/dashboard/empty_message.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_carousel.dart';
+import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_slide.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -19,6 +20,7 @@ class LatestRecipeViewer extends ConsumerWidget {
   TSlide getSlide(BuildContext context, Recipe recipe) => TSlide(
         imageSrc: recipe.coverUrl,
         title: recipe.label,
+        type: TImageType.network,
         date: recipe.createdOn,
         onTap: () => context.pushNamed(
           'recipe',

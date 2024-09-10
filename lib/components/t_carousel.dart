@@ -32,6 +32,7 @@ class _TCarouselState extends State<TCarousel> {
           if (widget.slides.length < 2)
             TImageLabel(
               imageSrc: widget.slides.first.imageSrc,
+              type: widget.slides.first.type,
               height: widget.height,
             )
           else
@@ -57,6 +58,7 @@ class _TCarouselState extends State<TCarousel> {
                     children: [
                       TImageLabel(
                         imageSrc: slide.imageSrc,
+                        type: slide.type,
                         height: widget.height,
                         title: slide.title,
                       ),

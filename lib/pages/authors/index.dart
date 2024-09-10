@@ -1,5 +1,6 @@
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_card.dart';
+import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_image_label.dart';
 import 'package:flavormate/components/t_pageable.dart';
 import 'package:flavormate/components/t_wrap.dart';
@@ -37,6 +38,7 @@ class AuthorsPage extends StatelessWidget {
                       child: TImageLabel(
                         imageSrc: author.account.avatar
                             ?.path(context.read(pServerProvider)!),
+                        type: TImageType.network,
                         height: 200,
                         title: author.account.displayName,
                         labelSize: 0.4,

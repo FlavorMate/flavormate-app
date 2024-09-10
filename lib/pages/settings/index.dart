@@ -70,6 +70,7 @@ class SettingsPage extends ConsumerWidget {
                                   ? TImage(
                                       imageSrc: user.avatar?.path(
                                           context.read(pServerProvider)!),
+                                      type: TImageType.network,
                                       height: 64,
                                       width: 64,
                                     )

@@ -1,6 +1,7 @@
 import 'package:flavormate/components/dialogs/confirm_dialog.dart';
 import 'package:flavormate/components/library/dialogs/edit_book_dialog.dart';
 import 'package:flavormate/components/t_card.dart';
+import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_image_label.dart';
 import 'package:flavormate/extensions/e_date_time.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -35,6 +36,7 @@ class BookCard extends ConsumerWidget {
               children: [
                 TImageLabel(
                   imageSrc: book.recipes!.firstOrNull?.coverUrl,
+                  type: TImageType.network,
                   height: 200,
                   title: book.label,
                   labelSize: 0.4,
