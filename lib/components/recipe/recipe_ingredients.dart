@@ -60,7 +60,7 @@ class RecipeIngredients extends StatelessWidget {
                 rows: [
                   for (final ingredient in ingredientGroup.ingredients)
                     [
-                      '${(ingredient.amount * factor) <= 0 ? '' : (ingredient.amount * factor / serving.amount).beautify} ${ingredient.unit.beautify()}',
+                      '${(ingredient.amount * factor) <= 0 ? '' : (ingredient.amount * factor / serving.amount).beautify} ${ingredient.unit.beautify}',
                       ingredient.label,
                     ],
                 ],
