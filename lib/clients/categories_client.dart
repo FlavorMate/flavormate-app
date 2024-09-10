@@ -42,4 +42,16 @@ class CategoriesClient extends ASearchL10nClient<Category> {
 
     return Pageable.fromMap(response.data!, CategoryMapper.fromMap);
   }
+
+  /// Used in editor where all categories need to be loaded.
+  /// The categories provided here dont have recipes.
+  Future<List<Category>> findRaw(String language) async {
+    final params = getParams({'language': language});
+
+    final response = await httpClient.get('$baseURL/raw?$params');
+
+    List<Map<String, dynamic>> data = List.from(response.data!);
+
+    return data.map(parser).toList();
+  }
 }
