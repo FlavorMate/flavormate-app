@@ -1,4 +1,4 @@
-import 'package:flavormate/components/dialogs/confirm_dialog.dart';
+import 'package:flavormate/components/dialogs/t_confirm_dialog.dart';
 import 'package:flavormate/components/library/dialogs/edit_book_dialog.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_image.dart';
@@ -137,7 +137,7 @@ class BookCard extends ConsumerWidget {
     final response = await showDialog<bool>(
       context: context,
       builder: (_) =>
-          ConfirmDialog(title: L10n.of(context).d_library_delete_title),
+          TConfirmDialog(title: L10n.of(context).d_library_delete_title),
     );
 
     if (response ?? false) {

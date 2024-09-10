@@ -1,5 +1,5 @@
+import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
-import 'package:flavormate/components/t_full_dialog.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/draft/p_draft_categories.dart';
 import 'package:flutter/material.dart';

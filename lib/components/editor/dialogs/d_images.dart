@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_column.dart';
-import 'package:flavormate/components/t_full_dialog.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/draft/draft.dart';
 import 'package:flavormate/models/file/file.dart';

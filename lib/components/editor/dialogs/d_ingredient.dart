@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/extensions/e_number.dart';
@@ -57,22 +58,13 @@ class _DIngredientState extends ConsumerState<DIngredient> {
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(pUnitsProvider);
-    return AlertDialog(
-      scrollable: true,
-      title: Text(L10n.of(context).d_editor_ingredient_title),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(),
-          child: Text(L10n.of(context).btn_cancel),
-        ),
-        FilledButton(
-          onPressed: submit,
-          child: Text(L10n.of(context).btn_save),
-        ),
-      ],
-      content: Form(
+    return TAlertDialog(
+      title: L10n.of(context).d_editor_ingredient_title,
+      submit: submit,
+      child: Form(
         key: _formKey,
         child: TColumn(
+          mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
               controller: _amountController,

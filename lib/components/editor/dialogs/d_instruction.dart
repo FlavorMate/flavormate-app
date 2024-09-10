@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe_draft/instructions/instruction_draft.dart';
@@ -40,22 +41,14 @@ class _DInstructionState extends State<DInstruction> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return TAlertDialog(
       scrollable: true,
-      title: Text(L10n.of(context).d_editor_instruction_title),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(),
-          child: Text(L10n.of(context).btn_cancel),
-        ),
-        FilledButton(
-          onPressed: submit,
-          child: Text(L10n.of(context).btn_save),
-        ),
-      ],
-      content: Form(
+      title: L10n.of(context).d_editor_instruction_title,
+      submit: submit,
+      child: Form(
         key: _formKey,
         child: TColumn(
+          mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
               controller: _instructionController,

@@ -1,8 +1,8 @@
+import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/editor/dialogs/d_duration.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_column.dart';
-import 'package:flavormate/components/t_full_dialog.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/extensions/e_duration.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';

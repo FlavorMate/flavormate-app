@@ -5,7 +5,7 @@ import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../utils/constants.dart';
+import '../../utils/constants.dart';
 
 class TFullDialog extends StatelessWidget {
   final String title;

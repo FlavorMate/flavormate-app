@@ -1,5 +1,5 @@
+import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/t_column.dart';
-import 'package:flavormate/components/t_full_dialog.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/tag_draft/tag_draft.dart';
 import 'package:flavormate/utils/constants.dart';

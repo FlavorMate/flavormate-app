@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -13,31 +14,22 @@ class DDiet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(L10n.of(context).d_editor_diet_title),
-      content: SizedBox(
-        width: 250,
-        child: TColumn(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (final diet in Diet.values)
-              TButton(
-                onPressed: () => context.pop(diet),
-                leading: Icon(diet.icon),
-                label: diet.getName(context),
-                trailing: this.diet == diet
-                    ? const Icon(MdiIcons.checkCircleOutline)
-                    : null,
-              ),
-          ],
-        ),
+    return TAlertDialog(
+      title: L10n.of(context).d_editor_diet_title,
+      child: TColumn(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (final diet in Diet.values)
+            TButton(
+              onPressed: () => context.pop(diet),
+              leading: Icon(diet.icon),
+              label: diet.getName(context),
+              trailing: this.diet == diet
+                  ? const Icon(MdiIcons.checkCircleOutline)
+                  : null,
+            ),
+        ],
       ),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(),
-          child: Text(L10n.of(context).btn_cancel),
-        ),
-      ],
     );
   }
 }

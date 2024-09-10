@@ -1,4 +1,4 @@
-import 'package:flavormate/components/dialogs/confirm_dialog.dart';
+import 'package:flavormate/components/dialogs/t_confirm_dialog.dart';
 import 'package:flavormate/components/recipe/dialogs/change_owner_dialog.dart';
 import 'package:flavormate/components/recipe/dialogs/library_dialog.dart';
 import 'package:flavormate/components/recipe/recipe_action_button.dart';
@@ -188,7 +188,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   delete() async {
     final response = await showDialog<bool>(
       context: context,
-      builder: (_) => ConfirmDialog(
+      builder: (_) => TConfirmDialog(
         title: L10n.of(context).d_recipe_delete_title,
       ),
     );
