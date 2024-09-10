@@ -477,4 +477,143 @@ class L10nDe extends L10n {
 
   @override
   String get c_dashboard_latest_recipes_no_subtitle => 'Bitte erstelle ein Rezept';
+
+  @override
+  String get d_editor_common_title => 'Allgemeine Informationen';
+
+  @override
+  String get d_editor_common_label => 'Rezeptname';
+
+  @override
+  String get d_editor_common_description => 'Beschreibung';
+
+  @override
+  String get d_editor_serving_title => 'Mengenangaben';
+
+  @override
+  String get d_editor_serving_amount => 'Menge';
+
+  @override
+  String get d_editor_serving_label => 'Portion';
+
+  @override
+  String get d_editor_durations_title => 'Zeitangaben';
+
+  @override
+  String get d_editor_durations_cook_time_title => 'Kochzeit';
+
+  @override
+  String get d_editor_durations_rest_time_title => 'Ruhezeit';
+
+  @override
+  String get d_editor_durations_prep_time_title => 'Vorbereitungszeit';
+
+  @override
+  String get d_editor_ingredient_groups_title => 'Zutatengruppen';
+
+  @override
+  String get d_editor_ingredient_group_title => 'Zutaten';
+
+  @override
+  String get d_editor_ingredient_group_add_ingredient => 'Zutat hinzufügen';
+
+  @override
+  String get d_editor_ingredient_group_ingredient => 'Zutat';
+
+  @override
+  String get d_editor_ingredient_title => 'Zutat';
+
+  @override
+  String get d_editor_ingredient_amount => 'Menge';
+
+  @override
+  String get d_editor_ingredient_unit => 'Einheit';
+
+  @override
+  String get d_editor_ingredient_label => 'Zutat';
+
+  @override
+  String get d_editor_ingredient_groups_label => 'Name';
+
+  @override
+  String d_editor_ingredient_groups_label_2(String index) {
+    return '$index. Gruppe';
+  }
+
+  @override
+  String get d_editor_ingredient_groups_create_group => 'Gruppe erstellen';
+
+  @override
+  String get d_editor_ingredient_group_label => 'Gruppenname';
+
+  @override
+  String get d_editor_instruction_groups_title => 'Schrittgruppen';
+
+  @override
+  String get d_editor_instruction_groups_label => 'Name';
+
+  @override
+  String d_editor_instruction_groups_label_2(Object index) {
+    return '$index. Gruppe';
+  }
+
+  @override
+  String get d_editor_instruction_groups_create_group => 'Gruppe erstellen';
+
+  @override
+  String get d_editor_instruction_group_title => 'Schritte';
+
+  @override
+  String get d_editor_instruction_group_label => 'Gruppenname';
+
+  @override
+  String get d_editor_instruction_group_instruction => 'Schritt';
+
+  @override
+  String get d_editor_instruction_group_add_instruction => 'Schritt hinzufügen';
+
+  @override
+  String get d_editor_instruction_title => 'Schritt';
+
+  @override
+  String get d_editor_instruction_label => 'Schritt';
+
+  @override
+  String get d_editor_course_title => 'Rezepttyp';
+
+  @override
+  String get d_editor_diet_title => 'Ernährungstyp';
+
+  @override
+  String get d_editor_tags_title => 'Tags';
+
+  @override
+  String get d_editor_tags_tag => 'Tag hinzufügen';
+
+  @override
+  String get v_duplicate => 'Element bereits vorhanden';
+
+  @override
+  String get d_editor_categories_title => 'Sonstige Kategorien';
+
+  @override
+  String get d_editor_duration_days => 'Tage';
+
+  @override
+  String get d_editor_duration_hours => 'Stunden';
+
+  @override
+  String get d_editor_duration_minutes => 'Minuten';
+
+  @override
+  String get d_editor_duration_seconds => 'Sekunden';
+
+  @override
+  String get v_isNumber => 'Bitte gib eine Zahl ein';
+
+  @override
+  String get d_editor_images_title => 'Bilder';
+
+  @override
+  String get d_editor_images_add_image => 'Bild hinzufügen';
 }
