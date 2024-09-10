@@ -74,21 +74,13 @@ extension EDuration on Duration {
       isoString += '${remainingDays}D';
     }
 
-    if (hoursOfDay > 0 || minutesOfHour > 0 || secondsOfMinute > 0) {
-      isoString += 'T';
-    }
+    isoString += 'T';
 
-    if (hoursOfDay > 0) {
-      isoString += '${hoursOfDay}H';
-    }
+    isoString += '${hoursOfDay}H';
 
-    if (minutesOfHour > 0) {
-      isoString += '${minutesOfHour}M';
-    }
+    isoString += '${minutesOfHour}M';
 
-    if (secondsOfMinute > 0) {
-      isoString += '${secondsOfMinute}S';
-    }
+    isoString += '${secondsOfMinute}S';
 
     return isoString;
   }
