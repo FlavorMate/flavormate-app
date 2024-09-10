@@ -3,6 +3,7 @@ import 'package:flavormate/pages/authors/_id.dart';
 import 'package:flavormate/pages/authors/index.dart';
 import 'package:flavormate/pages/categories/_id.dart';
 import 'package:flavormate/pages/categories/index.dart';
+import 'package:flavormate/pages/editor/_id.dart';
 import 'package:flavormate/pages/home/index.dart';
 import 'package:flavormate/pages/library/_id.dart';
 import 'package:flavormate/pages/library/index.dart';
@@ -163,6 +164,13 @@ var routes = [
     name: 'no_connection',
     pageBuilder: (context, state) => const NoTransitionPage(
       child: NoConnectionPage(),
+    ),
+  ),
+  GoRoute(
+    path: '/editor/:id',
+    name: 'editor',
+    pageBuilder: (context, state) => NoTransitionPage(
+      child: EditorPage(id: state.pathParameters['id'] as String),
     ),
   ),
 ];

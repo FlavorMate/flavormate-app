@@ -1,8 +1,9 @@
+import 'dart:math';
+
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_icon_button.dart';
 import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/components/t_text.dart';
-import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,10 @@ class MorePage extends StatelessWidget {
                 ),
                 TIconButton(
                   width: 250,
-                  onPressed: () => context.showTextSnackBar('Coming soon'),
+                  onPressed: () => context.pushNamed(
+                    'editor',
+                    pathParameters: {'id': '${Random().nextInt(1000)}'},
+                  ),
                   icon: MdiIcons.bookPlus,
                   label: L10n.of(context).p_more_recipes,
                 ),
