@@ -1,7 +1,8 @@
+import 'package:flavormate/components/t_text.dart';
 import 'package:flutter/material.dart';
 
 class TIconButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final IconData icon;
 
   final String? label;
@@ -20,7 +21,9 @@ class TIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (label == null) {
       return CircleAvatar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: IconButton(
+          color: TText.getColor(context, TextColor.filledButton),
           icon: Icon(icon),
           onPressed: onPressed,
         ),
@@ -34,7 +37,7 @@ class TIconButton extends StatelessWidget {
           child: Row(
             children: [
               Icon(icon),
-              Expanded(child: Text(label!, textAlign: TextAlign.center))
+              Expanded(child: Text(label!, textAlign: TextAlign.center)),
             ],
           ),
         ),
