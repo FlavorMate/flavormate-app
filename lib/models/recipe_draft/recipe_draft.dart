@@ -71,7 +71,7 @@ class RecipeDraft with RecipeDraftMappable {
 
   double get durationProgress {
     var score = 0.0;
-    if (prepTime.inMinutes + cookTime.inMinutes + restTime.inMinutes > 0) {
+    if (prepTime.inSeconds + cookTime.inSeconds + restTime.inSeconds > 0) {
       score += 100;
     }
     return score;

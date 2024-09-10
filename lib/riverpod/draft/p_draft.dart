@@ -5,6 +5,7 @@ import 'package:flavormate/models/recipe_draft/ingredients/ingredient_group_draf
 import 'package:flavormate/models/recipe_draft/instructions/instruction_group_draft.dart';
 import 'package:flavormate/models/recipe_draft/serving_draft/serving_draft.dart';
 import 'package:flavormate/models/tag_draft/tag_draft.dart';
+import 'package:flavormate/riverpod/api/p_api.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_draft.g.dart';
@@ -19,6 +20,7 @@ class PDraft extends _$PDraft {
   void setCommon(Map<String, String?> data) {
     state.value!.recipeDraft.label = data['label'];
     state.value!.recipeDraft.description = data['description'];
+    ref.notifyListeners();
   }
 
   void setServing(ServingDraft response) {
@@ -66,5 +68,33 @@ class PDraft extends _$PDraft {
   void set(Draft response) {
     state = AsyncData(response);
     ref.notifyListeners();
+  }
+
+  Future<bool> upload() async {
+    try {
+      final recipe = await ref
+          .read(pApiProvider)
+          .recipesClient
+          .create(data: state.value!.recipeDraft.toMap());
+
+      final files = <int>[];
+      for (final image in state.value!.addedImages) {
+        image.owner = recipe.id!;
+        final file = await ref
+            .read(pApiProvider)
+            .filesClient
+            .create(data: image.toMap());
+        files.add(file.id!);
+      }
+
+      await ref
+          .read(pApiProvider)
+          .recipesClient
+          .update(recipe.id!, data: {'files': files});
+
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 }

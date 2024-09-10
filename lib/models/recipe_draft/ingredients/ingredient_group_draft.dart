@@ -5,7 +5,7 @@ part 'ingredient_group_draft.mapper.dart';
 
 @MappableClass()
 class IngredientGroupDraft with IngredientGroupDraftMappable {
-  String label;
+  String? label;
   final List<IngredientDraft> ingredients;
 
   IngredientGroupDraft(this.label, this.ingredients);

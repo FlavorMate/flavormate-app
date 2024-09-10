@@ -56,12 +56,14 @@ class _DIngredientGroupsState extends State<DIngredientGroups> {
                         DataCell(
                           SizedBox(
                             width: double.infinity,
-                            child: Text(iG.label.isEmpty
-                                ? L10n.of(context)
-                                    .d_editor_ingredient_groups_label_2(
-                                    '${index + 1}',
-                                  )
-                                : iG.label),
+                            child: Text(
+                              (iG.label?.isEmpty ?? true)
+                                  ? L10n.of(context)
+                                      .d_editor_ingredient_groups_label_2(
+                                      '${index + 1}',
+                                    )
+                                  : iG.label!,
+                            ),
                           ),
                         ),
                         DataCell(

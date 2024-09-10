@@ -54,4 +54,15 @@ class Draft with DraftMappable {
 
     return score;
   }
+
+  bool get isValid {
+    return [
+      recipeDraft.commonProgress >= 100,
+      recipeDraft.durationProgress >= 100,
+      recipeDraft.ingredientsProgress >= 100,
+      recipeDraft.instructionsProgress >= 100,
+      recipeDraft.courseProgress >= 100,
+      recipeDraft.dietProgress >= 100,
+    ].every((value) => value == true);
+  }
 }

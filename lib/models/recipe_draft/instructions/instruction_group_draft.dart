@@ -5,7 +5,7 @@ part 'instruction_group_draft.mapper.dart';
 
 @MappableClass()
 class InstructionGroupDraft with InstructionGroupDraftMappable {
-  String label;
+  String? label;
   List<InstructionDraft> instructions;
 
   InstructionGroupDraft(this.label, this.instructions);

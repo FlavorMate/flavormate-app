@@ -30,7 +30,7 @@ class _DInstructionGroupState extends State<DInstructionGroup> {
   @override
   void initState() {
     _instructionGroup = widget.instructionGroup.copyWith();
-    _labelController.text = _instructionGroup.label;
+    _labelController.text = _instructionGroup.label ?? '';
     super.initState();
   }
 
@@ -136,7 +136,7 @@ class _DInstructionGroupState extends State<DInstructionGroup> {
   }
 
   void submit(BuildContext context) {
-    _instructionGroup.label = _labelController.text.trim();
+    _instructionGroup.label = EString.trimToNull(_labelController.text);
     context.pop(_instructionGroup);
   }
 }

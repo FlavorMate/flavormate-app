@@ -7,9 +7,10 @@ part 'file.mapper.dart';
 class File extends Entity with FileMappable {
   final String type;
   final String category;
-  final int owner;
   final String? content;
   final String? fileName;
+
+  int owner;
 
   File({
     required this.type,

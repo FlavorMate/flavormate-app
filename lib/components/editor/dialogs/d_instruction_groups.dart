@@ -56,12 +56,14 @@ class _DInstructionGroupsState extends State<DInstructionGroups> {
                         DataCell(
                           SizedBox(
                             width: double.infinity,
-                            child: Text(iG.label.isEmpty
-                                ? L10n.of(context)
-                                    .d_editor_instruction_groups_label_2(
-                                    '${index + 1}',
-                                  )
-                                : iG.label),
+                            child: Text(
+                              (iG.label?.isEmpty ?? true)
+                                  ? L10n.of(context)
+                                      .d_editor_instruction_groups_label_2(
+                                      '${index + 1}',
+                                    )
+                                  : iG.label!,
+                            ),
                           ),
                         ),
                         DataCell(

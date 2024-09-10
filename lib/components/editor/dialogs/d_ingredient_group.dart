@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flavormate/components/editor/dialogs/d_ingredient.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_full_dialog.dart';
+import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_draft.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_group_draft.dart';
@@ -29,7 +30,7 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
   @override
   void initState() {
     _ingredientGroup = widget.ingredientGroup.copyWith();
-    _labelController.text = _ingredientGroup.label;
+    _labelController.text = _ingredientGroup.label ?? '';
     super.initState();
   }
 
@@ -138,7 +139,7 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
   }
 
   void submit(BuildContext context) {
-    _ingredientGroup.label = _labelController.text.trim();
+    _ingredientGroup.label = EString.trimToNull(_labelController.text);
     context.pop(_ingredientGroup);
   }
 }

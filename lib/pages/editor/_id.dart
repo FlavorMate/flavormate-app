@@ -6,6 +6,7 @@ import 'package:flavormate/components/editor/dialogs/d_durations.dart';
 import 'package:flavormate/components/editor/dialogs/d_images.dart';
 import 'package:flavormate/components/editor/dialogs/d_ingredient_groups.dart';
 import 'package:flavormate/components/editor/dialogs/d_instruction_groups.dart';
+import 'package:flavormate/components/editor/dialogs/d_preview.dart';
 import 'package:flavormate/components/editor/dialogs/d_serving.dart';
 import 'package:flavormate/components/editor/dialogs/d_tags.dart';
 import 'package:flavormate/components/editor/t_progress.dart';
@@ -26,6 +27,7 @@ import 'package:flavormate/riverpod/draft/p_draft.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class EditorPage extends ConsumerWidget {
   final String id;
@@ -161,7 +163,25 @@ class EditorPage extends ConsumerWidget {
                   optional: true,
                 ),
               ),
+              const SizedBox(height: 48),
             ],
+          ),
+        ),
+      ),
+      floatingActionButton: RStruct(
+        provider,
+        (_, draft) => FloatingActionButton(
+          onPressed: draft.isValid
+              ? () => showPreview(
+                    context,
+                    ref,
+                    draft,
+                  )
+              : null,
+          disabledElevation: 0,
+          child: Icon(
+            MdiIcons.contentSave,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
         ),
       ),
@@ -256,7 +276,7 @@ class EditorPage extends ConsumerWidget {
       builder: (_) => DDiet(diet: recipeDraft.diet),
     );
 
-    if (response == null || response == recipeDraft.course) return;
+    if (response == null || response == recipeDraft.diet) return;
     ref.read(pDraftProvider(id).notifier).setDiet(response);
   }
 
@@ -292,5 +312,19 @@ class EditorPage extends ConsumerWidget {
 
     if (response == null) return;
     ref.read(pDraftProvider(id).notifier).set(response);
+  }
+
+  showPreview(BuildContext context, WidgetRef ref, Draft draft) async {
+    final response = await showDialog<bool>(
+      context: context,
+      builder: (_) => DPreview(draft: draft),
+      useSafeArea: false,
+    );
+
+    if (response != true) return;
+
+    if (await ref.read(pDraftProvider(id).notifier).upload()) {
+      context.goNamed('home');
+    }
   }
 }
