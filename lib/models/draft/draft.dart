@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/drift/app_database.dart';
 import 'package:flavormate/models/file/file.dart';
 import 'package:flavormate/models/recipe_draft/recipe_draft.dart';
 
@@ -35,6 +36,17 @@ class Draft with DraftMappable {
       addedImages: [],
       removedImages: [],
       version: 0,
+    );
+  }
+
+  factory Draft.fromDB(DraftTableData data) {
+    return Draft(
+      id: data.id,
+      recipeDraft: data.recipeDraft,
+      images: data.images,
+      addedImages: data.addedImages,
+      removedImages: data.removedImages,
+      version: data.version,
     );
   }
 
