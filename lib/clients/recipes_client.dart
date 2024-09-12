@@ -1,4 +1,5 @@
 import 'package:flavormate/interfaces/a_filter_search_client.dart';
+import 'package:flavormate/models/draft/scrape_response.dart';
 import 'package:flavormate/models/recipe/course.dart';
 import 'package:flavormate/models/recipe/diet.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
@@ -30,6 +31,14 @@ class RecipesClient extends AFilterSearchClient<Recipe> {
     );
 
     return response.data ?? false;
+  }
+
+  Future<ScrapeResponse> scrape(String url) async {
+    final params = getParams({'url': url});
+
+    final response = await httpClient.get('$baseURL/crawl?$params');
+
+    return ScrapeResponseMapper.fromMap(response.data);
   }
 
   String bring(String server, int id, int baseServing, int requestedServing) {

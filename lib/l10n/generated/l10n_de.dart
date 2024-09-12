@@ -616,4 +616,22 @@ class L10nDe extends L10n {
 
   @override
   String get d_editor_images_add_image => 'Bild hinzufügen';
+
+  @override
+  String get p_drafts_title => 'Entwürfe';
+
+  @override
+  String get p_drafts_create_draft => 'Rezept erstellen';
+
+  @override
+  String get p_drafts_scrape_draft => 'Rezept herunterladen';
+
+  @override
+  String get d_drafts_scrape_title => 'Rezept herunterladen';
+
+  @override
+  String get btn_download => 'Download';
+
+  @override
+  String get d_drafts_scrape_url => 'Adresse';
 }

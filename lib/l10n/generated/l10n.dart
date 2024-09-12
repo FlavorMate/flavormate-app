@@ -1300,6 +1300,42 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Add image'**
   String get d_editor_images_add_image;
+
+  /// No description provided for @p_drafts_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Drafts'**
+  String get p_drafts_title;
+
+  /// No description provided for @p_drafts_create_draft.
+  ///
+  /// In en, this message translates to:
+  /// **'Create recipe'**
+  String get p_drafts_create_draft;
+
+  /// No description provided for @p_drafts_scrape_draft.
+  ///
+  /// In en, this message translates to:
+  /// **'Scrape recipe'**
+  String get p_drafts_scrape_draft;
+
+  /// No description provided for @d_drafts_scrape_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Scrape recipe'**
+  String get d_drafts_scrape_title;
+
+  /// No description provided for @btn_download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get btn_download;
+
+  /// No description provided for @d_drafts_scrape_url.
+  ///
+  /// In en, this message translates to:
+  /// **'URL'**
+  String get d_drafts_scrape_url;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

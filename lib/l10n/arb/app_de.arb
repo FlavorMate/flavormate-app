@@ -223,5 +223,11 @@
   "d_editor_duration_seconds": "Sekunden",
   "v_isNumber": "Bitte gib eine Zahl ein",
   "d_editor_images_title": "Bilder",
-  "d_editor_images_add_image": "Bild hinzufügen"
+  "d_editor_images_add_image": "Bild hinzufügen",
+  "p_drafts_title": "Entwürfe",
+  "p_drafts_create_draft": "Rezept erstellen",
+  "p_drafts_scrape_draft": "Rezept herunterladen",
+  "d_drafts_scrape_title": "Rezept herunterladen",
+  "btn_download": "Download",
+  "d_drafts_scrape_url": "Adresse"
 }

@@ -616,4 +616,22 @@ class L10nEn extends L10n {
 
   @override
   String get d_editor_images_add_image => 'Add image';
+
+  @override
+  String get p_drafts_title => 'Drafts';
+
+  @override
+  String get p_drafts_create_draft => 'Create recipe';
+
+  @override
+  String get p_drafts_scrape_draft => 'Scrape recipe';
+
+  @override
+  String get d_drafts_scrape_title => 'Scrape recipe';
+
+  @override
+  String get btn_download => 'Download';
+
+  @override
+  String get d_drafts_scrape_url => 'URL';
 }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_icon_button.dart';
 import 'package:flavormate/components/t_responsive.dart';
@@ -31,10 +29,7 @@ class MorePage extends StatelessWidget {
                 ),
                 TIconButton(
                   width: 250,
-                  onPressed: () => context.pushNamed(
-                    'editor',
-                    pathParameters: {'id': '${Random().nextInt(1000)}'},
-                  ),
+                  onPressed: () => context.pushNamed('drafts'),
                   icon: MdiIcons.bookPlus,
                   label: L10n.of(context).p_more_recipes,
                 ),

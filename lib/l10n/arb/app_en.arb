@@ -223,5 +223,11 @@
   "d_editor_duration_seconds": "Seconds",
   "v_isNumber": "Please enter a valid number",
   "d_editor_images_title": "Images",
-  "d_editor_images_add_image": "Add image"
+  "d_editor_images_add_image": "Add image",
+  "p_drafts_title": "Drafts",
+  "p_drafts_create_draft": "Create recipe",
+  "p_drafts_scrape_draft": "Scrape recipe",
+  "d_drafts_scrape_title": "Scrape recipe",
+  "btn_download": "Download",
+  "d_drafts_scrape_url": "URL"
 }
