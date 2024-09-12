@@ -1030,6 +1030,312 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Please create a recipe'**
   String get c_dashboard_latest_recipes_no_subtitle;
+
+  /// No description provided for @d_editor_common_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Common informations'**
+  String get d_editor_common_title;
+
+  /// No description provided for @d_editor_common_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe name'**
+  String get d_editor_common_label;
+
+  /// No description provided for @d_editor_common_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get d_editor_common_description;
+
+  /// No description provided for @d_editor_serving_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Servings'**
+  String get d_editor_serving_title;
+
+  /// No description provided for @d_editor_serving_amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get d_editor_serving_amount;
+
+  /// No description provided for @d_editor_serving_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Portion'**
+  String get d_editor_serving_label;
+
+  /// No description provided for @d_editor_durations_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Time information'**
+  String get d_editor_durations_title;
+
+  /// No description provided for @d_editor_durations_cook_time_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Cook time'**
+  String get d_editor_durations_cook_time_title;
+
+  /// No description provided for @d_editor_durations_rest_time_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest time'**
+  String get d_editor_durations_rest_time_title;
+
+  /// No description provided for @d_editor_durations_prep_time_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Preperation time'**
+  String get d_editor_durations_prep_time_title;
+
+  /// No description provided for @d_editor_ingredient_groups_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredient groups'**
+  String get d_editor_ingredient_groups_title;
+
+  /// No description provided for @d_editor_ingredient_group_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredients'**
+  String get d_editor_ingredient_group_title;
+
+  /// No description provided for @d_editor_ingredient_group_add_ingredient.
+  ///
+  /// In en, this message translates to:
+  /// **'Add ingredient'**
+  String get d_editor_ingredient_group_add_ingredient;
+
+  /// No description provided for @d_editor_ingredient_group_ingredient.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredient'**
+  String get d_editor_ingredient_group_ingredient;
+
+  /// No description provided for @d_editor_ingredient_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredient'**
+  String get d_editor_ingredient_title;
+
+  /// No description provided for @d_editor_ingredient_amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get d_editor_ingredient_amount;
+
+  /// No description provided for @d_editor_ingredient_unit.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get d_editor_ingredient_unit;
+
+  /// No description provided for @d_editor_ingredient_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Ingredient'**
+  String get d_editor_ingredient_label;
+
+  /// No description provided for @d_editor_ingredient_groups_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get d_editor_ingredient_groups_label;
+
+  /// No description provided for @d_editor_ingredient_groups_label_2.
+  ///
+  /// In en, this message translates to:
+  /// **'{index}. group'**
+  String d_editor_ingredient_groups_label_2(String index);
+
+  /// No description provided for @d_editor_ingredient_groups_create_group.
+  ///
+  /// In en, this message translates to:
+  /// **'Create group'**
+  String get d_editor_ingredient_groups_create_group;
+
+  /// No description provided for @d_editor_ingredient_group_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Group label'**
+  String get d_editor_ingredient_group_label;
+
+  /// No description provided for @d_editor_instruction_groups_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Instruction groups'**
+  String get d_editor_instruction_groups_title;
+
+  /// No description provided for @d_editor_instruction_groups_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get d_editor_instruction_groups_label;
+
+  /// No description provided for @d_editor_instruction_groups_label_2.
+  ///
+  /// In en, this message translates to:
+  /// **'{index}. group'**
+  String d_editor_instruction_groups_label_2(Object index);
+
+  /// No description provided for @d_editor_instruction_groups_create_group.
+  ///
+  /// In en, this message translates to:
+  /// **'Create group'**
+  String get d_editor_instruction_groups_create_group;
+
+  /// No description provided for @d_editor_instruction_group_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions'**
+  String get d_editor_instruction_group_title;
+
+  /// No description provided for @d_editor_instruction_group_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Group label'**
+  String get d_editor_instruction_group_label;
+
+  /// No description provided for @d_editor_instruction_group_instruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Instruction'**
+  String get d_editor_instruction_group_instruction;
+
+  /// No description provided for @d_editor_instruction_group_add_instruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Add instruction'**
+  String get d_editor_instruction_group_add_instruction;
+
+  /// No description provided for @d_editor_instruction_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Instruction'**
+  String get d_editor_instruction_title;
+
+  /// No description provided for @d_editor_instruction_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Instruction'**
+  String get d_editor_instruction_label;
+
+  /// No description provided for @d_editor_course_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe course'**
+  String get d_editor_course_title;
+
+  /// No description provided for @d_editor_diet_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe diet'**
+  String get d_editor_diet_title;
+
+  /// No description provided for @d_editor_tags_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get d_editor_tags_title;
+
+  /// No description provided for @d_editor_tags_tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Add tag'**
+  String get d_editor_tags_tag;
+
+  /// No description provided for @v_duplicate.
+  ///
+  /// In en, this message translates to:
+  /// **'Element exists already'**
+  String get v_duplicate;
+
+  /// No description provided for @d_editor_categories_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Misc categories'**
+  String get d_editor_categories_title;
+
+  /// No description provided for @d_editor_duration_days.
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get d_editor_duration_days;
+
+  /// No description provided for @d_editor_duration_hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Hours'**
+  String get d_editor_duration_hours;
+
+  /// No description provided for @d_editor_duration_minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Minutes'**
+  String get d_editor_duration_minutes;
+
+  /// No description provided for @d_editor_duration_seconds.
+  ///
+  /// In en, this message translates to:
+  /// **'Seconds'**
+  String get d_editor_duration_seconds;
+
+  /// No description provided for @v_isNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid number'**
+  String get v_isNumber;
+
+  /// No description provided for @d_editor_images_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get d_editor_images_title;
+
+  /// No description provided for @d_editor_images_add_image.
+  ///
+  /// In en, this message translates to:
+  /// **'Add image'**
+  String get d_editor_images_add_image;
+
+  /// No description provided for @p_drafts_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Drafts'**
+  String get p_drafts_title;
+
+  /// No description provided for @p_drafts_create_draft.
+  ///
+  /// In en, this message translates to:
+  /// **'Create recipe'**
+  String get p_drafts_create_draft;
+
+  /// No description provided for @p_drafts_scrape_draft.
+  ///
+  /// In en, this message translates to:
+  /// **'Scrape recipe'**
+  String get p_drafts_scrape_draft;
+
+  /// No description provided for @d_drafts_scrape_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Scrape recipe'**
+  String get d_drafts_scrape_title;
+
+  /// No description provided for @btn_download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get btn_download;
+
+  /// No description provided for @d_drafts_scrape_url.
+  ///
+  /// In en, this message translates to:
+  /// **'URL'**
+  String get d_drafts_scrape_url;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

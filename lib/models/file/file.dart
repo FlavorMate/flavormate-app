@@ -7,16 +7,21 @@ part 'file.mapper.dart';
 class File extends Entity with FileMappable {
   final String type;
   final String category;
-  final double owner;
+  final String? content;
+  final String? fileName;
+
+  int owner;
 
   File({
     required this.type,
     required this.category,
     required this.owner,
-    required super.id,
-    required super.version,
-    required super.createdOn,
-    required super.lastModifiedOn,
+    super.id,
+    super.version,
+    super.createdOn,
+    super.lastModifiedOn,
+    this.content,
+    this.fileName,
   });
 
   String get typePath {

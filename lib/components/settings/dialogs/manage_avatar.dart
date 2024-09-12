@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_icon_button.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -10,9 +11,9 @@ class ManageAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(L10n.of(context).d_settings_manage_avatar_title),
-      content: SizedBox(
+    return TAlertDialog(
+      title: L10n.of(context).d_settings_manage_avatar_title,
+      child: SizedBox(
         width: 250,
         child: TColumn(
           mainAxisSize: MainAxisSize.min,
@@ -30,12 +31,6 @@ class ManageAvatar extends StatelessWidget {
           ],
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(),
-          child: Text(L10n.of(context).btn_cancel),
-        )
-      ],
     );
   }
 }

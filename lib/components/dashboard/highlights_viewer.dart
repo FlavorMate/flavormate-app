@@ -2,6 +2,7 @@ import 'package:flavormate/components/dashboard/empty_message.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_carousel.dart';
+import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_slide.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -19,6 +20,7 @@ class HighlightsViewer extends ConsumerWidget {
   TSlide getSlide(BuildContext context, Highlight highlight) => TSlide(
         imageSrc: highlight.recipe.coverUrl,
         title: highlight.recipe.label,
+        type: TImageType.network,
         date: highlight.date,
         onTap: () => context.pushNamed(
           'recipe',

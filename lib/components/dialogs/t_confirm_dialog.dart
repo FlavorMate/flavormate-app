@@ -2,10 +2,10 @@ import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ConfirmDialog extends StatelessWidget {
+class TConfirmDialog extends StatelessWidget {
   final String title;
 
-  const ConfirmDialog({super.key, required this.title});
+  const TConfirmDialog({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/utils/u_validator.dart';
@@ -30,99 +31,85 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(L10n.of(context).d_admin_user_management_create_title),
-      content: SizedBox(
-        // height: 300,
-        width: 250,
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: TColumn(
-              children: [
-                TextFormField(
-                  controller: _displayNameController,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(L10n.of(context)
-                        .d_admin_user_management_create_displayName),
-                  ),
-                  autocorrect: false,
-                  validator: (value) {
-                    if (UValidator.isEmpty(value)) {
-                      return L10n.of(context).v_isEmpty;
-                    }
+    return TAlertDialog(
+      title: L10n.of(context).d_admin_user_management_create_title,
+      scrollable: true,
+      submit: apply,
+      child: Form(
+        key: _formKey,
+        child: TColumn(
+          children: [
+            TextFormField(
+              controller: _displayNameController,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(L10n.of(context)
+                    .d_admin_user_management_create_displayName),
+              ),
+              autocorrect: false,
+              validator: (value) {
+                if (UValidator.isEmpty(value)) {
+                  return L10n.of(context).v_isEmpty;
+                }
 
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _userNameController,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(L10n.of(context)
-                        .d_admin_user_management_create_username),
-                  ),
-                  autocorrect: false,
-                  validator: (value) {
-                    if (UValidator.isEmpty(value)) {
-                      return L10n.of(context).v_isEmpty;
-                    }
-
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(L10n.of(context)
-                        .d_admin_user_management_create_password),
-                  ),
-                  obscureText: true,
-                  validator: (value) {
-                    if (UValidator.isEmpty(value)) {
-                      return L10n.of(context).v_isEmpty;
-                    }
-
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _mailController,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(
-                        L10n.of(context).d_admin_user_management_create_mail),
-                  ),
-                  autocorrect: false,
-                  validator: (value) {
-                    if (UValidator.isEmpty(value)) {
-                      return L10n.of(context).v_isEmpty;
-                    }
-
-                    if (!UValidator.isMail(value!)) {
-                      return L10n.of(context).v_isMail;
-                    }
-
-                    return null;
-                  },
-                ),
-              ],
+                return null;
+              },
             ),
-          ),
+            TextFormField(
+              controller: _userNameController,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(
+                    L10n.of(context).d_admin_user_management_create_username),
+              ),
+              autocorrect: false,
+              validator: (value) {
+                if (UValidator.isEmpty(value)) {
+                  return L10n.of(context).v_isEmpty;
+                }
+
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(
+                    L10n.of(context).d_admin_user_management_create_password),
+              ),
+              obscureText: true,
+              validator: (value) {
+                if (UValidator.isEmpty(value)) {
+                  return L10n.of(context).v_isEmpty;
+                }
+
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: _mailController,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label:
+                    Text(L10n.of(context).d_admin_user_management_create_mail),
+              ),
+              autocorrect: false,
+              validator: (value) {
+                if (UValidator.isEmpty(value)) {
+                  return L10n.of(context).v_isEmpty;
+                }
+
+                if (!UValidator.isMail(value!)) {
+                  return L10n.of(context).v_isMail;
+                }
+
+                return null;
+              },
+            ),
+          ],
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(),
-          child: Text(L10n.of(context).btn_cancel),
-        ),
-        FilledButton(
-          onPressed: () => apply(),
-          child: Text(L10n.of(context).btn_save),
-        ),
-      ],
     );
   }
 

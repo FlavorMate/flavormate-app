@@ -24,9 +24,4 @@ class CategoryGroupClient {
 
     return data.map(parser).toList();
   }
-
-  Future<CategoryGroup> findById(int id) async {
-    final response = await httpClient.get('$baseURL/$id');
-    return parser(response.data);
-  }
 }

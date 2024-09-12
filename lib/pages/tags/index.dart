@@ -1,5 +1,6 @@
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_card.dart';
+import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_image_label.dart';
 import 'package:flavormate/components/t_pageable.dart';
 import 'package:flavormate/components/t_wrap.dart';
@@ -33,6 +34,7 @@ class TagsPage extends StatelessWidget {
                         ),
                         child: TImageLabel(
                           imageSrc: tag.recipes!.firstOrNull?.coverUrl,
+                          type: TImageType.network,
                           height: 200,
                           title: tag.label,
                           labelSize: 0.4,

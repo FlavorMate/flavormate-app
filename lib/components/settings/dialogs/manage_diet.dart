@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_icon_button.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -10,21 +11,18 @@ class ManageDiet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(L10n.of(context).d_settings_manage_diet_title),
-      content: SizedBox(
-        width: 250,
-        child: TColumn(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (final diet in Diet.values)
-              TIconButton(
-                onPressed: () => context.pop(diet),
-                icon: diet.icon,
-                label: diet.getName(context),
-              ),
-          ],
-        ),
+    return TAlertDialog(
+      title: L10n.of(context).d_settings_manage_diet_title,
+      child: TColumn(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (final diet in Diet.values)
+            TIconButton(
+              onPressed: () => context.pop(diet),
+              icon: diet.icon,
+              label: diet.getName(context),
+            ),
+        ],
       ),
     );
   }

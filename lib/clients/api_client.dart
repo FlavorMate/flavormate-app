@@ -9,6 +9,7 @@ import 'package:flavormate/clients/library_client.dart';
 import 'package:flavormate/clients/recipes_client.dart';
 import 'package:flavormate/clients/stories_client.dart';
 import 'package:flavormate/clients/tags_client.dart';
+import 'package:flavormate/clients/units_client.dart';
 import 'package:flavormate/clients/user_client.dart';
 import 'package:flavormate/models/api/login.dart';
 import 'package:flavormate/models/author/author.dart';
@@ -20,6 +21,7 @@ import 'package:flavormate/models/library/book.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/models/story.dart';
 import 'package:flavormate/models/tag/tag.dart';
+import 'package:flavormate/models/unit.dart';
 import 'package:flavormate/models/user/token.dart';
 import 'package:flavormate/models/user/user.dart';
 import 'package:flavormate/utils/u_go_router.dart';
@@ -100,6 +102,7 @@ class ApiClient {
   late RecipesClient recipesClient;
   late StoriesClient storiesClient;
   late TagsClient tagsClient;
+  late UnitsClient unitsClient;
   late UserClient userClient;
 
   /// Creates an [ApiClient] with default options.
@@ -151,6 +154,11 @@ class ApiClient {
       httpClient: _httpClient,
       baseURL: '/v2/tags',
       parser: TagMapper.fromMap,
+    );
+    unitsClient = UnitsClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/units',
+      parser: UnitMapper.fromMap,
     );
     userClient = UserClient(
       httpClient: _httpClient,
@@ -215,6 +223,11 @@ class ApiClient {
       httpClient: _httpClient,
       baseURL: '/v2/tags',
       parser: TagMapper.fromMap,
+    );
+    unitsClient = UnitsClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/units',
+      parser: UnitMapper.fromMap,
     );
     userClient = UserClient(
       httpClient: _httpClient,

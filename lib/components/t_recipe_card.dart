@@ -30,7 +30,10 @@ class TRecipeCard extends StatelessWidget {
               width: double.infinity,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(BORDER_RADIUS),
-                child: TImage(imageSrc: recipe.coverUrl),
+                child: TImage(
+                  imageSrc: recipe.coverUrl,
+                  type: TImageType.network,
+                ),
               ),
             ),
             Padding(

@@ -477,4 +477,161 @@ class L10nEn extends L10n {
 
   @override
   String get c_dashboard_latest_recipes_no_subtitle => 'Please create a recipe';
+
+  @override
+  String get d_editor_common_title => 'Common informations';
+
+  @override
+  String get d_editor_common_label => 'Recipe name';
+
+  @override
+  String get d_editor_common_description => 'Description';
+
+  @override
+  String get d_editor_serving_title => 'Servings';
+
+  @override
+  String get d_editor_serving_amount => 'Amount';
+
+  @override
+  String get d_editor_serving_label => 'Portion';
+
+  @override
+  String get d_editor_durations_title => 'Time information';
+
+  @override
+  String get d_editor_durations_cook_time_title => 'Cook time';
+
+  @override
+  String get d_editor_durations_rest_time_title => 'Rest time';
+
+  @override
+  String get d_editor_durations_prep_time_title => 'Preperation time';
+
+  @override
+  String get d_editor_ingredient_groups_title => 'Ingredient groups';
+
+  @override
+  String get d_editor_ingredient_group_title => 'Ingredients';
+
+  @override
+  String get d_editor_ingredient_group_add_ingredient => 'Add ingredient';
+
+  @override
+  String get d_editor_ingredient_group_ingredient => 'Ingredient';
+
+  @override
+  String get d_editor_ingredient_title => 'Ingredient';
+
+  @override
+  String get d_editor_ingredient_amount => 'Amount';
+
+  @override
+  String get d_editor_ingredient_unit => 'Unit';
+
+  @override
+  String get d_editor_ingredient_label => 'Ingredient';
+
+  @override
+  String get d_editor_ingredient_groups_label => 'Name';
+
+  @override
+  String d_editor_ingredient_groups_label_2(String index) {
+    return '$index. group';
+  }
+
+  @override
+  String get d_editor_ingredient_groups_create_group => 'Create group';
+
+  @override
+  String get d_editor_ingredient_group_label => 'Group label';
+
+  @override
+  String get d_editor_instruction_groups_title => 'Instruction groups';
+
+  @override
+  String get d_editor_instruction_groups_label => 'Name';
+
+  @override
+  String d_editor_instruction_groups_label_2(Object index) {
+    return '$index. group';
+  }
+
+  @override
+  String get d_editor_instruction_groups_create_group => 'Create group';
+
+  @override
+  String get d_editor_instruction_group_title => 'Instructions';
+
+  @override
+  String get d_editor_instruction_group_label => 'Group label';
+
+  @override
+  String get d_editor_instruction_group_instruction => 'Instruction';
+
+  @override
+  String get d_editor_instruction_group_add_instruction => 'Add instruction';
+
+  @override
+  String get d_editor_instruction_title => 'Instruction';
+
+  @override
+  String get d_editor_instruction_label => 'Instruction';
+
+  @override
+  String get d_editor_course_title => 'Recipe course';
+
+  @override
+  String get d_editor_diet_title => 'Recipe diet';
+
+  @override
+  String get d_editor_tags_title => 'Tags';
+
+  @override
+  String get d_editor_tags_tag => 'Add tag';
+
+  @override
+  String get v_duplicate => 'Element exists already';
+
+  @override
+  String get d_editor_categories_title => 'Misc categories';
+
+  @override
+  String get d_editor_duration_days => 'Days';
+
+  @override
+  String get d_editor_duration_hours => 'Hours';
+
+  @override
+  String get d_editor_duration_minutes => 'Minutes';
+
+  @override
+  String get d_editor_duration_seconds => 'Seconds';
+
+  @override
+  String get v_isNumber => 'Please enter a valid number';
+
+  @override
+  String get d_editor_images_title => 'Images';
+
+  @override
+  String get d_editor_images_add_image => 'Add image';
+
+  @override
+  String get p_drafts_title => 'Drafts';
+
+  @override
+  String get p_drafts_create_draft => 'Create recipe';
+
+  @override
+  String get p_drafts_scrape_draft => 'Scrape recipe';
+
+  @override
+  String get d_drafts_scrape_title => 'Scrape recipe';
+
+  @override
+  String get btn_download => 'Download';
+
+  @override
+  String get d_drafts_scrape_url => 'URL';
 }

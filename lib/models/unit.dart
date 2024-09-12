@@ -10,7 +10,7 @@ class Unit with UnitMappable {
 
   Unit({required this.id, required this.label, this.shortLabel});
 
-  String beautify() {
+  String get beautify {
     return shortLabel?.isNotEmpty == true ? shortLabel! : label;
   }
 }

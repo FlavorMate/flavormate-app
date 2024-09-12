@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,25 +23,20 @@ class _EditBookDialogState extends State<EditBookDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(L10n.of(context).d_library_edit_title),
-      content: TextField(
+    return TAlertDialog(
+      title: L10n.of(context).d_library_edit_title,
+      submit: submit,
+      child: TextField(
         controller: _controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           label: Text(L10n.of(context).d_library_edit_name),
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(),
-          child: Text(L10n.of(context).btn_cancel),
-        ),
-        FilledButton(
-          onPressed: () => context.pop(_controller.text),
-          child: Text(L10n.of(context).btn_save),
-        ),
-      ],
     );
+  }
+
+  void submit() {
+    context.pop(_controller.text);
   }
 }

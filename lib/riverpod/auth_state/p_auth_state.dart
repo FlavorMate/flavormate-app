@@ -90,7 +90,9 @@ enum AuthState {
       '/tags/:id',
       '/authors',
       '/authors/:id',
-      '/admin/user'
+      '/editor/:id',
+      '/admin/user',
+      '/drafts',
     ],
   ),
   ;

@@ -7,6 +7,7 @@ import 'package:flavormate/components/recipe/recipe_title.dart';
 import 'package:flavormate/components/t_carousel.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_icon_button.dart';
+import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/t_slide.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
@@ -52,6 +53,7 @@ class RecipePageDesktop extends StatelessWidget {
                       .map(
                         (file) => TSlide(
                           imageSrc: file.path(context.read(pServerProvider)!),
+                          type: TImageType.network,
                         ),
                       )
                       .toList(),

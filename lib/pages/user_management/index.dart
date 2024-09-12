@@ -1,4 +1,4 @@
-import 'package:flavormate/components/dialogs/confirm_dialog.dart';
+import 'package:flavormate/components/dialogs/t_confirm_dialog.dart';
 import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_app_bar.dart';
@@ -122,7 +122,7 @@ class UserManagementPage extends ConsumerWidget {
   deleteUser(BuildContext context, WidgetRef ref, User user) async {
     final response = await showDialog<bool>(
       context: context,
-      builder: (_) => ConfirmDialog(
+      builder: (_) => TConfirmDialog(
         title: L10n.of(context)
             .d_admin_user_management_delete_title(user.username),
       ),

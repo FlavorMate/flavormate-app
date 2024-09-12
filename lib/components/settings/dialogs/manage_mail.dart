@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/utils/u_validator.dart';
@@ -30,95 +31,81 @@ class _ManageMailState extends State<ManageMail> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(L10n.of(context).d_settings_manage_mail_title),
-      content: SizedBox(
-        // height: 300,
-        width: 250,
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: TColumn(
-              children: [
-                if (widget.mail != null)
-                  TextFormField(
-                    controller: _oldMailController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      label: Text(L10n.of(context).d_settings_manage_mail_old),
-                    ),
-                    autocorrect: false,
-                    validator: (value) {
-                      if (UValidator.isEmpty(value)) {
-                        return L10n.of(context).v_isEmpty;
-                      }
-
-                      if (!UValidator.isMail(value!)) {
-                        return L10n.of(context).v_isMail;
-                      }
-
-                      if (!UValidator.isEqual(value, widget.mail!)) {
-                        return L10n.of(context).v_isEqual;
-                      }
-                      return null;
-                    },
-                  ),
-                TextFormField(
-                  controller: _newMail1Controller,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(L10n.of(context).d_settings_manage_mail_new),
-                  ),
-                  autocorrect: false,
-                  validator: (value) {
-                    if (UValidator.isEmpty(value)) {
-                      return L10n.of(context).v_isEmpty;
-                    }
-
-                    if (!UValidator.isMail(value!)) {
-                      return L10n.of(context).v_isMail;
-                    }
-
-                    return null;
-                  },
+    return TAlertDialog(
+      title: L10n.of(context).d_settings_manage_mail_title,
+      scrollable: true,
+      submit: apply,
+      child: Form(
+        key: _formKey,
+        child: TColumn(
+          children: [
+            if (widget.mail != null)
+              TextFormField(
+                controller: _oldMailController,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  label: Text(L10n.of(context).d_settings_manage_mail_old),
                 ),
-                TextFormField(
-                  controller: _newMail2Controller,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(L10n.of(context).d_settings_manage_mail_new_2),
-                  ),
-                  autocorrect: false,
-                  validator: (value) {
-                    if (UValidator.isEmpty(value)) {
-                      return L10n.of(context).v_isEmpty;
-                    }
+                autocorrect: false,
+                validator: (value) {
+                  if (UValidator.isEmpty(value)) {
+                    return L10n.of(context).v_isEmpty;
+                  }
 
-                    if (!UValidator.isMail(value!)) {
-                      return L10n.of(context).v_isMail;
-                    }
+                  if (!UValidator.isMail(value!)) {
+                    return L10n.of(context).v_isMail;
+                  }
 
-                    if (!UValidator.isEqual(value, _newMail1Controller.text)) {
-                      return L10n.of(context).v_isEqual;
-                    }
-                    return null;
-                  },
-                ),
-              ],
+                  if (!UValidator.isEqual(value, widget.mail!)) {
+                    return L10n.of(context).v_isEqual;
+                  }
+                  return null;
+                },
+              ),
+            TextFormField(
+              controller: _newMail1Controller,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(L10n.of(context).d_settings_manage_mail_new),
+              ),
+              autocorrect: false,
+              validator: (value) {
+                if (UValidator.isEmpty(value)) {
+                  return L10n.of(context).v_isEmpty;
+                }
+
+                if (!UValidator.isMail(value!)) {
+                  return L10n.of(context).v_isMail;
+                }
+
+                return null;
+              },
             ),
-          ),
+            TextFormField(
+              controller: _newMail2Controller,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(L10n.of(context).d_settings_manage_mail_new_2),
+              ),
+              autocorrect: false,
+              validator: (value) {
+                if (UValidator.isEmpty(value)) {
+                  return L10n.of(context).v_isEmpty;
+                }
+
+                if (!UValidator.isMail(value!)) {
+                  return L10n.of(context).v_isMail;
+                }
+
+                if (!UValidator.isEqual(value, _newMail1Controller.text)) {
+                  return L10n.of(context).v_isEqual;
+                }
+                return null;
+              },
+            ),
+          ],
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => context.pop(),
-          child: Text(L10n.of(context).btn_cancel),
-        ),
-        FilledButton(
-          onPressed: () => apply(),
-          child: Text(L10n.of(context).btn_save),
-        ),
-      ],
     );
   }
 
