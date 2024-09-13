@@ -2,6 +2,7 @@ import 'package:flavormate/components/dialogs/t_confirm_dialog.dart';
 import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_app_bar.dart';
+import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/user_management/dialog/change_password_dialog.dart';
 import 'package:flavormate/components/user_management/dialog/create_user_dialog.dart';
 import 'package:flavormate/extensions/e_date_time.dart';
@@ -14,11 +15,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserManagementPage extends ConsumerWidget {
+class UserManagementPage extends ConsumerStatefulWidget {
   const UserManagementPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _UserManagementPageState();
+}
+
+class _UserManagementPageState extends ConsumerState<UserManagementPage> {
+  int currentSortIndex = -1;
+  bool sortASC = true;
+
+  @override
+  Widget build(BuildContext context) {
     final provider = ref.watch(pUsersProvider);
     final userProvider = ref.watch(pUserProvider);
 
@@ -37,16 +47,45 @@ class UserManagementPage extends ConsumerWidget {
             (context, users) => DataTable(
               columns: [
                 DataColumn(
-                  label:
+                  label: TRow(
+                    children: [
                       Text(L10n.of(context).p_admin_user_management_username),
+                      if (currentSortIndex == 0)
+                        if (sortASC)
+                          Icon(MdiIcons.sortAscending)
+                        else
+                          Icon(MdiIcons.sortDescending)
+                    ],
+                  ),
+                  onSort: (index, _) => sort(index),
                 ),
                 DataColumn(
-                  label: Text(
-                      L10n.of(context).p_admin_user_management_displayname),
+                  label: TRow(
+                    children: [
+                      Text(
+                          L10n.of(context).p_admin_user_management_displayname),
+                      if (currentSortIndex == 1)
+                        if (sortASC)
+                          Icon(MdiIcons.sortAscending)
+                        else
+                          Icon(MdiIcons.sortDescending)
+                    ],
+                  ),
+                  onSort: (index, _) => sort(index),
                 ),
                 DataColumn(
-                  label: Text(
-                      L10n.of(context).p_admin_user_management_last_activity),
+                  label: TRow(
+                    children: [
+                      Text(L10n.of(context)
+                          .p_admin_user_management_last_activity),
+                      if (currentSortIndex == 2)
+                        if (sortASC)
+                          Icon(MdiIcons.sortAscending)
+                        else
+                          Icon(MdiIcons.sortDescending)
+                    ],
+                  ),
+                  onSort: (index, _) => sort(index),
                 ),
                 DataColumn(
                   label:
@@ -109,6 +148,28 @@ class UserManagementPage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  sort(int index) {
+    if (currentSortIndex != index) {
+      setState(() {
+        sortASC = false;
+        currentSortIndex = index;
+      });
+    }
+
+    setState(() => sortASC = !sortASC);
+    switch (index) {
+      case 0:
+        ref.read(pUsersProvider.notifier).sortByUsername(sortASC);
+        return;
+      case 1:
+        ref.read(pUsersProvider.notifier).sortByDisplayname(sortASC);
+        return;
+      case 2:
+        ref.read(pUsersProvider.notifier).sortByLastActivity(sortASC);
+        return;
+    }
   }
 
   toggleActiveState(WidgetRef ref, int id, bool newState) async {
