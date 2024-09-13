@@ -30,11 +30,7 @@ class _TCarouselState extends State<TCarousel> {
         alignment: Alignment.center,
         children: [
           if (widget.slides.length < 2)
-            TImageLabel(
-              imageSrc: widget.slides.first.imageSrc,
-              type: widget.slides.first.type,
-              height: widget.height,
-            )
+            SlideCard(slide: widget.slides[0], height: widget.height)
           else
             FlutterCarousel.builder(
               options: CarouselOptions(
@@ -50,40 +46,7 @@ class _TCarouselState extends State<TCarousel> {
               itemCount: widget.slides.length,
               itemBuilder: (_, i, ___) {
                 final slide = widget.slides[i];
-                return TCard(
-                  padding: 0,
-                  onTap: slide.onTap,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      TImageLabel(
-                        imageSrc: slide.imageSrc,
-                        type: slide.type,
-                        height: widget.height,
-                        title: slide.title,
-                      ),
-                      if (slide.date != null)
-                        Positioned(
-                          right: 8,
-                          top: 8,
-                          child: Card(
-                            color:
-                                Theme.of(context).colorScheme.primaryContainer,
-                            //const Color.fromARGB(200, 255, 255, 255),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                DateFormat(
-                                  'yMd',
-                                  Localizations.localeOf(context).languageCode,
-                                ).format(slide.date!),
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                );
+                return SlideCard(slide: slide, height: widget.height);
               },
             ),
           if (widget.slides.length > 1)
@@ -103,6 +66,54 @@ class _TCarouselState extends State<TCarousel> {
                 child: IconButton(
                   icon: const Icon(MdiIcons.chevronRight),
                   onPressed: _controller.nextPage,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class SlideCard extends StatelessWidget {
+  const SlideCard({
+    super.key,
+    required this.slide,
+    required this.height,
+  });
+
+  final TSlide slide;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return TCard(
+      padding: 0,
+      onTap: slide.onTap,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          TImageLabel(
+            imageSrc: slide.imageSrc,
+            type: slide.type,
+            height: height,
+            title: slide.title,
+          ),
+          if (slide.date != null)
+            Positioned(
+              right: 8,
+              top: 8,
+              child: Card(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                //const Color.fromARGB(200, 255, 255, 255),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    DateFormat(
+                      'yMd',
+                      Localizations.localeOf(context).languageCode,
+                    ).format(slide.date!),
+                  ),
                 ),
               ),
             ),
