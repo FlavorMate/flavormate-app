@@ -92,15 +92,18 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                   if (textEditingValue.text.isEmpty) {
                     return [];
                   }
-                  return units.where(
+                  final responses = units.where(
                     (unit) {
                       return unit.label
-                              .containsIgnoreCase(textEditingValue.text) ||
-                          (unit.shortLabel
-                                  ?.containsIgnoreCase(textEditingValue.text) ??
-                              false);
+                          .containsIgnoreCase(textEditingValue.text);
                     },
-                  );
+                  ).toList();
+
+                  if (responses.isEmpty) {
+                    responses.add(Unit(label: textEditingValue.text));
+                  }
+
+                  return responses;
                 },
                 fieldViewBuilder: (BuildContext context,
                         TextEditingController fieldTextEditingController,
