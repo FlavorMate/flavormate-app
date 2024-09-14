@@ -9,7 +9,7 @@ class PServer extends _$PServer {
   String? build() {
     final provider = ref.watch(pSharedPreferencesProvider).requireValue;
     final server = provider.get('server') as String?;
-    return server ?? 'http://localhost:8095/api';
+    return server ?? '';
   }
 
   void set(String value) async {
