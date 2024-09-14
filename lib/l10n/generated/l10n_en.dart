@@ -634,4 +634,7 @@ class L10nEn extends L10n {
 
   @override
   String get d_drafts_scrape_url => 'URL';
+
+  @override
+  String get p_drafts_scrape_failed => 'Recipe couldn\'t be scraped';
 }

@@ -5,6 +5,7 @@ import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_responsive.dart';
+import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/draft/p_drafts.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -97,21 +98,26 @@ class DraftsPage extends ConsumerWidget {
   }
 
   void scrapeDraft(BuildContext context, WidgetRef ref) async {
-    final response =
-        await showDialog<String>(context: context, builder: (_) => DScrape());
+    try {
+      final response =
+          await showDialog<String>(context: context, builder: (_) => DScrape());
 
-    if (response == null) return;
+      if (response == null) return;
 
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (_) => TLoadingDialog(),
-    );
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (_) => TLoadingDialog(),
+      );
 
-    final id = await ref.read(pDraftsProvider.notifier).scrape(response);
+      final id = await ref.read(pDraftsProvider.notifier).scrape(response);
 
-    context.pop();
+      context.pop();
 
-    openDraft(context, true, id);
+      openDraft(context, true, id);
+    } catch (e) {
+      context.pop();
+      context.showTextSnackBar(L10n.of(context).p_drafts_scrape_failed);
+    }
   }
 }

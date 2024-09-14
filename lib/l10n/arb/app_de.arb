@@ -229,5 +229,6 @@
   "p_drafts_scrape_draft": "Rezept herunterladen",
   "d_drafts_scrape_title": "Rezept herunterladen",
   "btn_download": "Download",
-  "d_drafts_scrape_url": "Adresse"
+  "d_drafts_scrape_url": "Adresse",
+  "p_drafts_scrape_failed": "Rezept konnte nicht heruntergeladen werden"
 }

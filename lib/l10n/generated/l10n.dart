@@ -1336,6 +1336,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'URL'**
   String get d_drafts_scrape_url;
+
+  /// No description provided for @p_drafts_scrape_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe couldn\'t be scraped'**
+  String get p_drafts_scrape_failed;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

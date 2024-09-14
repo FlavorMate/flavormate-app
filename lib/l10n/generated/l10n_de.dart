@@ -634,4 +634,7 @@ class L10nDe extends L10n {
 
   @override
   String get d_drafts_scrape_url => 'Adresse';
+
+  @override
+  String get p_drafts_scrape_failed => 'Rezept konnte nicht heruntergeladen werden';
 }
