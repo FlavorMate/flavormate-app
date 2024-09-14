@@ -115,7 +115,6 @@ class _DImagesState extends State<DImages> {
       category: 'RECIPE',
       owner: _draft.id,
       content: cropped,
-      fileName: image.name,
     );
 
     setState(() {

@@ -8,7 +8,6 @@ class File extends Entity with FileMappable {
   final String type;
   final String category;
   final String? content;
-  final String? fileName;
 
   int owner;
 
@@ -21,7 +20,6 @@ class File extends Entity with FileMappable {
     super.createdOn,
     super.lastModifiedOn,
     this.content,
-    this.fileName,
   });
 
   String get typePath {

@@ -34,7 +34,6 @@ class PDrafts extends _$PDrafts {
       category: 'RECIPE',
       owner: -1,
       content: image,
-      fileName: 'thumbnail.jpg',
     );
 
     final draft = DraftTableCompanion(
