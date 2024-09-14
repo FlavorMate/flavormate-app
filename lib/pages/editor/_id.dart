@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_loading_dialog.dart';
 import 'package:flavormate/components/editor/dialogs/d_categories.dart';
 import 'package:flavormate/components/editor/dialogs/d_common.dart';
 import 'package:flavormate/components/editor/dialogs/d_course.dart';
@@ -15,6 +16,7 @@ import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_responsive.dart';
+import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/draft/draft.dart';
 import 'package:flavormate/models/recipe/course.dart';
@@ -323,8 +325,14 @@ class EditorPage extends ConsumerWidget {
 
     if (response != true) return;
 
+    showDialog(context: context, builder: (_) => const TLoadingDialog());
+
     if (await ref.read(pDraftProvider(id).notifier).upload()) {
+      context.showTextSnackBar(L10n.of(context).p_editor_upload_success);
       context.goNamed('home');
+    } else {
+      context.pop();
+      context.showTextSnackBar(L10n.of(context).p_editor_upload_failed);
     }
   }
 }

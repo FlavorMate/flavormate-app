@@ -5,6 +5,8 @@ import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class TLoadingDialog extends StatelessWidget {
+  const TLoadingDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Dialog.fullscreen(

@@ -1342,6 +1342,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Recipe couldn\'t be scraped'**
   String get p_drafts_scrape_failed;
+
+  /// No description provided for @p_editor_upload_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe uploaded sucessfully'**
+  String get p_editor_upload_success;
+
+  /// No description provided for @p_editor_upload_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe couldn\'t be uploaded'**
+  String get p_editor_upload_failed;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

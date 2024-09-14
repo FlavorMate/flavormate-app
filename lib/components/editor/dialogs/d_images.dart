@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flavormate/components/dialogs/t_full_dialog.dart';
+import 'package:flavormate/components/dialogs/t_loading_dialog.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_column.dart';
@@ -45,7 +46,7 @@ class _DImagesState extends State<DImages> {
         children: [
           TButton(
             leading: const Icon(MdiIcons.plus),
-            onPressed: addImage,
+            onPressed: () => addImage(context),
             label: L10n.of(context).d_editor_images_add_image,
           ),
           Wrap(
@@ -96,10 +97,14 @@ class _DImagesState extends State<DImages> {
     context.pop(_draft);
   }
 
-  addImage() async {
+  addImage(BuildContext context) async {
     final XFile? image =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
+
+    showDialog(context: context, builder: (_) => const TLoadingDialog());
+    await Future.delayed(const Duration(milliseconds: 500));
+
     final bytes = await image.readAsBytes();
 
     final cropped = UImage.resizeImage(bytes: bytes, width: 1280, height: 720);
@@ -116,6 +121,7 @@ class _DImagesState extends State<DImages> {
     setState(() {
       _draft.addedImages.add(file);
     });
+    context.pop();
   }
 
   void deleteImage(File image) {

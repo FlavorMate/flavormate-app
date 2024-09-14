@@ -230,5 +230,7 @@
   "d_drafts_scrape_title": "Scrape recipe",
   "btn_download": "Download",
   "d_drafts_scrape_url": "URL",
-  "p_drafts_scrape_failed": "Recipe couldn't be scraped"
+  "p_drafts_scrape_failed": "Recipe couldn't be scraped",
+  "p_editor_upload_success": "Recipe uploaded sucessfully",
+  "p_editor_upload_failed": "Recipe couldn't be uploaded"
 }

@@ -637,4 +637,10 @@ class L10nDe extends L10n {
 
   @override
   String get p_drafts_scrape_failed => 'Rezept konnte nicht heruntergeladen werden';
+
+  @override
+  String get p_editor_upload_success => 'Rezept erfolgreich hochgeladen';
+
+  @override
+  String get p_editor_upload_failed => 'Rezept konnte nicht hochgeladen werden';
 }
