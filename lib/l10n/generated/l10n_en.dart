@@ -646,4 +646,19 @@ class L10nEn extends L10n {
 
   @override
   String get p_editor_edit_failed => 'Recipe draft exists already';
+
+  @override
+  String get p_drafts_drafts_name => 'Name';
+
+  @override
+  String get p_drafts_drafts_state => 'State';
+
+  @override
+  String get p_drafts_drafts_state_new => 'New';
+
+  @override
+  String get p_drafts_drafts_state_update => 'Update';
+
+  @override
+  String get p_drafts_drafts_name_unnamed => 'Unnamed';
 }

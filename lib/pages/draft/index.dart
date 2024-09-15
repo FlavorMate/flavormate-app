@@ -43,8 +43,12 @@ class DraftsPage extends ConsumerWidget {
                 child: DataTable(
                   showCheckboxColumn: false,
                   columns: [
-                    const DataColumn(label: Text('Name')),
-                    const DataColumn(label: Text('State')),
+                    DataColumn(
+                      label: Text(L10n.of(context).p_drafts_drafts_name),
+                    ),
+                    DataColumn(
+                      label: Text(L10n.of(context).p_drafts_drafts_state),
+                    ),
                     DataColumn(label: Container()),
                   ],
                   rows: [
@@ -56,15 +60,28 @@ class DraftsPage extends ConsumerWidget {
                           draft.id,
                         ),
                         cells: [
-                          DataCell(SizedBox(
+                          DataCell(
+                            SizedBox(
                               width: double.infinity,
-                              child:
-                                  Text(draft.recipeDraft.label ?? 'unnamed'))),
-                          DataCell(Text(draft.version <= 0 ? 'new' : 'update')),
+                              child: Text(
+                                draft.recipeDraft.label ??
+                                    L10n.of(context)
+                                        .p_drafts_drafts_name_unnamed,
+                              ),
+                            ),
+                          ),
+                          DataCell(
+                            Text(
+                              draft.version <= 0
+                                  ? L10n.of(context).p_drafts_drafts_state_new
+                                  : L10n.of(context)
+                                      .p_drafts_drafts_state_update,
+                            ),
+                          ),
                           DataCell(IconButton(
                             icon: Icon(
                               MdiIcons.delete,
-                              color: Theme.of(context).colorScheme.error,
+                              color: Colors.red.shade500,
                             ),
                             onPressed: () => deleteDraft(ref, draft.id),
                           )),

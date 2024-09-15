@@ -646,4 +646,19 @@ class L10nDe extends L10n {
 
   @override
   String get p_editor_edit_failed => 'Rezeptentwurf existiert bereits';
+
+  @override
+  String get p_drafts_drafts_name => 'Name';
+
+  @override
+  String get p_drafts_drafts_state => 'Status';
+
+  @override
+  String get p_drafts_drafts_state_new => 'Neu';
+
+  @override
+  String get p_drafts_drafts_state_update => 'Update';
+
+  @override
+  String get p_drafts_drafts_name_unnamed => 'Unbenannt';
 }

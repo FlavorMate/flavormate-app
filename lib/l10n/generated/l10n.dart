@@ -1360,6 +1360,36 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Recipe draft exists already'**
   String get p_editor_edit_failed;
+
+  /// No description provided for @p_drafts_drafts_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get p_drafts_drafts_name;
+
+  /// No description provided for @p_drafts_drafts_state.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get p_drafts_drafts_state;
+
+  /// No description provided for @p_drafts_drafts_state_new.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get p_drafts_drafts_state_new;
+
+  /// No description provided for @p_drafts_drafts_state_update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get p_drafts_drafts_state_update;
+
+  /// No description provided for @p_drafts_drafts_name_unnamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unnamed'**
+  String get p_drafts_drafts_name_unnamed;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

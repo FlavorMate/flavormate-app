@@ -233,5 +233,10 @@
   "p_drafts_scrape_failed": "Rezept konnte nicht heruntergeladen werden",
   "p_editor_upload_success": "Rezept erfolgreich hochgeladen",
   "p_editor_upload_failed": "Rezept konnte nicht hochgeladen werden",
-  "p_editor_edit_failed": "Rezeptentwurf existiert bereits"
+  "p_editor_edit_failed": "Rezeptentwurf existiert bereits",
+  "p_drafts_drafts_name": "Name",
+  "p_drafts_drafts_state": "Status",
+  "p_drafts_drafts_state_new": "Neu",
+  "p_drafts_drafts_state_update": "Update",
+  "p_drafts_drafts_name_unnamed": "Unbenannt"
 }
