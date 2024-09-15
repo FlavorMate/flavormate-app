@@ -643,4 +643,7 @@ class L10nEn extends L10n {
 
   @override
   String get p_editor_upload_failed => 'Recipe couldn\'t be uploaded';
+
+  @override
+  String get p_editor_edit_failed => 'Recipe draft exists already';
 }

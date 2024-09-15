@@ -1,5 +1,6 @@
-import 'package:flavormate/models/entity.dart';
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/models/entity.dart';
+import 'package:flavormate/models/recipe_draft/serving_draft/serving_draft.dart';
 
 part 'serving.mapper.dart';
 
@@ -16,4 +17,8 @@ class Serving extends Entity with ServingMappable {
     required this.label,
     required this.amount,
   });
+
+  ServingDraft toDraft() {
+    return ServingDraft(amount, label);
+  }
 }

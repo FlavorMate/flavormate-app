@@ -327,7 +327,15 @@ class EditorPage extends ConsumerWidget {
 
     showDialog(context: context, builder: (_) => const TLoadingDialog());
 
-    if (await ref.read(pDraftProvider(id).notifier).upload()) {
+    var result = false;
+
+    if (draft.version > 0) {
+      result = await ref.read(pDraftProvider(id).notifier).edit();
+    } else {
+      result = await ref.read(pDraftProvider(id).notifier).upload();
+    }
+
+    if (result) {
       context.showTextSnackBar(L10n.of(context).p_editor_upload_success);
       context.goNamed('home');
     } else {

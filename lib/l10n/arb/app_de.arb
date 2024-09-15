@@ -232,5 +232,6 @@
   "d_drafts_scrape_url": "Adresse",
   "p_drafts_scrape_failed": "Rezept konnte nicht heruntergeladen werden",
   "p_editor_upload_success": "Rezept erfolgreich hochgeladen",
-  "p_editor_upload_failed": "Rezept konnte nicht hochgeladen werden"
+  "p_editor_upload_failed": "Rezept konnte nicht hochgeladen werden",
+  "p_editor_edit_failed": "Rezeptentwurf existiert bereits"
 }

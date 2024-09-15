@@ -1,5 +1,6 @@
-import 'package:flavormate/models/entity.dart';
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/models/entity.dart';
+import 'package:flavormate/models/recipe_draft/instructions/instruction_draft.dart';
 
 part 'instruction.mapper.dart';
 
@@ -14,4 +15,8 @@ class Instruction extends Entity with InstructionMappable {
     required super.lastModifiedOn,
     required this.label,
   });
+
+  InstructionDraft toDraft() {
+    return InstructionDraft(label: label);
+  }
 }

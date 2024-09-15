@@ -643,4 +643,7 @@ class L10nDe extends L10n {
 
   @override
   String get p_editor_upload_failed => 'Rezept konnte nicht hochgeladen werden';
+
+  @override
+  String get p_editor_edit_failed => 'Rezeptentwurf existiert bereits';
 }

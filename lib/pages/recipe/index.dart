@@ -1,4 +1,5 @@
 import 'package:flavormate/components/dialogs/t_confirm_dialog.dart';
+import 'package:flavormate/components/dialogs/t_loading_dialog.dart';
 import 'package:flavormate/components/recipe/dialogs/change_owner_dialog.dart';
 import 'package:flavormate/components/recipe/dialogs/library_dialog.dart';
 import 'package:flavormate/components/recipe/recipe_action_button.dart';
@@ -18,6 +19,7 @@ import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/pages/recipe/variations/desktop.dart';
 import 'package:flavormate/pages/recipe/variations/mobile.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
+import 'package:flavormate/riverpod/draft/p_drafts.dart';
 import 'package:flavormate/riverpod/highlights/p_highlight.dart';
 import 'package:flavormate/riverpod/recipes/p_action_button.dart';
 import 'package:flavormate/riverpod/recipes/p_latest_recipes.dart';
@@ -167,7 +169,17 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   }
 
   edit() async {
-    final recipe = await ref.read(pRecipeProvider(int.parse(widget.id)).future);
+    showDialog(context: context, builder: (_) => const TLoadingDialog());
+
+    final id =
+        await ref.read(pDraftsProvider.notifier).recipeToDraft(widget.id);
+
+    context.pop();
+    if (id == null) {
+      context.showTextSnackBar(L10n.of(context).p_editor_edit_failed);
+    } else {
+      context.pushNamed('editor', pathParameters: {'id': '$id'});
+    }
   }
 
   transfer() async {

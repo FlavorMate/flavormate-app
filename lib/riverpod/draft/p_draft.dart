@@ -10,6 +10,7 @@ import 'package:flavormate/models/tag_draft/tag_draft.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
 import 'package:flavormate/riverpod/draft/p_drafts.dart';
 import 'package:flavormate/riverpod/drift/p_drift.dart';
+import 'package:flavormate/riverpod/highlights/p_highlight.dart';
 import 'package:flavormate/riverpod/recipes/p_latest_recipes.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -126,10 +127,73 @@ class PDraft extends _$PDraft {
 
       await ref.read(pDraftsProvider.notifier).deleteDraft(state.value!.id);
 
+      ref.invalidate(pHighlightProvider);
       ref.invalidate(pLatestRecipesProvider);
 
       return true;
     } catch (_) {
+      return false;
+    }
+  }
+
+  Future<bool> edit() async {
+    try {
+      final draft = state.value!;
+      final response = await ref.read(pApiProvider).recipesClient.update(
+            draft.id,
+            data: draft.recipeDraft.toMap(),
+          );
+
+      if (draft.addedImages.isEmpty && draft.removedImages.isEmpty) {
+        return true;
+      }
+
+      final usedImages = draft.images
+          .where((image) =>
+              draft.removedImages
+                  .indexWhere((rImage) => rImage.id == image.id) <
+              0)
+          .map((image) => image.id!);
+
+      final images = [...usedImages];
+
+      if (draft.addedImages.isNotEmpty) {
+        final addedFiles =
+            await Future.wait(draft.addedImages.map((addedImage) async {
+          addedImage.owner = response.id!;
+          return (await ref
+                  .read(pApiProvider)
+                  .filesClient
+                  .create(data: addedImage.toMap()))
+              .id!;
+        }));
+        images.addAll(addedFiles);
+      }
+
+      if (draft.removedImages.isNotEmpty) {
+        var deletedFiles =
+            await Future.wait(draft.removedImages.map((removedImage) async {
+          final response = await ref
+              .read(pApiProvider)
+              .filesClient
+              .deleteById(removedImage.id!);
+          return response ? null : removedImage.id!;
+        }));
+
+        images.addAll(deletedFiles.nonNulls);
+      }
+      await ref
+          .read(pApiProvider)
+          .recipesClient
+          .update(response.id!, data: {'files': images});
+
+      await ref.read(pDraftsProvider.notifier).deleteDraft(state.value!.id);
+
+      ref.invalidate(pHighlightProvider);
+      ref.invalidate(pLatestRecipesProvider);
+
+      return true;
+    } catch (e) {
       return false;
     }
   }

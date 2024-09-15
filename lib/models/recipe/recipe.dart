@@ -1,3 +1,4 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/models/author/author.dart';
 import 'package:flavormate/models/categories/category.dart';
 import 'package:flavormate/models/entity.dart';
@@ -8,8 +9,8 @@ import 'package:flavormate/models/recipe/diet.dart';
 import 'package:flavormate/models/recipe/ingredients/ingredient_group.dart';
 import 'package:flavormate/models/recipe/instructions/instruction_group.dart';
 import 'package:flavormate/models/recipe/serving/serving.dart';
+import 'package:flavormate/models/recipe_draft/recipe_draft.dart';
 import 'package:flavormate/models/tag/tag.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
 part 'recipe.mapper.dart';
 
@@ -68,4 +69,22 @@ class Recipe extends Entity with RecipeMappable {
     this.description,
     this.url,
   });
+
+  RecipeDraft toDraft() {
+    return RecipeDraft(
+      categories: categories?.map((c) => c.id!).toList() ?? [],
+      ingredientGroups: ingredientGroups.map((iG) => iG.toDraft()).toList(),
+      instructionGroups: instructionGroups.map((iG) => iG.toDraft()).toList(),
+      serving: serving.toDraft(),
+      tags: tags?.map((tag) => tag.toDraft()).toList() ?? [],
+      cookTime: cookTime,
+      prepTime: prepTime,
+      restTime: restTime,
+      course: course,
+      diet: diet,
+      description: description,
+      label: label,
+      url: url.toString(),
+    );
+  }
 }

@@ -1,6 +1,7 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/models/entity.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
-import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/models/tag_draft/tag_draft.dart';
 
 part 'tag.mapper.dart';
 
@@ -18,4 +19,8 @@ class Tag extends Entity with TagMappable {
     required this.label,
     required this.recipes,
   });
+
+  TagDraft toDraft() {
+    return TagDraft(label: label);
+  }
 }

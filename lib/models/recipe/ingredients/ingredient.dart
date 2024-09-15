@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/models/recipe_draft/ingredients/ingredient_draft.dart';
 import 'package:flavormate/models/unit.dart';
 
 part 'ingredient.mapper.dart';
@@ -10,4 +11,12 @@ class Ingredient with IngredientMappable {
   final Unit? unit;
 
   Ingredient({required this.amount, required this.label, required this.unit});
+
+  IngredientDraft toDraft() {
+    return IngredientDraft(
+      amount: amount,
+      label: label,
+      unit: unit,
+    );
+  }
 }

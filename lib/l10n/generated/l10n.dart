@@ -1354,6 +1354,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Recipe couldn\'t be uploaded'**
   String get p_editor_upload_failed;
+
+  /// No description provided for @p_editor_edit_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe draft exists already'**
+  String get p_editor_edit_failed;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
