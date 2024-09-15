@@ -109,6 +109,7 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
   void openIngredient(IngredientDraft ingredient) async {
     final response = await showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (_) => DIngredient(ingredient: ingredient.copyWith()),
     );
 

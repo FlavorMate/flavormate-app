@@ -112,6 +112,7 @@ class _DInstructionGroupState extends State<DInstructionGroup> {
   void openInstruction(InstructionDraft instruction) async {
     final response = await showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (_) => DInstruction(instruction: instruction.copyWith()),
     );
 

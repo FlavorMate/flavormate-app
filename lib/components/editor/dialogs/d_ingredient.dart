@@ -126,6 +126,8 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                           )
                         : null,
                   ),
+                  onEditingComplete: () =>
+                      setUnit(fieldTextEditingController.text, fieldFocusNode),
                 ),
                 onSelected: (Unit selection) {
                   setState(() {
@@ -162,6 +164,14 @@ class _DIngredientState extends ConsumerState<DIngredient> {
         ),
       ),
     );
+  }
+
+  void setUnit(String text, FocusNode focusNode) {
+    if (_ingredient.unit?.label == text) return;
+    focusNode.unfocus();
+    setState(() {
+      _ingredient.unit = Unit(label: text);
+    });
   }
 
   void clearUnit(TextEditingController unitController) {
