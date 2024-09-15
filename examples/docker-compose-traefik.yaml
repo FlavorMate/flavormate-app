@@ -3,6 +3,8 @@ services:
     container_name: flavormate_webapp
     image: ghcr.io/flavormate/flavormate-webapp
     restart: unless-stopped
+    environment:
+      - BACKEND_URL=https://example.com
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.flavormate_webapp.rule=(Host(`app.example.com`))"

@@ -4,6 +4,7 @@ import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/api/login.dart';
 import 'package:flavormate/riverpod/auth_state/p_auth_state.dart';
+import 'package:flavormate/riverpod/root_bundle/p_backend_url.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -21,12 +22,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  bool _staticServer = false;
+
   @override
   void initState() {
     ref.listenManual(pServerProvider, fireImmediately: true, (_, value) {
-      if (value == null || _serverController.text.isNotEmpty) return;
+      if (_serverController.text.isNotEmpty) return;
       _serverController.text = value;
     });
+
+    _staticServer = ref.read(pBackendUrlProvider).requireValue != null;
     super.initState();
   }
 
@@ -60,6 +65,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     TText(L10n.of(context).app_title, TextStyles.headlineLarge),
                     const SizedBox(height: PADDING * 2),
                     TextField(
+                      enabled: !_staticServer,
+                      readOnly: _staticServer,
                       controller: _serverController,
                       decoration: InputDecoration(
                         label: Text(L10n.of(context).p_login_server),

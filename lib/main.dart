@@ -2,6 +2,7 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/go_router/p_go_router.dart';
 import 'package:flavormate/riverpod/package_info/p_package_info.dart';
+import 'package:flavormate/riverpod/root_bundle/p_backend_url.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_shared_preferences.dart';
 import 'package:flavormate/utils/custom_mappers/custom_mappers.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
       routerConfig: provider,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -49,6 +51,7 @@ class _EagerInitialization extends ConsumerWidget {
     final values = [
       ref.watch(pPackageInfoProvider),
       ref.watch(pSharedPreferencesProvider),
+      ref.watch(pBackendUrlProvider),
     ];
 
     if (values.every((value) => value.hasValue)) {
