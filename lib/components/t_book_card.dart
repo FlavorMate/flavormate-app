@@ -7,6 +7,7 @@ import 'package:flavormate/extensions/e_date_time.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/library/book.dart';
 import 'package:flavormate/riverpod/library/p_library.dart';
+import 'package:flavormate/riverpod/user/p_user.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -20,6 +21,7 @@ class BookCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(pUserProvider).requireValue;
     return SizedBox(
       width: 450,
       child: TCard(
@@ -59,57 +61,59 @@ class BookCard extends ConsumerWidget {
                 ),
               ],
             ),
-            Positioned(
-              top: 8,
-              right: 8,
-              child: PopupMenuButton<String>(
-                child: const CircleAvatar(
-                  child: Icon(MdiIcons.dotsHorizontal),
+            if (book.owner.id == user.id!)
+              Positioned(
+                top: 8,
+                right: 8,
+                child: PopupMenuButton<String>(
+                  child: const CircleAvatar(
+                    child: Icon(MdiIcons.dotsHorizontal),
+                  ),
+                  onSelected: (String item) {
+                    if (item == 'edit') {
+                      editBook(context, ref, book);
+                    } else if (item == 'visibility') {
+                      toggleVisibility(context, ref, book);
+                    } else if (item == 'delete') {
+                      deleteBook(context, ref, book);
+                    }
+                  },
+                  itemBuilder: (BuildContext context) =>
+                      <PopupMenuEntry<String>>[
+                    PopupMenuItem<String>(
+                      value: 'edit',
+                      child: ListTile(
+                        leading: const Icon(MdiIcons.pencil),
+                        title: Text(
+                          L10n.of(context).p_library_edit,
+                        ),
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'visibility',
+                      child: ListTile(
+                        leading: Icon(
+                          book.visible ? MdiIcons.shareOff : MdiIcons.share,
+                        ),
+                        title: Text(
+                          book.visible
+                              ? L10n.of(context).p_library_unshare
+                              : L10n.of(context).p_library_share,
+                        ),
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'delete',
+                      child: ListTile(
+                        leading: const Icon(MdiIcons.trashCan),
+                        title: Text(
+                          L10n.of(context).p_library_delete,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                onSelected: (String item) {
-                  if (item == 'edit') {
-                    editBook(context, ref, book);
-                  } else if (item == 'visibility') {
-                    toggleVisibility(context, ref, book);
-                  } else if (item == 'delete') {
-                    deleteBook(context, ref, book);
-                  }
-                },
-                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                  PopupMenuItem<String>(
-                    value: 'edit',
-                    child: ListTile(
-                      leading: const Icon(MdiIcons.pencil),
-                      title: Text(
-                        L10n.of(context).p_library_edit,
-                      ),
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'visibility',
-                    child: ListTile(
-                      leading: Icon(
-                        book.visible ? MdiIcons.shareOff : MdiIcons.share,
-                      ),
-                      title: Text(
-                        book.visible
-                            ? L10n.of(context).p_library_unshare
-                            : L10n.of(context).p_library_share,
-                      ),
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'delete',
-                    child: ListTile(
-                      leading: const Icon(MdiIcons.trashCan),
-                      title: Text(
-                        L10n.of(context).p_library_delete,
-                      ),
-                    ),
-                  ),
-                ],
               ),
-            ),
           ],
         ),
       ),

@@ -12,7 +12,7 @@ import 'package:flavormate/pages/login/login_page.dart';
 import 'package:flavormate/pages/more/index.dart';
 import 'package:flavormate/pages/no_connection/index.dart';
 import 'package:flavormate/pages/recipe/index.dart';
-import 'package:flavormate/pages/recipes/index.dart';
+import 'package:flavormate/pages/recipes/_id.dart';
 import 'package:flavormate/pages/settings/index.dart';
 import 'package:flavormate/pages/tags/_id.dart';
 import 'package:flavormate/pages/tags/index.dart';

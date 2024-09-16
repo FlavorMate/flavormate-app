@@ -1456,6 +1456,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'As soon as your recipes have categories they will be shown here'**
   String get p_categories_no_recipe_subtitle;
+
+  /// No description provided for @p_book_no_recipes.
+  ///
+  /// In en, this message translates to:
+  /// **'Your book is empty'**
+  String get p_book_no_recipes;
+
+  /// No description provided for @p_book_no_recipes_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add recipes to your boo'**
+  String get p_book_no_recipes_subtitle;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

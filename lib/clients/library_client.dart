@@ -28,4 +28,22 @@ class LibraryClient extends ASearchClient<Book> {
 
     return Pageable.fromMap(response.data!, RecipeMapper.fromMap);
   }
+
+  Future<List<Book>> findOwn() async {
+    final response = await httpClient.get('$baseURL/own');
+
+    List<Map<String, dynamic>> data = List.from(response.data!);
+
+    return data.map(parser).toList();
+  }
+
+  Future<bool> isSubscribed(int id) async {
+    final response = await httpClient.get<bool>('$baseURL/subscribed/$id');
+    return response.data!;
+  }
+
+  Future<bool> toggleSubscription(int id) async {
+    final response = await httpClient.put<bool>('$baseURL/$id/subscribe');
+    return response.data!;
+  }
 }

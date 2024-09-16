@@ -32,11 +32,11 @@ class _LibraryDialogState extends ConsumerState<LibraryDialog> {
       negativeLabel: L10n.of(context).btn_close,
       child: RStruct(
         provider,
-        (_, page) => !page.page.empty
+        (_, page) => page.isNotEmpty
             ? ListView.builder(
-                itemCount: page.page.totalElements,
+                itemCount: page.length,
                 itemBuilder: (_, index) {
-                  final book = page.content[index];
+                  final book = page[index];
                   return CheckboxListTile(
                     value: book.has(widget.recipe),
                     onChanged: (_) => toggleRecipeInBook(

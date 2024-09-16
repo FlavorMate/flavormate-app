@@ -35,7 +35,7 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
     return RScaffold(
       userProvider,
       appBar: TAppBar(title: L10n.of(context).p_admin_user_management_title),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: (_, __) => FloatingActionButton(
         onPressed: () => createUser(context, ref),
         child: const Icon(MdiIcons.plus),
       ),

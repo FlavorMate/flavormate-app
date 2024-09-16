@@ -694,4 +694,10 @@ class L10nEn extends L10n {
 
   @override
   String get p_categories_no_recipe_subtitle => 'As soon as your recipes have categories they will be shown here';
+
+  @override
+  String get p_book_no_recipes => 'Your book is empty';
+
+  @override
+  String get p_book_no_recipes_subtitle => 'Add recipes to your boo';
 }

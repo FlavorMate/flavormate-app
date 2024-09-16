@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class RScaffold<T> extends StatelessWidget {
   final AsyncValue<T> provider;
   final Widget Function(BuildContext, T) builder;
+  final Widget? Function(BuildContext, T)? floatingActionButton;
   final PreferredSizeWidget? appBar;
-  final Widget? floatingActionButton;
 
   const RScaffold(
     this.provider, {
@@ -23,7 +23,9 @@ class RScaffold<T> extends StatelessWidget {
       AsyncData(value: final value) => Scaffold(
           appBar: appBar,
           body: SafeArea(child: builder(context, value)),
-          floatingActionButton: floatingActionButton,
+          floatingActionButton: floatingActionButton != null
+              ? floatingActionButton!(context, value)
+              : null,
         ),
       AsyncError(:final error) => ErrorPage(error.toString()),
       _ => const LoadingPage(),
