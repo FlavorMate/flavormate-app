@@ -24,6 +24,12 @@ class RecipesClient extends AFilterSearchClient<Recipe> {
     return response.data!.map((recipe) => parser(recipe)).toList();
   }
 
+  Future<Recipe> findByIdL10n(int id, String language) async {
+    final params = getParams({'language': language});
+    final response = await httpClient.get('$baseURL/$id/l10n?$params');
+    return parser(response.data);
+  }
+
   Future<bool> changeOwner(int recipeId, Map form) async {
     final response = await httpClient.put<bool>(
       '$baseURL/$recipeId/changeOwner',
