@@ -32,7 +32,7 @@ class _DScrapeState extends State<DScrape> {
         child: TextFormField(
           controller: _urlController,
           decoration: InputDecoration(
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
             label: Text(L10n.of(context).d_drafts_scrape_url),
           ),
           validator: (input) {

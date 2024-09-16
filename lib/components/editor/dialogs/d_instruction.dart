@@ -55,7 +55,7 @@ class _DInstructionState extends State<DInstruction> {
               minLines: null,
               maxLines: null,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 label: Text(L10n.of(context).d_editor_instruction_label),
               ),
               validator: (input) {

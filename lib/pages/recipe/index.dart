@@ -184,7 +184,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
 
   transfer() async {
     final id = await showDialog<int>(
-        context: context, builder: (_) => ChangeOwnerDialog());
+        context: context, builder: (_) => const ChangeOwnerDialog());
     if (id == null) return;
 
     final response = await ref

@@ -52,9 +52,9 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
                       Text(L10n.of(context).p_admin_user_management_username),
                       if (currentSortIndex == 0)
                         if (sortASC)
-                          Icon(MdiIcons.sortAscending)
+                          const Icon(MdiIcons.sortAscending)
                         else
-                          Icon(MdiIcons.sortDescending)
+                          const Icon(MdiIcons.sortDescending)
                     ],
                   ),
                   onSort: (index, _) => sort(index),
@@ -66,9 +66,9 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
                           L10n.of(context).p_admin_user_management_displayname),
                       if (currentSortIndex == 1)
                         if (sortASC)
-                          Icon(MdiIcons.sortAscending)
+                          const Icon(MdiIcons.sortAscending)
                         else
-                          Icon(MdiIcons.sortDescending)
+                          const Icon(MdiIcons.sortDescending)
                     ],
                   ),
                   onSort: (index, _) => sort(index),
@@ -80,9 +80,9 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
                           .p_admin_user_management_last_activity),
                       if (currentSortIndex == 2)
                         if (sortASC)
-                          Icon(MdiIcons.sortAscending)
+                          const Icon(MdiIcons.sortAscending)
                         else
-                          Icon(MdiIcons.sortDescending)
+                          const Icon(MdiIcons.sortDescending)
                     ],
                   ),
                   onSort: (index, _) => sort(index),

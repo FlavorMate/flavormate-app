@@ -69,7 +69,7 @@ class _DIngredientState extends ConsumerState<DIngredient> {
             TextFormField(
               controller: _amountController,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 label: Text(L10n.of(context).d_editor_ingredient_amount),
               ),
               validator: (input) {
@@ -113,7 +113,7 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                   controller: fieldTextEditingController,
                   focusNode: fieldFocusNode,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     label: Text(L10n.of(context).d_editor_ingredient_unit),
                     suffixIcon: _ingredient.unit != null
                         ? IconButton(
@@ -149,7 +149,7 @@ class _DIngredientState extends ConsumerState<DIngredient> {
             TextFormField(
               controller: _ingredientController,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 label: Text(L10n.of(context).d_editor_ingredient_label),
               ),
               validator: (input) {

@@ -15,12 +15,13 @@ class TProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (completed <= 0) {
-      if (optional)
-        return Icon(MdiIcons.minusCircleOutline);
-      else
-        return Icon(MdiIcons.alertCircleOutline);
+      if (optional) {
+        return const Icon(MdiIcons.minusCircleOutline);
+      } else {
+        return const Icon(MdiIcons.alertCircleOutline);
+      }
     } else if (completed >= 100) {
-      return Icon(MdiIcons.checkCircleOutline);
+      return const Icon(MdiIcons.checkCircleOutline);
     } else {
       return Padding(
         padding: const EdgeInsets.only(right: 4),

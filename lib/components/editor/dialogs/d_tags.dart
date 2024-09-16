@@ -58,8 +58,9 @@ class _DTagsState extends State<DTags> {
               ),
               onEditingComplete: addTag,
               validator: (input) {
-                if (UValidator.isEmpty(input))
+                if (UValidator.isEmpty(input)) {
                   return L10n.of(context).v_isEmpty;
+                }
                 if (_tags.any((tag) => tag.label == input)) {
                   return L10n.of(context).v_duplicate;
                 }

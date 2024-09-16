@@ -29,7 +29,7 @@ class _EditBookDialogState extends State<EditBookDialog> {
       child: TextField(
         controller: _controller,
         decoration: InputDecoration(
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           label: Text(L10n.of(context).d_library_edit_name),
         ),
       ),

@@ -59,7 +59,7 @@ class LibraryPage extends ConsumerWidget {
   addBook(BuildContext context, WidgetRef ref) async {
     final response = await showDialog<String?>(
       context: context,
-      builder: (_) => CreateBookDialog(),
+      builder: (_) => const CreateBookDialog(),
     );
     if (response?.isEmpty ?? true) return;
 

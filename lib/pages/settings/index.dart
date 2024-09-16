@@ -109,7 +109,7 @@ class SettingsPage extends ConsumerWidget {
                                 color: TextColor.filledButton,
                               ),
                               TText(
-                                '☁ ${serverProvider!}',
+                                '☁ $serverProvider',
                                 TextStyles.bodySmall,
                                 color: TextColor.filledButton,
                               ),
@@ -174,7 +174,7 @@ class SettingsPage extends ConsumerWidget {
                 RStruct(
                   infoProvider,
                   (_, info) => TIconButton(
-                    onPressed: () => null,
+                    onPressed: () {},
                     icon: MdiIcons.informationOutline,
                     label: '${info.version} ($_version)',
                     width: _buttonWidth,

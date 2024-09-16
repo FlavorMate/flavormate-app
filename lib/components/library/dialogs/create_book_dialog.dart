@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CreateBookDialog extends StatefulWidget {
+  const CreateBookDialog({super.key});
+
   @override
   State<StatefulWidget> createState() => _CreateBookDialogState();
 }
@@ -19,7 +21,7 @@ class _CreateBookDialogState extends State<CreateBookDialog> {
       child: TextField(
         controller: _controller,
         decoration: InputDecoration(
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           label: Text(L10n.of(context).d_library_create_label),
         ),
       ),

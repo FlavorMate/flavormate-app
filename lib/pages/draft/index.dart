@@ -117,14 +117,14 @@ class DraftsPage extends ConsumerWidget {
   void scrapeDraft(BuildContext context, WidgetRef ref) async {
     try {
       final response =
-          await showDialog<String>(context: context, builder: (_) => DScrape());
+          await showDialog<String>(context: context, builder: (_) => const DScrape());
 
       if (response == null) return;
 
       showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (_) => TLoadingDialog(),
+        builder: (_) => const TLoadingDialog(),
       );
 
       final id = await ref.read(pDraftsProvider.notifier).scrape(response);

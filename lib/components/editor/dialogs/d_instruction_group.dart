@@ -50,7 +50,7 @@ class _DInstructionGroupState extends State<DInstructionGroup> {
           TextField(
             controller: _labelController,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               label: Text(L10n.of(context).d_editor_instruction_group_label),
             ),
           ),

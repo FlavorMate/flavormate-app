@@ -40,7 +40,7 @@ class StoriesViewer extends ConsumerWidget {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: TText(
                   L10n.of(context).c_dashboard_stories,
                   TextStyles.displaySmall,

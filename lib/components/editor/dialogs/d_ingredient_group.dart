@@ -50,7 +50,7 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
           TextField(
             controller: _labelController,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               label: Text(L10n.of(context).d_editor_ingredient_group_label),
             ),
           ),

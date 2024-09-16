@@ -1,5 +1,4 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:flavormate/models/recipe/recipe.dart';
 
 part 'tag_draft.mapper.dart';
 

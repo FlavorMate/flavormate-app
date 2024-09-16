@@ -61,7 +61,7 @@ class _DDurationState extends State<DDuration> {
             TextFormField(
               controller: _daysController,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 label: Text(L10n.of(context).d_editor_duration_days),
               ),
               validator: (input) {
@@ -74,7 +74,7 @@ class _DDurationState extends State<DDuration> {
             TextFormField(
               controller: _hoursController,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 label: Text(L10n.of(context).d_editor_duration_hours),
               ),
               validator: (input) {
@@ -87,7 +87,7 @@ class _DDurationState extends State<DDuration> {
             TextFormField(
               controller: _minutesController,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 label: Text(L10n.of(context).d_editor_duration_minutes),
               ),
               validator: (input) {
@@ -100,7 +100,7 @@ class _DDurationState extends State<DDuration> {
             TextFormField(
               controller: _secondsController,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 label: Text(L10n.of(context).d_editor_duration_seconds),
               ),
               validator: (input) {

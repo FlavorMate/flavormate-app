@@ -70,7 +70,7 @@ abstract class UImage {
     final ih1 = ih * ratio;
     final iw1 = iw * ratio;
 
-    final x1 = 0.0;
+    const x1 = 0.0;
     final y1 = ch / 2 - ih1 / 2;
 
     // transformation for background picture
@@ -86,7 +86,7 @@ abstract class UImage {
     final iw2 = iw * ratio2;
 
     final x2 = cw / 2 - iw2 / 2;
-    final y2 = 0.0;
+    const y2 = 0.0;
 
     // if ih1 height exceeds canvas height, change primary and background image
     if (ih1 <= ch) {
@@ -133,11 +133,11 @@ abstract class UImage {
     final ih2 = ih * ratio2;
     final iw2 = iw * ratio2;
 
-    final x2 = 0.0;
+    const x2 = 0.0;
     final y2 = ch / 2 - ih2 / 2;
 
     final x1 = cw / 2 - iw1 / 2;
-    final y1 = 0.0;
+    const y1 = 0.0;
 
     // if iw2 height exceeds canvas width, change primary and background image
     if (iw2 <= cw) {
