@@ -18,7 +18,7 @@ class TCarousel extends StatefulWidget {
 }
 
 class _TCarouselState extends State<TCarousel> {
-  final _controller = CarouselControllerImpl();
+  final _controller = FlutterCarouselControllerImpl();
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +33,11 @@ class _TCarouselState extends State<TCarousel> {
             SlideCard(slide: widget.slides[0], height: widget.height)
           else
             FlutterCarousel.builder(
-              options: CarouselOptions(
+              options: FlutterCarouselOptions(
                 height: double.infinity,
                 viewportFraction: 1,
                 showIndicator: true,
-                slideIndicator: const CircularSlideIndicator(),
+                slideIndicator: CircularSlideIndicator(),
                 enlargeCenterPage: true,
                 controller: _controller,
                 enableInfiniteScroll: true,
