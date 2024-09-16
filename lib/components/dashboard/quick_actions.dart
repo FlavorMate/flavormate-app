@@ -1,4 +1,5 @@
 import 'package:flavormate/components/t_icon_button.dart';
+import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe/course.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
@@ -50,17 +51,21 @@ class QuickActions extends ConsumerWidget {
   }
 
   toRecipe(BuildContext context, WidgetRef ref, {Course? course}) async {
-    final user = await ref.read(pUserProvider.selectAsync((data) => data));
+    try {
+      final user = await ref.read(pUserProvider.selectAsync((data) => data));
 
-    final recipe = await ref
-        .read(pApiProvider)
-        .recipesClient
-        .findRandom(diet: user.diet!, course: course);
+      final recipe = await ref
+          .read(pApiProvider)
+          .recipesClient
+          .findRandom(diet: user.diet!, course: course);
 
-    await context.pushNamed(
-      'recipe',
-      pathParameters: {'id': '${recipe[0].id}'},
-      extra: recipe[0].label,
-    );
+      await context.pushNamed(
+        'recipe',
+        pathParameters: {'id': '${recipe[0].id}'},
+        extra: recipe[0].label,
+      );
+    } catch (e) {
+      context.showTextSnackBar(L10n.of(context).p_dashboard_no_recipe);
+    }
   }
 }

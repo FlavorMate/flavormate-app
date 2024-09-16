@@ -661,4 +661,37 @@ class L10nEn extends L10n {
 
   @override
   String get p_drafts_drafts_name_unnamed => 'Unnamed';
+
+  @override
+  String get d_recipe_library_no_books => 'No books available';
+
+  @override
+  String get d_recipe_library_no_books_subtitle => 'Create a book in the library';
+
+  @override
+  String get p_library_no_book => 'Your library is empty';
+
+  @override
+  String get p_library_no_book_subtitle => 'Create a book by clicking the \"+\" button';
+
+  @override
+  String get p_recipes_no_recipe => 'No recipes available';
+
+  @override
+  String get p_recipes_no_recipe_subtitle => 'Create recipe to show them here';
+
+  @override
+  String get p_dashboard_no_recipe => 'No recipes available';
+
+  @override
+  String get p_tags_no_recipe => 'No tags available';
+
+  @override
+  String get p_tags_no_recipe_subtitle => 'As soon as your recipes have tags they will be shown here';
+
+  @override
+  String get p_categories_no_recipe => 'No categories available';
+
+  @override
+  String get p_categories_no_recipe_subtitle => 'As soon as your recipes have categories they will be shown here';
 }

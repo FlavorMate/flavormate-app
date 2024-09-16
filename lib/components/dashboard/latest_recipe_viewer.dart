@@ -1,7 +1,7 @@
-import 'package:flavormate/components/dashboard/empty_message.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_carousel.dart';
+import 'package:flavormate/components/t_empty_message.dart';
 import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_slide.dart';
 import 'package:flavormate/components/t_text.dart';
@@ -52,7 +52,7 @@ class LatestRecipeViewer extends ConsumerWidget {
             child: RStruct(
               provider,
               (_, latestRecipes) => latestRecipes.page.empty
-                  ? EmptyMessage(
+                  ? TEmptyMessage(
                       title:
                           L10n.of(context).c_dashboard_latest_recipes_no_title,
                       subtitle: L10n.of(context)

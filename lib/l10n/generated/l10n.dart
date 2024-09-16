@@ -1390,6 +1390,72 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Unnamed'**
   String get p_drafts_drafts_name_unnamed;
+
+  /// No description provided for @d_recipe_library_no_books.
+  ///
+  /// In en, this message translates to:
+  /// **'No books available'**
+  String get d_recipe_library_no_books;
+
+  /// No description provided for @d_recipe_library_no_books_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a book in the library'**
+  String get d_recipe_library_no_books_subtitle;
+
+  /// No description provided for @p_library_no_book.
+  ///
+  /// In en, this message translates to:
+  /// **'Your library is empty'**
+  String get p_library_no_book;
+
+  /// No description provided for @p_library_no_book_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a book by clicking the \"+\" button'**
+  String get p_library_no_book_subtitle;
+
+  /// No description provided for @p_recipes_no_recipe.
+  ///
+  /// In en, this message translates to:
+  /// **'No recipes available'**
+  String get p_recipes_no_recipe;
+
+  /// No description provided for @p_recipes_no_recipe_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create recipe to show them here'**
+  String get p_recipes_no_recipe_subtitle;
+
+  /// No description provided for @p_dashboard_no_recipe.
+  ///
+  /// In en, this message translates to:
+  /// **'No recipes available'**
+  String get p_dashboard_no_recipe;
+
+  /// No description provided for @p_tags_no_recipe.
+  ///
+  /// In en, this message translates to:
+  /// **'No tags available'**
+  String get p_tags_no_recipe;
+
+  /// No description provided for @p_tags_no_recipe_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'As soon as your recipes have tags they will be shown here'**
+  String get p_tags_no_recipe_subtitle;
+
+  /// No description provided for @p_categories_no_recipe.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories available'**
+  String get p_categories_no_recipe;
+
+  /// No description provided for @p_categories_no_recipe_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'As soon as your recipes have categories they will be shown here'**
+  String get p_categories_no_recipe_subtitle;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

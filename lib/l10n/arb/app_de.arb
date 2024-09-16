@@ -238,5 +238,16 @@
   "p_drafts_drafts_state": "Status",
   "p_drafts_drafts_state_new": "Neu",
   "p_drafts_drafts_state_update": "Update",
-  "p_drafts_drafts_name_unnamed": "Unbenannt"
+  "p_drafts_drafts_name_unnamed": "Unbenannt",
+  "d_recipe_library_no_books": "Keine Bücher vorhanden",
+  "d_recipe_library_no_books_subtitle": "Erstelle ein Buch in der Biblothek",
+  "p_library_no_book": "Deine Bibliothek ist leer",
+  "p_library_no_book_subtitle": "Erstelle in Buch mit dem \"+\" Button",
+  "p_recipes_no_recipe": "Keine Rezepte verfügbar",
+  "p_recipes_no_recipe_subtitle": "Erstelle Rezepte um sie hier anzuzeigen",
+  "p_dashboard_no_recipe": "Keine Rezepte verfügbar",
+  "p_tags_no_recipe": "Keine Tags verfügbar",
+  "p_tags_no_recipe_subtitle": "Sobald deine Rezepte Tags haben, werden sie hier angezeigt",
+  "p_categories_no_recipe": "Keine Kategorien verfügbar",
+  "p_categories_no_recipe_subtitle": "Sobald deine Rezepte Kategorien haben, werden sie hier angezeigt"
 }

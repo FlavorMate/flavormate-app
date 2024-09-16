@@ -238,5 +238,16 @@
   "p_drafts_drafts_state": "State",
   "p_drafts_drafts_state_new": "New",
   "p_drafts_drafts_state_update": "Update",
-  "p_drafts_drafts_name_unnamed": "Unnamed"
+  "p_drafts_drafts_name_unnamed": "Unnamed",
+  "d_recipe_library_no_books": "No books available",
+  "d_recipe_library_no_books_subtitle": "Create a book in the library",
+  "p_library_no_book": "Your library is empty",
+  "p_library_no_book_subtitle": "Create a book by clicking the \"+\" button",
+  "p_recipes_no_recipe": "No recipes available",
+  "p_recipes_no_recipe_subtitle": "Create recipe to show them here",
+  "p_dashboard_no_recipe": "No recipes available",
+  "p_tags_no_recipe": "No tags available",
+  "p_tags_no_recipe_subtitle": "As soon as your recipes have tags they will be shown here",
+  "p_categories_no_recipe": "No categories available",
+  "p_categories_no_recipe_subtitle": "As soon as your recipes have categories they will be shown here"
 }
