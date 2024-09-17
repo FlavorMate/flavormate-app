@@ -6,7 +6,7 @@ part 'scrape_response.mapper.dart';
 @MappableClass()
 class ScrapeResponse with ScrapeResponseMappable {
   final RecipeDraft recipe;
-  final String image;
+  final List<String> images;
 
-  ScrapeResponse({required this.recipe, required this.image});
+  ScrapeResponse({required this.recipe, required this.images});
 }

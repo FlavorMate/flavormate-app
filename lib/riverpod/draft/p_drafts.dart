@@ -27,21 +27,28 @@ class PDrafts extends _$PDrafts {
 
   Future<int> scrape(String url) async {
     final response = await ref.read(pApiProvider).recipesClient.scrape(url);
-    final image = UImage.resizeImage(
-        bytes: base64Decode(response.image), width: 1280, height: 720);
 
-    final file = File(
-      id: Random().nextInt(1000),
-      type: 'IMAGE',
-      category: 'RECIPE',
-      owner: -1,
-      content: image,
-    );
+    List<File> files = [];
+
+    for (var image in response.images) {
+      final base64 = UImage.resizeImage(
+          bytes: base64Decode(image), width: 1280, height: 720);
+
+      final file = File(
+        id: Random().nextInt(1000),
+        type: 'IMAGE',
+        category: 'RECIPE',
+        owner: -1,
+        content: base64,
+      );
+
+      files.add(file);
+    }
 
     final draft = DraftTableCompanion(
       recipeDraft: Value(response.recipe),
       images: const Value([]),
-      addedImages: Value([file]),
+      addedImages: Value(files),
       removedImages: const Value([]),
       version: const Value(0),
     );
