@@ -25,6 +25,6 @@ abstract class UValidator {
   }
 
   static bool isNumber(String input) {
-    return int.tryParse(input) != null;
+    return double.tryParse(input) != null;
   }
 }
