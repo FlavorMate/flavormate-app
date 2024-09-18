@@ -2,18 +2,32 @@
 
 This is the Project for the FlavorMate frontend, which is written in Flutter.
 
+## Features
+
+See all the features with more screenshots on [flavormate.de](https://flavormate.de/features/)
+
+<img src="docs/features/phone/home.png" alt="Home screen screenshot" height="200px">
+<img src="docs/features/tablet/home.png" alt="Home screen screenshot" height="200px">
+<br>
+<img src="docs/features/phone/recipe_1.png" alt="Home screen screenshot" height="200px">
+<img src="docs/features/tablet/recipe_1.png" alt="Home screen screenshot" height="200px">
+<br>
+<img src="docs/features/phone/search.png" alt="Home screen screenshot" height="200px">
+<img src="docs/features/tablet/search.png" alt="Home screen screenshot" height="200px">
+
 ## Getting Started
 
 ### Android
 
-Want to join the closed beta? Send me your mail to be added to the test group.
-[Mail me](mailto:android-beta@flavormate.de?subject=Apply for android closed beta)
+Want to join the closed beta? Send me your mail to be added to the test group.<br>
+[Mail me](mailto:android-beta@flavormate.de?subject=Apply%20for%20android%20closed%20beta)
 
 Download the apk from the releases tab.
 
 ### iOS
 
-Join the [public beta](https://testflight.apple.com/join/yp5BtJGx) via testflight.
+Download FlavorMate from the [App Store](https://apps.apple.com/de/app/flavormate/id6670196195) or join
+the [public beta](https://testflight.apple.com/join/yp5BtJGx) via testflight.
 
 ### Web
 
