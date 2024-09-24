@@ -251,5 +251,9 @@
   "p_categories_no_recipe": "No categories available",
   "p_categories_no_recipe_subtitle": "As soon as your recipes have categories they will be shown here",
   "p_book_no_recipes": "Your book is empty",
-  "p_book_no_recipes_subtitle": "Add recipes to your boo"
+  "p_book_no_recipes_subtitle": "Add recipes to your boo",
+  "btn_continue": "Continue",
+  "v_isHttpUrl": "Please enter a valid address",
+  "p_login_create_server": "Create server",
+  "p_login_change_server": "Change server"
 }

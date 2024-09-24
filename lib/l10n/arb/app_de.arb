@@ -251,5 +251,9 @@
   "p_categories_no_recipe": "Keine Kategorien verfügbar",
   "p_categories_no_recipe_subtitle": "Sobald deine Rezepte Kategorien haben, werden sie hier angezeigt",
   "p_book_no_recipes": "Dein Buch ist leer",
-  "p_book_no_recipes_subtitle": "Füge Rezepte zu deinem Buch hinzu"
+  "p_book_no_recipes_subtitle": "Füge Rezepte zu deinem Buch hinzu",
+  "btn_continue": "Weiter",
+  "v_isHttpUrl": "Bitte gib eine gültige Adresse ein",
+  "p_login_create_server": "Server erstellen",
+  "p_login_change_server": "Server wechseln"
 }
