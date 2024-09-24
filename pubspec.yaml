@@ -79,8 +79,6 @@ dev_dependencies:
   drift_dev: ^2.20.2
 
 flutter_launcher_icons:
-  # common
-  image_path: "assets/icons/Android.png"
   # android
   android: true
   image_path_android: "build_assets/icons/android/light_icon.png"
