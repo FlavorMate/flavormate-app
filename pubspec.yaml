@@ -49,7 +49,7 @@ dependencies:
   package_info_plus: ^8.0.2
   dio: ^5.6.0
   shared_preferences: ^2.3.1
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.0
   collection: ^1.18.0
   flutter_carousel_widget: ^3.0.1
   dart_mappable: ^4.2.2
@@ -79,12 +79,22 @@ dev_dependencies:
   drift_dev: ^2.20.2
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  # common
   image_path: "assets/icons/Android.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  ios:
-    generate: true
-    image_path: "assets/icons/iOS.png"
+  # android
+  android: true
+  image_path_android: "build_assets/icons/android/light_icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "build_assets/icons/android/adaptive_background.png"
+  adaptive_icon_foreground: "build_assets/icons/android/adaptive_foreground.png"
+  adaptive_icon_foreground_inset: 24
+  adaptive_icon_monochrome: "build_assets/icons/android/monochrome.png"
+  # ios config
+  ios: true
+  image_path_ios: "build_assets/icons/ios/light_icon.png"
+  image_path_ios_dark_transparent: "build_assets/icons/ios/dark_icon.png"
+  image_path_ios_tinted_grayscale: "build_assets/icons/ios/tinted_icon.png"
+  desaturate_tinted_to_grayscale_ios: true
   web:
     generate: true
     image_path: "assets/icons/iOS.png"
