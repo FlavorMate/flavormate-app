@@ -34,6 +34,18 @@
           }
         }
       }
+    },
+    "NSHumanReadableCopyright" : {
+      "comment" : "Copyright (human-readable)",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Copyright © 2024 de.flavormate. All rights reserved."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
