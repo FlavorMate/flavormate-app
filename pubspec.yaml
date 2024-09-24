@@ -95,18 +95,21 @@ flutter_launcher_icons:
   image_path_ios_dark_transparent: "build_assets/icons/ios/dark_icon.png"
   image_path_ios_tinted_grayscale: "build_assets/icons/ios/tinted_icon.png"
   desaturate_tinted_to_grayscale_ios: true
+  # web config
   web:
     generate: true
-    image_path: "assets/icons/iOS.png"
+    image_path: "build_assets/icons/web/light_icon.png"
     background_color: "#FFFFFF"
     theme_color: "#8BC34A"
+  # windows config
   windows:
     generate: true
-    image_path: "assets/icons/iOS.png"
-    icon_size: 48 # min:48, max:256, default: 48
+    image_path: "build_assets/icons/windows/light_icon.png"
+    icon_size: 48
+  # macos config
   macos:
     generate: true
-    image_path: "assets/icons/macOS.png"
+    image_path: "build_assets/icons/macos/light_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
