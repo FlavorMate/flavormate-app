@@ -27,4 +27,10 @@ abstract class UValidator {
   static bool isNumber(String input) {
     return double.tryParse(input) != null;
   }
+
+  static bool isHttpUrl(String input) {
+    final urlRegex =
+        RegExp(r'^(https?://)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(:\d+)?(/\S*)?$');
+    return urlRegex.hasMatch(input);
+  }
 }

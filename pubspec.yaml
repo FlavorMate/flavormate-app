@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+11
+version: 1.0.1+1
 
 environment:
   sdk: '>=3.5.3 <4.0.0'
@@ -49,7 +49,7 @@ dependencies:
   package_info_plus: ^8.0.2
   dio: ^5.6.0
   shared_preferences: ^2.3.1
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.0
   collection: ^1.18.0
   flutter_carousel_widget: ^3.0.1
   dart_mappable: ^4.2.2
@@ -79,24 +79,35 @@ dev_dependencies:
   drift_dev: ^2.20.2
 
 flutter_launcher_icons:
-  android: "launcher_icon"
-  image_path: "assets/icons/Android.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  ios:
-    generate: true
-    image_path: "assets/icons/iOS.png"
+  # android
+  android: true
+  image_path_android: "build_assets/icons/android/light_icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "build_assets/icons/android/adaptive_background.png"
+  adaptive_icon_foreground: "build_assets/icons/android/adaptive_foreground.png"
+  adaptive_icon_foreground_inset: 24
+  adaptive_icon_monochrome: "build_assets/icons/android/monochrome.png"
+  # ios config
+  ios: true
+  image_path_ios: "build_assets/icons/ios/light_icon.png"
+  image_path_ios_dark_transparent: "build_assets/icons/ios/dark_icon.png"
+  image_path_ios_tinted_grayscale: "build_assets/icons/ios/tinted_icon.png"
+  desaturate_tinted_to_grayscale_ios: true
+  # web config
   web:
     generate: true
-    image_path: "assets/icons/iOS.png"
+    image_path: "build_assets/icons/web/light_icon.png"
     background_color: "#FFFFFF"
     theme_color: "#8BC34A"
+  # windows config
   windows:
     generate: true
-    image_path: "assets/icons/iOS.png"
-    icon_size: 48 # min:48, max:256, default: 48
+    image_path: "build_assets/icons/windows/light_icon.png"
+    icon_size: 48
+  # macos config
   macos:
     generate: true
-    image_path: "assets/icons/macOS.png"
+    image_path: "build_assets/icons/macos/light_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

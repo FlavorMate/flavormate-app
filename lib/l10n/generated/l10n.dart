@@ -1468,6 +1468,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Add recipes to your boo'**
   String get p_book_no_recipes_subtitle;
+
+  /// No description provided for @btn_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get btn_continue;
+
+  /// No description provided for @v_isHttpUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid address'**
+  String get v_isHttpUrl;
+
+  /// No description provided for @p_login_create_server.
+  ///
+  /// In en, this message translates to:
+  /// **'Create server'**
+  String get p_login_create_server;
+
+  /// No description provided for @p_login_change_server.
+  ///
+  /// In en, this message translates to:
+  /// **'Change server'**
+  String get p_login_change_server;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

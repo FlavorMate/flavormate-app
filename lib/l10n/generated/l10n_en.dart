@@ -700,4 +700,16 @@ class L10nEn extends L10n {
 
   @override
   String get p_book_no_recipes_subtitle => 'Add recipes to your boo';
+
+  @override
+  String get btn_continue => 'Continue';
+
+  @override
+  String get v_isHttpUrl => 'Please enter a valid address';
+
+  @override
+  String get p_login_create_server => 'Create server';
+
+  @override
+  String get p_login_change_server => 'Change server';
 }

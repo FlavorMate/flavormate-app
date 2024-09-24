@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 const double PADDING = 16.0;
 const double BORDER_RADIUS = 12;
 
+const FLAVORMATE_GETTING_STARTED =
+    'https://flavormate.de/getting-started/backend/';
+
 abstract class Breakpoints {
   static const double sm = 600;
   static const double m = 840;

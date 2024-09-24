@@ -700,4 +700,16 @@ class L10nDe extends L10n {
 
   @override
   String get p_book_no_recipes_subtitle => 'Füge Rezepte zu deinem Buch hinzu';
+
+  @override
+  String get btn_continue => 'Weiter';
+
+  @override
+  String get v_isHttpUrl => 'Bitte gib eine gültige Adresse ein';
+
+  @override
+  String get p_login_create_server => 'Server erstellen';
+
+  @override
+  String get p_login_change_server => 'Server wechseln';
 }
