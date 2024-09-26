@@ -1492,6 +1492,60 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Change server'**
   String get p_login_change_server;
+
+  /// No description provided for @d_settings_theme_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get d_settings_theme_title;
+
+  /// No description provided for @d_settings_theme_flavormate.
+  ///
+  /// In en, this message translates to:
+  /// **'FlavorMate'**
+  String get d_settings_theme_flavormate;
+
+  /// No description provided for @d_settings_theme_custom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get d_settings_theme_custom;
+
+  /// No description provided for @d_settings_theme_system.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get d_settings_theme_system;
+
+  /// No description provided for @d_settings_theme_flavormate_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'The default FlavorMate colors'**
+  String get d_settings_theme_flavormate_desc;
+
+  /// No description provided for @d_settings_theme_custom_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your favorite color'**
+  String get d_settings_theme_custom_desc;
+
+  /// No description provided for @d_settings_theme_system_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the system colors'**
+  String get d_settings_theme_system_desc;
+
+  /// No description provided for @d_settings_theme_example.
+  ///
+  /// In en, this message translates to:
+  /// **'Example'**
+  String get d_settings_theme_example;
+
+  /// No description provided for @p_settings_misc.
+  ///
+  /// In en, this message translates to:
+  /// **'Miscellaneous'**
+  String get p_settings_misc;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
