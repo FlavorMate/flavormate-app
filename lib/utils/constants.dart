@@ -8,6 +8,8 @@ const double BORDER_RADIUS = 12;
 const FLAVORMATE_GETTING_STARTED =
     'https://flavormate.de/getting-started/backend/';
 
+const FLAVORMATE_COLOR = Colors.lightGreen;
+
 abstract class Breakpoints {
   static const double sm = 600;
   static const double m = 840;

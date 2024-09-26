@@ -1,4 +1,5 @@
 import 'package:flavormate/components/riverpod/r_struct.dart';
+import 'package:flavormate/components/settings/dialogs/d_theme.dart';
 import 'package:flavormate/components/settings/dialogs/manage_avatar.dart';
 import 'package:flavormate/components/settings/dialogs/manage_diet.dart';
 import 'package:flavormate/components/settings/dialogs/manage_mail.dart';
@@ -183,6 +184,21 @@ class SettingsPage extends ConsumerWidget {
               ],
             ),
           ),
+          TCard(
+            padding: PADDING,
+            child: TColumn(
+              children: [
+                TText(L10n.of(context).p_settings_misc,
+                    TextStyles.headlineMedium),
+                TIconButton(
+                  onPressed: () => showThemePicker(context, ref),
+                  icon: MdiIcons.formatPaint,
+                  label: L10n.of(context).d_settings_theme_title,
+                  width: _buttonWidth,
+                ),
+              ],
+            ),
+          ),
           RStruct(
             userProvider,
             (_, user) => Visibility(
@@ -304,5 +320,10 @@ class SettingsPage extends ConsumerWidget {
         L10n.of(context).d_settings_manage_password_error,
       );
     }
+  }
+
+  Future<void> showThemePicker(BuildContext context, WidgetRef ref) async {
+    await showDialog(
+        context: context, builder: (_) => const DTheme(), useSafeArea: false);
   }
 }

@@ -712,4 +712,31 @@ class L10nDe extends L10n {
 
   @override
   String get p_login_change_server => 'Server wechseln';
+
+  @override
+  String get d_settings_theme_title => 'Theme';
+
+  @override
+  String get d_settings_theme_flavormate => 'FlavorMate';
+
+  @override
+  String get d_settings_theme_custom => 'Benutzerdefiniert';
+
+  @override
+  String get d_settings_theme_system => 'System';
+
+  @override
+  String get d_settings_theme_flavormate_desc => 'Die normalen FlavorMate Farben';
+
+  @override
+  String get d_settings_theme_custom_desc => 'Wähle deine Lieblingsfarbe';
+
+  @override
+  String get d_settings_theme_system_desc => 'Nutze die Systemfarben';
+
+  @override
+  String get d_settings_theme_example => 'Beispiel';
+
+  @override
+  String get p_settings_misc => 'Sonstiges';
 }
