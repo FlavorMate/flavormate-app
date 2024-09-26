@@ -264,5 +264,6 @@
   "d_settings_theme_custom_desc": "Choose your favorite color",
   "d_settings_theme_system_desc": "Use the system colors",
   "d_settings_theme_example": "Example",
-  "p_settings_misc": "Miscellaneous"
+  "p_settings_misc": "Miscellaneous",
+  "d_changelog_title": "What's new in FlavorMate"
 }

@@ -1546,6 +1546,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Miscellaneous'**
   String get p_settings_misc;
+
+  /// No description provided for @d_changelog_title.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s new in FlavorMate'**
+  String get d_changelog_title;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
