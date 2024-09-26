@@ -59,6 +59,7 @@ dependencies:
   image: ^4.2.0
   drift: ^2.20.1
   drift_flutter: ^0.2.0
+  dynamic_color: ^1.7.0
 
 dev_dependencies:
   flutter_test:
@@ -69,7 +70,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   riverpod_generator: ^2.4.0
   build_runner: ^2.4.12
   custom_lint: ^0.6.4
