@@ -1,6 +1,7 @@
 import 'package:flavormate/riverpod/theme/p_custom_color.dart';
 import 'package:flavormate/riverpod/theme/p_dynamic_color.dart';
 import 'package:flavormate/riverpod/theme/p_theme_mode.dart';
+import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,11 +29,11 @@ class PTheme extends _$PTheme {
 
     return DynamicColors(
       light: ColorScheme.fromSeed(
-        seedColor: Colors.lightGreen,
+        seedColor: FLAVORMATE_COLOR,
         brightness: Brightness.light,
       ),
       dark: ColorScheme.fromSeed(
-        seedColor: Colors.lightGreen,
+        seedColor: FLAVORMATE_COLOR,
         brightness: Brightness.dark,
       ),
     );
