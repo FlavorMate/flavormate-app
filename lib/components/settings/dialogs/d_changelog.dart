@@ -52,10 +52,15 @@ class DChangelog extends ConsumerWidget {
           child: Container(
             height: 80,
             padding: const EdgeInsets.all(PADDING),
-            constraints: BoxConstraints(maxWidth: Breakpoints.sm),
-            child: TButton(
-              onPressed: () => context.pop(),
-              label: L10n.of(context).btn_close,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TButton(
+                  width: 300,
+                  onPressed: () => context.pop(),
+                  label: L10n.of(context).btn_close,
+                ),
+              ],
             ),
           ),
         ),
