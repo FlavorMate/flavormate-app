@@ -4,6 +4,7 @@ import 'package:flavormate/riverpod/go_router/p_go_router.dart';
 import 'package:flavormate/riverpod/package_info/p_package_info.dart';
 import 'package:flavormate/riverpod/root_bundle/p_backend_url.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_shared_preferences.dart';
+import 'package:flavormate/riverpod/theme/p_theme.dart';
 import 'package:flavormate/utils/custom_mappers/custom_mappers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,16 +21,17 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(pGoRouterProvider);
+    final colors = ref.watch(pThemeProvider).requireValue;
     return MaterialApp.router(
       onGenerateTitle: (context) => L10n.of(context).app_title,
       theme: ThemeData(
         brightness: Brightness.light,
-        colorSchemeSeed: Colors.lightGreen,
+        colorScheme: colors.light,
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        colorSchemeSeed: Colors.lightGreen,
+        colorScheme: colors.dark,
         useMaterial3: true,
       ),
       themeMode: ThemeMode.system,
@@ -52,6 +54,7 @@ class _EagerInitialization extends ConsumerWidget {
       ref.watch(pPackageInfoProvider),
       ref.watch(pSharedPreferencesProvider),
       ref.watch(pBackendUrlProvider),
+      ref.watch(pThemeProvider),
     ];
 
     if (values.every((value) => value.hasValue)) {
