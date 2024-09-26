@@ -129,6 +129,9 @@ flutter:
     - assets/icons/bring.png
     - assets/images/no_image.png
     - assets/web/backend_url.txt
+    # Changelog
+    - assets/documents/changelog/de.json
+    - assets/documents/changelog/en.json
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
