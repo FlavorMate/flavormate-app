@@ -739,4 +739,7 @@ class L10nEn extends L10n {
 
   @override
   String get p_settings_misc => 'Miscellaneous';
+
+  @override
+  String get d_changelog_title => 'What\'s new in FlavorMate';
 }
