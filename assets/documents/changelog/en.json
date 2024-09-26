@@ -1,0 +1,25 @@
+[
+  {
+    "version": "1.0.2",
+    "changes": [
+      "Added support for dynamic or custom themes"
+    ],
+    "icon": "paletteOutline"
+  },
+  {
+    "version": "1.0.1",
+    "changes": [
+      "New login screen",
+      "Added iOS 18 icons",
+      "Added Android 8 & 13 icons"
+    ],
+    "icon": "imageOutline"
+  },
+  {
+    "version": "1.0.0",
+    "changes": [
+      "Initial version"
+    ],
+    "icon": "potSteamOutline"
+  }
+]
