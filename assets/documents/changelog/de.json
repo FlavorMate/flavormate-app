@@ -1,0 +1,25 @@
+[
+  {
+    "version": "1.0.2",
+    "changes": [
+      "Unterstützung für dynamische oder eigene Farben hinzugefügt"
+    ],
+    "icon": "paletteOutline"
+  },
+  {
+    "version": "1.0.1",
+    "changes": [
+      "Neue Login-Seite",
+      "iOS 18 Icons hinzugefügt",
+      "Android 8 & 13 Icons hinzugefügt"
+    ],
+    "icon": "imageOutline"
+  },
+  {
+    "version": "1.0.0",
+    "changes": [
+      "Initiale Version"
+    ],
+    "icon": "potSteamOutline"
+  }
+]
