@@ -60,7 +60,15 @@ jobs:
 
       # Build ipa
       - name: Build ipa
-        run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
+        run: flutter build ipa --release --dart-define=build.stage=release --no-codesign
+
+      # Export IPA using xcodebuild and ExportOptions.plist
+      - name: Export IPA
+        run: |
+          xcodebuild -exportArchive \
+          -archivePath build/ios/archive/Runner.xcarchive \
+          -exportOptionsPlist build_assets/ios/ExportOptions.plist \
+          -exportPath build/ios/ipa
 
       - name: Compress ipa
         run: |
