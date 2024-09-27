@@ -42,6 +42,31 @@ jobs:
           cd ios
           pod install
 
+      # Install certificates and provisioning profiles
+      - name: Install Certificates
+        run: |
+          echo "${{ secrets.APPLE_CERTIFICATE }}" | base64 --decode > certificate.p12
+          echo "${{ secrets.PROVISIONING_PROFILE }}" | base64 --decode > profile.mobileprovision
+
+      - name: Install Keychain
+        run: |
+          security create-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" build.keychain
+          security import certificate.p12 -k build.keychain -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
+          security list-keychains -s build.keychain
+          security unlock-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" build.keychain
+          security set-keychain-settings build.keychain
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+      # Build ipa
+      - name: Build ipa
+        run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
+
+      - name: Compress ipa
+        run: |
+          cd build
+          tar -czf ios_build.tar.gz ios
+
       # Setting up android signing
       - name: Decode Android Keystore
         run: |
@@ -83,32 +108,6 @@ jobs:
         run: |
           cd build
           tar -czf web_build.tar.gz web
-      
-
-      # Install certificates and provisioning profiles
-      - name: Install Certificates
-        run: |
-          echo "${{ secrets.APPLE_CERTIFICATE }}" | base64 --decode > certificate.p12
-          echo "${{ secrets.PROVISIONING_PROFILE }}" | base64 --decode > profile.mobileprovision
-
-      - name: Install Keychain
-        run: |
-          security create-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" build.keychain
-          security import certificate.p12 -k build.keychain -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
-          security list-keychains -s build.keychain
-          security unlock-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" build.keychain
-          security set-keychain-settings build.keychain
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-
-      # Build ipa
-      - name: Build ipa
-        run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
-
-      - name: Compress ipa
-        run: |
-          cd build
-          tar -czf ios_build.tar.gz ios
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
