@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Generate sources
+        run: dart run build_runner build -d
+
       # Setting up android signing
       - name: Decode Android Keystore
         run: |
