@@ -65,6 +65,7 @@ jobs:
         run: |
           cd build
           tar -czf web_build.tar.gz web
+          touch test.txt
 
       # Build ipa
       #      - name: Build xcArchive
@@ -83,6 +84,7 @@ jobs:
             #            build/app/outputs/flutter-apk/app-release.apk
             #            build/app/outputs/bundle/release/app-release.aab
                   build/web_build.tar.gz
+                  build/test.txt
       #            build/ios_build.tar.gz
 
       - name: Create Release
@@ -118,6 +120,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: Releases
+          path: build
 
       - name: Extract web archive
         run: |
