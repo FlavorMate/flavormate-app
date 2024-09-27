@@ -1,0 +1,94 @@
+name: FlavorMate app build workflow
+on:
+  push:
+    tags: [ v* ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+
+
+jobs:
+  project-build:
+    runs-on: macos-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set Up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Setting up android signing
+      - name: Decode Android Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
+
+      - name: Create key.properties
+        run: |
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+          echo "storeFile=keystore.jks" >> android/key.properties
+
+      # Build apk
+      - name: Build apk
+        run: flutter build apk --release --dart-define=build.stage=release
+
+      # Build app bundle
+      - name: Build app bundle
+        run: flutter build appbundle --release --dart-define=build.stage=release
+
+      # Build web archive
+      - name: Build web archive
+        run: flutter build web --wasm --release --dart-define=build.stage=release
+
+      - name: Compress web archive
+        run: |
+          cd build
+          tar -czf web_build.tar.gz web
+
+      # Build ipa
+      - name: Build ipa
+        run: flutter build ipa --no-codesign --release --dart-define=build.stage=release
+
+      - name: Compress Archives and IPAs
+        run: |
+          cd build
+          tar -czf ios_build.tar.gz ios
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Releases
+          path: |
+            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab
+            build/web_build.tar.gz
+            build/ios_build.tar.gz
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz,build/web_build.tar.gz"
+          artifactErrorsFailBuild: true
+          generateReleaseNotes: true
+          removeArtifacts: true
+          replacesArtifacts: true
+
