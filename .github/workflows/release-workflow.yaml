@@ -50,15 +50,15 @@ jobs:
           echo "storeFile=keystore.jks" >> android/key.properties
 
       # Build apk
-      - name: Build apk
-        run: flutter build apk --release --dart-define=build.stage=release
+      #      - name: Build apk
+      #        run: flutter build apk --release --dart-define=build.stage=release
 
       # Build app bundle
-      - name: Build app bundle
-        run: flutter build appbundle --release --dart-define=build.stage=release
+      #      - name: Build app bundle
+      #        run: flutter build appbundle --release --dart-define=build.stage=release
 
-      # Build web archive
-      - name: Build web archive
+      # Build web
+      - name: Build web
         run: flutter build web --wasm --release --dart-define=build.stage=release
 
       - name: Compress web archive
@@ -67,23 +67,23 @@ jobs:
           tar -czf web_build.tar.gz web
 
       # Build ipa
-      - name: Build ipa
-        run: flutter build ipa --no-codesign --release --dart-define=build.stage=release
+      #      - name: Build xcArchive
+      #        run: flutter build ipa --no-codesign --release --dart-define=build.stage=release
 
-      - name: Compress Archives and IPAs
-        run: |
-          cd build
-          tar -czf ios_build.tar.gz ios
+      #      - name: Compress xcArchive
+      #        run: |
+      #          cd build
+      #          tar -czf ios_build.tar.gz ios
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Releases
           path: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
-            build/web_build.tar.gz
-            build/ios_build.tar.gz
+            #            build/app/outputs/flutter-apk/app-release.apk
+            #            build/app/outputs/bundle/release/app-release.aab
+                  build/web_build.tar.gz
+      #            build/ios_build.tar.gz
 
       - name: Create Release
         uses: ncipollo/release-action@v1
@@ -95,3 +95,75 @@ jobs:
           removeArtifacts: true
           replacesArtifacts: true
 
+  docker-build:
+    needs:
+      - project-build
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Download web archive
+        uses: actions/download-artifact@v4
+        with:
+          name: Releases
+
+      - name: Extract web archive
+        run: |
+          cd build
+          tar -xzf web_build.tar.gz
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: build_assets/docker/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
+      - name: Remove untagged images
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          delete-untagged: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          package: flavormate-webapp
