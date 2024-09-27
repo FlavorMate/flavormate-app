@@ -712,4 +712,34 @@ class L10nEn extends L10n {
 
   @override
   String get p_login_change_server => 'Change server';
+
+  @override
+  String get d_settings_theme_title => 'Theme';
+
+  @override
+  String get d_settings_theme_flavormate => 'FlavorMate';
+
+  @override
+  String get d_settings_theme_custom => 'Custom';
+
+  @override
+  String get d_settings_theme_system => 'System';
+
+  @override
+  String get d_settings_theme_flavormate_desc => 'The default FlavorMate colors';
+
+  @override
+  String get d_settings_theme_custom_desc => 'Choose your favorite color';
+
+  @override
+  String get d_settings_theme_system_desc => 'Use the system colors';
+
+  @override
+  String get d_settings_theme_example => 'Example';
+
+  @override
+  String get p_settings_misc => 'Miscellaneous';
+
+  @override
+  String get d_changelog_title => 'What\'s new in FlavorMate';
 }

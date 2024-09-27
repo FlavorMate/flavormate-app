@@ -255,5 +255,15 @@
   "btn_continue": "Continue",
   "v_isHttpUrl": "Please enter a valid address",
   "p_login_create_server": "Create server",
-  "p_login_change_server": "Change server"
+  "p_login_change_server": "Change server",
+  "d_settings_theme_title": "Theme",
+  "d_settings_theme_flavormate": "FlavorMate",
+  "d_settings_theme_custom": "Custom",
+  "d_settings_theme_system": "System",
+  "d_settings_theme_flavormate_desc": "The default FlavorMate colors",
+  "d_settings_theme_custom_desc": "Choose your favorite color",
+  "d_settings_theme_system_desc": "Use the system colors",
+  "d_settings_theme_example": "Example",
+  "p_settings_misc": "Miscellaneous",
+  "d_changelog_title": "What's new in FlavorMate"
 }
