@@ -61,15 +61,7 @@ jobs:
 
       # Build ipa
       - name: Build ipa
-        run: flutter build ipa --release --dart-define=build.stage=release --no-codesign
-
-      # Export IPA using xcodebuild and ExportOptions.plist
-      - name: Export IPA
-        run: |
-          xcodebuild -exportArchive \
-          -archivePath build/ios/archive/Runner.xcarchive \
-          -exportOptionsPlist build_assets/ios/ExportOptions.plist \
-          -exportPath build/ios/ipa
+        run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
 
       - name: Compress ipa
         run: |
@@ -142,7 +134,7 @@ jobs:
       - name: Delete Keychain and Provisioning Profile
         if: always()  # Ensure this runs regardless of job success or failure
         run: |
-          security delete-keychain build.keychain
+          security delete-keychain "$RUNNER_TEMP/build.keychain"
           rm -f ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
           rm -f certificate.p12
 
