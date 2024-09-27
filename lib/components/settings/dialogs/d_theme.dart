@@ -3,6 +3,7 @@ import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_icon_button.dart';
 import 'package:flavormate/components/t_row.dart';
+import 'package:flavormate/components/t_scrollable_h.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_shared_preferences.dart';
@@ -152,8 +153,7 @@ class _DThemeState extends ConsumerState<DTheme> {
                     TextStyles.titleLarge,
                     textAlign: TextAlign.center,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
+                  TScrollableH(
                     child: TRow(
                       children: DTheme.colors.map((color) {
                         return GestureDetector(
@@ -193,8 +193,7 @@ class _DThemeState extends ConsumerState<DTheme> {
             TColumn(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
+                TScrollableH(
                   child: TRow(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
