@@ -59,6 +59,19 @@ jobs:
       - name: Build web
         run: flutter build web --wasm --release --dart-define=build.stage=release
 
+      - name: Prepare web archive
+        run: |
+          cd build/web
+          # modifying service worker to exclude the backend url file from getting cached
+          sed -i '' '/"assets\/assets\/web\/backend_url.txt"/d' flutter_service_worker.js
+          
+          # downloading required files for drift to work on web
+          # download sqlite
+          curl -L -O https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-2.4.6/sqlite3.wasm
+          
+          # download drift
+          curl -L -O https://github.com/simolus3/drift/releases/download/drift-2.20.1/drift_worker.js
+
       - name: Compress web archive
         run: |
           cd build
