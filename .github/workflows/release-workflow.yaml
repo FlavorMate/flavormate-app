@@ -1,7 +1,8 @@
 name: FlavorMate app build workflow
 on:
   push:
-    tags: [ v* ]
+    branches:
+      - enhancement/ios-signing
 
 env:
   REGISTRY: ghcr.io
@@ -34,6 +35,12 @@ jobs:
 
       - name: Generate sources
         run: dart run build_runner build -d
+
+      # Install CocoaPods dependencies
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod install
 
       # Setting up android signing
       - name: Decode Android Keystore
@@ -76,12 +83,29 @@ jobs:
         run: |
           cd build
           tar -czf web_build.tar.gz web
+      
+
+      # Install certificates and provisioning profiles
+      - name: Install Certificates
+        run: |
+          echo "${{ secrets.APPLE_CERTIFICATE }}" | base64 --decode > certificate.p12
+          echo "${{ secrets.PROVISIONING_PROFILE }}" | base64 --decode > profile.mobileprovision
+
+      - name: Install Keychain
+        run: |
+          security create-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" build.keychain
+          security import certificate.p12 -k build.keychain -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
+          security list-keychains -s build.keychain
+          security unlock-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" build.keychain
+          security set-keychain-settings build.keychain
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 
       # Build ipa
-      - name: Build xcArchive
-        run: flutter build ipa --no-codesign --release --dart-define=build.stage=release
+      - name: Build ipa
+        run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
 
-      - name: Compress xcArchive
+      - name: Compress ipa
         run: |
           cd build
           tar -czf ios_build.tar.gz ios
@@ -105,6 +129,20 @@ jobs:
           generateReleaseNotes: true
           removeArtifacts: true
           replacesArtifacts: true
+
+      # Cleanup step to always run, even if the build or upload fails
+      - name: Delete Keychain and Provisioning Profile
+        if: always()  # Ensure this runs regardless of job success or failure
+        run: |
+          security delete-keychain build.keychain
+          rm -f ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
+          rm -f certificate.p12
+
+      - name: Delete Android keys
+        if: always()  # Ensure this runs regardless of job success or failure
+        run: |
+          rm -f android/app/keystore.jks
+          rm -f android/key.properties
 
   docker-build:
     needs:
