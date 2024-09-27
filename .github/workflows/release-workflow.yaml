@@ -1,8 +1,7 @@
 name: FlavorMate app build workflow
 on:
   push:
-    branches:
-      - enhancement/ios-signing
+    tags: [ v* ]
 
 env:
   REGISTRY: ghcr.io
@@ -63,11 +62,6 @@ jobs:
       - name: Build ipa
         run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
 
-      - name: Compress ipa
-        run: |
-          cd build
-          tar -czf ios_build.tar.gz ios
-
       # Setting up android signing
       - name: Decode Android Keystore
         run: |
@@ -117,14 +111,14 @@ jobs:
           path: |
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
+            build/ios/ipa/Runner.ipa
             build/web_build.tar.gz
-            build/ios_build.tar.gz
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz,build/web_build.tar.gz"
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios/ipa/Runner.ipa,build/web_build.tar.gz"
           artifactErrorsFailBuild: true
           generateReleaseNotes: true
           removeArtifacts: true
