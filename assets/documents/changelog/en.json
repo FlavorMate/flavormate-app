@@ -1,5 +1,12 @@
 [
   {
+    "version": "1.0.3",
+    "changes": [
+      "Fixed multiple bugs"
+    ],
+    "icon": "wrenchOutline"
+  },
+  {
     "version": "1.0.2",
     "changes": [
       "Added support for dynamic or custom themes"
