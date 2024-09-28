@@ -35,6 +35,33 @@ jobs:
       - name: Generate sources
         run: dart run build_runner build -d
 
+      # Install CocoaPods dependencies
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod install
+
+      # Install certificates and provisioning profiles
+      - name: Install Certificates
+        run: |
+          echo "${{ secrets.APPLE_CERTIFICATE }}" | base64 --decode > certificate.p12
+          echo "${{ secrets.PROVISIONING_PROFILE }}" | base64 --decode > profile.mobileprovision
+
+      - name: Install Keychain
+        run: |
+          KEYCHAIN_PATH="$RUNNER_TEMP/build.keychain"
+          security create-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" $KEYCHAIN_PATH
+          security set-keychain-settings $KEYCHAIN_PATH
+          security unlock-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" $KEYCHAIN_PATH
+          security import certificate.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
+          security list-keychains -s $KEYCHAIN_PATH
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+      # Build ipa
+      - name: Build ipa
+        run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
+
       # Setting up android signing
       - name: Decode Android Keystore
         run: |
@@ -77,15 +104,6 @@ jobs:
           cd build
           tar -czf web_build.tar.gz web
 
-      # Build ipa
-      - name: Build xcArchive
-        run: flutter build ipa --no-codesign --release --dart-define=build.stage=release
-
-      - name: Compress xcArchive
-        run: |
-          cd build
-          tar -czf ios_build.tar.gz ios
-
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -93,18 +111,32 @@ jobs:
           path: |
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
+            build/ios/ipa/Runner.ipa
             build/web_build.tar.gz
-            build/ios_build.tar.gz
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz,build/web_build.tar.gz"
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios/ipa/Runner.ipa,build/web_build.tar.gz"
           artifactErrorsFailBuild: true
           generateReleaseNotes: true
           removeArtifacts: true
           replacesArtifacts: true
+
+      # Cleanup step to always run, even if the build or upload fails
+      - name: Delete Keychain and Provisioning Profile
+        if: always()  # Ensure this runs regardless of job success or failure
+        run: |
+          security delete-keychain "$RUNNER_TEMP/build.keychain"
+          rm -f ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
+          rm -f certificate.p12
+
+      - name: Delete Android keys
+        if: always()  # Ensure this runs regardless of job success or failure
+        run: |
+          rm -f android/app/keystore.jks
+          rm -f android/key.properties
 
   docker-build:
     needs:

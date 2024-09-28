@@ -1,5 +1,12 @@
 [
   {
+    "version": "1.0.3",
+    "changes": [
+      "Mehrere Fehler wurden behoben"
+    ],
+    "icon": "wrenchOutline"
+  },
+  {
     "version": "1.0.2",
     "changes": [
       "Unterstützung für dynamische oder eigene Farben hinzugefügt"

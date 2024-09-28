@@ -54,7 +54,8 @@ _interceptors(InterceptorMethods handlers) => InterceptorsWrapper(
         // If you want to resolve the request with some custom data,
         // you can resolve a `Response` object using `handler.resolve(response)`.
 
-        if (error.type == DioExceptionType.connectionError) {
+        if (error.type == DioExceptionType.connectionError ||
+            error.type == DioExceptionType.connectionTimeout) {
           if (!['/login', '/no_connection'].contains(currentRoute())) {
             handlers.onNoConnection();
             return;
