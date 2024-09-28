@@ -46,19 +46,20 @@ class RecipePageDesktop extends StatelessWidget {
           child: TRow(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: TCarousel(
-                  height: 20,
-                  slides: recipe.files
-                      .map(
-                        (file) => TSlide(
-                          imageSrc: file.path(context.read(pServerProvider)!),
-                          type: TImageType.network,
-                        ),
-                      )
-                      .toList(),
+              if (recipe.coverUrl != null)
+                Expanded(
+                  child: TCarousel(
+                    height: 20,
+                    slides: recipe.files
+                        .map(
+                          (file) => TSlide(
+                            imageSrc: file.path(context.read(pServerProvider)!),
+                            type: TImageType.network,
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
-              ),
               Expanded(
                 child: TColumn(
                   children: [
