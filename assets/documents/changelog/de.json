@@ -1,5 +1,12 @@
 [
   {
+    "version": "1.0.4",
+    "changes": [
+      "Ein Fehler bei der URL Validierung wurde behoben"
+    ],
+    "icon": "wrenchOutline"
+  },
+  {
     "version": "1.0.3",
     "changes": [
       "Mehrere Fehler wurden behoben"

@@ -29,8 +29,7 @@ abstract class UValidator {
   }
 
   static bool isHttpUrl(String input) {
-    final urlRegex =
-        RegExp(r'^(https?://)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(:\d+)?(/\S*)?$');
+    final urlRegex = RegExp(r'^https?://[^\s/$.?#].\S*$');
     return urlRegex.hasMatch(input);
   }
 }
