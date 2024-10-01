@@ -742,4 +742,16 @@ class L10nDe extends L10n {
 
   @override
   String get d_changelog_title => 'Was ist neu in FlavorMate';
+
+  @override
+  String get p_login_connection_failed => 'Verbindung zum Server nicht möglich';
+
+  @override
+  String get p_login_connection_loading => 'Verbindung wird hergestellt';
+
+  @override
+  String get p_login_server_outdated_minor => 'Server nicht auf dem neusten Stand!\\nBetrachte eine Aktualisierung durchzufühen.';
+
+  @override
+  String get p_login_server_outdated_major => 'Server ist veraltet!\\nBitte aktualisiere den Server.';
 }

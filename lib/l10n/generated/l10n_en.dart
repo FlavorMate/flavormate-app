@@ -742,4 +742,16 @@ class L10nEn extends L10n {
 
   @override
   String get d_changelog_title => 'What\'s new in FlavorMate';
+
+  @override
+  String get p_login_connection_failed => 'Could not connect to server';
+
+  @override
+  String get p_login_connection_loading => 'Connecting to server';
+
+  @override
+  String get p_login_server_outdated_minor => 'Server slightly outdated!\\nConsider updating the server.';
+
+  @override
+  String get p_login_server_outdated_major => 'Server outdated!\\nPlease update the server.';
 }

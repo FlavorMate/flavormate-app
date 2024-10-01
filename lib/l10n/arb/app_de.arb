@@ -265,5 +265,9 @@
   "d_settings_theme_system_desc": "Nutze die Systemfarben",
   "d_settings_theme_example": "Beispiel",
   "p_settings_misc": "Sonstiges",
-  "d_changelog_title": "Was ist neu in FlavorMate"
+  "d_changelog_title": "Was ist neu in FlavorMate",
+  "p_login_connection_failed": "Verbindung zum Server nicht möglich",
+  "p_login_connection_loading": "Verbindung wird hergestellt",
+  "p_login_server_outdated_minor": "Server nicht auf dem neusten Stand!\\nBetrachte eine Aktualisierung durchzufühen.",
+  "p_login_server_outdated_major": "Server ist veraltet!\\nBitte aktualisiere den Server."
 }

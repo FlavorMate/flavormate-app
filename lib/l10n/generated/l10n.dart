@@ -1552,6 +1552,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'What\'s new in FlavorMate'**
   String get d_changelog_title;
+
+  /// No description provided for @p_login_connection_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not connect to server'**
+  String get p_login_connection_failed;
+
+  /// No description provided for @p_login_connection_loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting to server'**
+  String get p_login_connection_loading;
+
+  /// No description provided for @p_login_server_outdated_minor.
+  ///
+  /// In en, this message translates to:
+  /// **'Server slightly outdated!\\nConsider updating the server.'**
+  String get p_login_server_outdated_minor;
+
+  /// No description provided for @p_login_server_outdated_major.
+  ///
+  /// In en, this message translates to:
+  /// **'Server outdated!\\nPlease update the server.'**
+  String get p_login_server_outdated_major;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
