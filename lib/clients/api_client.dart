@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flavormate/clients/authors_client.dart';
 import 'package:flavormate/clients/categories_client.dart';
 import 'package:flavormate/clients/category_group_client.dart';
+import 'package:flavormate/clients/features_client.dart';
 import 'package:flavormate/clients/files_client.dart';
 import 'package:flavormate/clients/highlights_client.dart';
 import 'package:flavormate/clients/interceptor_methods.dart';
@@ -15,6 +16,7 @@ import 'package:flavormate/models/api/login.dart';
 import 'package:flavormate/models/author/author.dart';
 import 'package:flavormate/models/categories/category.dart';
 import 'package:flavormate/models/categories/category_group.dart';
+import 'package:flavormate/models/features/features_response.dart';
 import 'package:flavormate/models/file/file.dart';
 import 'package:flavormate/models/highlight.dart';
 import 'package:flavormate/models/library/book.dart';
@@ -97,6 +99,7 @@ class ApiClient {
   late AuthorsClient authorsClient;
   late CategoriesClient categoriesClient;
   late CategoryGroupClient categoryGroupClient;
+  late FeaturesClient featuresClient;
   late FilesClient filesClient;
   late HighlightsClient highlightsClient;
   late LibraryClient libraryClient;
@@ -125,6 +128,11 @@ class ApiClient {
       httpClient: _httpClient,
       baseURL: '/v2/categoryGroups',
       parser: CategoryGroupMapper.fromMap,
+    );
+    featuresClient = FeaturesClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/features',
+      parser: FeaturesResponseMapper.fromMap,
     );
     filesClient = FilesClient(
       httpClient: _httpClient,
@@ -194,6 +202,11 @@ class ApiClient {
       httpClient: _httpClient,
       baseURL: '/v2/categoryGroups',
       parser: CategoryGroupMapper.fromMap,
+    );
+    featuresClient = FeaturesClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/features',
+      parser: FeaturesResponseMapper.fromMap,
     );
     filesClient = FilesClient(
       httpClient: _httpClient,
