@@ -173,36 +173,40 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           ),
         ),
       ),
-      loadingChild: Center(
-        child: TColumn(
-          space: PADDING * 2,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TEmptyMessage(
-              title: L10n.of(context).p_login_connection_loading,
-              icon: MdiIcons.cloudSyncOutline,
-            ),
-            CircularProgressIndicator()
-          ],
-        ),
-      ),
-      errorChild: Padding(
-        padding: const EdgeInsets.all(PADDING),
-        child: Center(
+      loadingChild: Scaffold(
+        body: Center(
           child: TColumn(
             space: PADDING * 2,
             mainAxisSize: MainAxisSize.min,
             children: [
               TEmptyMessage(
-                title: L10n.of(context).p_login_connection_failed,
-                icon: MdiIcons.cloudRemoveOutline,
+                title: L10n.of(context).p_login_connection_loading,
+                icon: MdiIcons.cloudSyncOutline,
               ),
-              TButton(
-                onPressed: changeServer,
-                width: 250,
-                label: L10n.of(context).p_login_change_server,
-              ),
+              CircularProgressIndicator()
             ],
+          ),
+        ),
+      ),
+      errorChild: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(PADDING),
+          child: Center(
+            child: TColumn(
+              space: PADDING * 2,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TEmptyMessage(
+                  title: L10n.of(context).p_login_connection_failed,
+                  icon: MdiIcons.cloudRemoveOutline,
+                ),
+                TButton(
+                  onPressed: changeServer,
+                  width: 250,
+                  label: L10n.of(context).p_login_change_server,
+                ),
+              ],
+            ),
           ),
         ),
       ),
