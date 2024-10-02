@@ -70,6 +70,8 @@ enum AuthState {
     redirectPath: '/login',
     allowedPaths: [
       '/login',
+      '/recovery',
+      '/registration',
     ],
   ),
   authenticated(

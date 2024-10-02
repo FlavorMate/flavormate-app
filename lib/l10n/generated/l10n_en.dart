@@ -742,4 +742,61 @@ class L10nEn extends L10n {
 
   @override
   String get d_changelog_title => 'What\'s new in FlavorMate';
+
+  @override
+  String get p_login_connection_failed => 'Could not connect to server';
+
+  @override
+  String get p_login_connection_loading => 'Connecting to server';
+
+  @override
+  String get p_login_server_outdated_minor => 'Server slightly outdated!\\nConsider updating the server.';
+
+  @override
+  String get p_login_server_outdated_major => 'Server outdated!\\nPlease update the server.';
+
+  @override
+  String get p_login_forgot_password => 'Forgot password?';
+
+  @override
+  String get p_recovery_mail => 'Mail';
+
+  @override
+  String get p_recovery_title => 'Reset your password';
+
+  @override
+  String get btn_reset => 'Reset';
+
+  @override
+  String get btn_registration => 'Sign up';
+
+  @override
+  String get p_recovery_mail_confirm => 'A mail has been sent to your mail address';
+
+  @override
+  String get p_registration_title => 'Create account';
+
+  @override
+  String get p_registration_mail => 'Mail address';
+
+  @override
+  String get p_registration_password => 'Password';
+
+  @override
+  String get p_registration_display_name => 'Display name';
+
+  @override
+  String get p_registration_username => 'Username';
+
+  @override
+  String get p_registration_confirm => 'Account was created successfully';
+
+  @override
+  String get p_registration_error => 'Account couldn\'t be created';
+
+  @override
+  String get p_login_no_account => 'You don\'t have an account?';
+
+  @override
+  String get p_login_connection_failed_subtitle => 'Check for possible updates for the server';
 }

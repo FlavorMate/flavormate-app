@@ -742,4 +742,61 @@ class L10nDe extends L10n {
 
   @override
   String get d_changelog_title => 'Was ist neu in FlavorMate';
+
+  @override
+  String get p_login_connection_failed => 'Verbindung zum Server nicht möglich';
+
+  @override
+  String get p_login_connection_loading => 'Verbindung wird hergestellt';
+
+  @override
+  String get p_login_server_outdated_minor => 'Server nicht auf dem neusten Stand!\\nBetrachte eine Aktualisierung durchzufühen.';
+
+  @override
+  String get p_login_server_outdated_major => 'Server ist veraltet!\\nBitte aktualisiere den Server.';
+
+  @override
+  String get p_login_forgot_password => 'Passwort vergessen?';
+
+  @override
+  String get p_recovery_mail => 'E-Mail';
+
+  @override
+  String get p_recovery_title => 'Passwort zurücksetzen';
+
+  @override
+  String get btn_reset => 'Zurücksetzen';
+
+  @override
+  String get btn_registration => 'Registrieren';
+
+  @override
+  String get p_recovery_mail_confirm => 'Eine E-Mail wurde an deine Adresse geschickt';
+
+  @override
+  String get p_registration_title => 'Konto erstellen';
+
+  @override
+  String get p_registration_mail => 'E-Mail Adresse';
+
+  @override
+  String get p_registration_password => 'Passwort';
+
+  @override
+  String get p_registration_display_name => 'Anzeigename';
+
+  @override
+  String get p_registration_username => 'Benutzername';
+
+  @override
+  String get p_registration_confirm => 'Konto wurde erfolgreich erstellt';
+
+  @override
+  String get p_registration_error => 'Konto konnte nicht erstellt werden';
+
+  @override
+  String get p_login_no_account => 'Du hast kein Konto?';
+
+  @override
+  String get p_login_connection_failed_subtitle => 'Prüfe, ob es Updates für den Server gibt';
 }
