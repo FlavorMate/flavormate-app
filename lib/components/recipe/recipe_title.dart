@@ -8,6 +8,10 @@ class RecipeTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TText(title, TextStyles.displayMedium);
+    return TText(
+      title,
+      TextStyles.displayMedium,
+      textAlign: TextAlign.center,
+    );
   }
 }
