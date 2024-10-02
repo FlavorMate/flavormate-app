@@ -269,5 +269,9 @@
   "p_login_connection_failed": "Verbindung zum Server nicht möglich",
   "p_login_connection_loading": "Verbindung wird hergestellt",
   "p_login_server_outdated_minor": "Server nicht auf dem neusten Stand!\\nBetrachte eine Aktualisierung durchzufühen.",
-  "p_login_server_outdated_major": "Server ist veraltet!\\nBitte aktualisiere den Server."
+  "p_login_server_outdated_major": "Server ist veraltet!\\nBitte aktualisiere den Server.",
+  "p_login_forgot_password": "Passwort vergessen?",
+  "p_recovery_mail": "E-Mail",
+  "p_recovery_title": "Passwort zurücksetzen",
+  "btn_reset": "Zurücksetzen"
 }

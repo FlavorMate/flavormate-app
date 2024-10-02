@@ -754,4 +754,16 @@ class L10nEn extends L10n {
 
   @override
   String get p_login_server_outdated_major => 'Server outdated!\\nPlease update the server.';
+
+  @override
+  String get p_login_forgot_password => 'Forgot password?';
+
+  @override
+  String get p_recovery_mail => 'Mail';
+
+  @override
+  String get p_recovery_title => 'Reset your password';
+
+  @override
+  String get btn_reset => 'Reset';
 }

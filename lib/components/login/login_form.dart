@@ -1,6 +1,7 @@
 import 'package:flavormate/clients/api_client.dart';
 import 'package:flavormate/components/login/server_major_incompatible.dart';
 import 'package:flavormate/components/login/server_minor_incompatible.dart';
+import 'package:flavormate/components/riverpod/r_feature.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
@@ -12,6 +13,7 @@ import 'package:flavormate/models/api/login.dart';
 import 'package:flavormate/models/version/version.dart';
 import 'package:flavormate/riverpod/auth_state/p_auth_state.dart';
 import 'package:flavormate/riverpod/features/p_compatibility.dart';
+import 'package:flavormate/riverpod/features/p_feature_recovery.dart';
 import 'package:flavormate/riverpod/features/p_features.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -19,6 +21,7 @@ import 'package:flavormate/utils/u_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
   final bool isStatic;
@@ -51,114 +54,125 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   Widget build(BuildContext context) {
     final provider = ref.watch(pFeaturesProvider);
     final compatibility = ref.watch(pCompatibilityProvider);
+    final recoveryProvider = ref.watch(pFeatureRecoveryProvider);
     return RStruct(
       provider,
-      (_, features) {
-        return Scaffold(
-          bottomNavigationBar: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('☁️ ${widget.server}'),
-                if (!widget.isStatic)
-                  GestureDetector(
-                    onTap: changeServer,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(
-                        L10n.of(context).p_login_change_server,
-                        style: TextStyle(
-                          color: context.colorScheme.primary,
-                        ),
+      (_, features) => Scaffold(
+        bottomNavigationBar: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('☁️ ${widget.server}'),
+              if (!widget.isStatic)
+                GestureDetector(
+                  onTap: changeServer,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      L10n.of(context).p_login_change_server,
+                      style: TextStyle(
+                        color: context.colorScheme.primary,
                       ),
                     ),
-                  )
-              ],
-            ),
+                  ),
+                )
+            ],
           ),
-          body: SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: const EdgeInsets.all(PADDING),
-                  constraints: const BoxConstraints(maxWidth: Breakpoints.sm),
-                  child: AutofillGroup(
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/icons/Transparent.png',
-                            width: 128,
-                            height: 128,
+        ),
+        body: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(PADDING),
+                constraints: const BoxConstraints(maxWidth: Breakpoints.sm),
+                child: AutofillGroup(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/icons/Transparent.png',
+                          width: 128,
+                          height: 128,
+                        ),
+                        TText(L10n.of(context).app_title,
+                            TextStyles.headlineLarge),
+                        const SizedBox(height: PADDING * 2),
+                        TextFormField(
+                          controller: _usernameController,
+                          decoration: InputDecoration(
+                            label: Text(L10n.of(context).p_login_username),
+                            border: const OutlineInputBorder(),
                           ),
-                          TText(L10n.of(context).app_title,
-                              TextStyles.headlineLarge),
-                          const SizedBox(height: PADDING * 2),
-                          TextFormField(
-                            controller: _usernameController,
-                            decoration: InputDecoration(
-                              label: Text(L10n.of(context).p_login_username),
-                              border: const OutlineInputBorder(),
-                            ),
-                            autocorrect: false,
-                            autofillHints: const [AutofillHints.username],
-                            validator: (input) {
-                              if (UValidator.isEmpty(input)) {
-                                return L10n.of(context).v_isEmpty;
-                              }
+                          autocorrect: false,
+                          autofillHints: const [AutofillHints.username],
+                          validator: (input) {
+                            if (UValidator.isEmpty(input)) {
+                              return L10n.of(context).v_isEmpty;
+                            }
 
-                              return null;
-                            },
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: PADDING),
+                        TextFormField(
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                            label: Text(L10n.of(context).p_login_password),
+                            border: const OutlineInputBorder(),
                           ),
-                          const SizedBox(height: PADDING),
-                          TextFormField(
-                            controller: _passwordController,
-                            decoration: InputDecoration(
-                              label: Text(L10n.of(context).p_login_password),
-                              border: const OutlineInputBorder(),
-                            ),
-                            obscureText: true,
-                            autofillHints: const [AutofillHints.password],
-                            validator: (input) {
-                              if (UValidator.isEmpty(input)) {
-                                return L10n.of(context).v_isEmpty;
-                              }
+                          obscureText: true,
+                          autofillHints: const [AutofillHints.password],
+                          validator: (input) {
+                            if (UValidator.isEmpty(input)) {
+                              return L10n.of(context).v_isEmpty;
+                            }
 
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: PADDING),
-                          SizedBox(
-                            width: 128,
-                            child: FilledButton(
-                              onPressed: () => login(),
-                              child: Text(L10n.of(context).btn_login),
+                            return null;
+                          },
+                        ),
+                        RFeature(
+                          recoveryProvider,
+                          (_) => Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: startRecovery,
+                              child: Text(
+                                L10n.of(context).p_login_forgot_password,
+                              ),
                             ),
                           ),
-                          SizedBox(height: PADDING),
-                          RStruct(
-                            compatibility,
-                            (_, isCompatible) => switch (isCompatible) {
-                              VersionComparison.fullyCompatible => Container(),
-                              VersionComparison.majorIncompatible =>
-                                ServerMajorIncompatible(),
-                              VersionComparison.minorIncompatible =>
-                                ServerMinorIncompatible(),
-                            },
+                        ),
+                        const SizedBox(height: PADDING / 2),
+                        SizedBox(
+                          width: 128,
+                          child: FilledButton(
+                            onPressed: () => login(),
+                            child: Text(L10n.of(context).btn_login),
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: PADDING),
+                        RStruct(
+                          compatibility,
+                          (_, isCompatible) => switch (isCompatible) {
+                            VersionComparison.fullyCompatible => Container(),
+                            VersionComparison.majorIncompatible =>
+                              ServerMajorIncompatible(),
+                            VersionComparison.minorIncompatible =>
+                              ServerMinorIncompatible(),
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
       loadingChild: Center(
         child: TColumn(
           space: PADDING * 2,
@@ -212,5 +226,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       if (!mounted) return;
       context.showTextSnackBar(L10n.of(context).p_login_error);
     }
+  }
+
+  void startRecovery() {
+    context.pushNamed('recovery');
   }
 }

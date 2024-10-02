@@ -754,4 +754,16 @@ class L10nDe extends L10n {
 
   @override
   String get p_login_server_outdated_major => 'Server ist veraltet!\\nBitte aktualisiere den Server.';
+
+  @override
+  String get p_login_forgot_password => 'Passwort vergessen?';
+
+  @override
+  String get p_recovery_mail => 'E-Mail';
+
+  @override
+  String get p_recovery_title => 'Passwort zurücksetzen';
+
+  @override
+  String get btn_reset => 'Zurücksetzen';
 }

@@ -1576,6 +1576,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Server outdated!\\nPlease update the server.'**
   String get p_login_server_outdated_major;
+
+  /// No description provided for @p_login_forgot_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get p_login_forgot_password;
+
+  /// No description provided for @p_recovery_mail.
+  ///
+  /// In en, this message translates to:
+  /// **'Mail'**
+  String get p_recovery_mail;
+
+  /// No description provided for @p_recovery_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset your password'**
+  String get p_recovery_title;
+
+  /// No description provided for @btn_reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get btn_reset;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

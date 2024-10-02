@@ -8,6 +8,7 @@ import 'package:flavormate/clients/highlights_client.dart';
 import 'package:flavormate/clients/interceptor_methods.dart';
 import 'package:flavormate/clients/library_client.dart';
 import 'package:flavormate/clients/recipes_client.dart';
+import 'package:flavormate/clients/self_service_client.dart';
 import 'package:flavormate/clients/stories_client.dart';
 import 'package:flavormate/clients/tags_client.dart';
 import 'package:flavormate/clients/units_client.dart';
@@ -104,6 +105,7 @@ class ApiClient {
   late HighlightsClient highlightsClient;
   late LibraryClient libraryClient;
   late RecipesClient recipesClient;
+  late SelfServiceClient selfServiceClient;
   late StoriesClient storiesClient;
   late TagsClient tagsClient;
   late UnitsClient unitsClient;
@@ -153,6 +155,10 @@ class ApiClient {
       httpClient: _httpClient,
       baseURL: '/v2/recipes',
       parser: RecipeMapper.fromMap,
+    );
+    selfServiceClient = SelfServiceClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/self-service',
     );
     storiesClient = StoriesClient(
       httpClient: _httpClient,
@@ -227,6 +233,10 @@ class ApiClient {
       httpClient: _httpClient,
       baseURL: '/v2/recipes',
       parser: RecipeMapper.fromMap,
+    );
+    selfServiceClient = SelfServiceClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/self-service',
     );
     storiesClient = StoriesClient(
       httpClient: _httpClient,
