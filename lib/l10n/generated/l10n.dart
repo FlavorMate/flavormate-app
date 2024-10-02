@@ -1654,6 +1654,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Account couldn\'t be created'**
   String get p_registration_error;
+
+  /// No description provided for @p_login_no_account.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have an account?'**
+  String get p_login_no_account;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

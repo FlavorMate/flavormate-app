@@ -793,4 +793,7 @@ class L10nDe extends L10n {
 
   @override
   String get p_registration_error => 'Konto konnte nicht erstellt werden';
+
+  @override
+  String get p_login_no_account => 'Du hast kein Konto?';
 }

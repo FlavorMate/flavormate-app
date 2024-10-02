@@ -282,5 +282,6 @@
   "p_registration_display_name": "Display name",
   "p_registration_username": "Username",
   "p_registration_confirm": "Account was created successfully",
-  "p_registration_error": "Account couldn't be created"
+  "p_registration_error": "Account couldn't be created",
+  "p_login_no_account": "You don't have an account?"
 }

@@ -163,7 +163,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                             space: PADDING / 4,
                             children: [
                               TText(
-                                "You don't have an account?",
+                                L10n.of(context).p_login_no_account,
                                 TextStyles.bodyMedium,
                               ),
                               TextButton(
