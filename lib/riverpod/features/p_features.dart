@@ -10,6 +10,9 @@ class PFeatures extends _$PFeatures {
   Future<FeaturesResponse> build() async {
     final response = await ref.watch(pApiProvider).featuresClient.get();
 
+    /// if response is successful, cache the response
+    ref.keepAlive();
+
     return response;
   }
 }
