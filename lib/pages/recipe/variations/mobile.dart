@@ -19,6 +19,7 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 
 class RecipePageMobile extends StatelessWidget {
   final Recipe recipe;
+  final bool isBringEnabled;
   final double servingFactor;
 
   final VoidCallback decreaseServing;
@@ -29,6 +30,7 @@ class RecipePageMobile extends StatelessWidget {
   const RecipePageMobile({
     super.key,
     required this.recipe,
+    required this.isBringEnabled,
     required this.servingFactor,
     required this.decreaseServing,
     required this.increaseServing,
@@ -60,7 +62,7 @@ class RecipePageMobile extends StatelessWidget {
             if (recipe.description != null)
               RecipeDescription(description: recipe.description!),
             const Divider(),
-            BringButton(onPressed: addToBring),
+            if (isBringEnabled) BringButton(onPressed: addToBring),
             TIconButton(
               onPressed: addBookmark,
               icon: MdiIcons.bookmark,

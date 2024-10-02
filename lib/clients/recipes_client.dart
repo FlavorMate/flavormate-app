@@ -46,10 +46,4 @@ class RecipesClient extends AFilterSearchClient<Recipe> {
 
     return ScrapeResponseMapper.fromMap(response.data);
   }
-
-  String bring(String server, int id, int baseServing, int requestedServing) {
-    final api = '$server$baseURL/$id/bring/$requestedServing';
-
-    return 'https://api.getbring.com/rest/bringrecipes/deeplink?url=$api&source=web&baseQuantity=$baseServing&requestedQuantity=$requestedServing';
-  }
 }
