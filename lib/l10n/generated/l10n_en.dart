@@ -766,4 +766,10 @@ class L10nEn extends L10n {
 
   @override
   String get btn_reset => 'Reset';
+
+  @override
+  String get btn_registration => 'Sign up';
+
+  @override
+  String get p_recovery_mail_confirm => 'A mail has been sent to your mail address';
 }

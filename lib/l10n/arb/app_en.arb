@@ -273,5 +273,7 @@
   "p_login_forgot_password": "Forgot password?",
   "p_recovery_mail": "Mail",
   "p_recovery_title": "Reset your password",
-  "btn_reset": "Reset"
+  "btn_reset": "Reset",
+  "btn_registration": "Sign up",
+  "p_recovery_mail_confirm": "A mail has been sent to your mail address"
 }

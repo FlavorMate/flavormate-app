@@ -30,7 +30,7 @@ class _RecoveryPageState extends ConsumerState<RecoveryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TAppBar(title: 'Recovery'),
+      appBar: TAppBar(title: L10n.of(context).p_recovery_title),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -99,7 +99,7 @@ class _RecoveryPageState extends ConsumerState<RecoveryPage> {
     if (!mounted) return;
     // pop the dialog
     context.pop();
-    context.showTextSnackBar('An email has been sent to your email address.');
+    context.showTextSnackBar(L10n.of(context).p_recovery_mail_confirm);
     context.pop();
   }
 }

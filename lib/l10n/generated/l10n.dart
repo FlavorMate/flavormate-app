@@ -1600,6 +1600,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Reset'**
   String get btn_reset;
+
+  /// No description provided for @btn_registration.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get btn_registration;
+
+  /// No description provided for @p_recovery_mail_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'A mail has been sent to your mail address'**
+  String get p_recovery_mail_confirm;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

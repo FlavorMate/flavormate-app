@@ -766,4 +766,10 @@ class L10nDe extends L10n {
 
   @override
   String get btn_reset => 'Zurücksetzen';
+
+  @override
+  String get btn_registration => 'Registrieren';
+
+  @override
+  String get p_recovery_mail_confirm => 'Eine E-Mail wurde an deine Adresse geschickt';
 }
