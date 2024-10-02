@@ -140,6 +140,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
           servingFactor.toInt(),
         );
     if (!await launchUrl(Uri.parse(url))) {
+      if (!mounted) return;
       context.showTextSnackBar(L10n.of(context).p_recipe_error_bring);
     }
   }
@@ -174,6 +175,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     final id =
         await ref.read(pDraftsProvider.notifier).recipeToDraft(widget.id);
 
+    if (!mounted) return;
     context.pop();
     if (id == null) {
       context.showTextSnackBar(L10n.of(context).p_editor_edit_failed);
@@ -193,6 +195,8 @@ class _RecipePageState extends ConsumerState<RecipePage> {
         .changeOwner(int.parse(widget.id), {'owner': id});
     if (response) {
       ref.invalidate(pRecipeProvider(int.parse(widget.id)));
+
+      if (!mounted) return;
       context.showTextSnackBar(L10n.of(context).d_recipe_change_owner_success);
     }
   }
@@ -212,6 +216,8 @@ class _RecipePageState extends ConsumerState<RecipePage> {
       ref.invalidate(pLatestRecipesProvider);
       ref.invalidate(pHighlightProvider);
       ref.invalidate(pStoriesProvider);
+
+      if (!mounted) return;
       context.pushReplacementNamed('home');
       context.showTextSnackBar(L10n.of(context).d_recipe_delete_success);
     }

@@ -1,4 +1,3 @@
-import 'package:flavormate/components/dialogs/t_loading_dialog.dart';
 import 'package:flavormate/components/drafts/d_scrape.dart';
 import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/t_app_bar.dart';
@@ -98,6 +97,8 @@ class DraftsPage extends ConsumerWidget {
 
   Future<void> createDraft(BuildContext context, WidgetRef ref) async {
     final id = await ref.read(pDraftsProvider.notifier).createDraft();
+
+    if (!context.mounted) return;
     openDraft(context, true, id);
   }
 
@@ -116,19 +117,17 @@ class DraftsPage extends ConsumerWidget {
 
   void scrapeDraft(BuildContext context, WidgetRef ref) async {
     try {
-      final response =
-          await showDialog<String>(context: context, builder: (_) => const DScrape());
+      final response = await showDialog<String>(
+          context: context, builder: (_) => const DScrape());
 
       if (response == null) return;
 
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (_) => const TLoadingDialog(),
-      );
+      if (!context.mounted) return;
+      context.showLoadingDialog();
 
       final id = await ref.read(pDraftsProvider.notifier).scrape(response);
 
+      if (!context.mounted) return;
       context.pop();
 
       openDraft(context, true, id);

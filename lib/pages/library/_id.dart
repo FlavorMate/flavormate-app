@@ -1,10 +1,10 @@
-import 'package:flavormate/components/dialogs/t_loading_dialog.dart';
 import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_empty_message.dart';
 import 'package:flavormate/components/t_pageable.dart';
 import 'package:flavormate/components/t_recipe_card.dart';
 import 'package:flavormate/components/t_wrap.dart';
+import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/library/p_book.dart';
 import 'package:flavormate/riverpod/library/p_book_page.dart';
@@ -57,10 +57,11 @@ class BookPage extends ConsumerWidget {
   }
 
   void toggleSubscription(BuildContext context, WidgetRef ref) async {
-    showDialog(context: context, builder: (_) => const TLoadingDialog());
+    context.showLoadingDialog();
 
     await ref.read(pBookProvider(id).notifier).toggleSubscription(id);
 
+    if (!context.mounted) return;
     context.pop();
   }
 }
