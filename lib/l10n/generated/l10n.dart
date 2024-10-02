@@ -1612,6 +1612,48 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'A mail has been sent to your mail address'**
   String get p_recovery_mail_confirm;
+
+  /// No description provided for @p_registration_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get p_registration_title;
+
+  /// No description provided for @p_registration_mail.
+  ///
+  /// In en, this message translates to:
+  /// **'Mail address'**
+  String get p_registration_mail;
+
+  /// No description provided for @p_registration_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get p_registration_password;
+
+  /// No description provided for @p_registration_display_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Display name'**
+  String get p_registration_display_name;
+
+  /// No description provided for @p_registration_username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get p_registration_username;
+
+  /// No description provided for @p_registration_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Account was created successfully'**
+  String get p_registration_confirm;
+
+  /// No description provided for @p_registration_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Account couldn\'t be created'**
+  String get p_registration_error;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

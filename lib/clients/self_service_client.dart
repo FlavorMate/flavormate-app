@@ -18,4 +18,26 @@ class SelfServiceClient {
       return false;
     }
   }
+
+  Future<bool> registration({
+    required String displayName,
+    required String username,
+    required String mail,
+    required String password,
+  }) async {
+    try {
+      final response = await httpClient.post<bool>(
+        '$baseURL/registration/',
+        data: {
+          'displayName': displayName,
+          'username': username,
+          'mail': mail,
+          'password': password,
+        },
+      );
+      return response.data!;
+    } catch (e) {
+      return false;
+    }
+  }
 }

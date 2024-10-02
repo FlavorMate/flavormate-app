@@ -71,6 +71,7 @@ enum AuthState {
     allowedPaths: [
       '/login',
       '/recovery',
+      '/registration',
     ],
   ),
   authenticated(

@@ -275,5 +275,12 @@
   "p_recovery_title": "Passwort zurücksetzen",
   "btn_reset": "Zurücksetzen",
   "btn_registration": "Registrieren",
-  "p_recovery_mail_confirm": "Eine E-Mail wurde an deine Adresse geschickt"
+  "p_recovery_mail_confirm": "Eine E-Mail wurde an deine Adresse geschickt",
+  "p_registration_title": "Konto erstellen",
+  "p_registration_mail": "E-Mail Adresse",
+  "p_registration_password": "Passwort",
+  "p_registration_display_name": "Anzeigename",
+  "p_registration_username": "Benutzername",
+  "p_registration_confirm": "Konto wurde erfolgreich erstellt",
+  "p_registration_error": "Konto konnte nicht erstellt werden"
 }

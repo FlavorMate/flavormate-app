@@ -772,4 +772,25 @@ class L10nDe extends L10n {
 
   @override
   String get p_recovery_mail_confirm => 'Eine E-Mail wurde an deine Adresse geschickt';
+
+  @override
+  String get p_registration_title => 'Konto erstellen';
+
+  @override
+  String get p_registration_mail => 'E-Mail Adresse';
+
+  @override
+  String get p_registration_password => 'Passwort';
+
+  @override
+  String get p_registration_display_name => 'Anzeigename';
+
+  @override
+  String get p_registration_username => 'Benutzername';
+
+  @override
+  String get p_registration_confirm => 'Konto wurde erfolgreich erstellt';
+
+  @override
+  String get p_registration_error => 'Konto konnte nicht erstellt werden';
 }

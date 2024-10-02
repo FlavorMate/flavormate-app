@@ -6,6 +6,7 @@ import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_empty_message.dart';
+import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -14,6 +15,7 @@ import 'package:flavormate/models/version/version.dart';
 import 'package:flavormate/riverpod/auth_state/p_auth_state.dart';
 import 'package:flavormate/riverpod/features/p_compatibility.dart';
 import 'package:flavormate/riverpod/features/p_feature_recovery.dart';
+import 'package:flavormate/riverpod/features/p_feature_registration.dart';
 import 'package:flavormate/riverpod/features/p_features.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -55,6 +57,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
     final provider = ref.watch(pFeaturesProvider);
     final compatibility = ref.watch(pCompatibilityProvider);
     final recoveryProvider = ref.watch(pFeatureRecoveryProvider);
+    final registrationProvider = ref.watch(pFeatureRegistrationProvider);
     return RStruct(
       provider,
       (_, features) => Scaffold(
@@ -145,12 +148,33 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: PADDING / 2),
+                        const SizedBox(height: PADDING),
                         SizedBox(
-                          width: 128,
+                          width: 192,
                           child: FilledButton(
                             onPressed: () => login(),
                             child: Text(L10n.of(context).btn_login),
+                          ),
+                        ),
+                        SizedBox(height: PADDING),
+                        RFeature(
+                          registrationProvider,
+                          (_) => TRow(
+                            space: PADDING / 4,
+                            children: [
+                              TText(
+                                "You don't have an account?",
+                                TextStyles.bodyMedium,
+                              ),
+                              TextButton(
+                                onPressed: startRegistration,
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(horizontal: 2),
+                                  overlayColor: Colors.transparent,
+                                ),
+                                child: Text(L10n.of(context).btn_registration),
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(height: PADDING),
@@ -234,5 +258,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   void startRecovery() {
     context.pushNamed('recovery');
+  }
+
+  void startRegistration() {
+    context.pushNamed('registration');
   }
 }

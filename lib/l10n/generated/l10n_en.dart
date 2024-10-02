@@ -772,4 +772,25 @@ class L10nEn extends L10n {
 
   @override
   String get p_recovery_mail_confirm => 'A mail has been sent to your mail address';
+
+  @override
+  String get p_registration_title => 'Create account';
+
+  @override
+  String get p_registration_mail => 'Mail address';
+
+  @override
+  String get p_registration_password => 'Password';
+
+  @override
+  String get p_registration_display_name => 'Display name';
+
+  @override
+  String get p_registration_username => 'Username';
+
+  @override
+  String get p_registration_confirm => 'Account was created successfully';
+
+  @override
+  String get p_registration_error => 'Account couldn\'t be created';
 }

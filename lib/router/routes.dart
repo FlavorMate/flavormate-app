@@ -14,6 +14,7 @@ import 'package:flavormate/pages/no_connection/index.dart';
 import 'package:flavormate/pages/recipe/index.dart';
 import 'package:flavormate/pages/recipes/_id.dart';
 import 'package:flavormate/pages/recovery/index.dart';
+import 'package:flavormate/pages/registration/index.dart';
 import 'package:flavormate/pages/settings/index.dart';
 import 'package:flavormate/pages/tags/_id.dart';
 import 'package:flavormate/pages/tags/index.dart';
@@ -188,6 +189,13 @@ var routes = [
     name: 'recovery',
     pageBuilder: (context, state) => const MaterialPage(
       child: RecoveryPage(),
+    ),
+  ),
+  GoRoute(
+    path: '/registration',
+    name: 'registration',
+    pageBuilder: (context, state) => const MaterialPage(
+      child: RegistrationPage(),
     ),
   ),
 ];

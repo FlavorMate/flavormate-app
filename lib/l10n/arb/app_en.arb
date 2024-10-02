@@ -275,5 +275,12 @@
   "p_recovery_title": "Reset your password",
   "btn_reset": "Reset",
   "btn_registration": "Sign up",
-  "p_recovery_mail_confirm": "A mail has been sent to your mail address"
+  "p_recovery_mail_confirm": "A mail has been sent to your mail address",
+  "p_registration_title": "Create account",
+  "p_registration_mail": "Mail address",
+  "p_registration_password": "Password",
+  "p_registration_display_name": "Display name",
+  "p_registration_username": "Username",
+  "p_registration_confirm": "Account was created successfully",
+  "p_registration_error": "Account couldn't be created"
 }
