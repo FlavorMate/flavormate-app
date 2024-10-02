@@ -1660,6 +1660,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'You don\'t have an account?'**
   String get p_login_no_account;
+
+  /// No description provided for @p_login_connection_failed_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for possible updates for the server'**
+  String get p_login_connection_failed_subtitle;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

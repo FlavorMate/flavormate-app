@@ -796,4 +796,7 @@ class L10nDe extends L10n {
 
   @override
   String get p_login_no_account => 'Du hast kein Konto?';
+
+  @override
+  String get p_login_connection_failed_subtitle => 'Prüfe, ob es updates für den Server gibt';
 }

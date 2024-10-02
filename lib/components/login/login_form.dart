@@ -222,6 +222,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               children: [
                 TEmptyMessage(
                   title: L10n.of(context).p_login_connection_failed,
+                  subtitle: L10n.of(context).p_login_connection_failed_subtitle,
                   icon: MdiIcons.cloudRemoveOutline,
                 ),
                 TButton(

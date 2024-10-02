@@ -283,5 +283,6 @@
   "p_registration_username": "Username",
   "p_registration_confirm": "Account was created successfully",
   "p_registration_error": "Account couldn't be created",
-  "p_login_no_account": "You don't have an account?"
+  "p_login_no_account": "You don't have an account?",
+  "p_login_connection_failed_subtitle": "Check for possible updates for the server"
 }
