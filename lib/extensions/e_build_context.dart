@@ -1,3 +1,4 @@
+import 'package:flavormate/components/dialogs/t_loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,13 +30,22 @@ extension EBuildContext on BuildContext {
         applicationName: 'DummyMart',
       );
 
-  // Custom call a provider for reading method only
-  // It will be helpful for us for calling the read function
-  // without Consumer,ConsumerWidget or ConsumerStatefulWidget
-  // In case if you face any issue using this then please wrap your widget
-  // with consumer and then call your provider
+  /// Custom call a provider for reading method only
+  /// It will be helpful for us for calling the read function
+  /// without Consumer,ConsumerWidget or ConsumerStatefulWidget
+  /// In case if you face any issue using this then please wrap your widget
+  /// with consumer and then call your provider
   T read<T>(ProviderListenable<T> provider) {
     return ProviderScope.containerOf(this, listen: false).read(provider);
+  }
+
+  /// Shows a loading dialog that can be dismissed via [Navigator.pop].
+  void showLoadingDialog() {
+    showDialog(
+      barrierDismissible: false,
+      context: this,
+      builder: (_) => const TLoadingDialog(),
+    );
   }
 }
 
