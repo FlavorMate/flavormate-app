@@ -1,4 +1,3 @@
-import 'package:flavormate/components/dialogs/t_loading_dialog.dart';
 import 'package:flavormate/components/editor/dialogs/d_categories.dart';
 import 'package:flavormate/components/editor/dialogs/d_common.dart';
 import 'package:flavormate/components/editor/dialogs/d_course.dart';
@@ -325,7 +324,8 @@ class EditorPage extends ConsumerWidget {
 
     if (response != true) return;
 
-    showDialog(context: context, builder: (_) => const TLoadingDialog());
+    if (!context.mounted) return;
+    context.showLoadingDialog();
 
     var result = false;
 
@@ -335,6 +335,7 @@ class EditorPage extends ConsumerWidget {
       result = await ref.read(pDraftProvider(id).notifier).upload();
     }
 
+    if (!context.mounted) return;
     if (result) {
       context.showTextSnackBar(L10n.of(context).p_editor_upload_success);
       context.goNamed('home');

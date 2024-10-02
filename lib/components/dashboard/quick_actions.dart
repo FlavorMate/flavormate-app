@@ -59,12 +59,14 @@ class QuickActions extends ConsumerWidget {
           .recipesClient
           .findRandom(diet: user.diet!, course: course);
 
+      if (!context.mounted) return;
       await context.pushNamed(
         'recipe',
         pathParameters: {'id': '${recipe[0].id}'},
         extra: recipe[0].label,
       );
     } catch (e) {
+      if (!context.mounted) return;
       context.showTextSnackBar(L10n.of(context).p_dashboard_no_recipe);
     }
   }

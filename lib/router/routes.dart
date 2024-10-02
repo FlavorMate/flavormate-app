@@ -1,4 +1,4 @@
-import 'package:flavormate/layouts/MainLayout.dart';
+import 'package:flavormate/layouts/main_layout.dart';
 import 'package:flavormate/pages/authors/_id.dart';
 import 'package:flavormate/pages/authors/index.dart';
 import 'package:flavormate/pages/categories/_id.dart';
@@ -13,10 +13,13 @@ import 'package:flavormate/pages/more/index.dart';
 import 'package:flavormate/pages/no_connection/index.dart';
 import 'package:flavormate/pages/recipe/index.dart';
 import 'package:flavormate/pages/recipes/_id.dart';
+import 'package:flavormate/pages/recovery/index.dart';
+import 'package:flavormate/pages/registration/index.dart';
 import 'package:flavormate/pages/settings/index.dart';
 import 'package:flavormate/pages/tags/_id.dart';
 import 'package:flavormate/pages/tags/index.dart';
 import 'package:flavormate/pages/user_management/index.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 var routes = [
@@ -179,6 +182,20 @@ var routes = [
     name: 'drafts',
     pageBuilder: (context, state) => const NoTransitionPage(
       child: DraftsPage(),
+    ),
+  ),
+  GoRoute(
+    path: '/recovery',
+    name: 'recovery',
+    pageBuilder: (context, state) => const MaterialPage(
+      child: RecoveryPage(),
+    ),
+  ),
+  GoRoute(
+    path: '/registration',
+    name: 'registration',
+    pageBuilder: (context, state) => const MaterialPage(
+      child: RegistrationPage(),
     ),
   ),
 ];

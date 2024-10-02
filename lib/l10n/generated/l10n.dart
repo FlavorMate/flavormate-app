@@ -1552,6 +1552,120 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'What\'s new in FlavorMate'**
   String get d_changelog_title;
+
+  /// No description provided for @p_login_connection_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not connect to server'**
+  String get p_login_connection_failed;
+
+  /// No description provided for @p_login_connection_loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting to server'**
+  String get p_login_connection_loading;
+
+  /// No description provided for @p_login_server_outdated_minor.
+  ///
+  /// In en, this message translates to:
+  /// **'Server slightly outdated!\\nConsider updating the server.'**
+  String get p_login_server_outdated_minor;
+
+  /// No description provided for @p_login_server_outdated_major.
+  ///
+  /// In en, this message translates to:
+  /// **'Server outdated!\\nPlease update the server.'**
+  String get p_login_server_outdated_major;
+
+  /// No description provided for @p_login_forgot_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get p_login_forgot_password;
+
+  /// No description provided for @p_recovery_mail.
+  ///
+  /// In en, this message translates to:
+  /// **'Mail'**
+  String get p_recovery_mail;
+
+  /// No description provided for @p_recovery_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset your password'**
+  String get p_recovery_title;
+
+  /// No description provided for @btn_reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get btn_reset;
+
+  /// No description provided for @btn_registration.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get btn_registration;
+
+  /// No description provided for @p_recovery_mail_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'A mail has been sent to your mail address'**
+  String get p_recovery_mail_confirm;
+
+  /// No description provided for @p_registration_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get p_registration_title;
+
+  /// No description provided for @p_registration_mail.
+  ///
+  /// In en, this message translates to:
+  /// **'Mail address'**
+  String get p_registration_mail;
+
+  /// No description provided for @p_registration_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get p_registration_password;
+
+  /// No description provided for @p_registration_display_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Display name'**
+  String get p_registration_display_name;
+
+  /// No description provided for @p_registration_username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get p_registration_username;
+
+  /// No description provided for @p_registration_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Account was created successfully'**
+  String get p_registration_confirm;
+
+  /// No description provided for @p_registration_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Account couldn\'t be created'**
+  String get p_registration_error;
+
+  /// No description provided for @p_login_no_account.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have an account?'**
+  String get p_login_no_account;
+
+  /// No description provided for @p_login_connection_failed_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for possible updates for the server'**
+  String get p_login_connection_failed_subtitle;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

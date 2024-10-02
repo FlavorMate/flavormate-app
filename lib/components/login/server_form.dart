@@ -96,7 +96,7 @@ class _ServerFormState extends ConsumerState<ServerForm> {
 
   void setServer() {
     if (!_serverFormKey.currentState!.validate()) return;
-    // TODO: maybe check in the future if a flavormate server is running on the url and only continue if a 'ping' is successful
+
     ref.read(pServerProvider.notifier).set(_serverController.text);
   }
 

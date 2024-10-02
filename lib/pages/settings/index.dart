@@ -237,6 +237,7 @@ class SettingsPage extends ConsumerWidget {
   manageAvatar(BuildContext context, WidgetRef ref) async {
     final user = await ref.read(pUserProvider.future);
 
+    if (!context.mounted) return;
     final response = await showDialog<String>(
       context: context,
       builder: (_) => const ManageAvatar(),
@@ -295,10 +296,12 @@ class SettingsPage extends ConsumerWidget {
     if (response == null || response == current) return;
 
     if (await ref.read(pUserProvider.notifier).setMail(response)) {
+      if (!context.mounted) return;
       context.showTextSnackBar(
         L10n.of(context).d_settings_manage_mail_success,
       );
     } else {
+      if (!context.mounted) return;
       context.showTextSnackBar(
         L10n.of(context).d_settings_manage_mail_error,
       );
@@ -313,10 +316,12 @@ class SettingsPage extends ConsumerWidget {
 
     if (response == null) return;
     if (await ref.read(pUserProvider.notifier).setPassword(response)) {
+      if (!context.mounted) return;
       context.showTextSnackBar(
         L10n.of(context).d_settings_manage_password_success,
       );
     } else {
+      if (!context.mounted) return;
       context.showTextSnackBar(
         L10n.of(context).d_settings_manage_password_error,
       );

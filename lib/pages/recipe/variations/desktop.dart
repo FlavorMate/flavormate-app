@@ -19,6 +19,7 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 
 class RecipePageDesktop extends StatelessWidget {
   final Recipe recipe;
+  final bool isBringEnabled;
   final double servingFactor;
 
   final VoidCallback decreaseServing;
@@ -34,6 +35,7 @@ class RecipePageDesktop extends StatelessWidget {
     required this.increaseServing,
     required this.addToBring,
     required this.addBookmark,
+    required this.isBringEnabled,
   });
 
   static const _widgetWidth = 450.0;
@@ -66,10 +68,11 @@ class RecipePageDesktop extends StatelessWidget {
                     RecipeTitle(title: recipe.label),
                     if (recipe.description != null)
                       RecipeDescription(description: recipe.description!),
-                    SizedBox(
-                      width: _widgetWidth,
-                      child: BringButton(onPressed: addToBring),
-                    ),
+                    if (isBringEnabled)
+                      SizedBox(
+                        width: _widgetWidth,
+                        child: BringButton(onPressed: addToBring),
+                      ),
                     SizedBox(
                       width: _widgetWidth,
                       child: TIconButton(

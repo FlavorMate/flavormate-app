@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flavormate/components/dialogs/t_full_dialog.dart';
-import 'package:flavormate/components/dialogs/t_loading_dialog.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_column.dart';
+import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/draft/draft.dart';
 import 'package:flavormate/models/file/file.dart';
@@ -102,7 +102,9 @@ class _DImagesState extends State<DImages> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
 
-    showDialog(context: context, builder: (_) => const TLoadingDialog());
+    if (!context.mounted) return;
+    context.showLoadingDialog();
+
     await Future.delayed(const Duration(milliseconds: 500));
 
     final bytes = await image.readAsBytes();
@@ -120,6 +122,8 @@ class _DImagesState extends State<DImages> {
     setState(() {
       _draft.addedImages.add(file);
     });
+
+    if (!context.mounted) return;
     context.pop();
   }
 
