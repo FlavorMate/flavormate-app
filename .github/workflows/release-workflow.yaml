@@ -48,16 +48,19 @@ jobs:
           security create-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" $KEYCHAIN_PATH
           security set-keychain-settings $KEYCHAIN_PATH
           security unlock-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" $KEYCHAIN_PATH
-          security import certificate_ios.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
-          security import certificate_macos_app.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
-          security import certificate_macos_install.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign
+          security import certificate_ios.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign -T /usr/bin/productbuild
+          security import certificate_macos_app.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign -T /usr/bin/productbuild
+          security import certificate_macos_install.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign -T /usr/bin/productbuild
           security list-keychains -s $KEYCHAIN_PATH
+                  
+          security set-key-partition-list -S apple-tool:,apple:,codesign:,productbuild: -s -k "${{ secrets.KEYCHAIN_PASSWORD }}" $KEYCHAIN_PATH
+          
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 
       # Build ipa
-      - name: Build ipa
-        run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
+      #- name: Build ipa
+      #  run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
 
       # Build macOS
       - name: Build macOS
