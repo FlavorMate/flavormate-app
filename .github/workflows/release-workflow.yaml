@@ -52,15 +52,15 @@ jobs:
           security import certificate_macos_app.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign -T /usr/bin/productbuild
           security import certificate_macos_install.p12 -k $KEYCHAIN_PATH -P "${{ secrets.APPLE_CERTIFICATE_PASSWORD }}" -T /usr/bin/codesign -T /usr/bin/productbuild
           security list-keychains -s $KEYCHAIN_PATH
-                  
+          
           security set-key-partition-list -S apple-tool:,apple:,codesign:,productbuild: -s -k "${{ secrets.KEYCHAIN_PASSWORD }}" $KEYCHAIN_PATH
           
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 
       # Build ipa
-      #- name: Build ipa
-      #  run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
+      - name: Build ipa
+        run: flutter build ipa --release --dart-define=build.stage=release --export-options-plist=build_assets/ios/ExportOptions.plist
 
       # Build macOS
       - name: Build macOS
@@ -70,14 +70,9 @@ jobs:
         run: |
           cd build/macos/Build/Products/Release
           codesign --deep --force -s "Developer ID Application: ${{ secrets.APPLE_MACOS_TEAM }}" --options runtime flavormate.app
-          ditto -c -k --keepParent flavormate.app notarization.zip
-          xcrun notarytool submit notarization.zip --apple-id ${{ secrets.APPLE_ID }} --team-id ${{ secrets.APPLE_TEAM }} --password ${{ secrets.APPLE_ID_PASSWORD }} --wait
-          xcrun stapler staple flavormate.app
-
-      - name: Package macOS
-        run: |
-          cd build/macos/Build/Products/Release
           productbuild --sign "Developer ID Installer: ${{ secrets.APPLE_MACOS_TEAM }}" --component "flavormate.app" /Applications "FlavorMate.pkg"
+          xcrun notarytool submit "FlavorMate.pkg" --apple-id ${{ secrets.APPLE_ID }} --team-id ${{ secrets.APPLE_TEAM }} --password ${{ secrets.APPLE_ID_PASSWORD }} --wait
+          xcrun stapler staple FlavorMate.pkg
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
