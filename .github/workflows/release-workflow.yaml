@@ -69,7 +69,7 @@ jobs:
           codesign --deep --force -s "Developer ID Application: ${{ secrets.APPLE_MACOS_TEAM }}" --options runtime flavormate.app
           ditto -c -k --keepParent flavormate.app notarization.zip
           xcrun notarytool submit notarization.zip --apple-id ${{ secrets.APPLE_ID }} --team-id ${{ secrets.APPLE_TEAM }} --password ${{ secrets.APPLE_ID_PASSWORD }} --wait
-          xcrun starpler staple flavormate.app
+          xcrun stapler staple flavormate.app
 
       - name: Package macOS
         run: |
@@ -149,7 +149,7 @@ jobs:
         run: |
           cd build/web
           # modifying service worker to exclude the backend url file from getting cached
-          sed -i '' '/"assets\/assets\/web\/backend_url.txt"/d' flutter_service_worker.js
+          sed -i '/"assets\/assets\/web\/backend_url.txt"/d' flutter_service_worker.js
           
           # downloading required files for drift to work on web
           # download sqlite
@@ -188,7 +188,7 @@ jobs:
 
   docker-build:
     needs:
-      - build-android-web
+      - create-release
 
     runs-on: ubuntu-latest
 
