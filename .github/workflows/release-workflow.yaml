@@ -61,7 +61,7 @@ jobs:
 
       # Build macOS
       - name: Build macOS
-        run: flutter build ipa --release --dart-define=build.stage=release
+        run: flutter build macos --release --dart-define=build.stage=release
 
       - name: Package and sign macos
         run: |
