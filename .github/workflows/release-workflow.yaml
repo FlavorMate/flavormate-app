@@ -66,15 +66,15 @@ jobs:
       - name: Package and sign macos
         run: |
           cd build/macos/Build/Products/Release
-          codesign --deep --force -s "Developer ID Application: ${{ APPLE_MACOS_TEAM }}" --options runtime flavormate.app
+          codesign --deep --force -s "Developer ID Application: ${{ secrets.APPLE_MACOS_TEAM }}" --options runtime flavormate.app
           ditto -c -k --keepParent flavormate.app notarization.zip
-          xcrun notarytool submit notarization.zip --apple-id ${{ APPLE_ID }} --team-id ${{ APPLE_TEAM }} --password ${{ APPLE_ID_PASSWORD }} --wait
+          xcrun notarytool submit notarization.zip --apple-id ${{ secrets.APPLE_ID }} --team-id ${{ secrets.APPLE_TEAM }} --password ${{ secrets.APPLE_ID_PASSWORD }} --wait
           xcrun starpler staple flavormate.app
 
       - name: Package macOS
         run: |
           cd build/macos/Build/Products/Release
-          productbuild --sign "Developer ID Installer: ${{ APPLE_MACOS_TEAM }}" --component "flavormate.app" /Applications "FlavorMate.pkg"
+          productbuild --sign "Developer ID Installer: ${{ secrets.APPLE_MACOS_TEAM }}" --component "flavormate.app" /Applications "FlavorMate.pkg"
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
