@@ -1,9 +1,7 @@
 name: FlavorMate app build workflow
 on:
   push:
-    branches:
-      - enhancement/pipeline
-    #tags: [ v* ]
+    tags: [ v* ]
 
 env:
   REGISTRY: ghcr.io
@@ -170,14 +168,6 @@ jobs:
             build/app/outputs/bundle/release/app-release.aab
             build/web_build.tar.gz
 
-      # Cleanup step to always run, even if the build or upload fails
-      - name: Delete Keychain and Provisioning Profile
-        if: always()  # Ensure this runs regardless of job success or failure
-        run: |
-          security delete-keychain "$RUNNER_TEMP/build.keychain"
-          rm -f ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
-          rm -f certificate.p12
-
       - name: Delete Android keys
         if: always()  # Ensure this runs regardless of job success or failure
         run: |
@@ -266,10 +256,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
-      packages: write
-      id-token: write
-      attestations: write
+      contents: write
 
     steps:
       - name: Download web archive
