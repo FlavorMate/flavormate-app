@@ -1,5 +1,12 @@
 [
   {
+    "version": "1.1.0",
+    "changes": [
+      "Users can now register and reset their password themselves"
+    ],
+    "icon": "accountReactivateOutline"
+  },
+  {
     "version": "1.0.4",
     "changes": [
       "Fixed a bug within the url validation"

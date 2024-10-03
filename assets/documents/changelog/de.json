@@ -1,5 +1,12 @@
 [
   {
+    "version": "1.1.0",
+    "changes": [
+      "Nutzer können sich nun selbstständig registrieren und ihr Passwort zurücksetzen"
+    ],
+    "icon": "accountReactivateOutline"
+  },
+  {
     "version": "1.0.4",
     "changes": [
       "Ein Fehler bei der URL Validierung wurde behoben"
