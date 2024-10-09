@@ -1,5 +1,12 @@
 [
   {
+    "version": "1.1.1",
+    "changes": [
+      "Fixed a bug on the author page"
+    ],
+    "icon": "wrenchOutline"
+  },
+  {
     "version": "1.1.0",
     "changes": [
       "Users can now register and reset their password themselves"
