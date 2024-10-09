@@ -14,7 +14,7 @@ class AuthorsClient extends ASearchClient<Author> {
       {required int page}) async {
     final params = getParams({
       'size': 6,
-      'sortBy': 'label',
+      'sortBy': 'r.label',
       'sortDirection': 'ASC',
       'page': page,
     });
