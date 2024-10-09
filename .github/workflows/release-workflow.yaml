@@ -262,7 +262,7 @@ jobs:
       - name: Download web archive
         uses: actions/download-artifact@v4
         with:
-          name: web-android
+          name: android-web
           path: build
 
       - name: Download web archive
