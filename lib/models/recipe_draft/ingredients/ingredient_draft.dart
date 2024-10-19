@@ -1,5 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/extensions/e_number.dart';
+import 'package:flavormate/models/recipe_draft/nutrition/nutrition_draft.dart';
 import 'package:flavormate/models/unit.dart';
 
 part 'ingredient_draft.mapper.dart';
@@ -9,11 +10,13 @@ class IngredientDraft with IngredientDraftMappable {
   double amount;
   Unit? unit;
   String label;
+  NutritionDraft? nutrition;
 
   IngredientDraft({
     required this.amount,
     required this.label,
     this.unit,
+    this.nutrition,
   });
 
   bool get isValid => amount != 0 && label.isNotEmpty;

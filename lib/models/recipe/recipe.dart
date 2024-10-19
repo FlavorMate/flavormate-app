@@ -40,7 +40,6 @@ class Recipe extends Entity with RecipeMappable {
   Course course;
   Diet diet;
   Uri? url;
-  String publicUrl;
   String? coverUrl;
 
   // Constructor
@@ -64,7 +63,6 @@ class Recipe extends Entity with RecipeMappable {
     required this.ingredientGroups,
     required this.course,
     required this.diet,
-    required this.publicUrl,
     required this.coverUrl,
     this.description,
     this.url,
