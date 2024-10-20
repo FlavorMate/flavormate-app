@@ -8,26 +8,26 @@ part 'ingredient_draft.mapper.dart';
 
 @MappableClass()
 class IngredientDraft with IngredientDraftMappable {
-  double amount;
+  double? amount;
   Unit? unit;
   String label;
   UnitLocalized? unitLocalized;
   NutritionDraft? nutrition;
 
   IngredientDraft({
-    required this.amount,
     required this.label,
+    this.amount,
     this.unit,
     this.nutrition,
     this.unitLocalized,
   });
 
-  bool get isValid => amount != 0 && label.isNotEmpty;
+  bool get isValid => label.isNotEmpty;
 
   String get beautify {
     final parts = [];
 
-    if (amount > 0) parts.add(amount.beautify);
+    if (amount != null && amount! > 0) parts.add(amount!.beautify);
     if (unit != null) parts.add(unit!.beautify);
     if (unitLocalized != null) parts.add(unitLocalized!.getLabel(amount));
     parts.add(label);

@@ -27,7 +27,7 @@ class UnitLocalized extends Entity with UnitLocalizedMappable {
     required this.labelPlAbrv,
   });
 
-  String getLabel(double amount) {
+  String getLabel(double? amount) {
     if (amount != 1.0) {
       if (!EString.isEmpty(labelPlAbrv)) {
         return labelPlAbrv!;

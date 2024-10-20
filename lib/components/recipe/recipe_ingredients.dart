@@ -79,8 +79,10 @@ class RecipeIngredients extends StatelessWidget {
   }
 
   String? _getAmount(Ingredient ingredient) {
-    if ((ingredient.amount * factor) > 0) {
-      return (ingredient.amount * factor / serving.amount).beautify;
+    if (ingredient.amount == null) return null;
+
+    if ((ingredient.amount! * factor) > 0) {
+      return (ingredient.amount! * factor / serving.amount).beautify;
     }
 
     return null;

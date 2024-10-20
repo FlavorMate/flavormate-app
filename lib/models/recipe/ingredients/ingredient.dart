@@ -10,7 +10,7 @@ part 'ingredient.mapper.dart';
 
 @MappableClass()
 class Ingredient with IngredientMappable {
-  final double amount;
+  final double? amount;
   final String label;
   final Unit? unit;
   final UnitLocalized? unitLocalized;
@@ -26,7 +26,7 @@ class Ingredient with IngredientMappable {
 
   @override
   String toString() {
-    final amountLabel = amount.beautify;
+    final amountLabel = amount?.beautify;
     String? unitLabel;
 
     if (unit != null) {

@@ -40,11 +40,8 @@ class _DIngredientState extends ConsumerState<DIngredient> {
   void initState() {
     _ingredient = widget.ingredient.copyWith();
 
-    if (_ingredient.amount <= 0) {
-      _amountController.text = '';
-    } else {
-      _amountController.text = _ingredient.amount.beautify;
-    }
+    _amountController.text = _ingredient.amount?.beautify ?? '';
+
     if (_ingredient.unit != null) {
       _oldUnitController.text = _ingredient.unit!.beautify;
     }
@@ -77,6 +74,16 @@ class _DIngredientState extends ConsumerState<DIngredient> {
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(L10n.of(context).d_editor_ingredient_amount),
+                suffix: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => _amountController.clear(),
+                    child: Icon(
+                      MdiIcons.delete,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                ),
               ),
               validator: (input) {
                 if (EString.isEmpty(input)) return null;
@@ -133,16 +140,16 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     label: Text(L10n.of(context).d_editor_ingredient_unit),
-                    suffixIcon: _ingredient.unitLocalized != null
-                        ? IconButton(
-                            onPressed: () =>
-                                clearUnit(fieldTextEditingController),
-                            icon: Icon(
-                              MdiIcons.delete,
-                              color: Theme.of(context).colorScheme.error,
-                            ),
-                          )
-                        : null,
+                    suffix: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () => clearUnit(fieldTextEditingController),
+                        child: Icon(
+                          MdiIcons.delete,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 onSelected: (UnitLocalized selection) {
@@ -192,9 +199,15 @@ class _DIngredientState extends ConsumerState<DIngredient> {
 
   void submit() {
     if (!_formKey.currentState!.validate()) return;
+
+    var parsedAmount = double.tryParse(_amountController.text);
+    if (parsedAmount != null && parsedAmount <= 0) {
+      parsedAmount = null;
+    }
+
     context.pop(
       IngredientDraft(
-        amount: double.tryParse(_amountController.text) ?? -1,
+        amount: parsedAmount,
         unit: _ingredient.unit,
         unitLocalized: _ingredient.unitLocalized,
         label: _ingredientController.text.trim(),

@@ -44,9 +44,7 @@ class PreviewIngredients extends StatelessWidget {
                   for (final ingredient in ingredientGroup.ingredients)
                     [
                       [
-                        (ingredient.amount) <= 0
-                            ? null
-                            : (ingredient.amount).beautify,
+                        ingredient.amount?.beautify ?? '',
                         ingredient.unit?.beautify,
                       ].nonNulls.join(' '),
                       // '${(ingredient.amount) <= 0 ? '' : (ingredient.amount / serving.amount).beautify} ${ingredient.unit?.beautify}',
