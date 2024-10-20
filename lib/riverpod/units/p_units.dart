@@ -1,5 +1,6 @@
-import 'package:flavormate/models/unit.dart';
+import 'package:flavormate/models/recipe/unit_ref/unit_localized.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
+import 'package:flavormate/utils/u_localizations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_units.g.dart';
@@ -7,8 +8,10 @@ part 'p_units.g.dart';
 @riverpod
 class PUnits extends _$PUnits {
   @override
-  Future<List<Unit>> build() async {
-    final units = await ref.watch(pApiProvider).unitsClient.findAll();
+  Future<List<UnitLocalized>> build() async {
+    final units = (await ref.watch(pApiProvider).unitsClient.findAll())
+        .where((unit) => unit.language == currentLocalization().languageCode)
+        .toList();
 
     ref.keepAlive();
 

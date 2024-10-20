@@ -29,6 +29,7 @@ class IngredientDraft with IngredientDraftMappable {
 
     if (amount > 0) parts.add(amount.beautify);
     if (unit != null) parts.add(unit!.beautify);
+    if (unitLocalized != null) parts.add(unitLocalized!.getLabel(amount));
     parts.add(label);
 
     return parts.join(' ');

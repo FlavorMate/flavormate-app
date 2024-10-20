@@ -4,8 +4,8 @@ import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/extensions/e_number.dart';
 import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/recipe/unit_ref/unit_localized.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_draft.dart';
-import 'package:flavormate/models/unit.dart';
 import 'package:flavormate/riverpod/units/p_units.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flavormate/utils/u_validator.dart';
@@ -33,6 +33,7 @@ class _DIngredientState extends ConsumerState<DIngredient> {
   late IngredientDraft _ingredient;
 
   final _amountController = TextEditingController();
+  final _oldUnitController = TextEditingController();
   final _ingredientController = TextEditingController();
 
   @override
@@ -44,6 +45,10 @@ class _DIngredientState extends ConsumerState<DIngredient> {
     } else {
       _amountController.text = _ingredient.amount.beautify;
     }
+    if (_ingredient.unit != null) {
+      _oldUnitController.text = _ingredient.unit!.beautify;
+    }
+
     _ingredientController.text = _ingredient.label;
     super.initState();
   }
@@ -51,6 +56,7 @@ class _DIngredientState extends ConsumerState<DIngredient> {
   @override
   void dispose() {
     _amountController.dispose();
+    _oldUnitController.dispose();
     _ingredientController.dispose();
     super.dispose();
   }
@@ -82,26 +88,38 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                 return null;
               },
             ),
+            if (_oldUnitController.text.isNotEmpty)
+              TextField(
+                controller: _oldUnitController,
+                readOnly: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label:
+                      Text(L10n.of(context).d_editor_ingredient_old_unit_label),
+                ),
+              ),
             RStruct(
               provider,
-              (_, units) => Autocomplete<Unit>(
-                initialValue:
-                    TextEditingValue(text: _ingredient.unit?.beautify ?? ''),
-                displayStringForOption: (unit) => unit.beautify,
+              (_, units) => Autocomplete<UnitLocalized>(
+                initialValue: TextEditingValue(
+                  text: _ingredient.unitLocalized?.labelSg ?? '',
+                ),
+                displayStringForOption: (unit) => unit.labelSg,
                 optionsBuilder: (textEditingValue) {
                   if (textEditingValue.text.isEmpty) {
                     return [];
                   }
                   final responses = units.where(
                     (unit) {
-                      return unit.label
-                          .containsIgnoreCase(textEditingValue.text);
+                      return [
+                        unit.labelSg,
+                        unit.labelSgAbrv,
+                        unit.labelPl,
+                        unit.labelPlAbrv
+                      ].nonNulls.any((label) =>
+                          label.containsIgnoreCase(textEditingValue.text));
                     },
                   ).toList();
-
-                  if (responses.isEmpty) {
-                    responses.add(Unit(label: textEditingValue.text));
-                  }
 
                   return responses;
                 },
@@ -115,7 +133,7 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     label: Text(L10n.of(context).d_editor_ingredient_unit),
-                    suffixIcon: _ingredient.unit != null
+                    suffixIcon: _ingredient.unitLocalized != null
                         ? IconButton(
                             onPressed: () =>
                                 clearUnit(fieldTextEditingController),
@@ -126,18 +144,17 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                           )
                         : null,
                   ),
-                  onEditingComplete: () =>
-                      setUnit(fieldTextEditingController.text, fieldFocusNode),
                 ),
-                onSelected: (Unit selection) {
+                onSelected: (UnitLocalized selection) {
                   setState(() {
-                    _ingredient.unit = selection;
+                    _ingredient.unit = null;
+                    _ingredient.unitLocalized = selection;
                   });
                 },
                 optionsViewBuilder: (
                   BuildContext context,
-                  AutocompleteOnSelected<Unit> onSelected,
-                  Iterable<Unit> options,
+                  AutocompleteOnSelected<UnitLocalized> onSelected,
+                  Iterable<UnitLocalized> options,
                 ) {
                   return AutocompleteOptions(
                     onSelected: onSelected,
@@ -166,17 +183,9 @@ class _DIngredientState extends ConsumerState<DIngredient> {
     );
   }
 
-  void setUnit(String text, FocusNode focusNode) {
-    if (_ingredient.unit?.label == text) return;
-    focusNode.unfocus();
-    setState(() {
-      _ingredient.unit = Unit(label: text);
-    });
-  }
-
   void clearUnit(TextEditingController unitController) {
     setState(() {
-      _ingredient.unit = null;
+      _ingredient.unitLocalized = null;
       unitController.clear();
     });
   }
@@ -187,6 +196,7 @@ class _DIngredientState extends ConsumerState<DIngredient> {
       IngredientDraft(
         amount: double.tryParse(_amountController.text) ?? -1,
         unit: _ingredient.unit,
+        unitLocalized: _ingredient.unitLocalized,
         label: _ingredientController.text.trim(),
       ),
     );
@@ -195,8 +205,8 @@ class _DIngredientState extends ConsumerState<DIngredient> {
 
 /// Necessary until https://github.com/flutter/flutter/issues/98728 is fixed
 class AutocompleteOptions extends StatelessWidget {
-  final AutocompleteOnSelected<Unit> onSelected;
-  final Iterable<Unit> options;
+  final AutocompleteOnSelected<UnitLocalized> onSelected;
+  final Iterable<UnitLocalized> options;
 
   const AutocompleteOptions({
     super.key,
@@ -221,7 +231,7 @@ class AutocompleteOptions extends StatelessWidget {
             shrinkWrap: true,
             itemCount: options.length,
             itemBuilder: (BuildContext context, int index) {
-              final Unit option = options.elementAt(index);
+              final UnitLocalized option = options.elementAt(index);
               return InkWell(
                 onTap: () => onSelected(option),
                 child: Builder(builder: (BuildContext context) {
@@ -236,7 +246,8 @@ class AutocompleteOptions extends StatelessWidget {
                   return Container(
                     color: highlight ? Theme.of(context).focusColor : null,
                     padding: const EdgeInsets.all(PADDING),
-                    child: Text(option.beautify),
+                    //TODO: label
+                    child: Text(option.labelSg),
                   );
                 }),
               );

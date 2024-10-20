@@ -1666,6 +1666,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Check for possible updates for the server'**
   String get p_login_connection_failed_subtitle;
+
+  /// No description provided for @d_editor_ingredient_old_unit_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Old unit'**
+  String get d_editor_ingredient_old_unit_label;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

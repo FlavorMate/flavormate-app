@@ -799,4 +799,7 @@ class L10nDe extends L10n {
 
   @override
   String get p_login_connection_failed_subtitle => 'Prüfe, ob es Updates für den Server gibt';
+
+  @override
+  String get d_editor_ingredient_old_unit_label => 'Alte Einheit';
 }
