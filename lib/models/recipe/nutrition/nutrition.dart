@@ -6,18 +6,18 @@ part 'nutrition.mapper.dart';
 
 @MappableClass()
 class Nutrition extends Entity with NutritionMappable {
-  final String openFoodFactsId;
+  final String? openFoodFactsId;
 
   // Nutritional values per 100g
-  final double carbohydrates;
-  final double energyKcal;
-  final double fat;
-  final double saturatedFat;
-  final double sugars;
-  final double fiber;
-  final double proteins;
-  final double salt;
-  final double sodium;
+  final double? carbohydrates;
+  final double? energyKcal;
+  final double? fat;
+  final double? saturatedFat;
+  final double? sugars;
+  final double? fiber;
+  final double? proteins;
+  final double? salt;
+  final double? sodium;
 
   Nutrition({
     required super.id,
