@@ -802,4 +802,67 @@ class L10nEn extends L10n {
 
   @override
   String get d_editor_ingredient_old_unit_label => 'Old unit';
+
+  @override
+  String get d_editor_ingredient_edit_nutrition => 'Edit nutrition';
+
+  @override
+  String get d_nutrition_title => 'Nutrition';
+
+  @override
+  String get d_nutrition_off_title => 'Open Food Facts';
+
+  @override
+  String get d_nutrition_custom_title => 'Custom';
+
+  @override
+  String get d_nutrition_off_hint_1 => 'Open Food Facts is a free database that contains informations about products';
+
+  @override
+  String get d_nutrition_off_hint_2 => 'You can use it to fetch the nutrition informations for an ingredient';
+
+  @override
+  String get d_nutrition_off_hint_3 => 'To get started, please enter the EAN or scan the barcode of the product';
+
+  @override
+  String get d_nutrition_off_hint_4 => 'Note: All data is fetched once the recipe is created';
+
+  @override
+  String get d_nutrition_off_open_off => 'Open Open Food Facts';
+
+  @override
+  String get d_nutrition_off_product_ean => 'Product EAN';
+
+  @override
+  String get d_nutrition_custom_disabled_hint => 'Note: You can\'t manually edit nutrition until you removed the EAN Code from the Open Food Facts page';
+
+  @override
+  String get d_nutrition_custom_hint_1 => 'Please enter all informations for 100 grams';
+
+  @override
+  String get nutrition_carbohydrates => 'Carbohydrates';
+
+  @override
+  String get nutrition_kcal => 'KCal';
+
+  @override
+  String get nutrition_fat => 'Fat';
+
+  @override
+  String get nutrition_saturated_fat => 'Saturated fat';
+
+  @override
+  String get nutrition_sugars => 'Sugars';
+
+  @override
+  String get nutrition_fiber => 'Fiber';
+
+  @override
+  String get nutrition_proteins => 'Proteins';
+
+  @override
+  String get nutrition_salt => 'Salt';
+
+  @override
+  String get nutrition_sodium => 'Sodium';
 }

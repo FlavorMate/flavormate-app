@@ -1672,6 +1672,132 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Old unit'**
   String get d_editor_ingredient_old_unit_label;
+
+  /// No description provided for @d_editor_ingredient_edit_nutrition.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit nutrition'**
+  String get d_editor_ingredient_edit_nutrition;
+
+  /// No description provided for @d_nutrition_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Nutrition'**
+  String get d_nutrition_title;
+
+  /// No description provided for @d_nutrition_off_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Food Facts'**
+  String get d_nutrition_off_title;
+
+  /// No description provided for @d_nutrition_custom_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get d_nutrition_custom_title;
+
+  /// No description provided for @d_nutrition_off_hint_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Food Facts is a free database that contains informations about products'**
+  String get d_nutrition_off_hint_1;
+
+  /// No description provided for @d_nutrition_off_hint_2.
+  ///
+  /// In en, this message translates to:
+  /// **'You can use it to fetch the nutrition informations for an ingredient'**
+  String get d_nutrition_off_hint_2;
+
+  /// No description provided for @d_nutrition_off_hint_3.
+  ///
+  /// In en, this message translates to:
+  /// **'To get started, please enter the EAN or scan the barcode of the product'**
+  String get d_nutrition_off_hint_3;
+
+  /// No description provided for @d_nutrition_off_hint_4.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: All data is fetched once the recipe is created'**
+  String get d_nutrition_off_hint_4;
+
+  /// No description provided for @d_nutrition_off_open_off.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Open Food Facts'**
+  String get d_nutrition_off_open_off;
+
+  /// No description provided for @d_nutrition_off_product_ean.
+  ///
+  /// In en, this message translates to:
+  /// **'Product EAN'**
+  String get d_nutrition_off_product_ean;
+
+  /// No description provided for @d_nutrition_custom_disabled_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: You can\'t manually edit nutrition until you removed the EAN Code from the Open Food Facts page'**
+  String get d_nutrition_custom_disabled_hint;
+
+  /// No description provided for @d_nutrition_custom_hint_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter all informations for 100 grams'**
+  String get d_nutrition_custom_hint_1;
+
+  /// No description provided for @nutrition_carbohydrates.
+  ///
+  /// In en, this message translates to:
+  /// **'Carbohydrates'**
+  String get nutrition_carbohydrates;
+
+  /// No description provided for @nutrition_kcal.
+  ///
+  /// In en, this message translates to:
+  /// **'KCal'**
+  String get nutrition_kcal;
+
+  /// No description provided for @nutrition_fat.
+  ///
+  /// In en, this message translates to:
+  /// **'Fat'**
+  String get nutrition_fat;
+
+  /// No description provided for @nutrition_saturated_fat.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturated fat'**
+  String get nutrition_saturated_fat;
+
+  /// No description provided for @nutrition_sugars.
+  ///
+  /// In en, this message translates to:
+  /// **'Sugars'**
+  String get nutrition_sugars;
+
+  /// No description provided for @nutrition_fiber.
+  ///
+  /// In en, this message translates to:
+  /// **'Fiber'**
+  String get nutrition_fiber;
+
+  /// No description provided for @nutrition_proteins.
+  ///
+  /// In en, this message translates to:
+  /// **'Proteins'**
+  String get nutrition_proteins;
+
+  /// No description provided for @nutrition_salt.
+  ///
+  /// In en, this message translates to:
+  /// **'Salt'**
+  String get nutrition_salt;
+
+  /// No description provided for @nutrition_sodium.
+  ///
+  /// In en, this message translates to:
+  /// **'Sodium'**
+  String get nutrition_sodium;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -802,4 +802,67 @@ class L10nDe extends L10n {
 
   @override
   String get d_editor_ingredient_old_unit_label => 'Alte Einheit';
+
+  @override
+  String get d_editor_ingredient_edit_nutrition => 'Nährwerte bearbeiten';
+
+  @override
+  String get d_nutrition_title => 'Nährwerte';
+
+  @override
+  String get d_nutrition_off_title => 'Open Food Facts';
+
+  @override
+  String get d_nutrition_custom_title => 'Manuell';
+
+  @override
+  String get d_nutrition_off_hint_1 => 'Open Food Facts ist eine freie Datenbank, welche Informationen über Produkte enthält';
+
+  @override
+  String get d_nutrition_off_hint_2 => 'Du kannst sie benutzen, um Nährwertinformationen für eine Zutat herunterzuladen';
+
+  @override
+  String get d_nutrition_off_hint_3 => 'Um zu starten, gib bitte die EAN ein oder Scanne den Barcode des Produkts';
+
+  @override
+  String get d_nutrition_off_hint_4 => 'Hinweis: Die Daten werden heruntergeladen, sobald das Rezept erstellt wurde';
+
+  @override
+  String get d_nutrition_off_open_off => 'Öffne Open Food Facts';
+
+  @override
+  String get d_nutrition_off_product_ean => 'Produkt EAN';
+
+  @override
+  String get d_nutrition_custom_disabled_hint => 'Hinweis: Du kannst die Daten nicht manuell bearbeiten, bis du den EAN Code auf der Open Food Facts Seite gelöscht hast';
+
+  @override
+  String get d_nutrition_custom_hint_1 => 'Bitte gib alle Daten für 100 Gramm an';
+
+  @override
+  String get nutrition_carbohydrates => 'Kohlenhydrate';
+
+  @override
+  String get nutrition_kcal => 'KCal';
+
+  @override
+  String get nutrition_fat => 'Fett';
+
+  @override
+  String get nutrition_saturated_fat => 'Gesättigte Fettsäuren';
+
+  @override
+  String get nutrition_sugars => 'Zucker';
+
+  @override
+  String get nutrition_fiber => 'Ballaststoffe';
+
+  @override
+  String get nutrition_proteins => 'Proteine';
+
+  @override
+  String get nutrition_salt => 'Salz';
+
+  @override
+  String get nutrition_sodium => 'Natrium';
 }
