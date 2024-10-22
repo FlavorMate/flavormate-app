@@ -14,7 +14,9 @@ import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
+import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/recipe/nutrition/nutrition.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/pages/recipe/variations/desktop.dart';
 import 'package:flavormate/pages/recipe/variations/mobile.dart';
@@ -27,7 +29,9 @@ import 'package:flavormate/riverpod/recipes/p_latest_recipes.dart';
 import 'package:flavormate/riverpod/recipes/p_recipe.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/riverpod/stories/p_stories.dart';
+import 'package:flavormate/riverpod/units/p_unit_conversions.dart';
 import 'package:flavormate/utils/constants.dart';
+import 'package:flavormate/utils/u_double.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -103,6 +107,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
                         increaseServing: increaseFactor,
                         addBookmark: () => addToBook(recipe),
                         addToBring: () => addToBring(recipe),
+                        nutrition: calculateNutrition(recipe),
                       ),
                     if (!useDesktop)
                       RecipePageMobile(
@@ -113,6 +118,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
                         increaseServing: increaseFactor,
                         addBookmark: () => addToBook(recipe),
                         addToBring: () => addToBring(recipe),
+                        nutrition: calculateNutrition(recipe),
                       ),
                     const Divider(),
                     RecipeInformations(
@@ -139,6 +145,59 @@ class _RecipePageState extends ConsumerState<RecipePage> {
         },
       ),
     );
+  }
+
+  Nutrition? calculateNutrition(Recipe recipe) {
+    final provider = ref.read(pUnitConversionProvider.notifier);
+    final nutrition = <Nutrition>[];
+    for (var iG in recipe.ingredientGroups) {
+      for (var i in iG.ingredients) {
+        if (i.nutrition == null || !UDouble.isPositive(i.amount)) continue;
+
+        var tmp = Nutrition();
+
+        if (i.unitLocalized?.unitRef.isConvertable() ?? false) {
+          if (EString.isNotEmpty(i.nutrition?.openFoodFactsId)) {
+            final conversion =
+                provider.convertFromGram(i.unitLocalized!.unitRef);
+
+            if (UDouble.isPositive(conversion)) {
+              // e.g.  100g = 80  kcal => 2kg = 1600 kcal
+              //         1g = 0.8 kcal
+              //
+              // amount / conversion = factor
+              //    2kg / 0.001       = 2000
+              //
+              // kcal (per 1g) * factor = converted
+              // 0.8 kcal      * 2000   = 1600 kcal
+
+              final factor = (i.amount! / conversion!);
+
+              final converted = i.nutrition!.multiply(0.01 * factor);
+
+              tmp = tmp.add(converted);
+            }
+          } else {
+            tmp = tmp.add(i.nutrition!);
+          }
+        } else {
+          tmp = tmp.add(i.nutrition!);
+        }
+
+        final factor = servingFactor / recipe.serving.amount;
+
+        tmp = tmp.multiply(factor);
+
+        nutrition.add(tmp);
+      }
+    }
+
+    final calculatedNutrition = nutrition.fold(Nutrition(), (a, b) => a.add(b));
+    if (calculatedNutrition.exists) {
+      return calculatedNutrition;
+    } else {
+      return null;
+    }
   }
 
   Future<void> addToBring(Recipe recipe) async {
