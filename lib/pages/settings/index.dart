@@ -43,7 +43,7 @@ class SettingsPage extends ConsumerWidget {
     final infoProvider = ref.watch(pPackageInfoProvider);
     final serverProvider = ref.watch(pServerProvider);
     return TResponsive(
-      child: Column(
+      child: TColumn(
         children: [
           RStruct(
             userProvider,
