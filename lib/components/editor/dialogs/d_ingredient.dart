@@ -1,11 +1,14 @@
 import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
+import 'package:flavormate/components/editor/dialogs/d_nutrition.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
+import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/extensions/e_number.dart';
 import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe/unit_ref/unit_localized.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_draft.dart';
+import 'package:flavormate/models/recipe_draft/nutrition/nutrition_draft.dart';
 import 'package:flavormate/riverpod/units/p_units.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flavormate/utils/u_validator.dart';
@@ -184,10 +187,34 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                 return null;
               },
             ),
+            TButton(
+              onPressed: openNutrition,
+              label: L10n.of(context).d_editor_ingredient_edit_nutrition,
+              trailing: Visibility(
+                visible: _ingredient.nutrition?.exists ?? false,
+                child: Icon(MdiIcons.checkCircleOutline),
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void openNutrition() async {
+    final response = await showDialog<NutritionDraft>(
+      context: context,
+      useSafeArea: false,
+      builder: (_) => DNutrition(
+        nutrition: _ingredient.nutrition ?? NutritionDraft(),
+      ),
+    );
+
+    if (response == null) return;
+
+    setState(() {
+      _ingredient.nutrition = response;
+    });
   }
 
   void clearUnit(TextEditingController unitController) {
@@ -211,12 +238,13 @@ class _DIngredientState extends ConsumerState<DIngredient> {
         unit: _ingredient.unit,
         unitLocalized: _ingredient.unitLocalized,
         label: _ingredientController.text.trim(),
+        nutrition: _ingredient.nutrition,
       ),
     );
   }
 }
 
-/// Necessary until https://github.com/flutter/flutter/issues/98728 is fixed
+/// Necessary until https://github.com/flutter/flutter/issues/78746 is fixed
 class AutocompleteOptions extends StatelessWidget {
   final AutocompleteOnSelected<UnitLocalized> onSelected;
   final Iterable<UnitLocalized> options;
