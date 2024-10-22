@@ -144,48 +144,46 @@ class PDraft extends _$PDraft {
             data: draft.recipeDraft.toMap(),
           );
 
-      if (draft.addedImages.isEmpty && draft.removedImages.isEmpty) {
-        return true;
+      if (draft.addedImages.isNotEmpty || draft.removedImages.isNotEmpty) {
+        final usedImages = draft.images
+            .where((image) =>
+                draft.removedImages
+                    .indexWhere((rImage) => rImage.id == image.id) <
+                0)
+            .map((image) => image.id!);
+
+        final images = [...usedImages];
+
+        if (draft.addedImages.isNotEmpty) {
+          final addedFiles =
+              await Future.wait(draft.addedImages.map((addedImage) async {
+            addedImage.owner = response.id!;
+            return (await ref
+                    .read(pApiProvider)
+                    .filesClient
+                    .create(data: addedImage.toMap()))
+                .id!;
+          }));
+          images.addAll(addedFiles);
+        }
+
+        if (draft.removedImages.isNotEmpty) {
+          var deletedFiles =
+              await Future.wait(draft.removedImages.map((removedImage) async {
+            final response = await ref
+                .read(pApiProvider)
+                .filesClient
+                .deleteById(removedImage.id!);
+            return response ? null : removedImage.id!;
+          }));
+
+          images.addAll(deletedFiles.nonNulls);
+        }
+        await ref
+            .read(pApiProvider)
+            .recipesClient
+            .update(response.id!, data: {'files': images});
       }
-
-      final usedImages = draft.images
-          .where((image) =>
-              draft.removedImages
-                  .indexWhere((rImage) => rImage.id == image.id) <
-              0)
-          .map((image) => image.id!);
-
-      final images = [...usedImages];
-
-      if (draft.addedImages.isNotEmpty) {
-        final addedFiles =
-            await Future.wait(draft.addedImages.map((addedImage) async {
-          addedImage.owner = response.id!;
-          return (await ref
-                  .read(pApiProvider)
-                  .filesClient
-                  .create(data: addedImage.toMap()))
-              .id!;
-        }));
-        images.addAll(addedFiles);
-      }
-
-      if (draft.removedImages.isNotEmpty) {
-        var deletedFiles =
-            await Future.wait(draft.removedImages.map((removedImage) async {
-          final response = await ref
-              .read(pApiProvider)
-              .filesClient
-              .deleteById(removedImage.id!);
-          return response ? null : removedImage.id!;
-        }));
-
-        images.addAll(deletedFiles.nonNulls);
-      }
-      await ref
-          .read(pApiProvider)
-          .recipesClient
-          .update(response.id!, data: {'files': images});
 
       await ref.read(pDraftsProvider.notifier).deleteDraft(state.value!.id);
 
