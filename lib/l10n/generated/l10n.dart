@@ -1742,8 +1742,8 @@ abstract class L10n {
   /// No description provided for @d_nutrition_custom_hint_1.
   ///
   /// In en, this message translates to:
-  /// **'Please enter all informations for 100 grams'**
-  String get d_nutrition_custom_hint_1;
+  /// **'Please enter all informations for \"{amount}\"'**
+  String d_nutrition_custom_hint_1(String amount);
 
   /// No description provided for @nutrition_carbohydrates.
   ///
@@ -1798,6 +1798,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Sodium'**
   String get nutrition_sodium;
+
+  /// No description provided for @d_nutrition_off_error_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'You can only use Open Food Facts with units that can be converted to grams and if the amount is greater than 0'**
+  String get d_nutrition_off_error_hint;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

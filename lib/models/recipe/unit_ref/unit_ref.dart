@@ -43,7 +43,7 @@ class UnitRef extends Entity with UnitRefMappable {
     return null;
   }
 
-  bool isConvertable() {
+  bool get isConvertable {
     return _convertable.contains(description);
   }
 }

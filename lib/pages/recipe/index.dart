@@ -156,7 +156,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
 
         var tmp = Nutrition();
 
-        if (i.unitLocalized?.unitRef.isConvertable() ?? false) {
+        if (i.unitLocalized?.unitRef.isConvertable ?? false) {
           if (EString.isNotEmpty(i.nutrition?.openFoodFactsId)) {
             final conversion =
                 provider.convertFromGram(i.unitLocalized!.unitRef);

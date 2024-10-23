@@ -206,6 +206,8 @@ class _DIngredientState extends ConsumerState<DIngredient> {
       context: context,
       useSafeArea: false,
       builder: (_) => DNutrition(
+        amount: _ingredient.amount,
+        unitRef: _ingredient.unitLocalized,
         nutrition: _ingredient.nutrition ?? NutritionDraft(),
       ),
     );

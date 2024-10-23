@@ -297,7 +297,7 @@
   "d_nutrition_off_open_off": "Öffne Open Food Facts",
   "d_nutrition_off_product_ean": "Produkt EAN",
   "d_nutrition_custom_disabled_hint": "Hinweis: Du kannst die Daten nicht manuell bearbeiten, bis du den EAN Code auf der Open Food Facts Seite gelöscht hast",
-  "d_nutrition_custom_hint_1": "Bitte gib alle Daten für 100 Gramm an",
+  "d_nutrition_custom_hint_1": "Bitte gib alle Daten für \"{amount}\" an",
   "nutrition_carbohydrates": "Kohlenhydrate",
   "nutrition_kcal": "KCal",
   "nutrition_fat": "Fett",
@@ -306,5 +306,14 @@
   "nutrition_fiber": "Ballaststoffe",
   "nutrition_proteins": "Proteine",
   "nutrition_salt": "Salz",
-  "nutrition_sodium": "Natrium"
+  "nutrition_sodium": "Natrium",
+  "d_nutrition_off_error_hint": "Du kannst Open Food Facts nur mit Einheiten nutzen, die in Gramm umgerechnet werden können und wenn die Menge größer als 0 ist",
+  "@d_nutrition_custom_hint_1": {
+    "placeholders": {
+      "amount": {
+        "example": "12",
+        "type": "String"
+      }
+    }
+  }
 }

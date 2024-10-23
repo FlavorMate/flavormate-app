@@ -837,7 +837,9 @@ class L10nEn extends L10n {
   String get d_nutrition_custom_disabled_hint => 'Note: You can\'t manually edit nutrition until you removed the EAN Code from the Open Food Facts page';
 
   @override
-  String get d_nutrition_custom_hint_1 => 'Please enter all informations for 100 grams';
+  String d_nutrition_custom_hint_1(String amount) {
+    return 'Please enter all informations for \"$amount\"';
+  }
 
   @override
   String get nutrition_carbohydrates => 'Carbohydrates';
@@ -865,4 +867,7 @@ class L10nEn extends L10n {
 
   @override
   String get nutrition_sodium => 'Sodium';
+
+  @override
+  String get d_nutrition_off_error_hint => 'You can only use Open Food Facts with units that can be converted to grams and if the amount is greater than 0';
 }

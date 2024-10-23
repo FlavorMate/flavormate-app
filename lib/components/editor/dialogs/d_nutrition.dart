@@ -8,6 +8,7 @@ import 'package:flavormate/components/t_text_form_field.dart';
 import 'package:flavormate/extensions/e_number.dart';
 import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/recipe/unit_ref/unit_localized.dart';
 import 'package:flavormate/models/recipe_draft/nutrition/nutrition_draft.dart';
 import 'package:flavormate/utils/u_double.dart';
 import 'package:flavormate/utils/u_validator.dart';
@@ -19,10 +20,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DNutrition extends ConsumerStatefulWidget {
   final NutritionDraft nutrition;
+  final UnitLocalized? unitRef;
+  final double? amount;
 
   const DNutrition({
     super.key,
     required this.nutrition,
+    required this.unitRef,
+    required this.amount,
   });
 
   @override
@@ -150,10 +155,28 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                       ],
                     ),
                   ),
+                  // if widget is null or not convertable
+                  if (!convertableUnit)
+                    TCard(
+                      color: Theme.of(context).colorScheme.tertiaryContainer,
+                      child: TRow(
+                        children: [
+                          Icon(MdiIcons.alertCircleOutline),
+                          Expanded(
+                            child: TText(
+                              L10n.of(context).d_nutrition_off_error_hint,
+                              TextStyles.titleSmall,
+                              color: TextColor.onPrimaryContainer,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   TTextFormField(
                     controller: _openFoodFactsIdController,
                     label: L10n.of(context).d_nutrition_off_product_ean,
                     prefix: Icon(MdiIcons.barcodeScan),
+                    readOnly: !convertableUnit,
                   ),
                 ],
               ),
@@ -178,7 +201,12 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                     ),
                   TCard(
                     child: TText(
-                      L10n.of(context).d_nutrition_custom_hint_1,
+                      L10n.of(context).d_nutrition_custom_hint_1(
+                        [
+                          widget.amount?.beautify,
+                          widget.unitRef?.getLabel(widget.amount),
+                        ].nonNulls.join(' '),
+                      ),
                       TextStyles.bodyMedium,
                       color: TextColor.onPrimaryContainer,
                     ),
@@ -261,6 +289,11 @@ class _DNutritionState extends ConsumerState<DNutrition> {
         ),
       ),
     );
+  }
+
+  bool get convertableUnit {
+    return (widget.unitRef?.unitRef.isConvertable ?? false) &&
+        UDouble.isPositive(widget.amount);
   }
 
   String? validate(String? input) {
