@@ -213,7 +213,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                   ),
                   TTextFormField(
                     controller: _carbohydratesController,
-                    label: L10n.of(context).nutrition_carbohydrates,
+                    label: '${L10n.of(context).nutrition_carbohydrates} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -229,7 +229,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                   ),
                   TTextFormField(
                     controller: _fatController,
-                    label: L10n.of(context).nutrition_fat,
+                    label: '${L10n.of(context).nutrition_fat} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -237,7 +237,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                   ),
                   TTextFormField(
                     controller: _saturatedFatController,
-                    label: L10n.of(context).nutrition_saturated_fat,
+                    label: '${L10n.of(context).nutrition_saturated_fat} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -245,7 +245,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                   ),
                   TTextFormField(
                     controller: _sugarsController,
-                    label: L10n.of(context).nutrition_sugars,
+                    label: '${L10n.of(context).nutrition_sugars} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -253,7 +253,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                   ),
                   TTextFormField(
                     controller: _fiberController,
-                    label: L10n.of(context).nutrition_fiber,
+                    label: '${L10n.of(context).nutrition_fiber} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -261,7 +261,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                   ),
                   TTextFormField(
                     controller: _proteinsController,
-                    label: L10n.of(context).nutrition_proteins,
+                    label: '${L10n.of(context).nutrition_proteins} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -269,7 +269,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                   ),
                   TTextFormField(
                     controller: _saltController,
-                    label: L10n.of(context).nutrition_salt,
+                    label: '${L10n.of(context).nutrition_salt} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -277,7 +277,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                   ),
                   TTextFormField(
                     controller: _sodiumController,
-                    label: L10n.of(context).nutrition_sodium,
+                    label: '${L10n.of(context).nutrition_sodium} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
