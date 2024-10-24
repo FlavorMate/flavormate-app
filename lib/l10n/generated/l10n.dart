@@ -1804,6 +1804,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'You can only use Open Food Facts with units that can be converted to grams and if the amount is greater than 0'**
   String get d_nutrition_off_error_hint;
+
+  /// No description provided for @d_nutrition_off_disabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Food Facts is not enabled on this server'**
+  String get d_nutrition_off_disabled;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

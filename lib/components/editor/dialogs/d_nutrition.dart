@@ -10,6 +10,7 @@ import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe/unit_ref/unit_localized.dart';
 import 'package:flavormate/models/recipe_draft/nutrition/nutrition_draft.dart';
+import 'package:flavormate/riverpod/features/p_feature_open_food_facts.dart';
 import 'package:flavormate/utils/u_double.dart';
 import 'package:flavormate/utils/u_validator.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
 
   @override
   Widget build(BuildContext context) {
+    final offFeature = ref.watch(pFeatureOpenFoodFactsProvider);
     return TFullDialog(
       title: L10n.of(context).d_nutrition_title,
       submit: submit,
@@ -122,64 +124,81 @@ class _DNutritionState extends ConsumerState<DNutrition> {
               },
             ),
             if (_mode == 0)
-              TColumn(
-                children: [
-                  TCard(
-                    child: TColumn(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TText(
-                          L10n.of(context).d_nutrition_off_hint_1,
-                          TextStyles.bodyMedium,
+              if (!offFeature)
+                TCard(
+                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  child: TRow(
+                    children: [
+                      Icon(MdiIcons.alertCircleOutline),
+                      Expanded(
+                        child: TText(
+                          L10n.of(context).d_nutrition_off_disabled,
+                          TextStyles.titleSmall,
                           color: TextColor.onPrimaryContainer,
                         ),
-                        TText(
-                          L10n.of(context).d_nutrition_off_hint_2,
-                          TextStyles.bodyMedium,
-                          color: TextColor.onPrimaryContainer,
-                        ),
-                        TText(
-                          L10n.of(context).d_nutrition_off_hint_3,
-                          TextStyles.bodyMedium,
-                          color: TextColor.onPrimaryContainer,
-                        ),
-                        TText(
-                          L10n.of(context).d_nutrition_off_hint_4,
-                          TextStyles.bodyMedium,
-                          color: TextColor.onPrimaryContainer,
-                        ),
-                        TButton(
-                          onPressed: launchOFF,
-                          label: L10n.of(context).d_nutrition_off_open_off,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  // if widget is null or not convertable
-                  if (!convertableUnit)
+                )
+              else
+                TColumn(
+                  children: [
                     TCard(
-                      color: Theme.of(context).colorScheme.tertiaryContainer,
-                      child: TRow(
+                      child: TColumn(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(MdiIcons.alertCircleOutline),
-                          Expanded(
-                            child: TText(
-                              L10n.of(context).d_nutrition_off_error_hint,
-                              TextStyles.titleSmall,
-                              color: TextColor.onPrimaryContainer,
-                            ),
+                          TText(
+                            L10n.of(context).d_nutrition_off_hint_1,
+                            TextStyles.bodyMedium,
+                            color: TextColor.onPrimaryContainer,
+                          ),
+                          TText(
+                            L10n.of(context).d_nutrition_off_hint_2,
+                            TextStyles.bodyMedium,
+                            color: TextColor.onPrimaryContainer,
+                          ),
+                          TText(
+                            L10n.of(context).d_nutrition_off_hint_3,
+                            TextStyles.bodyMedium,
+                            color: TextColor.onPrimaryContainer,
+                          ),
+                          TText(
+                            L10n.of(context).d_nutrition_off_hint_4,
+                            TextStyles.bodyMedium,
+                            color: TextColor.onPrimaryContainer,
+                          ),
+                          TButton(
+                            onPressed: launchOFF,
+                            label: L10n.of(context).d_nutrition_off_open_off,
                           ),
                         ],
                       ),
                     ),
-                  TTextFormField(
-                    controller: _openFoodFactsIdController,
-                    label: L10n.of(context).d_nutrition_off_product_ean,
-                    prefix: Icon(MdiIcons.barcodeScan),
-                    readOnly: !convertableUnit,
-                  ),
-                ],
-              ),
+                    // if widget is null or not convertable
+                    if (!convertableUnit)
+                      TCard(
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                        child: TRow(
+                          children: [
+                            Icon(MdiIcons.alertCircleOutline),
+                            Expanded(
+                              child: TText(
+                                L10n.of(context).d_nutrition_off_error_hint,
+                                TextStyles.titleSmall,
+                                color: TextColor.onPrimaryContainer,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    TTextFormField(
+                      controller: _openFoodFactsIdController,
+                      label: L10n.of(context).d_nutrition_off_product_ean,
+                      prefix: Icon(MdiIcons.barcodeScan),
+                      readOnly: !convertableUnit,
+                    ),
+                  ],
+                ),
             if (_mode == 1)
               TColumn(
                 children: [

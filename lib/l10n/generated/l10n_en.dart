@@ -870,4 +870,7 @@ class L10nEn extends L10n {
 
   @override
   String get d_nutrition_off_error_hint => 'You can only use Open Food Facts with units that can be converted to grams and if the amount is greater than 0';
+
+  @override
+  String get d_nutrition_off_disabled => 'Open Food Facts is not enabled on this server';
 }

@@ -315,5 +315,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "d_nutrition_off_disabled": "Open Food Facts is not enabled on this server"
 }
