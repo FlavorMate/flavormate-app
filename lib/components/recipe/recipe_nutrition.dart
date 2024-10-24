@@ -111,15 +111,3 @@ class NutritionCard extends StatelessWidget {
     );
   }
 }
-
-/*
-carbohydrates: carbohydrates,
-energyKcal: energyKcal,
-fat: fat,
-saturatedFat: saturatedFat,
-sugars: sugars,
-fiber: fiber,
-proteins: proteins,
-salt: salt,
-sodium: sodium,
-*/
