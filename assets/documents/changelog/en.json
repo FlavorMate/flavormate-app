@@ -1,53 +1,94 @@
 [
   {
+    "version": "2.0.0",
+    "details": [
+      {
+        "change": "Nutritional values can be added to ingredients",
+        "icon": "corn"
+      },
+      {
+        "change": "Open Food Facts can be used for nutritional values (if activated on the server)",
+        "icon": "searchWeb"
+      },
+      {
+        "change": "Units of ingredients can now be converted",
+        "icon": "calculator"
+      },
+      {
+        "change": "Improvements in password recovery",
+        "icon": "formTextboxPassword"
+      }
+    ]
+  },
+  {
     "version": "1.1.1",
-    "changes": [
-      "Fixed a bug on the author page"
-    ],
-    "icon": "wrenchOutline"
+    "details": [
+      {
+        "change": "Fixed a bug on the author page",
+        "icon": "wrenchOutline"
+      }
+    ]
   },
   {
     "version": "1.1.0",
-    "changes": [
-      "Users can now register and reset their password themselves"
-    ],
-    "icon": "accountReactivateOutline"
+    "details": [
+      {
+        "change": "Users can now register and reset their password themselves",
+        "icon": "accountReactivateOutline"
+      }
+    ]
   },
   {
     "version": "1.0.4",
-    "changes": [
-      "Fixed a bug within the url validation"
-    ],
-    "icon": "wrenchOutline"
+    "details": [
+      {
+        "change": "Fixed a bug within the url validation",
+        "icon": "wrenchOutline"
+      }
+    ]
   },
   {
     "version": "1.0.3",
-    "changes": [
-      "Fixed multiple bugs"
-    ],
-    "icon": "wrenchOutline"
+    "details": [
+      {
+        "change": "Fixed multiple bugs",
+        "icon": "wrenchOutline"
+      }
+    ]
   },
   {
     "version": "1.0.2",
-    "changes": [
-      "Added support for dynamic or custom themes"
-    ],
-    "icon": "paletteOutline"
+    "details": [
+      {
+        "change": "Added support for dynamic or custom themes",
+        "icon": "paletteOutline"
+      }
+    ]
   },
   {
     "version": "1.0.1",
-    "changes": [
-      "New login screen",
-      "Added iOS 18 icons",
-      "Added Android 8 & 13 icons"
-    ],
-    "icon": "imageOutline"
+    "details": [
+      {
+        "change": "New login screen",
+        "icon": "login"
+      },
+      {
+        "change": "Added iOS 18 icons",
+        "icon": "apple"
+      },
+      {
+        "change": "Added Android 8 & 13 icons",
+        "icon": "robotOutline"
+      }
+    ]
   },
   {
     "version": "1.0.0",
-    "changes": [
-      "Initial version"
-    ],
-    "icon": "potSteamOutline"
+    "details": [
+      {
+        "change": "Initial version",
+        "icon": "potSteamOutline"
+      }
+    ]
   }
 ]

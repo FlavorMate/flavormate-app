@@ -10,7 +10,7 @@ part 'p_changelog.g.dart';
 @riverpod
 class PChangelog extends _$PChangelog {
   @override
-  Future<List<Changelog>> build() async {
+  Future<Changelog> build() async {
     final language = currentLocalization().languageCode;
 
     final value = await rootBundle
@@ -18,6 +18,11 @@ class PChangelog extends _$PChangelog {
 
     final List<dynamic> parsedJson = jsonDecode(value);
 
-    return parsedJson.map((map) => ChangelogMapper.fromMap(map)).toList();
+    final entries =
+        parsedJson.map((map) => ChangelogVersionMapper.fromMap(map)).toList();
+
+    ref.keepAlive();
+
+    return Changelog(entries: {for (var v in entries) v.version: v});
   }
 }
