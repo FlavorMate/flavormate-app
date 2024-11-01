@@ -20,6 +20,8 @@ class DChangelog extends ConsumerStatefulWidget {
 }
 
 class _DChangelogState extends ConsumerState<DChangelog> {
+  final double _buttonWidth = 100;
+
   late ChangelogVersion? current;
 
   @override
@@ -52,30 +54,43 @@ class _DChangelogState extends ConsumerState<DChangelog> {
             ),
             SizedBox(height: PADDING),
             RStruct(
-                provider,
-                (_, value) => SizedBox(
-                      width: 200,
-                      child: DropdownButtonFormField(
-                        value: current,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hoverColor: Colors.red,
-                          focusColor: Colors.blue,
-                          fillColor: Colors.yellow,
-                          filled: false,
+              provider,
+              (_, value) => MenuAnchor(
+                builder: (_, controller, widget) => SizedBox(
+                  width: _buttonWidth,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      if (controller.isOpen) {
+                        controller.close();
+                      } else {
+                        controller.open();
+                      }
+                    },
+                    child: TText(
+                      current?.version.toString() ?? '',
+                      TextStyles.titleMedium,
+                      color: TextColor.onPrimaryContainer,
+                    ),
+                  ),
+                ),
+                menuChildren: [
+                  for (final entry in value.sorted)
+                    SizedBox(
+                      width: _buttonWidth,
+                      child: MenuItemButton(
+                        child: Center(
+                          child: TText(
+                            entry.version.toString(),
+                            TextStyles.titleMedium,
+                            color: TextColor.onPrimaryContainer,
+                          ),
                         ),
-                        // borderRadius: BorderRadius.circular(BORDER_RADIUS),
-                        items: value.sorted
-                            .map(
-                              (version) => DropdownMenuItem(
-                                value: version,
-                                child: Text('${version.version}'),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (val) => setState(() => current = val!),
+                        onPressed: () => setState(() => current = entry),
                       ),
-                    )),
+                    ),
+                ],
+              ),
+            ),
             SizedBox(height: PADDING * 3),
             Expanded(
               child: SingleChildScrollView(
