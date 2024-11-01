@@ -154,41 +154,37 @@ class _RecipePageState extends ConsumerState<RecipePage> {
       for (var i in iG.ingredients) {
         if (i.nutrition == null || !UDouble.isPositive(i.amount)) continue;
 
-        var tmp = Nutrition();
+        var nutritionalValue = Nutrition();
 
-        if (i.unitLocalized?.unitRef.isConvertable ?? false) {
-          if (EString.isNotEmpty(i.nutrition?.openFoodFactsId)) {
-            final conversion =
-                provider.convertFromGram(i.unitLocalized!.unitRef);
-
-            if (UDouble.isPositive(conversion)) {
-              // e.g.  100g = 80  kcal => 2kg = 1600 kcal
-              //         1g = 0.8 kcal
-              //
-              // amount / conversion = factor
-              //    2kg / 0.001       = 2000
-              //
-              // kcal (per 1g) * factor = converted
-              // 0.8 kcal      * 2000   = 1600 kcal
-
-              final factor = (i.amount! / conversion!);
-
-              final converted = i.nutrition!.multiply(0.01 * factor);
-
-              tmp = tmp.add(converted);
-            }
-          } else {
-            tmp = tmp.add(i.nutrition!);
-          }
+        if (i.unitLocalized == null ||
+            EString.isEmpty(i.nutrition!.openFoodFactsId)) {
+          nutritionalValue = nutritionalValue.add(i.nutrition!);
         } else {
-          tmp = tmp.add(i.nutrition!);
+          // nutrition info is for 100g
+          final conversionFactor =
+              provider.convertFromGram(i.unitLocalized!.unitRef) ?? 1;
+
+          // e.g.  100g = 80  kcal => 2kg = 1600 kcal
+          //         1g = 0.8 kcal
+          //
+          // amount / conversionFactor = factor
+          //    2kg / 0.001            = 2000
+          //
+          // kcal (per 1g) * factor = convertedNutrition
+          // 0.8 kcal      * 2000   = 1600 kcal
+
+          final factor = (i.amount! / conversionFactor);
+
+          final convertedNutrition = i.nutrition!.multiply(0.01 * factor);
+
+          nutritionalValue = nutritionalValue.add(convertedNutrition);
         }
 
-        final factor = servingFactor / recipe.serving.amount;
+        final servingAdjustmentFactor = servingFactor / recipe.serving.amount;
 
-        tmp = tmp.multiply(factor);
+        nutritionalValue = nutritionalValue.multiply(servingAdjustmentFactor);
 
-        nutrition.add(tmp);
+        nutrition.add(nutritionalValue);
       }
     }
 
