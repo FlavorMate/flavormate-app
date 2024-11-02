@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flavormate/gen/assets.gen.dart';
 import 'package:flavormate/models/changelog/changelog.dart';
 import 'package:flavormate/utils/u_localizations.dart';
 import 'package:flutter/services.dart';
@@ -13,8 +14,13 @@ class PChangelog extends _$PChangelog {
   Future<Changelog> build() async {
     final language = currentLocalization().languageCode;
 
-    final value = await rootBundle
-        .loadString('assets/documents/changelog/$language.json');
+    final path = switch (language) {
+      'de' => Assets.documents.changelog.de,
+      'en' => Assets.documents.changelog.en,
+      _ => '',
+    };
+
+    final value = await rootBundle.loadString(path);
 
     final List<dynamic> parsedJson = jsonDecode(value);
 

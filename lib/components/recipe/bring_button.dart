@@ -1,3 +1,4 @@
+import 'package:flavormate/gen/assets.gen.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -27,10 +28,7 @@ class BringButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Image.asset(
-              'assets/icons/bring.png',
-              height: 32,
-            ),
+            Assets.icons.bring.image(height: 32),
             Expanded(
               child: Text(
                 L10n.of(context).c_bring_btn,
