@@ -22,7 +22,7 @@ class DChangelog extends ConsumerStatefulWidget {
 class _DChangelogState extends ConsumerState<DChangelog> {
   final double _buttonWidth = 100;
 
-  late ChangelogVersion? current;
+  ChangelogVersion? current;
 
   @override
   void initState() {
@@ -98,7 +98,7 @@ class _DChangelogState extends ConsumerState<DChangelog> {
                   space: PADDING * 2.5,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (final change in current!.details)
+                    for (final change in current?.details ?? [])
                       _Detail(detail: change),
                   ],
                 ),
