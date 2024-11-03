@@ -8,16 +8,22 @@ class TTextFormField extends StatelessWidget {
   final Widget? prefix;
   final String? Function(String?)? validators;
   final TextInputType? keyboardType;
+  final int? maxLines;
   final bool readOnly;
+  final Function(String)? onChanged;
+  final Function(PointerDownEvent)? onTapOutside;
 
   const TTextFormField({
     super.key,
     required this.controller,
+    this.onChanged,
+    this.onTapOutside,
     this.label,
     this.suffix,
     this.prefix,
     this.validators,
     this.keyboardType,
+    this.maxLines = 1,
     this.readOnly = false,
   });
 
@@ -31,10 +37,13 @@ class TTextFormField extends StatelessWidget {
         suffix: suffix ?? _ClearButton(clear: controller.clear),
         prefixIcon: prefix,
       ),
+      maxLines: maxLines,
       validator: validators,
       keyboardType: keyboardType,
       readOnly: readOnly,
       enabled: !readOnly,
+      onChanged: onChanged,
+      onTapOutside: onTapOutside,
     );
   }
 }
