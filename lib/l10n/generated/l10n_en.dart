@@ -873,4 +873,7 @@ class L10nEn extends L10n {
 
   @override
   String get d_nutrition_off_disabled => 'Open Food Facts is not enabled on this server';
+
+  @override
+  String get p_story_go_to_recipe => 'Go to the recipe';
 }

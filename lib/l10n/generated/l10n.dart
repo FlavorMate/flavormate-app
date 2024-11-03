@@ -1810,6 +1810,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Open Food Facts is not enabled on this server'**
   String get d_nutrition_off_disabled;
+
+  /// No description provided for @p_story_go_to_recipe.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to the recipe'**
+  String get p_story_go_to_recipe;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

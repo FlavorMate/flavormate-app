@@ -16,6 +16,7 @@ import 'package:flavormate/pages/recipes/_id.dart';
 import 'package:flavormate/pages/recovery/index.dart';
 import 'package:flavormate/pages/registration/index.dart';
 import 'package:flavormate/pages/settings/index.dart';
+import 'package:flavormate/pages/story/_id.dart';
 import 'package:flavormate/pages/tags/_id.dart';
 import 'package:flavormate/pages/tags/index.dart';
 import 'package:flavormate/pages/user_management/index.dart';
@@ -175,6 +176,16 @@ var routes = [
     name: 'editor',
     pageBuilder: (context, state) => NoTransitionPage(
       child: EditorPage(id: state.pathParameters['id'] as String),
+    ),
+  ),
+  GoRoute(
+    path: '/story/:id',
+    name: 'story',
+    pageBuilder: (context, state) => NoTransitionPage(
+      child: StoryPage(
+        id: state.pathParameters['id'] as String,
+        title: state.extra as String?,
+      ),
     ),
   ),
   GoRoute(

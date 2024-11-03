@@ -316,5 +316,6 @@
       }
     }
   },
-  "d_nutrition_off_disabled": "Open Food Facts is not enabled on this server"
+  "d_nutrition_off_disabled": "Open Food Facts is not enabled on this server",
+  "p_story_go_to_recipe": "Go to the recipe"
 }

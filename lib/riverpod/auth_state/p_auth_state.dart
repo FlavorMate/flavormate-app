@@ -99,6 +99,7 @@ enum AuthState {
       '/authors',
       '/authors/:id',
       '/editor/:id',
+      '/story/:id',
       '/admin/user',
       '/drafts',
     ],
