@@ -1,11 +1,14 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/models/author/author.dart';
 import 'package:flavormate/models/entity.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
 part 'story.mapper.dart';
 
 @MappableClass()
 class Story extends Entity with StoryMappable {
+  final Author author;
+
   final Recipe recipe;
 
   final String content;
@@ -13,6 +16,7 @@ class Story extends Entity with StoryMappable {
   final String label;
 
   Story({
+    required this.author,
     required this.recipe,
     required this.content,
     required this.label,
