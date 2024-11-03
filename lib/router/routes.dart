@@ -17,6 +17,8 @@ import 'package:flavormate/pages/recovery/index.dart';
 import 'package:flavormate/pages/registration/index.dart';
 import 'package:flavormate/pages/settings/index.dart';
 import 'package:flavormate/pages/story/_id.dart';
+import 'package:flavormate/pages/story_draft/index.dart';
+import 'package:flavormate/pages/story_editor/_id.dart';
 import 'package:flavormate/pages/tags/_id.dart';
 import 'package:flavormate/pages/tags/index.dart';
 import 'package:flavormate/pages/user_management/index.dart';
@@ -207,6 +209,20 @@ var routes = [
     name: 'registration',
     pageBuilder: (context, state) => const MaterialPage(
       child: RegistrationPage(),
+    ),
+  ),
+  GoRoute(
+    path: '/storyDrafts',
+    name: 'storyDrafts',
+    pageBuilder: (context, state) => const NoTransitionPage(
+      child: StoryDraftsPage(),
+    ),
+  ),
+  GoRoute(
+    path: '/storyEditor/:id',
+    name: 'storyEditor',
+    pageBuilder: (context, state) => NoTransitionPage(
+      child: StoryEditorPage(id: state.pathParameters['id'] as String),
     ),
   ),
 ];

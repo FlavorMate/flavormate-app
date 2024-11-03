@@ -876,4 +876,25 @@ class L10nDe extends L10n {
 
   @override
   String get p_story_go_to_recipe => 'Zum Rezept';
+
+  @override
+  String get p_more_title_more => 'Mehr';
+
+  @override
+  String get p_more_stories => 'Story erstellen';
+
+  @override
+  String get p_story_drafts_title => 'Story Entwürfe';
+
+  @override
+  String get p_story_drafts_create => 'Story erstellen';
+
+  @override
+  String get p_story_title => 'Story Editor';
+
+  @override
+  String get p_story_label => 'Titel';
+
+  @override
+  String get p_story_content => 'Inhalt';
 }

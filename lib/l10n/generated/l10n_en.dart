@@ -876,4 +876,25 @@ class L10nEn extends L10n {
 
   @override
   String get p_story_go_to_recipe => 'Go to the recipe';
+
+  @override
+  String get p_more_title_more => 'More';
+
+  @override
+  String get p_more_stories => 'Create story';
+
+  @override
+  String get p_story_drafts_title => 'Story drafts';
+
+  @override
+  String get p_story_drafts_create => 'Create story';
+
+  @override
+  String get p_story_title => 'Story editor';
+
+  @override
+  String get p_story_label => 'Label';
+
+  @override
+  String get p_story_content => 'Content';
 }

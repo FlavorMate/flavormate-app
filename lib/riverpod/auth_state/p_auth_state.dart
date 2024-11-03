@@ -102,6 +102,8 @@ enum AuthState {
       '/story/:id',
       '/admin/user',
       '/drafts',
+      '/storyDrafts',
+      '/storyEditor/:id',
     ],
   ),
   ;

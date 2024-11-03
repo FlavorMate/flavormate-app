@@ -317,5 +317,12 @@
     }
   },
   "d_nutrition_off_disabled": "Open Food Facts is not enabled on this server",
-  "p_story_go_to_recipe": "Go to the recipe"
+  "p_story_go_to_recipe": "Go to the recipe",
+  "p_more_title_more": "More",
+  "p_more_stories": "Create story",
+  "p_story_drafts_title": "Story drafts",
+  "p_story_drafts_create": "Create story",
+  "p_story_title": "Story editor",
+  "p_story_label": "Label",
+  "p_story_content": "Content"
 }

@@ -1816,6 +1816,48 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Go to the recipe'**
   String get p_story_go_to_recipe;
+
+  /// No description provided for @p_more_title_more.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get p_more_title_more;
+
+  /// No description provided for @p_more_stories.
+  ///
+  /// In en, this message translates to:
+  /// **'Create story'**
+  String get p_more_stories;
+
+  /// No description provided for @p_story_drafts_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Story drafts'**
+  String get p_story_drafts_title;
+
+  /// No description provided for @p_story_drafts_create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create story'**
+  String get p_story_drafts_create;
+
+  /// No description provided for @p_story_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Story editor'**
+  String get p_story_title;
+
+  /// No description provided for @p_story_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get p_story_label;
+
+  /// No description provided for @p_story_content.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get p_story_content;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
