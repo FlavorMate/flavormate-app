@@ -48,3 +48,10 @@ This improves the user experience and increases security.
 | Key         | Required | Description                        | Example               | Default |
 |-------------|----------|------------------------------------|-----------------------|---------|
 | BACKEND_URL | No       | The url of your FlavorMate backend | `https://example.com` | `null`  |
+
+## Build Project
+
+1. Install and configure Flutter SDK
+2. Run `flutter pub get` to fetch all dependencies
+3. Run `dart run build_runner build` to generate necessary code
+4. Run `flutter run` to run the app
