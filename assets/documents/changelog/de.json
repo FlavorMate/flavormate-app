@@ -11,15 +11,15 @@
         "icon": "searchWeb"
       },
       {
-        "change": "Einheiten von Zutaten können nun umgerechnet werden",
-        "icon": "calculator"
+        "change": "Storys können nun erstellt werden - teile deine Geschichte mit anderen",
+        "icon": "heartOutline"
       },
       {
         "change": "Verbesserungen bei der Passwort wiederherstellung",
         "icon": "formTextboxPassword"
       },
       {
-        "change": "Kleine Verbesserungen",
+        "change": "Weitere Verbesserungen",
         "icon": "creationOutline"
       }
     ]
