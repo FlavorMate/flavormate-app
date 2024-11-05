@@ -76,7 +76,7 @@ class PStoryDraft extends _$PStoryDraft {
 
   Future<bool> edit() async {
     try {
-      await ref.read(pApiProvider).recipesClient.update(
+      await ref.read(pApiProvider).storiesClient.update(
             state.value!.id,
             data: state.value!.toMap(),
           );

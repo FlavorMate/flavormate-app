@@ -64,7 +64,7 @@ class StoryDraftsPage extends ConsumerWidget {
                           ),
                           DataCell(
                             Text(
-                              draft.version <= 0
+                              draft.version < 0
                                   ? L10n.of(context).p_drafts_drafts_state_new
                                   : L10n.of(context)
                                       .p_drafts_drafts_state_update,

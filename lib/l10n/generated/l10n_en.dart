@@ -897,4 +897,19 @@ class L10nEn extends L10n {
 
   @override
   String get p_story_content => 'Content';
+
+  @override
+  String get p_story_delete_title => 'Delete story?';
+
+  @override
+  String get p_story_delete_success => 'Story deleted successfully';
+
+  @override
+  String get p_story_edit_failed => 'Story draft exists already';
+
+  @override
+  String get p_story_editor_upload_failed => 'Story couldn\'t be uploaded';
+
+  @override
+  String get p_story_editor_upload_success => 'Story uploaded sucessfully';
 }

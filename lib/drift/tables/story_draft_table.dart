@@ -10,7 +10,7 @@ class StoryDraftTable extends Table {
 
   TextColumn get recipe => text().map(const RecipeConverter()).nullable()();
 
-  IntColumn get version => integer().withDefault(const Constant(0))();
+  IntColumn get version => integer().withDefault(const Constant(-1))();
 }
 
 // stores recipe as string

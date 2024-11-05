@@ -131,7 +131,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
 
     var result = false;
 
-    if (draft.version > 0) {
+    if (draft.version >= 0) {
       result = await ref.read(pStoryDraftProvider(widget.id).notifier).edit();
     } else {
       result = await ref.read(pStoryDraftProvider(widget.id).notifier).upload();
@@ -139,11 +139,11 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
 
     if (!context.mounted) return;
     if (result) {
-      context.showTextSnackBar(L10n.of(context).p_editor_upload_success);
+      context.showTextSnackBar(L10n.of(context).p_story_editor_upload_success);
       context.goNamed('home');
     } else {
       context.pop();
-      context.showTextSnackBar(L10n.of(context).p_editor_upload_failed);
+      context.showTextSnackBar(L10n.of(context).p_story_editor_upload_failed);
     }
   }
 

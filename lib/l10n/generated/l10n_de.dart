@@ -897,4 +897,19 @@ class L10nDe extends L10n {
 
   @override
   String get p_story_content => 'Inhalt';
+
+  @override
+  String get p_story_delete_title => 'Story löschen?';
+
+  @override
+  String get p_story_delete_success => 'Story erfolgreich gelöscht';
+
+  @override
+  String get p_story_edit_failed => 'Storyentwurf existiert bereits';
+
+  @override
+  String get p_story_editor_upload_failed => 'Story konnte nicht hochgeladen werden';
+
+  @override
+  String get p_story_editor_upload_success => 'Story erfolgreich hochgeladen';
 }

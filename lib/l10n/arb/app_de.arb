@@ -324,5 +324,10 @@
   "p_story_drafts_create": "Story erstellen",
   "p_story_title": "Story Editor",
   "p_story_label": "Titel",
-  "p_story_content": "Inhalt"
+  "p_story_content": "Inhalt",
+  "p_story_delete_title": "Story löschen?",
+  "p_story_delete_success": "Story erfolgreich gelöscht",
+  "p_story_edit_failed": "Storyentwurf existiert bereits",
+  "p_story_editor_upload_failed": "Story konnte nicht hochgeladen werden",
+  "p_story_editor_upload_success": "Story erfolgreich hochgeladen"
 }

@@ -1858,6 +1858,36 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Content'**
   String get p_story_content;
+
+  /// No description provided for @p_story_delete_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete story?'**
+  String get p_story_delete_title;
+
+  /// No description provided for @p_story_delete_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Story deleted successfully'**
+  String get p_story_delete_success;
+
+  /// No description provided for @p_story_edit_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Story draft exists already'**
+  String get p_story_edit_failed;
+
+  /// No description provided for @p_story_editor_upload_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Story couldn\'t be uploaded'**
+  String get p_story_editor_upload_failed;
+
+  /// No description provided for @p_story_editor_upload_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Story uploaded sucessfully'**
+  String get p_story_editor_upload_success;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
