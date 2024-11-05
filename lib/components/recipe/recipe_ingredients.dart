@@ -63,7 +63,7 @@ class RecipeIngredients extends StatelessWidget {
                     [
                       [
                         _getAmount(ingredient),
-                        ingredient.unitLabel,
+                        ingredient.unitLabel(factor / serving.amount),
                       ].nonNulls.join(' '),
                       ingredient.label,
                     ],

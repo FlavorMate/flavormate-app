@@ -5,6 +5,7 @@ import 'package:flavormate/models/recipe/nutrition/nutrition.dart';
 import 'package:flavormate/models/recipe/unit_ref/unit_localized.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_draft.dart';
 import 'package:flavormate/models/unit.dart';
+import 'package:flavormate/utils/u_double.dart';
 
 part 'ingredient.mapper.dart';
 
@@ -38,11 +39,11 @@ class Ingredient with IngredientMappable {
     return [amountLabel, unitLabel, label].where(EString.isNotEmpty).join(' ');
   }
 
-  String? get unitLabel {
+  String? unitLabel(double factor) {
     if (unit != null) {
       return unit!.label;
     } else if (unitLocalized != null) {
-      return unitLocalized!.getLabel(amount);
+      return unitLocalized!.getLabel(UDouble.multiply(amount, factor));
     }
     return null;
   }
