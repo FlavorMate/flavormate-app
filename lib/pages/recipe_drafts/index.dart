@@ -1,4 +1,4 @@
-import 'package:flavormate/components/drafts/d_scrape.dart';
+import 'package:flavormate/components/recipe_drafts/d_scrape.dart';
 import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_button.dart';
@@ -8,7 +8,7 @@ import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
-import 'package:flavormate/riverpod/draft/p_drafts.dart';
+import 'package:flavormate/riverpod/recipe_draft/p_recipe_drafts.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -20,7 +20,7 @@ class RecipeDraftsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(pDraftsProvider);
+    final provider = ref.watch(pRecipeDraftsProvider);
     return RScaffold(
       provider,
       appBar: TAppBar(title: L10n.of(context).p_drafts_title),
@@ -88,14 +88,14 @@ class RecipeDraftsPage extends ConsumerWidget {
   }
 
   Future<void> createDraft(BuildContext context, WidgetRef ref) async {
-    final id = await ref.read(pDraftsProvider.notifier).createDraft();
+    final id = await ref.read(pRecipeDraftsProvider.notifier).createDraft();
 
     if (!context.mounted) return;
     openDraft(context, true, id);
   }
 
   deleteDraft(WidgetRef ref, int id) async {
-    await ref.read(pDraftsProvider.notifier).deleteDraft(id);
+    await ref.read(pRecipeDraftsProvider.notifier).deleteDraft(id);
   }
 
   void openDraft(BuildContext context, bool? value, int id) {
@@ -117,7 +117,8 @@ class RecipeDraftsPage extends ConsumerWidget {
       if (!context.mounted) return;
       context.showLoadingDialog();
 
-      final id = await ref.read(pDraftsProvider.notifier).scrape(response);
+      final id =
+          await ref.read(pRecipeDraftsProvider.notifier).scrape(response);
 
       if (!context.mounted) return;
       context.pop();

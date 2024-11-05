@@ -21,9 +21,9 @@ import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/pages/recipe/variations/desktop.dart';
 import 'package:flavormate/pages/recipe/variations/mobile.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
-import 'package:flavormate/riverpod/draft/p_drafts.dart';
 import 'package:flavormate/riverpod/features/p_feature_bring.dart';
 import 'package:flavormate/riverpod/highlights/p_highlight.dart';
+import 'package:flavormate/riverpod/recipe_draft/p_recipe_drafts.dart';
 import 'package:flavormate/riverpod/recipes/p_action_button.dart';
 import 'package:flavormate/riverpod/recipes/p_latest_recipes.dart';
 import 'package:flavormate/riverpod/recipes/p_recipe.dart';
@@ -237,7 +237,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     showDialog(context: context, builder: (_) => const TLoadingDialog());
 
     final id =
-        await ref.read(pDraftsProvider.notifier).recipeToDraft(widget.id);
+        await ref.read(pRecipeDraftsProvider.notifier).recipeToDraft(widget.id);
 
     if (!mounted) return;
     context.pop();

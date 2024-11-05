@@ -3,10 +3,10 @@ import 'package:flavormate/drift/app_database.dart';
 import 'package:flavormate/models/file/file.dart';
 import 'package:flavormate/models/recipe_draft/recipe_draft.dart';
 
-part 'draft.mapper.dart';
+part 'recipe_draft_wrapper.mapper.dart';
 
 @MappableClass()
-class Draft with DraftMappable {
+class RecipeDraftWrapper with RecipeDraftWrapperMappable {
   final int id;
   final int? originId;
   final RecipeDraft recipeDraft;
@@ -15,7 +15,7 @@ class Draft with DraftMappable {
   final List<File> removedImages;
   final int version;
 
-  Draft({
+  RecipeDraftWrapper({
     required this.id,
     required this.originId,
     required this.recipeDraft,
@@ -25,8 +25,8 @@ class Draft with DraftMappable {
     required this.version,
   });
 
-  factory Draft.fromDB(DraftTableData data) {
-    return Draft(
+  factory RecipeDraftWrapper.fromDB(DraftTableData data) {
+    return RecipeDraftWrapper(
       id: data.id,
       originId: data.originId,
       recipeDraft: data.recipeDraft,
