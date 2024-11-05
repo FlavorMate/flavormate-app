@@ -912,4 +912,7 @@ class L10nEn extends L10n {
 
   @override
   String get p_story_editor_upload_success => 'Story uploaded sucessfully';
+
+  @override
+  String get p_story_edit_invalid => 'Story is incomplete';
 }

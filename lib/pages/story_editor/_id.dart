@@ -13,6 +13,7 @@ import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/models/story_draft/story_draft.dart';
 import 'package:flavormate/riverpod/story_draft/p_story_draft.dart';
+import 'package:flavormate/utils/u_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,6 +30,7 @@ class StoryEditorPage extends ConsumerStatefulWidget {
 }
 
 class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
+  final _formKey = GlobalKey<FormState>();
   final _contentController = TextEditingController();
   final _labelController = TextEditingController();
 
@@ -59,55 +61,63 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
       body: RStruct(
         provider,
         (_, draft) => TResponsive(
-          child: TColumn(
-            children: [
-              RecipeSearch(onTap: setRecipe),
-              if (draft.recipe != null)
-                AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: TImageLabel(
-                    imageSrc: draft.recipe!.coverUrl,
-                    type: TImageType.network,
-                    height: 350,
-                    title: draft.recipe!.label,
+          child: Form(
+            key: _formKey,
+            child: TColumn(
+              children: [
+                RecipeSearch(onTap: setRecipe),
+                if (draft.recipe != null)
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: TImageLabel(
+                      imageSrc: draft.recipe!.coverUrl,
+                      type: TImageType.network,
+                      height: 350,
+                      title: draft.recipe!.label,
+                    ),
                   ),
+                TTextFormField(
+                  controller: _labelController,
+                  label: L10n.of(context).p_story_label,
+                  onChanged: (val) => ref
+                      .read(pStoryDraftProvider(widget.id).notifier)
+                      .setLabel(EString.trimToNull(val)),
+                  validators: (value) {
+                    if (UValidator.isEmpty(value)) {
+                      return L10n.of(context).v_isEmpty;
+                    }
+
+                    return null;
+                  },
                 ),
-              TTextFormField(
-                controller: _labelController,
-                label: L10n.of(context).p_story_label,
-                onChanged: (val) => ref
-                    .read(pStoryDraftProvider(widget.id).notifier)
-                    .setLabel(EString.trimToNull(val)),
-                validators: (val) {
-                  return null;
-                },
-              ),
-              TTextFormField(
-                controller: _contentController,
-                label: L10n.of(context).p_story_content,
-                onChanged: (val) => ref
-                    .read(pStoryDraftProvider(widget.id).notifier)
-                    .setContent(EString.trimToNull(val)),
-                maxLines: null,
-                validators: (val) {
-                  return null;
-                },
-              ),
-              const SizedBox(height: 48),
-            ],
+                TTextFormField(
+                  controller: _contentController,
+                  label: L10n.of(context).p_story_content,
+                  onChanged: (val) => ref
+                      .read(pStoryDraftProvider(widget.id).notifier)
+                      .setContent(EString.trimToNull(val)),
+                  maxLines: null,
+                  validators: (value) {
+                    if (UValidator.isEmpty(value)) {
+                      return L10n.of(context).v_isEmpty;
+                    }
+
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 48),
+              ],
+            ),
           ),
         ),
       ),
       floatingActionButton: RStruct(
         provider,
         (_, draft) => FloatingActionButton(
-          onPressed: draft.isValid
-              ? () => showPreview(
-                    context,
-                    draft,
-                  )
-              : null,
-          disabledElevation: 0,
+          onPressed: () => showPreview(
+            context,
+            draft,
+          ),
           child: Icon(
             MdiIcons.contentSave,
             color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -118,6 +128,11 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
   }
 
   showPreview(BuildContext context, StoryDraft draft) async {
+    if (draft.recipe == null || !_formKey.currentState!.validate()) {
+      context.showTextSnackBar(L10n.of(context).p_story_edit_invalid);
+      return;
+    }
+
     final response = await showDialog<bool>(
       context: context,
       builder: (_) => DPreview(storyDraft: draft),

@@ -1888,6 +1888,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Story uploaded sucessfully'**
   String get p_story_editor_upload_success;
+
+  /// No description provided for @p_story_edit_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Story is incomplete'**
+  String get p_story_edit_invalid;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

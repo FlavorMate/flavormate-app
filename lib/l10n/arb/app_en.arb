@@ -329,5 +329,6 @@
   "p_story_delete_success": "Story deleted successfully",
   "p_story_edit_failed": "Story draft exists already",
   "p_story_editor_upload_failed": "Story couldn't be uploaded",
-  "p_story_editor_upload_success": "Story uploaded sucessfully"
+  "p_story_editor_upload_success": "Story uploaded sucessfully",
+  "p_story_edit_invalid": "Story is incomplete"
 }

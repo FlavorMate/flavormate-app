@@ -329,5 +329,6 @@
   "p_story_delete_success": "Story erfolgreich gelöscht",
   "p_story_edit_failed": "Storyentwurf existiert bereits",
   "p_story_editor_upload_failed": "Story konnte nicht hochgeladen werden",
-  "p_story_editor_upload_success": "Story erfolgreich hochgeladen"
+  "p_story_editor_upload_success": "Story erfolgreich hochgeladen",
+  "p_story_edit_invalid": "Story nicht vollständig"
 }

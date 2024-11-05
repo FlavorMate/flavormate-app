@@ -9,6 +9,8 @@ part 'story_draft.mapper.dart';
 class StoryDraft with StoryDraftMappable {
   final int id;
 
+  final int? originId;
+
   Recipe? recipe;
 
   String? content;
@@ -19,6 +21,7 @@ class StoryDraft with StoryDraftMappable {
 
   StoryDraft({
     required this.id,
+    required this.originId,
     required this.recipe,
     required this.content,
     required this.label,
@@ -28,11 +31,19 @@ class StoryDraft with StoryDraftMappable {
   factory StoryDraft.fromDB(StoryDraftTableData data) {
     return StoryDraft(
       id: data.id,
+      originId: data.originId,
       recipe: data.recipe,
       content: data.content,
       label: data.label,
       version: data.version,
     );
+  }
+
+  Map<String, dynamic> toBackend() {
+    final map = toMap();
+    map['id'] = originId;
+    map.remove('originId');
+    return map;
   }
 
   bool get isValid {

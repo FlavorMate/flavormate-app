@@ -26,6 +26,7 @@ class PStoryDraft extends _$PStoryDraft {
         await (ref.read(pDriftProvider).storyDraftTable.update()).replace(
       StoryDraftTableCompanion.insert(
         id: Value(state.value!.id),
+        originId: Value(state.value!.originId),
         label: Value(state.value!.label),
         content: Value(state.value!.content),
         recipe: Value(state.value!.recipe),
@@ -60,7 +61,7 @@ class PStoryDraft extends _$PStoryDraft {
       await ref
           .read(pApiProvider)
           .storiesClient
-          .create(data: state.value!.toMap());
+          .create(data: state.value!.toBackend());
 
       await ref
           .read(pStoryDraftsProvider.notifier)
@@ -77,8 +78,8 @@ class PStoryDraft extends _$PStoryDraft {
   Future<bool> edit() async {
     try {
       await ref.read(pApiProvider).storiesClient.update(
-            state.value!.id,
-            data: state.value!.toMap(),
+            state.value!.originId!,
+            data: state.value!.toBackend(),
           );
 
       await ref

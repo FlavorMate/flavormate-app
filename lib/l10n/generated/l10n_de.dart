@@ -912,4 +912,7 @@ class L10nDe extends L10n {
 
   @override
   String get p_story_editor_upload_success => 'Story erfolgreich hochgeladen';
+
+  @override
+  String get p_story_edit_invalid => 'Story nicht vollständig';
 }
