@@ -17,6 +17,10 @@
       {
         "change": "Verbesserungen bei der Passwort wiederherstellung",
         "icon": "formTextboxPassword"
+      },
+      {
+        "change": "Kleine Verbesserungen",
+        "icon": "creationOutline"
       }
     ]
   },
@@ -74,7 +78,7 @@
       },
       {
         "change": "iOS 18 Icons hinzugefügt",
-        "icon": "apple"
+        "icon": "foodAppleOutline"
       },
       {
         "change": "Android 8 & 13 Icons hinzugefügt",

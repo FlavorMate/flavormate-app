@@ -17,6 +17,10 @@
       {
         "change": "Improvements in password recovery",
         "icon": "formTextboxPassword"
+      },
+      {
+        "change": "Small improvements",
+        "icon": "creationOutline"
       }
     ]
   },
@@ -74,7 +78,7 @@
       },
       {
         "change": "Added iOS 18 icons",
-        "icon": "apple"
+        "icon": "foodAppleOutline"
       },
       {
         "change": "Added Android 8 & 13 icons",
