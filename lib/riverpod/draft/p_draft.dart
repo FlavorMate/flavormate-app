@@ -31,6 +31,7 @@ class PDraft extends _$PDraft {
     return await (ref.read(pDriftProvider).draftTable.update()).replace(
       DraftTableCompanion.insert(
         id: Value(state.value!.id),
+        originId: Value(state.value!.originId),
         recipeDraft: state.value!.recipeDraft,
         images: state.value!.images,
         addedImages: state.value!.addedImages,
@@ -140,7 +141,7 @@ class PDraft extends _$PDraft {
     try {
       final draft = state.value!;
       final response = await ref.read(pApiProvider).recipesClient.update(
-            draft.id,
+            draft.originId!,
             data: draft.recipeDraft.toMap(),
           );
 

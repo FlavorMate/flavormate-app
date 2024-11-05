@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/drift/app_database.dart';
 import 'package:flavormate/models/file/file.dart';
@@ -10,6 +8,7 @@ part 'draft.mapper.dart';
 @MappableClass()
 class Draft with DraftMappable {
   final int id;
+  final int? originId;
   final RecipeDraft recipeDraft;
   final List<File> images;
   final List<File> addedImages;
@@ -18,6 +17,7 @@ class Draft with DraftMappable {
 
   Draft({
     required this.id,
+    required this.originId,
     required this.recipeDraft,
     required this.images,
     required this.addedImages,
@@ -25,23 +25,10 @@ class Draft with DraftMappable {
     required this.version,
   });
 
-  factory Draft.empty() {
-    // final id = const UuidV4().generate();
-    final id = Random().nextInt(999999999);
-    final recipeDraft = RecipeDraft.empty();
-    return Draft(
-      id: id,
-      recipeDraft: recipeDraft,
-      images: [],
-      addedImages: [],
-      removedImages: [],
-      version: 0,
-    );
-  }
-
   factory Draft.fromDB(DraftTableData data) {
     return Draft(
       id: data.id,
+      originId: data.originId,
       recipeDraft: data.recipeDraft,
       images: data.images,
       addedImages: data.addedImages,

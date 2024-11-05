@@ -83,14 +83,16 @@ class PDrafts extends _$PDrafts {
     return true;
   }
 
-  Future<int?> recipeToDraft(String id) async {
+  Future<int?> recipeToDraft(String recipeIdString) async {
+    final recipeId = int.parse(recipeIdString);
+
     final exists = await (ref.read(pDriftProvider).draftTable.select()
-          ..where((d) => d.id.isValue(int.parse(id))))
+          ..where((d) => d.originId.isValue(recipeId)))
         .getSingleOrNull();
 
     if (exists != null) return null;
 
-    final recipe = await ref.read(pRecipeProvider(int.parse(id)).future);
+    final recipe = await ref.read(pRecipeProvider(recipeId).future);
 
     final server = ref.read(pServerProvider);
 
@@ -114,7 +116,7 @@ class PDrafts extends _$PDrafts {
 
     final response = await ref.read(pDriftProvider).draftTable.insert().insert(
           DraftTableCompanion(
-            id: Value(recipe.id!),
+            originId: Value(recipe.id),
             recipeDraft: Value(recipe.toDraft()),
             images: Value(images),
             addedImages: const Value([]),
