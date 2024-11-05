@@ -17,7 +17,7 @@ import 'package:flavormate/pages/recovery/index.dart';
 import 'package:flavormate/pages/registration/index.dart';
 import 'package:flavormate/pages/settings/index.dart';
 import 'package:flavormate/pages/story/_id.dart';
-import 'package:flavormate/pages/story_draft/index.dart';
+import 'package:flavormate/pages/story_drafts/index.dart';
 import 'package:flavormate/pages/story_editor/_id.dart';
 import 'package:flavormate/pages/tags/_id.dart';
 import 'package:flavormate/pages/tags/index.dart';
