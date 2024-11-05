@@ -1,4 +1,24 @@
 extension EString on String {
+  /// Shortens the current string to a specified length.
+  ///
+  /// This function truncates the string to the given [length]. If the string
+  /// contains newline characters, it will truncate at the first newline and
+  /// recursively shorten the resulting substring. Once the string is of the
+  /// desired length, an ellipsis (`...`) is appended if it was shortened
+  /// as part of a recursive call or if it has been truncated.
+  ///
+  /// - [length]: The maximum length of the shortened string. Defaults to 48.
+  /// - [deep]: The recursion depth used to track when to append
+  ///   the ellipsis. Defaults to 0.
+  ///
+  /// Returns the shortened string with an ellipsis appended if necessary.
+  ///
+  /// Example usage:
+  /// ```
+  /// String text = "This is a long string that will be shortened.";
+  /// String shortText = text.shorten(length: 20);
+  /// print(shortText); // Output: "This is a long..."
+  /// ```
   String shorten({int length = 48, int deep = 0}) {
     final newLine = indexOf(RegExp(r'[\r\n]'));
 
