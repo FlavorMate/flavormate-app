@@ -5,10 +5,10 @@ import 'package:flavormate/components/settings/dialogs/manage_avatar.dart';
 import 'package:flavormate/components/settings/dialogs/manage_diet.dart';
 import 'package:flavormate/components/settings/dialogs/manage_mail.dart';
 import 'package:flavormate/components/settings/dialogs/manage_password.dart';
+import 'package:flavormate/components/t_avatar_viewer.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_icon_button.dart';
-import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/t_text.dart';
@@ -65,32 +65,7 @@ class SettingsPage extends ConsumerWidget {
                           flex: 1,
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.circular(BORDER_RADIUS),
-                              child: user.avatar != null
-                                  ? TImage(
-                                      imageSrc: user.avatar?.path(
-                                          context.read(pServerProvider)!),
-                                      type: TImageType.network,
-                                      height: 64,
-                                      width: 64,
-                                    )
-                                  : Container(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primaryContainer,
-                                      height: 64,
-                                      width: 64,
-                                      child: Center(
-                                        child: TText(
-                                          user.displayName[0],
-                                          TextStyles.headlineLarge,
-                                          color: TextColor.onPrimaryContainer,
-                                        ),
-                                      ),
-                                    ),
-                            ),
+                            child: AvatarViewer(user: user),
                           ),
                         ),
                         Expanded(
