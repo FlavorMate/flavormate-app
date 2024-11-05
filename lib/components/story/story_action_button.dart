@@ -22,42 +22,27 @@ class StoryActionButton extends ConsumerWidget {
     final provider = ref.watch(pActionButtonProvider(storyId));
     return RStruct(
       provider,
-      (_, user) => PopupMenuButton<_ActionButtonValues>(
-        icon: const Icon(Icons.more_vert),
-        onSelected: (item) {
-          switch (item) {
-            case _ActionButtonValues.edit:
-              edit();
-              return;
-            case _ActionButtonValues.delete:
-              delete();
-              return;
-          }
-        },
-        itemBuilder: (_) => [
+      (_, user) => MenuAnchor(
+        builder: (_, controller, widget) => IconButton(
+          icon: Icon(MdiIcons.dotsVertical),
+          onPressed: () =>
+              controller.isOpen ? controller.close() : controller.open(),
+        ),
+        menuChildren: [
           if (user.isOwner)
-            PopupMenuItem(
-              value: _ActionButtonValues.edit,
-              child: ListTile(
-                title: Text(L10n.of(context).p_recipe_actions_edit),
-                leading: const Icon(MdiIcons.pencil),
-              ),
+            MenuItemButton(
+              leadingIcon: Icon(MdiIcons.pencil),
+              onPressed: edit,
+              child: Text(L10n.of(context).p_recipe_actions_edit),
             ),
           if (user.isOwner || user.isAdmin)
-            PopupMenuItem(
-              value: _ActionButtonValues.delete,
-              child: ListTile(
-                title: Text(L10n.of(context).p_recipe_actions_delete),
-                leading: const Icon(MdiIcons.trashCan),
-              ),
+            MenuItemButton(
+              leadingIcon: Icon(MdiIcons.trashCan),
+              onPressed: delete,
+              child: Text(L10n.of(context).p_recipe_actions_delete),
             ),
         ],
       ),
     );
   }
-}
-
-enum _ActionButtonValues {
-  edit,
-  delete,
 }
