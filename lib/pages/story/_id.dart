@@ -45,7 +45,7 @@ class _StoryPageStore extends ConsumerState<StoryPage> {
           RStruct(
             userProvider,
             (_, user) => Visibility(
-              visible: user.isOwner,
+              visible: user.isOwner || user.isAdmin,
               child: StoryActionButton(
                 storyId: int.parse(widget.id),
                 edit: () => edit(),

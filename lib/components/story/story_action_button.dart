@@ -43,7 +43,7 @@ class StoryActionButton extends ConsumerWidget {
                 leading: const Icon(MdiIcons.pencil),
               ),
             ),
-          if (user.isOwner)
+          if (user.isOwner || user.isAdmin)
             PopupMenuItem(
               value: _ActionButtonValues.delete,
               child: ListTile(
