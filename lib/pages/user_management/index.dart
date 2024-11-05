@@ -3,6 +3,7 @@ import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_row.dart';
+import 'package:flavormate/components/t_scrollable_h.dart';
 import 'package:flavormate/components/user_management/dialog/change_password_dialog.dart';
 import 'package:flavormate/components/user_management/dialog/create_user_dialog.dart';
 import 'package:flavormate/extensions/e_date_time.dart';
@@ -40,8 +41,7 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
         child: const Icon(MdiIcons.plus),
       ),
       builder: (_, currentUser) => SingleChildScrollView(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+        child: TScrollableH(
           child: RStruct(
             provider,
             (context, users) => DataTable(
