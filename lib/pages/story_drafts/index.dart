@@ -2,7 +2,9 @@ import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
+import 'package:flavormate/components/t_data_table.dart';
 import 'package:flavormate/components/t_responsive.dart';
+import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/story_draft/p_story_drafts.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -30,59 +32,47 @@ class StoryDraftsPage extends ConsumerWidget {
             ),
             if (drafts.isNotEmpty) const SizedBox(height: PADDING),
             if (drafts.isNotEmpty)
-              SizedBox(
-                width: double.infinity,
-                child: DataTable(
-                  showCheckboxColumn: false,
-                  columns: [
-                    DataColumn(
-                      label: Text(L10n.of(context).p_drafts_drafts_name),
-                    ),
-                    DataColumn(
-                      label: Text(L10n.of(context).p_drafts_drafts_state),
-                    ),
-                    DataColumn(label: Container()),
-                  ],
-                  rows: [
-                    for (final draft in drafts)
-                      DataRow(
-                        onSelectChanged: (value) => openDraft(
-                          context,
-                          value,
-                          draft.id,
-                        ),
-                        cells: [
-                          DataCell(
-                            SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                draft.label ??
-                                    L10n.of(context)
-                                        .p_drafts_drafts_name_unnamed,
-                              ),
-                            ),
-                          ),
-                          DataCell(
-                            Text(
-                              draft.version < 0
-                                  ? L10n.of(context).p_drafts_drafts_state_new
-                                  : L10n.of(context)
-                                      .p_drafts_drafts_state_update,
-                            ),
-                          ),
-                          DataCell(
-                            IconButton(
-                              icon: Icon(
-                                MdiIcons.delete,
-                                color: Colors.red.shade500,
-                              ),
-                              onPressed: () => deleteDraft(ref, draft.id),
-                            ),
-                          ),
-                        ],
+              TDataTable(
+                columns: [
+                  TDataColumn(
+                    alignment: Alignment.centerLeft,
+                    child: Text(L10n.of(context).p_drafts_drafts_name),
+                  ),
+                  TDataColumn(
+                    width: 128,
+                    alignment: Alignment.centerLeft,
+                    child: Text(L10n.of(context).p_drafts_drafts_state),
+                  ),
+                  TDataColumn(width: 48),
+                ],
+                rows: [
+                  for (final draft in drafts)
+                    TDataRow(
+                      onSelectChanged: (value) => openDraft(
+                        context,
+                        value,
+                        draft.id,
                       ),
-                  ],
-                ),
+                      cells: [
+                        Text(
+                          draft.label?.shorten() ??
+                              L10n.of(context).p_drafts_drafts_name_unnamed,
+                        ),
+                        Text(
+                          draft.version < 0
+                              ? L10n.of(context).p_drafts_drafts_state_new
+                              : L10n.of(context).p_drafts_drafts_state_update,
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            MdiIcons.delete,
+                            color: Colors.red.shade500,
+                          ),
+                          onPressed: () => deleteDraft(ref, draft.id),
+                        ),
+                      ],
+                    ),
+                ],
               ),
           ],
         ),
