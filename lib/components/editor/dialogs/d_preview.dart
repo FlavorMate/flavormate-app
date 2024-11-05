@@ -6,14 +6,14 @@ import 'package:flavormate/components/recipe/recipe_informations.dart';
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_responsive.dart';
-import 'package:flavormate/models/draft/draft.dart';
+import 'package:flavormate/models/recipe_draft_wrapper/recipe_draft_wrapper.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
 
 class DPreview extends StatefulWidget {
-  final Draft draft;
+  final RecipeDraftWrapper draft;
 
   const DPreview({
     super.key,
@@ -25,7 +25,7 @@ class DPreview extends StatefulWidget {
 }
 
 class _DPreviewState extends State<DPreview> {
-  late Draft _draft;
+  late RecipeDraftWrapper _draft;
 
   @override
   void initState() {

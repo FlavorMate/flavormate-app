@@ -1,36 +1,37 @@
 import 'package:drift/drift.dart';
 import 'package:flavormate/drift/app_database.dart';
-import 'package:flavormate/models/draft/draft.dart';
 import 'package:flavormate/models/recipe/course.dart';
 import 'package:flavormate/models/recipe/diet.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_group_draft.dart';
 import 'package:flavormate/models/recipe_draft/instructions/instruction_group_draft.dart';
 import 'package:flavormate/models/recipe_draft/serving_draft/serving_draft.dart';
+import 'package:flavormate/models/recipe_draft_wrapper/recipe_draft_wrapper.dart';
 import 'package:flavormate/models/tag_draft/tag_draft.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
-import 'package:flavormate/riverpod/draft/p_drafts.dart';
 import 'package:flavormate/riverpod/drift/p_drift.dart';
 import 'package:flavormate/riverpod/highlights/p_highlight.dart';
+import 'package:flavormate/riverpod/recipe_draft/p_recipe_drafts.dart';
 import 'package:flavormate/riverpod/recipes/p_latest_recipes.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'p_draft.g.dart';
+part 'p_recipe_draft.g.dart';
 
 @riverpod
-class PDraft extends _$PDraft {
+class PRecipeDraft extends _$PRecipeDraft {
   @override
-  Future<Draft> build(String id) async {
+  Future<RecipeDraftWrapper> build(String id) async {
     final response = await (ref.watch(pDriftProvider).draftTable.select()
           ..where((draft) => draft.id.isValue(int.parse(id))))
         .getSingle();
 
-    return Draft.fromDB(response);
+    return RecipeDraftWrapper.fromDB(response);
   }
 
   Future<bool> autosave() async {
     return await (ref.read(pDriftProvider).draftTable.update()).replace(
       DraftTableCompanion.insert(
         id: Value(state.value!.id),
+        originId: Value(state.value!.originId),
         recipeDraft: state.value!.recipeDraft,
         images: state.value!.images,
         addedImages: state.value!.addedImages,
@@ -97,7 +98,7 @@ class PDraft extends _$PDraft {
     autosave();
   }
 
-  void set(Draft response) {
+  void set(RecipeDraftWrapper response) {
     state = AsyncData(response);
     ref.notifyListeners();
     autosave();
@@ -125,7 +126,9 @@ class PDraft extends _$PDraft {
           .recipesClient
           .update(recipe.id!, data: {'files': files});
 
-      await ref.read(pDraftsProvider.notifier).deleteDraft(state.value!.id);
+      await ref
+          .read(pRecipeDraftsProvider.notifier)
+          .deleteDraft(state.value!.id);
 
       ref.invalidate(pHighlightProvider);
       ref.invalidate(pLatestRecipesProvider);
@@ -140,54 +143,54 @@ class PDraft extends _$PDraft {
     try {
       final draft = state.value!;
       final response = await ref.read(pApiProvider).recipesClient.update(
-            draft.id,
+            draft.originId!,
             data: draft.recipeDraft.toMap(),
           );
 
-      if (draft.addedImages.isEmpty && draft.removedImages.isEmpty) {
-        return true;
+      if (draft.addedImages.isNotEmpty || draft.removedImages.isNotEmpty) {
+        final usedImages = draft.images
+            .where((image) =>
+                draft.removedImages
+                    .indexWhere((rImage) => rImage.id == image.id) <
+                0)
+            .map((image) => image.id!);
+
+        final images = [...usedImages];
+
+        if (draft.addedImages.isNotEmpty) {
+          final addedFiles =
+              await Future.wait(draft.addedImages.map((addedImage) async {
+            addedImage.owner = response.id!;
+            return (await ref
+                    .read(pApiProvider)
+                    .filesClient
+                    .create(data: addedImage.toMap()))
+                .id!;
+          }));
+          images.addAll(addedFiles);
+        }
+
+        if (draft.removedImages.isNotEmpty) {
+          var deletedFiles =
+              await Future.wait(draft.removedImages.map((removedImage) async {
+            final response = await ref
+                .read(pApiProvider)
+                .filesClient
+                .deleteById(removedImage.id!);
+            return response ? null : removedImage.id!;
+          }));
+
+          images.addAll(deletedFiles.nonNulls);
+        }
+        await ref
+            .read(pApiProvider)
+            .recipesClient
+            .update(response.id!, data: {'files': images});
       }
 
-      final usedImages = draft.images
-          .where((image) =>
-              draft.removedImages
-                  .indexWhere((rImage) => rImage.id == image.id) <
-              0)
-          .map((image) => image.id!);
-
-      final images = [...usedImages];
-
-      if (draft.addedImages.isNotEmpty) {
-        final addedFiles =
-            await Future.wait(draft.addedImages.map((addedImage) async {
-          addedImage.owner = response.id!;
-          return (await ref
-                  .read(pApiProvider)
-                  .filesClient
-                  .create(data: addedImage.toMap()))
-              .id!;
-        }));
-        images.addAll(addedFiles);
-      }
-
-      if (draft.removedImages.isNotEmpty) {
-        var deletedFiles =
-            await Future.wait(draft.removedImages.map((removedImage) async {
-          final response = await ref
-              .read(pApiProvider)
-              .filesClient
-              .deleteById(removedImage.id!);
-          return response ? null : removedImage.id!;
-        }));
-
-        images.addAll(deletedFiles.nonNulls);
-      }
       await ref
-          .read(pApiProvider)
-          .recipesClient
-          .update(response.id!, data: {'files': images});
-
-      await ref.read(pDraftsProvider.notifier).deleteDraft(state.value!.id);
+          .read(pRecipeDraftsProvider.notifier)
+          .deleteDraft(state.value!.id);
 
       ref.invalidate(pHighlightProvider);
       ref.invalidate(pLatestRecipesProvider);

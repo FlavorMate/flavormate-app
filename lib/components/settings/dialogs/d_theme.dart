@@ -214,8 +214,10 @@ class _DThemeState extends ConsumerState<DTheme> {
                 TCard(
                   child: TColumn(
                     children: [
-                      TText(L10n.of(context).d_settings_theme_example,
-                          TextStyles.headlineMedium),
+                      TText(
+                        L10n.of(context).d_settings_theme_example,
+                        TextStyles.headlineMedium,
+                      ),
                       TIconButton(
                         onPressed: () {},
                         icon: MdiIcons.formatPaint,

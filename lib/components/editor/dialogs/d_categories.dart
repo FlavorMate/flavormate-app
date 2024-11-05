@@ -1,7 +1,7 @@
 import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
-import 'package:flavormate/riverpod/draft/p_draft_categories.dart';
+import 'package:flavormate/riverpod/recipe_draft/p_recipe_draft_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +29,7 @@ class _DCategoriesState extends ConsumerState<DCategories> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = ref.watch(pDraftCategoriesProvider);
+    final provider = ref.watch(pRecipeDraftCategoriesProvider);
     return TFullDialog(
         title: L10n.of(context).d_editor_categories_title,
         submit: submit,

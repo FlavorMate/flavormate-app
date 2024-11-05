@@ -4,10 +4,10 @@ import 'package:flavormate/riverpod/category_group/p_category_groups.dart';
 import 'package:flavormate/utils/u_localizations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'p_draft_categories.g.dart';
+part 'p_recipe_draft_categories.g.dart';
 
 @riverpod
-class PDraftCategories extends _$PDraftCategories {
+class PRecipeDraftCategories extends _$PRecipeDraftCategories {
   @override
   Future<Map<String, List<Category>>> build() async {
     final language = currentLocalization().languageCode;

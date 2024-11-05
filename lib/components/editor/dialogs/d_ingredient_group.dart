@@ -56,44 +56,69 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
           ),
           SizedBox(
             width: double.infinity,
-            child: DataTable(
-              showCheckboxColumn: false,
-              columns: [
-                DataColumn(
-                  label: Text(
-                    L10n.of(context).d_editor_ingredient_group_ingredient,
+            child: LayoutBuilder(builder: (context, constraints) {
+              return DataTable(
+                columnSpacing: 0,
+                horizontalMargin: 0,
+                showCheckboxColumn: false,
+                columns: [
+                  DataColumn(
+                    label: SizedBox(
+                      width: constraints.minWidth - 128 - 48,
+                      child: Text(
+                        L10n.of(context).d_editor_ingredient_group_ingredient,
+                      ),
+                    ),
                   ),
-                ),
-                const DataColumn(label: Text('')),
-              ],
-              rows: _ingredientGroup.ingredients
-                  .mapIndexed(
-                    (index, iG) => DataRow(
-                      onSelectChanged: (_) => openIngredient(iG),
-                      cells: [
-                        DataCell(
-                          SizedBox(
-                            width: double.infinity,
-                            child:
-                                Text(iG.beautify.isEmpty ? '-' : iG.beautify),
+                  DataColumn(
+                    label: SizedBox(
+                      width: 128,
+                      child: Center(
+                          child: Text(L10n.of(context).d_nutrition_title)),
+                    ),
+                  ),
+                  DataColumn(
+                    label: SizedBox(width: 48),
+                  ),
+                ],
+                rows: _ingredientGroup.ingredients
+                    .mapIndexed(
+                      (index, iG) => DataRow(
+                        onSelectChanged: (_) => openIngredient(iG),
+                        cells: [
+                          DataCell(
+                            SizedBox(
+                              width: constraints.minWidth - 128 - 48,
+                              child:
+                                  Text(iG.beautify.isEmpty ? '-' : iG.beautify),
+                            ),
                           ),
-                        ),
-                        DataCell(
-                          Center(
-                            child: IconButton(
-                              onPressed: () => deleteIngredient(iG),
-                              icon: Icon(
-                                MdiIcons.delete,
-                                color: Theme.of(context).colorScheme.error,
+                          DataCell(
+                            SizedBox(
+                                width: 128,
+                                child: Visibility(
+                                  visible: iG.nutrition?.exists ?? false,
+                                  child: Icon(MdiIcons.checkCircleOutline),
+                                )),
+                          ),
+                          DataCell(
+                            SizedBox(
+                              width: 48,
+                              child: IconButton(
+                                onPressed: () => deleteIngredient(iG),
+                                icon: Icon(
+                                  MdiIcons.delete,
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            ),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              );
+            }),
           ),
           FilledButton.tonal(
             onPressed: createIngredient,

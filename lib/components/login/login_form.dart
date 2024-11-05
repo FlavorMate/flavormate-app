@@ -9,6 +9,7 @@ import 'package:flavormate/components/t_empty_message.dart';
 import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
+import 'package:flavormate/gen/assets.gen.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/api/login.dart';
 import 'package:flavormate/models/version/version.dart';
@@ -95,8 +96,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/icons/Transparent.png',
+                        Assets.icons.logoTransparent.image(
                           width: 128,
                           height: 128,
                         ),

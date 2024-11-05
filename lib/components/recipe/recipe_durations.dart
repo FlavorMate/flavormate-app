@@ -1,7 +1,9 @@
 import 'package:flavormate/components/t_card.dart';
+import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/extensions/e_duration.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class RecipeDurations extends StatelessWidget {
@@ -19,6 +21,7 @@ class RecipeDurations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
+      runSpacing: PADDING / 2,
       alignment: WrapAlignment.center,
       children: [
         RecipeDuration(
@@ -53,7 +56,8 @@ class RecipeDuration extends StatelessWidget {
     return Visibility(
       visible: duration != null && duration != Duration.zero,
       child: TCard(
-        child: Column(
+        child: TColumn(
+          space: PADDING / 4,
           children: [
             TText(label, TextStyles.titleSmall),
             TText(

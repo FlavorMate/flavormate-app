@@ -1666,6 +1666,234 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Check for possible updates for the server'**
   String get p_login_connection_failed_subtitle;
+
+  /// No description provided for @d_editor_ingredient_old_unit_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Old unit'**
+  String get d_editor_ingredient_old_unit_label;
+
+  /// No description provided for @d_editor_ingredient_edit_nutrition.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit nutrition'**
+  String get d_editor_ingredient_edit_nutrition;
+
+  /// No description provided for @d_nutrition_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Nutrition'**
+  String get d_nutrition_title;
+
+  /// No description provided for @d_nutrition_off_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Food Facts'**
+  String get d_nutrition_off_title;
+
+  /// No description provided for @d_nutrition_custom_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get d_nutrition_custom_title;
+
+  /// No description provided for @d_nutrition_off_hint_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Food Facts is a free database that contains informations about products'**
+  String get d_nutrition_off_hint_1;
+
+  /// No description provided for @d_nutrition_off_hint_2.
+  ///
+  /// In en, this message translates to:
+  /// **'You can use it to fetch the nutrition informations for an ingredient'**
+  String get d_nutrition_off_hint_2;
+
+  /// No description provided for @d_nutrition_off_hint_3.
+  ///
+  /// In en, this message translates to:
+  /// **'To get started, please enter the EAN or scan the barcode of the product'**
+  String get d_nutrition_off_hint_3;
+
+  /// No description provided for @d_nutrition_off_hint_4.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: All data is fetched once the recipe is created'**
+  String get d_nutrition_off_hint_4;
+
+  /// No description provided for @d_nutrition_off_open_off.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Open Food Facts'**
+  String get d_nutrition_off_open_off;
+
+  /// No description provided for @d_nutrition_off_product_ean.
+  ///
+  /// In en, this message translates to:
+  /// **'Product EAN'**
+  String get d_nutrition_off_product_ean;
+
+  /// No description provided for @d_nutrition_custom_disabled_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: You can\'t manually edit nutrition until you removed the EAN Code from the Open Food Facts page'**
+  String get d_nutrition_custom_disabled_hint;
+
+  /// No description provided for @d_nutrition_custom_hint_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter all informations for \"{amount}\"'**
+  String d_nutrition_custom_hint_1(String amount);
+
+  /// No description provided for @nutrition_carbohydrates.
+  ///
+  /// In en, this message translates to:
+  /// **'Carbohydrates'**
+  String get nutrition_carbohydrates;
+
+  /// No description provided for @nutrition_kcal.
+  ///
+  /// In en, this message translates to:
+  /// **'KCal'**
+  String get nutrition_kcal;
+
+  /// No description provided for @nutrition_fat.
+  ///
+  /// In en, this message translates to:
+  /// **'Fat'**
+  String get nutrition_fat;
+
+  /// No description provided for @nutrition_saturated_fat.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturated fat'**
+  String get nutrition_saturated_fat;
+
+  /// No description provided for @nutrition_sugars.
+  ///
+  /// In en, this message translates to:
+  /// **'Sugars'**
+  String get nutrition_sugars;
+
+  /// No description provided for @nutrition_fiber.
+  ///
+  /// In en, this message translates to:
+  /// **'Fiber'**
+  String get nutrition_fiber;
+
+  /// No description provided for @nutrition_proteins.
+  ///
+  /// In en, this message translates to:
+  /// **'Proteins'**
+  String get nutrition_proteins;
+
+  /// No description provided for @nutrition_salt.
+  ///
+  /// In en, this message translates to:
+  /// **'Salt'**
+  String get nutrition_salt;
+
+  /// No description provided for @nutrition_sodium.
+  ///
+  /// In en, this message translates to:
+  /// **'Sodium'**
+  String get nutrition_sodium;
+
+  /// No description provided for @d_nutrition_off_error_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'You can only use Open Food Facts with units that can be converted to grams and if the amount is greater than 0'**
+  String get d_nutrition_off_error_hint;
+
+  /// No description provided for @d_nutrition_off_disabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Food Facts is not enabled on this server'**
+  String get d_nutrition_off_disabled;
+
+  /// No description provided for @p_story_go_to_recipe.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to the recipe'**
+  String get p_story_go_to_recipe;
+
+  /// No description provided for @p_more_title_more.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get p_more_title_more;
+
+  /// No description provided for @p_more_stories.
+  ///
+  /// In en, this message translates to:
+  /// **'Create story'**
+  String get p_more_stories;
+
+  /// No description provided for @p_story_drafts_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Story drafts'**
+  String get p_story_drafts_title;
+
+  /// No description provided for @p_story_drafts_create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create story'**
+  String get p_story_drafts_create;
+
+  /// No description provided for @p_story_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Story editor'**
+  String get p_story_title;
+
+  /// No description provided for @p_story_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get p_story_label;
+
+  /// No description provided for @p_story_content.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get p_story_content;
+
+  /// No description provided for @p_story_delete_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete story?'**
+  String get p_story_delete_title;
+
+  /// No description provided for @p_story_delete_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Story deleted successfully'**
+  String get p_story_delete_success;
+
+  /// No description provided for @p_story_edit_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Story draft exists already'**
+  String get p_story_edit_failed;
+
+  /// No description provided for @p_story_editor_upload_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Story couldn\'t be uploaded'**
+  String get p_story_editor_upload_failed;
+
+  /// No description provided for @p_story_editor_upload_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Story uploaded sucessfully'**
+  String get p_story_editor_upload_success;
+
+  /// No description provided for @p_story_edit_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Story is incomplete'**
+  String get p_story_edit_invalid;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

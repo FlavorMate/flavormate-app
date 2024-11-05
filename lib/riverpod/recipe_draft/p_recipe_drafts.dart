@@ -3,9 +3,9 @@ import 'dart:math';
 
 import 'package:drift/drift.dart';
 import 'package:flavormate/drift/app_database.dart';
-import 'package:flavormate/models/draft/draft.dart';
 import 'package:flavormate/models/file/file.dart';
 import 'package:flavormate/models/recipe_draft/recipe_draft.dart';
+import 'package:flavormate/models/recipe_draft_wrapper/recipe_draft_wrapper.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
 import 'package:flavormate/riverpod/drift/p_drift.dart';
 import 'package:flavormate/riverpod/recipes/p_recipe.dart';
@@ -13,16 +13,16 @@ import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/utils/u_image.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'p_drafts.g.dart';
+part 'p_recipe_drafts.g.dart';
 
 @riverpod
-class PDrafts extends _$PDrafts {
+class PRecipeDrafts extends _$PRecipeDrafts {
   @override
-  Future<List<Draft>> build() async {
+  Future<List<RecipeDraftWrapper>> build() async {
     final response =
         await (ref.watch(pDriftProvider).draftTable.select()).get();
 
-    return response.map((data) => Draft.fromDB(data)).toList();
+    return response.map((data) => RecipeDraftWrapper.fromDB(data)).toList();
   }
 
   Future<int> scrape(String url) async {
@@ -83,14 +83,16 @@ class PDrafts extends _$PDrafts {
     return true;
   }
 
-  Future<int?> recipeToDraft(String id) async {
+  Future<int?> recipeToDraft(String recipeIdString) async {
+    final recipeId = int.parse(recipeIdString);
+
     final exists = await (ref.read(pDriftProvider).draftTable.select()
-          ..where((d) => d.id.isValue(int.parse(id))))
+          ..where((d) => d.originId.isValue(recipeId)))
         .getSingleOrNull();
 
     if (exists != null) return null;
 
-    final recipe = await ref.read(pRecipeProvider(int.parse(id)).future);
+    final recipe = await ref.read(pRecipeProvider(recipeId).future);
 
     final server = ref.read(pServerProvider);
 
@@ -114,7 +116,7 @@ class PDrafts extends _$PDrafts {
 
     final response = await ref.read(pDriftProvider).draftTable.insert().insert(
           DraftTableCompanion(
-            id: Value(recipe.id!),
+            originId: Value(recipe.id),
             recipeDraft: Value(recipe.toDraft()),
             images: Value(images),
             addedImages: const Value([]),

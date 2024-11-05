@@ -1,5 +1,7 @@
+import 'package:drift/drift.dart';
 import 'package:flavormate/models/api/login.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
+import 'package:flavormate/riverpod/drift/p_drift.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_shared_preferences.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_tokens.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -43,18 +45,22 @@ class PAuthState extends _$PAuthState {
 
   /// Logs out, deletes the saved token and profile info from storage, and invalidates
   /// the state.
-  void logout() {
+  void logout() async {
     final prefs = ref.read(pSharedPreferencesProvider).requireValue;
 
-    // Delete the current [token] and [profile] from secure storage.
-    prefs.remove('token');
+    // Clear the shared preferences
+    await prefs.clear();
+
+    // Clear the drift table
+    await ref.read(pDriftProvider).draftTable.deleteAll();
 
     ref
       // Invalidate the state so the auth state will be updated to unauthenticated.
       ..invalidateSelf()
       // Invalidate the token provider so the API service will no longer use the
       // previous token.
-      ..invalidate(pTokensProvider);
+      ..invalidate(pSharedPreferencesProvider)
+      ..invalidate(pDriftProvider);
   }
 }
 
@@ -93,8 +99,11 @@ enum AuthState {
       '/authors',
       '/authors/:id',
       '/editor/:id',
+      '/story/:id',
       '/admin/user',
       '/drafts',
+      '/storyDrafts',
+      '/storyEditor/:id',
     ],
   ),
   ;

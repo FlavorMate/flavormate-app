@@ -17,14 +17,14 @@ import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
-import 'package:flavormate/models/draft/draft.dart';
 import 'package:flavormate/models/recipe/course.dart';
 import 'package:flavormate/models/recipe/diet.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_group_draft.dart';
 import 'package:flavormate/models/recipe_draft/recipe_draft.dart';
 import 'package:flavormate/models/recipe_draft/serving_draft/serving_draft.dart';
+import 'package:flavormate/models/recipe_draft_wrapper/recipe_draft_wrapper.dart';
 import 'package:flavormate/models/tag_draft/tag_draft.dart';
-import 'package:flavormate/riverpod/draft/p_draft.dart';
+import 'package:flavormate/riverpod/recipe_draft/p_recipe_draft.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,7 +37,7 @@ class EditorPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(pDraftProvider(id));
+    final provider = ref.watch(pRecipeDraftProvider(id));
     return Scaffold(
       appBar: const TAppBar(title: 'Editor'),
       body: RStruct(
@@ -202,7 +202,7 @@ class EditorPage extends ConsumerWidget {
 
     if (response == null) return;
 
-    ref.read(pDraftProvider(id).notifier).setCommon(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setCommon(response);
   }
 
   editServing(
@@ -214,7 +214,7 @@ class EditorPage extends ConsumerWidget {
     );
 
     if (response == null) return;
-    ref.read(pDraftProvider(id).notifier).setServing(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setServing(response);
   }
 
   editDurations(
@@ -230,7 +230,7 @@ class EditorPage extends ConsumerWidget {
     );
 
     if (response == null) return;
-    ref.read(pDraftProvider(id).notifier).setDurations(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setDurations(response);
   }
 
   editIngredientGroups(
@@ -244,7 +244,7 @@ class EditorPage extends ConsumerWidget {
     );
 
     if (response == null) return;
-    ref.read(pDraftProvider(id).notifier).setIngredientGroups(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setIngredientGroups(response);
   }
 
   editInstructionGroups(
@@ -257,7 +257,7 @@ class EditorPage extends ConsumerWidget {
     );
 
     if (response == null) return;
-    ref.read(pDraftProvider(id).notifier).setInstructionGroups(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setInstructionGroups(response);
   }
 
   editCourse(
@@ -268,7 +268,7 @@ class EditorPage extends ConsumerWidget {
     );
 
     if (response == null || response == recipeDraft.course) return;
-    ref.read(pDraftProvider(id).notifier).setCourse(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setCourse(response);
   }
 
   editDiet(BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
@@ -278,7 +278,7 @@ class EditorPage extends ConsumerWidget {
     );
 
     if (response == null || response == recipeDraft.diet) return;
-    ref.read(pDraftProvider(id).notifier).setDiet(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setDiet(response);
   }
 
   editTags(BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
@@ -289,7 +289,7 @@ class EditorPage extends ConsumerWidget {
     );
 
     if (response == null) return;
-    ref.read(pDraftProvider(id).notifier).setTags(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setTags(response);
   }
 
   editCategories(
@@ -301,21 +301,23 @@ class EditorPage extends ConsumerWidget {
     );
 
     if (response == null) return;
-    ref.read(pDraftProvider(id).notifier).setCategories(response);
+    ref.read(pRecipeDraftProvider(id).notifier).setCategories(response);
   }
 
-  editImages(BuildContext context, WidgetRef ref, Draft draft) async {
-    final response = await showDialog<Draft>(
+  editImages(
+      BuildContext context, WidgetRef ref, RecipeDraftWrapper draft) async {
+    final response = await showDialog<RecipeDraftWrapper>(
       context: context,
       builder: (_) => DImages(draft: draft),
       useSafeArea: false,
     );
 
     if (response == null) return;
-    ref.read(pDraftProvider(id).notifier).set(response);
+    ref.read(pRecipeDraftProvider(id).notifier).set(response);
   }
 
-  showPreview(BuildContext context, WidgetRef ref, Draft draft) async {
+  showPreview(
+      BuildContext context, WidgetRef ref, RecipeDraftWrapper draft) async {
     final response = await showDialog<bool>(
       context: context,
       builder: (_) => DPreview(draft: draft),
@@ -330,9 +332,9 @@ class EditorPage extends ConsumerWidget {
     var result = false;
 
     if (draft.version > 0) {
-      result = await ref.read(pDraftProvider(id).notifier).edit();
+      result = await ref.read(pRecipeDraftProvider(id).notifier).edit();
     } else {
-      result = await ref.read(pDraftProvider(id).notifier).upload();
+      result = await ref.read(pRecipeDraftProvider(id).notifier).upload();
     }
 
     if (!context.mounted) return;

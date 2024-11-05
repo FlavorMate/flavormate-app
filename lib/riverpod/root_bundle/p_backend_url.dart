@@ -1,4 +1,5 @@
 import 'package:flavormate/extensions/e_string.dart';
+import 'package:flavormate/gen/assets.gen.dart';
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,9 +12,8 @@ part 'p_backend_url.g.dart';
 class PBackendUrl extends _$PBackendUrl {
   @override
   Future<String?> build() async {
-    final value = await rootBundle
-        .loadString('assets/web/backend_url.txt')
-        .catchError((_) => '');
+    final path = Assets.web.backendUrl;
+    final value = await rootBundle.loadString(path).catchError((_) => '');
     return EString.trimToNull(value);
   }
 }

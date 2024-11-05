@@ -799,4 +799,120 @@ class L10nDe extends L10n {
 
   @override
   String get p_login_connection_failed_subtitle => 'Prüfe, ob es Updates für den Server gibt';
+
+  @override
+  String get d_editor_ingredient_old_unit_label => 'Alte Einheit';
+
+  @override
+  String get d_editor_ingredient_edit_nutrition => 'Nährwerte bearbeiten';
+
+  @override
+  String get d_nutrition_title => 'Nährwerte';
+
+  @override
+  String get d_nutrition_off_title => 'Open Food Facts';
+
+  @override
+  String get d_nutrition_custom_title => 'Manuell';
+
+  @override
+  String get d_nutrition_off_hint_1 => 'Open Food Facts ist eine freie Datenbank, welche Informationen über Produkte enthält';
+
+  @override
+  String get d_nutrition_off_hint_2 => 'Du kannst sie benutzen, um Nährwertinformationen für eine Zutat herunterzuladen';
+
+  @override
+  String get d_nutrition_off_hint_3 => 'Um zu starten, gib bitte die EAN ein oder Scanne den Barcode des Produkts';
+
+  @override
+  String get d_nutrition_off_hint_4 => 'Hinweis: Die Daten werden heruntergeladen, sobald das Rezept erstellt wurde';
+
+  @override
+  String get d_nutrition_off_open_off => 'Öffne Open Food Facts';
+
+  @override
+  String get d_nutrition_off_product_ean => 'Produkt EAN';
+
+  @override
+  String get d_nutrition_custom_disabled_hint => 'Hinweis: Du kannst die Daten nicht manuell bearbeiten, bis du den EAN Code auf der Open Food Facts Seite gelöscht hast';
+
+  @override
+  String d_nutrition_custom_hint_1(String amount) {
+    return 'Bitte gib alle Daten für \"$amount\" an';
+  }
+
+  @override
+  String get nutrition_carbohydrates => 'Kohlenhydrate';
+
+  @override
+  String get nutrition_kcal => 'KCal';
+
+  @override
+  String get nutrition_fat => 'Fett';
+
+  @override
+  String get nutrition_saturated_fat => 'Gesättigte Fettsäuren';
+
+  @override
+  String get nutrition_sugars => 'Zucker';
+
+  @override
+  String get nutrition_fiber => 'Ballaststoffe';
+
+  @override
+  String get nutrition_proteins => 'Proteine';
+
+  @override
+  String get nutrition_salt => 'Salz';
+
+  @override
+  String get nutrition_sodium => 'Natrium';
+
+  @override
+  String get d_nutrition_off_error_hint => 'Du kannst Open Food Facts nur mit Einheiten nutzen, die in Gramm umgerechnet werden können und wenn die Menge größer als 0 ist';
+
+  @override
+  String get d_nutrition_off_disabled => 'Open Food Facts ist für diesen Server nicht aktiviert';
+
+  @override
+  String get p_story_go_to_recipe => 'Zum Rezept';
+
+  @override
+  String get p_more_title_more => 'Mehr';
+
+  @override
+  String get p_more_stories => 'Story erstellen';
+
+  @override
+  String get p_story_drafts_title => 'Story Entwürfe';
+
+  @override
+  String get p_story_drafts_create => 'Story erstellen';
+
+  @override
+  String get p_story_title => 'Story Editor';
+
+  @override
+  String get p_story_label => 'Titel';
+
+  @override
+  String get p_story_content => 'Inhalt';
+
+  @override
+  String get p_story_delete_title => 'Story löschen?';
+
+  @override
+  String get p_story_delete_success => 'Story erfolgreich gelöscht';
+
+  @override
+  String get p_story_edit_failed => 'Storyentwurf existiert bereits';
+
+  @override
+  String get p_story_editor_upload_failed => 'Story konnte nicht hochgeladen werden';
+
+  @override
+  String get p_story_editor_upload_success => 'Story erfolgreich hochgeladen';
+
+  @override
+  String get p_story_edit_invalid => 'Story nicht vollständig';
 }

@@ -38,7 +38,7 @@ class PreviewDesktop extends StatelessWidget {
                   slides: images
                       .map(
                         (file) => TSlide(
-                          imageSrc: file.content!,
+                          imageSrc: file.content!.split(',')[1],
                           type: TImageType.memory,
                         ),
                       )

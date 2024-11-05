@@ -1,4 +1,5 @@
 import 'package:flavormate/components/t_card.dart';
+import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_icon_button.dart';
 import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/components/t_text.dart';
@@ -14,7 +15,7 @@ class MorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TResponsive(
-      child: Column(
+      child: TColumn(
         children: [
           TCard(
             child: Wrap(
@@ -29,12 +30,6 @@ class MorePage extends StatelessWidget {
                 ),
                 TIconButton(
                   width: 250,
-                  onPressed: () => context.pushNamed('drafts'),
-                  icon: MdiIcons.bookPlus,
-                  label: L10n.of(context).p_more_recipes,
-                ),
-                TIconButton(
-                  width: 250,
                   onPressed: () => context.pushNamed('categories'),
                   icon: MdiIcons.archive,
                   label: L10n.of(context).p_more_categories,
@@ -44,6 +39,32 @@ class MorePage extends StatelessWidget {
                   onPressed: () => context.pushNamed('tags'),
                   icon: MdiIcons.tag,
                   label: L10n.of(context).p_more_tags,
+                ),
+              ],
+            ),
+          ),
+          TCard(
+            child: Wrap(
+              direction: Axis.vertical,
+              spacing: PADDING,
+              runAlignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                TText(
+                  L10n.of(context).p_more_title_more,
+                  TextStyles.headlineMedium,
+                ),
+                TIconButton(
+                  width: 250,
+                  onPressed: () => context.pushNamed('drafts'),
+                  icon: MdiIcons.bookPlus,
+                  label: L10n.of(context).p_more_recipes,
+                ),
+                TIconButton(
+                  width: 250,
+                  onPressed: () => context.pushNamed('storyDrafts'),
+                  icon: MdiIcons.newspaperVariantOutline,
+                  label: L10n.of(context).p_more_stories,
                 ),
               ],
             ),

@@ -1,5 +1,6 @@
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_text.dart';
+import 'package:flavormate/gen/assets.gen.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -49,8 +50,7 @@ class _ServerFormState extends ConsumerState<ServerForm> {
                 key: _serverFormKey,
                 child: Column(
                   children: [
-                    Image.asset(
-                      'assets/icons/Transparent.png',
+                    Assets.icons.logoTransparent.image(
                       width: 128,
                       height: 128,
                     ),

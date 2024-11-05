@@ -7,8 +7,8 @@ import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
-import 'package:flavormate/models/draft/draft.dart';
 import 'package:flavormate/models/file/file.dart';
+import 'package:flavormate/models/recipe_draft_wrapper/recipe_draft_wrapper.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flavormate/utils/u_image.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class DImages extends StatefulWidget {
-  final Draft draft;
+  final RecipeDraftWrapper draft;
 
   const DImages({
     super.key,
@@ -29,7 +29,7 @@ class DImages extends StatefulWidget {
 }
 
 class _DImagesState extends State<DImages> {
-  late Draft _draft;
+  late RecipeDraftWrapper _draft;
 
   @override
   void initState() {

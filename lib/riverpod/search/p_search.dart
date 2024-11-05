@@ -1,5 +1,6 @@
 import 'package:flavormate/models/search/search_result.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
+import 'package:flavormate/riverpod/features/p_feature_story.dart';
 import 'package:flavormate/riverpod/search/p_search_term.dart';
 import 'package:flavormate/riverpod/user/p_user.dart';
 import 'package:flavormate/utils/u_localizations.dart';
@@ -84,18 +85,22 @@ class PSearch extends _$PSearch {
           ),
         );
 
-    final storiesResponses = (await ref
-            .read(pApiProvider)
-            .storiesClient
-            .findBySearch(searchTerm: term, sortBy: 'label'))
-        .content
-        .map(
-          (story) => SearchResult(
-            type: SearchResultType.story,
-            label: story.label,
-            id: story.id!,
-          ),
-        );
+    var storiesResponses = <SearchResult>[];
+    if (ref.read(pFeatureStoryProvider).requireValue) {
+      storiesResponses = (await ref
+              .read(pApiProvider)
+              .storiesClient
+              .findBySearch(searchTerm: term, sortBy: 'label'))
+          .content
+          .map(
+            (story) => SearchResult(
+              type: SearchResultType.story,
+              label: story.label,
+              id: story.id!,
+            ),
+          )
+          .toList();
+    }
 
     final tagsResponses = (await ref
             .read(pApiProvider)

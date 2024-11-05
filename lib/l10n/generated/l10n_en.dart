@@ -799,4 +799,120 @@ class L10nEn extends L10n {
 
   @override
   String get p_login_connection_failed_subtitle => 'Check for possible updates for the server';
+
+  @override
+  String get d_editor_ingredient_old_unit_label => 'Old unit';
+
+  @override
+  String get d_editor_ingredient_edit_nutrition => 'Edit nutrition';
+
+  @override
+  String get d_nutrition_title => 'Nutrition';
+
+  @override
+  String get d_nutrition_off_title => 'Open Food Facts';
+
+  @override
+  String get d_nutrition_custom_title => 'Custom';
+
+  @override
+  String get d_nutrition_off_hint_1 => 'Open Food Facts is a free database that contains informations about products';
+
+  @override
+  String get d_nutrition_off_hint_2 => 'You can use it to fetch the nutrition informations for an ingredient';
+
+  @override
+  String get d_nutrition_off_hint_3 => 'To get started, please enter the EAN or scan the barcode of the product';
+
+  @override
+  String get d_nutrition_off_hint_4 => 'Note: All data is fetched once the recipe is created';
+
+  @override
+  String get d_nutrition_off_open_off => 'Open Open Food Facts';
+
+  @override
+  String get d_nutrition_off_product_ean => 'Product EAN';
+
+  @override
+  String get d_nutrition_custom_disabled_hint => 'Note: You can\'t manually edit nutrition until you removed the EAN Code from the Open Food Facts page';
+
+  @override
+  String d_nutrition_custom_hint_1(String amount) {
+    return 'Please enter all informations for \"$amount\"';
+  }
+
+  @override
+  String get nutrition_carbohydrates => 'Carbohydrates';
+
+  @override
+  String get nutrition_kcal => 'KCal';
+
+  @override
+  String get nutrition_fat => 'Fat';
+
+  @override
+  String get nutrition_saturated_fat => 'Saturated fat';
+
+  @override
+  String get nutrition_sugars => 'Sugars';
+
+  @override
+  String get nutrition_fiber => 'Fiber';
+
+  @override
+  String get nutrition_proteins => 'Proteins';
+
+  @override
+  String get nutrition_salt => 'Salt';
+
+  @override
+  String get nutrition_sodium => 'Sodium';
+
+  @override
+  String get d_nutrition_off_error_hint => 'You can only use Open Food Facts with units that can be converted to grams and if the amount is greater than 0';
+
+  @override
+  String get d_nutrition_off_disabled => 'Open Food Facts is not enabled on this server';
+
+  @override
+  String get p_story_go_to_recipe => 'Go to the recipe';
+
+  @override
+  String get p_more_title_more => 'More';
+
+  @override
+  String get p_more_stories => 'Create story';
+
+  @override
+  String get p_story_drafts_title => 'Story drafts';
+
+  @override
+  String get p_story_drafts_create => 'Create story';
+
+  @override
+  String get p_story_title => 'Story editor';
+
+  @override
+  String get p_story_label => 'Label';
+
+  @override
+  String get p_story_content => 'Content';
+
+  @override
+  String get p_story_delete_title => 'Delete story?';
+
+  @override
+  String get p_story_delete_success => 'Story deleted successfully';
+
+  @override
+  String get p_story_edit_failed => 'Story draft exists already';
+
+  @override
+  String get p_story_editor_upload_failed => 'Story couldn\'t be uploaded';
+
+  @override
+  String get p_story_editor_upload_success => 'Story uploaded sucessfully';
+
+  @override
+  String get p_story_edit_invalid => 'Story is incomplete';
 }
