@@ -24,54 +24,33 @@ class ActionButton extends ConsumerWidget {
     final provider = ref.watch(pActionButtonProvider(recipeId));
     return RStruct(
       provider,
-      (_, user) => PopupMenuButton<_ActionButtonValues>(
-        icon: const Icon(Icons.more_vert),
-        onSelected: (item) {
-          switch (item) {
-            case _ActionButtonValues.edit:
-              edit();
-              return;
-            case _ActionButtonValues.delete:
-              delete();
-              return;
-            case _ActionButtonValues.transfer:
-              transfer();
-              return;
-          }
-        },
-        itemBuilder: (_) => [
+      (_, user) => MenuAnchor(
+        builder: (_, controller, widget) => IconButton(
+          icon: Icon(MdiIcons.dotsVertical),
+          onPressed: () =>
+              controller.isOpen ? controller.close() : controller.open(),
+        ),
+        menuChildren: [
           if (user.isOwner)
-            PopupMenuItem(
-              value: _ActionButtonValues.edit,
-              child: ListTile(
-                title: Text(L10n.of(context).p_recipe_actions_edit),
-                leading: const Icon(MdiIcons.pencil),
-              ),
+            MenuItemButton(
+              leadingIcon: Icon(MdiIcons.pencil),
+              onPressed: edit,
+              child: Text(L10n.of(context).p_recipe_actions_edit),
             ),
-          if (user.isOwner)
-            PopupMenuItem(
-              value: _ActionButtonValues.delete,
-              child: ListTile(
-                title: Text(L10n.of(context).p_recipe_actions_delete),
-                leading: const Icon(MdiIcons.trashCan),
-              ),
+          if (user.isOwner || user.isAdmin)
+            MenuItemButton(
+              leadingIcon: Icon(MdiIcons.trashCan),
+              onPressed: delete,
+              child: Text(L10n.of(context).p_recipe_actions_delete),
             ),
           if (user.isAdmin)
-            PopupMenuItem(
-              value: _ActionButtonValues.transfer,
-              child: ListTile(
-                title: Text(L10n.of(context).p_recipe_actions_transfer),
-                leading: const Icon(MdiIcons.refresh),
-              ),
+            MenuItemButton(
+              leadingIcon: Icon(MdiIcons.refresh),
+              onPressed: transfer,
+              child: Text(L10n.of(context).p_recipe_actions_transfer),
             ),
         ],
       ),
     );
   }
-}
-
-enum _ActionButtonValues {
-  edit,
-  delete,
-  transfer;
 }
