@@ -15,8 +15,8 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class DraftsPage extends ConsumerWidget {
-  const DraftsPage({super.key});
+class RecipeDraftsPage extends ConsumerWidget {
+  const RecipeDraftsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

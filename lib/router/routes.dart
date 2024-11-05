@@ -3,7 +3,6 @@ import 'package:flavormate/pages/authors/_id.dart';
 import 'package:flavormate/pages/authors/index.dart';
 import 'package:flavormate/pages/categories/_id.dart';
 import 'package:flavormate/pages/categories/index.dart';
-import 'package:flavormate/pages/draft/index.dart';
 import 'package:flavormate/pages/editor/_id.dart';
 import 'package:flavormate/pages/home/index.dart';
 import 'package:flavormate/pages/library/_id.dart';
@@ -12,6 +11,7 @@ import 'package:flavormate/pages/login/login_page.dart';
 import 'package:flavormate/pages/more/index.dart';
 import 'package:flavormate/pages/no_connection/index.dart';
 import 'package:flavormate/pages/recipe/index.dart';
+import 'package:flavormate/pages/recipe_drafts/index.dart';
 import 'package:flavormate/pages/recipes/_id.dart';
 import 'package:flavormate/pages/recovery/index.dart';
 import 'package:flavormate/pages/registration/index.dart';
@@ -194,7 +194,7 @@ var routes = [
     path: '/drafts',
     name: 'drafts',
     pageBuilder: (context, state) => const NoTransitionPage(
-      child: DraftsPage(),
+      child: RecipeDraftsPage(),
     ),
   ),
   GoRoute(
