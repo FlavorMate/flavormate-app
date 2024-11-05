@@ -4,6 +4,8 @@ import 'package:flavormate/models/recipe/recipe.dart';
 class StoryDraftTable extends Table {
   IntColumn get id => integer().autoIncrement()();
 
+  IntColumn get originId => integer().nullable()();
+
   TextColumn get label => text().nullable()();
 
   TextColumn get content => text().nullable()();
