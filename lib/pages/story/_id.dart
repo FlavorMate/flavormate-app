@@ -4,11 +4,14 @@ import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/story/story_action_button.dart';
 import 'package:flavormate/components/t_app_bar.dart';
+import 'package:flavormate/components/t_avatar_viewer.dart';
+import 'package:flavormate/components/t_bubble.dart';
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_image_label.dart';
 import 'package:flavormate/components/t_responsive.dart';
+import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -77,9 +80,33 @@ class _StoryPageStore extends ConsumerState<StoryPage> {
                 ),
                 child: TColumn(
                   children: [
-                    TText(value.label, TextStyles.titleLarge),
-                    TText(value.content, TextStyles.bodyMedium),
-                    ElevatedButton(
+                    TRow(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AvatarViewer(
+                          user: value.author.account,
+                          border: true,
+                        ),
+                        Expanded(
+                          child: TBubble(
+                            topLeft: true,
+                            children: [
+                              TText(
+                                value.label,
+                                TextStyles.titleLarge,
+                                color: TextColor.filledButton,
+                              ),
+                              TText(
+                                value.content,
+                                TextStyles.bodyMedium,
+                                color: TextColor.filledButton,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    FilledButton(
                       onPressed: () => context.pushNamed(
                         'recipe',
                         pathParameters: {'id': '${value.recipe.id}'},
