@@ -1,5 +1,5 @@
 import 'package:flavormate/components/recipe/bring_button.dart';
-import 'package:flavormate/components/recipe/recipe_decription.dart';
+import 'package:flavormate/components/recipe/recipe_description.dart';
 import 'package:flavormate/components/recipe/recipe_durations.dart';
 import 'package:flavormate/components/recipe/recipe_ingredients.dart';
 import 'package:flavormate/components/recipe/recipe_instructions.dart';

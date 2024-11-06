@@ -1,39 +1,39 @@
 import 'package:collection/collection.dart';
 import 'package:flavormate/components/dialogs/t_full_dialog.dart';
-import 'package:flavormate/components/editor/dialogs/d_instruction_group.dart';
+import 'package:flavormate/components/recipe_editor/dialogs/d_ingredient_group.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
-import 'package:flavormate/models/recipe_draft/instructions/instruction_group_draft.dart';
+import 'package:flavormate/models/recipe_draft/ingredients/ingredient_group_draft.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
 
-class DInstructionGroups extends StatefulWidget {
-  final List<InstructionGroupDraft> instructionGroups;
+class DIngredientGroups extends StatefulWidget {
+  final List<IngredientGroupDraft> ingredientGroups;
 
-  const DInstructionGroups({
+  const DIngredientGroups({
     super.key,
-    required this.instructionGroups,
+    required this.ingredientGroups,
   });
 
   @override
-  State<StatefulWidget> createState() => _DInstructionGroupsState();
+  State<StatefulWidget> createState() => _DIngredientGroupsState();
 }
 
-class _DInstructionGroupsState extends State<DInstructionGroups> {
-  late List<InstructionGroupDraft> _instructionGroups;
+class _DIngredientGroupsState extends State<DIngredientGroups> {
+  late List<IngredientGroupDraft> _ingredientGroups;
 
   @override
   void initState() {
-    _instructionGroups =
-        widget.instructionGroups.map((iG) => iG.copyWith()).toList();
+    _ingredientGroups =
+        widget.ingredientGroups.map((iG) => iG.copyWith()).toList();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return TFullDialog(
-      title: L10n.of(context).d_editor_instruction_groups_title,
+      title: L10n.of(context).d_editor_ingredient_groups_title,
       submit: () => submit(context),
       child: TColumn(
         children: [
@@ -44,11 +44,11 @@ class _DInstructionGroupsState extends State<DInstructionGroups> {
               columns: [
                 DataColumn(
                   label:
-                      Text(L10n.of(context).d_editor_instruction_groups_label),
+                      Text(L10n.of(context).d_editor_ingredient_groups_label),
                 ),
                 DataColumn(label: Container()),
               ],
-              rows: _instructionGroups
+              rows: _ingredientGroups
                   .mapIndexed(
                     (index, iG) => DataRow(
                       onSelectChanged: (_) => openGroup(iG),
@@ -59,7 +59,7 @@ class _DInstructionGroupsState extends State<DInstructionGroups> {
                             child: Text(
                               (iG.label?.isEmpty ?? true)
                                   ? L10n.of(context)
-                                      .d_editor_instruction_groups_label_2(
+                                      .d_editor_ingredient_groups_label_2(
                                       '${index + 1}',
                                     )
                                   : iG.label!,
@@ -86,43 +86,43 @@ class _DInstructionGroupsState extends State<DInstructionGroups> {
           FilledButton.tonal(
             onPressed: createGroup,
             child:
-                Text(L10n.of(context).d_editor_instruction_groups_create_group),
+                Text(L10n.of(context).d_editor_ingredient_groups_create_group),
           )
         ],
       ),
     );
   }
 
-  void openGroup(InstructionGroupDraft group) async {
-    final response = await showDialog<InstructionGroupDraft>(
+  void openGroup(IngredientGroupDraft group) async {
+    final response = await showDialog<IngredientGroupDraft>(
       context: context,
-      builder: (_) => DInstructionGroup(instructionGroup: group.copyWith()),
+      builder: (_) => DIngredientGroup(ingredientGroup: group.copyWith()),
       useSafeArea: false,
     );
 
     if (response == null) return;
 
-    final index = _instructionGroups.indexOf(group);
+    final index = _ingredientGroups.indexOf(group);
     setState(() {
-      _instructionGroups[index] = response;
+      _ingredientGroups[index] = response;
     });
   }
 
   void createGroup() {
-    final instructionGroup = InstructionGroupDraft(instructions: []);
+    final ingredientGroup = IngredientGroupDraft(ingredients: []);
 
-    setState(() => _instructionGroups.add(instructionGroup));
+    setState(() => _ingredientGroups.add(ingredientGroup));
 
-    openGroup(instructionGroup);
+    openGroup(ingredientGroup);
   }
 
-  void deleteGroup(InstructionGroupDraft group) {
+  void deleteGroup(IngredientGroupDraft group) {
     setState(() {
-      _instructionGroups.remove(group);
+      _ingredientGroups.remove(group);
     });
   }
 
   void submit(BuildContext context) {
-    context.pop(_instructionGroups);
+    context.pop(_ingredientGroups);
   }
 }

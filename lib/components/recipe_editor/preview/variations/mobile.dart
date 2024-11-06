@@ -1,8 +1,8 @@
-import 'package:flavormate/components/editor/preview/preview_ingredients.dart';
-import 'package:flavormate/components/editor/preview/preview_instructions.dart';
-import 'package:flavormate/components/recipe/recipe_decription.dart';
+import 'package:flavormate/components/recipe/recipe_description.dart';
 import 'package:flavormate/components/recipe/recipe_durations.dart';
 import 'package:flavormate/components/recipe/recipe_title.dart';
+import 'package:flavormate/components/recipe_editor/preview/preview_ingredients.dart';
+import 'package:flavormate/components/recipe_editor/preview/preview_instructions.dart';
 import 'package:flavormate/components/t_carousel.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_image.dart';

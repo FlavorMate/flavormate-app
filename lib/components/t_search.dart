@@ -39,6 +39,7 @@ class _TSearchState extends ConsumerState<TSearch> {
   Widget build(BuildContext context) {
     searchHint = getMessage(context);
     return SearchAnchor(
+      keyboardType: TextInputType.visiblePassword,
       searchController: _controller,
       builder: (_, controller) => SearchBar(
         leading: const IconButton(

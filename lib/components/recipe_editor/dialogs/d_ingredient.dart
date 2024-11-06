@@ -1,5 +1,5 @@
 import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
-import 'package:flavormate/components/editor/dialogs/d_nutrition.dart';
+import 'package:flavormate/components/recipe_editor/dialogs/d_nutrition.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
