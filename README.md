@@ -84,11 +84,6 @@ Adapt the app to your liking by choosing your favorite color.
 <img src="docs/features/theme/phone.png" alt="Theme phone screenshot" height="200px">
 <img src="docs/features/theme/tablet.png" alt="Theme tablet screenshot" height="200px">
 
-
----
-
-[^1]: Feature must be enabled on the server
-
 </details>
 
 ## Getting Started
@@ -134,7 +129,6 @@ the [releases](https://github.com/FlavorMate/flavormate-app/releases) page and h
 
 To permanently bind your frontend to your backend url, add the `BACKEND_URL` entry to your docker environment.
 
-> [!TIP]
 > The user will then no longer be able to connect to other FlavorMate servers.<br>
 > This improves the user experience and increases security.
 
@@ -152,3 +146,5 @@ Follow these steps to build the app locally:
 2. Run `flutter pub get` to fetch all dependencies
 3. Run `dart run build_runner build` to generate necessary code
 4. Run `flutter run` to run the app
+
+[^1]: Feature must be enabled on the server
