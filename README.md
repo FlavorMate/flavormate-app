@@ -132,8 +132,9 @@ the [releases](https://github.com/FlavorMate/flavormate-app/releases) page and h
 
 #### Environment Variables
 
+To permanently bind your frontend to your backend url, add the `BACKEND_URL` entry to your docker environment.
+
 > [!TIP]
-> To permanently bind your frontend to your backend url, add the `BACKEND_URL` entry to your docker environment.<br>
 > The user will then no longer be able to connect to other FlavorMate servers.<br>
 > This improves the user experience and increases security.
 
