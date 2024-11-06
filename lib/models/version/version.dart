@@ -33,6 +33,11 @@ class Version {
 
     return VersionComparison.fullyCompatible;
   }
+
+  @override
+  String toString() {
+    return '$major.$minor.$patch';
+  }
 }
 
 enum VersionComparison {

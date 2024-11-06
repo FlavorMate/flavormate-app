@@ -23,9 +23,9 @@ import 'package:flavormate/models/file/file.dart';
 import 'package:flavormate/models/highlight.dart';
 import 'package:flavormate/models/library/book.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
+import 'package:flavormate/models/recipe/unit_ref/unit_localized.dart';
 import 'package:flavormate/models/story.dart';
 import 'package:flavormate/models/tag/tag.dart';
-import 'package:flavormate/models/unit.dart';
 import 'package:flavormate/models/user/token.dart';
 import 'package:flavormate/models/user/user.dart';
 import 'package:flavormate/utils/u_go_router.dart';
@@ -60,7 +60,7 @@ _interceptors(InterceptorMethods handlers) => InterceptorsWrapper(
 
         if (error.type == DioExceptionType.connectionError ||
             error.type == DioExceptionType.connectionTimeout) {
-          if (!['/login', '/no_connection'].contains(currentRoute())) {
+          if (!['/login', '/no-connection'].contains(currentRoute())) {
             handlers.onNoConnection();
             return;
           } else {
@@ -179,7 +179,7 @@ class ApiClient {
     unitsClient = UnitsClient(
       httpClient: _httpClient,
       baseURL: '/v2/units',
-      parser: UnitMapper.fromMap,
+      parser: UnitLocalizedMapper.fromMap,
     );
     userClient = UserClient(
       httpClient: _httpClient,
@@ -261,7 +261,7 @@ class ApiClient {
     unitsClient = UnitsClient(
       httpClient: _httpClient,
       baseURL: '/v2/units',
-      parser: UnitMapper.fromMap,
+      parser: UnitLocalizedMapper.fromMap,
     );
     userClient = UserClient(
       httpClient: _httpClient,

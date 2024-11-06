@@ -14,20 +14,24 @@ import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
+import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/recipe/nutrition/nutrition.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/pages/recipe/variations/desktop.dart';
 import 'package:flavormate/pages/recipe/variations/mobile.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
-import 'package:flavormate/riverpod/draft/p_drafts.dart';
 import 'package:flavormate/riverpod/features/p_feature_bring.dart';
 import 'package:flavormate/riverpod/highlights/p_highlight.dart';
+import 'package:flavormate/riverpod/recipe_draft/p_recipe_drafts.dart';
 import 'package:flavormate/riverpod/recipes/p_action_button.dart';
 import 'package:flavormate/riverpod/recipes/p_latest_recipes.dart';
 import 'package:flavormate/riverpod/recipes/p_recipe.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/riverpod/stories/p_stories.dart';
+import 'package:flavormate/riverpod/units/p_unit_conversions.dart';
 import 'package:flavormate/utils/constants.dart';
+import 'package:flavormate/utils/u_double.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -103,6 +107,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
                         increaseServing: increaseFactor,
                         addBookmark: () => addToBook(recipe),
                         addToBring: () => addToBring(recipe),
+                        nutrition: calculateNutrition(recipe),
                       ),
                     if (!useDesktop)
                       RecipePageMobile(
@@ -113,6 +118,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
                         increaseServing: increaseFactor,
                         addBookmark: () => addToBook(recipe),
                         addToBring: () => addToBring(recipe),
+                        nutrition: calculateNutrition(recipe),
                       ),
                     const Divider(),
                     RecipeInformations(
@@ -139,6 +145,55 @@ class _RecipePageState extends ConsumerState<RecipePage> {
         },
       ),
     );
+  }
+
+  Nutrition? calculateNutrition(Recipe recipe) {
+    final provider = ref.read(pUnitConversionProvider.notifier);
+    final nutrition = <Nutrition>[];
+    for (var iG in recipe.ingredientGroups) {
+      for (var i in iG.ingredients) {
+        if (i.nutrition == null || !UDouble.isPositive(i.amount)) continue;
+
+        var nutritionalValue = Nutrition();
+
+        if (i.unitLocalized == null ||
+            EString.isEmpty(i.nutrition!.openFoodFactsId)) {
+          nutritionalValue = nutritionalValue.add(i.nutrition!);
+        } else {
+          // nutrition info is for 100g
+          final conversionFactor =
+              provider.convertFromGram(i.unitLocalized!.unitRef) ?? 1;
+
+          // e.g.  100g = 80  kcal => 2kg = 1600 kcal
+          //         1g = 0.8 kcal
+          //
+          // amount / conversionFactor = factor
+          //    2kg / 0.001            = 2000
+          //
+          // kcal (per 1g) * factor = convertedNutrition
+          // 0.8 kcal      * 2000   = 1600 kcal
+
+          final factor = (i.amount! / conversionFactor);
+
+          final convertedNutrition = i.nutrition!.multiply(0.01 * factor);
+
+          nutritionalValue = nutritionalValue.add(convertedNutrition);
+        }
+
+        final servingAdjustmentFactor = servingFactor / recipe.serving.amount;
+
+        nutritionalValue = nutritionalValue.multiply(servingAdjustmentFactor);
+
+        nutrition.add(nutritionalValue);
+      }
+    }
+
+    final calculatedNutrition = nutrition.fold(Nutrition(), (a, b) => a.add(b));
+    if (calculatedNutrition.exists) {
+      return calculatedNutrition;
+    } else {
+      return null;
+    }
   }
 
   Future<void> addToBring(Recipe recipe) async {
@@ -182,14 +237,14 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     showDialog(context: context, builder: (_) => const TLoadingDialog());
 
     final id =
-        await ref.read(pDraftsProvider.notifier).recipeToDraft(widget.id);
+        await ref.read(pRecipeDraftsProvider.notifier).recipeToDraft(widget.id);
 
     if (!mounted) return;
     context.pop();
     if (id == null) {
       context.showTextSnackBar(L10n.of(context).p_editor_edit_failed);
     } else {
-      context.pushNamed('editor', pathParameters: {'id': '$id'});
+      context.pushNamed('recipe-editor', pathParameters: {'id': '$id'});
     }
   }
 

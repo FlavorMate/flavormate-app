@@ -1,8 +1,8 @@
 import 'package:flavormate/interfaces/a_filter_search_client.dart';
-import 'package:flavormate/models/draft/scrape_response.dart';
 import 'package:flavormate/models/recipe/course.dart';
 import 'package:flavormate/models/recipe/diet.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
+import 'package:flavormate/models/recipe_draft_wrapper/scrape_response.dart';
 
 class RecipesClient extends AFilterSearchClient<Recipe> {
   RecipesClient({

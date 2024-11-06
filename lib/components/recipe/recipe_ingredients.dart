@@ -5,6 +5,7 @@ import 'package:flavormate/components/t_table.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/extensions/e_number.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/recipe/ingredients/ingredient.dart';
 import 'package:flavormate/models/recipe/ingredients/ingredient_group.dart';
 import 'package:flavormate/models/recipe/serving/serving.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -61,11 +62,8 @@ class RecipeIngredients extends StatelessWidget {
                   for (final ingredient in ingredientGroup.ingredients)
                     [
                       [
-                        (ingredient.amount * factor) <= 0
-                            ? null
-                            : (ingredient.amount * factor / serving.amount)
-                                .beautify,
-                        ingredient.unit?.beautify,
+                        _getAmount(ingredient),
+                        ingredient.unitLabel(factor / serving.amount),
                       ].nonNulls.join(' '),
                       ingredient.label,
                     ],
@@ -78,5 +76,15 @@ class RecipeIngredients extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  String? _getAmount(Ingredient ingredient) {
+    if (ingredient.amount == null) return null;
+
+    if ((ingredient.amount! * factor) > 0) {
+      return (ingredient.amount! * factor / serving.amount).beautify;
+    }
+
+    return null;
   }
 }

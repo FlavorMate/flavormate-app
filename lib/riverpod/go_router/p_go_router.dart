@@ -23,7 +23,7 @@ class PGoRouter extends _$PGoRouter {
     final router = GoRouter(
       navigatorKey: navigationKey,
       debugLogDiagnostics: kDebugMode,
-      initialLocation: '/home',
+      initialLocation: '/splash',
       routes: routes,
       refreshListenable: authStateNotifier,
       redirect: (_, state) {

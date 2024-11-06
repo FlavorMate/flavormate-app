@@ -7,6 +7,8 @@ import 'package:flavormate/models/recipe_draft/recipe_draft.dart';
 class DraftTable extends Table {
   IntColumn get id => integer().autoIncrement()();
 
+  IntColumn get originId => integer().nullable()();
+
   TextColumn get recipeDraft => text().map(const RecipeDraftConverter())();
 
   TextColumn get images => text().map(const FileConverter())();

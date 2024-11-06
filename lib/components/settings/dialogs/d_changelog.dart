@@ -12,11 +12,33 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class DChangelog extends ConsumerWidget {
+class DChangelog extends ConsumerStatefulWidget {
   const DChangelog({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _DChangelogState();
+}
+
+class _DChangelogState extends ConsumerState<DChangelog> {
+  final double _buttonWidth = 100;
+
+  ChangelogVersion? current;
+
+  @override
+  void initState() {
+    ref.listenManual(
+      pChangelogProvider,
+      fireImmediately: true,
+      (_, value) {
+        if (!value.hasValue) return;
+        current = value.value!.sorted.first;
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final provider = ref.watch(pChangelogProvider);
     return Dialog.fullscreen(
       child: Scaffold(
@@ -30,19 +52,55 @@ class DChangelog extends ConsumerWidget {
               L10n.of(context).d_changelog_title,
               TextStyles.headlineMedium,
             ),
-            SizedBox(height: 48),
+            SizedBox(height: PADDING),
+            RStruct(
+              provider,
+              (_, value) => MenuAnchor(
+                builder: (_, controller, widget) => SizedBox(
+                  width: _buttonWidth,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      if (controller.isOpen) {
+                        controller.close();
+                      } else {
+                        controller.open();
+                      }
+                    },
+                    child: TText(
+                      current?.version.toString() ?? '',
+                      TextStyles.titleMedium,
+                      color: TextColor.onPrimaryContainer,
+                    ),
+                  ),
+                ),
+                menuChildren: [
+                  for (final entry in value.sorted)
+                    SizedBox(
+                      width: _buttonWidth,
+                      child: MenuItemButton(
+                        child: Center(
+                          child: TText(
+                            entry.version.toString(),
+                            TextStyles.titleMedium,
+                            color: TextColor.onPrimaryContainer,
+                          ),
+                        ),
+                        onPressed: () => setState(() => current = entry),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            SizedBox(height: PADDING * 3),
             Expanded(
               child: SingleChildScrollView(
-                child: RStruct(
-                  provider,
-                  (_, changelogs) => TColumn(
-                    space: PADDING * 2.5,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      for (final changelog in changelogs)
-                        ChangelogEntry(changelog: changelog),
-                    ],
-                  ),
+                child: TColumn(
+                  space: PADDING * 2.5,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (final change in current?.details ?? [])
+                      _Detail(detail: change),
+                  ],
                 ),
               ),
             ),
@@ -69,12 +127,11 @@ class DChangelog extends ConsumerWidget {
   }
 }
 
-class ChangelogEntry extends StatelessWidget {
-  final Changelog changelog;
+class _Detail extends StatelessWidget {
+  final ChangelogDetail detail;
 
-  const ChangelogEntry({
-    super.key,
-    required this.changelog,
+  const _Detail({
+    required this.detail,
   });
 
   @override
@@ -83,21 +140,12 @@ class ChangelogEntry extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          MdiIcons.values.byName(changelog.icon),
-          size: 48,
+          MdiIcons.values.byName(detail.icon),
+          size: 32,
         ),
-        TColumn(
-          space: 4,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TText(changelog.version, TextStyles.titleMedium),
-            for (final change in changelog.changes)
-              SizedBox(
-                width: 250,
-                child: TText(change, TextStyles.bodyMedium),
-              ),
-          ],
+        SizedBox(
+          width: 250,
+          child: TText(detail.change, TextStyles.bodyMedium),
         ),
       ],
     );

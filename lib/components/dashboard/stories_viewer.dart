@@ -22,8 +22,8 @@ class StoriesViewer extends ConsumerWidget {
         type: TImageType.network,
         date: story.createdOn,
         onTap: () => context.pushNamed(
-          'recipe',
-          pathParameters: {'id': '${story.recipe.id}'},
+          'story',
+          pathParameters: {'id': '${story.id}'},
           extra: story.recipe.label,
         ),
       );

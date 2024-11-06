@@ -19,6 +19,7 @@ class TCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: color ?? Theme.of(context).colorScheme.primaryContainer,
+      margin: EdgeInsets.zero,
       child: InkWell(
         borderRadius: BorderRadius.circular(BORDER_RADIUS),
         onTap: onTap,

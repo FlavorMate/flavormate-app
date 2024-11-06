@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flavormate/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 enum TImageType {
@@ -65,8 +66,7 @@ class _NoImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/images/no_image.png',
+    return Assets.images.noImage.image(
       fit: BoxFit.cover,
       height: height,
       width: width,

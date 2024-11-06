@@ -1,8 +1,9 @@
 import 'package:flavormate/components/recipe/bring_button.dart';
-import 'package:flavormate/components/recipe/recipe_decription.dart';
+import 'package:flavormate/components/recipe/recipe_description.dart';
 import 'package:flavormate/components/recipe/recipe_durations.dart';
 import 'package:flavormate/components/recipe/recipe_ingredients.dart';
 import 'package:flavormate/components/recipe/recipe_instructions.dart';
+import 'package:flavormate/components/recipe/recipe_nutrition.dart';
 import 'package:flavormate/components/recipe/recipe_title.dart';
 import 'package:flavormate/components/t_carousel.dart';
 import 'package:flavormate/components/t_column.dart';
@@ -11,6 +12,7 @@ import 'package:flavormate/components/t_image.dart';
 import 'package:flavormate/components/t_slide.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/recipe/nutrition/nutrition.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -21,6 +23,7 @@ class RecipePageMobile extends StatelessWidget {
   final Recipe recipe;
   final bool isBringEnabled;
   final double servingFactor;
+  final Nutrition? nutrition;
 
   final VoidCallback decreaseServing;
   final VoidCallback increaseServing;
@@ -36,6 +39,7 @@ class RecipePageMobile extends StatelessWidget {
     required this.increaseServing,
     required this.addToBring,
     required this.addBookmark,
+    required this.nutrition,
   });
 
   @override
@@ -74,6 +78,17 @@ class RecipePageMobile extends StatelessWidget {
               cookTime: recipe.cookTime,
               restTime: recipe.restTime,
             ),
+            if (nutrition != null)
+              TColumn(
+                children: [
+                  const Divider(),
+                  RecipeNutrition(
+                    nutrition: nutrition,
+                    factor: servingFactor,
+                    serving: recipe.serving,
+                  )
+                ],
+              ),
             const Divider(),
             RecipeIngredients(
               ingredientGroups: recipe.ingredientGroups,

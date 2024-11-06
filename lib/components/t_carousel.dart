@@ -1,6 +1,7 @@
 import 'package:flavormate/components/t_card.dart';
 import 'package:flavormate/components/t_image_label.dart';
 import 'package:flavormate/components/t_slide.dart';
+import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -22,7 +23,8 @@ class _TCarouselState extends State<TCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.all(PADDING / 4),
       height: widget.height,
       width: double.infinity,
       child: Stack(

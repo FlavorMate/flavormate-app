@@ -1,8 +1,9 @@
 import 'package:flavormate/components/recipe/bring_button.dart';
-import 'package:flavormate/components/recipe/recipe_decription.dart';
+import 'package:flavormate/components/recipe/recipe_description.dart';
 import 'package:flavormate/components/recipe/recipe_durations.dart';
 import 'package:flavormate/components/recipe/recipe_ingredients.dart';
 import 'package:flavormate/components/recipe/recipe_instructions.dart';
+import 'package:flavormate/components/recipe/recipe_nutrition.dart';
 import 'package:flavormate/components/recipe/recipe_title.dart';
 import 'package:flavormate/components/t_carousel.dart';
 import 'package:flavormate/components/t_column.dart';
@@ -12,6 +13,7 @@ import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/t_slide.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/recipe/nutrition/nutrition.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ class RecipePageDesktop extends StatelessWidget {
   final Recipe recipe;
   final bool isBringEnabled;
   final double servingFactor;
+  final Nutrition? nutrition;
 
   final VoidCallback decreaseServing;
   final VoidCallback increaseServing;
@@ -36,6 +39,7 @@ class RecipePageDesktop extends StatelessWidget {
     required this.addToBring,
     required this.addBookmark,
     required this.isBringEnabled,
+    required this.nutrition,
   });
 
   static const _widgetWidth = 450.0;
@@ -87,6 +91,14 @@ class RecipePageDesktop extends StatelessWidget {
                         prepTime: recipe.prepTime,
                         cookTime: recipe.cookTime,
                         restTime: recipe.restTime,
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RecipeNutrition(
+                        nutrition: nutrition,
+                        factor: servingFactor,
+                        serving: recipe.serving,
                       ),
                     ),
                   ],

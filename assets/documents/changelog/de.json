@@ -1,53 +1,98 @@
 [
   {
+    "version": "2.0.0",
+    "details": [
+      {
+        "change": "Nährwerte können Zutaten hinzugefügt werden",
+        "icon": "corn"
+      },
+      {
+        "change": "Open Food Facts kann für Nährwerte benutzt werden (falls auf dem Server aktiviert)",
+        "icon": "searchWeb"
+      },
+      {
+        "change": "Storys können nun erstellt werden - teile deine Geschichte mit anderen",
+        "icon": "heartOutline"
+      },
+      {
+        "change": "Verbesserungen bei der Passwort wiederherstellung",
+        "icon": "formTextboxPassword"
+      },
+      {
+        "change": "Weitere Verbesserungen",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "1.1.1",
-    "changes": [
-      "Ein Fehler auf der Autorenseite wurde behoben"
-    ],
-    "icon": "wrenchOutline"
+    "details": [
+      {
+        "change": "Ein Fehler auf der Autorenseite wurde behoben",
+        "icon": "wrenchOutline"
+      }
+    ]
   },
   {
     "version": "1.1.0",
-    "changes": [
-      "Nutzer können sich nun selbstständig registrieren und ihr Passwort zurücksetzen"
-    ],
-    "icon": "accountReactivateOutline"
+    "details": [
+      {
+        "change": "Nutzer können sich nun selbstständig registrieren und ihr Passwort zurücksetzen",
+        "icon": "accountReactivateOutline"
+      }
+    ]
   },
   {
     "version": "1.0.4",
-    "changes": [
-      "Ein Fehler bei der URL Validierung wurde behoben"
-    ],
-    "icon": "wrenchOutline"
+    "details": [
+      {
+        "change": "Ein Fehler bei der URL Validierung wurde behoben",
+        "icon": "wrenchOutline"
+      }
+    ]
   },
   {
     "version": "1.0.3",
-    "changes": [
-      "Mehrere Fehler wurden behoben"
-    ],
-    "icon": "wrenchOutline"
+    "details": [
+      {
+        "change": "Mehrere Fehler wurden behoben",
+        "icon": "wrenchOutline"
+      }
+    ]
   },
   {
     "version": "1.0.2",
-    "changes": [
-      "Unterstützung für dynamische oder eigene Farben hinzugefügt"
-    ],
-    "icon": "paletteOutline"
+    "details": [
+      {
+        "change": "Unterstützung für dynamische oder eigene Farben hinzugefügt",
+        "icon": "paletteOutline"
+      }
+    ]
   },
   {
     "version": "1.0.1",
-    "changes": [
-      "Neue Login-Seite",
-      "iOS 18 Icons hinzugefügt",
-      "Android 8 & 13 Icons hinzugefügt"
-    ],
-    "icon": "imageOutline"
+    "details": [
+      {
+        "change": "Neue Login-Seite",
+        "icon": "login"
+      },
+      {
+        "change": "iOS 18 Icons hinzugefügt",
+        "icon": "foodAppleOutline"
+      },
+      {
+        "change": "Android 8 & 13 Icons hinzugefügt",
+        "icon": "robotOutline"
+      }
+    ]
   },
   {
     "version": "1.0.0",
-    "changes": [
-      "Initiale Version"
-    ],
-    "icon": "potSteamOutline"
+    "details": [
+      {
+        "change": "Initiale Version",
+        "icon": "potSteamOutline"
+      }
+    ]
   }
 ]
