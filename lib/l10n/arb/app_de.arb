@@ -330,5 +330,9 @@
   "p_story_edit_failed": "Storyentwurf existiert bereits",
   "p_story_editor_upload_failed": "Story konnte nicht hochgeladen werden",
   "p_story_editor_upload_success": "Story erfolgreich hochgeladen",
-  "p_story_edit_invalid": "Story nicht vollständig"
+  "p_story_edit_invalid": "Story nicht vollständig",
+  "p_splash_loading": "Wird geladen ...",
+  "p_server_outdated_title": "Der Server ist nicht mit dieser App Version kompatibel",
+  "p_server_outdated_subtitle": "Prüfe, ob sowohl die App, als auch der Server aktuell ist",
+  "p_server_outdated_timer": "Aktualisierung alle 15 Sekunden"
 }

@@ -915,4 +915,16 @@ class L10nEn extends L10n {
 
   @override
   String get p_story_edit_invalid => 'Story is incomplete';
+
+  @override
+  String get p_splash_loading => 'Loading ...';
+
+  @override
+  String get p_server_outdated_title => 'The server is incompatible with this app version';
+
+  @override
+  String get p_server_outdated_subtitle => 'Please verify that both, the server and the app, are up to date';
+
+  @override
+  String get p_server_outdated_timer => 'Refresh every 15 seconds';
 }

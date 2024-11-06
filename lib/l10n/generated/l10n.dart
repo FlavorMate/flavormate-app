@@ -1894,6 +1894,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Story is incomplete'**
   String get p_story_edit_invalid;
+
+  /// No description provided for @p_splash_loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading ...'**
+  String get p_splash_loading;
+
+  /// No description provided for @p_server_outdated_title.
+  ///
+  /// In en, this message translates to:
+  /// **'The server is incompatible with this app version'**
+  String get p_server_outdated_title;
+
+  /// No description provided for @p_server_outdated_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please verify that both, the server and the app, are up to date'**
+  String get p_server_outdated_subtitle;
+
+  /// No description provided for @p_server_outdated_timer.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh every 15 seconds'**
+  String get p_server_outdated_timer;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

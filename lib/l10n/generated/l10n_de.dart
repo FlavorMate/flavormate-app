@@ -915,4 +915,16 @@ class L10nDe extends L10n {
 
   @override
   String get p_story_edit_invalid => 'Story nicht vollständig';
+
+  @override
+  String get p_splash_loading => 'Wird geladen ...';
+
+  @override
+  String get p_server_outdated_title => 'Der Server ist nicht mit dieser App Version kompatibel';
+
+  @override
+  String get p_server_outdated_subtitle => 'Prüfe, ob sowohl die App, als auch der Server aktuell ist';
+
+  @override
+  String get p_server_outdated_timer => 'Aktualisierung alle 15 Sekunden';
 }

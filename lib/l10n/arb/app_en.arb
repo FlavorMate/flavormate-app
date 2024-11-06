@@ -330,5 +330,9 @@
   "p_story_edit_failed": "Story draft exists already",
   "p_story_editor_upload_failed": "Story couldn't be uploaded",
   "p_story_editor_upload_success": "Story uploaded sucessfully",
-  "p_story_edit_invalid": "Story is incomplete"
+  "p_story_edit_invalid": "Story is incomplete",
+  "p_splash_loading": "Loading ...",
+  "p_server_outdated_title": "The server is incompatible with this app version",
+  "p_server_outdated_subtitle": "Please verify that both, the server and the app, are up to date",
+  "p_server_outdated_timer": "Refresh every 15 seconds"
 }
