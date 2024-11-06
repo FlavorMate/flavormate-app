@@ -29,7 +29,7 @@ class TBubble extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (topLeft) CustomPaint(painter: _Triangle(color)),
-        Flexible(
+        Expanded(
           child: Container(
             decoration: BoxDecoration(
               color: color,
