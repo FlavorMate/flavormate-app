@@ -65,6 +65,7 @@ class _DIngredientState extends ConsumerState<DIngredient> {
   Widget build(BuildContext context) {
     final provider = ref.watch(pUnitsProvider);
     return TAlertDialog(
+      scrollable: true,
       title: L10n.of(context).d_editor_ingredient_title,
       submit: submit,
       child: Form(
