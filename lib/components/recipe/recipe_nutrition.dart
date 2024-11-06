@@ -100,7 +100,11 @@ class NutritionCard extends StatelessWidget {
               child: TColumn(
                 space: PADDING / 2,
                 children: [
-                  TText(nutritionType.getName(context), TextStyles.titleLarge),
+                  TText(
+                    nutritionType.getName(context),
+                    TextStyles.titleLarge,
+                    textAlign: TextAlign.center,
+                  ),
                   TText('${amount.beautify} g / ml', TextStyles.bodyMedium),
                 ],
               ),
