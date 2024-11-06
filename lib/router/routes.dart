@@ -15,7 +15,9 @@ import 'package:flavormate/pages/recipe_drafts/index.dart';
 import 'package:flavormate/pages/recipes/_id.dart';
 import 'package:flavormate/pages/recovery/index.dart';
 import 'package:flavormate/pages/registration/index.dart';
+import 'package:flavormate/pages/server_outdated/index.dart';
 import 'package:flavormate/pages/settings/index.dart';
+import 'package:flavormate/pages/splash/index.dart';
 import 'package:flavormate/pages/story/_id.dart';
 import 'package:flavormate/pages/story_drafts/index.dart';
 import 'package:flavormate/pages/story_editor/_id.dart';
@@ -167,15 +169,15 @@ var routes = [
     ),
   ),
   GoRoute(
-    path: '/no_connection',
-    name: 'no_connection',
+    path: '/no-connection',
+    name: 'no-connection',
     pageBuilder: (context, state) => const NoTransitionPage(
       child: NoConnectionPage(),
     ),
   ),
   GoRoute(
-    path: '/editor/:id',
-    name: 'editor',
+    path: '/recipe-editor/:id',
+    name: 'recipe-editor',
     pageBuilder: (context, state) => NoTransitionPage(
       child: EditorPage(id: state.pathParameters['id'] as String),
     ),
@@ -191,8 +193,8 @@ var routes = [
     ),
   ),
   GoRoute(
-    path: '/drafts',
-    name: 'drafts',
+    path: '/recipe-drafts',
+    name: 'recipe-drafts',
     pageBuilder: (context, state) => const NoTransitionPage(
       child: RecipeDraftsPage(),
     ),
@@ -212,17 +214,28 @@ var routes = [
     ),
   ),
   GoRoute(
-    path: '/storyDrafts',
-    name: 'storyDrafts',
-    pageBuilder: (context, state) => const NoTransitionPage(
+    path: '/story-drafts',
+    name: 'story-drafts',
+    pageBuilder: (context, state) => const MaterialPage(
       child: StoryDraftsPage(),
     ),
   ),
   GoRoute(
-    path: '/storyEditor/:id',
-    name: 'storyEditor',
-    pageBuilder: (context, state) => NoTransitionPage(
+    path: '/story-editor/:id',
+    name: 'story-editor',
+    pageBuilder: (context, state) => MaterialPage(
       child: StoryEditorPage(id: state.pathParameters['id'] as String),
     ),
+  ),
+  GoRoute(
+    path: '/splash',
+    name: 'splash',
+    pageBuilder: (context, state) => const MaterialPage(child: SplashPage()),
+  ),
+  GoRoute(
+    path: '/server-outdated',
+    name: 'server-outdated',
+    pageBuilder: (context, state) =>
+        const MaterialPage(child: ServerOutdatedPage()),
   ),
 ];

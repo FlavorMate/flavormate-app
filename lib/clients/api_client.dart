@@ -60,7 +60,7 @@ _interceptors(InterceptorMethods handlers) => InterceptorsWrapper(
 
         if (error.type == DioExceptionType.connectionError ||
             error.type == DioExceptionType.connectionTimeout) {
-          if (!['/login', '/no_connection'].contains(currentRoute())) {
+          if (!['/login', '/no-connection'].contains(currentRoute())) {
             handlers.onNoConnection();
             return;
           } else {

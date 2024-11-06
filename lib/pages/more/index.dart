@@ -60,7 +60,7 @@ class MorePage extends ConsumerWidget {
                 ),
                 TIconButton(
                   width: 250,
-                  onPressed: () => context.pushNamed('drafts'),
+                  onPressed: () => context.pushNamed('recipe-drafts'),
                   icon: MdiIcons.bookPlus,
                   label: L10n.of(context).p_more_recipes,
                 ),
@@ -68,7 +68,7 @@ class MorePage extends ConsumerWidget {
                   storyProvider,
                   (_) => TIconButton(
                     width: 250,
-                    onPressed: () => context.pushNamed('storyDrafts'),
+                    onPressed: () => context.pushNamed('story-drafts'),
                     icon: MdiIcons.newspaperVariantOutline,
                     label: L10n.of(context).p_more_stories,
                   ),

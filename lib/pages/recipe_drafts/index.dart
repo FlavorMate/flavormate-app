@@ -102,7 +102,7 @@ class RecipeDraftsPage extends ConsumerWidget {
     if (value != true) return;
 
     context.pushNamed(
-      'editor',
+      'recipe-editor',
       pathParameters: {'id': id.toString()},
     );
   }

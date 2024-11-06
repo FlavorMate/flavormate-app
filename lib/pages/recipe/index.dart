@@ -244,7 +244,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     if (id == null) {
       context.showTextSnackBar(L10n.of(context).p_editor_edit_failed);
     } else {
-      context.pushNamed('editor', pathParameters: {'id': '$id'});
+      context.pushNamed('recipe-editor', pathParameters: {'id': '$id'});
     }
   }
 

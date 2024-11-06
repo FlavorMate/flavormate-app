@@ -96,7 +96,7 @@ class StoryDraftsPage extends ConsumerWidget {
 
     if (!context.mounted) return;
     context.pushNamed(
-      'storyEditor',
+      'story-editor',
       pathParameters: {'id': id.toString()},
     );
   }

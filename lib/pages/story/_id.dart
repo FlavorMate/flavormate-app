@@ -136,7 +136,7 @@ class _StoryPageStore extends ConsumerState<StoryPage> {
     if (id == null) {
       context.showTextSnackBar(L10n.of(context).p_story_edit_failed);
     } else {
-      context.pushNamed('storyEditor', pathParameters: {'id': '$id'});
+      context.pushNamed('story-editor', pathParameters: {'id': '$id'});
     }
   }
 
