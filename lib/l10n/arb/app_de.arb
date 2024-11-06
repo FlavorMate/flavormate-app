@@ -333,6 +333,5 @@
   "p_story_edit_invalid": "Story nicht vollständig",
   "p_splash_loading": "Wird geladen ...",
   "p_server_outdated_title": "Der Server ist nicht mit dieser App Version kompatibel",
-  "p_server_outdated_subtitle": "Prüfe, ob sowohl die App, als auch der Server aktuell ist",
-  "p_server_outdated_timer": "Aktualisierung alle 15 Sekunden"
+  "p_server_outdated_subtitle": "Prüfe, ob sowohl die App, als auch der Server aktuell ist"
 }

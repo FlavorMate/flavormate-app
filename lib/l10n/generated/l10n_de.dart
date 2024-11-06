@@ -924,7 +924,4 @@ class L10nDe extends L10n {
 
   @override
   String get p_server_outdated_subtitle => 'Prüfe, ob sowohl die App, als auch der Server aktuell ist';
-
-  @override
-  String get p_server_outdated_timer => 'Aktualisierung alle 15 Sekunden';
 }
