@@ -3,6 +3,7 @@ import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/extensions/e_number.dart';
+import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe/nutrition/nutrition.dart';
 import 'package:flavormate/models/recipe/serving/serving.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -23,56 +24,63 @@ class RecipeNutrition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: PADDING,
-      runSpacing: PADDING,
-      alignment: WrapAlignment.center,
+    return ExpansionTile(
+      title: Text(L10n.of(context).d_nutrition_title),
+      shape: const Border(),
+      childrenPadding: EdgeInsets.symmetric(vertical: PADDING),
       children: [
-        if (UDouble.isPositive(nutrition?.carbohydrates))
-          NutritionCard(
-            amount: nutrition!.carbohydrates!,
-            nutritionType: NutritionType.carbohydrates,
-          ),
-        if (UDouble.isPositive(nutrition?.energyKcal))
-          NutritionCard(
-            amount: nutrition!.energyKcal!,
-            nutritionType: NutritionType.energyKcal,
-          ),
-        if (UDouble.isPositive(nutrition?.fat))
-          NutritionCard(
-            amount: nutrition!.fat!,
-            nutritionType: NutritionType.fat,
-          ),
-        if (UDouble.isPositive(nutrition?.saturatedFat))
-          NutritionCard(
-            amount: nutrition!.saturatedFat!,
-            nutritionType: NutritionType.saturatedFat,
-          ),
-        if (UDouble.isPositive(nutrition?.sugars))
-          NutritionCard(
-            amount: nutrition!.sugars!,
-            nutritionType: NutritionType.sugars,
-          ),
-        if (UDouble.isPositive(nutrition?.fiber))
-          NutritionCard(
-            amount: nutrition!.fiber!,
-            nutritionType: NutritionType.fiber,
-          ),
-        if (UDouble.isPositive(nutrition?.proteins))
-          NutritionCard(
-            amount: nutrition!.proteins!,
-            nutritionType: NutritionType.proteins,
-          ),
-        if (UDouble.isPositive(nutrition?.salt))
-          NutritionCard(
-            amount: nutrition!.salt!,
-            nutritionType: NutritionType.salt,
-          ),
-        if (UDouble.isPositive(nutrition?.sodium))
-          NutritionCard(
-            amount: nutrition!.sodium!,
-            nutritionType: NutritionType.sodium,
-          ),
+        Wrap(
+          spacing: PADDING,
+          runSpacing: PADDING,
+          alignment: WrapAlignment.center,
+          children: [
+            if (UDouble.isPositive(nutrition?.carbohydrates))
+              NutritionCard(
+                amount: nutrition!.carbohydrates!,
+                nutritionType: NutritionType.carbohydrates,
+              ),
+            if (UDouble.isPositive(nutrition?.energyKcal))
+              NutritionCard(
+                amount: nutrition!.energyKcal!,
+                nutritionType: NutritionType.energyKcal,
+              ),
+            if (UDouble.isPositive(nutrition?.fat))
+              NutritionCard(
+                amount: nutrition!.fat!,
+                nutritionType: NutritionType.fat,
+              ),
+            if (UDouble.isPositive(nutrition?.saturatedFat))
+              NutritionCard(
+                amount: nutrition!.saturatedFat!,
+                nutritionType: NutritionType.saturatedFat,
+              ),
+            if (UDouble.isPositive(nutrition?.sugars))
+              NutritionCard(
+                amount: nutrition!.sugars!,
+                nutritionType: NutritionType.sugars,
+              ),
+            if (UDouble.isPositive(nutrition?.fiber))
+              NutritionCard(
+                amount: nutrition!.fiber!,
+                nutritionType: NutritionType.fiber,
+              ),
+            if (UDouble.isPositive(nutrition?.proteins))
+              NutritionCard(
+                amount: nutrition!.proteins!,
+                nutritionType: NutritionType.proteins,
+              ),
+            if (UDouble.isPositive(nutrition?.salt))
+              NutritionCard(
+                amount: nutrition!.salt!,
+                nutritionType: NutritionType.salt,
+              ),
+            if (UDouble.isPositive(nutrition?.sodium))
+              NutritionCard(
+                amount: nutrition!.sodium!,
+                nutritionType: NutritionType.sodium,
+              ),
+          ],
+        )
       ],
     );
   }
