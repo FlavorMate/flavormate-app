@@ -24,6 +24,10 @@ class RecipeNutritionTable extends StatelessWidget {
       columns: [
         TDataColumn(
           alignment: Alignment.centerLeft,
+          width: 24,
+        ),
+        TDataColumn(
+          alignment: Alignment.centerLeft,
           child: Text(L10n.of(context).d_nutrition_title),
         ),
         TDataColumn(
@@ -51,6 +55,7 @@ class RecipeNutritionTable extends StatelessWidget {
         if (UDouble.isPositive(nutrition.fat))
           TDataRow(
             cells: [
+              Icon(NutritionType.fat.icon),
               Text(NutritionType.fat.getName(context)),
               Text(nutrition.fat!.beautify),
               Text(nutrition.fatPercent.beautify),
@@ -59,6 +64,7 @@ class RecipeNutritionTable extends StatelessWidget {
         if (UDouble.isPositive(nutrition.saturatedFat))
           TDataRow(
             cells: [
+              Icon(NutritionType.saturatedFat.icon),
               Padding(
                 padding: const EdgeInsets.only(left: PADDING),
                 child: Text(NutritionType.saturatedFat.getName(context)),
@@ -70,6 +76,7 @@ class RecipeNutritionTable extends StatelessWidget {
         if (UDouble.isPositive(nutrition.carbohydrates))
           TDataRow(
             cells: [
+              Icon(NutritionType.carbohydrates.icon),
               Text(NutritionType.carbohydrates.getName(context)),
               Text(nutrition.carbohydrates!.beautify),
               Text(nutrition.carbohydratesPercent.beautify),
@@ -78,6 +85,7 @@ class RecipeNutritionTable extends StatelessWidget {
         if (UDouble.isPositive(nutrition.sugars))
           TDataRow(
             cells: [
+              Icon(NutritionType.sugars.icon),
               Padding(
                 padding: const EdgeInsets.only(left: PADDING),
                 child: Text(NutritionType.sugars.getName(context)),
@@ -89,6 +97,7 @@ class RecipeNutritionTable extends StatelessWidget {
         if (UDouble.isPositive(nutrition.fiber))
           TDataRow(
             cells: [
+              Icon(NutritionType.fiber.icon),
               Text(NutritionType.fiber.getName(context)),
               Text(nutrition.fiber!.beautify),
               Text(nutrition.fiberPercent.beautify),
@@ -97,6 +106,7 @@ class RecipeNutritionTable extends StatelessWidget {
         if (UDouble.isPositive(nutrition.proteins))
           TDataRow(
             cells: [
+              Icon(NutritionType.proteins.icon),
               Text(NutritionType.proteins.getName(context)),
               Text(nutrition.proteins!.beautify),
               Text(nutrition.proteinsPercent.beautify),
@@ -105,6 +115,7 @@ class RecipeNutritionTable extends StatelessWidget {
         if (UDouble.isPositive(nutrition.salt))
           TDataRow(
             cells: [
+              Icon(NutritionType.salt.icon),
               Text(NutritionType.salt.getName(context)),
               Text(nutrition.salt!.beautify),
               Text(nutrition.saltPercent.beautify),
@@ -113,6 +124,7 @@ class RecipeNutritionTable extends StatelessWidget {
         if (UDouble.isPositive(nutrition.sodium))
           TDataRow(
             cells: [
+              Icon(NutritionType.sodium.icon),
               Text(NutritionType.sodium.getName(context)),
               Text(nutrition.sodium!.beautify),
               Text(nutrition.sodiumPercent.beautify),

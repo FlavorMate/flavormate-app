@@ -47,6 +47,8 @@ class RecipeNutritionDesktop extends StatelessWidget {
             ),
             RecipeNutritionChart(
               size: 256,
+              space: 4,
+              showLabels: true,
               nutrition: nutrition!,
             ),
           ],

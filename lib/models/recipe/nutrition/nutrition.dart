@@ -3,7 +3,7 @@ import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/entity.dart';
 import 'package:flavormate/models/recipe_draft/nutrition/nutrition_draft.dart';
 import 'package:flavormate/utils/u_double.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 part 'nutrition.mapper.dart';
@@ -188,5 +188,11 @@ enum NutritionType {
       NutritionType.salt => L10n.of(context).nutrition_salt,
       NutritionType.sodium => L10n.of(context).nutrition_sodium,
     };
+  }
+
+  Color getColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.light
+        ? colorLight
+        : colorDark;
   }
 }

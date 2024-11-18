@@ -32,28 +32,9 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
       width: widget.size,
       child: PieChart(
         PieChartData(
-          pieTouchData: PieTouchData(
-            touchCallback: (FlTouchEvent event, pieTouchResponse) {
-              // setState(() {
-              //   if (!event.isInterestedForInteractions ||
-              //       pieTouchResponse == null ||
-              //       pieTouchResponse.touchedSection == null) {
-              //     touchedIndex = -1;
-              //     return;
-              //   }
-              //   touchedIndex =
-              //       pieTouchResponse.touchedSection!.touchedSectionIndex;
-              // });
-            },
-          ),
           sectionsSpace: widget.space,
-          // centerSpaceRadius: widget.centerSpace,
           sections: showingSections(),
         ),
-
-        swapAnimationDuration: Duration(milliseconds: 150),
-        // Optional
-        swapAnimationCurve: Curves.linear, // Optional
       ),
     );
   }
@@ -65,7 +46,7 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
     return [
       if (UDouble.isPositive(widget.nutrition.carbohydrates))
         PieChartSectionData(
-          color: NutritionType.carbohydrates.colorLight,
+          color: NutritionType.carbohydrates.getColor(context),
           value: widget.nutrition.carbohydratesPercent,
           showTitle: widget.showLabels,
           title: '${widget.nutrition.carbohydratesPercent.beautify}%',
@@ -76,16 +57,11 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
             color: const Color(0xffffffff),
             shadows: shadows,
           ),
-          // badgeWidget: _Badge(
-          //   'assets/icons/ophthalmology-svgrepo-com.svg',
-          //   size: widgetSize,
-          //   borderColor: AppColors.contentColorBlack,
-          // ),
           badgePositionPercentageOffset: .98,
         ),
       if (UDouble.isPositive(widget.nutrition.fat))
         PieChartSectionData(
-          color: NutritionType.fat.colorLight,
+          color: NutritionType.fat.getColor(context),
           value: widget.nutrition.fatPercent,
           showTitle: widget.showLabels,
           title: '${widget.nutrition.fatPercent.beautify}%',
@@ -96,16 +72,10 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
             color: const Color(0xffffffff),
             shadows: shadows,
           ),
-          // badgeWidget: _Badge(
-          //   'assets/icons/ophthalmology-svgrepo-com.svg',
-          //   size: widgetSize,
-          //   borderColor: AppColors.contentColorBlack,
-          // ),
-          badgePositionPercentageOffset: .98,
         ),
       if (UDouble.isPositive(widget.nutrition.fiber))
         PieChartSectionData(
-          color: NutritionType.fiber.colorLight,
+          color: NutritionType.fiber.getColor(context),
           value: widget.nutrition.fiberPercent,
           showTitle: widget.showLabels,
           title: '${widget.nutrition.fiberPercent.beautify}%',
@@ -116,16 +86,10 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
             color: const Color(0xffffffff),
             shadows: shadows,
           ),
-          // badgeWidget: _Badge(
-          //   'assets/icons/ophthalmology-svgrepo-com.svg',
-          //   size: widgetSize,
-          //   borderColor: AppColors.contentColorBlack,
-          // ),
-          badgePositionPercentageOffset: .98,
         ),
       if (UDouble.isPositive(widget.nutrition.proteins))
         PieChartSectionData(
-          color: NutritionType.proteins.colorLight,
+          color: NutritionType.proteins.getColor(context),
           value: widget.nutrition.proteinsPercent,
           showTitle: widget.showLabels,
           title: '${widget.nutrition.proteinsPercent.beautify}%',
@@ -136,16 +100,10 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
             color: const Color(0xffffffff),
             shadows: shadows,
           ),
-          // badgeWidget: _Badge(
-          //   'assets/icons/ophthalmology-svgrepo-com.svg',
-          //   size: widgetSize,
-          //   borderColor: AppColors.contentColorBlack,
-          // ),
-          badgePositionPercentageOffset: .98,
         ),
       if (UDouble.isPositive(widget.nutrition.salt))
         PieChartSectionData(
-          color: NutritionType.salt.colorLight,
+          color: NutritionType.salt.getColor(context),
           value: widget.nutrition.saltPercent,
           showTitle: widget.showLabels,
           title: '${widget.nutrition.saltPercent.beautify}%',
@@ -156,16 +114,10 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
             color: const Color(0xffffffff),
             shadows: shadows,
           ),
-          // badgeWidget: _Badge(
-          //   'assets/icons/ophthalmology-svgrepo-com.svg',
-          //   size: widgetSize,
-          //   borderColor: AppColors.contentColorBlack,
-          // ),
-          badgePositionPercentageOffset: .98,
         ),
       if (UDouble.isPositive(widget.nutrition.sodium))
         PieChartSectionData(
-          color: NutritionType.sodium.colorLight,
+          color: NutritionType.sodium.getColor(context),
           value: widget.nutrition.sodiumPercent,
           showTitle: widget.showLabels,
           title: '${widget.nutrition.sodiumPercent.beautify}%',
@@ -176,12 +128,6 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
             color: const Color(0xffffffff),
             shadows: shadows,
           ),
-          // badgeWidget: _Badge(
-          //   'assets/icons/ophthalmology-svgrepo-com.svg',
-          //   size: widgetSize,
-          //   borderColor: AppColors.contentColorBlack,
-          // ),
-          badgePositionPercentageOffset: .98,
         )
     ];
   }
