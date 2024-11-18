@@ -63,6 +63,7 @@ class TDataTable extends StatelessWidget {
             rows: [
               for (final row in rows)
                 DataRow(
+                  color: WidgetStateProperty.all(row.background),
                   onSelectChanged: row.onSelectChanged,
                   cells: [
                     for (final (index, cell) in row.cells.indexed)
@@ -117,10 +118,12 @@ class TDataColumn {
 
 class TDataRow {
   final void Function(bool?)? onSelectChanged;
+  final Color? background;
   final List<Widget> cells;
 
   TDataRow({
     this.onSelectChanged,
+    this.background,
     required this.cells,
   });
 }
