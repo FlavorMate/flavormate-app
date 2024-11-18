@@ -40,6 +40,31 @@ class Nutrition extends Entity with NutritionMappable {
     this.sodium,
   });
 
+  double get sum =>
+      0.0 +
+      (carbohydrates ?? 0) +
+      (fat ?? 0) +
+      (fiber ?? 0) +
+      (proteins ?? 0) +
+      (salt ?? 0) +
+      (sodium ?? 0);
+
+  double get carbohydratesPercent => 100 / sum * (carbohydrates ?? 0);
+
+  double get sugarsPercent => 100 / sum * (sugars ?? 0);
+
+  double get fatPercent => 100 / sum * (fat ?? 0);
+
+  double get saturatedFatPercent => 100 / sum * (saturatedFat ?? 0);
+
+  double get fiberPercent => 100 / sum * (fiber ?? 0);
+
+  double get proteinsPercent => 100 / sum * (proteins ?? 0);
+
+  double get saltPercent => 100 / sum * (salt ?? 0);
+
+  double get sodiumPercent => 100 / sum * (sodium ?? 0);
+
   Nutrition add(Nutrition other) {
     return Nutrition(
       carbohydrates: UDouble.add(carbohydrates, other.carbohydrates),
@@ -99,19 +124,57 @@ class Nutrition extends Entity with NutritionMappable {
 }
 
 enum NutritionType {
-  carbohydrates(MdiIcons.corn),
-  energyKcal(MdiIcons.fire),
-  fat(MdiIcons.waterOutline),
-  saturatedFat(MdiIcons.foodDrumstickOutline),
-  sugars(MdiIcons.cubeOutline),
-  fiber(MdiIcons.leaf),
-  proteins(MdiIcons.peanutOutline),
-  salt(MdiIcons.shakerOutline),
-  sodium(MdiIcons.flaskOutline);
+  carbohydrates(
+    MdiIcons.corn,
+    Color(0xFFFFD1A9),
+    Color(0xFFFF8E62),
+  ),
+  sugars(
+    MdiIcons.cubeOutline,
+    Color(0xFFFDC7B0),
+    Color(0xFFFF826D),
+  ),
+  energyKcal(
+    MdiIcons.fire,
+    Color(0xFFF4B3B3),
+    Color(0xFFE57373),
+  ),
+  fat(
+    MdiIcons.waterOutline,
+    Color(0xFFFFF5CC),
+    Color(0xFFFFD966),
+  ),
+  saturatedFat(
+    MdiIcons.foodDrumstickOutline,
+    Color(0xFFFDC7B0),
+    Color(0xFFFF826D),
+  ),
+  fiber(
+    MdiIcons.leaf,
+    Color(0xFFB9E4C9),
+    Color(0xFF76C7A2),
+  ),
+  proteins(
+    MdiIcons.peanutOutline,
+    Color(0xFFA8D8EB),
+    Color(0xFF5EB3D4),
+  ),
+  salt(
+    MdiIcons.shakerOutline,
+    Color(0xFFE3E3E3),
+    Color(0xFFA9A9A9),
+  ),
+  sodium(
+    MdiIcons.flaskOutline,
+    Color(0xFFD8C2AC),
+    Color(0xFFC19A76),
+  );
 
   final IconData icon;
+  final Color colorLight;
+  final Color colorDark;
 
-  const NutritionType(this.icon);
+  const NutritionType(this.icon, this.colorLight, this.colorDark);
 
   String getName(BuildContext context) {
     return switch (this) {

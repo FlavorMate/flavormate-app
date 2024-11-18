@@ -3,7 +3,7 @@ import 'package:flavormate/components/recipe/recipe_description.dart';
 import 'package:flavormate/components/recipe/recipe_durations.dart';
 import 'package:flavormate/components/recipe/recipe_ingredients.dart';
 import 'package:flavormate/components/recipe/recipe_instructions.dart';
-import 'package:flavormate/components/recipe/recipe_nutrition.dart';
+import 'package:flavormate/components/recipe/recipe_nutrition_desktop.dart';
 import 'package:flavormate/components/recipe/recipe_title.dart';
 import 'package:flavormate/components/t_carousel.dart';
 import 'package:flavormate/components/t_column.dart';
@@ -93,20 +93,18 @@ class RecipePageDesktop extends StatelessWidget {
                         restTime: recipe.restTime,
                       ),
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: RecipeNutrition(
-                        nutrition: nutrition,
-                        factor: servingFactor,
-                        serving: recipe.serving,
-                      ),
-                    ),
                   ],
                 ),
               )
             ],
           ),
         ),
+        if (nutrition != null)
+          RecipeNutritionDesktop(
+            nutrition: nutrition,
+            serving: recipe.serving,
+            servingFactor: servingFactor,
+          ),
         IntrinsicHeight(
           child: TRow(
             crossAxisAlignment: CrossAxisAlignment.stretch,
