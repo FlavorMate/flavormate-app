@@ -12,14 +12,20 @@ class RecipeNutritionTable extends StatelessWidget {
   final double factor;
   final Nutrition nutrition;
 
-  const RecipeNutritionTable(
-      {super.key,
-      required this.serving,
-      required this.factor,
-      required this.nutrition});
+  final int selected;
+
+  const RecipeNutritionTable({
+    super.key,
+    required this.serving,
+    required this.factor,
+    required this.nutrition,
+    this.selected = -1,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final selectedColor = Theme.of(context).colorScheme.primaryContainer;
+
     return TDataTable(
       columns: [
         TDataColumn(
@@ -54,6 +60,7 @@ class RecipeNutritionTable extends StatelessWidget {
       rows: [
         if (UDouble.isPositive(nutrition.fat))
           TDataRow(
+            background: selected == 0 ? selectedColor : null,
             cells: [
               Icon(NutritionType.fat.icon),
               Text(NutritionType.fat.getName(context)),
@@ -63,6 +70,7 @@ class RecipeNutritionTable extends StatelessWidget {
           ),
         if (UDouble.isPositive(nutrition.saturatedFat))
           TDataRow(
+            background: selected == 0 ? selectedColor : null,
             cells: [
               Icon(NutritionType.saturatedFat.icon),
               Padding(
@@ -75,6 +83,7 @@ class RecipeNutritionTable extends StatelessWidget {
           ),
         if (UDouble.isPositive(nutrition.carbohydrates))
           TDataRow(
+            background: selected == 1 ? selectedColor : null,
             cells: [
               Icon(NutritionType.carbohydrates.icon),
               Text(NutritionType.carbohydrates.getName(context)),
@@ -84,6 +93,7 @@ class RecipeNutritionTable extends StatelessWidget {
           ),
         if (UDouble.isPositive(nutrition.sugars))
           TDataRow(
+            background: selected == 1 ? selectedColor : null,
             cells: [
               Icon(NutritionType.sugars.icon),
               Padding(
@@ -96,6 +106,7 @@ class RecipeNutritionTable extends StatelessWidget {
           ),
         if (UDouble.isPositive(nutrition.fiber))
           TDataRow(
+            background: selected == 2 ? selectedColor : null,
             cells: [
               Icon(NutritionType.fiber.icon),
               Text(NutritionType.fiber.getName(context)),
@@ -105,6 +116,7 @@ class RecipeNutritionTable extends StatelessWidget {
           ),
         if (UDouble.isPositive(nutrition.proteins))
           TDataRow(
+            background: selected == 3 ? selectedColor : null,
             cells: [
               Icon(NutritionType.proteins.icon),
               Text(NutritionType.proteins.getName(context)),
@@ -114,6 +126,7 @@ class RecipeNutritionTable extends StatelessWidget {
           ),
         if (UDouble.isPositive(nutrition.salt))
           TDataRow(
+            background: selected == 4 ? selectedColor : null,
             cells: [
               Icon(NutritionType.salt.icon),
               Text(NutritionType.salt.getName(context)),
@@ -123,6 +136,7 @@ class RecipeNutritionTable extends StatelessWidget {
           ),
         if (UDouble.isPositive(nutrition.sodium))
           TDataRow(
+            background: selected == 5 ? selectedColor : null,
             cells: [
               Icon(NutritionType.sodium.icon),
               Text(NutritionType.sodium.getName(context)),

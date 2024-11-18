@@ -6,7 +6,7 @@ import 'package:flavormate/models/recipe/serving/serving.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class RecipeNutrition extends StatelessWidget {
+class RecipeNutrition extends StatefulWidget {
   final Nutrition? nutrition;
   final double factor;
   final Serving serving;
@@ -19,13 +19,20 @@ class RecipeNutrition extends StatelessWidget {
   });
 
   @override
+  State<RecipeNutrition> createState() => _RecipeNutritionState();
+}
+
+class _RecipeNutritionState extends State<RecipeNutrition> {
+  int _selectedIndex = -1;
+
+  @override
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Row(
         children: [
           Expanded(child: Text(L10n.of(context).d_nutrition_title)),
           RecipeNutritionChart(
-            nutrition: nutrition!,
+            nutrition: widget.nutrition!,
             space: 1,
             size: 32,
             showLabels: false,
@@ -36,14 +43,16 @@ class RecipeNutrition extends StatelessWidget {
       childrenPadding: EdgeInsets.symmetric(vertical: PADDING),
       children: [
         RecipeNutritionChart(
-          nutrition: nutrition!,
+          nutrition: widget.nutrition!,
           size: 256,
+          onTouch: (val) => setState(() => _selectedIndex = val),
         ),
         Center(
           child: RecipeNutritionTable(
-            serving: serving,
-            factor: factor,
-            nutrition: nutrition!,
+            serving: widget.serving,
+            factor: widget.factor,
+            nutrition: widget.nutrition!,
+            selected: _selectedIndex,
           ),
         ),
       ],
