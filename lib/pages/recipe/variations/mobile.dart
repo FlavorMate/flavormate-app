@@ -3,7 +3,7 @@ import 'package:flavormate/components/recipe/recipe_description.dart';
 import 'package:flavormate/components/recipe/recipe_durations.dart';
 import 'package:flavormate/components/recipe/recipe_ingredients.dart';
 import 'package:flavormate/components/recipe/recipe_instructions.dart';
-import 'package:flavormate/components/recipe/recipe_nutrition.dart';
+import 'package:flavormate/components/recipe/recipe_nutrition_mobile.dart';
 import 'package:flavormate/components/recipe/recipe_title.dart';
 import 'package:flavormate/components/t_carousel.dart';
 import 'package:flavormate/components/t_column.dart';

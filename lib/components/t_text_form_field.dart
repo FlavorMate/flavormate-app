@@ -12,6 +12,8 @@ class TTextFormField extends StatelessWidget {
   final bool readOnly;
   final Function(String)? onChanged;
   final Function(PointerDownEvent)? onTapOutside;
+  final VoidCallback? clear;
+  final FocusNode? focusNode;
 
   const TTextFormField({
     super.key,
@@ -25,16 +27,19 @@ class TTextFormField extends StatelessWidget {
     this.keyboardType,
     this.maxLines = 1,
     this.readOnly = false,
+    this.focusNode,
+    this.clear,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: focusNode,
       controller: controller,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         label: label != null ? Text(label!) : null,
-        suffix: suffix ?? _ClearButton(clear: controller.clear),
+        suffix: suffix ?? _ClearButton(clear: clearField),
         prefixIcon: prefix,
       ),
       maxLines: maxLines,
@@ -45,6 +50,11 @@ class TTextFormField extends StatelessWidget {
       onChanged: onChanged,
       onTapOutside: onTapOutside,
     );
+  }
+
+  void clearField() {
+    clear?.call();
+    controller.clear();
   }
 }
 

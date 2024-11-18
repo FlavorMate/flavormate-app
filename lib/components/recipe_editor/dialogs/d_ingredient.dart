@@ -3,6 +3,7 @@ import 'package:flavormate/components/recipe_editor/dialogs/d_nutrition.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_button.dart';
 import 'package:flavormate/components/t_column.dart';
+import 'package:flavormate/components/t_text_form_field.dart';
 import 'package:flavormate/extensions/e_number.dart';
 import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -11,6 +12,7 @@ import 'package:flavormate/models/recipe_draft/ingredients/ingredient_draft.dart
 import 'package:flavormate/models/recipe_draft/nutrition/nutrition_draft.dart';
 import 'package:flavormate/riverpod/units/p_units.dart';
 import 'package:flavormate/utils/constants.dart';
+import 'package:flavormate/utils/u_double.dart';
 import 'package:flavormate/utils/u_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -73,41 +75,18 @@ class _DIngredientState extends ConsumerState<DIngredient> {
         child: TColumn(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextFormField(
+            TTextFormField(
               controller: _amountController,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                label: Text(L10n.of(context).d_editor_ingredient_amount),
-                suffix: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: () => _amountController.clear(),
-                    child: Icon(
-                      MdiIcons.delete,
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
-                ),
-              ),
-              validator: (input) {
-                if (EString.isEmpty(input)) return null;
-
-                if (!UValidator.isNumber(input!)) {
-                  return L10n.of(context).v_isNumber;
-                }
-
-                return null;
-              },
+              onChanged: setAmount,
+              label: L10n.of(context).d_editor_ingredient_amount,
+              validators: (input) =>
+                  UValidatorPresets.isNumberNullable(context, input),
             ),
             if (_oldUnitController.text.isNotEmpty)
-              TextField(
+              TTextFormField(
                 controller: _oldUnitController,
                 readOnly: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label:
-                      Text(L10n.of(context).d_editor_ingredient_old_unit_label),
-                ),
+                label: L10n.of(context).d_editor_ingredient_old_unit_label,
               ),
             RStruct(
               provider,
@@ -138,23 +117,11 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                         TextEditingController fieldTextEditingController,
                         FocusNode fieldFocusNode,
                         VoidCallback onFieldSubmitted) =>
-                    TextField(
+                    TTextFormField(
                   controller: fieldTextEditingController,
+                  label: L10n.of(context).d_editor_ingredient_unit,
                   focusNode: fieldFocusNode,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(L10n.of(context).d_editor_ingredient_unit),
-                    suffix: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () => clearUnit(fieldTextEditingController),
-                        child: Icon(
-                          MdiIcons.delete,
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                      ),
-                    ),
-                  ),
+                  clear: clearUnit,
                 ),
                 onSelected: (UnitLocalized selection) {
                   setState(() {
@@ -174,19 +141,11 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                 },
               ),
             ),
-            TextFormField(
+            TTextFormField(
               controller: _ingredientController,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                label: Text(L10n.of(context).d_editor_ingredient_label),
-              ),
-              validator: (input) {
-                if (UValidator.isEmpty(input)) {
-                  return L10n.of(context).v_isEmpty;
-                }
-
-                return null;
-              },
+              label: L10n.of(context).d_editor_ingredient_label,
+              validators: (input) =>
+                  UValidatorPresets.isNotEmpty(context, input),
             ),
             TButton(
               onPressed: openNutrition,
@@ -200,6 +159,14 @@ class _DIngredientState extends ConsumerState<DIngredient> {
         ),
       ),
     );
+  }
+
+  void setAmount(String? value) {
+    _ingredient.amount = UDouble.tryParsePositive(_amountController.text);
+  }
+
+  void clearUnit() {
+    setState(() => _ingredient.unitLocalized = null);
   }
 
   void openNutrition() async {
@@ -220,24 +187,12 @@ class _DIngredientState extends ConsumerState<DIngredient> {
     });
   }
 
-  void clearUnit(TextEditingController unitController) {
-    setState(() {
-      _ingredient.unitLocalized = null;
-      unitController.clear();
-    });
-  }
-
   void submit() {
     if (!_formKey.currentState!.validate()) return;
 
-    var parsedAmount = double.tryParse(_amountController.text);
-    if (parsedAmount != null && parsedAmount <= 0) {
-      parsedAmount = null;
-    }
-
     context.pop(
       IngredientDraft(
-        amount: parsedAmount,
+        amount: _ingredient.amount,
         unit: _ingredient.unit,
         unitLocalized: _ingredient.unitLocalized,
         label: _ingredientController.text.trim(),
