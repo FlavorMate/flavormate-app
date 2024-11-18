@@ -1,5 +1,18 @@
 [
   {
+    "version": "2.0.1",
+    "details": [
+      {
+        "change": "Nährwerte werden verbessert dargestellt",
+        "icon": "nutrition"
+      },
+      {
+        "change": "Weitere Verbesserungen",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "2.0.0",
     "details": [
       {

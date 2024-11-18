@@ -1,5 +1,18 @@
 [
   {
+    "version": "2.0.1",
+    "details": [
+      {
+        "change": "Nutritional values are presented in an improved manner",
+        "icon": "nutrition"
+      },
+      {
+        "change": "Other improvements",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "2.0.0",
     "details": [
       {
