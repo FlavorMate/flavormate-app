@@ -128,8 +128,10 @@ class _TTableState extends State<TTable> {
     return Table(
       columnWidths: _columnWidth,
       border: TableBorder(
-        horizontalInside: BorderSide(color: Colors.grey.shade300, width: 1),
-        // verticalInside: BorderSide(color: Colors.grey, width: 1),
+        horizontalInside: BorderSide(
+          color: Theme.of(context).dividerColor,
+          width: .5,
+        ),
       ),
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
@@ -137,7 +139,10 @@ class _TTableState extends State<TTable> {
           children: [
             for (var (index, head) in widget.header.indexed)
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 16,
+                ),
                 child: TText(
                   head,
                   TextStyles.labelLarge,
@@ -151,7 +156,10 @@ class _TTableState extends State<TTable> {
             children: [
               for (var (index, cell) in row.indexed)
                 Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 8,
+                  ),
                   child: Text(
                     cell,
                     textAlign: _cellTextAligns.elementAt(index),
