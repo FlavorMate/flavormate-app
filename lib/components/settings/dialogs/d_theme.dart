@@ -5,6 +5,7 @@ import 'package:flavormate/components/t_icon_button.dart';
 import 'package:flavormate/components/t_row.dart';
 import 'package:flavormate/components/t_scrollable_h.dart';
 import 'package:flavormate/components/t_text.dart';
+import 'package:flavormate/components/t_text_form_field.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_shared_preferences.dart';
 import 'package:flavormate/riverpod/theme/p_custom_color.dart';
@@ -235,11 +236,9 @@ class _DThemeState extends ConsumerState<DTheme> {
                     Checkbox(value: true, onChanged: (_) {}),
                   ],
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    label: Text(L10n.of(context).d_settings_theme_example),
-                  ),
+                TTextFormField(
+                  controller: TextEditingController(),
+                  label: L10n.of(context).d_settings_theme_example,
                 ),
                 TRow(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

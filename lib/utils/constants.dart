@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 const double PADDING = 16.0;
 const double BORDER_RADIUS = 12;
+const double TABLE_ICON_WIDTH = 48;
 
 const FLAVORMATE_GETTING_STARTED =
     'https://flavormate.de/getting-started/backend/';

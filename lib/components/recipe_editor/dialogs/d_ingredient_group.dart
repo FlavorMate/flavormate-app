@@ -1,11 +1,13 @@
-import 'package:collection/collection.dart';
 import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/recipe_editor/dialogs/d_ingredient.dart';
 import 'package:flavormate/components/t_column.dart';
+import 'package:flavormate/components/t_data_table.dart';
+import 'package:flavormate/components/t_text_form_field.dart';
 import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_draft.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_group_draft.dart';
+import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
@@ -47,78 +49,42 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
       submit: () => submit(context),
       child: TColumn(
         children: [
-          TextField(
+          TTextFormField(
             controller: _labelController,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              label: Text(L10n.of(context).d_editor_ingredient_group_label),
-            ),
+            label: L10n.of(context).d_editor_ingredient_group_label,
           ),
-          SizedBox(
-            width: double.infinity,
-            child: LayoutBuilder(builder: (context, constraints) {
-              return DataTable(
-                columnSpacing: 0,
-                horizontalMargin: 0,
-                showCheckboxColumn: false,
-                columns: [
-                  DataColumn(
-                    label: SizedBox(
-                      width: constraints.minWidth - 128 - 48,
-                      child: Text(
-                        L10n.of(context).d_editor_ingredient_group_ingredient,
-                      ),
+          TDataTable(
+            columns: [
+              TDataColumn(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  L10n.of(context).d_editor_ingredient_group_ingredient,
+                ),
+              ),
+              TDataColumn(
+                child: Text(L10n.of(context).d_nutrition_title),
+                width: 128,
+              ),
+              TDataColumn(width: TABLE_ICON_WIDTH),
+            ],
+            rows: [
+              for (final ingredient in _ingredientGroup.ingredients)
+                TDataRow(
+                  onSelectChanged: (_) => openIngredient(ingredient),
+                  cells: [
+                    Text(ingredient.beautify),
+                    Visibility(
+                      visible: ingredient.nutrition?.exists ?? false,
+                      child: Icon(MdiIcons.checkCircleOutline),
                     ),
-                  ),
-                  DataColumn(
-                    label: SizedBox(
-                      width: 128,
-                      child: Center(
-                          child: Text(L10n.of(context).d_nutrition_title)),
+                    IconButton(
+                      onPressed: () => deleteIngredient(ingredient),
+                      icon: Icon(MdiIcons.delete),
+                      color: Colors.red,
                     ),
-                  ),
-                  DataColumn(
-                    label: SizedBox(width: 48),
-                  ),
-                ],
-                rows: _ingredientGroup.ingredients
-                    .mapIndexed(
-                      (index, iG) => DataRow(
-                        onSelectChanged: (_) => openIngredient(iG),
-                        cells: [
-                          DataCell(
-                            SizedBox(
-                              width: constraints.minWidth - 128 - 48,
-                              child:
-                                  Text(iG.beautify.isEmpty ? '-' : iG.beautify),
-                            ),
-                          ),
-                          DataCell(
-                            SizedBox(
-                                width: 128,
-                                child: Visibility(
-                                  visible: iG.nutrition?.exists ?? false,
-                                  child: Icon(MdiIcons.checkCircleOutline),
-                                )),
-                          ),
-                          DataCell(
-                            SizedBox(
-                              width: 48,
-                              child: IconButton(
-                                onPressed: () => deleteIngredient(iG),
-                                icon: Icon(
-                                  MdiIcons.delete,
-                                  color: Theme.of(context).colorScheme.error,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                    .toList(),
-              );
-            }),
+                  ],
+                ),
+            ],
           ),
           FilledButton.tonal(
             onPressed: createIngredient,
@@ -147,7 +113,7 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
   }
 
   void createIngredient() {
-    final ingredient = IngredientDraft(amount: 0, label: '');
+    final ingredient = IngredientDraft(label: '');
 
     setState(() => _ingredientGroup.ingredients.add(ingredient));
 

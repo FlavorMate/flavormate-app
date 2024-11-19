@@ -1,7 +1,7 @@
-import 'package:collection/collection.dart';
 import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/recipe_editor/dialogs/d_ingredient_group.dart';
 import 'package:flavormate/components/t_column.dart';
+import 'package:flavormate/components/t_data_table.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe_draft/ingredients/ingredient_group_draft.dart';
 import 'package:flutter/material.dart';
@@ -37,51 +37,27 @@ class _DIngredientGroupsState extends State<DIngredientGroups> {
       submit: () => submit(context),
       child: TColumn(
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: DataTable(
-              showCheckboxColumn: false,
-              columns: [
-                DataColumn(
-                  label:
-                      Text(L10n.of(context).d_editor_ingredient_groups_label),
+          TDataTable(
+            columns: [
+              TDataColumn(
+                alignment: Alignment.centerLeft,
+                child: Text(L10n.of(context).d_editor_ingredient_groups_label),
+              ),
+              TDataColumn(width: 48),
+            ],
+            rows: [
+              for (final (index, group) in _ingredientGroups.indexed)
+                TDataRow(
+                  onSelectChanged: (_) => openGroup(group),
+                  cells: [
+                    Text(getName(context, group.label, index)),
+                    IconButton(
+                      onPressed: () => deleteGroup(group),
+                      icon: Icon(MdiIcons.delete, color: Colors.red),
+                    )
+                  ],
                 ),
-                DataColumn(label: Container()),
-              ],
-              rows: _ingredientGroups
-                  .mapIndexed(
-                    (index, iG) => DataRow(
-                      onSelectChanged: (_) => openGroup(iG),
-                      cells: [
-                        DataCell(
-                          SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              (iG.label?.isEmpty ?? true)
-                                  ? L10n.of(context)
-                                      .d_editor_ingredient_groups_label_2(
-                                      '${index + 1}',
-                                    )
-                                  : iG.label!,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Center(
-                            child: IconButton(
-                              onPressed: () => deleteGroup(iG),
-                              icon: Icon(
-                                MdiIcons.delete,
-                                color: Theme.of(context).colorScheme.error,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            ),
+            ],
           ),
           FilledButton.tonal(
             onPressed: createGroup,
@@ -91,6 +67,16 @@ class _DIngredientGroupsState extends State<DIngredientGroups> {
         ],
       ),
     );
+  }
+
+  String getName(BuildContext context, String? val, int index) {
+    if (val?.isEmpty ?? true) {
+      return L10n.of(context).d_editor_ingredient_groups_label_2(
+        '${index + 1}',
+      );
+    } else {
+      return val!;
+    }
   }
 
   void openGroup(IngredientGroupDraft group) async {
