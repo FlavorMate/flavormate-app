@@ -32,6 +32,6 @@ class IngredientDraft with IngredientDraftMappable {
     if (unitLocalized != null) parts.add(unitLocalized!.getLabel(amount));
     parts.add(label);
 
-    return parts.join(' ');
+    return parts.isEmpty ? '-' : parts.join(' ');
   }
 }

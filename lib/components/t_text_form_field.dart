@@ -69,10 +69,7 @@ class _ClearButton extends StatelessWidget {
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: clear,
-        child: Icon(
-          MdiIcons.delete,
-          color: Theme.of(context).colorScheme.error,
-        ),
+        child: Icon(MdiIcons.delete, color: Colors.red),
       ),
     );
   }
