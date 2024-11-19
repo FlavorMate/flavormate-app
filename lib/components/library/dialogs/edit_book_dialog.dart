@@ -1,5 +1,7 @@
 import 'package:flavormate/components/dialogs/t_alert_dialog.dart';
+import 'package:flavormate/components/t_text_form_field.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/utils/u_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,6 +16,7 @@ class EditBookDialog extends StatefulWidget {
 
 class _EditBookDialogState extends State<EditBookDialog> {
   final _controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -26,17 +29,19 @@ class _EditBookDialogState extends State<EditBookDialog> {
     return TAlertDialog(
       title: L10n.of(context).d_library_edit_title,
       submit: submit,
-      child: TextField(
-        controller: _controller,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          label: Text(L10n.of(context).d_library_edit_name),
+      child: Form(
+        key: _formKey,
+        child: TTextFormField(
+          controller: _controller,
+          label: L10n.of(context).d_library_edit_name,
+          validators: (input) => UValidatorPresets.isNotEmpty(context, input),
         ),
       ),
     );
   }
 
   void submit() {
+    if (!_formKey.currentState!.validate()) return;
     context.pop(_controller.text);
   }
 }

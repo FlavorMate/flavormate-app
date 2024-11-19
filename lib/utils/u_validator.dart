@@ -54,4 +54,16 @@ abstract class UValidatorPresets {
 
     return null;
   }
+
+  static String? isNumber(BuildContext context, String? input) {
+    if (EString.isEmpty(input)) {
+      return L10n.of(context).v_isEmpty;
+    }
+
+    if (!UValidator.isNumber(input!)) {
+      return L10n.of(context).v_isNumber;
+    }
+
+    return null;
+  }
 }

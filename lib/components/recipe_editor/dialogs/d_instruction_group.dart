@@ -2,6 +2,7 @@ import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/recipe_editor/dialogs/d_instruction.dart';
 import 'package:flavormate/components/t_column.dart';
 import 'package:flavormate/components/t_data_table.dart';
+import 'package:flavormate/components/t_text_form_field.dart';
 import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe_draft/instructions/instruction_draft.dart';
@@ -48,12 +49,9 @@ class _DInstructionGroupState extends State<DInstructionGroup> {
       submit: () => submit(context),
       child: TColumn(
         children: [
-          TextField(
+          TTextFormField(
             controller: _labelController,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              label: Text(L10n.of(context).d_editor_instruction_group_label),
-            ),
+            label: L10n.of(context).d_editor_instruction_group_label,
           ),
           TDataTable(
             columns: [

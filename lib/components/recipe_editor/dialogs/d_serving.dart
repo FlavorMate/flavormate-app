@@ -1,5 +1,6 @@
 import 'package:flavormate/components/dialogs/t_full_dialog.dart';
 import 'package:flavormate/components/t_column.dart';
+import 'package:flavormate/components/t_text_form_field.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/recipe_draft/serving_draft/serving_draft.dart';
 import 'package:flavormate/utils/u_validator.dart';
@@ -49,30 +50,16 @@ class _DServingState extends State<DServing> {
         key: _formKey,
         child: TColumn(
           children: [
-            TextFormField(
+            TTextFormField(
               controller: _amountController,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                label: Text(L10n.of(context).d_editor_serving_amount),
-              ),
-              validator: (input) {
-                if (UValidator.isEmpty(input)) {
-                  return L10n.of(context).v_isEmpty;
-                }
-
-                if (!UValidator.isNumber(input!)) {
-                  return L10n.of(context).v_isNumber;
-                }
-
-                return null;
-              },
+              label: L10n.of(context).d_editor_serving_amount,
+              validators: (input) => UValidatorPresets.isNumber(context, input),
             ),
-            TextField(
+            TTextFormField(
               controller: _labelController,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                label: Text(L10n.of(context).d_editor_serving_label),
-              ),
+              label: L10n.of(context).d_editor_serving_label,
+              validators: (input) =>
+                  UValidatorPresets.isNotEmpty(context, input),
             ),
           ],
         ),
@@ -81,6 +68,8 @@ class _DServingState extends State<DServing> {
   }
 
   void submit() {
+    if (!_formKey.currentState!.validate()) return;
+
     final sd = ServingDraft(
       double.parse(_amountController.text),
       _labelController.text.trim(),
