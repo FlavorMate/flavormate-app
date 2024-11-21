@@ -58,32 +58,9 @@ class RecipeNutritionTable extends StatelessWidget {
         ),
       ],
       rows: [
-        if (UDouble.isPositive(nutrition.fat))
-          TDataRow(
-            background: selected == 0 ? selectedColor : null,
-            cells: [
-              Icon(NutritionType.fat.icon),
-              Text(NutritionType.fat.getName(context)),
-              Text(nutrition.fat!.beautify),
-              Text(nutrition.fatPercent.beautify),
-            ],
-          ),
-        if (UDouble.isPositive(nutrition.saturatedFat))
-          TDataRow(
-            background: selected == 0 ? selectedColor : null,
-            cells: [
-              Icon(NutritionType.saturatedFat.icon),
-              Padding(
-                padding: const EdgeInsets.only(left: PADDING),
-                child: Text(NutritionType.saturatedFat.getName(context)),
-              ),
-              Text(nutrition.saturatedFat!.beautify),
-              Text(nutrition.saturatedFatPercent.beautify),
-            ],
-          ),
         if (UDouble.isPositive(nutrition.carbohydrates))
           TDataRow(
-            background: selected == 1 ? selectedColor : null,
+            background: selected == 0 ? selectedColor : null,
             cells: [
               Icon(NutritionType.carbohydrates.icon),
               Text(NutritionType.carbohydrates.getName(context)),
@@ -93,7 +70,7 @@ class RecipeNutritionTable extends StatelessWidget {
           ),
         if (UDouble.isPositive(nutrition.sugars))
           TDataRow(
-            background: selected == 1 ? selectedColor : null,
+            background: selected == 0 ? selectedColor : null,
             cells: [
               Icon(NutritionType.sugars.icon),
               Padding(
@@ -102,6 +79,29 @@ class RecipeNutritionTable extends StatelessWidget {
               ),
               Text(nutrition.sugars!.beautify),
               Text(nutrition.sugarsPercent.beautify),
+            ],
+          ),
+        if (UDouble.isPositive(nutrition.fat))
+          TDataRow(
+            background: selected == 1 ? selectedColor : null,
+            cells: [
+              Icon(NutritionType.fat.icon),
+              Text(NutritionType.fat.getName(context)),
+              Text(nutrition.fat!.beautify),
+              Text(nutrition.fatPercent.beautify),
+            ],
+          ),
+        if (UDouble.isPositive(nutrition.saturatedFat))
+          TDataRow(
+            background: selected == 1 ? selectedColor : null,
+            cells: [
+              Icon(NutritionType.saturatedFat.icon),
+              Padding(
+                padding: const EdgeInsets.only(left: PADDING),
+                child: Text(NutritionType.saturatedFat.getName(context)),
+              ),
+              Text(nutrition.saturatedFat!.beautify),
+              Text(nutrition.saturatedFatPercent.beautify),
             ],
           ),
         if (UDouble.isPositive(nutrition.fiber))
