@@ -42,18 +42,18 @@ class Nutrition extends Entity with NutritionMappable {
 
   double get sum =>
       0.0 +
-      (carbohydrates ?? 0) +
-      (fat ?? 0) +
+      (carbohydrates ?? sugars ?? 0) +
+      (fat ?? saturatedFat ?? 0) +
       (fiber ?? 0) +
       (proteins ?? 0) +
       (salt ?? 0) +
       (sodium ?? 0);
 
-  double get carbohydratesPercent => 100 / sum * (carbohydrates ?? 0);
+  double get carbohydratesPercent => 100 / sum * (carbohydrates ?? sugars ?? 0);
 
   double get sugarsPercent => 100 / sum * (sugars ?? 0);
 
-  double get fatPercent => 100 / sum * (fat ?? 0);
+  double get fatPercent => 100 / sum * (fat ?? saturatedFat ?? 0);
 
   double get saturatedFatPercent => 100 / sum * (saturatedFat ?? 0);
 
@@ -111,8 +111,18 @@ class Nutrition extends Entity with NutritionMappable {
 
   bool get exists {
     return UDouble.isPositive(carbohydrates) ||
-        UDouble.isPositive(carbohydrates) ||
         UDouble.isPositive(energyKcal) ||
+        UDouble.isPositive(fat) ||
+        UDouble.isPositive(saturatedFat) ||
+        UDouble.isPositive(sugars) ||
+        UDouble.isPositive(fiber) ||
+        UDouble.isPositive(proteins) ||
+        UDouble.isPositive(salt) ||
+        UDouble.isPositive(sodium);
+  }
+
+  bool get showChart {
+    return UDouble.isPositive(carbohydrates) ||
         UDouble.isPositive(fat) ||
         UDouble.isPositive(saturatedFat) ||
         UDouble.isPositive(sugars) ||

@@ -36,6 +36,8 @@ class DNutrition extends ConsumerStatefulWidget {
 }
 
 class _DNutritionState extends ConsumerState<DNutrition> {
+  final double _dividerWidth = 250;
+
   final _formKey = GlobalKey<FormState>();
 
   int _mode = 1;
@@ -231,6 +233,15 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                     ),
                   ),
                   TTextFormField(
+                    controller: _energyKcalController,
+                    label: L10n.of(context).nutrition_kcal,
+                    keyboardType: TextInputType.number,
+                    readOnly: !enableCustom,
+                    validators: validate,
+                    prefix: Icon(MdiIcons.fire),
+                  ),
+                  SizedBox(width: _dividerWidth, child: Divider()),
+                  TTextFormField(
                     controller: _carbohydratesController,
                     label: '${L10n.of(context).nutrition_carbohydrates} (g)',
                     keyboardType: TextInputType.number,
@@ -239,13 +250,14 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                     prefix: Icon(MdiIcons.corn),
                   ),
                   TTextFormField(
-                    controller: _energyKcalController,
-                    label: L10n.of(context).nutrition_kcal,
+                    controller: _sugarsController,
+                    label: '${L10n.of(context).nutrition_sugars} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
-                    prefix: Icon(MdiIcons.fire),
+                    prefix: Icon(MdiIcons.cubeOutline),
                   ),
+                  SizedBox(width: _dividerWidth, child: Divider()),
                   TTextFormField(
                     controller: _fatController,
                     label: '${L10n.of(context).nutrition_fat} (g)',
@@ -262,14 +274,7 @@ class _DNutritionState extends ConsumerState<DNutrition> {
                     validators: validate,
                     prefix: Icon(MdiIcons.foodDrumstickOutline),
                   ),
-                  TTextFormField(
-                    controller: _sugarsController,
-                    label: '${L10n.of(context).nutrition_sugars} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: Icon(MdiIcons.cubeOutline),
-                  ),
+                  SizedBox(width: _dividerWidth, child: Divider()),
                   TTextFormField(
                     controller: _fiberController,
                     label: '${L10n.of(context).nutrition_fiber} (g)',
