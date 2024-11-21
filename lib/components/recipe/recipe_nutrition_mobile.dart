@@ -31,22 +31,24 @@ class _RecipeNutritionState extends State<RecipeNutrition> {
       title: Row(
         children: [
           Expanded(child: Text(L10n.of(context).d_nutrition_title)),
-          RecipeNutritionChart(
-            nutrition: widget.nutrition!,
-            space: 1,
-            size: 32,
-            showLabels: false,
-          ),
+          if (widget.nutrition!.showChart)
+            RecipeNutritionChart(
+              nutrition: widget.nutrition!,
+              space: 1,
+              size: 32,
+              showLabels: false,
+            ),
         ],
       ),
       shape: const Border(),
       childrenPadding: EdgeInsets.symmetric(vertical: PADDING),
       children: [
-        RecipeNutritionChart(
-          nutrition: widget.nutrition!,
-          size: 256,
-          onTouch: (val) => setState(() => _selectedIndex = val),
-        ),
+        if (widget.nutrition!.showChart)
+          RecipeNutritionChart(
+            nutrition: widget.nutrition!,
+            size: 256,
+            onTouch: (val) => setState(() => _selectedIndex = val),
+          ),
         Center(
           child: RecipeNutritionTable(
             serving: widget.serving,

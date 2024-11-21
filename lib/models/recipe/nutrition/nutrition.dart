@@ -111,8 +111,18 @@ class Nutrition extends Entity with NutritionMappable {
 
   bool get exists {
     return UDouble.isPositive(carbohydrates) ||
-        UDouble.isPositive(carbohydrates) ||
         UDouble.isPositive(energyKcal) ||
+        UDouble.isPositive(fat) ||
+        UDouble.isPositive(saturatedFat) ||
+        UDouble.isPositive(sugars) ||
+        UDouble.isPositive(fiber) ||
+        UDouble.isPositive(proteins) ||
+        UDouble.isPositive(salt) ||
+        UDouble.isPositive(sodium);
+  }
+
+  bool get showChart {
+    return UDouble.isPositive(carbohydrates) ||
         UDouble.isPositive(fat) ||
         UDouble.isPositive(saturatedFat) ||
         UDouble.isPositive(sugars) ||

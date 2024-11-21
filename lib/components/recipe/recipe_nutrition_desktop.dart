@@ -31,13 +31,16 @@ class _RecipeNutritionDesktopState extends State<RecipeNutritionDesktop> {
     return ExpansionTile(
       title: Row(
         children: [
-          Expanded(child: Text(L10n.of(context).d_nutrition_title)),
-          RecipeNutritionChart(
-            nutrition: widget.nutrition!,
-            space: 1,
-            size: 32,
-            showLabels: false,
+          Expanded(
+            child: Text(L10n.of(context).d_nutrition_title),
           ),
+          if (widget.nutrition!.showChart)
+            RecipeNutritionChart(
+              nutrition: widget.nutrition!,
+              space: 1,
+              size: 32,
+              showLabels: false,
+            ),
         ],
       ),
       shape: const Border(),
@@ -53,13 +56,14 @@ class _RecipeNutritionDesktopState extends State<RecipeNutritionDesktop> {
                 selected: _selectedIndex,
               ),
             ),
-            RecipeNutritionChart(
-              size: 256,
-              space: 4,
-              showLabels: true,
-              nutrition: widget.nutrition!,
-              onTouch: (val) => setState(() => _selectedIndex = val),
-            ),
+            if (widget.nutrition!.showChart)
+              RecipeNutritionChart(
+                size: 256,
+                space: 4,
+                showLabels: true,
+                nutrition: widget.nutrition!,
+                onTouch: (val) => setState(() => _selectedIndex = val),
+              ),
           ],
         )
       ],
