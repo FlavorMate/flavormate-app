@@ -56,6 +56,7 @@ dependencies:
   drift_flutter: ^0.2.0
   dynamic_color: ^1.7.0
   fl_chart: ^0.69.0
+  app_links: ^6.3.2
 
 dev_dependencies:
   flutter_test:
