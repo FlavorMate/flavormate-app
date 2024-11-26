@@ -1,4 +1,5 @@
 import 'package:app_links/app_links.dart';
+import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/models/appLink/app_link.dart';
 import 'package:flavormate/riverpod/go_router/p_go_router.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
@@ -38,7 +39,10 @@ class PAppLinks extends _$PAppLinks {
     if (foreign == loggedIn) {
       loggedInServer(uri.host, appLink);
     } else {
-      foreignServer(uri.host, appLink);
+      navigationKey.currentContext!
+          .showTextSnackBar('Foreign server are not supported yet!');
+      // TODO: add public sites
+      // foreignServer(uri.host, appLink);
     }
   }
 
