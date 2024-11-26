@@ -17,3 +17,18 @@ class Token with TokenMappable {
 
   Token({required this.token, required this.expiresIn});
 }
+
+@MappableClass()
+class TToken with TTokenMappable {
+  final String token;
+  final Duration validFor;
+  final String type;
+  final double? content;
+
+  TToken({
+    required this.token,
+    required this.validFor,
+    required this.type,
+    required this.content,
+  });
+}
