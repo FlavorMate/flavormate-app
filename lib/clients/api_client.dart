@@ -12,6 +12,7 @@ import 'package:flavormate/clients/recipes_client.dart';
 import 'package:flavormate/clients/self_service_client.dart';
 import 'package:flavormate/clients/stories_client.dart';
 import 'package:flavormate/clients/tags_client.dart';
+import 'package:flavormate/clients/token_client.dart';
 import 'package:flavormate/clients/units_client.dart';
 import 'package:flavormate/clients/user_client.dart';
 import 'package:flavormate/models/api/login.dart';
@@ -110,6 +111,7 @@ class ApiClient {
   late SelfServiceClient selfServiceClient;
   late StoriesClient storiesClient;
   late TagsClient tagsClient;
+  late TokenClient tokenClient;
   late UnitsClient unitsClient;
   late UserClient userClient;
 
@@ -175,6 +177,11 @@ class ApiClient {
       httpClient: _httpClient,
       baseURL: '/v2/tags',
       parser: TagMapper.fromMap,
+    );
+    tokenClient = TokenClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/token',
+      parser: TTokenMapper.fromMap,
     );
     unitsClient = UnitsClient(
       httpClient: _httpClient,
@@ -257,6 +264,11 @@ class ApiClient {
       httpClient: _httpClient,
       baseURL: '/v2/tags',
       parser: TagMapper.fromMap,
+    );
+    tokenClient = TokenClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/token',
+      parser: TTokenMapper.fromMap,
     );
     unitsClient = UnitsClient(
       httpClient: _httpClient,
