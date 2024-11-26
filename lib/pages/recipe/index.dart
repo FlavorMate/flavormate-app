@@ -8,6 +8,7 @@ import 'package:flavormate/components/recipe/recipe_categories.dart';
 import 'package:flavormate/components/recipe/recipe_informations.dart';
 import 'package:flavormate/components/recipe/recipe_published.dart';
 import 'package:flavormate/components/recipe/recipe_tags.dart';
+import 'package:flavormate/components/riverpod/r_feature.dart';
 import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_app_bar.dart';
@@ -23,6 +24,7 @@ import 'package:flavormate/pages/recipe/variations/desktop.dart';
 import 'package:flavormate/pages/recipe/variations/mobile.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
 import 'package:flavormate/riverpod/features/p_feature_bring.dart';
+import 'package:flavormate/riverpod/features/p_feature_share.dart';
 import 'package:flavormate/riverpod/highlights/p_highlight.dart';
 import 'package:flavormate/riverpod/recipe_draft/p_recipe_drafts.dart';
 import 'package:flavormate/riverpod/recipes/p_action_button.dart';
@@ -67,15 +69,19 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     final provider = ref.watch(pRecipeProvider(int.parse(widget.id)));
     final userProvider = ref.watch(pActionButtonProvider(int.parse(widget.id)));
     final bringProvider = ref.watch(pFeatureBringProvider);
+    final shareProvider = ref.watch(pFeatureShareProvider);
 
     return RScaffold(
       provider,
       appBar: TAppBar(
         title: widget.title ?? L10n.of(context).p_recipe_title,
         actions: [
-          IconButton(
-            onPressed: () => share(context),
-            icon: const Icon(MdiIcons.shareVariant),
+          RFeature(
+            shareProvider,
+            (_) => IconButton(
+              onPressed: () => share(context),
+              icon: const Icon(MdiIcons.shareVariant),
+            ),
           ),
           RStruct(
             userProvider,
