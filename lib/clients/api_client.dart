@@ -8,6 +8,7 @@ import 'package:flavormate/clients/files_client.dart';
 import 'package:flavormate/clients/highlights_client.dart';
 import 'package:flavormate/clients/interceptor_methods.dart';
 import 'package:flavormate/clients/library_client.dart';
+import 'package:flavormate/clients/public_recipe_client.dart';
 import 'package:flavormate/clients/recipes_client.dart';
 import 'package:flavormate/clients/self_service_client.dart';
 import 'package:flavormate/clients/stories_client.dart';
@@ -107,6 +108,7 @@ class ApiClient {
   late FilesClient filesClient;
   late HighlightsClient highlightsClient;
   late LibraryClient libraryClient;
+  late PublicRecipeClient publicRecipeClient;
   late RecipesClient recipesClient;
   late SelfServiceClient selfServiceClient;
   late StoriesClient storiesClient;
@@ -114,6 +116,16 @@ class ApiClient {
   late TokenClient tokenClient;
   late UnitsClient unitsClient;
   late UserClient userClient;
+
+  /// Creates an [ApiClient] that is only in charge for foreign servers
+  ApiClient.public(String server) {
+    _httpClient = Dio(_defaultOptions(server));
+    publicRecipeClient = PublicRecipeClient(
+      httpClient: _httpClient,
+      baseURL: '/v2/public/recipes',
+      parser: RecipeMapper.fromMap,
+    );
+  }
 
   /// Creates an [ApiClient] with default options.
   ApiClient(String server, InterceptorMethods handlers) {

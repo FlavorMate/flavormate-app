@@ -78,6 +78,7 @@ enum AuthState {
       '/login',
       '/recovery',
       '/registration',
+      '/public/recipe/:id',
     ],
   ),
   authenticated(
@@ -106,6 +107,7 @@ enum AuthState {
       '/story-drafts',
       '/story-editor/:id',
       '/server-outdated',
+      '/public/recipe/:id',
     ],
   ),
   ;

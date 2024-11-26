@@ -1,9 +1,7 @@
 import 'package:app_links/app_links.dart';
-import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/models/appLink/app_link.dart';
 import 'package:flavormate/riverpod/go_router/p_go_router.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_app_links.g.dart';
@@ -40,22 +38,18 @@ class PAppLinks extends _$PAppLinks {
     if (foreign == loggedIn) {
       loggedInServer(uri.host, appLink);
     } else {
-      navigationKey.currentContext!.showTextSnackBar(
-        'Foreign server are not supported yet!',
-        color: Colors.red,
-      );
-      // TODO: add public sites
-      // foreignServer(uri.host, appLink);
+      foreignServer(uri.host, appLink);
     }
   }
 
   void foreignServer(String action, AppLink appLink) {
     if (action == AppLinkMode.open.name) {
       if (appLink.page == 'recipe') {
-        open('public', {
-          'id': appLink.id.toString(),
-          'token': appLink.token,
-        });
+        open(
+          'public-recipe',
+          appLink,
+          params: {'id': appLink.id.toString()},
+        );
       }
     }
   }
@@ -63,15 +57,22 @@ class PAppLinks extends _$PAppLinks {
   void loggedInServer(String action, AppLink appLink) {
     if (action == AppLinkMode.open.name) {
       if (appLink.page == 'recipe') {
-        open('recipe', {'id': appLink.id.toString()});
+        open('recipe', appLink, params: {'id': appLink.id.toString()});
       }
     }
   }
 
-  void open(String page, Map<String, String>? params) {
+  void open(
+    String page,
+    AppLink appLink, {
+    Map<String, String>? params,
+    Map<String, String>? queryParams,
+  }) {
     ref.read(pGoRouterProvider).pushNamed(
           page,
           pathParameters: params ?? {},
+          queryParameters: queryParams ?? {},
+          extra: appLink,
         );
   }
 }
