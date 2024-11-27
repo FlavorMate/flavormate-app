@@ -333,5 +333,13 @@
   "p_story_edit_invalid": "Story nicht vollständig",
   "p_splash_loading": "Wird geladen ...",
   "p_server_outdated_title": "Der Server ist nicht mit dieser App Version kompatibel",
-  "p_server_outdated_subtitle": "Prüfe, ob sowohl die App, als auch der Server aktuell ist"
+  "p_server_outdated_subtitle": "Prüfe, ob sowohl die App, als auch der Server aktuell ist",
+  "p_admin_share_title": "Tokenverwaltung",
+  "p_admin_share_username": "Benutzername",
+  "p_admin_share_type": "Typ",
+  "p_admin_share_created": "Erstellt am",
+  "p_admin_share_valid_until": "Gültig bis",
+  "p_admin_share_uses": "Benutzungen",
+  "p_admin_share_delete_title": "Token löschen?",
+  "p_admin_share_delete_content": "Diese Freigabe ist dann nicht mehr nutzbar."
 }

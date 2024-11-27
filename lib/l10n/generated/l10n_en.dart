@@ -924,4 +924,28 @@ class L10nEn extends L10n {
 
   @override
   String get p_server_outdated_subtitle => 'Please verify that both, the server and the app, are up to date';
+
+  @override
+  String get p_admin_share_title => 'Token management';
+
+  @override
+  String get p_admin_share_username => 'Username';
+
+  @override
+  String get p_admin_share_type => 'Type';
+
+  @override
+  String get p_admin_share_created => 'Created on';
+
+  @override
+  String get p_admin_share_valid_until => 'Valid until';
+
+  @override
+  String get p_admin_share_uses => 'Uses';
+
+  @override
+  String get p_admin_share_delete_title => 'Delete token?';
+
+  @override
+  String get p_admin_share_delete_content => 'This share will not be usable anymore.';
 }

@@ -333,5 +333,13 @@
   "p_story_edit_invalid": "Story is incomplete",
   "p_splash_loading": "Loading ...",
   "p_server_outdated_title": "The server is incompatible with this app version",
-  "p_server_outdated_subtitle": "Please verify that both, the server and the app, are up to date"
+  "p_server_outdated_subtitle": "Please verify that both, the server and the app, are up to date",
+  "p_admin_share_title": "Token management",
+  "p_admin_share_username": "Username",
+  "p_admin_share_type": "Type",
+  "p_admin_share_created": "Created on",
+  "p_admin_share_valid_until": "Valid until",
+  "p_admin_share_uses": "Uses",
+  "p_admin_share_delete_title": "Delete token?",
+  "p_admin_share_delete_content": "This share will not be usable anymore."
 }

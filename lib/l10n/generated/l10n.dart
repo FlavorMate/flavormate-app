@@ -1912,6 +1912,54 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Please verify that both, the server and the app, are up to date'**
   String get p_server_outdated_subtitle;
+
+  /// No description provided for @p_admin_share_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Token management'**
+  String get p_admin_share_title;
+
+  /// No description provided for @p_admin_share_username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get p_admin_share_username;
+
+  /// No description provided for @p_admin_share_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get p_admin_share_type;
+
+  /// No description provided for @p_admin_share_created.
+  ///
+  /// In en, this message translates to:
+  /// **'Created on'**
+  String get p_admin_share_created;
+
+  /// No description provided for @p_admin_share_valid_until.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid until'**
+  String get p_admin_share_valid_until;
+
+  /// No description provided for @p_admin_share_uses.
+  ///
+  /// In en, this message translates to:
+  /// **'Uses'**
+  String get p_admin_share_uses;
+
+  /// No description provided for @p_admin_share_delete_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete token?'**
+  String get p_admin_share_delete_title;
+
+  /// No description provided for @p_admin_share_delete_content.
+  ///
+  /// In en, this message translates to:
+  /// **'This share will not be usable anymore.'**
+  String get p_admin_share_delete_content;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

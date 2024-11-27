@@ -194,9 +194,9 @@ class SettingsPage extends ConsumerWidget {
                       width: _buttonWidth,
                     ),
                     TIconButton(
-                      onPressed: () => context.showTextSnackBar('Coming soon'),
-                      icon: MdiIcons.bookOutline,
-                      label: L10n.of(context).p_settings_recipe_management,
+                      onPressed: () => context.pushNamed('share_management'),
+                      icon: MdiIcons.shareAllOutline,
+                      label: L10n.of(context).p_admin_share_title,
                       width: _buttonWidth,
                     ),
                   ],

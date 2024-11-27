@@ -108,6 +108,7 @@ enum AuthState {
       '/story-editor/:id',
       '/server-outdated',
       '/public/recipe/:id',
+      '/admin/share',
     ],
   ),
   ;

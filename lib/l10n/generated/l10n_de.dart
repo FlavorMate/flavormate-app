@@ -924,4 +924,28 @@ class L10nDe extends L10n {
 
   @override
   String get p_server_outdated_subtitle => 'Prüfe, ob sowohl die App, als auch der Server aktuell ist';
+
+  @override
+  String get p_admin_share_title => 'Tokenverwaltung';
+
+  @override
+  String get p_admin_share_username => 'Benutzername';
+
+  @override
+  String get p_admin_share_type => 'Typ';
+
+  @override
+  String get p_admin_share_created => 'Erstellt am';
+
+  @override
+  String get p_admin_share_valid_until => 'Gültig bis';
+
+  @override
+  String get p_admin_share_uses => 'Benutzungen';
+
+  @override
+  String get p_admin_share_delete_title => 'Token löschen?';
+
+  @override
+  String get p_admin_share_delete_content => 'Diese Freigabe ist dann nicht mehr nutzbar.';
 }
