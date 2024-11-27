@@ -47,7 +47,7 @@ class PAppLinks extends _$PAppLinks {
       if (appLink.page == 'recipe') {
         open(
           'public-recipe',
-          appLink,
+          appLink: appLink,
           params: {'id': appLink.id.toString()},
         );
       }
@@ -57,14 +57,14 @@ class PAppLinks extends _$PAppLinks {
   void loggedInServer(String action, AppLink appLink) {
     if (action == AppLinkMode.open.name) {
       if (appLink.page == 'recipe') {
-        open('recipe', appLink, params: {'id': appLink.id.toString()});
+        open('recipe', params: {'id': appLink.id.toString()});
       }
     }
   }
 
   void open(
-    String page,
-    AppLink appLink, {
+    String page, {
+    AppLink? appLink,
     Map<String, String>? params,
     Map<String, String>? queryParams,
   }) {
