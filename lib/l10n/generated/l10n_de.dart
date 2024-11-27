@@ -948,4 +948,13 @@ class L10nDe extends L10n {
 
   @override
   String get p_admin_share_delete_content => 'Diese Freigabe ist dann nicht mehr nutzbar.';
+
+  @override
+  String get p_public_recipe_error_title => 'Fehler';
+
+  @override
+  String get p_public_recipe_error_label => 'Das Rezept konnte nicht geladen werden';
+
+  @override
+  String get p_public_recipe_error_sublabel => 'Das Rezept existiert nicht mehr\\n\\noder\\n\\ndie Freigabe ist nicht mehr gültig';
 }

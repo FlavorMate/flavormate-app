@@ -6,6 +6,7 @@ import 'package:flavormate/components/recipe/recipe_published.dart';
 import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/components/t_column.dart';
+import 'package:flavormate/components/t_empty_message.dart';
 import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/extensions/e_string.dart';
@@ -22,6 +23,7 @@ import 'package:flavormate/riverpod/units/p_unit_conversions.dart';
 import 'package:flavormate/utils/constants.dart';
 import 'package:flavormate/utils/u_double.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -58,6 +60,20 @@ class _PublicRecipePageState extends ConsumerState<PublicRecipePage> {
       provider,
       appBar: TAppBar(
         title: L10n.of(context).p_recipe_title,
+      ),
+      errorBuilder: (_, __) => Scaffold(
+        appBar: TAppBar(
+          title: L10n.of(context).p_public_recipe_error_title,
+        ),
+        body: Center(
+          child: TEmptyMessage(
+            icon: MdiIcons.cloudQuestionOutline,
+            title: L10n.of(context).p_public_recipe_error_label,
+            subtitle: L10n.of(context)
+                .p_public_recipe_error_sublabel
+                .replaceAll('\\n', '\n'),
+          ),
+        ),
       ),
       builder: (_, recipe) => LayoutBuilder(
         builder: (_, constraints) {

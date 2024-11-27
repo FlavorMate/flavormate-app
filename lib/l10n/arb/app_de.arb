@@ -341,5 +341,8 @@
   "p_admin_share_valid_until": "Gültig bis",
   "p_admin_share_uses": "Benutzungen",
   "p_admin_share_delete_title": "Token löschen?",
-  "p_admin_share_delete_content": "Diese Freigabe ist dann nicht mehr nutzbar."
+  "p_admin_share_delete_content": "Diese Freigabe ist dann nicht mehr nutzbar.",
+  "p_public_recipe_error_title": "Fehler",
+  "p_public_recipe_error_label": "Das Rezept konnte nicht geladen werden",
+  "p_public_recipe_error_sublabel": "Das Rezept existiert nicht mehr\\n\\noder\\n\\ndie Freigabe ist nicht mehr gültig"
 }

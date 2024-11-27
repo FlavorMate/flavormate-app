@@ -1960,6 +1960,24 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'This share will not be usable anymore.'**
   String get p_admin_share_delete_content;
+
+  /// No description provided for @p_public_recipe_error_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get p_public_recipe_error_title;
+
+  /// No description provided for @p_public_recipe_error_label.
+  ///
+  /// In en, this message translates to:
+  /// **'The recipe could not be loaded'**
+  String get p_public_recipe_error_label;
+
+  /// No description provided for @p_public_recipe_error_sublabel.
+  ///
+  /// In en, this message translates to:
+  /// **'The recipe doesn\'t exist anymore\\n\\nor\\n\\nthe share is no longer valid'**
+  String get p_public_recipe_error_sublabel;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
