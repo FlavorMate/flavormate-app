@@ -4,13 +4,15 @@ import 'package:go_router/go_router.dart';
 
 class TConfirmDialog extends StatelessWidget {
   final String title;
+  final String? content;
 
-  const TConfirmDialog({super.key, required this.title});
+  const TConfirmDialog({super.key, required this.title, this.content});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(title),
+      content: content != null ? Text(content!) : null,
       actions: [
         TextButton(
           onPressed: () => context.pop(false),

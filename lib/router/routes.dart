@@ -1,5 +1,6 @@
 import 'package:flavormate/components/go_router/wrapper.dart';
 import 'package:flavormate/layouts/main_layout.dart';
+import 'package:flavormate/models/appLink/app_link.dart';
 import 'package:flavormate/pages/authors/_id.dart';
 import 'package:flavormate/pages/authors/index.dart';
 import 'package:flavormate/pages/categories/_id.dart';
@@ -11,6 +12,7 @@ import 'package:flavormate/pages/library/index.dart';
 import 'package:flavormate/pages/login/login_page.dart';
 import 'package:flavormate/pages/more/index.dart';
 import 'package:flavormate/pages/no_connection/index.dart';
+import 'package:flavormate/pages/public_recipe/index.dart';
 import 'package:flavormate/pages/recipe/index.dart';
 import 'package:flavormate/pages/recipe_drafts/index.dart';
 import 'package:flavormate/pages/recipes/_id.dart';
@@ -18,6 +20,7 @@ import 'package:flavormate/pages/recovery/index.dart';
 import 'package:flavormate/pages/registration/index.dart';
 import 'package:flavormate/pages/server_outdated/index.dart';
 import 'package:flavormate/pages/settings/index.dart';
+import 'package:flavormate/pages/share_management/index.dart';
 import 'package:flavormate/pages/splash/index.dart';
 import 'package:flavormate/pages/story/_id.dart';
 import 'package:flavormate/pages/story_drafts/index.dart';
@@ -238,5 +241,17 @@ var routes = [
     name: 'server-outdated',
     pageBuilder: (context, state) =>
         const MaterialPage(child: ServerOutdatedPage()),
+  ),
+  GoRoute(
+    path: '/public/recipe/:id',
+    name: 'public-recipe',
+    pageBuilder: (context, state) =>
+        MaterialPage(child: PublicRecipePage(appLink: state.extra as AppLink)),
+  ),
+  GoRoute(
+    path: '/admin/share',
+    name: 'share_management',
+    pageBuilder: (context, state) =>
+        const MaterialPage(child: ShareManagementPage()),
   ),
 ];
