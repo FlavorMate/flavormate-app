@@ -30,26 +30,7 @@ class RecipesPage extends ConsumerWidget {
             for (final recipe in recipes.content) TRecipeCard(recipe: recipe),
           ],
         ),
-        onPressed: setPage,
       ),
     );
-
-    // final provider = ref.watch(pRecipesProvider);
-    // return RScaffold(
-    //   provider,
-    //   builder: (_, recipes) => recipes.page.empty
-    //       ? Center(
-    //           child: TEmptyMessage(
-    //             icon: MdiIcons.cookieOffOutline,
-    //             title: L10n.of(context).p_recipes_no_recipe,
-    //             subtitle: L10n.of(context).p_recipes_no_recipe_subtitle,
-    //           ),
-    //         )
-    //       : ,
-    // );
-  }
-
-  void setPage(WidgetRef ref, int value) {
-    ref.read(pRecipesPageProvider.notifier).setState(value);
   }
 }

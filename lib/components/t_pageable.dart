@@ -1,15 +1,15 @@
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_pageable_bar.dart';
 import 'package:flavormate/components/t_pageable_content.dart';
+import 'package:flavormate/interfaces/a_base_page_provider.dart';
 import 'package:flavormate/models/pageable/pageable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TPageable<T> extends ConsumerStatefulWidget {
+class TPageable<T, N extends BasePageProvider> extends ConsumerStatefulWidget {
   final AutoDisposeAsyncNotifierProvider<dynamic, Pageable<T>> provider;
-  final AutoDisposeNotifierProvider<AutoDisposeNotifier<int>, int> pageProvider;
+  final AutoDisposeNotifierProvider<N, int> pageProvider;
   final Widget Function(BuildContext, Pageable<T>) builder;
-  final void Function(WidgetRef, int) onPressed;
   final Widget onEmpty;
 
   const TPageable({
@@ -17,15 +17,16 @@ class TPageable<T> extends ConsumerStatefulWidget {
     required this.provider,
     required this.pageProvider,
     required this.builder,
-    required this.onPressed,
     required this.onEmpty,
   });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _TPageableState<T>();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _TPageableState<T, N>();
 }
 
-class _TPageableState<T> extends ConsumerState<TPageable<T>> {
+class _TPageableState<T, N extends BasePageProvider>
+    extends ConsumerState<TPageable<T, N>> {
   int _totalPages = 1;
 
   @override
@@ -48,17 +49,19 @@ class _TPageableState<T> extends ConsumerState<TPageable<T>> {
             provider,
             (context, value) => value.content.isEmpty
                 ? Center(child: widget.onEmpty)
-                : TPageableContent(
-                    child: widget.builder(context, value),
-                  ),
+                : TPageableContent(child: widget.builder(context, value)),
           ),
         ),
         TPageableBar(
           totalPages: _totalPages,
-          onPressed: (int value) => widget.onPressed(ref, value),
+          onPressed: (int value) => setPage(value),
           currentPage: pageProvider,
         ),
       ],
     );
+  }
+
+  void setPage(int value) {
+    ref.read(widget.pageProvider.notifier).setState(value);
   }
 }

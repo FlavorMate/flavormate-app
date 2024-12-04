@@ -40,13 +40,8 @@ class TagsPage extends ConsumerWidget {
               ),
           ],
         ),
-        onPressed: setPage,
       ),
     );
-  }
-
-  void setPage(WidgetRef ref, int value) {
-    ref.read(pTagsPageProvider.notifier).setState(value);
   }
 
   void openTag(BuildContext context, int id, String label) {

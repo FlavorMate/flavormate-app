@@ -8,7 +8,6 @@ import 'package:flavormate/riverpod/authors/p_author.dart';
 import 'package:flavormate/riverpod/authors/p_author_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthorPage extends StatelessWidget {
   final int id;
@@ -33,13 +32,8 @@ class AuthorPage extends StatelessWidget {
               for (final recipe in recipes.content) TRecipeCard(recipe: recipe)
             ],
           ),
-          onPressed: setPage,
         ),
       ),
     );
-  }
-
-  void setPage(WidgetRef ref, int value) {
-    ref.read(pAuthorPageProvider.notifier).setState(value);
   }
 }

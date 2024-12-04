@@ -30,6 +30,9 @@ linter:
 
 # riverpod linting
 analyzer:
+  exclude:
+    - '**/*.g.dart'
+    - '**/*.mapper.dart'
   plugins:
     - custom_lint
 

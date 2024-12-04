@@ -40,13 +40,8 @@ class CategoriesPage extends ConsumerWidget {
               ),
           ],
         ),
-        onPressed: setPage,
       ),
     );
-  }
-
-  void setPage(WidgetRef ref, int value) {
-    ref.read(pCategoriesPageProvider.notifier).setState(value);
   }
 
   void openCategory(BuildContext context, int id, String label) {

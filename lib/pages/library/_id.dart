@@ -47,13 +47,8 @@ class BookPage extends ConsumerWidget {
             for (final recipe in page.content) TRecipeCard(recipe: recipe)
           ],
         ),
-        onPressed: setPage,
       ),
     );
-  }
-
-  void setPage(WidgetRef ref, int value) {
-    ref.read(pBookPageProvider.notifier).setState(value);
   }
 
   void toggleSubscription(BuildContext context, WidgetRef ref) async {

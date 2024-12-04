@@ -30,7 +30,6 @@ class LibraryPage extends ConsumerWidget {
               for (final book in library.content) BookCard(book: book),
             ],
           ),
-          onPressed: setPage,
         ),
         Positioned(
           right: 16,
@@ -44,10 +43,6 @@ class LibraryPage extends ConsumerWidget {
         ),
       ],
     );
-  }
-
-  void setPage(WidgetRef ref, int value) {
-    ref.read(pLibraryPageProvider.notifier).setState(value);
   }
 
   Future<void> addBook(BuildContext context, WidgetRef ref) async {
