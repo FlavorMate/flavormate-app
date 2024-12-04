@@ -924,4 +924,37 @@ class L10nEn extends L10n {
 
   @override
   String get p_server_outdated_subtitle => 'Please verify that both, the server and the app, are up to date';
+
+  @override
+  String get p_admin_share_title => 'Token management';
+
+  @override
+  String get p_admin_share_username => 'Username';
+
+  @override
+  String get p_admin_share_type => 'Type';
+
+  @override
+  String get p_admin_share_created => 'Created on';
+
+  @override
+  String get p_admin_share_valid_until => 'Valid until';
+
+  @override
+  String get p_admin_share_uses => 'Uses';
+
+  @override
+  String get p_admin_share_delete_title => 'Delete token?';
+
+  @override
+  String get p_admin_share_delete_content => 'This share will not be usable anymore.';
+
+  @override
+  String get p_public_recipe_error_title => 'Error';
+
+  @override
+  String get p_public_recipe_error_label => 'The recipe could not be loaded';
+
+  @override
+  String get p_public_recipe_error_sublabel => 'The recipe doesn\'t exist anymore\\n\\nor\\n\\nthe share is no longer valid';
 }

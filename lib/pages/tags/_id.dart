@@ -1,4 +1,5 @@
 import 'package:flavormate/components/t_app_bar.dart';
+import 'package:flavormate/components/t_empty_message.dart';
 import 'package:flavormate/components/t_pageable.dart';
 import 'package:flavormate/components/t_recipe_card.dart';
 import 'package:flavormate/components/t_wrap.dart';
@@ -6,6 +7,7 @@ import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/tags/p_tag.dart';
 import 'package:flavormate/riverpod/tags/p_tag_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 class TagPage extends StatelessWidget {
   final int id;
@@ -21,13 +23,15 @@ class TagPage extends StatelessWidget {
         child: TPageable(
           provider: pTagProvider(id),
           pageProvider: pTagPageProvider,
-          builder: (_, recipes) => TWrap(
-            children: recipes.content
-                .map((recipe) => TRecipeCard(recipe: recipe))
-                .toList(),
+          onEmpty: TEmptyMessage(
+            title: L10n.of(context).p_recipes_no_recipe,
+            icon: MdiIcons.tagOffOutline,
           ),
-          onPressed: (ref, value) =>
-              ref.read(pTagPageProvider.notifier).setState(value),
+          builder: (_, recipes) => TWrap(
+            children: [
+              for (final recipe in recipes.content) TRecipeCard(recipe: recipe),
+            ],
+          ),
         ),
       ),
     );

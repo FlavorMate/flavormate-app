@@ -22,12 +22,33 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>de.flavormate</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>flavormate</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This is used to capture an avatar or upload recipe images</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This is used to capture an avatar or uplaod recipe ímages</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This is used to select an avatar or upload recipe images</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -40,14 +61,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>FlutterDeepLinkingEnabled</key>
-	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This is used to select an avatar or upload recipe images</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This is used to capture an avatar or upload recipe images</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>This is used to capture an avatar or uplaod recipe ímages</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -1,3 +1,4 @@
+import 'package:flavormate/components/riverpod/r_feature.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/settings/dialogs/d_changelog.dart';
 import 'package:flavormate/components/settings/dialogs/d_theme.dart';
@@ -18,6 +19,7 @@ import 'package:flavormate/models/file/file_draft.dart';
 import 'package:flavormate/models/recipe/diet.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
 import 'package:flavormate/riverpod/auth_state/p_auth_state.dart';
+import 'package:flavormate/riverpod/features/p_feature_share.dart';
 import 'package:flavormate/riverpod/package_info/p_package_info.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/riverpod/user/p_user.dart';
@@ -42,6 +44,8 @@ class SettingsPage extends ConsumerWidget {
     final userProvider = ref.watch(pUserProvider);
     final infoProvider = ref.watch(pPackageInfoProvider);
     final serverProvider = ref.watch(pServerProvider);
+    final shareProvider = ref.watch(pFeatureShareProvider);
+
     return TResponsive(
       child: TColumn(
         children: [
@@ -193,11 +197,14 @@ class SettingsPage extends ConsumerWidget {
                       label: L10n.of(context).p_settings_user_management,
                       width: _buttonWidth,
                     ),
-                    TIconButton(
-                      onPressed: () => context.showTextSnackBar('Coming soon'),
-                      icon: MdiIcons.bookOutline,
-                      label: L10n.of(context).p_settings_recipe_management,
-                      width: _buttonWidth,
+                    RFeature(
+                      shareProvider,
+                      (_) => TIconButton(
+                        onPressed: () => context.pushNamed('share_management'),
+                        icon: MdiIcons.shareAllOutline,
+                        label: L10n.of(context).p_admin_share_title,
+                        width: _buttonWidth,
+                      ),
                     ),
                   ],
                 ),

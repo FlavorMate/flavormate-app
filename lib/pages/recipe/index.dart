@@ -8,6 +8,7 @@ import 'package:flavormate/components/recipe/recipe_categories.dart';
 import 'package:flavormate/components/recipe/recipe_informations.dart';
 import 'package:flavormate/components/recipe/recipe_published.dart';
 import 'package:flavormate/components/recipe/recipe_tags.dart';
+import 'package:flavormate/components/riverpod/r_feature.dart';
 import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_app_bar.dart';
@@ -16,12 +17,14 @@ import 'package:flavormate/components/t_responsive.dart';
 import 'package:flavormate/extensions/e_build_context.dart';
 import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/appLink/app_link.dart';
 import 'package:flavormate/models/recipe/nutrition/nutrition.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/pages/recipe/variations/desktop.dart';
 import 'package:flavormate/pages/recipe/variations/mobile.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
 import 'package:flavormate/riverpod/features/p_feature_bring.dart';
+import 'package:flavormate/riverpod/features/p_feature_share.dart';
 import 'package:flavormate/riverpod/highlights/p_highlight.dart';
 import 'package:flavormate/riverpod/recipe_draft/p_recipe_drafts.dart';
 import 'package:flavormate/riverpod/recipes/p_action_button.dart';
@@ -31,10 +34,13 @@ import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/riverpod/stories/p_stories.dart';
 import 'package:flavormate/riverpod/units/p_unit_conversions.dart';
 import 'package:flavormate/utils/constants.dart';
+import 'package:flavormate/utils/u_app_link.dart';
 import 'package:flavormate/utils/u_double.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RecipePage extends ConsumerStatefulWidget {
@@ -63,17 +69,20 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     final provider = ref.watch(pRecipeProvider(int.parse(widget.id)));
     final userProvider = ref.watch(pActionButtonProvider(int.parse(widget.id)));
     final bringProvider = ref.watch(pFeatureBringProvider);
+    final shareProvider = ref.watch(pFeatureShareProvider);
 
     return RScaffold(
       provider,
       appBar: TAppBar(
         title: widget.title ?? L10n.of(context).p_recipe_title,
         actions: [
-          // TODO: implement proper url handling
-          // IconButton(
-          //   onPressed: () => share(context),
-          //   icon: const Icon(MdiIcons.shareVariant),
-          // ),
+          RFeature(
+            shareProvider,
+            (_) => IconButton(
+              onPressed: () => share(context),
+              icon: const Icon(MdiIcons.shareVariant),
+            ),
+          ),
           RStruct(
             userProvider,
             (_, user) => Visibility(
@@ -225,12 +234,31 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   }
 
   share(BuildContext context) async {
-    // TODO: implement proper url handling
-    // final recipe = await ref.read(pRecipeProvider(int.parse(widget.id)).future);
-    // final url = '$frontendURL/recipe/${recipe.id}';
-    // await Share.share(
-    //   '${L10n.of(context).p_recipe_share(recipe.label)} 🍽️\n$url',
-    // );
+    final recipe = await ref.read(pRecipeProvider(int.parse(widget.id)).future);
+    final token = await ref
+        .read(pApiProvider)
+        .tokenClient
+        .create(data: {'id': recipe.id});
+
+    if (!context.mounted) return;
+
+    final server = ref.read(pServerProvider);
+
+    final appLink = AppLink(
+      server: server,
+      page: 'recipe',
+      id: recipe.id!,
+      token: token.token,
+    );
+
+    final url = UAppLink.createURL(
+      AppLinkMode.open,
+      appLink,
+    );
+
+    await Share.share(
+      '${L10n.of(context).p_recipe_share(recipe.label)} 🍽️\n$url',
+    );
   }
 
   edit() async {

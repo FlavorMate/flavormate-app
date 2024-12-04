@@ -30,6 +30,7 @@ class TDataTable extends StatelessWidget {
             showCheckboxColumn: false,
             columnSpacing: columnSpacing,
             horizontalMargin: horizontalMargin,
+            dataRowMaxHeight: double.infinity,
             columns: [
               for (final column in columns)
                 DataColumn(

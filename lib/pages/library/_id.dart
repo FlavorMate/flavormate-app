@@ -34,25 +34,20 @@ class BookPage extends ConsumerWidget {
               ),
             )
           : null,
-      builder: (_, book) => book.book.recipes!.isEmpty
-          ? Center(
-              child: TEmptyMessage(
-                title: L10n.of(context).p_book_no_recipes,
-                subtitle: L10n.of(context).p_book_no_recipes_subtitle,
-                icon: MdiIcons.cookieOffOutline,
-              ),
-            )
-          : TPageable(
-              provider: pBookRecipesProvider(id),
-              pageProvider: pBookPageProvider,
-              builder: (_, page) => TWrap(
-                children: page.content
-                    .map((recipe) => TRecipeCard(recipe: recipe))
-                    .toList(),
-              ),
-              onPressed: (ref, value) =>
-                  ref.read(pBookPageProvider.notifier).setState(value),
-            ),
+      builder: (_, __) => TPageable(
+        provider: pBookRecipesProvider(id),
+        pageProvider: pBookPageProvider,
+        onEmpty: TEmptyMessage(
+          title: L10n.of(context).p_book_no_recipes,
+          subtitle: L10n.of(context).p_book_no_recipes_subtitle,
+          icon: MdiIcons.cookieOffOutline,
+        ),
+        builder: (_, page) => TWrap(
+          children: [
+            for (final recipe in page.content) TRecipeCard(recipe: recipe)
+          ],
+        ),
+      ),
     );
   }
 

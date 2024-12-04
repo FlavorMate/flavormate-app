@@ -7,6 +7,7 @@ class RScaffold<T> extends StatelessWidget {
   final AsyncValue<T> provider;
   final Widget Function(BuildContext, T) builder;
   final Widget? Function(BuildContext, T)? floatingActionButton;
+  final Widget Function(BuildContext, String)? errorBuilder;
   final PreferredSizeWidget? appBar;
 
   const RScaffold(
@@ -14,6 +15,7 @@ class RScaffold<T> extends StatelessWidget {
     required this.builder,
     this.appBar,
     this.floatingActionButton,
+    this.errorBuilder,
     super.key,
   });
 
@@ -27,7 +29,11 @@ class RScaffold<T> extends StatelessWidget {
               ? floatingActionButton!(context, value)
               : null,
         ),
-      AsyncError(:final error) => ErrorPage(error.toString()),
+      AsyncError(:final error) => errorBuilder?.call(
+            context,
+            error.toString(),
+          ) ??
+          ErrorPage(error.toString()),
       _ => const LoadingPage(),
     };
   }

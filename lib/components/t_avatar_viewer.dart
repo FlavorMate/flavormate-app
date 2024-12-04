@@ -1,3 +1,4 @@
+import 'package:flavormate/components/t_circular_avatar.dart';
 import 'package:flavormate/models/user/user.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_server.dart';
 import 'package:flavormate/utils/constants.dart';
@@ -27,28 +28,13 @@ class AvatarViewer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (user.avatar == null) {
-      return Container(
+      return TCircularAvatar(
+        label: user.displayName,
         height: height,
         width: width,
-        decoration: BoxDecoration(
-          border: border
-              ? Border.all(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 2,
-                )
-              : null,
-          borderRadius: BorderRadius.circular(borderRadius),
-          color: Theme.of(context).colorScheme.primaryContainer,
-        ),
-        child: Center(
-          child: Text(
-            user.displayName[0],
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
-              fontSize: fontSize,
-            ),
-          ),
-        ),
+        border: border,
+        borderRadius: borderRadius,
+        fontSize: fontSize,
       );
     } else {
       final server = ref.read(pServerProvider);

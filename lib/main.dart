@@ -1,5 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/riverpod/app_links/p_app_links.dart';
 import 'package:flavormate/riverpod/go_router/p_go_router.dart';
 import 'package:flavormate/riverpod/package_info/p_package_info.dart';
 import 'package:flavormate/riverpod/root_bundle/p_backend_url.dart';
@@ -50,6 +51,7 @@ class _EagerInitialization extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(pAppLinksProvider);
     final values = [
       ref.watch(pPackageInfoProvider),
       ref.watch(pSharedPreferencesProvider),

@@ -17,10 +17,12 @@ extension EBuildContext on BuildContext {
 
   /// Shows a floating snack bar with text as its content.
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showTextSnackBar(
-    String text,
-  ) =>
+    String text, {
+    Color? color,
+  }) =>
       ScaffoldMessenger.of(this).showSnackBar(SnackBar(
         behavior: SnackBarBehavior.floating,
+        backgroundColor: color,
         content: Text(text),
       ));
 
