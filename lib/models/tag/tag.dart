@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/models/entity.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
 import 'package:flavormate/models/tag_draft/tag_draft.dart';
@@ -19,6 +20,11 @@ class Tag extends Entity with TagMappable {
     required this.label,
     required this.recipes,
   });
+
+  String? get coverUrl => recipes
+      ?.where((recipe) => EString.isNotEmpty(recipe.coverUrl))
+      .firstOrNull
+      ?.coverUrl;
 
   TagDraft toDraft() {
     return TagDraft(label: label);

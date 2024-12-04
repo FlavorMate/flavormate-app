@@ -1,7 +1,8 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/models/categories/category_group.dart';
 import 'package:flavormate/models/entity.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
 part 'category.mapper.dart';
 
@@ -20,4 +21,9 @@ class Category extends Entity with CategoryMappable {
     required super.createdOn,
     required super.lastModifiedOn,
   });
+
+  String? get coverUrl => recipes
+      ?.where((recipe) => EString.isNotEmpty(recipe.coverUrl))
+      .firstOrNull
+      ?.coverUrl;
 }
