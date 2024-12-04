@@ -2,7 +2,6 @@ import 'package:flavormate/components/go_router/wrapper.dart';
 import 'package:flavormate/layouts/main_layout.dart';
 import 'package:flavormate/models/appLink/app_link.dart';
 import 'package:flavormate/pages/authors/_id.dart';
-import 'package:flavormate/pages/authors/index.dart';
 import 'package:flavormate/pages/categories/_id.dart';
 import 'package:flavormate/pages/categories/index.dart';
 import 'package:flavormate/pages/editor/_id.dart';
@@ -146,13 +145,6 @@ var routes = [
         id: int.parse(state.pathParameters['id']!),
         title: state.extra as String?,
       ),
-    ),
-  ),
-  GoRoute(
-    path: '/authors',
-    name: 'authors',
-    pageBuilder: (context, state) => const MaterialPage(
-      child: AuthorsPage(),
     ),
   ),
   GoRoute(

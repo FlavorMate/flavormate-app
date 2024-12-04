@@ -1,9 +1,6 @@
-import 'package:flavormate/components/riverpod/r_scaffold.dart';
 import 'package:flavormate/components/t_app_bar.dart';
-import 'package:flavormate/components/t_card.dart';
+import 'package:flavormate/components/t_component_card.dart';
 import 'package:flavormate/components/t_empty_message.dart';
-import 'package:flavormate/components/t_image.dart';
-import 'package:flavormate/components/t_image_label.dart';
 import 'package:flavormate/components/t_pageable.dart';
 import 'package:flavormate/components/t_wrap.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
@@ -19,47 +16,44 @@ class CategoriesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(pCategoriesProvider);
-    return RScaffold(
-      provider,
+    return Scaffold(
       appBar: TAppBar(title: L10n.of(context).p_categories),
-      builder: (_, categories) => categories.page.empty
-          ? Center(
-              child: TEmptyMessage(
-                icon: MdiIcons.archiveOffOutline,
-                title: L10n.of(context).p_categories_no_recipe,
-                subtitle: L10n.of(context).p_categories_no_recipe_subtitle,
+      body: TPageable(
+        provider: pCategoriesProvider,
+        pageProvider: pCategoriesPageProvider,
+        onEmpty: TEmptyMessage(
+          icon: MdiIcons.archiveOffOutline,
+          title: L10n.of(context).p_categories_no_recipe,
+          subtitle: L10n.of(context).p_categories_no_recipe_subtitle,
+        ),
+        builder: (_, categories) => TWrap(
+          children: [
+            for (final category in categories.content)
+              TComponentCard(
+                image: category.coverUrl,
+                label: category.label,
+                onTap: () => openCategory(
+                  context,
+                  category.id!,
+                  category.label,
+                ),
               ),
-            )
-          : TPageable(
-              provider: pCategoriesProvider,
-              pageProvider: pCategoriesPageProvider,
-              builder: (_, categories) => TWrap(
-                  children: categories.content
-                      .map(
-                        (category) => SizedBox(
-                          width: 450,
-                          child: TCard(
-                            padding: 0,
-                            onTap: () => context.pushNamed(
-                              'category',
-                              pathParameters: {'id': category.id.toString()},
-                              extra: category.label,
-                            ),
-                            child: TImageLabel(
-                              imageSrc: category.recipes!.firstOrNull?.coverUrl,
-                              type: TImageType.network,
-                              height: 200,
-                              title: category.label,
-                              labelSize: 0.4,
-                            ),
-                          ),
-                        ),
-                      )
-                      .toList()),
-              onPressed: (ref, value) =>
-                  ref.read(pCategoriesPageProvider.notifier).setState(value),
-            ),
+          ],
+        ),
+        onPressed: setPage,
+      ),
+    );
+  }
+
+  void setPage(WidgetRef ref, int value) {
+    ref.read(pCategoriesPageProvider.notifier).setState(value);
+  }
+
+  void openCategory(BuildContext context, int id, String label) {
+    context.pushNamed(
+      'category',
+      pathParameters: {'id': id.toString()},
+      extra: label,
     );
   }
 }

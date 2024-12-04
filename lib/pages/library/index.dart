@@ -1,5 +1,4 @@
 import 'package:flavormate/components/library/dialogs/create_book_dialog.dart';
-import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_book_card.dart';
 import 'package:flavormate/components/t_empty_message.dart';
 import 'package:flavormate/components/t_pageable.dart';
@@ -16,51 +15,47 @@ class LibraryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(pLibraryProvider);
-
-    return RStruct(
-      provider,
-      (_, library) => Stack(
-        children: [
-          library.page.empty
-              ? Center(
-                  child: TEmptyMessage(
-                    icon: MdiIcons.bookOffOutline,
-                    title: L10n.of(context).p_library_no_book,
-                    subtitle: L10n.of(context).p_library_no_book_subtitle,
-                  ),
-                )
-              : TPageable(
-                  provider: pLibraryProvider,
-                  pageProvider: pLibraryPageProvider,
-                  onPressed: (ref, index) =>
-                      ref.read(pLibraryPageProvider.notifier).setState(index),
-                  builder: (_, library) => TWrap(
-                    children: library.content
-                        .map((book) => BookCard(book: book))
-                        .toList(),
-                  ),
-                ),
-          Positioned(
-            right: 16,
-            bottom: 48,
-            child: Consumer(
-              builder: (context, ref, __) => FloatingActionButton(
-                onPressed: () => addBook(context, ref),
-                child: const Icon(MdiIcons.plus),
-              ),
+    return Stack(
+      children: [
+        TPageable(
+          provider: pLibraryProvider,
+          pageProvider: pLibraryPageProvider,
+          onEmpty: TEmptyMessage(
+            icon: MdiIcons.bookOffOutline,
+            title: L10n.of(context).p_library_no_book,
+            subtitle: L10n.of(context).p_library_no_book_subtitle,
+          ),
+          builder: (_, library) => TWrap(
+            children: [
+              for (final book in library.content) BookCard(book: book),
+            ],
+          ),
+          onPressed: setPage,
+        ),
+        Positioned(
+          right: 16,
+          bottom: 48,
+          child: Consumer(
+            builder: (context, ref, __) => FloatingActionButton(
+              onPressed: () => addBook(context, ref),
+              child: const Icon(MdiIcons.plus),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  addBook(BuildContext context, WidgetRef ref) async {
+  void setPage(WidgetRef ref, int value) {
+    ref.read(pLibraryPageProvider.notifier).setState(value);
+  }
+
+  Future<void> addBook(BuildContext context, WidgetRef ref) async {
     final response = await showDialog<String?>(
       context: context,
       builder: (_) => const CreateBookDialog(),
     );
+
     if (response?.isEmpty ?? true) return;
 
     await ref.read(pLibraryProvider.notifier).createBook(response!);

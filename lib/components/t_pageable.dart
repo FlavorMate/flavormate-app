@@ -10,6 +10,7 @@ class TPageable<T> extends ConsumerStatefulWidget {
   final AutoDisposeNotifierProvider<AutoDisposeNotifier<int>, int> pageProvider;
   final Widget Function(BuildContext, Pageable<T>) builder;
   final void Function(WidgetRef, int) onPressed;
+  final Widget onEmpty;
 
   const TPageable({
     super.key,
@@ -17,6 +18,7 @@ class TPageable<T> extends ConsumerStatefulWidget {
     required this.pageProvider,
     required this.builder,
     required this.onPressed,
+    required this.onEmpty,
   });
 
   @override
@@ -28,7 +30,7 @@ class _TPageableState<T> extends ConsumerState<TPageable<T>> {
 
   @override
   void initState() {
-    ref.listenManual(widget.provider, (_, value) {
+    ref.listenManual(widget.provider, fireImmediately: true, (_, value) {
       if (!value.hasValue) return;
       _totalPages = value.value!.page.totalPages;
     });
@@ -41,7 +43,16 @@ class _TPageableState<T> extends ConsumerState<TPageable<T>> {
     final pageProvider = ref.watch(widget.pageProvider);
     return Column(
       children: [
-        TPageableContent(child: RStruct(provider, widget.builder)),
+        Expanded(
+          child: RStruct(
+            provider,
+            (context, value) => value.content.isEmpty
+                ? Center(child: widget.onEmpty)
+                : TPageableContent(
+                    child: widget.builder(context, value),
+                  ),
+          ),
+        ),
         TPageableBar(
           totalPages: _totalPages,
           onPressed: (int value) => widget.onPressed(ref, value),
