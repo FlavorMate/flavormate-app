@@ -1,5 +1,18 @@
 [
   {
+    "version": "2.1.0",
+    "details": [
+      {
+        "change": "Rezepte können nun geteilt werden (falls auf dem Server aktiviert)",
+        "icon": "share"
+      },
+      {
+        "change": "Kleine Fehlerbehebungen und Verbesserungen",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "2.0.3",
     "details": [
       {

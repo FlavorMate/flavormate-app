@@ -1,5 +1,18 @@
 [
   {
+    "version": "2.1.0",
+    "details": [
+      {
+        "change": "Recipes can now be shared (if activated on the server)",
+        "icon": "share"
+      },
+      {
+        "change": "Small bugfixes and improvements",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "2.0.3",
     "details": [
       {
