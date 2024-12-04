@@ -11,14 +11,12 @@ class TPageableContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(PADDING),
-            child: child,
-          ),
+    return SingleChildScrollView(
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(PADDING),
+          child: child,
         ),
       ),
     );
