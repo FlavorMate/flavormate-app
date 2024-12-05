@@ -51,6 +51,8 @@ class RecipePage extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _RecipePageState();
+
+  int get recipeId => int.parse(id);
 }
 
 class _RecipePageState extends ConsumerState<RecipePage> {
@@ -59,15 +61,20 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   @override
   void initState() {
     super.initState();
-    ref.listenManual(pRecipeProvider(int.parse(widget.id)), (_, next) {
-      servingFactor = next.value!.serving.amount;
-    });
+    ref.listenManual(
+      pRecipeProvider(widget.recipeId),
+      fireImmediately: true,
+      (_, next) {
+        if (!next.hasValue) return;
+        servingFactor = next.value!.serving.amount;
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider = ref.watch(pRecipeProvider(int.parse(widget.id)));
-    final userProvider = ref.watch(pActionButtonProvider(int.parse(widget.id)));
+    final provider = ref.watch(pRecipeProvider(widget.recipeId));
+    final userProvider = ref.watch(pActionButtonProvider(widget.recipeId));
     final bringProvider = ref.watch(pFeatureBringProvider);
     final shareProvider = ref.watch(pFeatureShareProvider);
 
@@ -88,7 +95,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
             (_, user) => Visibility(
               visible: user.isAdmin || user.isOwner,
               child: ActionButton(
-                recipeId: int.parse(widget.id),
+                recipeId: widget.recipeId,
                 edit: () => edit(),
                 delete: () => delete(),
                 transfer: () => transfer(),
@@ -234,7 +241,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   }
 
   share(BuildContext context) async {
-    final recipe = await ref.read(pRecipeProvider(int.parse(widget.id)).future);
+    final recipe = await ref.read(pRecipeProvider(widget.recipeId).future);
     final token = await ref
         .read(pApiProvider)
         .tokenClient
@@ -252,8 +259,8 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     );
 
     final url = UAppLink.createURL(
-      AppLinkMode.open,
       appLink,
+      Localizations.localeOf(context).languageCode,
     );
 
     await Share.share(
@@ -284,9 +291,9 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     final response = await ref
         .read(pApiProvider)
         .recipesClient
-        .changeOwner(int.parse(widget.id), {'owner': id});
+        .changeOwner(widget.recipeId, {'owner': id});
     if (response) {
-      ref.invalidate(pRecipeProvider(int.parse(widget.id)));
+      ref.invalidate(pRecipeProvider(widget.recipeId));
 
       if (!mounted) return;
       context.showTextSnackBar(L10n.of(context).d_recipe_change_owner_success);
@@ -304,7 +311,7 @@ class _RecipePageState extends ConsumerState<RecipePage> {
     if (await ref
         .read(pApiProvider)
         .recipesClient
-        .deleteById(int.parse(widget.id))) {
+        .deleteById(widget.recipeId)) {
       ref.invalidate(pLatestRecipesProvider);
       ref.invalidate(pHighlightProvider);
       ref.invalidate(pStoriesProvider);
