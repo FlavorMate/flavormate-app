@@ -59,7 +59,8 @@ class RecipePageDesktop extends StatelessWidget {
                     slides: recipe.files
                         .map(
                           (file) => TSlide(
-                            imageSrc: file.path(context.read(pServerProvider)!),
+                            imageSrc: file.fullPath ??
+                                file.path(context.read(pServerProvider)!),
                             type: TImageType.network,
                           ),
                         )

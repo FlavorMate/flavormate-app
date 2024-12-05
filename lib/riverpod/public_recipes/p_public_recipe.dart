@@ -1,7 +1,6 @@
 import 'package:flavormate/clients/api_client.dart';
 import 'package:flavormate/models/appLink/app_link.dart';
 import 'package:flavormate/models/recipe/recipe.dart';
-import 'package:flavormate/riverpod/units/p_unit_conversions.dart';
 import 'package:flavormate/utils/u_localizations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,7 +10,6 @@ part 'p_public_recipe.g.dart';
 class PPublicRecipe extends _$PPublicRecipe {
   @override
   Future<Recipe> build(AppLink appLink) async {
-    await ref.watch(pUnitConversionProvider.selectAsync((data) => data));
     final language = currentLocalization().languageCode;
 
     final api = ApiClient.public(appLink.server);
