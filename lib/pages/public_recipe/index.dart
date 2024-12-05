@@ -47,6 +47,7 @@ class _PublicRecipePageState extends ConsumerState<PublicRecipePage> {
   void initState() {
     super.initState();
     ref.listenManual(pPublicRecipeProvider(widget.appLink), (_, next) {
+      if (!next.hasValue) return;
       servingFactor = next.value!.serving.amount;
     });
   }
