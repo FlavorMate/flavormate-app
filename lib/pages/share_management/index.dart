@@ -3,13 +3,16 @@ import 'package:flavormate/components/dialogs/t_confirm_dialog.dart';
 import 'package:flavormate/components/riverpod/r_struct.dart';
 import 'package:flavormate/components/t_app_bar.dart';
 import 'package:flavormate/extensions/e_date_time.dart';
+import 'package:flavormate/extensions/e_string.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/models/user/token.dart';
 import 'package:flavormate/riverpod/api/p_api.dart';
+import 'package:flavormate/riverpod/recipes/p_recipe.dart';
 import 'package:flavormate/riverpod/tokens/p_tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class ShareManagementPage extends ConsumerStatefulWidget {
   const ShareManagementPage({super.key});
@@ -30,8 +33,13 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
     final double columnSpacing = 10;
     final double horizontalMargin = 24;
 
-    final double minWidth =
-        horizontalMargin * 2 + columnSpacing * 5 + 256 * 2 + 128 * 2 + 128 + 72;
+    final double minWidth = horizontalMargin * 2 +
+        columnSpacing * 6 +
+        160 * 3 +
+        64 +
+        128 * 1 +
+        128 +
+        72;
 
     return Scaffold(
       appBar: TAppBar(title: L10n.of(context).p_admin_share_title),
@@ -55,17 +63,21 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
               ),
               DataColumn2(
                 label: Text(L10n.of(context).p_admin_share_type),
-                fixedWidth: 128,
+                fixedWidth: 64,
                 onSort: (i, j) => sort(i),
               ),
               DataColumn2(
+                label: Text(L10n.of(context).p_recipe_title),
+                fixedWidth: 160,
+              ),
+              DataColumn2(
                 label: Text(L10n.of(context).p_admin_share_created),
-                fixedWidth: 256,
+                fixedWidth: 160,
                 onSort: (i, j) => sort(i),
               ),
               DataColumn2(
                 label: Text(L10n.of(context).p_admin_share_valid_until),
-                fixedWidth: 256,
+                fixedWidth: 160,
                 onSort: (i, j) => sort(i),
               ),
               DataColumn2(
@@ -81,22 +93,49 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
             ],
             rows: [
               for (final token in tokens)
-                DataRow2(cells: [
-                  DataCell(Text(token.owner.username)),
-                  DataCell(Text(token.type)),
-                  DataCell(
-                      Text(token.createdOn!.toLocalDateTimeString(context))),
-                  DataCell(Text(
-                      token.validUntil?.toLocalDateTimeString(context) ?? '-')),
-                  DataCell(Text(token.uses.toString())),
-                  DataCell(
-                    IconButton(
-                      color: Colors.red,
-                      onPressed: () => deleteToken(context, ref, token),
-                      icon: Icon(MdiIcons.delete),
+                DataRow2(
+                  cells: [
+                    DataCell(Text(token.owner.username)),
+                    DataCell(Text(token.type)),
+                    DataCell(
+                      RStruct(
+                        ref.watch(pRecipeProvider(token.content!)),
+                        (_, recipe) => SizedBox(
+                          width: 150,
+                          child: FilledButton.tonal(
+                            onPressed: () => context.pushNamed(
+                              'recipe',
+                              pathParameters: {'id': recipe.id.toString()},
+                              extra: recipe.label,
+                            ),
+                            child: Text(
+                              recipe.label.shorten(length: 16),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ])
+                    DataCell(
+                        Text(token.createdOn!.toLocalDateTimeString2(context))),
+                    DataCell(
+                      Text(
+                        token.validUntil?.toLocalDateTimeString2(context) ??
+                            '-',
+                      ),
+                    ),
+                    DataCell(Text(token.uses.toString())),
+                    DataCell(
+                      Center(
+                        child: IconButton(
+                          color: Colors.red,
+                          onPressed: () => deleteToken(context, ref, token),
+                          icon: Icon(MdiIcons.delete),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
             ],
           ),
         ),

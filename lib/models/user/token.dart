@@ -25,7 +25,7 @@ class TToken extends Entity with TTokenMappable {
   final String token;
   final Duration? validFor;
   final String type;
-  final double? content;
+  final int? content;
   final User owner;
   final int uses;
 

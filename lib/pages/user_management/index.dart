@@ -100,7 +100,9 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
                   DataCell(Text(user.username)),
                   DataCell(Text(user.displayName)),
                   DataCell(
-                    Text(user.lastActivity!.toLocalDateTimeString2(context)),
+                    Text(
+                      user.lastActivity?.toLocalDateTimeString2(context) ?? '-',
+                    ),
                   ),
                   DataCell(
                     Center(
