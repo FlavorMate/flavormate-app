@@ -16,6 +16,10 @@ extension EDateTime on DateTime {
     return '${toLocalDateString(context)} - ${toLocalTimeString(context)}';
   }
 
+  String toLocalDateTimeString2(BuildContext context) {
+    return '${toLocalDateString(context)}\n${toLocalTimeString(context)}';
+  }
+
   bool isSameDate(DateTime other) {
     return year == other.year && month == other.month && day == other.day;
   }
