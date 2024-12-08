@@ -18,27 +18,29 @@ class TagsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: TAppBar(title: L10n.of(context).p_tags),
-      body: TPageable(
-        provider: pTagsProvider,
-        pageProvider: pTagsPageProvider,
-        onEmpty: TEmptyMessage(
-          title: L10n.of(context).p_tags_no_recipe,
-          subtitle: L10n.of(context).p_tags_no_recipe_subtitle,
-          icon: MdiIcons.tagOffOutline,
-        ),
-        builder: (_, tags) => TWrap(
-          children: [
-            for (final tag in tags.content)
-              TComponentCard(
-                onTap: () => openTag(
-                  context,
-                  tag.id!,
-                  tag.label,
+      body: SafeArea(
+        child: TPageable(
+          provider: pTagsProvider,
+          pageProvider: pTagsPageProvider,
+          onEmpty: TEmptyMessage(
+            title: L10n.of(context).p_tags_no_recipe,
+            subtitle: L10n.of(context).p_tags_no_recipe_subtitle,
+            icon: MdiIcons.tagOffOutline,
+          ),
+          builder: (_, tags) => TWrap(
+            children: [
+              for (final tag in tags.content)
+                TComponentCard(
+                  onTap: () => openTag(
+                    context,
+                    tag.id!,
+                    tag.label,
+                  ),
+                  image: tag.coverUrl,
+                  label: tag.label,
                 ),
-                image: tag.coverUrl,
-                label: tag.label,
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
