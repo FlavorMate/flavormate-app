@@ -18,27 +18,29 @@ class CategoriesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: TAppBar(title: L10n.of(context).p_categories),
-      body: TPageable(
-        provider: pCategoriesProvider,
-        pageProvider: pCategoriesPageProvider,
-        onEmpty: TEmptyMessage(
-          icon: MdiIcons.archiveOffOutline,
-          title: L10n.of(context).p_categories_no_recipe,
-          subtitle: L10n.of(context).p_categories_no_recipe_subtitle,
-        ),
-        builder: (_, categories) => TWrap(
-          children: [
-            for (final category in categories.content)
-              TComponentCard(
-                image: category.coverUrl,
-                label: category.label,
-                onTap: () => openCategory(
-                  context,
-                  category.id!,
-                  category.label,
+      body: SafeArea(
+        child: TPageable(
+          provider: pCategoriesProvider,
+          pageProvider: pCategoriesPageProvider,
+          onEmpty: TEmptyMessage(
+            icon: MdiIcons.archiveOffOutline,
+            title: L10n.of(context).p_categories_no_recipe,
+            subtitle: L10n.of(context).p_categories_no_recipe_subtitle,
+          ),
+          builder: (_, categories) => TWrap(
+            children: [
+              for (final category in categories.content)
+                TComponentCard(
+                  image: category.coverUrl,
+                  label: category.label,
+                  onTap: () => openCategory(
+                    context,
+                    category.id!,
+                    category.label,
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
