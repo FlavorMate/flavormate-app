@@ -17,7 +17,7 @@ jobs:
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.5'
+          flutter-version: '3.27.0'
           channel: 'stable'
 
       - name: Install dependencies
@@ -108,7 +108,7 @@ jobs:
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.5'
+          flutter-version: '3.27.0'
           channel: 'stable'
 
       - name: Install dependencies
@@ -149,10 +149,10 @@ jobs:
           
           # downloading required files for drift to work on web
           # download sqlite
-          curl -L -O https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-2.4.6/sqlite3.wasm
+          curl -L -O https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-2.5.0/sqlite3.wasm
           
           # download drift
-          curl -L -O https://github.com/simolus3/drift/releases/download/drift-2.20.1/drift_worker.js
+          curl -L -O https://github.com/simolus3/drift/releases/download/drift-2.22.0/drift_worker.js
 
       - name: Compress web archive
         run: |

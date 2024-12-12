@@ -1,5 +1,14 @@
 [
   {
+    "version": "2.1.2",
+    "details": [
+      {
+        "change": "Kleine Fehlerbehebungen und Verbesserungen",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "2.1.1",
     "details": [
       {
