@@ -1,5 +1,18 @@
 [
   {
+    "version": "2.1.3",
+    "details": [
+      {
+        "change": "The system colors are now displayed correctly",
+        "icon": "paletteOutline"
+      },
+      {
+        "change": "Small improvements",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "2.1.2",
     "details": [
       {
