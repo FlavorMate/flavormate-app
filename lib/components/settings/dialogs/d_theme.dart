@@ -7,6 +7,7 @@ import 'package:flavormate/components/t_scrollable_h.dart';
 import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/components/t_text_form_field.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
+import 'package:flavormate/models/t_theme.dart';
 import 'package:flavormate/riverpod/shared_preferences/p_shared_preferences.dart';
 import 'package:flavormate/riverpod/theme/p_custom_color.dart';
 import 'package:flavormate/riverpod/theme/p_dynamic_color.dart';
@@ -53,7 +54,7 @@ class _DThemeState extends ConsumerState<DTheme> {
 
   // values from shared preferences
   Color? _savedColor;
-  DynamicColors? _dynamicColors;
+  TTheme? _dynamicColors;
 
   @override
   void initState() {
