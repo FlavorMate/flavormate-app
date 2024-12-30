@@ -720,7 +720,7 @@ class L10nDe extends L10n {
   String get d_settings_theme_flavormate => 'FlavorMate';
 
   @override
-  String get d_settings_theme_custom => 'Benutzerdefiniert';
+  String get d_settings_theme_custom => 'Individuell';
 
   @override
   String get d_settings_theme_system => 'System';
