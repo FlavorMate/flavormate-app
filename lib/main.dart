@@ -8,6 +8,7 @@ import 'package:flavormate/riverpod/shared_preferences/p_shared_preferences.dart
 import 'package:flavormate/riverpod/theme/p_theme.dart';
 import 'package:flavormate/utils/custom_mappers/custom_mappers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:system_theme/system_theme.dart';
 
@@ -15,6 +16,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemTheme.accentColor.load();
   MapperContainer.globals.useAll(customMappers);
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent),
+  );
+
   runApp(const ProviderScope(child: _EagerInitialization(child: MyApp())));
 }
 
