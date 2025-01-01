@@ -21,6 +21,8 @@ class RecipeNutritionDesktop extends StatefulWidget {
 
   @override
   State<RecipeNutritionDesktop> createState() => _RecipeNutritionDesktopState();
+
+  double get factor => servingFactor / serving.amount;
 }
 
 class _RecipeNutritionDesktopState extends State<RecipeNutritionDesktop> {
@@ -51,7 +53,7 @@ class _RecipeNutritionDesktopState extends State<RecipeNutritionDesktop> {
             Expanded(
               child: RecipeNutritionTable(
                 serving: widget.serving,
-                factor: widget.servingFactor,
+                factor: widget.factor,
                 nutrition: widget.nutrition!,
                 selected: _selectedIndex,
               ),

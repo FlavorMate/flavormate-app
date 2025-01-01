@@ -8,18 +8,20 @@ import 'package:flutter/material.dart';
 
 class RecipeNutrition extends StatefulWidget {
   final Nutrition? nutrition;
-  final double factor;
+  final double servingFactor;
   final Serving serving;
 
   const RecipeNutrition({
     super.key,
     required this.nutrition,
-    required this.factor,
+    required this.servingFactor,
     required this.serving,
   });
 
   @override
   State<RecipeNutrition> createState() => _RecipeNutritionState();
+
+  double get factor => servingFactor / serving.amount;
 }
 
 class _RecipeNutritionState extends State<RecipeNutrition> {
