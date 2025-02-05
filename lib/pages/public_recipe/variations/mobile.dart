@@ -70,7 +70,7 @@ class PublicRecipePageMobile extends StatelessWidget {
                   const Divider(),
                   RecipeNutrition(
                     nutrition: nutrition,
-                    factor: servingFactor,
+                    servingFactor: servingFactor,
                     serving: recipe.serving,
                   )
                 ],
