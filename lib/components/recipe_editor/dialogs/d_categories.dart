@@ -9,10 +9,7 @@ import 'package:go_router/go_router.dart';
 class DCategories extends ConsumerStatefulWidget {
   final List<int> categories;
 
-  const DCategories({
-    super.key,
-    required this.categories,
-  });
+  const DCategories({super.key, required this.categories});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _DCategoriesState();
@@ -31,27 +28,28 @@ class _DCategoriesState extends ConsumerState<DCategories> {
   Widget build(BuildContext context) {
     final provider = ref.watch(pRecipeDraftCategoriesProvider);
     return TFullDialog(
-        title: L10n.of(context).d_editor_categories_title,
-        submit: submit,
-        child: RStruct(
-          provider,
-          (_, categoryGroups) => Column(
-            children: [
-              for (final categoryGroup in categoryGroups.entries)
-                ExpansionTile(
-                  title: Text(categoryGroup.key),
-                  children: [
-                    for (final category in categoryGroup.value)
-                      CheckboxListTile(
-                        value: _categories.contains(category.id),
-                        onChanged: (_) => toggleCategory(category.id!),
-                        title: Text(category.label),
-                      )
-                  ],
-                ),
-            ],
-          ),
-        ));
+      title: L10n.of(context).d_editor_categories_title,
+      submit: submit,
+      child: RStruct(
+        provider,
+        (_, categoryGroups) => Column(
+          children: [
+            for (final categoryGroup in categoryGroups.entries)
+              ExpansionTile(
+                title: Text(categoryGroup.key),
+                children: [
+                  for (final category in categoryGroup.value)
+                    CheckboxListTile(
+                      value: _categories.contains(category.id),
+                      onChanged: (_) => toggleCategory(category.id!),
+                      title: Text(category.label),
+                    ),
+                ],
+              ),
+          ],
+        ),
+      ),
+    );
   }
 
   void submit() {

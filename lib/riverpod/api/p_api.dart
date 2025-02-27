@@ -20,13 +20,16 @@ class PApi extends _$PApi {
 
     final interceptorMethods = InterceptorMethods(
       onUnauthenticated: auth.logout,
-      onNoConnection: () =>
-          ref.read(pGoRouterProvider).goNamed('no-connection'),
+      onNoConnection:
+          () => ref.read(pGoRouterProvider).goNamed('no-connection'),
     );
 
     return token != null
         ? ApiClient.withToken(
-            server, token.accessToken!.token, interceptorMethods)
+          server,
+          token.accessToken!.token,
+          interceptorMethods,
+        )
         : ApiClient(server, interceptorMethods);
   }
 }

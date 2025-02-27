@@ -26,11 +26,13 @@ class RecipesPage extends ConsumerWidget {
             title: L10n.of(context).p_recipes_no_recipe,
             subtitle: L10n.of(context).p_recipes_no_recipe_subtitle,
           ),
-          builder: (_, recipes) => TWrap(
-            children: [
-              for (final recipe in recipes.content) TRecipeCard(recipe: recipe),
-            ],
-          ),
+          builder:
+              (_, recipes) => TWrap(
+                children: [
+                  for (final recipe in recipes.content)
+                    TRecipeCard(recipe: recipe),
+                ],
+              ),
         ),
       ),
     );

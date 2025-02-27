@@ -24,9 +24,10 @@ class DDiet extends StatelessWidget {
               onPressed: () => context.pop(diet),
               leading: Icon(diet.icon),
               label: diet.getName(context),
-              trailing: this.diet == diet
-                  ? const Icon(MdiIcons.checkCircleOutline)
-                  : null,
+              trailing:
+                  this.diet == diet
+                      ? const Icon(MdiIcons.checkCircleOutline)
+                      : null,
             ),
         ],
       ),

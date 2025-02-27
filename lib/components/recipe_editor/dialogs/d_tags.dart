@@ -11,10 +11,7 @@ import 'package:go_router/go_router.dart';
 class DTags extends StatefulWidget {
   final List<TagDraft> tags;
 
-  const DTags({
-    super.key,
-    required this.tags,
-  });
+  const DTags({super.key, required this.tags});
 
   @override
   State<StatefulWidget> createState() => _DTagsState();

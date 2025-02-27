@@ -10,10 +10,7 @@ import 'package:go_router/go_router.dart';
 class DServing extends StatefulWidget {
   final ServingDraft serving;
 
-  const DServing({
-    super.key,
-    required this.serving,
-  });
+  const DServing({super.key, required this.serving});
 
   @override
   State<StatefulWidget> createState() => _DServingState();
@@ -27,9 +24,10 @@ class _DServingState extends State<DServing> {
 
   @override
   void initState() {
-    _amountController.text = widget.serving.amount <= 0
-        ? ''
-        : widget.serving.amount.toInt().toString();
+    _amountController.text =
+        widget.serving.amount <= 0
+            ? ''
+            : widget.serving.amount.toInt().toString();
     _labelController.text = widget.serving.label;
     super.initState();
   }
@@ -58,8 +56,8 @@ class _DServingState extends State<DServing> {
             TTextFormField(
               controller: _labelController,
               label: L10n.of(context).d_editor_serving_label,
-              validators: (input) =>
-                  UValidatorPresets.isNotEmpty(context, input),
+              validators:
+                  (input) => UValidatorPresets.isNotEmpty(context, input),
             ),
           ],
         ),

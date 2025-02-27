@@ -10,8 +10,9 @@ class UnitsClient extends ABaseClient<UnitLocalized> {
   });
 
   Future<List<UnitConversion>> getAllConversions() async {
-    final response =
-        await httpClient.get<List<dynamic>>('$baseURL/conversions');
+    final response = await httpClient.get<List<dynamic>>(
+      '$baseURL/conversions',
+    );
 
     return response.data!
         .map((ul) => UnitConversionMapper.fromMap(ul))

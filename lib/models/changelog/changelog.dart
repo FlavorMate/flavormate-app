@@ -19,10 +19,7 @@ class ChangelogVersion with ChangelogVersionMappable {
 
   final List<ChangelogDetail> details;
 
-  ChangelogVersion({
-    required this.version,
-    required this.details,
-  });
+  ChangelogVersion({required this.version, required this.details});
 }
 
 @MappableClass()
@@ -30,8 +27,5 @@ class ChangelogDetail with ChangelogDetailMappable {
   final String icon;
   final String change;
 
-  ChangelogDetail({
-    required this.icon,
-    required this.change,
-  });
+  ChangelogDetail({required this.icon, required this.change});
 }

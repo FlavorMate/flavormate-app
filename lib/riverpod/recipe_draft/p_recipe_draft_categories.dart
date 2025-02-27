@@ -13,15 +13,19 @@ class PRecipeDraftCategories extends _$PRecipeDraftCategories {
     final language = currentLocalization().languageCode;
     final Map<String, List<Category>> map = {};
 
-    final categoryGroups =
-        await ref.watch(pCategoryGroupsProvider.selectAsync((data) => data));
-    final categories =
-        await ref.watch(pApiProvider).categoriesClient.findRaw(language);
+    final categoryGroups = await ref.watch(
+      pCategoryGroupsProvider.selectAsync((data) => data),
+    );
+    final categories = await ref
+        .watch(pApiProvider)
+        .categoriesClient
+        .findRaw(language);
 
     for (final categoryGroup in categoryGroups) {
-      map[categoryGroup.label] = categories
-          .where((category) => category.group.id == categoryGroup.id)
-          .toList();
+      map[categoryGroup.label] =
+          categories
+              .where((category) => category.group.id == categoryGroup.id)
+              .toList();
     }
 
     return map;

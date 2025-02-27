@@ -15,10 +15,7 @@ import 'package:go_router/go_router.dart';
 class DInstructionGroup extends StatefulWidget {
   final InstructionGroupDraft instructionGroup;
 
-  const DInstructionGroup({
-    super.key,
-    required this.instructionGroup,
-  });
+  const DInstructionGroup({super.key, required this.instructionGroup});
 
   @override
   State<StatefulWidget> createState() => _DInstructionGroupState();
@@ -68,9 +65,11 @@ class _DInstructionGroupState extends State<DInstructionGroup> {
                 TDataRow(
                   onSelectChanged: (_) => openInstruction(instruction),
                   cells: [
-                    Text(instruction.label.isEmpty
-                        ? '-'
-                        : instruction.label.shorten()),
+                    Text(
+                      instruction.label.isEmpty
+                          ? '-'
+                          : instruction.label.shorten(),
+                    ),
                     IconButton(
                       onPressed: () => deleteInstruction(instruction),
                       icon: Icon(MdiIcons.delete, color: Colors.red),
@@ -84,7 +83,7 @@ class _DInstructionGroupState extends State<DInstructionGroup> {
             child: Text(
               L10n.of(context).d_editor_instruction_group_add_instruction,
             ),
-          )
+          ),
         ],
       ),
     );

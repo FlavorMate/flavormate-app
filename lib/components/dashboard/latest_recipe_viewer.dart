@@ -13,21 +13,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class LatestRecipeViewer extends ConsumerWidget {
-  const LatestRecipeViewer({
-    super.key,
-  });
+  const LatestRecipeViewer({super.key});
 
   TSlide getSlide(BuildContext context, Recipe recipe) => TSlide(
-        imageSrc: recipe.coverUrl,
-        title: recipe.label,
-        type: TImageType.network,
-        date: recipe.createdOn,
-        onTap: () => context.pushNamed(
+    imageSrc: recipe.coverUrl,
+    title: recipe.label,
+    type: TImageType.network,
+    date: recipe.createdOn,
+    onTap:
+        () => context.pushNamed(
           'recipe',
           pathParameters: {'id': '${recipe.id}'},
           extra: recipe.label,
         ),
-      );
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,19 +50,25 @@ class LatestRecipeViewer extends ConsumerWidget {
             width: double.infinity,
             child: RStruct(
               provider,
-              (_, latestRecipes) => latestRecipes.page.empty
-                  ? TEmptyMessage(
-                      title:
-                          L10n.of(context).c_dashboard_latest_recipes_no_title,
-                      subtitle: L10n.of(context)
-                          .c_dashboard_latest_recipes_no_subtitle,
-                    )
-                  : TCarousel(
-                      height: 400,
-                      slides: latestRecipes.content
-                          .map((l) => getSlide(context, l))
-                          .toList(),
-                    ),
+              (_, latestRecipes) =>
+                  latestRecipes.page.empty
+                      ? TEmptyMessage(
+                        title:
+                            L10n.of(
+                              context,
+                            ).c_dashboard_latest_recipes_no_title,
+                        subtitle:
+                            L10n.of(
+                              context,
+                            ).c_dashboard_latest_recipes_no_subtitle,
+                      )
+                      : TCarousel(
+                        height: 400,
+                        slides:
+                            latestRecipes.content
+                                .map((l) => getSlide(context, l))
+                                .toList(),
+                      ),
             ),
           ),
         ],

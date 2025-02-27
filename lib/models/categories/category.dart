@@ -22,8 +22,9 @@ class Category extends Entity with CategoryMappable {
     required super.lastModifiedOn,
   });
 
-  String? get coverUrl => recipes
-      ?.where((recipe) => EString.isNotEmpty(recipe.coverUrl))
-      .firstOrNull
-      ?.coverUrl;
+  String? get coverUrl =>
+      recipes
+          ?.where((recipe) => EString.isNotEmpty(recipe.coverUrl))
+          .firstOrNull
+          ?.coverUrl;
 }

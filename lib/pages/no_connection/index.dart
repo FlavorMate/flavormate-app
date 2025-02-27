@@ -52,10 +52,7 @@ class _NoConnectionPageState extends ConsumerState<NoConnectionPage> {
               child: TColumn(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    MdiIcons.cloudOffOutline,
-                    size: 128,
-                  ),
+                  const Icon(MdiIcons.cloudOffOutline, size: 128),
                   TText(
                     L10n.of(context).p_no_connection_title,
                     TextStyles.titleLarge,
@@ -66,8 +63,8 @@ class _NoConnectionPageState extends ConsumerState<NoConnectionPage> {
                     textAlign: TextAlign.center,
                   ),
                   FilledButton(
-                    onPressed: () =>
-                        ref.read(pAuthStateProvider.notifier).logout(),
+                    onPressed:
+                        () => ref.read(pAuthStateProvider.notifier).logout(),
                     child: Text(L10n.of(context).btn_logout),
                   ),
                 ],

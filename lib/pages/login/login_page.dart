@@ -16,10 +16,7 @@ class LoginPage extends ConsumerWidget {
     if (serverURL.isEmpty) {
       return ServerForm(readOnly: isStatic != null);
     } else {
-      return LoginForm(
-        server: serverURL,
-        isStatic: isStatic != null,
-      );
+      return LoginForm(server: serverURL, isStatic: isStatic != null);
     }
   }
 }

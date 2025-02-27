@@ -8,10 +8,7 @@ import 'package:go_router/go_router.dart';
 class DDuration extends StatefulWidget {
   final Duration duration;
 
-  const DDuration({
-    super.key,
-    required this.duration,
-  });
+  const DDuration({super.key, required this.duration});
 
   @override
   State<StatefulWidget> createState() => _DDurationState();

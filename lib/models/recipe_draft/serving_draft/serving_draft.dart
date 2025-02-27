@@ -7,8 +7,5 @@ class ServingDraft with ServingDraftMappable {
   final double amount;
   final String label;
 
-  ServingDraft(
-    this.amount,
-    this.label,
-  );
+  ServingDraft(this.amount, this.label);
 }

@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ManagePassword extends StatefulWidget {
-  const ManagePassword({
-    super.key,
-  });
+  const ManagePassword({super.key});
 
   @override
   State<StatefulWidget> createState() => _ManagePasswordState();
@@ -85,10 +83,7 @@ class _ManagePasswordState extends State<ManagePassword> {
                   return L10n.of(context).v_isEmpty;
                 }
 
-                if (!UValidator.isEqual(
-                  value!,
-                  _newPassword1Controller.text,
-                )) {
+                if (!UValidator.isEqual(value!, _newPassword1Controller.text)) {
                   return L10n.of(context).v_isEqual;
                 }
 

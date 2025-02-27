@@ -18,11 +18,12 @@ class TRecipeCard extends StatelessWidget {
       width: 450,
       child: TCard(
         padding: 0,
-        onTap: () => context.pushNamed(
-          'recipe',
-          pathParameters: {'id': recipe.id.toString()},
-          extra: recipe.label,
-        ),
+        onTap:
+            () => context.pushNamed(
+              'recipe',
+              pathParameters: {'id': recipe.id.toString()},
+              extra: recipe.label,
+            ),
         child: Column(
           children: [
             SizedBox(

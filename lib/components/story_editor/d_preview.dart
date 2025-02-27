@@ -50,10 +50,7 @@ class DPreview extends ConsumerWidget {
                   TRow(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AvatarViewer(
-                        user: user,
-                        border: true,
-                      ),
+                      AvatarViewer(user: user, border: true),
                       Expanded(
                         child: TBubble(
                           topLeft: true,

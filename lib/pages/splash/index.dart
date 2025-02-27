@@ -44,16 +44,10 @@ class _SplashPageState extends ConsumerState<SplashPage> {
                 height: 160,
                 width: 160,
               ),
-              TText(
-                L10n.of(context).app_title,
-                TextStyles.headlineLarge,
-              ),
+              TText(L10n.of(context).app_title, TextStyles.headlineLarge),
               SizedBox(height: 16),
               CircularProgressIndicator(),
-              TText(
-                L10n.of(context).p_splash_loading,
-                TextStyles.titleLarge,
-              ),
+              TText(L10n.of(context).p_splash_loading, TextStyles.titleLarge),
             ],
           ),
         ),

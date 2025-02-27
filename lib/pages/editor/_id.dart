@@ -46,11 +46,7 @@ class EditorPage extends ConsumerWidget {
           child: TColumn(
             children: [
               TButton(
-                onPressed: () => editCommon(
-                  context,
-                  ref,
-                  draft.recipeDraft,
-                ),
+                onPressed: () => editCommon(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_common_title,
                 trailing: TProgress(
@@ -58,11 +54,7 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed: () => editServing(
-                  context,
-                  ref,
-                  draft.recipeDraft,
-                ),
+                onPressed: () => editServing(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_serving_title,
                 trailing: TProgress(
@@ -70,11 +62,7 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed: () => editDurations(
-                  context,
-                  ref,
-                  draft.recipeDraft,
-                ),
+                onPressed: () => editDurations(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_durations_title,
                 trailing: TProgress(
@@ -82,11 +70,8 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed: () => editIngredientGroups(
-                  context,
-                  ref,
-                  draft.recipeDraft,
-                ),
+                onPressed:
+                    () => editIngredientGroups(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_ingredient_groups_title,
                 trailing: TProgress(
@@ -94,11 +79,9 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed: () => editInstructionGroups(
-                  context,
-                  ref,
-                  draft.recipeDraft,
-                ),
+                onPressed:
+                    () =>
+                        editInstructionGroups(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_instruction_groups_title,
                 trailing: TProgress(
@@ -106,11 +89,7 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed: () => editCourse(
-                  context,
-                  ref,
-                  draft.recipeDraft,
-                ),
+                onPressed: () => editCourse(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_course_title,
                 trailing: TProgress(
@@ -118,16 +97,10 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed: () => editDiet(
-                  context,
-                  ref,
-                  draft.recipeDraft,
-                ),
+                onPressed: () => editDiet(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_diet_title,
-                trailing: TProgress(
-                  completed: draft.recipeDraft.dietProgress,
-                ),
+                trailing: TProgress(completed: draft.recipeDraft.dietProgress),
               ),
               TButton(
                 onPressed: () => editTags(context, ref, draft.recipeDraft),
@@ -139,11 +112,8 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed: () => editCategories(
-                  context,
-                  ref,
-                  draft.recipeDraft,
-                ),
+                onPressed:
+                    () => editCategories(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_categories_title,
                 trailing: TProgress(
@@ -152,11 +122,7 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed: () => editImages(
-                  context,
-                  ref,
-                  draft,
-                ),
+                onPressed: () => editImages(context, ref, draft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_images_title,
                 trailing: TProgress(
@@ -172,13 +138,8 @@ class EditorPage extends ConsumerWidget {
       floatingActionButton: RStruct(
         provider,
         (_, draft) => FloatingActionButton(
-          onPressed: draft.isValid
-              ? () => showPreview(
-                    context,
-                    ref,
-                    draft,
-                  )
-              : null,
+          onPressed:
+              draft.isValid ? () => showPreview(context, ref, draft) : null,
           disabledElevation: 0,
           child: Icon(
             MdiIcons.contentSave,
@@ -190,13 +151,17 @@ class EditorPage extends ConsumerWidget {
   }
 
   editCommon(
-      BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog<Map<String, String?>>(
       context: context,
-      builder: (_) => DCommon(
-        label: recipeDraft.label,
-        description: recipeDraft.description,
-      ),
+      builder:
+          (_) => DCommon(
+            label: recipeDraft.label,
+            description: recipeDraft.description,
+          ),
       useSafeArea: false,
     );
 
@@ -206,7 +171,10 @@ class EditorPage extends ConsumerWidget {
   }
 
   editServing(
-      BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog<ServingDraft>(
       context: context,
       builder: (_) => DServing(serving: recipeDraft.serving),
@@ -218,14 +186,18 @@ class EditorPage extends ConsumerWidget {
   }
 
   editDurations(
-      BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog<Map<String, Duration>>(
       context: context,
-      builder: (_) => DDurations(
-        prepTime: recipeDraft.prepTime,
-        cookTime: recipeDraft.cookTime,
-        restTime: recipeDraft.restTime,
-      ),
+      builder:
+          (_) => DDurations(
+            prepTime: recipeDraft.prepTime,
+            cookTime: recipeDraft.cookTime,
+            restTime: recipeDraft.restTime,
+          ),
       useSafeArea: false,
     );
 
@@ -234,12 +206,15 @@ class EditorPage extends ConsumerWidget {
   }
 
   editIngredientGroups(
-      BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog<List<IngredientGroupDraft>>(
       context: context,
-      builder: (_) => DIngredientGroups(
-        ingredientGroups: recipeDraft.ingredientGroups,
-      ),
+      builder:
+          (_) =>
+              DIngredientGroups(ingredientGroups: recipeDraft.ingredientGroups),
       useSafeArea: false,
     );
 
@@ -248,11 +223,16 @@ class EditorPage extends ConsumerWidget {
   }
 
   editInstructionGroups(
-      BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog(
       context: context,
-      builder: (_) =>
-          DInstructionGroups(instructionGroups: recipeDraft.instructionGroups),
+      builder:
+          (_) => DInstructionGroups(
+            instructionGroups: recipeDraft.instructionGroups,
+          ),
       useSafeArea: false,
     );
 
@@ -261,7 +241,10 @@ class EditorPage extends ConsumerWidget {
   }
 
   editCourse(
-      BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog<Course>(
       context: context,
       builder: (_) => DCourse(course: recipeDraft.course),
@@ -293,7 +276,10 @@ class EditorPage extends ConsumerWidget {
   }
 
   editCategories(
-      BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog<List<int>>(
       context: context,
       builder: (_) => DCategories(categories: recipeDraft.categories),
@@ -305,7 +291,10 @@ class EditorPage extends ConsumerWidget {
   }
 
   editImages(
-      BuildContext context, WidgetRef ref, RecipeDraftWrapper draft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraftWrapper draft,
+  ) async {
     final response = await showDialog<RecipeDraftWrapper>(
       context: context,
       builder: (_) => DImages(draft: draft),
@@ -317,7 +306,10 @@ class EditorPage extends ConsumerWidget {
   }
 
   showPreview(
-      BuildContext context, WidgetRef ref, RecipeDraftWrapper draft) async {
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraftWrapper draft,
+  ) async {
     final response = await showDialog<bool>(
       context: context,
       builder: (_) => DPreview(draft: draft),

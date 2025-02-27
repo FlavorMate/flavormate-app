@@ -33,7 +33,8 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
     final double columnSpacing = 10;
     final double horizontalMargin = 24;
 
-    final double minWidth = horizontalMargin * 2 +
+    final double minWidth =
+        horizontalMargin * 2 +
         columnSpacing * 6 +
         160 * 3 +
         64 +
@@ -86,10 +87,7 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
                 numeric: true,
                 onSort: (i, j) => sort(i),
               ),
-              DataColumn2(
-                label: SizedBox.shrink(),
-                fixedWidth: 72,
-              ),
+              DataColumn2(label: SizedBox.shrink(), fixedWidth: 72),
             ],
             rows: [
               for (final token in tokens)
@@ -103,11 +101,12 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
                         (_, recipe) => SizedBox(
                           width: 150,
                           child: FilledButton.tonal(
-                            onPressed: () => context.pushNamed(
-                              'recipe',
-                              pathParameters: {'id': recipe.id.toString()},
-                              extra: recipe.label,
-                            ),
+                            onPressed:
+                                () => context.pushNamed(
+                                  'recipe',
+                                  pathParameters: {'id': recipe.id.toString()},
+                                  extra: recipe.label,
+                                ),
                             child: Text(
                               recipe.label.shorten(length: 16),
                               textAlign: TextAlign.center,
@@ -117,7 +116,8 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
                       ),
                     ),
                     DataCell(
-                        Text(token.createdOn!.toLocalDateTimeString2(context))),
+                      Text(token.createdOn!.toLocalDateTimeString2(context)),
+                    ),
                     DataCell(
                       Text(
                         token.validUntil?.toLocalDateTimeString2(context) ??
@@ -174,10 +174,11 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
   deleteToken(BuildContext context, WidgetRef ref, TToken token) async {
     final response = await showDialog<bool>(
       context: context,
-      builder: (_) => TConfirmDialog(
-        title: L10n.of(context).p_admin_share_delete_title,
-        content: L10n.of(context).p_admin_share_delete_content,
-      ),
+      builder:
+          (_) => TConfirmDialog(
+            title: L10n.of(context).p_admin_share_delete_title,
+            content: L10n.of(context).p_admin_share_delete_content,
+          ),
     );
     if (response == true) {
       await ref.read(pApiProvider).tokenClient.deleteById(token.id!);

@@ -44,7 +44,8 @@ class TDataTable extends StatelessWidget {
                             .map((row) => row.width!)
                             .fold(0.0, (a, b) => a + b);
 
-                        width = constraints.minWidth -
+                        width =
+                            constraints.minWidth -
                             restWidth -
                             (horizontalMargin * 2) -
                             (columnSpacing * (columns.length - 1));
@@ -79,7 +80,8 @@ class TDataTable extends StatelessWidget {
                                   .map((row) => row.width!)
                                   .fold(0.0, (a, b) => a + b);
 
-                              width = constraints.minWidth -
+                              width =
+                                  constraints.minWidth -
                                   restWidth -
                                   (horizontalMargin * 2) -
                                   (columnSpacing * (columns.length - 1));
@@ -96,7 +98,7 @@ class TDataTable extends StatelessWidget {
                         ),
                       ),
                   ],
-                )
+                ),
             ],
           );
         },
@@ -122,9 +124,5 @@ class TDataRow {
   final Color? background;
   final List<Widget> cells;
 
-  TDataRow({
-    this.onSelectChanged,
-    this.background,
-    required this.cells,
-  });
+  TDataRow({this.onSelectChanged, this.background, required this.cells});
 }

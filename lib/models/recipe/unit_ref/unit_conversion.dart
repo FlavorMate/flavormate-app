@@ -8,10 +8,7 @@ class UnitConversion with UnitConversionMappable {
   final UnitConversionId id;
   final double factor;
 
-  UnitConversion({
-    required this.id,
-    required this.factor,
-  });
+  UnitConversion({required this.id, required this.factor});
 }
 
 @MappableClass()

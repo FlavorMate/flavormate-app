@@ -11,10 +11,7 @@ import 'package:go_router/go_router.dart';
 class DIngredientGroups extends StatefulWidget {
   final List<IngredientGroupDraft> ingredientGroups;
 
-  const DIngredientGroups({
-    super.key,
-    required this.ingredientGroups,
-  });
+  const DIngredientGroups({super.key, required this.ingredientGroups});
 
   @override
   State<StatefulWidget> createState() => _DIngredientGroupsState();
@@ -54,16 +51,17 @@ class _DIngredientGroupsState extends State<DIngredientGroups> {
                     IconButton(
                       onPressed: () => deleteGroup(group),
                       icon: Icon(MdiIcons.delete, color: Colors.red),
-                    )
+                    ),
                   ],
                 ),
             ],
           ),
           FilledButton.tonal(
             onPressed: createGroup,
-            child:
-                Text(L10n.of(context).d_editor_ingredient_groups_create_group),
-          )
+            child: Text(
+              L10n.of(context).d_editor_ingredient_groups_create_group,
+            ),
+          ),
         ],
       ),
     );
@@ -71,9 +69,9 @@ class _DIngredientGroupsState extends State<DIngredientGroups> {
 
   String getName(BuildContext context, String? val, int index) {
     if (val?.isEmpty ?? true) {
-      return L10n.of(context).d_editor_ingredient_groups_label_2(
-        '${index + 1}',
-      );
+      return L10n.of(
+        context,
+      ).d_editor_ingredient_groups_label_2('${index + 1}');
     } else {
       return val!;
     }

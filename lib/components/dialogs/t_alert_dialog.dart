@@ -44,11 +44,7 @@ class TAlertDialog extends StatelessWidget {
             child: Text(positiveLabel ?? L10n.of(context).btn_save),
           ),
       ],
-      content: SizedBox(
-        width: width,
-        height: height,
-        child: child,
-      ),
+      content: SizedBox(width: width, height: height, child: child),
     );
   }
 }

@@ -12,11 +12,10 @@ class PLibrary extends _$PLibrary {
   @override
   Future<Pageable<Book>> build() async {
     final page = ref.watch(pLibraryPageProvider);
-    final books = await ref.watch(pApiProvider).libraryClient.findByPage(
-          page: page,
-          sortBy: 'label',
-          sortDirection: 'ASC',
-        );
+    final books = await ref
+        .watch(pApiProvider)
+        .libraryClient
+        .findByPage(page: page, sortBy: 'label', sortDirection: 'ASC');
 
     books.content.sort((a, b) => a.label.compareToIgnoreCase(b.label));
 

@@ -11,11 +11,7 @@ class DCommon extends StatefulWidget {
   final String? label;
   final String? description;
 
-  const DCommon({
-    super.key,
-    required this.label,
-    required this.description,
-  });
+  const DCommon({super.key, required this.label, required this.description});
 
   @override
   State<StatefulWidget> createState() => _DCommonState();
@@ -53,8 +49,8 @@ class _DCommonState extends State<DCommon> {
             TTextFormField(
               controller: _labelController,
               label: L10n.of(context).d_editor_common_label,
-              validators: (input) =>
-                  UValidatorPresets.isNotEmpty(context, input),
+              validators:
+                  (input) => UValidatorPresets.isNotEmpty(context, input),
             ),
             TTextFormField(
               controller: _descriptionController,

@@ -112,7 +112,7 @@ class _RecipeNutritionChartState extends State<RecipeNutritionChart> {
         title: '${widget.nutrition.sodiumPercent.beautify}%',
         radius: widget.size / 4,
         titleStyle: textStyle,
-      )
+      ),
     ];
   }
 }

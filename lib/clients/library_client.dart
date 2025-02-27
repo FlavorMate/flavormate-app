@@ -15,8 +15,10 @@ class LibraryClient extends ASearchClient<Book> {
     return parser(response.data);
   }
 
-  Future<Pageable<Recipe>> findRecipesInBook(int id,
-      {required int page}) async {
+  Future<Pageable<Recipe>> findRecipesInBook(
+    int id, {
+    required int page,
+  }) async {
     final params = getParams({
       'size': 6,
       'sortBy': 'label',

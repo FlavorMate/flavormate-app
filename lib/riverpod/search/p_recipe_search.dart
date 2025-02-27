@@ -28,11 +28,10 @@ class PRecipeSearch extends _$PRecipeSearch {
 
     final user = await ref.read(pUserProvider.selectAsync((data) => data));
 
-    final response = await ref.read(pApiProvider).recipesClient.findBySearch(
-          searchTerm: term,
-          filter: user.diet!,
-          sortBy: 'label',
-        );
+    final response = await ref
+        .read(pApiProvider)
+        .recipesClient
+        .findBySearch(searchTerm: term, filter: user.diet!, sortBy: 'label');
 
     final recipeResponses = response.content.toList();
 

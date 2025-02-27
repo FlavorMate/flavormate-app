@@ -8,10 +8,7 @@ class InstructionGroupDraft with InstructionGroupDraftMappable {
   String? label;
   List<InstructionDraft> instructions;
 
-  InstructionGroupDraft({
-    this.label,
-    required this.instructions,
-  });
+  InstructionGroupDraft({this.label, required this.instructions});
 
   bool get isValid =>
       instructions.isNotEmpty && instructions.every((i) => i.isValid);

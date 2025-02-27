@@ -9,10 +9,7 @@ import 'package:go_router/go_router.dart';
 class DInstruction extends StatefulWidget {
   final InstructionDraft instruction;
 
-  const DInstruction({
-    super.key,
-    required this.instruction,
-  });
+  const DInstruction({super.key, required this.instruction});
 
   @override
   State<StatefulWidget> createState() => _DInstructionState();

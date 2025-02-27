@@ -39,32 +39,20 @@ class MainLayoutState extends State<MainLayout> {
   }
 
   List<Destination> buildDestinations(BuildContext context) => [
-        Destination(
-          icon: MdiIcons.home,
-          label: L10n.of(context).l_main_home,
-        ),
-        Destination(
-          icon: MdiIcons.bookshelf,
-          label: L10n.of(context).l_main_library,
-        ),
-        Destination(
-          icon: MdiIcons.shape,
-          label: L10n.of(context).l_main_more,
-        ),
-        Destination(
-          icon: MdiIcons.cog,
-          label: L10n.of(context).l_main_settings,
-        ),
-      ];
+    Destination(icon: MdiIcons.home, label: L10n.of(context).l_main_home),
+    Destination(
+      icon: MdiIcons.bookshelf,
+      label: L10n.of(context).l_main_library,
+    ),
+    Destination(icon: MdiIcons.shape, label: L10n.of(context).l_main_more),
+    Destination(icon: MdiIcons.cog, label: L10n.of(context).l_main_settings),
+  ];
 
   @override
   Widget build(BuildContext context) {
     final destinations = buildDestinations(context);
     return Scaffold(
-      appBar: TAppBar(
-        title: L10n.of(context).app_title,
-        showHome: false,
-      ),
+      appBar: TAppBar(title: L10n.of(context).app_title, showHome: false),
       body: Row(
         children: [
           if (wideScreen)
@@ -79,27 +67,28 @@ class MainLayoutState extends State<MainLayout> {
                     NavigationDrawerDestination(
                       icon: Icon(destination.icon),
                       label: Text(destination.label),
-                    )
+                    ),
                 ],
               ),
             ),
           Expanded(child: widget.navigationShell),
         ],
       ),
-      bottomNavigationBar: wideScreen
-          ? null
-          : NavigationBar(
-              selectedIndex: widget.navigationShell.currentIndex,
-              labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-              destinations: [
-                for (var destination in destinations)
-                  NavigationDestination(
-                    label: destination.label,
-                    icon: Icon(destination.icon),
-                  ),
-              ],
-              onDestinationSelected: _goBranch,
-            ),
+      bottomNavigationBar:
+          wideScreen
+              ? null
+              : NavigationBar(
+                selectedIndex: widget.navigationShell.currentIndex,
+                labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+                destinations: [
+                  for (var destination in destinations)
+                    NavigationDestination(
+                      label: destination.label,
+                      icon: Icon(destination.icon),
+                    ),
+                ],
+                onDestinationSelected: _goBranch,
+              ),
     );
   }
 }

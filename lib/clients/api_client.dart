@@ -41,44 +41,44 @@ extension ApiClientExceptionX on ApiClientException {
 }
 
 _interceptors(InterceptorMethods handlers) => InterceptorsWrapper(
-      onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
-        // Do something before request is sent.
-        // If you want to resolve the request with custom data,
-        // you can resolve a `Response` using `handler.resolve(response)`.
-        // If you want to reject the request with a error message,
-        // you can reject with a `DioException` using `handler.reject(dioError)`.
-        return handler.next(options);
-      },
-      onResponse: (Response response, ResponseInterceptorHandler handler) {
-        // Do something with response data.
-        // If you want to reject the request with a error message,
-        // you can reject a `DioException` object using `handler.reject(dioError)`.
-        return handler.next(response);
-      },
-      onError: (DioException error, ErrorInterceptorHandler handler) {
-        // Do something with response error.
-        // If you want to resolve the request with some custom data,
-        // you can resolve a `Response` object using `handler.resolve(response)`.
+  onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+    // Do something before request is sent.
+    // If you want to resolve the request with custom data,
+    // you can resolve a `Response` using `handler.resolve(response)`.
+    // If you want to reject the request with a error message,
+    // you can reject with a `DioException` using `handler.reject(dioError)`.
+    return handler.next(options);
+  },
+  onResponse: (Response response, ResponseInterceptorHandler handler) {
+    // Do something with response data.
+    // If you want to reject the request with a error message,
+    // you can reject a `DioException` object using `handler.reject(dioError)`.
+    return handler.next(response);
+  },
+  onError: (DioException error, ErrorInterceptorHandler handler) {
+    // Do something with response error.
+    // If you want to resolve the request with some custom data,
+    // you can resolve a `Response` object using `handler.resolve(response)`.
 
-        if (error.type == DioExceptionType.connectionError ||
-            error.type == DioExceptionType.connectionTimeout) {
-          if (!['/login', '/no-connection'].contains(currentRoute())) {
-            handlers.onNoConnection();
-            return;
-          } else {
-            return handler.next(error);
-          }
-        }
-
-        if (error.response?.statusCode == 401) {
-          if (error.requestOptions.path.contains('login')) throw error;
-          handlers.onUnauthenticated();
-          return;
-        }
-
+    if (error.type == DioExceptionType.connectionError ||
+        error.type == DioExceptionType.connectionTimeout) {
+      if (!['/login', '/no-connection'].contains(currentRoute())) {
+        handlers.onNoConnection();
+        return;
+      } else {
         return handler.next(error);
-      },
-    );
+      }
+    }
+
+    if (error.response?.statusCode == 401) {
+      if (error.requestOptions.path.contains('login')) throw error;
+      handlers.onUnauthenticated();
+      return;
+    }
+
+    return handler.next(error);
+  },
+);
 
 /// An API client that makes network requests.
 ///
@@ -93,9 +93,9 @@ _interceptors(InterceptorMethods handlers) => InterceptorsWrapper(
 /// of this type.
 class ApiClient {
   BaseOptions _defaultOptions(String server) => BaseOptions(
-        baseUrl: server,
-        headers: {'Content-Type': 'application/json'},
-      );
+    baseUrl: server,
+    headers: {'Content-Type': 'application/json'},
+  );
 
   late Dio _httpClient;
 
@@ -137,10 +137,7 @@ class ApiClient {
       baseURL: '/v2/authors',
       parser: AuthorMapper.fromMap,
     );
-    bringClient = BringClient(
-      httpClient: _httpClient,
-      baseURL: '/v2/bring',
-    );
+    bringClient = BringClient(httpClient: _httpClient, baseURL: '/v2/bring');
     categoriesClient = CategoriesClient(
       httpClient: _httpClient,
       baseURL: '/v2/categories',
@@ -224,10 +221,7 @@ class ApiClient {
       baseURL: '/v2/authors',
       parser: AuthorMapper.fromMap,
     );
-    bringClient = BringClient(
-      httpClient: _httpClient,
-      baseURL: '/v2/bring',
-    );
+    bringClient = BringClient(httpClient: _httpClient, baseURL: '/v2/bring');
     categoriesClient = CategoriesClient(
       httpClient: _httpClient,
       baseURL: '/v2/categories',
@@ -301,10 +295,7 @@ class ApiClient {
 
   /// Attempts to login with the login [data], returns the token if success.
   Future<Tokens?> login(Login data) async {
-    final response = await _httpClient.post(
-      '/auth/login',
-      data: data.toJson(),
-    );
+    final response = await _httpClient.post('/auth/login', data: data.toJson());
 
     return TokensMapper.fromMap(response.data);
   }

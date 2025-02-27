@@ -375,13 +375,16 @@ class L10nEn extends L10n {
   String get d_settings_manage_password_new => 'New password';
 
   @override
-  String get v_isSecure => 'Min. one upper and lower case letter, one special character & one number';
+  String get v_isSecure =>
+      'Min. one upper and lower case letter, one special character & one number';
 
   @override
-  String get d_settings_manage_password_success => 'Password changed successfully';
+  String get d_settings_manage_password_success =>
+      'Password changed successfully';
 
   @override
-  String get d_settings_manage_password_error => 'Password could not be changed';
+  String get d_settings_manage_password_error =>
+      'Password could not be changed';
 
   @override
   String get d_settings_manage_mail_success => 'Mail changed successfully';
@@ -443,10 +446,12 @@ class L10nEn extends L10n {
   String get d_admin_user_management_change_password_title => 'Change password';
 
   @override
-  String get d_admin_user_management_change_password_new_password => 'New password';
+  String get d_admin_user_management_change_password_new_password =>
+      'New password';
 
   @override
-  String get d_admin_user_management_change_password_new_password_2 => 'Confirm password';
+  String get d_admin_user_management_change_password_new_password_2 =>
+      'Confirm password';
 
   @override
   String get d_recipe_change_owner_title => 'Change owner';
@@ -461,7 +466,8 @@ class L10nEn extends L10n {
   String get p_no_connection_title => 'No connection to the server';
 
   @override
-  String get p_no_connection_subtitle => 'Please try again later or switch the server';
+  String get p_no_connection_subtitle =>
+      'Please try again later or switch the server';
 
   @override
   String get btn_logout => 'Logout';
@@ -666,13 +672,15 @@ class L10nEn extends L10n {
   String get d_recipe_library_no_books => 'No books available';
 
   @override
-  String get d_recipe_library_no_books_subtitle => 'Create a book in the library';
+  String get d_recipe_library_no_books_subtitle =>
+      'Create a book in the library';
 
   @override
   String get p_library_no_book => 'Your library is empty';
 
   @override
-  String get p_library_no_book_subtitle => 'Create a book by clicking the \"+\" button';
+  String get p_library_no_book_subtitle =>
+      'Create a book by clicking the \"+\" button';
 
   @override
   String get p_recipes_no_recipe => 'No recipes available';
@@ -687,13 +695,15 @@ class L10nEn extends L10n {
   String get p_tags_no_recipe => 'No tags available';
 
   @override
-  String get p_tags_no_recipe_subtitle => 'As soon as your recipes have tags they will be shown here';
+  String get p_tags_no_recipe_subtitle =>
+      'As soon as your recipes have tags they will be shown here';
 
   @override
   String get p_categories_no_recipe => 'No categories available';
 
   @override
-  String get p_categories_no_recipe_subtitle => 'As soon as your recipes have categories they will be shown here';
+  String get p_categories_no_recipe_subtitle =>
+      'As soon as your recipes have categories they will be shown here';
 
   @override
   String get p_book_no_recipes => 'Your book is empty';
@@ -726,7 +736,8 @@ class L10nEn extends L10n {
   String get d_settings_theme_system => 'System';
 
   @override
-  String get d_settings_theme_flavormate_desc => 'The default FlavorMate colors';
+  String get d_settings_theme_flavormate_desc =>
+      'The default FlavorMate colors';
 
   @override
   String get d_settings_theme_custom_desc => 'Choose your favorite color';
@@ -750,10 +761,12 @@ class L10nEn extends L10n {
   String get p_login_connection_loading => 'Connecting to server';
 
   @override
-  String get p_login_server_outdated_minor => 'Server slightly outdated!\\nConsider updating the server.';
+  String get p_login_server_outdated_minor =>
+      'Server slightly outdated!\\nConsider updating the server.';
 
   @override
-  String get p_login_server_outdated_major => 'Server outdated!\\nPlease update the server.';
+  String get p_login_server_outdated_major =>
+      'Server outdated!\\nPlease update the server.';
 
   @override
   String get p_login_forgot_password => 'Forgot password?';
@@ -771,7 +784,8 @@ class L10nEn extends L10n {
   String get btn_registration => 'Sign up';
 
   @override
-  String get p_recovery_mail_confirm => 'A mail has been sent to your mail address';
+  String get p_recovery_mail_confirm =>
+      'A mail has been sent to your mail address';
 
   @override
   String get p_registration_title => 'Create account';
@@ -798,7 +812,8 @@ class L10nEn extends L10n {
   String get p_login_no_account => 'You don\'t have an account?';
 
   @override
-  String get p_login_connection_failed_subtitle => 'Check for possible updates for the server';
+  String get p_login_connection_failed_subtitle =>
+      'Check for possible updates for the server';
 
   @override
   String get d_editor_ingredient_old_unit_label => 'Old unit';
@@ -816,16 +831,20 @@ class L10nEn extends L10n {
   String get d_nutrition_custom_title => 'Custom';
 
   @override
-  String get d_nutrition_off_hint_1 => 'Open Food Facts is a free database that contains informations about products';
+  String get d_nutrition_off_hint_1 =>
+      'Open Food Facts is a free database that contains informations about products';
 
   @override
-  String get d_nutrition_off_hint_2 => 'You can use it to fetch the nutrition informations for an ingredient';
+  String get d_nutrition_off_hint_2 =>
+      'You can use it to fetch the nutrition informations for an ingredient';
 
   @override
-  String get d_nutrition_off_hint_3 => 'To get started, please enter the EAN or scan the barcode of the product';
+  String get d_nutrition_off_hint_3 =>
+      'To get started, please enter the EAN or scan the barcode of the product';
 
   @override
-  String get d_nutrition_off_hint_4 => 'Note: All data is fetched once the recipe is created';
+  String get d_nutrition_off_hint_4 =>
+      'Note: All data is fetched once the recipe is created';
 
   @override
   String get d_nutrition_off_open_off => 'Open Open Food Facts';
@@ -834,7 +853,8 @@ class L10nEn extends L10n {
   String get d_nutrition_off_product_ean => 'Product EAN';
 
   @override
-  String get d_nutrition_custom_disabled_hint => 'Note: You can\'t manually edit nutrition until you removed the EAN Code from the Open Food Facts page';
+  String get d_nutrition_custom_disabled_hint =>
+      'Note: You can\'t manually edit nutrition until you removed the EAN Code from the Open Food Facts page';
 
   @override
   String d_nutrition_custom_hint_1(String amount) {
@@ -869,10 +889,12 @@ class L10nEn extends L10n {
   String get nutrition_sodium => 'Sodium';
 
   @override
-  String get d_nutrition_off_error_hint => 'You can only use Open Food Facts with units that can be converted to grams and if the amount is greater than 0';
+  String get d_nutrition_off_error_hint =>
+      'You can only use Open Food Facts with units that can be converted to grams and if the amount is greater than 0';
 
   @override
-  String get d_nutrition_off_disabled => 'Open Food Facts is not enabled on this server';
+  String get d_nutrition_off_disabled =>
+      'Open Food Facts is not enabled on this server';
 
   @override
   String get p_story_go_to_recipe => 'Go to the recipe';
@@ -920,10 +942,12 @@ class L10nEn extends L10n {
   String get p_splash_loading => 'Loading ...';
 
   @override
-  String get p_server_outdated_title => 'The server is incompatible with this app version';
+  String get p_server_outdated_title =>
+      'The server is incompatible with this app version';
 
   @override
-  String get p_server_outdated_subtitle => 'Please verify that both, the server and the app, are up to date';
+  String get p_server_outdated_subtitle =>
+      'Please verify that both, the server and the app, are up to date';
 
   @override
   String get p_admin_share_title => 'Token management';
@@ -947,7 +971,8 @@ class L10nEn extends L10n {
   String get p_admin_share_delete_title => 'Delete token?';
 
   @override
-  String get p_admin_share_delete_content => 'This share will not be usable anymore.';
+  String get p_admin_share_delete_content =>
+      'This share will not be usable anymore.';
 
   @override
   String get p_public_recipe_error_title => 'Error';
@@ -956,5 +981,6 @@ class L10nEn extends L10n {
   String get p_public_recipe_error_label => 'The recipe could not be loaded';
 
   @override
-  String get p_public_recipe_error_sublabel => 'The recipe doesn\'t exist anymore\\n\\nor\\n\\nthe share is no longer valid';
+  String get p_public_recipe_error_sublabel =>
+      'The recipe doesn\'t exist anymore\\n\\nor\\n\\nthe share is no longer valid';
 }

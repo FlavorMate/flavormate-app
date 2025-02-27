@@ -21,11 +21,12 @@ class RecipeAuthor extends StatelessWidget {
         children: [
           TText(L10n.of(context).c_recipe_author, TextStyles.headlineMedium),
           OutlinedButton(
-            onPressed: () => context.pushNamed(
-              'author',
-              pathParameters: {'id': '${author.id}'},
-              extra: author.account.displayName,
-            ),
+            onPressed:
+                () => context.pushNamed(
+                  'author',
+                  pathParameters: {'id': '${author.id}'},
+                  extra: author.account.displayName,
+                ),
             style: OutlinedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(BORDER_RADIUS),

@@ -43,8 +43,9 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
               controller: _displayNameController,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
-                label: Text(L10n.of(context)
-                    .d_admin_user_management_create_displayName),
+                label: Text(
+                  L10n.of(context).d_admin_user_management_create_displayName,
+                ),
               ),
               autocorrect: false,
               validator: (value) {
@@ -60,7 +61,8 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(
-                    L10n.of(context).d_admin_user_management_create_username),
+                  L10n.of(context).d_admin_user_management_create_username,
+                ),
               ),
               autocorrect: false,
               validator: (value) {
@@ -76,7 +78,8 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(
-                    L10n.of(context).d_admin_user_management_create_password),
+                  L10n.of(context).d_admin_user_management_create_password,
+                ),
               ),
               obscureText: true,
               validator: (value) {
@@ -91,8 +94,9 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
               controller: _mailController,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
-                label:
-                    Text(L10n.of(context).d_admin_user_management_create_mail),
+                label: Text(
+                  L10n.of(context).d_admin_user_management_create_mail,
+                ),
               ),
               autocorrect: false,
               validator: (value) {

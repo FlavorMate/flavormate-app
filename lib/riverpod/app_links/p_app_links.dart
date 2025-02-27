@@ -68,7 +68,9 @@ class PAppLinks extends _$PAppLinks {
     Map<String, String>? params,
     Map<String, String>? queryParams,
   }) {
-    ref.read(pGoRouterProvider).pushNamed(
+    ref
+        .read(pGoRouterProvider)
+        .pushNamed(
           page,
           pathParameters: params ?? {},
           queryParameters: queryParams ?? {},

@@ -7,8 +7,9 @@ part 'p_feature_story.g.dart';
 class PFeatureStory extends _$PFeatureStory {
   @override
   Future<bool> build() async {
-    final features =
-        await ref.watch(pFeaturesProvider.selectAsync((data) => data));
+    final features = await ref.watch(
+      pFeaturesProvider.selectAsync((data) => data),
+    );
     return features.features.contains('story');
   }
 }

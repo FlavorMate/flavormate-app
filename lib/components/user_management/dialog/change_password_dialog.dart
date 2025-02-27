@@ -39,8 +39,11 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
               controller: _passwordController,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
-                label: Text(L10n.of(context)
-                    .d_admin_user_management_change_password_new_password),
+                label: Text(
+                  L10n.of(
+                    context,
+                  ).d_admin_user_management_change_password_new_password,
+                ),
               ),
               obscureText: true,
               validator: (value) {
@@ -59,8 +62,11 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
               controller: _passwordController2,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
-                label: Text(L10n.of(context)
-                    .d_admin_user_management_change_password_new_password_2),
+                label: Text(
+                  L10n.of(
+                    context,
+                  ).d_admin_user_management_change_password_new_password_2,
+                ),
               ),
               obscureText: true,
               validator: (value) {
@@ -87,9 +93,7 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
 
   apply() {
     if (_formKey.currentState!.validate()) {
-      context.pop({
-        'password': _passwordController2.text,
-      });
+      context.pop({'password': _passwordController2.text});
     }
   }
 }
