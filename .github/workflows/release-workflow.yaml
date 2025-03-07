@@ -149,10 +149,10 @@ jobs:
           
           # downloading required files for drift to work on web
           # download sqlite
-          curl -L -O https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-2.5.0/sqlite3.wasm
+          curl -L -O https://github.com/simolus3/sqlite3.dart/releases/latest/download/sqlite3.wasm
           
           # download drift
-          curl -L -O https://github.com/simolus3/drift/releases/download/drift-2.22.0/drift_worker.js
+          curl -L -O https://github.com/simolus3/drift/releases/latest/download/drift_worker.js
 
       - name: Compress web archive
         run: |
