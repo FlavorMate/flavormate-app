@@ -49,6 +49,11 @@ class _DChangelogState extends ConsumerState<DChangelog> {
             RStruct(
               provider,
               (_, value) => MenuAnchor(
+                style: MenuStyle(
+                  maximumSize: WidgetStateProperty.resolveWith<Size?>(
+                    (_) => Size.fromHeight(250),
+                  ),
+                ),
                 builder:
                     (_, controller, widget) => SizedBox(
                       width: _buttonWidth,
