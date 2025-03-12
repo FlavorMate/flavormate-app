@@ -7,8 +7,9 @@ part 'p_feature_bring.g.dart';
 class PFeatureBring extends _$PFeatureBring {
   @override
   Future<bool> build() async {
-    final features =
-        await ref.watch(pFeaturesProvider.selectAsync((data) => data));
+    final features = await ref.watch(
+      pFeaturesProvider.selectAsync((data) => data),
+    );
 
     return features.features.contains('bring');
   }

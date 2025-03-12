@@ -7,8 +7,5 @@ class FeaturesResponse with FeaturesResponseMappable {
   final String version;
   final List<String> features;
 
-  FeaturesResponse({
-    required this.version,
-    required this.features,
-  });
+  FeaturesResponse({required this.version, required this.features});
 }

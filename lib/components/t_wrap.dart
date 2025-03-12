@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 class TWrap extends StatelessWidget {
   final List<Widget> children;
 
-  const TWrap({
-    super.key,
-    required this.children,
-  });
+  const TWrap({super.key, required this.children});
 
   @override
   Widget build(BuildContext context) {

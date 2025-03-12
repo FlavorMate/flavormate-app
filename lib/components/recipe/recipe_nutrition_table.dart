@@ -28,10 +28,7 @@ class RecipeNutritionTable extends StatelessWidget {
 
     return TDataTable(
       columns: [
-        TDataColumn(
-          alignment: Alignment.centerLeft,
-          width: 24,
-        ),
+        TDataColumn(alignment: Alignment.centerLeft, width: 24),
         TDataColumn(
           alignment: Alignment.centerLeft,
           child: Text(L10n.of(context).d_nutrition_title),

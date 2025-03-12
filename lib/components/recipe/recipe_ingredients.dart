@@ -49,10 +49,7 @@ class RecipeIngredients extends StatelessWidget {
           TColumn(
             children: [
               if (ingredientGroup.label != null)
-                TText(
-                  ingredientGroup.label!,
-                  TextStyles.titleLarge,
-                ),
+                TText(ingredientGroup.label!, TextStyles.titleLarge),
               TTable(
                 header: [
                   L10n.of(context).c_recipe_ingredients_amount,

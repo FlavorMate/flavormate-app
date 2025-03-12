@@ -5,10 +5,7 @@ import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class PreviewTags extends StatelessWidget {
-  const PreviewTags({
-    super.key,
-    required this.tags,
-  });
+  const PreviewTags({super.key, required this.tags});
 
   final List<TagDraft> tags;
 
@@ -23,9 +20,10 @@ class PreviewTags extends StatelessWidget {
           runSpacing: PADDING,
           alignment: WrapAlignment.center,
           runAlignment: WrapAlignment.center,
-          children: tags
-              .map((category) => Chip(label: Text(category.label)))
-              .toList(),
+          children:
+              tags
+                  .map((category) => Chip(label: Text(category.label)))
+                  .toList(),
         ),
       ],
     );

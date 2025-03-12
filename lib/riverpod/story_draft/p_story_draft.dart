@@ -14,25 +14,26 @@ part 'p_story_draft.g.dart';
 class PStoryDraft extends _$PStoryDraft {
   @override
   Future<StoryDraft> build(String id) async {
-    final response = await (ref.watch(pDriftProvider).storyDraftTable.select()
-          ..where((draft) => draft.id.isValue(int.parse(id))))
-        .getSingle();
+    final response =
+        await (ref.watch(pDriftProvider).storyDraftTable.select()
+              ..where((draft) => draft.id.isValue(int.parse(id))))
+            .getSingle();
 
     return StoryDraft.fromDB(response);
   }
 
   Future<bool> autosave() async {
-    final result =
-        await (ref.read(pDriftProvider).storyDraftTable.update()).replace(
-      StoryDraftTableCompanion.insert(
-        id: Value(state.value!.id),
-        originId: Value(state.value!.originId),
-        label: Value(state.value!.label),
-        content: Value(state.value!.content),
-        recipe: Value(state.value!.recipe),
-        version: Value(state.value!.version),
-      ),
-    );
+    final result = await (ref.read(pDriftProvider).storyDraftTable.update())
+        .replace(
+          StoryDraftTableCompanion.insert(
+            id: Value(state.value!.id),
+            originId: Value(state.value!.originId),
+            label: Value(state.value!.label),
+            content: Value(state.value!.content),
+            recipe: Value(state.value!.recipe),
+            version: Value(state.value!.version),
+          ),
+        );
 
     if (result) {
       ref.invalidate(pStoryDraftsProvider);
@@ -77,10 +78,10 @@ class PStoryDraft extends _$PStoryDraft {
 
   Future<bool> edit() async {
     try {
-      await ref.read(pApiProvider).storiesClient.update(
-            state.value!.originId!,
-            data: state.value!.toBackend(),
-          );
+      await ref
+          .read(pApiProvider)
+          .storiesClient
+          .update(state.value!.originId!, data: state.value!.toBackend());
 
       await ref
           .read(pStoryDraftsProvider.notifier)

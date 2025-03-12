@@ -50,10 +50,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                 key: _form,
                 child: TColumn(
                   children: [
-                    Icon(
-                      MdiIcons.accountBoxPlusOutline,
-                      size: 128,
-                    ),
+                    Icon(MdiIcons.accountBoxPlusOutline, size: 128),
                     TText(
                       L10n.of(context).p_registration_title,
                       TextStyles.headlineLarge,
@@ -62,8 +59,9 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                     TextFormField(
                       controller: _displayNameController,
                       decoration: InputDecoration(
-                        label:
-                            Text(L10n.of(context).p_registration_display_name),
+                        label: Text(
+                          L10n.of(context).p_registration_display_name,
+                        ),
                         border: const OutlineInputBorder(),
                       ),
                       autocorrect: false,
@@ -147,13 +145,15 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
 
     context.showLoadingDialog();
 
-    final response =
-        await ref.read(pApiProvider).selfServiceClient.registration(
-              displayName: _displayNameController.text,
-              username: _usernameController.text,
-              mail: _mailController.text,
-              password: _passwordController.text,
-            );
+    final response = await ref
+        .read(pApiProvider)
+        .selfServiceClient
+        .registration(
+          displayName: _displayNameController.text,
+          username: _usernameController.text,
+          mail: _mailController.text,
+          password: _passwordController.text,
+        );
 
     if (!mounted) return;
     context.pop();

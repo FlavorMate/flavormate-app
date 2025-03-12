@@ -3,11 +3,7 @@ import 'dart:convert';
 import 'package:flavormate/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
-enum TImageType {
-  asset,
-  network,
-  memory;
-}
+enum TImageType { asset, network, memory }
 
 class TImage extends StatelessWidget {
   final String? imageSrc;
@@ -28,29 +24,26 @@ class TImage extends StatelessWidget {
     if (imageSrc != null) {
       return switch (type!) {
         TImageType.asset => Image.asset(
-            imageSrc!,
-            fit: BoxFit.cover,
-            height: height,
-            width: width,
-            errorBuilder: (_, __, ___) =>
-                _NoImage(height: height, width: width),
-          ),
+          imageSrc!,
+          fit: BoxFit.cover,
+          height: height,
+          width: width,
+          errorBuilder: (_, __, ___) => _NoImage(height: height, width: width),
+        ),
         TImageType.network => Image.network(
-            imageSrc!,
-            fit: BoxFit.cover,
-            height: height,
-            width: width,
-            errorBuilder: (_, __, ___) =>
-                _NoImage(height: height, width: width),
-          ),
+          imageSrc!,
+          fit: BoxFit.cover,
+          height: height,
+          width: width,
+          errorBuilder: (_, __, ___) => _NoImage(height: height, width: width),
+        ),
         TImageType.memory => Image.memory(
-            base64Decode(imageSrc!),
-            fit: BoxFit.cover,
-            height: height,
-            width: width,
-            errorBuilder: (_, __, ___) =>
-                _NoImage(height: height, width: width),
-          ),
+          base64Decode(imageSrc!),
+          fit: BoxFit.cover,
+          height: height,
+          width: width,
+          errorBuilder: (_, __, ___) => _NoImage(height: height, width: width),
+        ),
       };
     } else {
       return _NoImage(height: height, width: width);

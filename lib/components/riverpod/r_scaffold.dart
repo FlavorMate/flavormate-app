@@ -23,17 +23,16 @@ class RScaffold<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return switch (provider) {
       AsyncData(value: final value) => Scaffold(
-          appBar: appBar,
-          body: SafeArea(child: builder(context, value)),
-          floatingActionButton: floatingActionButton != null
-              ? floatingActionButton!(context, value)
-              : null,
-        ),
-      AsyncError(:final error) => errorBuilder?.call(
-            context,
-            error.toString(),
-          ) ??
-          ErrorPage(error.toString()),
+        appBar: appBar,
+        body: SafeArea(child: builder(context, value)),
+        floatingActionButton:
+            floatingActionButton != null
+                ? floatingActionButton!(context, value)
+                : null,
+      ),
+      AsyncError(:final error) =>
+        errorBuilder?.call(context, error.toString()) ??
+            ErrorPage(error.toString()),
       _ => const LoadingPage(),
     };
   }

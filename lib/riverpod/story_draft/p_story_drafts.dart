@@ -40,24 +40,28 @@ class PStoryDrafts extends _$PStoryDrafts {
 
   Future<int?> storyToDraft(String storyIdString) async {
     final storyId = int.parse(storyIdString);
-    final exists = await (ref.read(pDriftProvider).storyDraftTable.select()
-          ..where((d) => d.originId.isValue(storyId)))
-        .getSingleOrNull();
+    final exists =
+        await (ref.read(pDriftProvider).storyDraftTable.select()
+              ..where((d) => d.originId.isValue(storyId)))
+            .getSingleOrNull();
 
     if (exists != null) return null;
 
     final story = await ref.read(pStoryProvider(storyId).future);
 
-    final response =
-        await ref.read(pDriftProvider).storyDraftTable.insert().insert(
-              StoryDraftTableCompanion(
-                originId: Value(story.id!),
-                content: Value(story.content),
-                label: Value(story.label),
-                recipe: Value(story.recipe),
-                version: Value(story.version!),
-              ),
-            );
+    final response = await ref
+        .read(pDriftProvider)
+        .storyDraftTable
+        .insert()
+        .insert(
+          StoryDraftTableCompanion(
+            originId: Value(story.id!),
+            content: Value(story.content),
+            label: Value(story.label),
+            recipe: Value(story.recipe),
+            version: Value(story.version!),
+          ),
+        );
 
     ref.invalidateSelf();
     return response;

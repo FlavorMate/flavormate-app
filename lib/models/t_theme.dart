@@ -12,10 +12,7 @@ class TTheme {
         seedColor: color,
         brightness: Brightness.light,
       ),
-      dark: ColorScheme.fromSeed(
-        seedColor: color,
-        brightness: Brightness.dark,
-      ),
+      dark: ColorScheme.fromSeed(seedColor: color, brightness: Brightness.dark),
     );
   }
 }

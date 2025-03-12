@@ -28,10 +28,7 @@ class TImageLabel extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(radius),
-            child: TImage(
-              imageSrc: imageSrc,
-              type: type,
-            ),
+            child: TImage(imageSrc: imageSrc, type: type),
           ),
           if (title != null)
             Align(

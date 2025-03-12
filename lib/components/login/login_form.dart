@@ -30,11 +30,7 @@ class LoginForm extends ConsumerStatefulWidget {
   final bool isStatic;
   final String server;
 
-  const LoginForm({
-    super.key,
-    required this.server,
-    required this.isStatic,
-  });
+  const LoginForm({super.key, required this.server, required this.isStatic});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _LoginFormState();
@@ -75,12 +71,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                     padding: const EdgeInsets.all(4.0),
                     child: Text(
                       L10n.of(context).p_login_change_server,
-                      style: TextStyle(
-                        color: context.colorScheme.primary,
-                      ),
+                      style: TextStyle(color: context.colorScheme.primary),
                     ),
                   ),
-                )
+                ),
             ],
           ),
         ),
@@ -100,8 +94,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                           width: 128,
                           height: 128,
                         ),
-                        TText(L10n.of(context).app_title,
-                            TextStyles.headlineLarge),
+                        TText(
+                          L10n.of(context).app_title,
+                          TextStyles.headlineLarge,
+                        ),
                         const SizedBox(height: PADDING * 2),
                         TextFormField(
                           controller: _usernameController,
@@ -207,7 +203,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                 title: L10n.of(context).p_login_connection_loading,
                 icon: MdiIcons.cloudSyncOutline,
               ),
-              CircularProgressIndicator()
+              CircularProgressIndicator(),
             ],
           ),
         ),

@@ -12,10 +12,7 @@ import 'package:go_router/go_router.dart';
 class DInstructionGroups extends StatefulWidget {
   final List<InstructionGroupDraft> instructionGroups;
 
-  const DInstructionGroups({
-    super.key,
-    required this.instructionGroups,
-  });
+  const DInstructionGroups({super.key, required this.instructionGroups});
 
   @override
   State<StatefulWidget> createState() => _DInstructionGroupsState();
@@ -51,9 +48,7 @@ class _DInstructionGroupsState extends State<DInstructionGroups> {
                 TDataRow(
                   onSelectChanged: (_) => openGroup(group),
                   cells: [
-                    Text(
-                      getName(context, group.label, index),
-                    ),
+                    Text(getName(context, group.label, index)),
                     IconButton(
                       onPressed: () => deleteGroup(group),
                       icon: Icon(MdiIcons.delete, color: Colors.red),
@@ -64,9 +59,10 @@ class _DInstructionGroupsState extends State<DInstructionGroups> {
           ),
           FilledButton.tonal(
             onPressed: createGroup,
-            child:
-                Text(L10n.of(context).d_editor_instruction_groups_create_group),
-          )
+            child: Text(
+              L10n.of(context).d_editor_instruction_groups_create_group,
+            ),
+          ),
         ],
       ),
     );
@@ -74,9 +70,9 @@ class _DInstructionGroupsState extends State<DInstructionGroups> {
 
   String getName(BuildContext context, String? val, int index) {
     if (val?.isEmpty ?? true) {
-      return L10n.of(context).d_editor_instruction_groups_label_2(
-        '${index + 1}',
-      );
+      return L10n.of(
+        context,
+      ).d_editor_instruction_groups_label_2('${index + 1}');
     } else {
       return val!;
     }

@@ -36,8 +36,10 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
 
   @override
   void initState() {
-    ref.listenManual(pStoryDraftProvider(widget.id), fireImmediately: true,
-        (_, value) {
+    ref.listenManual(pStoryDraftProvider(widget.id), fireImmediately: true, (
+      _,
+      value,
+    ) {
       if (!value.hasValue) return;
 
       _contentController.text = value.value!.content ?? '';
@@ -79,9 +81,10 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
                 TTextFormField(
                   controller: _labelController,
                   label: L10n.of(context).p_story_label,
-                  onChanged: (val) => ref
-                      .read(pStoryDraftProvider(widget.id).notifier)
-                      .setLabel(EString.trimToNull(val)),
+                  onChanged:
+                      (val) => ref
+                          .read(pStoryDraftProvider(widget.id).notifier)
+                          .setLabel(EString.trimToNull(val)),
                   validators: (value) {
                     if (UValidator.isEmpty(value)) {
                       return L10n.of(context).v_isEmpty;
@@ -93,9 +96,10 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
                 TTextFormField(
                   controller: _contentController,
                   label: L10n.of(context).p_story_content,
-                  onChanged: (val) => ref
-                      .read(pStoryDraftProvider(widget.id).notifier)
-                      .setContent(EString.trimToNull(val)),
+                  onChanged:
+                      (val) => ref
+                          .read(pStoryDraftProvider(widget.id).notifier)
+                          .setContent(EString.trimToNull(val)),
                   maxLines: null,
                   validators: (value) {
                     if (UValidator.isEmpty(value)) {
@@ -114,10 +118,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
       floatingActionButton: RStruct(
         provider,
         (_, draft) => FloatingActionButton(
-          onPressed: () => showPreview(
-            context,
-            draft,
-          ),
+          onPressed: () => showPreview(context, draft),
           child: Icon(
             MdiIcons.contentSave,
             color: Theme.of(context).colorScheme.onPrimaryContainer,

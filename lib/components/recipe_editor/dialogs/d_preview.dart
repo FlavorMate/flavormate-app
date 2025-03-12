@@ -15,10 +15,7 @@ import 'package:go_router/go_router.dart';
 class DPreview extends StatefulWidget {
   final RecipeDraftWrapper draft;
 
-  const DPreview({
-    super.key,
-    required this.draft,
-  });
+  const DPreview({super.key, required this.draft});
 
   @override
   State<StatefulWidget> createState() => _DPreviewState();
@@ -37,39 +34,39 @@ class _DPreviewState extends State<DPreview> {
   Widget build(BuildContext context) {
     return Dialog.fullscreen(
       child: Scaffold(
-        appBar: TAppBar(
-          title: _draft.recipeDraft.label!,
+        appBar: TAppBar(title: _draft.recipeDraft.label!),
+        body: LayoutBuilder(
+          builder: (_, constraints) {
+            final useDesktop = Breakpoints.gt(context, Breakpoints.m);
+            return TResponsive(
+              maxWidth: useDesktop ? Breakpoints.l : constraints.maxWidth,
+              child: TColumn(
+                children: [
+                  if (useDesktop)
+                    PreviewDesktop(
+                      images: _draft.displayImages,
+                      recipe: _draft.recipeDraft,
+                    ),
+                  if (!useDesktop)
+                    PreviewMobile(
+                      images: _draft.displayImages,
+                      recipe: _draft.recipeDraft,
+                    ),
+                  const Divider(),
+                  RecipeInformations(
+                    course: _draft.recipeDraft.course!,
+                    diet: _draft.recipeDraft.diet!,
+                  ),
+                  const Divider(),
+                  PreviewCategories(categories: _draft.recipeDraft.categories),
+                  const Divider(),
+                  PreviewTags(tags: _draft.recipeDraft.tags),
+                  const SizedBox(height: 48),
+                ],
+              ),
+            );
+          },
         ),
-        body: LayoutBuilder(builder: (_, constraints) {
-          final useDesktop = Breakpoints.gt(context, Breakpoints.m);
-          return TResponsive(
-            maxWidth: useDesktop ? Breakpoints.l : constraints.maxWidth,
-            child: TColumn(
-              children: [
-                if (useDesktop)
-                  PreviewDesktop(
-                    images: _draft.displayImages,
-                    recipe: _draft.recipeDraft,
-                  ),
-                if (!useDesktop)
-                  PreviewMobile(
-                    images: _draft.displayImages,
-                    recipe: _draft.recipeDraft,
-                  ),
-                const Divider(),
-                RecipeInformations(
-                  course: _draft.recipeDraft.course!,
-                  diet: _draft.recipeDraft.diet!,
-                ),
-                const Divider(),
-                PreviewCategories(categories: _draft.recipeDraft.categories),
-                const Divider(),
-                PreviewTags(tags: _draft.recipeDraft.tags),
-                const SizedBox(height: 48),
-              ],
-            ),
-          );
-        }),
         floatingActionButton: FloatingActionButton(
           onPressed: submit,
           child: const Icon(MdiIcons.upload),

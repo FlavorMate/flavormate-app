@@ -21,21 +21,10 @@ class TEmptyMessage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
-          icon,
-          size: 96,
-        ),
-        TText(
-          title,
-          TextStyles.titleLarge,
-          textAlign: TextAlign.center,
-        ),
+        Icon(icon, size: 96),
+        TText(title, TextStyles.titleLarge, textAlign: TextAlign.center),
         if (subtitle != null)
-          TText(
-            subtitle!,
-            TextStyles.titleSmall,
-            textAlign: TextAlign.center,
-          )
+          TText(subtitle!, TextStyles.titleSmall, textAlign: TextAlign.center),
       ],
     );
   }

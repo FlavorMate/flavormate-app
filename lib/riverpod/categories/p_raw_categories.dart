@@ -10,8 +10,10 @@ class PRawCategories extends _$PRawCategories {
   @override
   Future<Map<int, Category>> build() async {
     final language = currentLocalization().languageCode;
-    final categories =
-        await ref.watch(pApiProvider).categoriesClient.findRaw(language);
+    final categories = await ref
+        .watch(pApiProvider)
+        .categoriesClient
+        .findRaw(language);
 
     return {for (var v in categories) v.id!: v};
   }

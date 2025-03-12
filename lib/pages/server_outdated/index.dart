@@ -61,10 +61,7 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
               child: TColumn(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    MdiIcons.cloudAlertOutline,
-                    size: 128,
-                  ),
+                  const Icon(MdiIcons.cloudAlertOutline, size: 128),
                   TText(
                     L10n.of(context).p_server_outdated_title,
                     TextStyles.titleLarge,
@@ -76,8 +73,8 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
                     textAlign: TextAlign.center,
                   ),
                   FilledButton(
-                    onPressed: () =>
-                        ref.read(pAuthStateProvider.notifier).logout(),
+                    onPressed:
+                        () => ref.read(pAuthStateProvider.notifier).logout(),
                     child: Text(L10n.of(context).btn_logout),
                   ),
                 ],

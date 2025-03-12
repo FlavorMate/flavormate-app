@@ -42,15 +42,18 @@ class PublicRecipePageMobile extends StatelessWidget {
           AspectRatio(
             aspectRatio: 16 / 9,
             child: TCarousel(
-                slides: recipe.files
-                    .map(
-                      (file) => TSlide(
-                        imageSrc: file.fullPath ??
-                            file.path(context.read(pServerProvider)!),
-                        type: TImageType.network,
-                      ),
-                    )
-                    .toList()),
+              slides:
+                  recipe.files
+                      .map(
+                        (file) => TSlide(
+                          imageSrc:
+                              file.fullPath ??
+                              file.path(context.read(pServerProvider)!),
+                          type: TImageType.network,
+                        ),
+                      )
+                      .toList(),
+            ),
           ),
         if (recipe.coverUrl != null) const SizedBox(height: PADDING),
         TColumn(
@@ -72,7 +75,7 @@ class PublicRecipePageMobile extends StatelessWidget {
                     nutrition: nutrition,
                     servingFactor: servingFactor,
                     serving: recipe.serving,
-                  )
+                  ),
                 ],
               ),
             const Divider(),

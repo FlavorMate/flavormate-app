@@ -20,16 +20,15 @@ class RecipeInformations extends StatelessWidget {
     return Column(
       children: [
         TText(
-            L10n.of(context).c_recipe_informations, TextStyles.headlineMedium),
+          L10n.of(context).c_recipe_informations,
+          TextStyles.headlineMedium,
+        ),
         const SizedBox(height: PADDING),
         Wrap(
           runSpacing: PADDING,
           spacing: PADDING,
           children: [
-            Chip(
-              avatar: Icon(diet.icon),
-              label: Text(diet.getName(context)),
-            ),
+            Chip(avatar: Icon(diet.icon), label: Text(diet.getName(context))),
             Chip(
               avatar: Icon(course.icon),
               label: Text(course.getName(context)),

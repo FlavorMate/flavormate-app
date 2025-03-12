@@ -24,9 +24,10 @@ class DCourse extends StatelessWidget {
               onPressed: () => context.pop(course),
               leading: Icon(course.icon),
               label: course.getName(context),
-              trailing: this.course == course
-                  ? const Icon(MdiIcons.checkCircleOutline)
-                  : null,
+              trailing:
+                  this.course == course
+                      ? const Icon(MdiIcons.checkCircleOutline)
+                      : null,
             ),
         ],
       ),

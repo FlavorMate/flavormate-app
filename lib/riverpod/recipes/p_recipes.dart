@@ -11,10 +11,9 @@ class PRecipes extends _$PRecipes {
   @override
   Future<Pageable<Recipe>> build() async {
     final page = ref.watch(pRecipesPageProvider);
-    return await ref.watch(pApiProvider).recipesClient.findByPage(
-          page: page,
-          sortBy: 'label',
-          sortDirection: 'ASC',
-        );
+    return await ref
+        .watch(pApiProvider)
+        .recipesClient
+        .findByPage(page: page, sortBy: 'label', sortDirection: 'ASC');
   }
 }

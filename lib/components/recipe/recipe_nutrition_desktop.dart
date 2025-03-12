@@ -33,9 +33,7 @@ class _RecipeNutritionDesktopState extends State<RecipeNutritionDesktop> {
     return ExpansionTile(
       title: Row(
         children: [
-          Expanded(
-            child: Text(L10n.of(context).d_nutrition_title),
-          ),
+          Expanded(child: Text(L10n.of(context).d_nutrition_title)),
           if (widget.nutrition!.showChart)
             RecipeNutritionChart(
               nutrition: widget.nutrition!,
@@ -67,7 +65,7 @@ class _RecipeNutritionDesktopState extends State<RecipeNutritionDesktop> {
                 onTouch: (val) => setState(() => _selectedIndex = val),
               ),
           ],
-        )
+        ),
       ],
     );
   }

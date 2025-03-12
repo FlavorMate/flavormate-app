@@ -19,18 +19,19 @@ extension EBuildContext on BuildContext {
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showTextSnackBar(
     String text, {
     Color? color,
-  }) =>
-      ScaffoldMessenger.of(this).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: color,
-        content: Text(text),
-      ));
+  }) => ScaffoldMessenger.of(this).showSnackBar(
+    SnackBar(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: color,
+      content: Text(text),
+    ),
+  );
 
   void showAppLicensePage() => showLicensePage(
-        context: this,
-        useRootNavigator: true,
-        applicationName: 'DummyMart',
-      );
+    context: this,
+    useRootNavigator: true,
+    applicationName: 'DummyMart',
+  );
 
   /// Custom call a provider for reading method only
   /// It will be helpful for us for calling the read function
@@ -53,8 +54,8 @@ extension EBuildContext on BuildContext {
 
 extension ThemeModeX on ThemeMode {
   String get label => switch (this) {
-        ThemeMode.system => 'System',
-        ThemeMode.light => 'Light',
-        ThemeMode.dark => 'Dark',
-      };
+    ThemeMode.system => 'System',
+    ThemeMode.light => 'Light',
+    ThemeMode.dark => 'Dark',
+  };
 }

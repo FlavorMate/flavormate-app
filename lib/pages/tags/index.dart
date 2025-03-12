@@ -27,20 +27,17 @@ class TagsPage extends ConsumerWidget {
             subtitle: L10n.of(context).p_tags_no_recipe_subtitle,
             icon: MdiIcons.tagOffOutline,
           ),
-          builder: (_, tags) => TWrap(
-            children: [
-              for (final tag in tags.content)
-                TComponentCard(
-                  onTap: () => openTag(
-                    context,
-                    tag.id!,
-                    tag.label,
-                  ),
-                  image: tag.coverUrl,
-                  label: tag.label,
-                ),
-            ],
-          ),
+          builder:
+              (_, tags) => TWrap(
+                children: [
+                  for (final tag in tags.content)
+                    TComponentCard(
+                      onTap: () => openTag(context, tag.id!, tag.label),
+                      image: tag.coverUrl,
+                      label: tag.label,
+                    ),
+                ],
+              ),
         ),
       ),
     );

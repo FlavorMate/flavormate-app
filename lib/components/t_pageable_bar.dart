@@ -59,45 +59,38 @@ class TPageableBar extends StatelessWidget {
         alignment: WrapAlignment.center,
         runAlignment: WrapAlignment.center,
         spacing: PADDING / 2,
-        children: List.generate(
-          createPaginationButtons.length,
-          (index) {
-            final label = createPaginationButtons[index];
+        children: List.generate(createPaginationButtons.length, (index) {
+          final label = createPaginationButtons[index];
 
-            const width = 40.0;
-            final int i = label == '...' ? -1 : int.parse(label) - 1;
+          const width = 40.0;
+          final int i = label == '...' ? -1 : int.parse(label) - 1;
 
-            onPressed() {
-              if (label != '...') {
-                this.onPressed(i);
-              }
+          onPressed() {
+            if (label != '...') {
+              this.onPressed(i);
             }
+          }
 
-            if (i == currentPage) {
-              return SizedBox(
-                width: width,
-                child: FilledButton(
-                  style: FilledButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
-                  onPressed: onPressed,
-                  child: Text(label),
-                ),
-              );
-            } else {
-              return SizedBox(
-                width: width,
-                child: FilledButton.tonal(
-                  style: FilledButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
-                  onPressed: onPressed,
-                  child: Text(label),
-                ),
-              );
-            }
-          },
-        ),
+          if (i == currentPage) {
+            return SizedBox(
+              width: width,
+              child: FilledButton(
+                style: FilledButton.styleFrom(padding: EdgeInsets.zero),
+                onPressed: onPressed,
+                child: Text(label),
+              ),
+            );
+          } else {
+            return SizedBox(
+              width: width,
+              child: FilledButton.tonal(
+                style: FilledButton.styleFrom(padding: EdgeInsets.zero),
+                onPressed: onPressed,
+                child: Text(label),
+              ),
+            );
+          }
+        }),
       ),
     );
   }

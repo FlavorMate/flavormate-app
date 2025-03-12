@@ -25,12 +25,13 @@ class TCircularAvatar extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        border: border
-            ? Border.all(
-                color: Theme.of(context).colorScheme.primary,
-                width: 2,
-              )
-            : null,
+        border:
+            border
+                ? Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2,
+                )
+                : null,
         borderRadius: BorderRadius.circular(borderRadius),
         color: Theme.of(context).colorScheme.primaryContainer,
       ),

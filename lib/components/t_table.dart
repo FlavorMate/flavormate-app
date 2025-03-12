@@ -73,22 +73,24 @@ class _TTableState extends State<TTable> {
       // When distributions property is not provided, each column gets an equal width.
       _columnWidth = {
         for (var (index, _) in widget.header.indexed)
-          index: const FlexColumnWidth(1)
+          index: const FlexColumnWidth(1),
       };
     } else {
       // In case that distributions property is provided, it assigns width for each column
       // according to corresponding item from the distributions property.
       _columnWidth = {
         for (var (index, distribution) in widget.distributions!.indexed)
-          index: FlexColumnWidth(distribution)
+          index: FlexColumnWidth(distribution),
       };
     }
 
     // Initialization for text alignment in cells.
     if (widget.cellTextAlign == null) {
       // If cellTextAlign property is not specified, set all cell alignments to start.
-      _cellTextAligns =
-          List.generate(widget.header.length, (_) => TextAlign.start);
+      _cellTextAligns = List.generate(
+        widget.header.length,
+        (_) => TextAlign.start,
+      );
     } else if (widget.header.length == widget.cellTextAlign!.length) {
       // If cellTextAlign property provided equals the length of headers,
       // each cell gets separate alignment according to corresponding item from cellTextAlign.
@@ -105,8 +107,10 @@ class _TTableState extends State<TTable> {
     // Initialization for text alignment in headers.
     if (widget.headerTextAlign == null) {
       // If headerTextAlign property is not specified, set all cell alignments to start.
-      _headerTextAligns =
-          List.generate(widget.header.length, (_) => TextAlign.start);
+      _headerTextAligns = List.generate(
+        widget.header.length,
+        (_) => TextAlign.start,
+      );
     } else if (widget.header.length == widget.headerTextAlign!.length) {
       // If headerTextAlign property provided equals the length of headers,
       // each cell gets separate alignment according to corresponding item from headerTextAlign.

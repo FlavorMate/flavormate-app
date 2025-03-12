@@ -4,20 +4,14 @@ import 'package:flutter/material.dart';
 class TPageableContent extends StatelessWidget {
   final Widget child;
 
-  const TPageableContent({
-    super.key,
-    required this.child,
-  });
+  const TPageableContent({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
         width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(PADDING),
-          child: child,
-        ),
+        child: Padding(padding: const EdgeInsets.all(PADDING), child: child),
       ),
     );
   }

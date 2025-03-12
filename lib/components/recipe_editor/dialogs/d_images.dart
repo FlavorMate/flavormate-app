@@ -19,10 +19,7 @@ import 'package:image_picker/image_picker.dart';
 class DImages extends StatefulWidget {
   final RecipeDraftWrapper draft;
 
-  const DImages({
-    super.key,
-    required this.draft,
-  });
+  const DImages({super.key, required this.draft});
 
   @override
   State<StatefulWidget> createState() => _DImagesState();
@@ -85,7 +82,7 @@ class _DImagesState extends State<DImages> {
                       ],
                     ),
                   ),
-                )
+                ),
             ],
           ),
         ],
@@ -98,8 +95,9 @@ class _DImagesState extends State<DImages> {
   }
 
   addImage(BuildContext context) async {
-    final XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final XFile? image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
     if (image == null) return;
 
     if (!context.mounted) return;

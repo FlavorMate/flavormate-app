@@ -66,12 +66,7 @@ class PAuthState extends _$PAuthState {
 
 /// The possible authentication states of the app.
 enum AuthState {
-  unknown(
-    redirectPath: '/',
-    allowedPaths: [
-      '/',
-    ],
-  ),
+  unknown(redirectPath: '/', allowedPaths: ['/']),
   unauthenticated(
     redirectPath: '/login',
     allowedPaths: [
@@ -110,13 +105,9 @@ enum AuthState {
       '/public/recipe/:id',
       '/admin/share',
     ],
-  ),
-  ;
+  );
 
-  const AuthState({
-    required this.redirectPath,
-    required this.allowedPaths,
-  });
+  const AuthState({required this.redirectPath, required this.allowedPaths});
 
   /// The target path to redirect when the current route is not allowed in this
   /// auth state.

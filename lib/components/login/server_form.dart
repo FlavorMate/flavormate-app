@@ -50,14 +50,8 @@ class _ServerFormState extends ConsumerState<ServerForm> {
                 key: _serverFormKey,
                 child: Column(
                   children: [
-                    Assets.icons.logoTransparent.image(
-                      width: 128,
-                      height: 128,
-                    ),
-                    const TText(
-                      'FlavorMate',
-                      TextStyles.headlineLarge,
-                    ),
+                    Assets.icons.logoTransparent.image(width: 128, height: 128),
+                    const TText('FlavorMate', TextStyles.headlineLarge),
                     const SizedBox(height: PADDING * 2),
                     TextFormField(
                       enabled: !widget.readOnly,

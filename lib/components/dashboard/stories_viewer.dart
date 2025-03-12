@@ -12,21 +12,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class StoriesViewer extends ConsumerWidget {
-  const StoriesViewer({
-    super.key,
-  });
+  const StoriesViewer({super.key});
 
   TSlide getSlide(BuildContext context, Story story) => TSlide(
-        imageSrc: story.recipe.coverUrl,
-        title: story.label,
-        type: TImageType.network,
-        date: story.createdOn,
-        onTap: () => context.pushNamed(
+    imageSrc: story.recipe.coverUrl,
+    title: story.label,
+    type: TImageType.network,
+    date: story.createdOn,
+    onTap:
+        () => context.pushNamed(
           'story',
           pathParameters: {'id': '${story.id}'},
           extra: story.recipe.label,
         ),
-      );
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

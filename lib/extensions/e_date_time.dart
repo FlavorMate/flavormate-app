@@ -3,13 +3,15 @@ import 'package:intl/intl.dart';
 
 extension EDateTime on DateTime {
   String toLocalDateString(BuildContext context) {
-    return DateFormat.yMMMMd(Localizations.localeOf(context).languageCode)
-        .format(this);
+    return DateFormat.yMMMMd(
+      Localizations.localeOf(context).languageCode,
+    ).format(this);
   }
 
   String toLocalTimeString(BuildContext context) {
-    return DateFormat.Hm(Localizations.localeOf(context).languageCode)
-        .format(this);
+    return DateFormat.Hm(
+      Localizations.localeOf(context).languageCode,
+    ).format(this);
   }
 
   String toLocalDateTimeString(BuildContext context) {

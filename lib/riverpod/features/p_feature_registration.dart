@@ -7,8 +7,9 @@ part 'p_feature_registration.g.dart';
 class PFeatureRegistration extends _$PFeatureRegistration {
   @override
   Future<bool> build() async {
-    final features =
-        await ref.watch(pFeaturesProvider.selectAsync((data) => data));
+    final features = await ref.watch(
+      pFeaturesProvider.selectAsync((data) => data),
+    );
     return features.features.contains('registration');
   }
 }

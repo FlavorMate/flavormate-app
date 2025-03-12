@@ -60,10 +60,7 @@ class RecipeDuration extends StatelessWidget {
           space: PADDING / 4,
           children: [
             TText(label, TextStyles.titleSmall),
-            TText(
-              duration!.beautify(context),
-              TextStyles.headlineSmall,
-            ),
+            TText(duration!.beautify(context), TextStyles.headlineSmall),
           ],
         ),
       ),

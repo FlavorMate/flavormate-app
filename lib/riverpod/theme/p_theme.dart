@@ -31,8 +31,4 @@ class PTheme extends _$PTheme {
   }
 }
 
-enum CustomThemeMode {
-  flavormate,
-  dynamic,
-  custom;
-}
+enum CustomThemeMode { flavormate, dynamic, custom }

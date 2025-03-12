@@ -7,10 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PreviewCategories extends ConsumerWidget {
-  const PreviewCategories({
-    super.key,
-    required this.categories,
-  });
+  const PreviewCategories({super.key, required this.categories});
 
   final List<int> categories;
 
@@ -28,10 +25,13 @@ class PreviewCategories extends ConsumerWidget {
             runSpacing: PADDING,
             alignment: WrapAlignment.center,
             runAlignment: WrapAlignment.center,
-            children: categories
-                .map((category) =>
-                    Chip(label: Text(categoryMap[category]!.label)))
-                .toList(),
+            children:
+                categories
+                    .map(
+                      (category) =>
+                          Chip(label: Text(categoryMap[category]!.label)),
+                    )
+                    .toList(),
           ),
         ),
       ],
