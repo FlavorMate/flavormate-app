@@ -17,8 +17,9 @@ class CategoryGroupClient {
   });
 
   Future<List<CategoryGroup>> findAll({required String language}) async {
-    final response =
-        await httpClient.get<List<dynamic>>('$baseURL/?language=$language');
+    final response = await httpClient.get<List<dynamic>>(
+      '$baseURL/?language=$language',
+    );
 
     List<Map<String, dynamic>> data = List.from(response.data!);
 

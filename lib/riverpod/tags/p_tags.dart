@@ -11,10 +11,9 @@ class PTags extends _$PTags {
   @override
   Future<Pageable<Tag>> build() async {
     final page = ref.watch(pTagsPageProvider);
-    return await ref.watch(pApiProvider).tagsClient.findByPage(
-          page: page,
-          sortBy: 'label',
-          sortDirection: 'ASC',
-        );
+    return await ref
+        .watch(pApiProvider)
+        .tagsClient
+        .findByPage(page: page, sortBy: 'label', sortDirection: 'ASC');
   }
 }

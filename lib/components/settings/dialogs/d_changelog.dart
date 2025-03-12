@@ -26,14 +26,10 @@ class _DChangelogState extends ConsumerState<DChangelog> {
 
   @override
   void initState() {
-    ref.listenManual(
-      pChangelogProvider,
-      fireImmediately: true,
-      (_, value) {
-        if (!value.hasValue) return;
-        current = value.value!.sorted.first;
-      },
-    );
+    ref.listenManual(pChangelogProvider, fireImmediately: true, (_, value) {
+      if (!value.hasValue) return;
+      current = value.value!.sorted.first;
+    });
     super.initState();
   }
 
@@ -42,10 +38,7 @@ class _DChangelogState extends ConsumerState<DChangelog> {
     final provider = ref.watch(pChangelogProvider);
     return Dialog.fullscreen(
       child: Scaffold(
-        appBar: AppBar(
-          leading: Container(),
-          forceMaterialTransparency: true,
-        ),
+        appBar: AppBar(leading: Container(), forceMaterialTransparency: true),
         body: Column(
           children: [
             TText(
@@ -56,23 +49,29 @@ class _DChangelogState extends ConsumerState<DChangelog> {
             RStruct(
               provider,
               (_, value) => MenuAnchor(
-                builder: (_, controller, widget) => SizedBox(
-                  width: _buttonWidth,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      if (controller.isOpen) {
-                        controller.close();
-                      } else {
-                        controller.open();
-                      }
-                    },
-                    child: TText(
-                      current?.version.toString() ?? '',
-                      TextStyles.titleMedium,
-                      color: TextColor.onPrimaryContainer,
-                    ),
+                style: MenuStyle(
+                  maximumSize: WidgetStateProperty.resolveWith<Size?>(
+                    (_) => Size.fromHeight(250),
                   ),
                 ),
+                builder:
+                    (_, controller, widget) => SizedBox(
+                      width: _buttonWidth,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          if (controller.isOpen) {
+                            controller.close();
+                          } else {
+                            controller.open();
+                          }
+                        },
+                        child: TText(
+                          current?.version.toString() ?? '',
+                          TextStyles.titleMedium,
+                          color: TextColor.onPrimaryContainer,
+                        ),
+                      ),
+                    ),
                 menuChildren: [
                   for (final entry in value.sorted)
                     SizedBox(
@@ -130,19 +129,14 @@ class _DChangelogState extends ConsumerState<DChangelog> {
 class _Detail extends StatelessWidget {
   final ChangelogDetail detail;
 
-  const _Detail({
-    required this.detail,
-  });
+  const _Detail({required this.detail});
 
   @override
   Widget build(BuildContext context) {
     return TRow(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
-          MdiIcons.values.byName(detail.icon),
-          size: 32,
-        ),
+        Icon(MdiIcons.values.byName(detail.icon), size: 32),
         SizedBox(
           width: 250,
           child: TText(detail.change, TextStyles.bodyMedium),

@@ -21,7 +21,8 @@ class _TSearchState extends ConsumerState<TSearch> {
   final _controller = SearchController();
   String searchHint = '';
 
-  String getMessage(BuildContext context) => [
+  String getMessage(BuildContext context) =>
+      [
         L10n.of(context).c_search_label_author,
         L10n.of(context).c_search_label_book,
         L10n.of(context).c_search_label_category,
@@ -41,46 +42,56 @@ class _TSearchState extends ConsumerState<TSearch> {
     return SearchAnchor(
       keyboardType: TextInputType.visiblePassword,
       searchController: _controller,
-      builder: (_, controller) => SearchBar(
-        leading: const IconButton(
-          icon: Icon(MdiIcons.magnify),
-          onPressed: null,
-        ),
-        hintText: searchHint,
-        onTap: controller.openView,
-      ),
+      builder:
+          (_, controller) => SearchBar(
+            leading: const IconButton(
+              icon: Icon(MdiIcons.magnify),
+              onPressed: null,
+            ),
+            hintText: searchHint,
+            onTap: controller.openView,
+          ),
       viewHintText: L10n.of(context).c_search_hint,
       viewLeading: IconButton(
         onPressed: close,
         icon: const Icon(MdiIcons.arrowLeft),
       ),
-      viewBuilder: (_) => Consumer(
-        builder: (_, ref, __) {
-          final searchTerm = ref.read(pSearchTermProvider);
-          return ref.watch(pSearchProvider).when(
-              data: (suggestions) => suggestions.isEmpty
-                  ? searchTerm.length < 3
-                      ? const SearchTermTooShort()
-                      : const NothingFound()
-                  : ListView.builder(
-                      itemCount: suggestions.length,
-                      itemBuilder: (_, index) {
-                        final suggestion = suggestions[index];
-                        return ListTile(
-                          title: Text(suggestion.label),
-                          leading: Icon(suggestion.icon),
-                          onTap: () => context.pushNamed(
-                            suggestion.type.name,
-                            pathParameters: {'id': '${suggestion.id}'},
-                            extra: suggestion.label,
-                          ),
-                        );
-                      },
-                    ),
-              loading: () => const LoadingSearch(),
-              error: (_, __) => const Text('An error occurred!'));
-        },
-      ),
+      viewBuilder:
+          (_) => Consumer(
+            builder: (_, ref, __) {
+              final searchTerm = ref.read(pSearchTermProvider);
+              return ref
+                  .watch(pSearchProvider)
+                  .when(
+                    data:
+                        (suggestions) =>
+                            suggestions.isEmpty
+                                ? searchTerm.length < 3
+                                    ? const SearchTermTooShort()
+                                    : const NothingFound()
+                                : ListView.builder(
+                                  itemCount: suggestions.length,
+                                  itemBuilder: (_, index) {
+                                    final suggestion = suggestions[index];
+                                    return ListTile(
+                                      title: Text(suggestion.label),
+                                      leading: Icon(suggestion.icon),
+                                      onTap:
+                                          () => context.pushNamed(
+                                            suggestion.type.name,
+                                            pathParameters: {
+                                              'id': '${suggestion.id}',
+                                            },
+                                            extra: suggestion.label,
+                                          ),
+                                    );
+                                  },
+                                ),
+                    loading: () => const LoadingSearch(),
+                    error: (_, __) => const Text('An error occurred!'),
+                  );
+            },
+          ),
       suggestionsBuilder: (_, __) => [],
       viewOnChanged: onChange,
     );

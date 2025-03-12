@@ -13,21 +13,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class HighlightsViewer extends ConsumerWidget {
-  const HighlightsViewer({
-    super.key,
-  });
+  const HighlightsViewer({super.key});
 
   TSlide getSlide(BuildContext context, Highlight highlight) => TSlide(
-        imageSrc: highlight.recipe.coverUrl,
-        title: highlight.recipe.label,
-        type: TImageType.network,
-        date: highlight.date,
-        onTap: () => context.pushNamed(
+    imageSrc: highlight.recipe.coverUrl,
+    title: highlight.recipe.label,
+    type: TImageType.network,
+    date: highlight.date,
+    onTap:
+        () => context.pushNamed(
           'recipe',
           pathParameters: {'id': '${highlight.recipe.id}'},
           extra: highlight.recipe.label,
         ),
-      );
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,17 +50,19 @@ class HighlightsViewer extends ConsumerWidget {
             width: double.infinity,
             child: RStruct(
               provider,
-              (_, highlights) => highlights.page.empty
-                  ? TEmptyMessage(
-                      title: L10n.of(context).c_dashboard_highlights_no_title,
-                      subtitle:
-                          L10n.of(context).c_dashboard_highlights_no_subtitle,
-                    )
-                  : TCarousel(
-                      slides: highlights.content
-                          .map((h) => getSlide(context, h))
-                          .toList(),
-                    ),
+              (_, highlights) =>
+                  highlights.page.empty
+                      ? TEmptyMessage(
+                        title: L10n.of(context).c_dashboard_highlights_no_title,
+                        subtitle:
+                            L10n.of(context).c_dashboard_highlights_no_subtitle,
+                      )
+                      : TCarousel(
+                        slides:
+                            highlights.content
+                                .map((h) => getSlide(context, h))
+                                .toList(),
+                      ),
             ),
           ),
         ],

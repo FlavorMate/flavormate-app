@@ -13,7 +13,10 @@ class PCategories extends _$PCategories {
   Future<Pageable<Category>> build() async {
     final language = currentLocalization().languageCode;
     final page = ref.watch(pCategoriesPageProvider);
-    return await ref.watch(pApiProvider).categoriesClient.findNotEmpty(
+    return await ref
+        .watch(pApiProvider)
+        .categoriesClient
+        .findNotEmpty(
           language: language,
           page: page,
           sortBy: 'label',

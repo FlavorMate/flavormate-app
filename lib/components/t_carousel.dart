@@ -78,11 +78,7 @@ class _TCarouselState extends State<TCarousel> {
 }
 
 class SlideCard extends StatelessWidget {
-  const SlideCard({
-    super.key,
-    required this.slide,
-    required this.height,
-  });
+  const SlideCard({super.key, required this.slide, required this.height});
 
   final TSlide slide;
   final double height;

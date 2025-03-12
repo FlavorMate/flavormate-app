@@ -9,11 +9,13 @@ part 'p_compatibility.g.dart';
 class PCompatibility extends _$PCompatibility {
   @override
   Future<VersionComparison> build() async {
-    final serverInfo =
-        await ref.watch(pFeaturesProvider.selectAsync((data) => data));
+    final serverInfo = await ref.watch(
+      pFeaturesProvider.selectAsync((data) => data),
+    );
 
-    final clientInfo =
-        await ref.watch(pPackageInfoProvider.selectAsync((data) => data));
+    final clientInfo = await ref.watch(
+      pPackageInfoProvider.selectAsync((data) => data),
+    );
 
     final serverVersion = Version.fromString(serverInfo.version);
     final clientVersion = Version.fromString(clientInfo.version);

@@ -23,10 +23,7 @@ import 'package:go_router/go_router.dart';
 class DIngredient extends ConsumerStatefulWidget {
   final IngredientDraft ingredient;
 
-  const DIngredient({
-    super.key,
-    required this.ingredient,
-  });
+  const DIngredient({super.key, required this.ingredient});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _DIngredientState();
@@ -79,8 +76,8 @@ class _DIngredientState extends ConsumerState<DIngredient> {
               controller: _amountController,
               onChanged: setAmount,
               label: L10n.of(context).d_editor_ingredient_amount,
-              validators: (input) =>
-                  UValidatorPresets.isNumberNullable(context, input),
+              validators:
+                  (input) => UValidatorPresets.isNumberNullable(context, input),
             ),
             if (_oldUnitController.text.isNotEmpty)
               TTextFormField(
@@ -99,30 +96,33 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                   if (textEditingValue.text.isEmpty) {
                     return [];
                   }
-                  final responses = units.where(
-                    (unit) {
-                      return [
-                        unit.labelSg,
-                        unit.labelSgAbrv,
-                        unit.labelPl,
-                        unit.labelPlAbrv
-                      ].nonNulls.any((label) =>
-                          label.containsIgnoreCase(textEditingValue.text));
-                    },
-                  ).toList();
+                  final responses =
+                      units.where((unit) {
+                        return [
+                          unit.labelSg,
+                          unit.labelSgAbrv,
+                          unit.labelPl,
+                          unit.labelPlAbrv,
+                        ].nonNulls.any(
+                          (label) =>
+                              label.containsIgnoreCase(textEditingValue.text),
+                        );
+                      }).toList();
 
                   return responses;
                 },
-                fieldViewBuilder: (BuildContext context,
-                        TextEditingController fieldTextEditingController,
-                        FocusNode fieldFocusNode,
-                        VoidCallback onFieldSubmitted) =>
-                    TTextFormField(
-                  controller: fieldTextEditingController,
-                  label: L10n.of(context).d_editor_ingredient_unit,
-                  focusNode: fieldFocusNode,
-                  clear: clearUnit,
-                ),
+                fieldViewBuilder:
+                    (
+                      BuildContext context,
+                      TextEditingController fieldTextEditingController,
+                      FocusNode fieldFocusNode,
+                      VoidCallback onFieldSubmitted,
+                    ) => TTextFormField(
+                      controller: fieldTextEditingController,
+                      label: L10n.of(context).d_editor_ingredient_unit,
+                      focusNode: fieldFocusNode,
+                      clear: clearUnit,
+                    ),
                 onSelected: (UnitLocalized selection) {
                   setState(() {
                     _ingredient.unit = null;
@@ -144,8 +144,8 @@ class _DIngredientState extends ConsumerState<DIngredient> {
             TTextFormField(
               controller: _ingredientController,
               label: L10n.of(context).d_editor_ingredient_label,
-              validators: (input) =>
-                  UValidatorPresets.isNotEmpty(context, input),
+              validators:
+                  (input) => UValidatorPresets.isNotEmpty(context, input),
             ),
             TButton(
               onPressed: openNutrition,
@@ -173,11 +173,12 @@ class _DIngredientState extends ConsumerState<DIngredient> {
     final response = await showDialog<NutritionDraft>(
       context: context,
       useSafeArea: false,
-      builder: (_) => DNutrition(
-        amount: _ingredient.amount,
-        unitRef: _ingredient.unitLocalized,
-        nutrition: _ingredient.nutrition ?? NutritionDraft(),
-      ),
+      builder:
+          (_) => DNutrition(
+            amount: _ingredient.amount,
+            unitRef: _ingredient.unitLocalized,
+            nutrition: _ingredient.nutrition ?? NutritionDraft(),
+          ),
     );
 
     if (response == null) return;
@@ -220,10 +221,7 @@ class AutocompleteOptions extends StatelessWidget {
       child: Material(
         elevation: 4.0,
         child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxHeight: 500,
-            maxWidth: 233,
-          ),
+          constraints: const BoxConstraints(maxHeight: 500, maxWidth: 233),
           // width: 230,
           child: ListView.builder(
             padding: EdgeInsets.zero,
@@ -233,22 +231,25 @@ class AutocompleteOptions extends StatelessWidget {
               final UnitLocalized option = options.elementAt(index);
               return InkWell(
                 onTap: () => onSelected(option),
-                child: Builder(builder: (BuildContext context) {
-                  final bool highlight =
-                      AutocompleteHighlightedOption.of(context) == index;
-                  if (highlight) {
-                    SchedulerBinding.instance.addPostFrameCallback(
-                        (Duration timeStamp) {
-                      Scrollable.ensureVisible(context, alignment: 0.5);
-                    }, debugLabel: 'AutocompleteOptions.ensureVisible');
-                  }
-                  return Container(
-                    color: highlight ? Theme.of(context).focusColor : null,
-                    padding: const EdgeInsets.all(PADDING),
-                    //TODO: label
-                    child: Text(option.labelSg),
-                  );
-                }),
+                child: Builder(
+                  builder: (BuildContext context) {
+                    final bool highlight =
+                        AutocompleteHighlightedOption.of(context) == index;
+                    if (highlight) {
+                      SchedulerBinding.instance.addPostFrameCallback((
+                        Duration timeStamp,
+                      ) {
+                        Scrollable.ensureVisible(context, alignment: 0.5);
+                      }, debugLabel: 'AutocompleteOptions.ensureVisible');
+                    }
+                    return Container(
+                      color: highlight ? Theme.of(context).focusColor : null,
+                      padding: const EdgeInsets.all(PADDING),
+                      //TODO: label
+                      child: Text(option.labelSg),
+                    );
+                  },
+                ),
               );
             },
           ),

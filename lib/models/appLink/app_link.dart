@@ -31,6 +31,4 @@ class AppLink {
   }
 }
 
-enum AppLinkMode {
-  open;
-}
+enum AppLinkMode { open }

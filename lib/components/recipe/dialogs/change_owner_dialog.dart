@@ -26,21 +26,20 @@ class ChangeOwnerDialog extends ConsumerWidget {
             return TRoundedListTile(
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: user.avatar?.path != null
-                    ? Image.network(
-                        user.avatar!.path(context.read(pServerProvider)!),
-                        height: 28,
-                        width: 28,
-                        fit: BoxFit.cover,
-                      )
-                    : Container(
-                        height: 28,
-                        width: 28,
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        child: Center(
-                          child: Text(user.displayName[0]),
+                child:
+                    user.avatar?.path != null
+                        ? Image.network(
+                          user.avatar!.path(context.read(pServerProvider)!),
+                          height: 28,
+                          width: 28,
+                          fit: BoxFit.cover,
+                        )
+                        : Container(
+                          height: 28,
+                          width: 28,
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                          child: Center(child: Text(user.displayName[0])),
                         ),
-                      ),
               ),
               title: Text(user.displayName),
               onTap: () => context.pop(user.id),

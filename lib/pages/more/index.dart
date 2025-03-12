@@ -28,10 +28,7 @@ class MorePage extends ConsumerWidget {
               runAlignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                TText(
-                  L10n.of(context).p_more_title,
-                  TextStyles.headlineMedium,
-                ),
+                TText(L10n.of(context).p_more_title, TextStyles.headlineMedium),
                 TIconButton(
                   width: 250,
                   onPressed: () => context.pushNamed('categories'),

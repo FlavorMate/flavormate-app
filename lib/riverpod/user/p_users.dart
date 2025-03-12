@@ -25,11 +25,13 @@ class PUsers extends _$PUsers {
 
   void sortByDisplayname(bool sortASC) {
     if (sortASC) {
-      state.value!
-          .sort((a, b) => a.displayName.compareToIgnoreCase(b.displayName));
+      state.value!.sort(
+        (a, b) => a.displayName.compareToIgnoreCase(b.displayName),
+      );
     } else {
-      state.value!
-          .sort((a, b) => b.displayName.compareToIgnoreCase(a.displayName));
+      state.value!.sort(
+        (a, b) => b.displayName.compareToIgnoreCase(a.displayName),
+      );
     }
     ref.notifyListeners();
   }

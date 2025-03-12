@@ -12,8 +12,10 @@ class PBook extends _$PBook {
   Future<BookWrapper> build(int id) async {
     final user = ref.watch(pUserProvider).requireValue;
     final book = await ref.watch(pApiProvider).libraryClient.findById(id);
-    final subscribed =
-        await ref.watch(pApiProvider).libraryClient.isSubscribed(id);
+    final subscribed = await ref
+        .watch(pApiProvider)
+        .libraryClient
+        .isSubscribed(id);
 
     return BookWrapper(
       book: book,

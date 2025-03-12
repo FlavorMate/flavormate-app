@@ -26,11 +26,12 @@ class BookCard extends ConsumerWidget {
       width: 450,
       child: TCard(
         padding: 0,
-        onTap: () => context.pushNamed(
-          'book',
-          pathParameters: {'id': book.id.toString()},
-          extra: book.label,
-        ),
+        onTap:
+            () => context.pushNamed(
+              'book',
+              pathParameters: {'id': book.id.toString()},
+              extra: book.label,
+            ),
         child: Stack(
           children: [
             Column(
@@ -48,9 +49,7 @@ class BookCard extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        book.lastModifiedOn!.toLocalDateString(context),
-                      ),
+                      Text(book.lastModifiedOn!.toLocalDateString(context)),
                       Text(
                         book.visible
                             ? L10n.of(context).p_library_public
@@ -78,40 +77,36 @@ class BookCard extends ConsumerWidget {
                       deleteBook(context, ref, book);
                     }
                   },
-                  itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<String>>[
-                    PopupMenuItem<String>(
-                      value: 'edit',
-                      child: ListTile(
-                        leading: const Icon(MdiIcons.pencil),
-                        title: Text(
-                          L10n.of(context).p_library_edit,
+                  itemBuilder:
+                      (BuildContext context) => <PopupMenuEntry<String>>[
+                        PopupMenuItem<String>(
+                          value: 'edit',
+                          child: ListTile(
+                            leading: const Icon(MdiIcons.pencil),
+                            title: Text(L10n.of(context).p_library_edit),
+                          ),
                         ),
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'visibility',
-                      child: ListTile(
-                        leading: Icon(
-                          book.visible ? MdiIcons.shareOff : MdiIcons.share,
+                        PopupMenuItem(
+                          value: 'visibility',
+                          child: ListTile(
+                            leading: Icon(
+                              book.visible ? MdiIcons.shareOff : MdiIcons.share,
+                            ),
+                            title: Text(
+                              book.visible
+                                  ? L10n.of(context).p_library_unshare
+                                  : L10n.of(context).p_library_share,
+                            ),
+                          ),
                         ),
-                        title: Text(
-                          book.visible
-                              ? L10n.of(context).p_library_unshare
-                              : L10n.of(context).p_library_share,
+                        PopupMenuItem(
+                          value: 'delete',
+                          child: ListTile(
+                            leading: const Icon(MdiIcons.trashCan),
+                            title: Text(L10n.of(context).p_library_delete),
+                          ),
                         ),
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'delete',
-                      child: ListTile(
-                        leading: const Icon(MdiIcons.trashCan),
-                        title: Text(
-                          L10n.of(context).p_library_delete,
-                        ),
-                      ),
-                    ),
-                  ],
+                      ],
                 ),
               ),
           ],
@@ -140,8 +135,8 @@ class BookCard extends ConsumerWidget {
   deleteBook(BuildContext context, WidgetRef ref, Book book) async {
     final response = await showDialog<bool>(
       context: context,
-      builder: (_) =>
-          TConfirmDialog(title: L10n.of(context).d_library_delete_title),
+      builder:
+          (_) => TConfirmDialog(title: L10n.of(context).d_library_delete_title),
     );
 
     if (response ?? false) {

@@ -157,19 +157,21 @@ class _DThemeState extends ConsumerState<DTheme> {
                   ),
                   TScrollableH(
                     child: TRow(
-                      children: DTheme.colors.map((color) {
-                        return GestureDetector(
-                          onTap: () => setState(() => _color = color),
-                          child: CircleAvatar(
-                            radius: PADDING * 2,
-                            backgroundColor: color,
-                            foregroundColor: Colors.white,
-                            child: _color.value == color.value
-                                ? const Icon(MdiIcons.check)
-                                : null,
-                          ),
-                        );
-                      }).toList(),
+                      children:
+                          DTheme.colors.map((color) {
+                            return GestureDetector(
+                              onTap: () => setState(() => _color = color),
+                              child: CircleAvatar(
+                                radius: PADDING * 2,
+                                backgroundColor: color,
+                                foregroundColor: Colors.white,
+                                child:
+                                    _color.value == color.value
+                                        ? const Icon(MdiIcons.check)
+                                        : null,
+                              ),
+                            );
+                          }).toList(),
                     ),
                   ),
                 ],
@@ -203,13 +205,10 @@ class _DThemeState extends ConsumerState<DTheme> {
                         onPressed: () {},
                         child: Text(L10n.of(context).d_settings_theme_example),
                       ),
-                      Slider(
-                        value: 0.5,
-                        onChanged: (_) {},
-                      ),
+                      Slider(value: 0.5, onChanged: (_) {}),
                       Chip(
-                          label:
-                              Text(L10n.of(context).d_settings_theme_example)),
+                        label: Text(L10n.of(context).d_settings_theme_example),
+                      ),
                     ],
                   ),
                 ),
@@ -249,7 +248,7 @@ class _DThemeState extends ConsumerState<DTheme> {
                     const CircularProgressIndicator(),
                     const SizedBox(width: 48, child: LinearProgressIndicator()),
                   ],
-                )
+                ),
               ],
             ),
           ],

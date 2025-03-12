@@ -7,11 +7,7 @@ class SearchResult {
   final int id;
   late IconData icon;
 
-  SearchResult({
-    required this.type,
-    required this.label,
-    required this.id,
-  }) {
+  SearchResult({required this.type, required this.label, required this.id}) {
     icon = switch (type) {
       SearchResultType.author => MdiIcons.account,
       SearchResultType.book => MdiIcons.book,

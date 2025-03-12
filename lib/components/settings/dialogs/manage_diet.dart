@@ -28,9 +28,10 @@ class ManageDiet extends ConsumerWidget {
                 onPressed: () => context.pop(diet),
                 leading: Icon(diet.icon),
                 label: diet.getName(context),
-                trailing: user.diet == diet
-                    ? const Icon(MdiIcons.checkCircleOutline)
-                    : null,
+                trailing:
+                    user.diet == diet
+                        ? const Icon(MdiIcons.checkCircleOutline)
+                        : null,
               ),
           ],
         ),

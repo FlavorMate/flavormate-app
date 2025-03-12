@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'l10n.dart';
 
 // ignore_for_file: type=lint
@@ -375,19 +377,23 @@ class L10nDe extends L10n {
   String get d_settings_manage_password_new => 'Neues Passwort';
 
   @override
-  String get v_isSecure => 'Min. ein Groß-/ und Kleinbuchstaben, ein Sonderzeichen & eine Zahl';
+  String get v_isSecure =>
+      'Min. ein Groß-/ und Kleinbuchstaben, ein Sonderzeichen & eine Zahl';
 
   @override
-  String get d_settings_manage_password_success => 'Passwort erfolgreich geändert';
+  String get d_settings_manage_password_success =>
+      'Passwort erfolgreich geändert';
 
   @override
-  String get d_settings_manage_password_error => 'Passwort konnte nicht geändert werden';
+  String get d_settings_manage_password_error =>
+      'Passwort konnte nicht geändert werden';
 
   @override
   String get d_settings_manage_mail_success => 'Mail erfolgreich geändert';
 
   @override
-  String get d_settings_manage_mail_error => 'Mail konnte nicht geändert werden';
+  String get d_settings_manage_mail_error =>
+      'Mail konnte nicht geändert werden';
 
   @override
   String get d_settings_manage_avatar_title => 'Avatar ändern';
@@ -443,10 +449,12 @@ class L10nDe extends L10n {
   String get d_admin_user_management_change_password_title => 'Passwort ändern';
 
   @override
-  String get d_admin_user_management_change_password_new_password => 'Neues Passwort';
+  String get d_admin_user_management_change_password_new_password =>
+      'Neues Passwort';
 
   @override
-  String get d_admin_user_management_change_password_new_password_2 => 'Passwort wiederholen';
+  String get d_admin_user_management_change_password_new_password_2 =>
+      'Passwort wiederholen';
 
   @override
   String get d_recipe_change_owner_title => 'Besitzer wechseln';
@@ -461,7 +469,8 @@ class L10nDe extends L10n {
   String get p_no_connection_title => 'Keine Verbindung zum Server';
 
   @override
-  String get p_no_connection_subtitle => 'Bitte probiere es später nochmal oder wechsle den Server';
+  String get p_no_connection_subtitle =>
+      'Bitte probiere es später nochmal oder wechsle den Server';
 
   @override
   String get btn_logout => 'Abmelden';
@@ -476,7 +485,8 @@ class L10nDe extends L10n {
   String get c_dashboard_latest_recipes_no_title => 'Keine Rezepte gefunden!';
 
   @override
-  String get c_dashboard_latest_recipes_no_subtitle => 'Bitte erstelle ein Rezept';
+  String get c_dashboard_latest_recipes_no_subtitle =>
+      'Bitte erstelle ein Rezept';
 
   @override
   String get d_editor_common_title => 'Allgemeine Informationen';
@@ -636,7 +646,8 @@ class L10nDe extends L10n {
   String get d_drafts_scrape_url => 'Adresse';
 
   @override
-  String get p_drafts_scrape_failed => 'Rezept konnte nicht heruntergeladen werden';
+  String get p_drafts_scrape_failed =>
+      'Rezept konnte nicht heruntergeladen werden';
 
   @override
   String get p_editor_upload_success => 'Rezept erfolgreich hochgeladen';
@@ -666,19 +677,22 @@ class L10nDe extends L10n {
   String get d_recipe_library_no_books => 'Keine Bücher vorhanden';
 
   @override
-  String get d_recipe_library_no_books_subtitle => 'Erstelle ein Buch in der Biblothek';
+  String get d_recipe_library_no_books_subtitle =>
+      'Erstelle ein Buch in der Biblothek';
 
   @override
   String get p_library_no_book => 'Deine Bibliothek ist leer';
 
   @override
-  String get p_library_no_book_subtitle => 'Erstelle in Buch mit dem \"+\" Button';
+  String get p_library_no_book_subtitle =>
+      'Erstelle in Buch mit dem \"+\" Button';
 
   @override
   String get p_recipes_no_recipe => 'Keine Rezepte verfügbar';
 
   @override
-  String get p_recipes_no_recipe_subtitle => 'Erstelle Rezepte um sie hier anzuzeigen';
+  String get p_recipes_no_recipe_subtitle =>
+      'Erstelle Rezepte um sie hier anzuzeigen';
 
   @override
   String get p_dashboard_no_recipe => 'Keine Rezepte verfügbar';
@@ -687,13 +701,15 @@ class L10nDe extends L10n {
   String get p_tags_no_recipe => 'Keine Tags verfügbar';
 
   @override
-  String get p_tags_no_recipe_subtitle => 'Sobald deine Rezepte Tags haben, werden sie hier angezeigt';
+  String get p_tags_no_recipe_subtitle =>
+      'Sobald deine Rezepte Tags haben, werden sie hier angezeigt';
 
   @override
   String get p_categories_no_recipe => 'Keine Kategorien verfügbar';
 
   @override
-  String get p_categories_no_recipe_subtitle => 'Sobald deine Rezepte Kategorien haben, werden sie hier angezeigt';
+  String get p_categories_no_recipe_subtitle =>
+      'Sobald deine Rezepte Kategorien haben, werden sie hier angezeigt';
 
   @override
   String get p_book_no_recipes => 'Dein Buch ist leer';
@@ -726,7 +742,8 @@ class L10nDe extends L10n {
   String get d_settings_theme_system => 'System';
 
   @override
-  String get d_settings_theme_flavormate_desc => 'Die normalen FlavorMate Farben';
+  String get d_settings_theme_flavormate_desc =>
+      'Die normalen FlavorMate Farben';
 
   @override
   String get d_settings_theme_custom_desc => 'Wähle deine Lieblingsfarbe';
@@ -750,10 +767,12 @@ class L10nDe extends L10n {
   String get p_login_connection_loading => 'Verbindung wird hergestellt';
 
   @override
-  String get p_login_server_outdated_minor => 'Server nicht auf dem neusten Stand!\\nBetrachte eine Aktualisierung durchzufühen.';
+  String get p_login_server_outdated_minor =>
+      'Server nicht auf dem neusten Stand!\\nBetrachte eine Aktualisierung durchzufühen.';
 
   @override
-  String get p_login_server_outdated_major => 'Server ist veraltet!\\nBitte aktualisiere den Server.';
+  String get p_login_server_outdated_major =>
+      'Server ist veraltet!\\nBitte aktualisiere den Server.';
 
   @override
   String get p_login_forgot_password => 'Passwort vergessen?';
@@ -771,7 +790,8 @@ class L10nDe extends L10n {
   String get btn_registration => 'Registrieren';
 
   @override
-  String get p_recovery_mail_confirm => 'Eine E-Mail wurde an deine Adresse geschickt';
+  String get p_recovery_mail_confirm =>
+      'Eine E-Mail wurde an deine Adresse geschickt';
 
   @override
   String get p_registration_title => 'Konto erstellen';
@@ -798,7 +818,8 @@ class L10nDe extends L10n {
   String get p_login_no_account => 'Du hast kein Konto?';
 
   @override
-  String get p_login_connection_failed_subtitle => 'Prüfe, ob es Updates für den Server gibt';
+  String get p_login_connection_failed_subtitle =>
+      'Prüfe, ob es Updates für den Server gibt';
 
   @override
   String get d_editor_ingredient_old_unit_label => 'Alte Einheit';
@@ -816,16 +837,20 @@ class L10nDe extends L10n {
   String get d_nutrition_custom_title => 'Manuell';
 
   @override
-  String get d_nutrition_off_hint_1 => 'Open Food Facts ist eine freie Datenbank, welche Informationen über Produkte enthält';
+  String get d_nutrition_off_hint_1 =>
+      'Open Food Facts ist eine freie Datenbank, welche Informationen über Produkte enthält';
 
   @override
-  String get d_nutrition_off_hint_2 => 'Du kannst sie benutzen, um Nährwertinformationen für eine Zutat herunterzuladen';
+  String get d_nutrition_off_hint_2 =>
+      'Du kannst sie benutzen, um Nährwertinformationen für eine Zutat herunterzuladen';
 
   @override
-  String get d_nutrition_off_hint_3 => 'Um zu starten, gib bitte die EAN ein oder Scanne den Barcode des Produkts';
+  String get d_nutrition_off_hint_3 =>
+      'Um zu starten, gib bitte die EAN ein oder Scanne den Barcode des Produkts';
 
   @override
-  String get d_nutrition_off_hint_4 => 'Hinweis: Die Daten werden heruntergeladen, sobald das Rezept erstellt wurde';
+  String get d_nutrition_off_hint_4 =>
+      'Hinweis: Die Daten werden heruntergeladen, sobald das Rezept erstellt wurde';
 
   @override
   String get d_nutrition_off_open_off => 'Öffne Open Food Facts';
@@ -834,7 +859,8 @@ class L10nDe extends L10n {
   String get d_nutrition_off_product_ean => 'Produkt EAN';
 
   @override
-  String get d_nutrition_custom_disabled_hint => 'Hinweis: Du kannst die Daten nicht manuell bearbeiten, bis du den EAN Code auf der Open Food Facts Seite gelöscht hast';
+  String get d_nutrition_custom_disabled_hint =>
+      'Hinweis: Du kannst die Daten nicht manuell bearbeiten, bis du den EAN Code auf der Open Food Facts Seite gelöscht hast';
 
   @override
   String d_nutrition_custom_hint_1(String amount) {
@@ -869,10 +895,12 @@ class L10nDe extends L10n {
   String get nutrition_sodium => 'Natrium';
 
   @override
-  String get d_nutrition_off_error_hint => 'Du kannst Open Food Facts nur mit Einheiten nutzen, die in Gramm umgerechnet werden können und wenn die Menge größer als 0 ist';
+  String get d_nutrition_off_error_hint =>
+      'Du kannst Open Food Facts nur mit Einheiten nutzen, die in Gramm umgerechnet werden können und wenn die Menge größer als 0 ist';
 
   @override
-  String get d_nutrition_off_disabled => 'Open Food Facts ist für diesen Server nicht aktiviert';
+  String get d_nutrition_off_disabled =>
+      'Open Food Facts ist für diesen Server nicht aktiviert';
 
   @override
   String get p_story_go_to_recipe => 'Zum Rezept';
@@ -908,7 +936,8 @@ class L10nDe extends L10n {
   String get p_story_edit_failed => 'Storyentwurf existiert bereits';
 
   @override
-  String get p_story_editor_upload_failed => 'Story konnte nicht hochgeladen werden';
+  String get p_story_editor_upload_failed =>
+      'Story konnte nicht hochgeladen werden';
 
   @override
   String get p_story_editor_upload_success => 'Story erfolgreich hochgeladen';
@@ -920,10 +949,12 @@ class L10nDe extends L10n {
   String get p_splash_loading => 'Wird geladen ...';
 
   @override
-  String get p_server_outdated_title => 'Der Server ist nicht mit dieser App Version kompatibel';
+  String get p_server_outdated_title =>
+      'Der Server ist nicht mit dieser App Version kompatibel';
 
   @override
-  String get p_server_outdated_subtitle => 'Prüfe, ob sowohl die App, als auch der Server aktuell ist';
+  String get p_server_outdated_subtitle =>
+      'Prüfe, ob sowohl die App, als auch der Server aktuell ist';
 
   @override
   String get p_admin_share_title => 'Tokenverwaltung';
@@ -947,14 +978,17 @@ class L10nDe extends L10n {
   String get p_admin_share_delete_title => 'Token löschen?';
 
   @override
-  String get p_admin_share_delete_content => 'Diese Freigabe ist dann nicht mehr nutzbar.';
+  String get p_admin_share_delete_content =>
+      'Diese Freigabe ist dann nicht mehr nutzbar.';
 
   @override
   String get p_public_recipe_error_title => 'Fehler';
 
   @override
-  String get p_public_recipe_error_label => 'Das Rezept konnte nicht geladen werden';
+  String get p_public_recipe_error_label =>
+      'Das Rezept konnte nicht geladen werden';
 
   @override
-  String get p_public_recipe_error_sublabel => 'Das Rezept existiert nicht mehr\\n\\noder\\n\\ndie Freigabe ist nicht mehr gültig';
+  String get p_public_recipe_error_sublabel =>
+      'Das Rezept existiert nicht mehr\\n\\noder\\n\\ndie Freigabe ist nicht mehr gültig';
 }

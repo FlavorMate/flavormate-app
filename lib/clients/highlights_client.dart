@@ -24,8 +24,9 @@ class HighlightsClient extends APageableClient<Highlight> {
       'page': page,
     });
 
-    final response =
-        await httpClient.get('$baseURL/list/${filter.name}?$params');
+    final response = await httpClient.get(
+      '$baseURL/list/${filter.name}?$params',
+    );
 
     return Pageable.fromMap(response.data!, parser);
   }

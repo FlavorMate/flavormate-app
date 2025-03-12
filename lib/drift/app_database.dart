@@ -19,42 +19,44 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   MigrationStrategy get migration {
-    return MigrationStrategy(onCreate: (Migrator m) async {
-      await m.createAll();
-    }, onUpgrade: (Migrator m, int from, int to) async {
-      if (from < 2) {
-        await m.createTable(storyDraftTable);
+    return MigrationStrategy(
+      onCreate: (Migrator m) async {
+        await m.createAll();
+      },
+      onUpgrade: (Migrator m, int from, int to) async {
+        if (from < 2) {
+          await m.createTable(storyDraftTable);
 
-        await m.addColumnIfNotExists(
-          draftTable,
-          draftTable.originId,
-        );
-      }
-    }, beforeOpen: (OpeningDetails details) async {
-      if (details.hadUpgrade) {
-        if (details.versionNow == 2) {
-          // Get all recipe drafts which is an update
-          final drafts = await (draftTable.select()
-                ..where((draft) => draft.version.isBiggerOrEqualValue(0)))
-              .get();
+          await m.addColumnIfNotExists(draftTable, draftTable.originId);
+        }
+      },
+      beforeOpen: (OpeningDetails details) async {
+        if (details.hadUpgrade) {
+          if (details.versionNow == 2) {
+            // Get all recipe drafts which is an update
+            final drafts =
+                await (draftTable.select()
+                      ..where((draft) => draft.version.isBiggerOrEqualValue(0)))
+                    .get();
 
-          // since the id is the recipe id, set it to the originId
-          for (final draft in drafts) {
-            await (draftTable.update()).replace(
-              DraftTableCompanion.insert(
-                id: Value(draft.id),
-                originId: Value(draft.id),
-                recipeDraft: draft.recipeDraft,
-                images: draft.images,
-                addedImages: draft.addedImages,
-                removedImages: draft.removedImages,
-                version: draft.version,
-              ),
-            );
+            // since the id is the recipe id, set it to the originId
+            for (final draft in drafts) {
+              await (draftTable.update()).replace(
+                DraftTableCompanion.insert(
+                  id: Value(draft.id),
+                  originId: Value(draft.id),
+                  recipeDraft: draft.recipeDraft,
+                  images: draft.images,
+                  addedImages: draft.addedImages,
+                  removedImages: draft.removedImages,
+                  version: draft.version,
+                ),
+              );
+            }
           }
         }
-      }
-    });
+      },
+    );
   }
 
   static QueryExecutor _openConnection() {
@@ -63,8 +65,10 @@ class AppDatabase extends _$AppDatabase {
       driftWorker: Uri.parse('drift_worker.dart.js'),
       onResult: (result) {
         if (result.missingFeatures.isNotEmpty) {
-          debugPrint('Using ${result.chosenImplementation} due to unsupported '
-              'browser features: ${result.missingFeatures}');
+          debugPrint(
+            'Using ${result.chosenImplementation} due to unsupported '
+            'browser features: ${result.missingFeatures}',
+          );
         }
       },
     );

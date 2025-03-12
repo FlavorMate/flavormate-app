@@ -32,7 +32,10 @@ class PRecipeDrafts extends _$PRecipeDrafts {
 
     for (var image in response.images) {
       final base64 = UImage.resizeImage(
-          bytes: base64Decode(image), width: 1280, height: 720);
+        bytes: base64Decode(image),
+        width: 1280,
+        height: 720,
+      );
 
       final file = File(
         id: Random().nextInt(1000),
@@ -59,7 +62,11 @@ class PRecipeDrafts extends _$PRecipeDrafts {
   }
 
   Future<int> createDraft() async {
-    final response = await ref.read(pDriftProvider).draftTable.insert().insert(
+    final response = await ref
+        .read(pDriftProvider)
+        .draftTable
+        .insert()
+        .insert(
           DraftTableCompanion(
             recipeDraft: Value(RecipeDraft.empty()),
             images: const Value([]),
@@ -86,9 +93,10 @@ class PRecipeDrafts extends _$PRecipeDrafts {
   Future<int?> recipeToDraft(String recipeIdString) async {
     final recipeId = int.parse(recipeIdString);
 
-    final exists = await (ref.read(pDriftProvider).draftTable.select()
-          ..where((d) => d.originId.isValue(recipeId)))
-        .getSingleOrNull();
+    final exists =
+        await (ref.read(pDriftProvider).draftTable.select()
+              ..where((d) => d.originId.isValue(recipeId)))
+            .getSingleOrNull();
 
     if (exists != null) return null;
 
@@ -114,7 +122,11 @@ class PRecipeDrafts extends _$PRecipeDrafts {
       );
     }
 
-    final response = await ref.read(pDriftProvider).draftTable.insert().insert(
+    final response = await ref
+        .read(pDriftProvider)
+        .draftTable
+        .insert()
+        .insert(
           DraftTableCompanion(
             originId: Value(recipe.id),
             recipeDraft: Value(recipe.toDraft()),

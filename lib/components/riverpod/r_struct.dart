@@ -7,8 +7,13 @@ class RStruct<T> extends StatelessWidget {
   final Widget? loadingChild;
   final Widget? errorChild;
 
-  const RStruct(this.provider, this.builder,
-      {this.loadingChild, this.errorChild, super.key});
+  const RStruct(
+    this.provider,
+    this.builder, {
+    this.loadingChild,
+    this.errorChild,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

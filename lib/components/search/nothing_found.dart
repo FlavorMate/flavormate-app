@@ -13,10 +13,7 @@ class NothingFound extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            MdiIcons.mushroomOffOutline,
-            size: 64,
-          ),
+          const Icon(MdiIcons.mushroomOffOutline, size: 64),
           const SizedBox(height: PADDING),
           TText(L10n.of(context).c_search_nothing_found, TextStyles.titleLarge),
         ],

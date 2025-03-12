@@ -24,7 +24,9 @@ class PreviewInstructions extends StatelessWidget {
       space: PADDING,
       children: [
         TText(
-            L10n.of(context).c_recipe_instructions, TextStyles.headlineMedium),
+          L10n.of(context).c_recipe_instructions,
+          TextStyles.headlineMedium,
+        ),
         ...List.generate(instructionGroups.length, (index) {
           final group = instructionGroups.elementAt(index);
           return [

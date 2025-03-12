@@ -61,14 +61,13 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   @override
   void initState() {
     super.initState();
-    ref.listenManual(
-      pRecipeProvider(widget.recipeId),
-      fireImmediately: true,
-      (_, next) {
-        if (!next.hasValue) return;
-        servingFactor = next.value!.serving.amount;
-      },
-    );
+    ref.listenManual(pRecipeProvider(widget.recipeId), fireImmediately: true, (
+      _,
+      next,
+    ) {
+      if (!next.hasValue) return;
+      servingFactor = next.value!.serving.amount;
+    });
   }
 
   @override
@@ -104,62 +103,60 @@ class _RecipePageState extends ConsumerState<RecipePage> {
           ),
         ],
       ),
-      builder: (_, recipe) => LayoutBuilder(
-        builder: (_, constraints) {
-          final useDesktop = Breakpoints.gt(context, Breakpoints.m);
-          return RStruct(
-            bringProvider,
-            (context, isBringEnabled) {
-              return TResponsive(
-                maxWidth: useDesktop ? Breakpoints.l : constraints.maxWidth,
-                child: TColumn(
-                  children: [
-                    if (useDesktop)
-                      RecipePageDesktop(
-                        recipe: recipe,
-                        isBringEnabled: isBringEnabled,
-                        servingFactor: servingFactor,
-                        decreaseServing: decreaseFactor,
-                        increaseServing: increaseFactor,
-                        addBookmark: () => addToBook(recipe),
-                        addToBring: () => addToBring(recipe),
-                        nutrition: calculateNutrition(recipe),
+      builder:
+          (_, recipe) => LayoutBuilder(
+            builder: (_, constraints) {
+              final useDesktop = Breakpoints.gt(context, Breakpoints.m);
+              return RStruct(bringProvider, (context, isBringEnabled) {
+                return TResponsive(
+                  maxWidth: useDesktop ? Breakpoints.l : constraints.maxWidth,
+                  child: TColumn(
+                    children: [
+                      if (useDesktop)
+                        RecipePageDesktop(
+                          recipe: recipe,
+                          isBringEnabled: isBringEnabled,
+                          servingFactor: servingFactor,
+                          decreaseServing: decreaseFactor,
+                          increaseServing: increaseFactor,
+                          addBookmark: () => addToBook(recipe),
+                          addToBring: () => addToBring(recipe),
+                          nutrition: calculateNutrition(recipe),
+                        ),
+                      if (!useDesktop)
+                        RecipePageMobile(
+                          recipe: recipe,
+                          isBringEnabled: isBringEnabled,
+                          servingFactor: servingFactor,
+                          decreaseServing: decreaseFactor,
+                          increaseServing: increaseFactor,
+                          addBookmark: () => addToBook(recipe),
+                          addToBring: () => addToBring(recipe),
+                          nutrition: calculateNutrition(recipe),
+                        ),
+                      const Divider(),
+                      RecipeInformations(
+                        course: recipe.course,
+                        diet: recipe.diet,
                       ),
-                    if (!useDesktop)
-                      RecipePageMobile(
-                        recipe: recipe,
-                        isBringEnabled: isBringEnabled,
-                        servingFactor: servingFactor,
-                        decreaseServing: decreaseFactor,
-                        increaseServing: increaseFactor,
-                        addBookmark: () => addToBook(recipe),
-                        addToBring: () => addToBring(recipe),
-                        nutrition: calculateNutrition(recipe),
+                      const Divider(),
+                      RecipeCategories(categories: recipe.categories!),
+                      const Divider(),
+                      RecipeTags(tags: recipe.tags!),
+                      const Divider(),
+                      RecipeAuthor(author: recipe.author!),
+                      const Divider(),
+                      RecipePublished(
+                        createdOn: recipe.createdOn!,
+                        version: recipe.version!,
+                        url: recipe.url,
                       ),
-                    const Divider(),
-                    RecipeInformations(
-                      course: recipe.course,
-                      diet: recipe.diet,
-                    ),
-                    const Divider(),
-                    RecipeCategories(categories: recipe.categories!),
-                    const Divider(),
-                    RecipeTags(tags: recipe.tags!),
-                    const Divider(),
-                    RecipeAuthor(author: recipe.author!),
-                    const Divider(),
-                    RecipePublished(
-                      createdOn: recipe.createdOn!,
-                      version: recipe.version!,
-                      url: recipe.url,
-                    )
-                  ],
-                ),
-              );
+                    ],
+                  ),
+                );
+              });
             },
-          );
-        },
-      ),
+          ),
     );
   }
 
@@ -213,7 +210,10 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   }
 
   Future<void> addToBring(Recipe recipe) async {
-    final url = ref.read(pApiProvider).bringClient.get(
+    final url = ref
+        .read(pApiProvider)
+        .bringClient
+        .get(
           ref.read(pServerProvider)!,
           recipe.id!,
           recipe.serving.amount.toInt(),
@@ -271,8 +271,9 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   edit() async {
     showDialog(context: context, builder: (_) => const TLoadingDialog());
 
-    final id =
-        await ref.read(pRecipeDraftsProvider.notifier).recipeToDraft(widget.id);
+    final id = await ref
+        .read(pRecipeDraftsProvider.notifier)
+        .recipeToDraft(widget.id);
 
     if (!mounted) return;
     context.pop();
@@ -285,13 +286,15 @@ class _RecipePageState extends ConsumerState<RecipePage> {
 
   transfer() async {
     final id = await showDialog<int>(
-        context: context, builder: (_) => const ChangeOwnerDialog());
+      context: context,
+      builder: (_) => const ChangeOwnerDialog(),
+    );
     if (id == null) return;
 
-    final response = await ref
-        .read(pApiProvider)
-        .recipesClient
-        .changeOwner(widget.recipeId, {'owner': id});
+    final response = await ref.read(pApiProvider).recipesClient.changeOwner(
+      widget.recipeId,
+      {'owner': id},
+    );
     if (response) {
       ref.invalidate(pRecipeProvider(widget.recipeId));
 
@@ -303,9 +306,8 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   delete() async {
     final response = await showDialog<bool>(
       context: context,
-      builder: (_) => TConfirmDialog(
-        title: L10n.of(context).d_recipe_delete_title,
-      ),
+      builder:
+          (_) => TConfirmDialog(title: L10n.of(context).d_recipe_delete_title),
     );
     if (!response!) return;
     if (await ref

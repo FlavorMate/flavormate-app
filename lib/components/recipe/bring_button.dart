@@ -34,7 +34,7 @@ class BringButton extends StatelessWidget {
                 L10n.of(context).c_bring_btn,
                 textAlign: TextAlign.center,
               ),
-            )
+            ),
           ],
         ),
       ),

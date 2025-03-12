@@ -15,10 +15,7 @@ import 'package:go_router/go_router.dart';
 class DIngredientGroup extends StatefulWidget {
   final IngredientGroupDraft ingredientGroup;
 
-  const DIngredientGroup({
-    super.key,
-    required this.ingredientGroup,
-  });
+  const DIngredientGroup({super.key, required this.ingredientGroup});
 
   @override
   State<StatefulWidget> createState() => _DIngredientGroupState();
@@ -91,7 +88,7 @@ class _DIngredientGroupState extends State<DIngredientGroup> {
             child: Text(
               L10n.of(context).d_editor_ingredient_group_add_ingredient,
             ),
-          )
+          ),
         ],
       ),
     );

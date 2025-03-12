@@ -8,8 +8,9 @@ part 'p_action_button.g.dart';
 class PActionButton extends _$PActionButton {
   @override
   Future<ActionButtonPermissions> build(int storyId) async {
-    final story =
-        await ref.watch(pStoryProvider(storyId).selectAsync((data) => data));
+    final story = await ref.watch(
+      pStoryProvider(storyId).selectAsync((data) => data),
+    );
     final user = await ref.watch(pUserProvider.selectAsync((data) => data));
 
     return ActionButtonPermissions(

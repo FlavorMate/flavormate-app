@@ -32,23 +32,17 @@ class TText extends StatelessWidget {
   final TextColor? color;
   final TextAlign? textAlign;
 
-  const TText(
-    this.label,
-    this.style, {
-    this.textAlign,
-    this.color,
-    super.key,
-  });
+  const TText(this.label, this.style, {this.textAlign, this.color, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       label,
       textAlign: textAlign,
-      style: getStyle(context, style)?.copyWith(
-        color: getColor(context, color),
-        height: 1,
-      ),
+      style: getStyle(
+        context,
+        style,
+      )?.copyWith(color: getColor(context, color), height: 1),
     );
   }
 

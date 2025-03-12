@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 class ServerMinorIncompatible extends StatelessWidget {
-  const ServerMinorIncompatible({
-    super.key,
-  });
+  const ServerMinorIncompatible({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +16,9 @@ class ServerMinorIncompatible extends StatelessWidget {
         children: [
           Icon(MdiIcons.alertCircleOutline),
           TText(
-            L10n.of(context)
-                .p_login_server_outdated_minor
-                .replaceAll('\\n', '\n'),
+            L10n.of(
+              context,
+            ).p_login_server_outdated_minor.replaceAll('\\n', '\n'),
             TextStyles.bodyMedium,
             color: TextColor.white,
           ),

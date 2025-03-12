@@ -41,10 +41,7 @@ class _RecoveryPageState extends ConsumerState<RecoveryPage> {
                 key: _form,
                 child: Column(
                   children: [
-                    Icon(
-                      MdiIcons.lockRemoveOutline,
-                      size: 128,
-                    ),
+                    Icon(MdiIcons.lockRemoveOutline, size: 128),
                     TText(
                       L10n.of(context).p_recovery_title,
                       TextStyles.headlineLarge,

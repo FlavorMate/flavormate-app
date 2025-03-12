@@ -6,11 +6,7 @@ class TProgress extends StatelessWidget {
   final bool optional;
   final double completed;
 
-  const TProgress({
-    super.key,
-    required this.completed,
-    this.optional = false,
-  });
+  const TProgress({super.key, required this.completed, this.optional = false});
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +27,7 @@ class TProgress extends StatelessWidget {
           child: CircularProgressIndicator(
             value: completed / 100,
             strokeWidth: 3,
-            color: TText.getColor(
-              context,
-              TextColor.filledButton,
-            ),
+            color: TText.getColor(context, TextColor.filledButton),
           ),
         ),
       );

@@ -10,8 +10,10 @@ class AuthorsClient extends ASearchClient<Author> {
     required super.parser,
   });
 
-  Future<Pageable<Recipe>> findRecipesInAuthor(int id,
-      {required int page}) async {
+  Future<Pageable<Recipe>> findRecipesInAuthor(
+    int id, {
+    required int page,
+  }) async {
     final params = getParams({
       'size': 6,
       'sortBy': 'r.label',

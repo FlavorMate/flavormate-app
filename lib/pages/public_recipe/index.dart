@@ -30,10 +30,7 @@ import 'package:url_launcher/url_launcher.dart';
 class PublicRecipePage extends ConsumerStatefulWidget {
   final AppLink appLink;
 
-  const PublicRecipePage({
-    required this.appLink,
-    super.key,
-  });
+  const PublicRecipePage({required this.appLink, super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -54,75 +51,73 @@ class _PublicRecipePageState extends ConsumerState<PublicRecipePage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = ref.watch(
-      pPublicRecipeProvider(widget.appLink),
-    );
+    final provider = ref.watch(pPublicRecipeProvider(widget.appLink));
     return RScaffold(
       provider,
-      appBar: TAppBar(
-        title: L10n.of(context).p_recipe_title,
-      ),
-      errorBuilder: (_, __) => Scaffold(
-        appBar: TAppBar(
-          title: L10n.of(context).p_public_recipe_error_title,
-        ),
-        body: Center(
-          child: TEmptyMessage(
-            icon: MdiIcons.cloudQuestionOutline,
-            title: L10n.of(context).p_public_recipe_error_label,
-            subtitle: L10n.of(context)
-                .p_public_recipe_error_sublabel
-                .replaceAll('\\n', '\n'),
-          ),
-        ),
-      ),
-      builder: (_, recipe) => LayoutBuilder(
-        builder: (_, constraints) {
-          final useDesktop = Breakpoints.gt(context, Breakpoints.m);
-          return TResponsive(
-            maxWidth: useDesktop ? Breakpoints.l : constraints.maxWidth,
-            child: TColumn(
-              children: [
-                if (useDesktop)
-                  PublicRecipePageDesktop(
-                    recipe: recipe,
-                    servingFactor: servingFactor,
-                    decreaseServing: decreaseFactor,
-                    increaseServing: increaseFactor,
-                    addToBring: () => addToBring(recipe),
-                    nutrition: calculateNutrition(recipe),
-                  ),
-                if (!useDesktop)
-                  PublicRecipePageMobile(
-                    recipe: recipe,
-                    servingFactor: servingFactor,
-                    decreaseServing: decreaseFactor,
-                    increaseServing: increaseFactor,
-                    addToBring: () => addToBring(recipe),
-                    nutrition: calculateNutrition(recipe),
-                  ),
-                const Divider(),
-                RecipeInformations(
-                  course: recipe.course,
-                  diet: recipe.diet,
-                ),
-                const Divider(),
-                PublicRecipeCategories(categories: recipe.categories!),
-                const Divider(),
-                PublicRecipeTags(tags: recipe.tags!),
-                const Divider(),
-                PublicRecipeAuthor(author: recipe.author!),
-                const Divider(),
-                RecipePublished(
-                  createdOn: recipe.createdOn!,
-                  version: recipe.version!,
-                  url: recipe.url,
-                )
-              ],
+      appBar: TAppBar(title: L10n.of(context).p_recipe_title),
+      errorBuilder:
+          (_, __) => Scaffold(
+            appBar: TAppBar(
+              title: L10n.of(context).p_public_recipe_error_title,
             ),
-          );
-        },
-      ),
+            body: Center(
+              child: TEmptyMessage(
+                icon: MdiIcons.cloudQuestionOutline,
+                title: L10n.of(context).p_public_recipe_error_label,
+                subtitle: L10n.of(
+                  context,
+                ).p_public_recipe_error_sublabel.replaceAll('\\n', '\n'),
+              ),
+            ),
+          ),
+      builder:
+          (_, recipe) => LayoutBuilder(
+            builder: (_, constraints) {
+              final useDesktop = Breakpoints.gt(context, Breakpoints.m);
+              return TResponsive(
+                maxWidth: useDesktop ? Breakpoints.l : constraints.maxWidth,
+                child: TColumn(
+                  children: [
+                    if (useDesktop)
+                      PublicRecipePageDesktop(
+                        recipe: recipe,
+                        servingFactor: servingFactor,
+                        decreaseServing: decreaseFactor,
+                        increaseServing: increaseFactor,
+                        addToBring: () => addToBring(recipe),
+                        nutrition: calculateNutrition(recipe),
+                      ),
+                    if (!useDesktop)
+                      PublicRecipePageMobile(
+                        recipe: recipe,
+                        servingFactor: servingFactor,
+                        decreaseServing: decreaseFactor,
+                        increaseServing: increaseFactor,
+                        addToBring: () => addToBring(recipe),
+                        nutrition: calculateNutrition(recipe),
+                      ),
+                    const Divider(),
+                    RecipeInformations(
+                      course: recipe.course,
+                      diet: recipe.diet,
+                    ),
+                    const Divider(),
+                    PublicRecipeCategories(categories: recipe.categories!),
+                    const Divider(),
+                    PublicRecipeTags(tags: recipe.tags!),
+                    const Divider(),
+                    PublicRecipeAuthor(author: recipe.author!),
+                    const Divider(),
+                    RecipePublished(
+                      createdOn: recipe.createdOn!,
+                      version: recipe.version!,
+                      url: recipe.url,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
     );
   }
 
@@ -176,7 +171,10 @@ class _PublicRecipePageState extends ConsumerState<PublicRecipePage> {
   }
 
   Future<void> addToBring(Recipe recipe) async {
-    final url = ref.read(pApiProvider).bringClient.get(
+    final url = ref
+        .read(pApiProvider)
+        .bringClient
+        .get(
           ref.read(pServerProvider)!,
           recipe.id!,
           recipe.serving.amount.toInt(),

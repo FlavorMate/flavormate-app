@@ -26,28 +26,33 @@ class BookPage extends ConsumerWidget {
     return RScaffold(
       provider,
       appBar: TAppBar(title: title ?? L10n.of(context).p_book),
-      floatingActionButton: (_, book) => !book.isOwner
-          ? FloatingActionButton(
-              onPressed: () => toggleSubscription(context, ref),
-              child: Icon(
-                book.isSubscribed ? MdiIcons.star : MdiIcons.starOutline,
-              ),
-            )
-          : null,
-      builder: (_, __) => TPageable(
-        provider: pBookRecipesProvider(id),
-        pageProvider: pBookPageProvider,
-        onEmpty: TEmptyMessage(
-          title: L10n.of(context).p_book_no_recipes,
-          subtitle: L10n.of(context).p_book_no_recipes_subtitle,
-          icon: MdiIcons.cookieOffOutline,
-        ),
-        builder: (_, page) => TWrap(
-          children: [
-            for (final recipe in page.content) TRecipeCard(recipe: recipe)
-          ],
-        ),
-      ),
+      floatingActionButton:
+          (_, book) =>
+              !book.isOwner
+                  ? FloatingActionButton(
+                    onPressed: () => toggleSubscription(context, ref),
+                    child: Icon(
+                      book.isSubscribed ? MdiIcons.star : MdiIcons.starOutline,
+                    ),
+                  )
+                  : null,
+      builder:
+          (_, __) => TPageable(
+            provider: pBookRecipesProvider(id),
+            pageProvider: pBookPageProvider,
+            onEmpty: TEmptyMessage(
+              title: L10n.of(context).p_book_no_recipes,
+              subtitle: L10n.of(context).p_book_no_recipes_subtitle,
+              icon: MdiIcons.cookieOffOutline,
+            ),
+            builder:
+                (_, page) => TWrap(
+                  children: [
+                    for (final recipe in page.content)
+                      TRecipeCard(recipe: recipe),
+                  ],
+                ),
+          ),
     );
   }
 

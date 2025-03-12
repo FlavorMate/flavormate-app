@@ -56,15 +56,17 @@ class RecipePageDesktop extends StatelessWidget {
                 Expanded(
                   child: TCarousel(
                     height: 20,
-                    slides: recipe.files
-                        .map(
-                          (file) => TSlide(
-                            imageSrc: file.fullPath ??
-                                file.path(context.read(pServerProvider)!),
-                            type: TImageType.network,
-                          ),
-                        )
-                        .toList(),
+                    slides:
+                        recipe.files
+                            .map(
+                              (file) => TSlide(
+                                imageSrc:
+                                    file.fullPath ??
+                                    file.path(context.read(pServerProvider)!),
+                                type: TImageType.network,
+                              ),
+                            )
+                            .toList(),
                   ),
                 ),
               Expanded(
@@ -96,7 +98,7 @@ class RecipePageDesktop extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

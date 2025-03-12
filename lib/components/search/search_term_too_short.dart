@@ -13,10 +13,7 @@ class SearchTermTooShort extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            MdiIcons.magnifyMinusOutline,
-            size: 64,
-          ),
+          const Icon(MdiIcons.magnifyMinusOutline, size: 64),
           const SizedBox(height: PADDING),
           TText(
             L10n.of(context).c_search_search_term_too_short,

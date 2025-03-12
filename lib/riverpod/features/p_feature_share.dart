@@ -7,8 +7,9 @@ part 'p_feature_share.g.dart';
 class PFeatureShare extends _$PFeatureShare {
   @override
   Future<bool> build() async {
-    final features =
-        await ref.watch(pFeaturesProvider.selectAsync((data) => data));
+    final features = await ref.watch(
+      pFeaturesProvider.selectAsync((data) => data),
+    );
     return features.features.contains('share');
   }
 }

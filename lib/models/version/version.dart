@@ -3,11 +3,7 @@ class Version {
   final int minor;
   final int patch;
 
-  Version({
-    required this.major,
-    required this.minor,
-    required this.patch,
-  });
+  Version({required this.major, required this.minor, required this.patch});
 
   factory Version.fromString(String input) {
     /// example: input = 1.0.2+13

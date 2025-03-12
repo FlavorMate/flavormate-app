@@ -20,9 +20,10 @@ class PublicRecipeCategories extends StatelessWidget {
           runSpacing: PADDING,
           alignment: WrapAlignment.center,
           runAlignment: WrapAlignment.center,
-          children: categories
-              .map((category) => Chip(label: Text(category.label)))
-              .toList(),
+          children:
+              categories
+                  .map((category) => Chip(label: Text(category.label)))
+                  .toList(),
         ),
       ],
     );

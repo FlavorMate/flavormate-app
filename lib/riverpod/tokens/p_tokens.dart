@@ -15,10 +15,12 @@ class PTokens extends _$PTokens {
   void sortByUsername(bool sortASC) {
     if (sortASC) {
       state.value!.sort(
-          (a, b) => a.owner.username.compareToIgnoreCase(b.owner.username));
+        (a, b) => a.owner.username.compareToIgnoreCase(b.owner.username),
+      );
     } else {
       state.value!.sort(
-          (a, b) => b.owner.username.compareToIgnoreCase(a.owner.username));
+        (a, b) => b.owner.username.compareToIgnoreCase(a.owner.username),
+      );
     }
     ref.notifyListeners();
   }

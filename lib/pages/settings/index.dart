@@ -34,8 +34,10 @@ import 'package:image_picker/image_picker.dart';
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
-  static const _version =
-      String.fromEnvironment('build.stage', defaultValue: '-');
+  static const _version = String.fromEnvironment(
+    'build.stage',
+    defaultValue: '-',
+  );
 
   final double _buttonWidth = 350;
 
@@ -102,38 +104,41 @@ class SettingsPage extends ConsumerWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: PADDING),
-                    child: TColumn(children: [
-                      TIconButton(
-                        onPressed: () => manageAvatar(context, ref),
-                        icon: MdiIcons.accountCircleOutline,
-                        label: L10n.of(context).p_settings_manage_avatar,
-                        width: _buttonWidth,
-                      ),
-                      TIconButton(
-                        onPressed: () => manageDiet(context, ref, user.diet!),
-                        icon: MdiIcons.foodOutline,
-                        label: L10n.of(context).p_settings_manage_diet,
-                        width: _buttonWidth,
-                      ),
-                      TIconButton(
-                        onPressed: () => manageMail(context, ref, user.mail),
-                        icon: MdiIcons.emailOutline,
-                        label: L10n.of(context).p_settings_change_mail,
-                        width: _buttonWidth,
-                      ),
-                      TIconButton(
-                        onPressed: () => managePassword(context, ref),
-                        icon: MdiIcons.formTextboxPassword,
-                        label: L10n.of(context).p_settings_change_password,
-                        width: _buttonWidth,
-                      ),
-                      TIconButton(
-                        onPressed: ref.read(pAuthStateProvider.notifier).logout,
-                        icon: MdiIcons.logout,
-                        label: L10n.of(context).p_settings_logout,
-                        width: _buttonWidth,
-                      ),
-                    ]),
+                    child: TColumn(
+                      children: [
+                        TIconButton(
+                          onPressed: () => manageAvatar(context, ref),
+                          icon: MdiIcons.accountCircleOutline,
+                          label: L10n.of(context).p_settings_manage_avatar,
+                          width: _buttonWidth,
+                        ),
+                        TIconButton(
+                          onPressed: () => manageDiet(context, ref, user.diet!),
+                          icon: MdiIcons.foodOutline,
+                          label: L10n.of(context).p_settings_manage_diet,
+                          width: _buttonWidth,
+                        ),
+                        TIconButton(
+                          onPressed: () => manageMail(context, ref, user.mail),
+                          icon: MdiIcons.emailOutline,
+                          label: L10n.of(context).p_settings_change_mail,
+                          width: _buttonWidth,
+                        ),
+                        TIconButton(
+                          onPressed: () => managePassword(context, ref),
+                          icon: MdiIcons.formTextboxPassword,
+                          label: L10n.of(context).p_settings_change_password,
+                          width: _buttonWidth,
+                        ),
+                        TIconButton(
+                          onPressed:
+                              ref.read(pAuthStateProvider.notifier).logout,
+                          icon: MdiIcons.logout,
+                          label: L10n.of(context).p_settings_logout,
+                          width: _buttonWidth,
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(),
                 ],
@@ -144,8 +149,10 @@ class SettingsPage extends ConsumerWidget {
             padding: PADDING,
             child: TColumn(
               children: [
-                TText(L10n.of(context).p_settings_informations_title,
-                    TextStyles.headlineMedium),
+                TText(
+                  L10n.of(context).p_settings_informations_title,
+                  TextStyles.headlineMedium,
+                ),
                 TIconButton(
                   onPressed: () => showChangelog(context),
                   icon: MdiIcons.arrowUpBoldCircleOutline,
@@ -168,8 +175,10 @@ class SettingsPage extends ConsumerWidget {
             padding: PADDING,
             child: TColumn(
               children: [
-                TText(L10n.of(context).p_settings_misc,
-                    TextStyles.headlineMedium),
+                TText(
+                  L10n.of(context).p_settings_misc,
+                  TextStyles.headlineMedium,
+                ),
                 TIconButton(
                   onPressed: () => showThemePicker(context, ref),
                   icon: MdiIcons.formatPaint,
@@ -229,8 +238,9 @@ class SettingsPage extends ConsumerWidget {
       await ref.read(pApiProvider).filesClient.deleteById(user.avatar!.id!);
       ref.invalidate(pUserProvider);
     } else if (response == 'change') {
-      final XFile? image =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
+      final XFile? image = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+      );
       if (image == null) return;
       final bytes = await image.readAsBytes();
 
@@ -245,9 +255,10 @@ class SettingsPage extends ConsumerWidget {
         content: cropped,
       );
 
-      final fileResponse = await ref.read(pApiProvider).filesClient.create(
-            data: file.toMap(),
-          );
+      final fileResponse = await ref
+          .read(pApiProvider)
+          .filesClient
+          .create(data: file.toMap());
 
       await ref
           .read(pApiProvider)
@@ -279,14 +290,10 @@ class SettingsPage extends ConsumerWidget {
 
     if (await ref.read(pUserProvider.notifier).setMail(response)) {
       if (!context.mounted) return;
-      context.showTextSnackBar(
-        L10n.of(context).d_settings_manage_mail_success,
-      );
+      context.showTextSnackBar(L10n.of(context).d_settings_manage_mail_success);
     } else {
       if (!context.mounted) return;
-      context.showTextSnackBar(
-        L10n.of(context).d_settings_manage_mail_error,
-      );
+      context.showTextSnackBar(L10n.of(context).d_settings_manage_mail_error);
     }
   }
 

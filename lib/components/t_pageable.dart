@@ -47,9 +47,10 @@ class _TPageableState<T, N extends BasePageProvider>
         Expanded(
           child: RStruct(
             provider,
-            (context, value) => value.content.isEmpty
-                ? Center(child: widget.onEmpty)
-                : TPageableContent(child: widget.builder(context, value)),
+            (context, value) =>
+                value.content.isEmpty
+                    ? Center(child: widget.onEmpty)
+                    : TPageableContent(child: widget.builder(context, value)),
           ),
         ),
         TPageableBar(

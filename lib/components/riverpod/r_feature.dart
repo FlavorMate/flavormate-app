@@ -20,10 +20,7 @@ class RFeature extends StatelessWidget {
   Widget build(BuildContext context) {
     return RStruct(
       provider,
-      (ctx, visible) => Visibility(
-        visible: visible,
-        child: builder(ctx),
-      ),
+      (ctx, visible) => Visibility(visible: visible, child: builder(ctx)),
       loadingChild: loadingChild,
       errorChild: errorChild,
     );
