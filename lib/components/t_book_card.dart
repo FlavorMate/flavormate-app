@@ -28,7 +28,7 @@ class BookCard extends ConsumerWidget {
             pathParameters: {'id': book.id.toString()},
             extra: book.label,
           ),
-      emptyIcon: MdiIcons.bookOffOutline,
+      emptyIcon: MdiIcons.bookOutline,
       headerHeight: 40,
       imageUrl: book.recipes?.firstOrNull?.coverUrl,
       contentHeight: 24,

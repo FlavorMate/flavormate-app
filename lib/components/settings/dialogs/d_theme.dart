@@ -166,7 +166,7 @@ class _DThemeState extends ConsumerState<DTheme> {
                                 backgroundColor: color,
                                 foregroundColor: Colors.white,
                                 child:
-                                    _color.value == color.value
+                                    _color.toARGB32() == color.toARGB32()
                                         ? const Icon(MdiIcons.check)
                                         : null,
                               ),

@@ -12,7 +12,7 @@ class TContentCard extends StatelessWidget {
 
   final IconData? emptyIcon;
 
-  final List<Widget> header;
+  final List<Widget>? header;
   final String? imageUrl;
   final VoidCallback onTap;
 
@@ -21,9 +21,9 @@ class TContentCard extends StatelessWidget {
     required this.onTap,
     required this.content,
     required this.contentHeight,
-    required this.header,
     required this.emptyIcon,
     required this.imageUrl,
+    this.header,
     this.headerHeight = 24,
   });
 
@@ -50,6 +50,7 @@ class TContentCard extends StatelessWidget {
                   TImage(imageSrc: imageUrl, type: TImageType.network),
                   if (imageUrl != null)
                     TGradient(
+                      showHeader: header?.isNotEmpty ?? false,
                       steps: [
                         0,
                         headerSection,
@@ -67,10 +68,10 @@ class TContentCard extends StatelessWidget {
                     child: Column(
                       spacing: PADDING + 0.05,
                       children: [
-                        if (header.isNotEmpty)
+                        if (header?.isNotEmpty ?? false)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: header,
+                            children: header!,
                           ),
                         Expanded(
                           child:

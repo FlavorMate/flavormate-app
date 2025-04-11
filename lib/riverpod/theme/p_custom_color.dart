@@ -24,7 +24,7 @@ class PCustomColor extends _$PCustomColor {
     if (color == null) {
       sp.remove('theme_custom_color');
     } else {
-      sp.setInt('theme_custom_color', color.value);
+      sp.setInt('theme_custom_color', color.toARGB32());
     }
 
     ref.invalidateSelf();
