@@ -1,7 +1,8 @@
 import 'package:flavormate/components/t_app_bar.dart';
-import 'package:flavormate/components/t_component_card.dart';
+import 'package:flavormate/components/t_content_card.dart';
 import 'package:flavormate/components/t_empty_message.dart';
 import 'package:flavormate/components/t_pageable.dart';
+import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/components/t_wrap.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/categories/p_categories.dart';
@@ -31,15 +32,22 @@ class CategoriesPage extends ConsumerWidget {
               (_, categories) => TWrap(
                 children: [
                   for (final category in categories.content)
-                    TComponentCard(
-                      image: category.coverUrl,
-                      label: category.label,
+                    TContentCard(
                       onTap:
                           () => openCategory(
                             context,
                             category.id!,
                             category.label,
                           ),
+                      content: TText(
+                        category.label,
+                        TextStyles.headlineSmall,
+                        color: TextColor.white,
+                        textOverflow: TextOverflow.ellipsis,
+                      ),
+                      contentHeight: 24,
+                      emptyIcon: MdiIcons.tagOutline,
+                      imageUrl: category.coverUrl,
                     ),
                 ],
               ),
