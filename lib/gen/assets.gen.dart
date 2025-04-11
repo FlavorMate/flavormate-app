@@ -31,17 +31,6 @@ class $AssetsIconsGen {
   List<AssetGenImage> get values => [bring, logoTransparent];
 }
 
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
-
-  /// File path: assets/images/no_image.png
-  AssetGenImage get noImage =>
-      const AssetGenImage('assets/images/no_image.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [noImage];
-}
-
 class $AssetsWebGen {
   const $AssetsWebGen();
 
@@ -70,7 +59,6 @@ class Assets {
 
   static const $AssetsDocumentsGen documents = $AssetsDocumentsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
-  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsWebGen web = $AssetsWebGen();
 }
 
