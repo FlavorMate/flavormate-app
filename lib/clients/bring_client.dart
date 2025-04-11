@@ -6,9 +6,24 @@ class BringClient {
 
   BringClient({required this.httpClient, required this.baseURL});
 
-  String get(String server, int id, int baseServing, int requestedServing) {
+  Future<String> post(
+    String server,
+    int id,
+    int baseServing,
+    int requestedServing,
+  ) async {
     final api = '$server$baseURL/$id/$requestedServing';
 
-    return 'https://api.getbring.com/rest/bringrecipes/deeplink?url=$api&source=web&baseQuantity=$baseServing&requestedQuantity=$requestedServing';
+    final response = await httpClient.post(
+      'https://api.getbring.com/rest/bringrecipes/deeplink',
+      data: {
+        'url': api,
+        'baseQuantity': requestedServing,
+        'requestedQuantity': requestedServing,
+        'source': 'app',
+      },
+    );
+
+    return response.data['deeplink'];
   }
 }

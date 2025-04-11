@@ -31,8 +31,16 @@ class TText extends StatelessWidget {
   final TextStyles style;
   final TextColor? color;
   final TextAlign? textAlign;
+  final TextOverflow? textOverflow;
 
-  const TText(this.label, this.style, {this.textAlign, this.color, super.key});
+  const TText(
+    this.label,
+    this.style, {
+    this.textAlign,
+    this.color,
+    this.textOverflow,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +51,7 @@ class TText extends StatelessWidget {
         context,
         style,
       )?.copyWith(color: getColor(context, color), height: 1),
+      overflow: textOverflow,
     );
   }
 

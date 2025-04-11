@@ -1,68 +1,63 @@
 import 'dart:convert';
 
-import 'package:flavormate/gen/assets.gen.dart';
+import 'package:flavormate/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 enum TImageType { asset, network, memory }
 
 class TImage extends StatelessWidget {
   final String? imageSrc;
-  final double width;
-  final double height;
   final TImageType? type;
+  final double borderRadius;
 
   const TImage({
     super.key,
     required this.imageSrc,
     required this.type,
-    this.width = double.infinity,
-    this.height = double.infinity,
+    this.borderRadius = BORDER_RADIUS,
   });
 
   @override
   Widget build(BuildContext context) {
     if (imageSrc != null) {
-      return switch (type!) {
-        TImageType.asset => Image.asset(
-          imageSrc!,
-          fit: BoxFit.cover,
-          height: height,
-          width: width,
-          errorBuilder: (_, __, ___) => _NoImage(height: height, width: width),
-        ),
-        TImageType.network => Image.network(
-          imageSrc!,
-          fit: BoxFit.cover,
-          height: height,
-          width: width,
-          errorBuilder: (_, __, ___) => _NoImage(height: height, width: width),
-        ),
-        TImageType.memory => Image.memory(
-          base64Decode(imageSrc!),
-          fit: BoxFit.cover,
-          height: height,
-          width: width,
-          errorBuilder: (_, __, ___) => _NoImage(height: height, width: width),
-        ),
-      };
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius),
+        child: switch (type!) {
+          TImageType.asset => Image.asset(
+            imageSrc!,
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => _NoImage(),
+          ),
+          TImageType.network => Image.network(
+            imageSrc!,
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => _NoImage(),
+          ),
+          TImageType.memory => Image.memory(
+            base64Decode(imageSrc!),
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => _NoImage(),
+          ),
+        },
+      );
     } else {
-      return _NoImage(height: height, width: width);
+      return _NoImage();
     }
   }
 }
 
 class _NoImage extends StatelessWidget {
-  final double height;
-  final double width;
-
-  const _NoImage({required this.height, required this.width});
-
   @override
   Widget build(BuildContext context) {
-    return Assets.images.noImage.image(
-      fit: BoxFit.cover,
-      height: height,
-      width: width,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(BORDER_RADIUS),
+        color: Color.lerp(
+          Theme.of(context).colorScheme.inversePrimary,
+          Colors.black,
+          0.15,
+        ),
+      ),
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flavormate/components/t_app_bar.dart';
-import 'package:flavormate/components/t_component_card.dart';
+import 'package:flavormate/components/t_content_card.dart';
 import 'package:flavormate/components/t_empty_message.dart';
 import 'package:flavormate/components/t_pageable.dart';
+import 'package:flavormate/components/t_text.dart';
 import 'package:flavormate/components/t_wrap.dart';
 import 'package:flavormate/l10n/generated/l10n.dart';
 import 'package:flavormate/riverpod/tags/p_tags.dart';
@@ -31,10 +32,17 @@ class TagsPage extends ConsumerWidget {
               (_, tags) => TWrap(
                 children: [
                   for (final tag in tags.content)
-                    TComponentCard(
+                    TContentCard(
                       onTap: () => openTag(context, tag.id!, tag.label),
-                      image: tag.coverUrl,
-                      label: tag.label,
+                      content: TText(
+                        tag.label,
+                        TextStyles.headlineSmall,
+                        color: TextColor.white,
+                        textOverflow: TextOverflow.ellipsis,
+                      ),
+                      contentHeight: 24,
+                      emptyIcon: MdiIcons.tagOutline,
+                      imageUrl: tag.coverUrl,
                     ),
                 ],
               ),

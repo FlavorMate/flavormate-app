@@ -8,6 +8,11 @@ extension EDuration on Duration {
     return '0$n';
   }
 
+  String _filterDigits(int n) {
+    if (n == 0) return '';
+    return '$n';
+  }
+
   String beautify(BuildContext context) {
     List<String> parts = [];
 
@@ -15,7 +20,7 @@ extension EDuration on Duration {
       parts.add('$inDays ${L10n.of(context).e_duration_day}');
     }
 
-    String twoDigitHours = _twoDigits(inHours.remainder(24));
+    String twoDigitHours = _filterDigits(inHours.remainder(24));
     if (twoDigitHours.isNotEmpty) {
       parts.add('$twoDigitHours ${L10n.of(context).e_duration_hour}');
     }
