@@ -1,5 +1,14 @@
 [
   {
+    "version": "2.2.0",
+    "details": [
+      {
+        "change": "New UI for content cards",
+        "icon": "brushOutline"
+      }
+    ]
+  },
+  {
     "version": "2.1.5",
     "details": [
       {
