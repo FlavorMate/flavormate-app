@@ -38,11 +38,13 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           child: TColumn(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TImage(
-                imageSrc: Assets.icons.logoTransparent.path,
-                type: TImageType.asset,
+              SizedBox(
                 height: 160,
                 width: 160,
+                child: TImage(
+                  imageSrc: Assets.icons.logoTransparent.path,
+                  type: TImageType.asset,
+                ),
               ),
               TText(L10n.of(context).app_title, TextStyles.headlineLarge),
               SizedBox(height: 16),
