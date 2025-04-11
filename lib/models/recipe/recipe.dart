@@ -85,4 +85,8 @@ class Recipe extends Entity with RecipeMappable {
       url: url.toString(),
     );
   }
+
+  Duration get totalTime {
+    return prepTime + cookTime + restTime;
+  }
 }
