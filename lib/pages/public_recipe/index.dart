@@ -171,15 +171,17 @@ class _PublicRecipePageState extends ConsumerState<PublicRecipePage> {
   }
 
   Future<void> addToBring(Recipe recipe) async {
-    final url = ref
+    final server = ref.read(pServerProvider);
+    final url = await ref
         .read(pApiProvider)
         .bringClient
-        .get(
-          ref.read(pServerProvider)!,
+        .post(
+          server,
           recipe.id!,
           recipe.serving.amount.toInt(),
           servingFactor.toInt(),
         );
+
     if (!await launchUrl(Uri.parse(url))) {
       if (!mounted) return;
       context.showTextSnackBar(L10n.of(context).p_recipe_error_bring);

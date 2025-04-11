@@ -210,11 +210,12 @@ class _RecipePageState extends ConsumerState<RecipePage> {
   }
 
   Future<void> addToBring(Recipe recipe) async {
-    final url = ref
+    final server = ref.read(pServerProvider);
+    final url = await ref
         .read(pApiProvider)
         .bringClient
-        .get(
-          ref.read(pServerProvider)!,
+        .post(
+          server,
           recipe.id!,
           recipe.serving.amount.toInt(),
           servingFactor.toInt(),
