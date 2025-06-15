@@ -6,6 +6,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
+  FLUTTER_VERSION: '3.32.2'
+  JAVA_VERSION: '21'
 
 jobs:
   build-ios-macos:
@@ -17,7 +19,7 @@ jobs:
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.2'
+          flutter-version: ${{env.FLUTTER_VERSION}}
           channel: 'stable'
 
       - name: Install dependencies
@@ -99,16 +101,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Set up JDK ${{env.JAVA_VERSION}}
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
+          java-version: ${{env.JAVA_VERSION}}
           distribution: 'temurin'
 
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.2'
+          flutter-version: ${{env.FLUTTER_VERSION}}
           channel: 'stable'
 
       - name: Install dependencies
