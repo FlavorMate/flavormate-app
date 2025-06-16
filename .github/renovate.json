@@ -16,6 +16,7 @@
   "baseBranches": [
     "dev"
   ],
+  "rangeStrategy": "bump",
   "labels": [
     "renovate"
   ]
