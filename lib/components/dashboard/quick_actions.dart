@@ -50,7 +50,11 @@ class QuickActions extends ConsumerWidget {
     );
   }
 
-  toRecipe(BuildContext context, WidgetRef ref, {Course? course}) async {
+  Future<void> toRecipe(
+    BuildContext context,
+    WidgetRef ref, {
+    Course? course,
+  }) async {
     try {
       final user = await ref.read(pUserProvider.selectAsync((data) => data));
 

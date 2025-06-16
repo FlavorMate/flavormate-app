@@ -46,20 +46,20 @@ class PTokens extends _$PTokens {
   void sortByValidUntil(bool sortASC) {
     if (sortASC) {
       state.value!.sort((a, b) {
-        DateTime? _a;
-        DateTime? _b;
+        DateTime? tmpA;
+        DateTime? tmpB;
 
         if (a.createdOn != null && a.validFor != null) {
-          _a = a.createdOn!.add(a.validFor!);
+          tmpA = a.createdOn!.add(a.validFor!);
         }
 
         if (b.createdOn != null && b.validFor != null) {
-          _b = b.createdOn!.add(b.validFor!);
+          tmpB = b.createdOn!.add(b.validFor!);
         }
 
-        if (_a != null && _b != null) {
-          return _a.compareTo(_b);
-        } else if (_a == null) {
+        if (tmpA != null && tmpB != null) {
+          return tmpA.compareTo(tmpB);
+        } else if (tmpA == null) {
           return 1;
         } else {
           return -1;
@@ -67,20 +67,20 @@ class PTokens extends _$PTokens {
       });
     } else {
       state.value!.sort((a, b) {
-        DateTime? _a;
-        DateTime? _b;
+        DateTime? tmpA;
+        DateTime? tmpB;
 
         if (a.createdOn != null && a.validFor != null) {
-          _a = a.createdOn!.add(a.validFor!);
+          tmpA = a.createdOn!.add(a.validFor!);
         }
 
         if (b.createdOn != null && b.validFor != null) {
-          _b = b.createdOn!.add(b.validFor!);
+          tmpB = b.createdOn!.add(b.validFor!);
         }
 
-        if (_a != null && _b != null) {
-          return _b.compareTo(_a);
-        } else if (_b == null) {
+        if (tmpA != null && tmpB != null) {
+          return tmpB.compareTo(tmpA);
+        } else if (tmpB == null) {
           return 1;
         } else {
           return -1;

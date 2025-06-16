@@ -22,8 +22,9 @@ class _DIngredientGroupsState extends State<DIngredientGroups> {
 
   @override
   void initState() {
-    _ingredientGroups =
-        widget.ingredientGroups.map((iG) => iG.copyWith()).toList();
+    _ingredientGroups = widget.ingredientGroups
+        .map((iG) => iG.copyWith())
+        .toList();
     super.initState();
   }
 

@@ -31,60 +31,69 @@ class PSearch extends _$PSearch {
 
     final user = await ref.read(pUserProvider.selectAsync((data) => data));
 
-    final recipeResponses = (await ref
-        .read(pApiProvider)
-        .recipesClient
-        .findBySearch(
-          searchTerm: term,
-          filter: user.diet!,
-          sortBy: 'label',
-        )).content.map(
-      (recipe) => SearchResult(
-        type: SearchResultType.recipe,
-        label: recipe.label,
-        id: recipe.id!,
-      ),
-    );
+    final recipeResponses =
+        (await ref
+                .read(pApiProvider)
+                .recipesClient
+                .findBySearch(
+                  searchTerm: term,
+                  filter: user.diet!,
+                  sortBy: 'label',
+                ))
+            .content
+            .map(
+              (recipe) => SearchResult(
+                type: SearchResultType.recipe,
+                label: recipe.label,
+                id: recipe.id!,
+              ),
+            );
 
-    final bookResponses = (await ref
-        .read(pApiProvider)
-        .libraryClient
-        .findBySearch(searchTerm: term, sortBy: 'label')).content.map(
-      (book) => SearchResult(
-        type: SearchResultType.book,
-        label: book.label,
-        id: book.id!,
-      ),
-    );
+    final bookResponses =
+        (await ref
+                .read(pApiProvider)
+                .libraryClient
+                .findBySearch(searchTerm: term, sortBy: 'label'))
+            .content
+            .map(
+              (book) => SearchResult(
+                type: SearchResultType.book,
+                label: book.label,
+                id: book.id!,
+              ),
+            );
 
-    final authorResponses = (await ref
-        .read(pApiProvider)
-        .authorsClient
-        .findBySearch(
-          searchTerm: term,
-          sortBy: 'account.displayName',
-        )).content.map(
-      (author) => SearchResult(
-        type: SearchResultType.author,
-        label: author.account.displayName,
-        id: author.id!,
-      ),
-    );
+    final authorResponses =
+        (await ref
+                .read(pApiProvider)
+                .authorsClient
+                .findBySearch(searchTerm: term, sortBy: 'account.displayName'))
+            .content
+            .map(
+              (author) => SearchResult(
+                type: SearchResultType.author,
+                label: author.account.displayName,
+                id: author.id!,
+              ),
+            );
 
-    final categoryResponses = (await ref
-        .read(pApiProvider)
-        .categoriesClient
-        .findBySearch(
-          language: language,
-          searchTerm: term,
-          sortBy: 'label',
-        )).content.map(
-      (category) => SearchResult(
-        type: SearchResultType.category,
-        label: category.label,
-        id: category.id!,
-      ),
-    );
+    final categoryResponses =
+        (await ref
+                .read(pApiProvider)
+                .categoriesClient
+                .findBySearch(
+                  language: language,
+                  searchTerm: term,
+                  sortBy: 'label',
+                ))
+            .content
+            .map(
+              (category) => SearchResult(
+                type: SearchResultType.category,
+                label: category.label,
+                id: category.id!,
+              ),
+            );
 
     var storiesResponses = <SearchResult>[];
     if (ref.read(pFeatureStoryProvider).requireValue) {
@@ -92,7 +101,8 @@ class PSearch extends _$PSearch {
           (await ref
                   .read(pApiProvider)
                   .storiesClient
-                  .findBySearch(searchTerm: term, sortBy: 'label')).content
+                  .findBySearch(searchTerm: term, sortBy: 'label'))
+              .content
               .map(
                 (story) => SearchResult(
                   type: SearchResultType.story,
@@ -103,16 +113,19 @@ class PSearch extends _$PSearch {
               .toList();
     }
 
-    final tagsResponses = (await ref
-        .read(pApiProvider)
-        .tagsClient
-        .findBySearch(searchTerm: term, sortBy: 'label')).content.map(
-      (tag) => SearchResult(
-        type: SearchResultType.tag,
-        label: tag.label,
-        id: tag.id!,
-      ),
-    );
+    final tagsResponses =
+        (await ref
+                .read(pApiProvider)
+                .tagsClient
+                .findBySearch(searchTerm: term, sortBy: 'label'))
+            .content
+            .map(
+              (tag) => SearchResult(
+                type: SearchResultType.tag,
+                label: tag.label,
+                id: tag.id!,
+              ),
+            );
 
     final responses = [
       ...authorResponses,

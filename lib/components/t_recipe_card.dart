@@ -15,12 +15,11 @@ class TRecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TContentCard(
-      onTap:
-          () => context.pushNamed(
-            'recipe',
-            pathParameters: {'id': recipe.id.toString()},
-            extra: recipe.label,
-          ),
+      onTap: () => context.pushNamed(
+        'recipe',
+        pathParameters: {'id': recipe.id.toString()},
+        extra: recipe.label,
+      ),
       content: TText(
         recipe.label,
         TextStyles.headlineSmall,

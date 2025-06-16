@@ -131,8 +131,9 @@ class SettingsPage extends ConsumerWidget {
                           width: _buttonWidth,
                         ),
                         TIconButton(
-                          onPressed:
-                              ref.read(pAuthStateProvider.notifier).logout,
+                          onPressed: ref
+                              .read(pAuthStateProvider.notifier)
+                              .logout,
                           icon: MdiIcons.logout,
                           label: L10n.of(context).p_settings_logout,
                           width: _buttonWidth,
@@ -225,7 +226,7 @@ class SettingsPage extends ConsumerWidget {
     );
   }
 
-  manageAvatar(BuildContext context, WidgetRef ref) async {
+  Future<void> manageAvatar(BuildContext context, WidgetRef ref) async {
     final user = await ref.read(pUserProvider.future);
 
     if (!context.mounted) return;
@@ -269,7 +270,11 @@ class SettingsPage extends ConsumerWidget {
     }
   }
 
-  manageDiet(BuildContext context, WidgetRef ref, Diet current) async {
+  Future<void> manageDiet(
+    BuildContext context,
+    WidgetRef ref,
+    Diet current,
+  ) async {
     final response = await showDialog<Diet>(
       context: context,
       builder: (_) => const ManageDiet(),
@@ -280,7 +285,11 @@ class SettingsPage extends ConsumerWidget {
     ref.read(pUserProvider.notifier).setDiet(response);
   }
 
-  manageMail(BuildContext context, WidgetRef ref, String? current) async {
+  Future<void> manageMail(
+    BuildContext context,
+    WidgetRef ref,
+    String? current,
+  ) async {
     final response = await showDialog<String>(
       context: context,
       builder: (_) => ManageMail(mail: current),
@@ -297,7 +306,7 @@ class SettingsPage extends ConsumerWidget {
     }
   }
 
-  managePassword(BuildContext context, WidgetRef ref) async {
+  Future<void> managePassword(BuildContext context, WidgetRef ref) async {
     final response = await showDialog<Map>(
       context: context,
       builder: (_) => const ManagePassword(),

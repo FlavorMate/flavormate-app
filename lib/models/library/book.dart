@@ -23,7 +23,7 @@ class Book extends Entity with BookMappable {
     required super.lastModifiedOn,
   });
 
-  has(Recipe recipe) {
+  bool has(Recipe recipe) {
     return recipes!.indexWhere((r) => r.id == recipe.id) >= 0;
   }
 }

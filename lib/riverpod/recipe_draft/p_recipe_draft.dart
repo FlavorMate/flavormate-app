@@ -166,9 +166,10 @@ class PRecipeDraft extends _$PRecipeDraft {
             draft.addedImages.map((addedImage) async {
               addedImage.owner = response.id!;
               return (await ref
-                  .read(pApiProvider)
-                  .filesClient
-                  .create(data: addedImage.toMap())).id!;
+                      .read(pApiProvider)
+                      .filesClient
+                      .create(data: addedImage.toMap()))
+                  .id!;
             }),
           );
           images.addAll(addedFiles);

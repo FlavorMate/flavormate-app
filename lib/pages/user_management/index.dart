@@ -48,126 +48,110 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
     return RScaffold(
       userProvider,
       appBar: TAppBar(title: L10n.of(context).p_admin_user_management_title),
-      floatingActionButton:
-          (_, __) => FloatingActionButton(
-            onPressed: () => createUser(context, ref),
-            child: const Icon(MdiIcons.plus),
-          ),
-      builder:
-          (_, currentUser) => RStruct(
-            provider,
-            (_, users) => DataTable2(
-              isHorizontalScrollBarVisible: true,
-              isVerticalScrollBarVisible: true,
-              minWidth: minWidth,
-              columnSpacing: columnSpacing,
-              horizontalMargin: horizontalMargin,
-              sortColumnIndex: currentSortIndex,
-              sortAscending: sortASC,
-              sortArrowIcon: MdiIcons.chevronUp,
-              columns: [
-                DataColumn2(
-                  label: Text(
-                    L10n.of(context).p_admin_user_management_username,
-                  ),
-                  fixedWidth: 128,
-                  onSort: (i, j) => sort(i),
-                ),
-                DataColumn2(
-                  label: Text(
-                    L10n.of(context).p_admin_user_management_displayname,
-                  ),
-                  fixedWidth: 128,
-                  onSort: (i, j) => sort(i),
-                ),
-                DataColumn2(
-                  label: Text(
-                    L10n.of(context).p_admin_user_management_last_activity,
-                  ),
-                  fixedWidth: 160,
-                  onSort: (i, j) => sort(i),
-                ),
-                DataColumn2(
-                  label: Text(
-                    L10n.of(context).p_admin_user_management_is_active,
-                  ),
-                  fixedWidth: 64,
-                ),
-                DataColumn2(
-                  label: Text(
-                    L10n.of(context).p_admin_user_management_set_password,
-                  ),
-                  fixedWidth: 128,
-                ),
-                DataColumn2(
-                  label: Text(L10n.of(context).p_admin_user_management_delete),
-                  fixedWidth: 64,
-                ),
-              ],
-              rows: [
-                for (final user in users)
-                  DataRow2(
-                    cells: [
-                      DataCell(Text(user.username)),
-                      DataCell(Text(user.displayName)),
-                      DataCell(
-                        Text(
-                          user.lastActivity?.toLocalDateTimeString2(context) ??
-                              '-',
-                        ),
-                      ),
-                      DataCell(
-                        Center(
-                          child: IconButton(
-                            onPressed:
-                                currentUser.id! == user.id
-                                    ? null
-                                    : () => toggleActiveState(
-                                      ref,
-                                      user.id!,
-                                      !user.valid!,
-                                    ),
-                            icon:
-                                user.valid!
-                                    ? const Icon(MdiIcons.lockOpen)
-                                    : const Icon(MdiIcons.lockOff),
-                          ),
-                        ),
-                      ),
-                      DataCell(
-                        Center(
-                          child: IconButton(
-                            onPressed:
-                                currentUser.id! == user.id
-                                    ? null
-                                    : () => changePassword(context, ref, user),
-                            icon: const Icon(MdiIcons.formTextboxPassword),
-                          ),
-                        ),
-                      ),
-                      DataCell(
-                        Center(
-                          child: IconButton(
-                            onPressed:
-                                currentUser.id! == user.id
-                                    ? null
-                                    : () => deleteUser(context, ref, user),
-                            icon: const Icon(
-                              MdiIcons.delete,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-              ],
+      floatingActionButton: (_, _) => FloatingActionButton(
+        onPressed: () => createUser(context, ref),
+        child: const Icon(MdiIcons.plus),
+      ),
+      builder: (_, currentUser) => RStruct(
+        provider,
+        (_, users) => DataTable2(
+          isHorizontalScrollBarVisible: true,
+          isVerticalScrollBarVisible: true,
+          minWidth: minWidth,
+          columnSpacing: columnSpacing,
+          horizontalMargin: horizontalMargin,
+          sortColumnIndex: currentSortIndex,
+          sortAscending: sortASC,
+          sortArrowIcon: MdiIcons.chevronUp,
+          columns: [
+            DataColumn2(
+              label: Text(L10n.of(context).p_admin_user_management_username),
+              fixedWidth: 128,
+              onSort: (i, j) => sort(i),
             ),
-          ),
+            DataColumn2(
+              label: Text(L10n.of(context).p_admin_user_management_displayname),
+              fixedWidth: 128,
+              onSort: (i, j) => sort(i),
+            ),
+            DataColumn2(
+              label: Text(
+                L10n.of(context).p_admin_user_management_last_activity,
+              ),
+              fixedWidth: 160,
+              onSort: (i, j) => sort(i),
+            ),
+            DataColumn2(
+              label: Text(L10n.of(context).p_admin_user_management_is_active),
+              fixedWidth: 64,
+            ),
+            DataColumn2(
+              label: Text(
+                L10n.of(context).p_admin_user_management_set_password,
+              ),
+              fixedWidth: 128,
+            ),
+            DataColumn2(
+              label: Text(L10n.of(context).p_admin_user_management_delete),
+              fixedWidth: 64,
+            ),
+          ],
+          rows: [
+            for (final user in users)
+              DataRow2(
+                cells: [
+                  DataCell(Text(user.username)),
+                  DataCell(Text(user.displayName)),
+                  DataCell(
+                    Text(
+                      user.lastActivity?.toLocalDateTimeString2(context) ?? '-',
+                    ),
+                  ),
+                  DataCell(
+                    Center(
+                      child: IconButton(
+                        onPressed: currentUser.id! == user.id
+                            ? null
+                            : () => toggleActiveState(
+                                ref,
+                                user.id!,
+                                !user.valid!,
+                              ),
+                        icon: user.valid!
+                            ? const Icon(MdiIcons.lockOpen)
+                            : const Icon(MdiIcons.lockOff),
+                      ),
+                    ),
+                  ),
+                  DataCell(
+                    Center(
+                      child: IconButton(
+                        onPressed: currentUser.id! == user.id
+                            ? null
+                            : () => changePassword(context, ref, user),
+                        icon: const Icon(MdiIcons.formTextboxPassword),
+                      ),
+                    ),
+                  ),
+                  DataCell(
+                    Center(
+                      child: IconButton(
+                        onPressed: currentUser.id! == user.id
+                            ? null
+                            : () => deleteUser(context, ref, user),
+                        icon: const Icon(MdiIcons.delete, color: Colors.red),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
+      ),
     );
   }
 
-  sort(int index) {
+  void sort(int index) {
     if (currentSortIndex != index) {
       setState(() {
         sortASC = false;
@@ -189,7 +173,7 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
     }
   }
 
-  toggleActiveState(WidgetRef ref, int id, bool newState) async {
+  Future<void> toggleActiveState(WidgetRef ref, int id, bool newState) async {
     await ref
         .read(pApiProvider)
         .userClient
@@ -197,15 +181,18 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
     ref.invalidate(pUsersProvider);
   }
 
-  deleteUser(BuildContext context, WidgetRef ref, User user) async {
+  Future<void> deleteUser(
+    BuildContext context,
+    WidgetRef ref,
+    User user,
+  ) async {
     final response = await showDialog<bool>(
       context: context,
-      builder:
-          (_) => TConfirmDialog(
-            title: L10n.of(
-              context,
-            ).d_admin_user_management_delete_title(user.username),
-          ),
+      builder: (_) => TConfirmDialog(
+        title: L10n.of(
+          context,
+        ).d_admin_user_management_delete_title(user.username),
+      ),
     );
     if (response == true) {
       await ref.read(pApiProvider).userClient.deleteById(user.id!);
@@ -213,7 +200,11 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
     }
   }
 
-  changePassword(BuildContext context, WidgetRef ref, User user) async {
+  Future<void> changePassword(
+    BuildContext context,
+    WidgetRef ref,
+    User user,
+  ) async {
     final response = await showDialog<Map>(
       context: context,
       builder: (_) => const ChangePasswordDialog(),
@@ -224,7 +215,7 @@ class _UserManagementPageState extends ConsumerState<UserManagementPage> {
     }
   }
 
-  createUser(BuildContext context, WidgetRef ref) async {
+  Future<void> createUser(BuildContext context, WidgetRef ref) async {
     final form = await showDialog<Map<String, dynamic>>(
       context: context,
       builder: (_) => const CreateUserDialog(),

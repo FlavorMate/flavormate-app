@@ -8,10 +8,9 @@ class Wrapper extends StatelessWidget {
   final Widget child;
 
   bool canPop(BuildContext context) {
-    final lastMatch =
-        GoRouter.of(
-          context,
-        ).routerDelegate.currentConfiguration.matches.lastOrNull;
+    final lastMatch = GoRouter.of(
+      context,
+    ).routerDelegate.currentConfiguration.matches.lastOrNull;
 
     if (lastMatch is ShellRouteMatch) {
       return lastMatch.matches.length == 1;

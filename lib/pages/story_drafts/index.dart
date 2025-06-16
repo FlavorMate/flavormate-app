@@ -22,61 +22,58 @@ class StoryDraftsPage extends ConsumerWidget {
     return RScaffold(
       provider,
       appBar: TAppBar(title: L10n.of(context).p_story_drafts_title),
-      builder:
-          (_, drafts) => TResponsive(
-            child: TColumn(
-              children: [
-                TButton(
-                  onPressed: () => createDraft(context, ref),
-                  label: L10n.of(context).p_story_drafts_create,
-                  leading: const Icon(MdiIcons.plus),
-                ),
-                if (drafts.isNotEmpty) const SizedBox(height: PADDING),
-                if (drafts.isNotEmpty)
-                  TDataTable(
-                    columns: [
-                      TDataColumn(
-                        alignment: Alignment.centerLeft,
-                        child: Text(L10n.of(context).p_drafts_drafts_name),
-                      ),
-                      TDataColumn(
-                        width: 128,
-                        alignment: Alignment.centerLeft,
-                        child: Text(L10n.of(context).p_drafts_drafts_state),
-                      ),
-                      TDataColumn(width: 48),
-                    ],
-                    rows: [
-                      for (final draft in drafts)
-                        TDataRow(
-                          onSelectChanged:
-                              (value) => openDraft(context, value, draft.id),
-                          cells: [
-                            Text(
-                              draft.label?.shorten() ??
-                                  L10n.of(context).p_drafts_drafts_name_unnamed,
-                            ),
-                            Text(
-                              draft.version < 0
-                                  ? L10n.of(context).p_drafts_drafts_state_new
-                                  : L10n.of(
-                                    context,
-                                  ).p_drafts_drafts_state_update,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                MdiIcons.delete,
-                                color: Colors.red.shade500,
-                              ),
-                              onPressed: () => deleteDraft(ref, draft.id),
-                            ),
-                          ],
-                        ),
-                    ],
-                  ),
-              ],
+      builder: (_, drafts) => TResponsive(
+        child: TColumn(
+          children: [
+            TButton(
+              onPressed: () => createDraft(context, ref),
+              label: L10n.of(context).p_story_drafts_create,
+              leading: const Icon(MdiIcons.plus),
             ),
-          ),
+            if (drafts.isNotEmpty) const SizedBox(height: PADDING),
+            if (drafts.isNotEmpty)
+              TDataTable(
+                columns: [
+                  TDataColumn(
+                    alignment: Alignment.centerLeft,
+                    child: Text(L10n.of(context).p_drafts_drafts_name),
+                  ),
+                  TDataColumn(
+                    width: 128,
+                    alignment: Alignment.centerLeft,
+                    child: Text(L10n.of(context).p_drafts_drafts_state),
+                  ),
+                  TDataColumn(width: 48),
+                ],
+                rows: [
+                  for (final draft in drafts)
+                    TDataRow(
+                      onSelectChanged: (value) =>
+                          openDraft(context, value, draft.id),
+                      cells: [
+                        Text(
+                          draft.label?.shorten() ??
+                              L10n.of(context).p_drafts_drafts_name_unnamed,
+                        ),
+                        Text(
+                          draft.version < 0
+                              ? L10n.of(context).p_drafts_drafts_state_new
+                              : L10n.of(context).p_drafts_drafts_state_update,
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            MdiIcons.delete,
+                            color: Colors.red.shade500,
+                          ),
+                          onPressed: () => deleteDraft(ref, draft.id),
+                        ),
+                      ],
+                    ),
+                ],
+              ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -87,7 +84,7 @@ class StoryDraftsPage extends ConsumerWidget {
     openDraft(context, true, id);
   }
 
-  deleteDraft(WidgetRef ref, int id) async {
+  Future<void> deleteDraft(WidgetRef ref, int id) async {
     await ref.read(pStoryDraftsProvider.notifier).deleteDraft(id);
   }
 

@@ -63,8 +63,8 @@ class _NoConnectionPageState extends ConsumerState<NoConnectionPage> {
                     textAlign: TextAlign.center,
                   ),
                   FilledButton(
-                    onPressed:
-                        () => ref.read(pAuthStateProvider.notifier).logout(),
+                    onPressed: () =>
+                        ref.read(pAuthStateProvider.notifier).logout(),
                     child: Text(L10n.of(context).btn_logout),
                   ),
                 ],

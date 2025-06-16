@@ -109,7 +109,7 @@ class _ManageMailState extends State<ManageMail> {
     );
   }
 
-  apply() {
+  void apply() {
     if (_formKey.currentState!.validate()) {
       context.pop(_newMail1Controller.text);
     }

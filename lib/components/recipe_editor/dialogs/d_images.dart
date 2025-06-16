@@ -70,8 +70,9 @@ class _DImagesState extends State<DImages> {
                           top: PADDING,
                           right: PADDING,
                           child: CircleAvatar(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.error,
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.error,
                             child: IconButton(
                               color: Colors.white,
                               icon: const Icon(MdiIcons.delete),
@@ -94,7 +95,7 @@ class _DImagesState extends State<DImages> {
     context.pop(_draft);
   }
 
-  addImage(BuildContext context) async {
+  Future<void> addImage(BuildContext context) async {
     final XFile? image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );

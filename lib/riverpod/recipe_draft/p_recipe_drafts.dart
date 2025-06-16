@@ -19,8 +19,8 @@ part 'p_recipe_drafts.g.dart';
 class PRecipeDrafts extends _$PRecipeDrafts {
   @override
   Future<List<RecipeDraftWrapper>> build() async {
-    final response =
-        await (ref.watch(pDriftProvider).draftTable.select()).get();
+    final response = await (ref.watch(pDriftProvider).draftTable.select())
+        .get();
 
     return response.map((data) => RecipeDraftWrapper.fromDB(data)).toList();
   }

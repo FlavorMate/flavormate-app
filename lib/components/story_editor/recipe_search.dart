@@ -32,62 +32,58 @@ class _RecipeSearchState extends ConsumerState<RecipeSearch> {
   Widget build(BuildContext context) {
     return SearchAnchor(
       searchController: _controller,
-      builder:
-          (_, controller) => SearchBar(
-            leading: const IconButton(
-              icon: Icon(MdiIcons.magnify),
-              onPressed: null,
-            ),
-            hintText: L10n.of(context).c_search_label_recipe,
-            onTap: controller.openView,
-          ),
+      builder: (_, controller) => SearchBar(
+        leading: const IconButton(
+          icon: Icon(MdiIcons.magnify),
+          onPressed: null,
+        ),
+        hintText: L10n.of(context).c_search_label_recipe,
+        onTap: controller.openView,
+      ),
       viewHintText: L10n.of(context).c_search_hint,
       viewLeading: IconButton(
         onPressed: close,
         icon: const Icon(MdiIcons.arrowLeft),
       ),
-      viewBuilder:
-          (_) => Consumer(
-            builder: (_, ref, __) {
-              final searchTerm = ref.read(pRecipeSearchTermProvider);
-              return ref
-                  .watch(pRecipeSearchProvider)
-                  .when(
-                    data:
-                        (suggestions) =>
-                            suggestions.isEmpty
-                                ? searchTerm.length < 3
-                                    ? const SearchTermTooShort()
-                                    : const NothingFound()
-                                : ListView.builder(
-                                  itemCount: suggestions.length,
-                                  itemBuilder: (_, index) {
-                                    final suggestion = suggestions[index];
-                                    return ListTile(
-                                      title: Text(suggestion.label),
-                                      leading: Icon(MdiIcons.foodForkDrink),
-                                      onTap: () {
-                                        context.pop();
-                                        widget.onTap(suggestion);
-                                      },
-                                    );
-                                  },
-                                ),
-                    loading: () => const LoadingSearch(),
-                    error: (_, __) => const Text('An error occurred!'),
-                  );
-            },
-          ),
-      suggestionsBuilder: (_, __) => [],
+      viewBuilder: (_) => Consumer(
+        builder: (_, ref, _) {
+          final searchTerm = ref.read(pRecipeSearchTermProvider);
+          return ref
+              .watch(pRecipeSearchProvider)
+              .when(
+                data: (suggestions) => suggestions.isEmpty
+                    ? searchTerm.length < 3
+                          ? const SearchTermTooShort()
+                          : const NothingFound()
+                    : ListView.builder(
+                        itemCount: suggestions.length,
+                        itemBuilder: (_, index) {
+                          final suggestion = suggestions[index];
+                          return ListTile(
+                            title: Text(suggestion.label),
+                            leading: Icon(MdiIcons.foodForkDrink),
+                            onTap: () {
+                              context.pop();
+                              widget.onTap(suggestion);
+                            },
+                          );
+                        },
+                      ),
+                loading: () => const LoadingSearch(),
+                error: (_, _) => const Text('An error occurred!'),
+              );
+        },
+      ),
+      suggestionsBuilder: (_, _) => [],
       viewOnChanged: onChange,
     );
   }
 
-  onChange(String val) {
+  void onChange(String val) {
     ref.read(pRecipeSearchTermProvider.notifier).set(val);
   }
 
-  close() {
+  void close() {
     _controller.closeView(null);
     _controller.clear();
     ref.read(pRecipeSearchTermProvider.notifier).set('');

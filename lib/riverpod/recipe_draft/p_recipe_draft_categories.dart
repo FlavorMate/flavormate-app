@@ -22,10 +22,9 @@ class PRecipeDraftCategories extends _$PRecipeDraftCategories {
         .findRaw(language);
 
     for (final categoryGroup in categoryGroups) {
-      map[categoryGroup.label] =
-          categories
-              .where((category) => category.group.id == categoryGroup.id)
-              .toList();
+      map[categoryGroup.label] = categories
+          .where((category) => category.group.id == categoryGroup.id)
+          .toList();
     }
 
     return map;

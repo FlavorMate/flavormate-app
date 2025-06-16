@@ -117,7 +117,7 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
     );
   }
 
-  apply() {
+  void apply() {
     if (_formKey.currentState!.validate()) {
       context.pop({
         'displayName': _displayNameController.text,

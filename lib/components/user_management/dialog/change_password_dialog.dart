@@ -91,7 +91,7 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
     );
   }
 
-  apply() {
+  void apply() {
     if (_formKey.currentState!.validate()) {
       context.pop({'password': _passwordController2.text});
     }

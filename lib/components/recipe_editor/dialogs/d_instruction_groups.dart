@@ -23,8 +23,9 @@ class _DInstructionGroupsState extends State<DInstructionGroups> {
 
   @override
   void initState() {
-    _instructionGroups =
-        widget.instructionGroups.map((iG) => iG.copyWith()).toList();
+    _instructionGroups = widget.instructionGroups
+        .map((iG) => iG.copyWith())
+        .toList();
     super.initState();
   }
 

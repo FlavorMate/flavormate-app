@@ -46,7 +46,7 @@ class _TCarouselState extends State<TCarousel> {
                 enlargeStrategy: CenterPageEnlargeStrategy.height,
               ),
               itemCount: widget.slides.length,
-              itemBuilder: (_, i, ___) {
+              itemBuilder: (_, i, _) {
                 final slide = widget.slides[i];
                 return SlideCard(slide: slide, height: widget.height);
               },

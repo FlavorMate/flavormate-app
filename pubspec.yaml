@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 2.2.0+32
+version: 2.2.1+33
 
 environment:
-  sdk: '>=3.7.2 <4.0.0'
+  sdk: '>=3.8.1 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,27 +31,27 @@ dependencies:
   flutter:
     sdk: flutter
 
-  app_links: ^6.3.2
-  collection: any
+  app_links: ^6.4.0
+  collection: ^1.19.1
   dart_mappable: ^4.5.0
   data_table_2: ^2.6.0
-  dio: ^5.6.0
-  drift: ^2.26.0
-  drift_flutter: ^0.2.0
-  flutter_carousel_widget: ^3.0.1
+  dio: ^5.8.0+1
+  drift: ^2.27.0
+  drift_flutter: ^0.2.4
+  flutter_carousel_widget: ^3.1.0
   flutter_material_design_icons: ^1.1.7447
   flutter_riverpod: ^2.6.1
-  fl_chart: ^0.70.0
-  go_router: ^14.6.2
+  fl_chart: ^1.0.0
+  go_router: ^15.2.0
   image: ^4.5.4
   image_picker: ^1.1.2
-  intl: any
-  package_info_plus: ^8.1.1
+  intl: ^0.20.2
+  package_info_plus: ^8.3.0
   riverpod_annotation: ^2.6.1
-  shared_preferences: ^2.5.2
-  share_plus: ^10.1.2
+  shared_preferences: ^2.5.3
+  share_plus: ^11.0.0
   system_theme: ^3.1.2
-  url_launcher: ^6.3.0
+  url_launcher: ^6.3.1
   # no strict version because these depend on the SDK version:
   flutter_localizations:
     sdk: flutter
@@ -60,14 +60,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^2.4.12
+  build_runner: ^2.5.0
   custom_lint: ^0.7.5
   dart_mappable_builder: ^4.5.0
   dependency_validator: ^5.0.2
-  drift_dev: ^2.26.0
+  drift_dev: ^2.27.0
   flutter_gen_runner: ^5.10.0
-  flutter_launcher_icons: ^0.14.0
-  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
   riverpod_generator: ^2.6.5
   riverpod_lint: ^2.6.5
 

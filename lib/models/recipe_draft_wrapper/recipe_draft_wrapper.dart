@@ -38,13 +38,11 @@ class RecipeDraftWrapper with RecipeDraftWrapperMappable {
   }
 
   List<File> get displayImages {
-    final list =
-        images
-            .where(
-              (image) =>
-                  removedImages.indexWhere((rI) => image.id == rI.id) == -1,
-            )
-            .toList();
+    final list = images
+        .where(
+          (image) => removedImages.indexWhere((rI) => image.id == rI.id) == -1,
+        )
+        .toList();
     list.addAll(addedImages);
     return list;
   }

@@ -74,13 +74,12 @@ class TContentCard extends StatelessWidget {
                             children: header!,
                           ),
                         Expanded(
-                          child:
-                              imageUrl != null
-                                  ? const SizedBox.shrink()
-                                  : FittedBox(
-                                    fit: BoxFit.fill,
-                                    child: Icon(emptyIcon, color: Colors.white),
-                                  ),
+                          child: imageUrl != null
+                              ? const SizedBox.shrink()
+                              : FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Icon(emptyIcon, color: Colors.white),
+                                ),
                         ),
                         Align(alignment: Alignment.centerLeft, child: content),
                       ],

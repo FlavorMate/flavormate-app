@@ -28,24 +28,23 @@ class TagsPage extends ConsumerWidget {
             subtitle: L10n.of(context).p_tags_no_recipe_subtitle,
             icon: MdiIcons.tagOffOutline,
           ),
-          builder:
-              (_, tags) => TWrap(
-                children: [
-                  for (final tag in tags.content)
-                    TContentCard(
-                      onTap: () => openTag(context, tag.id!, tag.label),
-                      content: TText(
-                        tag.label,
-                        TextStyles.headlineSmall,
-                        color: TextColor.white,
-                        textOverflow: TextOverflow.ellipsis,
-                      ),
-                      contentHeight: 24,
-                      emptyIcon: MdiIcons.tagOutline,
-                      imageUrl: tag.coverUrl,
-                    ),
-                ],
-              ),
+          builder: (_, tags) => TWrap(
+            children: [
+              for (final tag in tags.content)
+                TContentCard(
+                  onTap: () => openTag(context, tag.id!, tag.label),
+                  content: TText(
+                    tag.label,
+                    TextStyles.headlineSmall,
+                    color: TextColor.white,
+                    textOverflow: TextOverflow.ellipsis,
+                  ),
+                  contentHeight: 24,
+                  emptyIcon: MdiIcons.tagOutline,
+                  imageUrl: tag.coverUrl,
+                ),
+            ],
+          ),
         ),
       ),
     );

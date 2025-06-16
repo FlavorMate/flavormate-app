@@ -27,28 +27,27 @@ class TButton extends StatelessWidget {
     return SizedBox(
       height: height,
       width: width,
-      child:
-          tonal
-              ? FilledButton.tonal(
-                onPressed: onPressed,
-                child: Row(
-                  children: [
-                    if (leading != null) leading!,
-                    Expanded(child: Text(label, textAlign: TextAlign.center)),
-                    if (trailing != null) trailing!,
-                  ],
-                ),
-              )
-              : FilledButton(
-                onPressed: onPressed,
-                child: Row(
-                  children: [
-                    if (leading != null) leading!,
-                    Expanded(child: Text(label, textAlign: TextAlign.center)),
-                    if (trailing != null) trailing!,
-                  ],
-                ),
+      child: tonal
+          ? FilledButton.tonal(
+              onPressed: onPressed,
+              child: Row(
+                children: [
+                  if (leading != null) leading!,
+                  Expanded(child: Text(label, textAlign: TextAlign.center)),
+                  if (trailing != null) trailing!,
+                ],
               ),
+            )
+          : FilledButton(
+              onPressed: onPressed,
+              child: Row(
+                children: [
+                  if (leading != null) leading!,
+                  Expanded(child: Text(label, textAlign: TextAlign.center)),
+                  if (trailing != null) trailing!,
+                ],
+              ),
+            ),
     );
   }
 }
