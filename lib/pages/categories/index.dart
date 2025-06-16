@@ -28,29 +28,24 @@ class CategoriesPage extends ConsumerWidget {
             title: L10n.of(context).p_categories_no_recipe,
             subtitle: L10n.of(context).p_categories_no_recipe_subtitle,
           ),
-          builder:
-              (_, categories) => TWrap(
-                children: [
-                  for (final category in categories.content)
-                    TContentCard(
-                      onTap:
-                          () => openCategory(
-                            context,
-                            category.id!,
-                            category.label,
-                          ),
-                      content: TText(
-                        category.label,
-                        TextStyles.headlineSmall,
-                        color: TextColor.white,
-                        textOverflow: TextOverflow.ellipsis,
-                      ),
-                      contentHeight: 24,
-                      emptyIcon: MdiIcons.tagOutline,
-                      imageUrl: category.coverUrl,
-                    ),
-                ],
-              ),
+          builder: (_, categories) => TWrap(
+            children: [
+              for (final category in categories.content)
+                TContentCard(
+                  onTap: () =>
+                      openCategory(context, category.id!, category.label),
+                  content: TText(
+                    category.label,
+                    TextStyles.headlineSmall,
+                    color: TextColor.white,
+                    textOverflow: TextOverflow.ellipsis,
+                  ),
+                  contentHeight: 24,
+                  emptyIcon: MdiIcons.tagOutline,
+                  imageUrl: category.coverUrl,
+                ),
+            ],
+          ),
         ),
       ),
     );

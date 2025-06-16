@@ -22,12 +22,11 @@ class BookCard extends ConsumerWidget {
     final user = ref.watch(pUserProvider).requireValue;
 
     return TContentCard(
-      onTap:
-          () => context.pushNamed(
-            'book',
-            pathParameters: {'id': book.id.toString()},
-            extra: book.label,
-          ),
+      onTap: () => context.pushNamed(
+        'book',
+        pathParameters: {'id': book.id.toString()},
+        extra: book.label,
+      ),
       emptyIcon: MdiIcons.bookOutline,
       headerHeight: 40,
       imageUrl: book.recipes?.firstOrNull?.coverUrl,
@@ -67,42 +66,41 @@ class BookCard extends ConsumerWidget {
                 deleteBook(context, ref, book);
               }
             },
-            itemBuilder:
-                (BuildContext context) => <PopupMenuEntry<String>>[
-                  PopupMenuItem<String>(
-                    value: 'edit',
-                    child: ListTile(
-                      leading: const Icon(MdiIcons.pencil),
-                      title: Text(L10n.of(context).p_library_edit),
-                    ),
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              PopupMenuItem<String>(
+                value: 'edit',
+                child: ListTile(
+                  leading: const Icon(MdiIcons.pencil),
+                  title: Text(L10n.of(context).p_library_edit),
+                ),
+              ),
+              PopupMenuItem(
+                value: 'visibility',
+                child: ListTile(
+                  leading: Icon(
+                    book.visible ? MdiIcons.shareOff : MdiIcons.share,
                   ),
-                  PopupMenuItem(
-                    value: 'visibility',
-                    child: ListTile(
-                      leading: Icon(
-                        book.visible ? MdiIcons.shareOff : MdiIcons.share,
-                      ),
-                      title: Text(
-                        book.visible
-                            ? L10n.of(context).p_library_unshare
-                            : L10n.of(context).p_library_share,
-                      ),
-                    ),
+                  title: Text(
+                    book.visible
+                        ? L10n.of(context).p_library_unshare
+                        : L10n.of(context).p_library_share,
                   ),
-                  PopupMenuItem(
-                    value: 'delete',
-                    child: ListTile(
-                      leading: const Icon(MdiIcons.trashCan),
-                      title: Text(L10n.of(context).p_library_delete),
-                    ),
-                  ),
-                ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'delete',
+                child: ListTile(
+                  leading: const Icon(MdiIcons.trashCan),
+                  title: Text(L10n.of(context).p_library_delete),
+                ),
+              ),
+            ],
           ),
       ],
     );
   }
 
-  editBook(BuildContext context, WidgetRef ref, Book book) async {
+  Future<void> editBook(BuildContext context, WidgetRef ref, Book book) async {
     final response = await showDialog<String>(
       context: context,
       builder: (_) => EditBookDialog(label: book.label),
@@ -113,17 +111,25 @@ class BookCard extends ConsumerWidget {
     await ref.read(pLibraryProvider.notifier).updateBook(book.id!, response!);
   }
 
-  toggleVisibility(BuildContext context, WidgetRef ref, Book book) async {
+  Future<void> toggleVisibility(
+    BuildContext context,
+    WidgetRef ref,
+    Book book,
+  ) async {
     await ref
         .read(pLibraryProvider.notifier)
         .toggleVisibility(book.id!, !book.visible);
   }
 
-  deleteBook(BuildContext context, WidgetRef ref, Book book) async {
+  Future<void> deleteBook(
+    BuildContext context,
+    WidgetRef ref,
+    Book book,
+  ) async {
     final response = await showDialog<bool>(
       context: context,
-      builder:
-          (_) => TConfirmDialog(title: L10n.of(context).d_library_delete_title),
+      builder: (_) =>
+          TConfirmDialog(title: L10n.of(context).d_library_delete_title),
     );
 
     if (response ?? false) {

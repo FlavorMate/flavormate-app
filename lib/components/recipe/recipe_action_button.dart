@@ -25,15 +25,11 @@ class ActionButton extends ConsumerWidget {
     return RStruct(
       provider,
       (_, user) => MenuAnchor(
-        builder:
-            (_, controller, widget) => IconButton(
-              icon: Icon(MdiIcons.dotsVertical),
-              onPressed:
-                  () =>
-                      controller.isOpen
-                          ? controller.close()
-                          : controller.open(),
-            ),
+        builder: (_, controller, widget) => IconButton(
+          icon: Icon(MdiIcons.dotsVertical),
+          onPressed: () =>
+              controller.isOpen ? controller.close() : controller.open(),
+        ),
         menuChildren: [
           if (user.isOwner)
             MenuItemButton(

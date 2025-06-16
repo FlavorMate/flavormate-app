@@ -21,11 +21,10 @@ class Tag extends Entity with TagMappable {
     required this.recipes,
   });
 
-  String? get coverUrl =>
-      recipes
-          ?.where((recipe) => EString.isNotEmpty(recipe.coverUrl))
-          .firstOrNull
-          ?.coverUrl;
+  String? get coverUrl => recipes
+      ?.where((recipe) => EString.isNotEmpty(recipe.coverUrl))
+      .firstOrNull
+      ?.coverUrl;
 
   TagDraft toDraft() {
     return TagDraft(label: label);

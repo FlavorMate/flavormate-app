@@ -26,15 +26,14 @@ class PreviewMobile extends StatelessWidget {
           AspectRatio(
             aspectRatio: 16 / 9,
             child: TCarousel(
-              slides:
-                  images
-                      .map(
-                        (file) => TSlide(
-                          imageSrc: file.content!.split(',')[1],
-                          type: TImageType.memory,
-                        ),
-                      )
-                      .toList(),
+              slides: images
+                  .map(
+                    (file) => TSlide(
+                      imageSrc: file.content!.split(',')[1],
+                      type: TImageType.memory,
+                    ),
+                  )
+                  .toList(),
             ),
           ),
         if (images.isNotEmpty) const SizedBox(height: PADDING),

@@ -55,69 +55,62 @@ class _PublicRecipePageState extends ConsumerState<PublicRecipePage> {
     return RScaffold(
       provider,
       appBar: TAppBar(title: L10n.of(context).p_recipe_title),
-      errorBuilder:
-          (_, __) => Scaffold(
-            appBar: TAppBar(
-              title: L10n.of(context).p_public_recipe_error_title,
-            ),
-            body: Center(
-              child: TEmptyMessage(
-                icon: MdiIcons.cloudQuestionOutline,
-                title: L10n.of(context).p_public_recipe_error_label,
-                subtitle: L10n.of(
-                  context,
-                ).p_public_recipe_error_sublabel.replaceAll('\\n', '\n'),
-              ),
-            ),
+      errorBuilder: (_, _) => Scaffold(
+        appBar: TAppBar(title: L10n.of(context).p_public_recipe_error_title),
+        body: Center(
+          child: TEmptyMessage(
+            icon: MdiIcons.cloudQuestionOutline,
+            title: L10n.of(context).p_public_recipe_error_label,
+            subtitle: L10n.of(
+              context,
+            ).p_public_recipe_error_sublabel.replaceAll('\\n', '\n'),
           ),
-      builder:
-          (_, recipe) => LayoutBuilder(
-            builder: (_, constraints) {
-              final useDesktop = Breakpoints.gt(context, Breakpoints.m);
-              return TResponsive(
-                maxWidth: useDesktop ? Breakpoints.l : constraints.maxWidth,
-                child: TColumn(
-                  children: [
-                    if (useDesktop)
-                      PublicRecipePageDesktop(
-                        recipe: recipe,
-                        servingFactor: servingFactor,
-                        decreaseServing: decreaseFactor,
-                        increaseServing: increaseFactor,
-                        addToBring: () => addToBring(recipe),
-                        nutrition: calculateNutrition(recipe),
-                      ),
-                    if (!useDesktop)
-                      PublicRecipePageMobile(
-                        recipe: recipe,
-                        servingFactor: servingFactor,
-                        decreaseServing: decreaseFactor,
-                        increaseServing: increaseFactor,
-                        addToBring: () => addToBring(recipe),
-                        nutrition: calculateNutrition(recipe),
-                      ),
-                    const Divider(),
-                    RecipeInformations(
-                      course: recipe.course,
-                      diet: recipe.diet,
-                    ),
-                    const Divider(),
-                    PublicRecipeCategories(categories: recipe.categories!),
-                    const Divider(),
-                    PublicRecipeTags(tags: recipe.tags!),
-                    const Divider(),
-                    PublicRecipeAuthor(author: recipe.author!),
-                    const Divider(),
-                    RecipePublished(
-                      createdOn: recipe.createdOn!,
-                      version: recipe.version!,
-                      url: recipe.url,
-                    ),
-                  ],
+        ),
+      ),
+      builder: (_, recipe) => LayoutBuilder(
+        builder: (_, constraints) {
+          final useDesktop = Breakpoints.gt(context, Breakpoints.m);
+          return TResponsive(
+            maxWidth: useDesktop ? Breakpoints.l : constraints.maxWidth,
+            child: TColumn(
+              children: [
+                if (useDesktop)
+                  PublicRecipePageDesktop(
+                    recipe: recipe,
+                    servingFactor: servingFactor,
+                    decreaseServing: decreaseFactor,
+                    increaseServing: increaseFactor,
+                    addToBring: () => addToBring(recipe),
+                    nutrition: calculateNutrition(recipe),
+                  ),
+                if (!useDesktop)
+                  PublicRecipePageMobile(
+                    recipe: recipe,
+                    servingFactor: servingFactor,
+                    decreaseServing: decreaseFactor,
+                    increaseServing: increaseFactor,
+                    addToBring: () => addToBring(recipe),
+                    nutrition: calculateNutrition(recipe),
+                  ),
+                const Divider(),
+                RecipeInformations(course: recipe.course, diet: recipe.diet),
+                const Divider(),
+                PublicRecipeCategories(categories: recipe.categories!),
+                const Divider(),
+                PublicRecipeTags(tags: recipe.tags!),
+                const Divider(),
+                PublicRecipeAuthor(author: recipe.author!),
+                const Divider(),
+                RecipePublished(
+                  createdOn: recipe.createdOn!,
+                  version: recipe.version!,
+                  url: recipe.url,
                 ),
-              );
-            },
-          ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -188,11 +181,11 @@ class _PublicRecipePageState extends ConsumerState<PublicRecipePage> {
     }
   }
 
-  decreaseFactor() {
+  void decreaseFactor() {
     if (servingFactor > 1) setState(() => servingFactor--);
   }
 
-  increaseFactor() {
+  void increaseFactor() {
     setState(() => servingFactor++);
   }
 }

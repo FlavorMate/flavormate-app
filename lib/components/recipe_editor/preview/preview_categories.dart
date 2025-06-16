@@ -25,13 +25,11 @@ class PreviewCategories extends ConsumerWidget {
             runSpacing: PADDING,
             alignment: WrapAlignment.center,
             runAlignment: WrapAlignment.center,
-            children:
-                categories
-                    .map(
-                      (category) =>
-                          Chip(label: Text(categoryMap[category]!.label)),
-                    )
-                    .toList(),
+            children: categories
+                .map(
+                  (category) => Chip(label: Text(categoryMap[category]!.label)),
+                )
+                .toList(),
           ),
         ),
       ],

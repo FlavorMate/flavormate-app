@@ -49,8 +49,8 @@ class _DCommonState extends State<DCommon> {
             TTextFormField(
               controller: _labelController,
               label: L10n.of(context).d_editor_common_label,
-              validators:
-                  (input) => UValidatorPresets.isNotEmpty(context, input),
+              validators: (input) =>
+                  UValidatorPresets.isNotEmpty(context, input),
             ),
             TTextFormField(
               controller: _descriptionController,

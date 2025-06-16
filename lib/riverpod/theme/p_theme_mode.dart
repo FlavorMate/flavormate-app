@@ -8,8 +8,9 @@ part 'p_theme_mode.g.dart';
 class PThemeMode extends _$PThemeMode {
   @override
   CustomThemeMode build() {
-    final sharedPreferences =
-        ref.watch(pSharedPreferencesProvider).requireValue;
+    final sharedPreferences = ref
+        .watch(pSharedPreferencesProvider)
+        .requireValue;
 
     final modeString =
         sharedPreferences.getString('theme_mode') ?? 'flavormate';
@@ -20,8 +21,9 @@ class PThemeMode extends _$PThemeMode {
   }
 
   void setMode(CustomThemeMode? single) {
-    final sharedPreferences =
-        ref.watch(pSharedPreferencesProvider).requireValue;
+    final sharedPreferences = ref
+        .watch(pSharedPreferencesProvider)
+        .requireValue;
 
     if (single == null) {
       sharedPreferences.remove('theme_mode');

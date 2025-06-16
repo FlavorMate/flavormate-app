@@ -25,22 +25,20 @@ class LibraryPage extends ConsumerWidget {
             title: L10n.of(context).p_library_no_book,
             subtitle: L10n.of(context).p_library_no_book_subtitle,
           ),
-          builder:
-              (_, library) => TWrap(
-                children: [
-                  for (final book in library.content) BookCard(book: book),
-                ],
-              ),
+          builder: (_, library) => TWrap(
+            children: [
+              for (final book in library.content) BookCard(book: book),
+            ],
+          ),
         ),
         Positioned(
           right: 16,
           bottom: 48,
           child: Consumer(
-            builder:
-                (context, ref, __) => FloatingActionButton(
-                  onPressed: () => addBook(context, ref),
-                  child: const Icon(MdiIcons.plus),
-                ),
+            builder: (context, ref, _) => FloatingActionButton(
+              onPressed: () => addBook(context, ref),
+              child: const Icon(MdiIcons.plus),
+            ),
           ),
         ),
       ],

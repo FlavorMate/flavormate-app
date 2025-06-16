@@ -31,15 +31,14 @@ class PreviewDesktop extends StatelessWidget {
               Expanded(
                 child: TCarousel(
                   height: 20,
-                  slides:
-                      images
-                          .map(
-                            (file) => TSlide(
-                              imageSrc: file.content!.split(',')[1],
-                              type: TImageType.memory,
-                            ),
-                          )
-                          .toList(),
+                  slides: images
+                      .map(
+                        (file) => TSlide(
+                          imageSrc: file.content!.split(',')[1],
+                          type: TImageType.memory,
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
               Expanded(

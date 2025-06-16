@@ -54,24 +54,23 @@ class _DChangelogState extends ConsumerState<DChangelog> {
                     (_) => Size.fromHeight(250),
                   ),
                 ),
-                builder:
-                    (_, controller, widget) => SizedBox(
-                      width: _buttonWidth,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          if (controller.isOpen) {
-                            controller.close();
-                          } else {
-                            controller.open();
-                          }
-                        },
-                        child: TText(
-                          current?.version.toString() ?? '',
-                          TextStyles.titleMedium,
-                          color: TextColor.onPrimaryContainer,
-                        ),
-                      ),
+                builder: (_, controller, widget) => SizedBox(
+                  width: _buttonWidth,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      if (controller.isOpen) {
+                        controller.close();
+                      } else {
+                        controller.open();
+                      }
+                    },
+                    child: TText(
+                      current?.version.toString() ?? '',
+                      TextStyles.titleMedium,
+                      color: TextColor.onPrimaryContainer,
                     ),
+                  ),
+                ),
                 menuChildren: [
                   for (final entry in value.sorted)
                     SizedBox(

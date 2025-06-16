@@ -19,14 +19,10 @@ abstract class Breakpoints {
   static const double xl = 1600;
 
   static bool gt(BuildContext context, double bp) {
-    return MediaQuery
-        .sizeOf(context)
-        .width >= bp;
+    return MediaQuery.sizeOf(context).width >= bp;
   }
 
   static bool lt(BuildContext context, double bp) {
-    return MediaQuery
-        .sizeOf(context)
-        .width < bp;
+    return MediaQuery.sizeOf(context).width < bp;
   }
 }

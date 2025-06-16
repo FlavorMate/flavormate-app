@@ -74,21 +74,20 @@ class MainLayoutState extends State<MainLayout> {
           Expanded(child: widget.navigationShell),
         ],
       ),
-      bottomNavigationBar:
-          wideScreen
-              ? null
-              : NavigationBar(
-                selectedIndex: widget.navigationShell.currentIndex,
-                labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-                destinations: [
-                  for (var destination in destinations)
-                    NavigationDestination(
-                      label: destination.label,
-                      icon: Icon(destination.icon),
-                    ),
-                ],
-                onDestinationSelected: _goBranch,
-              ),
+      bottomNavigationBar: wideScreen
+          ? null
+          : NavigationBar(
+              selectedIndex: widget.navigationShell.currentIndex,
+              labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+              destinations: [
+                for (var destination in destinations)
+                  NavigationDestination(
+                    label: destination.label,
+                    icon: Icon(destination.icon),
+                  ),
+              ],
+              onDestinationSelected: _goBranch,
+            ),
     );
   }
 }

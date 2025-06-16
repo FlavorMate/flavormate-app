@@ -11,8 +11,8 @@ part 'p_story_drafts.g.dart';
 class PStoryDrafts extends _$PStoryDrafts {
   @override
   Future<List<StoryDraft>> build() async {
-    final response =
-        await (ref.watch(pDriftProvider).storyDraftTable.select()).get();
+    final response = await (ref.watch(pDriftProvider).storyDraftTable.select())
+        .get();
 
     return response.map((data) => StoryDraft.fromDB(data)).toList();
   }

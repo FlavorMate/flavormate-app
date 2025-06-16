@@ -32,26 +32,24 @@ class _LibraryDialogState extends ConsumerState<LibraryDialog> {
       negativeLabel: L10n.of(context).btn_close,
       child: RStruct(
         provider,
-        (_, page) =>
-            page.isNotEmpty
-                ? ListView.builder(
-                  itemCount: page.length,
-                  itemBuilder: (_, index) {
-                    final book = page[index];
-                    return CheckboxListTile(
-                      value: book.has(widget.recipe),
-                      onChanged:
-                          (_) =>
-                              toggleRecipeInBook(book.id!, widget.recipe.id!),
-                      title: Text(book.label),
-                    );
-                  },
-                )
-                : TEmptyMessage(
-                  title: L10n.of(context).d_recipe_library_no_books,
-                  subtitle: L10n.of(context).d_recipe_library_no_books_subtitle,
-                  icon: MdiIcons.bookOffOutline,
-                ),
+        (_, page) => page.isNotEmpty
+            ? ListView.builder(
+                itemCount: page.length,
+                itemBuilder: (_, index) {
+                  final book = page[index];
+                  return CheckboxListTile(
+                    value: book.has(widget.recipe),
+                    onChanged: (_) =>
+                        toggleRecipeInBook(book.id!, widget.recipe.id!),
+                    title: Text(book.label),
+                  );
+                },
+              )
+            : TEmptyMessage(
+                title: L10n.of(context).d_recipe_library_no_books,
+                subtitle: L10n.of(context).d_recipe_library_no_books_subtitle,
+                icon: MdiIcons.bookOffOutline,
+              ),
       ),
     );
   }

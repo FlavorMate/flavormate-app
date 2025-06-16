@@ -26,17 +26,17 @@ class TImage extends StatelessWidget {
           TImageType.asset => Image.asset(
             imageSrc!,
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => _NoImage(),
+            errorBuilder: (_, _, _) => _NoImage(),
           ),
           TImageType.network => Image.network(
             imageSrc!,
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => _NoImage(),
+            errorBuilder: (_, _, _) => _NoImage(),
           ),
           TImageType.memory => Image.memory(
             base64Decode(imageSrc!),
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => _NoImage(),
+            errorBuilder: (_, _, _) => _NoImage(),
           ),
         },
       );

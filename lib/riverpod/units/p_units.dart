@@ -11,12 +11,9 @@ class PUnits extends _$PUnits {
   @override
   Future<List<UnitLocalized>> build() async {
     await ref.watch(pUnitConversionProvider.selectAsync((data) => data));
-    final units =
-        (await ref.watch(pApiProvider).unitsClient.findAll())
-            .where(
-              (unit) => unit.language == currentLocalization().languageCode,
-            )
-            .toList();
+    final units = (await ref.watch(pApiProvider).unitsClient.findAll())
+        .where((unit) => unit.language == currentLocalization().languageCode)
+        .toList();
 
     ref.keepAlive();
 

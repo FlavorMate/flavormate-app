@@ -81,10 +81,9 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
                 TTextFormField(
                   controller: _labelController,
                   label: L10n.of(context).p_story_label,
-                  onChanged:
-                      (val) => ref
-                          .read(pStoryDraftProvider(widget.id).notifier)
-                          .setLabel(EString.trimToNull(val)),
+                  onChanged: (val) => ref
+                      .read(pStoryDraftProvider(widget.id).notifier)
+                      .setLabel(EString.trimToNull(val)),
                   validators: (value) {
                     if (UValidator.isEmpty(value)) {
                       return L10n.of(context).v_isEmpty;
@@ -96,10 +95,9 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
                 TTextFormField(
                   controller: _contentController,
                   label: L10n.of(context).p_story_content,
-                  onChanged:
-                      (val) => ref
-                          .read(pStoryDraftProvider(widget.id).notifier)
-                          .setContent(EString.trimToNull(val)),
+                  onChanged: (val) => ref
+                      .read(pStoryDraftProvider(widget.id).notifier)
+                      .setContent(EString.trimToNull(val)),
                   maxLines: null,
                   validators: (value) {
                     if (UValidator.isEmpty(value)) {
@@ -128,7 +126,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
     );
   }
 
-  showPreview(BuildContext context, StoryDraft draft) async {
+  Future<void> showPreview(BuildContext context, StoryDraft draft) async {
     if (draft.recipe == null || !_formKey.currentState!.validate()) {
       context.showTextSnackBar(L10n.of(context).p_story_edit_invalid);
       return;

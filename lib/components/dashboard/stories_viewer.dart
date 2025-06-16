@@ -19,12 +19,11 @@ class StoriesViewer extends ConsumerWidget {
     title: story.label,
     type: TImageType.network,
     date: story.createdOn,
-    onTap:
-        () => context.pushNamed(
-          'story',
-          pathParameters: {'id': '${story.id}'},
-          extra: story.recipe.label,
-        ),
+    onTap: () => context.pushNamed(
+      'story',
+      pathParameters: {'id': '${story.id}'},
+      extra: story.recipe.label,
+    ),
   );
 
   @override
@@ -48,8 +47,9 @@ class StoriesViewer extends ConsumerWidget {
               ),
               TCarousel(
                 height: 400,
-                slides:
-                    stories.content.map((s) => getSlide(context, s)).toList(),
+                slides: stories.content
+                    .map((s) => getSlide(context, s))
+                    .toList(),
               ),
             ],
           ),

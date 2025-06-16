@@ -76,8 +76,8 @@ class _DIngredientState extends ConsumerState<DIngredient> {
               controller: _amountController,
               onChanged: setAmount,
               label: L10n.of(context).d_editor_ingredient_amount,
-              validators:
-                  (input) => UValidatorPresets.isNumberNullable(context, input),
+              validators: (input) =>
+                  UValidatorPresets.isNumberNullable(context, input),
             ),
             if (_oldUnitController.text.isNotEmpty)
               TTextFormField(
@@ -96,18 +96,17 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                   if (textEditingValue.text.isEmpty) {
                     return [];
                   }
-                  final responses =
-                      units.where((unit) {
-                        return [
-                          unit.labelSg,
-                          unit.labelSgAbrv,
-                          unit.labelPl,
-                          unit.labelPlAbrv,
-                        ].nonNulls.any(
-                          (label) =>
-                              label.containsIgnoreCase(textEditingValue.text),
-                        );
-                      }).toList();
+                  final responses = units.where((unit) {
+                    return [
+                      unit.labelSg,
+                      unit.labelSgAbrv,
+                      unit.labelPl,
+                      unit.labelPlAbrv,
+                    ].nonNulls.any(
+                      (label) =>
+                          label.containsIgnoreCase(textEditingValue.text),
+                    );
+                  }).toList();
 
                   return responses;
                 },
@@ -129,23 +128,24 @@ class _DIngredientState extends ConsumerState<DIngredient> {
                     _ingredient.unitLocalized = selection;
                   });
                 },
-                optionsViewBuilder: (
-                  BuildContext context,
-                  AutocompleteOnSelected<UnitLocalized> onSelected,
-                  Iterable<UnitLocalized> options,
-                ) {
-                  return AutocompleteOptions(
-                    onSelected: onSelected,
-                    options: options,
-                  );
-                },
+                optionsViewBuilder:
+                    (
+                      BuildContext context,
+                      AutocompleteOnSelected<UnitLocalized> onSelected,
+                      Iterable<UnitLocalized> options,
+                    ) {
+                      return AutocompleteOptions(
+                        onSelected: onSelected,
+                        options: options,
+                      );
+                    },
               ),
             ),
             TTextFormField(
               controller: _ingredientController,
               label: L10n.of(context).d_editor_ingredient_label,
-              validators:
-                  (input) => UValidatorPresets.isNotEmpty(context, input),
+              validators: (input) =>
+                  UValidatorPresets.isNotEmpty(context, input),
             ),
             TButton(
               onPressed: openNutrition,
@@ -173,12 +173,11 @@ class _DIngredientState extends ConsumerState<DIngredient> {
     final response = await showDialog<NutritionDraft>(
       context: context,
       useSafeArea: false,
-      builder:
-          (_) => DNutrition(
-            amount: _ingredient.amount,
-            unitRef: _ingredient.unitLocalized,
-            nutrition: _ingredient.nutrition ?? NutritionDraft(),
-          ),
+      builder: (_) => DNutrition(
+        amount: _ingredient.amount,
+        unitRef: _ingredient.unitLocalized,
+        nutrition: _ingredient.nutrition ?? NutritionDraft(),
+      ),
     );
 
     if (response == null) return;
@@ -245,7 +244,6 @@ class AutocompleteOptions extends StatelessWidget {
                     return Container(
                       color: highlight ? Theme.of(context).focusColor : null,
                       padding: const EdgeInsets.all(PADDING),
-                      //TODO: label
                       child: Text(option.labelSg),
                     );
                   },

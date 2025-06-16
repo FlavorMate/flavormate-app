@@ -56,7 +56,7 @@ class _DCategoriesState extends ConsumerState<DCategories> {
     context.pop(_categories);
   }
 
-  toggleCategory(int id) {
+  void toggleCategory(int id) {
     final index = _categories.indexOf(id);
     setState(() {
       if (index < 0) {

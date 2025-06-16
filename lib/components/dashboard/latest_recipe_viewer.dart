@@ -20,12 +20,11 @@ class LatestRecipeViewer extends ConsumerWidget {
     title: recipe.label,
     type: TImageType.network,
     date: recipe.createdOn,
-    onTap:
-        () => context.pushNamed(
-          'recipe',
-          pathParameters: {'id': '${recipe.id}'},
-          extra: recipe.label,
-        ),
+    onTap: () => context.pushNamed(
+      'recipe',
+      pathParameters: {'id': '${recipe.id}'},
+      extra: recipe.label,
+    ),
   );
 
   @override
@@ -50,25 +49,21 @@ class LatestRecipeViewer extends ConsumerWidget {
             width: double.infinity,
             child: RStruct(
               provider,
-              (_, latestRecipes) =>
-                  latestRecipes.page.empty
-                      ? TEmptyMessage(
-                        title:
-                            L10n.of(
-                              context,
-                            ).c_dashboard_latest_recipes_no_title,
-                        subtitle:
-                            L10n.of(
-                              context,
-                            ).c_dashboard_latest_recipes_no_subtitle,
-                      )
-                      : TCarousel(
-                        height: 400,
-                        slides:
-                            latestRecipes.content
-                                .map((l) => getSlide(context, l))
-                                .toList(),
-                      ),
+              (_, latestRecipes) => latestRecipes.page.empty
+                  ? TEmptyMessage(
+                      title: L10n.of(
+                        context,
+                      ).c_dashboard_latest_recipes_no_title,
+                      subtitle: L10n.of(
+                        context,
+                      ).c_dashboard_latest_recipes_no_subtitle,
+                    )
+                  : TCarousel(
+                      height: 400,
+                      slides: latestRecipes.content
+                          .map((l) => getSlide(context, l))
+                          .toList(),
+                    ),
             ),
           ),
         ],

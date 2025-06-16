@@ -58,71 +58,66 @@ class _StoryPageStore extends ConsumerState<StoryPage> {
           ),
         ],
       ),
-      builder:
-          (_, value) => TResponsive(
-            child: TCard(
-              padding: 0,
-              child: TColumn(
-                children: [
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: TImageLabel(
-                      imageSrc: value.recipe.coverUrl,
-                      type: TImageType.network,
-                      title: value.recipe.label,
-                      height: 325,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: PADDING,
-                      right: PADDING,
-                      bottom: PADDING,
-                    ),
-                    child: TColumn(
+      builder: (_, value) => TResponsive(
+        child: TCard(
+          padding: 0,
+          child: TColumn(
+            children: [
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: TImageLabel(
+                  imageSrc: value.recipe.coverUrl,
+                  type: TImageType.network,
+                  title: value.recipe.label,
+                  height: 325,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: PADDING,
+                  right: PADDING,
+                  bottom: PADDING,
+                ),
+                child: TColumn(
+                  children: [
+                    TRow(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TRow(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AvatarViewer(
-                              user: value.author.account,
-                              border: true,
-                            ),
-                            Expanded(
-                              child: TBubble(
-                                topLeft: true,
-                                children: [
-                                  TText(
-                                    value.label,
-                                    TextStyles.titleLarge,
-                                    color: TextColor.filledButton,
-                                  ),
-                                  TText(
-                                    value.content,
-                                    TextStyles.bodyMedium,
-                                    color: TextColor.filledButton,
-                                  ),
-                                ],
+                        AvatarViewer(user: value.author.account, border: true),
+                        Expanded(
+                          child: TBubble(
+                            topLeft: true,
+                            children: [
+                              TText(
+                                value.label,
+                                TextStyles.titleLarge,
+                                color: TextColor.filledButton,
                               ),
-                            ),
-                          ],
-                        ),
-                        FilledButton(
-                          onPressed:
-                              () => context.pushNamed(
-                                'recipe',
-                                pathParameters: {'id': '${value.recipe.id}'},
-                                extra: value.recipe.label,
+                              TText(
+                                value.content,
+                                TextStyles.bodyMedium,
+                                color: TextColor.filledButton,
                               ),
-                          child: Text(L10n.of(context).p_story_go_to_recipe),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                    FilledButton(
+                      onPressed: () => context.pushNamed(
+                        'recipe',
+                        pathParameters: {'id': '${value.recipe.id}'},
+                        extra: value.recipe.label,
+                      ),
+                      child: Text(L10n.of(context).p_story_go_to_recipe),
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
+        ),
+      ),
     );
   }
 
@@ -146,8 +141,8 @@ class _StoryPageStore extends ConsumerState<StoryPage> {
   void delete() async {
     final response = await showDialog<bool>(
       context: context,
-      builder:
-          (_) => TConfirmDialog(title: L10n.of(context).p_story_delete_title),
+      builder: (_) =>
+          TConfirmDialog(title: L10n.of(context).p_story_delete_title),
     );
     if (!response! || !mounted) return;
 

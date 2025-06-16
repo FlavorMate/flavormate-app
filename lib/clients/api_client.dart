@@ -40,7 +40,9 @@ extension ApiClientExceptionX on ApiClientException {
   String? get responseMessage => response?.data?['message'] as String?;
 }
 
-_interceptors(InterceptorMethods handlers) => InterceptorsWrapper(
+InterceptorsWrapper _interceptors(
+  InterceptorMethods handlers,
+) => InterceptorsWrapper(
   onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
     // Do something before request is sent.
     // If you want to resolve the request with custom data,

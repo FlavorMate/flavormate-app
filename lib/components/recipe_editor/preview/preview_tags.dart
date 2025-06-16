@@ -20,10 +20,9 @@ class PreviewTags extends StatelessWidget {
           runSpacing: PADDING,
           alignment: WrapAlignment.center,
           runAlignment: WrapAlignment.center,
-          children:
-              tags
-                  .map((category) => Chip(label: Text(category.label)))
-                  .toList(),
+          children: tags
+              .map((category) => Chip(label: Text(category.label)))
+              .toList(),
         ),
       ],
     );

@@ -24,8 +24,9 @@ class PChangelog extends _$PChangelog {
 
     final List<dynamic> parsedJson = jsonDecode(value);
 
-    final entries =
-        parsedJson.map((map) => ChangelogVersionMapper.fromMap(map)).toList();
+    final entries = parsedJson
+        .map((map) => ChangelogVersionMapper.fromMap(map))
+        .toList();
 
     ref.keepAlive();
 

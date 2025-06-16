@@ -100,7 +100,7 @@ class _ManagePasswordState extends State<ManagePassword> {
     );
   }
 
-  apply() {
+  void apply() {
     if (_formKey.currentState!.validate()) {
       context.pop({
         'oldPassword': _oldPasswordController.text,

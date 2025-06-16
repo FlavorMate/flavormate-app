@@ -70,8 +70,8 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed:
-                    () => editIngredientGroups(context, ref, draft.recipeDraft),
+                onPressed: () =>
+                    editIngredientGroups(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_ingredient_groups_title,
                 trailing: TProgress(
@@ -79,9 +79,8 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed:
-                    () =>
-                        editInstructionGroups(context, ref, draft.recipeDraft),
+                onPressed: () =>
+                    editInstructionGroups(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_instruction_groups_title,
                 trailing: TProgress(
@@ -112,8 +111,8 @@ class EditorPage extends ConsumerWidget {
                 ),
               ),
               TButton(
-                onPressed:
-                    () => editCategories(context, ref, draft.recipeDraft),
+                onPressed: () =>
+                    editCategories(context, ref, draft.recipeDraft),
                 leading: const Icon(MdiIcons.pen),
                 label: L10n.of(context).d_editor_categories_title,
                 trailing: TProgress(
@@ -138,8 +137,9 @@ class EditorPage extends ConsumerWidget {
       floatingActionButton: RStruct(
         provider,
         (_, draft) => FloatingActionButton(
-          onPressed:
-              draft.isValid ? () => showPreview(context, ref, draft) : null,
+          onPressed: draft.isValid
+              ? () => showPreview(context, ref, draft)
+              : null,
           disabledElevation: 0,
           child: Icon(
             MdiIcons.contentSave,
@@ -150,18 +150,17 @@ class EditorPage extends ConsumerWidget {
     );
   }
 
-  editCommon(
+  Future<void> editCommon(
     BuildContext context,
     WidgetRef ref,
     RecipeDraft recipeDraft,
   ) async {
     final response = await showDialog<Map<String, String?>>(
       context: context,
-      builder:
-          (_) => DCommon(
-            label: recipeDraft.label,
-            description: recipeDraft.description,
-          ),
+      builder: (_) => DCommon(
+        label: recipeDraft.label,
+        description: recipeDraft.description,
+      ),
       useSafeArea: false,
     );
 
@@ -170,7 +169,7 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setCommon(response);
   }
 
-  editServing(
+  Future<void> editServing(
     BuildContext context,
     WidgetRef ref,
     RecipeDraft recipeDraft,
@@ -185,19 +184,18 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setServing(response);
   }
 
-  editDurations(
+  Future<void> editDurations(
     BuildContext context,
     WidgetRef ref,
     RecipeDraft recipeDraft,
   ) async {
     final response = await showDialog<Map<String, Duration>>(
       context: context,
-      builder:
-          (_) => DDurations(
-            prepTime: recipeDraft.prepTime,
-            cookTime: recipeDraft.cookTime,
-            restTime: recipeDraft.restTime,
-          ),
+      builder: (_) => DDurations(
+        prepTime: recipeDraft.prepTime,
+        cookTime: recipeDraft.cookTime,
+        restTime: recipeDraft.restTime,
+      ),
       useSafeArea: false,
     );
 
@@ -205,16 +203,15 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setDurations(response);
   }
 
-  editIngredientGroups(
+  Future<void> editIngredientGroups(
     BuildContext context,
     WidgetRef ref,
     RecipeDraft recipeDraft,
   ) async {
     final response = await showDialog<List<IngredientGroupDraft>>(
       context: context,
-      builder:
-          (_) =>
-              DIngredientGroups(ingredientGroups: recipeDraft.ingredientGroups),
+      builder: (_) =>
+          DIngredientGroups(ingredientGroups: recipeDraft.ingredientGroups),
       useSafeArea: false,
     );
 
@@ -222,17 +219,15 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setIngredientGroups(response);
   }
 
-  editInstructionGroups(
+  Future<void> editInstructionGroups(
     BuildContext context,
     WidgetRef ref,
     RecipeDraft recipeDraft,
   ) async {
     final response = await showDialog(
       context: context,
-      builder:
-          (_) => DInstructionGroups(
-            instructionGroups: recipeDraft.instructionGroups,
-          ),
+      builder: (_) =>
+          DInstructionGroups(instructionGroups: recipeDraft.instructionGroups),
       useSafeArea: false,
     );
 
@@ -240,7 +235,7 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setInstructionGroups(response);
   }
 
-  editCourse(
+  Future<void> editCourse(
     BuildContext context,
     WidgetRef ref,
     RecipeDraft recipeDraft,
@@ -254,7 +249,11 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setCourse(response);
   }
 
-  editDiet(BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+  Future<void> editDiet(
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog<Diet>(
       context: context,
       builder: (_) => DDiet(diet: recipeDraft.diet),
@@ -264,7 +263,11 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setDiet(response);
   }
 
-  editTags(BuildContext context, WidgetRef ref, RecipeDraft recipeDraft) async {
+  Future<void> editTags(
+    BuildContext context,
+    WidgetRef ref,
+    RecipeDraft recipeDraft,
+  ) async {
     final response = await showDialog<List<TagDraft>>(
       context: context,
       builder: (_) => DTags(tags: recipeDraft.tags),
@@ -275,7 +278,7 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setTags(response);
   }
 
-  editCategories(
+  Future<void> editCategories(
     BuildContext context,
     WidgetRef ref,
     RecipeDraft recipeDraft,
@@ -290,7 +293,7 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).setCategories(response);
   }
 
-  editImages(
+  Future<void> editImages(
     BuildContext context,
     WidgetRef ref,
     RecipeDraftWrapper draft,
@@ -305,7 +308,7 @@ class EditorPage extends ConsumerWidget {
     ref.read(pRecipeDraftProvider(id).notifier).set(response);
   }
 
-  showPreview(
+  Future<void> showPreview(
     BuildContext context,
     WidgetRef ref,
     RecipeDraftWrapper draft,

@@ -27,13 +27,11 @@ class AuthorPage extends StatelessWidget {
             icon: MdiIcons.cookieOffOutline,
             title: L10n.of(context).p_recipes_no_recipe,
           ),
-          builder:
-              (_, recipes) => TWrap(
-                children: [
-                  for (final recipe in recipes.content)
-                    TRecipeCard(recipe: recipe),
-                ],
-              ),
+          builder: (_, recipes) => TWrap(
+            children: [
+              for (final recipe in recipes.content) TRecipeCard(recipe: recipe),
+            ],
+          ),
         ),
       ),
     );

@@ -21,20 +21,18 @@ class RecipeTags extends StatelessWidget {
           runSpacing: PADDING,
           alignment: WrapAlignment.center,
           runAlignment: WrapAlignment.center,
-          children:
-              tags
-                  .map(
-                    (category) => ActionChip(
-                      onPressed:
-                          () => context.pushNamed(
-                            'tag',
-                            pathParameters: {'id': '${category.id}'},
-                            extra: category.label,
-                          ),
-                      label: Text(category.label),
-                    ),
-                  )
-                  .toList(),
+          children: tags
+              .map(
+                (category) => ActionChip(
+                  onPressed: () => context.pushNamed(
+                    'tag',
+                    pathParameters: {'id': '${category.id}'},
+                    extra: category.label,
+                  ),
+                  label: Text(category.label),
+                ),
+              )
+              .toList(),
         ),
       ],
     );

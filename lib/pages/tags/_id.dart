@@ -27,13 +27,11 @@ class TagPage extends StatelessWidget {
             title: L10n.of(context).p_recipes_no_recipe,
             icon: MdiIcons.tagOffOutline,
           ),
-          builder:
-              (_, recipes) => TWrap(
-                children: [
-                  for (final recipe in recipes.content)
-                    TRecipeCard(recipe: recipe),
-                ],
-              ),
+          builder: (_, recipes) => TWrap(
+            children: [
+              for (final recipe in recipes.content) TRecipeCard(recipe: recipe),
+            ],
+          ),
         ),
       ),
     );

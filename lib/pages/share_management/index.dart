@@ -101,12 +101,11 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
                         (_, recipe) => SizedBox(
                           width: 150,
                           child: FilledButton.tonal(
-                            onPressed:
-                                () => context.pushNamed(
-                                  'recipe',
-                                  pathParameters: {'id': recipe.id.toString()},
-                                  extra: recipe.label,
-                                ),
+                            onPressed: () => context.pushNamed(
+                              'recipe',
+                              pathParameters: {'id': recipe.id.toString()},
+                              extra: recipe.label,
+                            ),
                             child: Text(
                               recipe.label.shorten(length: 16),
                               textAlign: TextAlign.center,
@@ -143,7 +142,7 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
     );
   }
 
-  sort(int index) {
+  void sort(int index) {
     if (currentSortIndex != index) {
       setState(() {
         sortASC = false;
@@ -171,14 +170,17 @@ class _ShareManagementPageState extends ConsumerState<ShareManagementPage> {
     }
   }
 
-  deleteToken(BuildContext context, WidgetRef ref, TToken token) async {
+  Future<void> deleteToken(
+    BuildContext context,
+    WidgetRef ref,
+    TToken token,
+  ) async {
     final response = await showDialog<bool>(
       context: context,
-      builder:
-          (_) => TConfirmDialog(
-            title: L10n.of(context).p_admin_share_delete_title,
-            content: L10n.of(context).p_admin_share_delete_content,
-          ),
+      builder: (_) => TConfirmDialog(
+        title: L10n.of(context).p_admin_share_delete_title,
+        content: L10n.of(context).p_admin_share_delete_content,
+      ),
     );
     if (response == true) {
       await ref.read(pApiProvider).tokenClient.deleteById(token.id!);

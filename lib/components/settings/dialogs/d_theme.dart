@@ -157,21 +157,19 @@ class _DThemeState extends ConsumerState<DTheme> {
                   ),
                   TScrollableH(
                     child: TRow(
-                      children:
-                          DTheme.colors.map((color) {
-                            return GestureDetector(
-                              onTap: () => setState(() => _color = color),
-                              child: CircleAvatar(
-                                radius: PADDING * 2,
-                                backgroundColor: color,
-                                foregroundColor: Colors.white,
-                                child:
-                                    _color.toARGB32() == color.toARGB32()
-                                        ? const Icon(MdiIcons.check)
-                                        : null,
-                              ),
-                            );
-                          }).toList(),
+                      children: DTheme.colors.map((color) {
+                        return GestureDetector(
+                          onTap: () => setState(() => _color = color),
+                          child: CircleAvatar(
+                            radius: PADDING * 2,
+                            backgroundColor: color,
+                            foregroundColor: Colors.white,
+                            child: _color.toARGB32() == color.toARGB32()
+                                ? const Icon(MdiIcons.check)
+                                : null,
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],

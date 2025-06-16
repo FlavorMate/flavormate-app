@@ -20,12 +20,11 @@ class HighlightsViewer extends ConsumerWidget {
     title: highlight.recipe.label,
     type: TImageType.network,
     date: highlight.date,
-    onTap:
-        () => context.pushNamed(
-          'recipe',
-          pathParameters: {'id': '${highlight.recipe.id}'},
-          extra: highlight.recipe.label,
-        ),
+    onTap: () => context.pushNamed(
+      'recipe',
+      pathParameters: {'id': '${highlight.recipe.id}'},
+      extra: highlight.recipe.label,
+    ),
   );
 
   @override
@@ -50,19 +49,18 @@ class HighlightsViewer extends ConsumerWidget {
             width: double.infinity,
             child: RStruct(
               provider,
-              (_, highlights) =>
-                  highlights.page.empty
-                      ? TEmptyMessage(
-                        title: L10n.of(context).c_dashboard_highlights_no_title,
-                        subtitle:
-                            L10n.of(context).c_dashboard_highlights_no_subtitle,
-                      )
-                      : TCarousel(
-                        slides:
-                            highlights.content
-                                .map((h) => getSlide(context, h))
-                                .toList(),
-                      ),
+              (_, highlights) => highlights.page.empty
+                  ? TEmptyMessage(
+                      title: L10n.of(context).c_dashboard_highlights_no_title,
+                      subtitle: L10n.of(
+                        context,
+                      ).c_dashboard_highlights_no_subtitle,
+                    )
+                  : TCarousel(
+                      slides: highlights.content
+                          .map((h) => getSlide(context, h))
+                          .toList(),
+                    ),
             ),
           ),
         ],
