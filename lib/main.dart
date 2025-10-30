@@ -1,12 +1,12 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:flavormate/l10n/generated/l10n.dart';
-import 'package:flavormate/riverpod/app_links/p_app_links.dart';
-import 'package:flavormate/riverpod/go_router/p_go_router.dart';
-import 'package:flavormate/riverpod/package_info/p_package_info.dart';
-import 'package:flavormate/riverpod/root_bundle/p_backend_url.dart';
-import 'package:flavormate/riverpod/shared_preferences/p_shared_preferences.dart';
-import 'package:flavormate/riverpod/theme/p_theme.dart';
-import 'package:flavormate/utils/custom_mappers/custom_mappers.dart';
+import 'package:flavormate/core/config/app_links/p_app_links.dart';
+import 'package:flavormate/core/mappers/custom_mappers.dart';
+import 'package:flavormate/core/navigation/p_go_router.dart';
+import 'package:flavormate/core/riverpod/package_info/p_package_info.dart';
+import 'package:flavormate/core/storage/root_bundle/backend_url/p_rb_backend_url.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
+import 'package:flavormate/core/theme/providers/p_theme.dart';
+import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,17 +33,18 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(pGoRouterProvider);
     final colors = ref.watch(pThemeProvider).requireValue;
+
     return MaterialApp.router(
-      onGenerateTitle: (context) => L10n.of(context).app_title,
+      onGenerateTitle: (context) => L10n.of(context).flavormate,
       theme: ThemeData(
         brightness: Brightness.light,
         colorScheme: colors.light,
-        useMaterial3: true,
+        extensions: [colors.lightBlendedColors],
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: colors.dark,
-        useMaterial3: true,
+        extensions: [colors.darkBlendedColors],
       ),
       themeMode: ThemeMode.system,
       localizationsDelegates: L10n.localizationsDelegates,
@@ -61,12 +62,12 @@ class _EagerInitialization extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(pAppLinksProvider);
+    ref.watch(pAppLinksProvider);
     final values = [
-      ref.watch(pPackageInfoProvider),
-      ref.watch(pSharedPreferencesProvider),
-      ref.watch(pBackendUrlProvider),
+      ref.watch(pSPProvider),
+      ref.watch(pRBBackendUrlProvider),
       ref.watch(pThemeProvider),
+      ref.watch(pPackageInfoProvider),
     ];
 
     if (values.every((value) => value.hasValue)) {

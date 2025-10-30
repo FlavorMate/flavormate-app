@@ -1,14 +1,5 @@
 [
   {
-    "version": "2.2.1",
-    "details": [
-      {
-        "change": "Small bugfixes and improvements",
-        "icon": "creationOutline"
-      }
-    ]
-  },
-  {
     "version": "2.2.0",
     "details": [
       {

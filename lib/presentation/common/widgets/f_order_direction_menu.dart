@@ -1,0 +1,47 @@
+import 'package:flavormate/data/models/shared/enums/order_direction.dart';
+import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+
+class FOrderDirectionMenu extends StatelessWidget {
+  final OrderDirection? current;
+  final Function(OrderDirection?) onTap;
+
+  const FOrderDirectionMenu({
+    super.key,
+    required this.current,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final selected = current != null;
+    final icon = current?.icon ?? MdiIcons.sort;
+    final label =
+        current?.getName(context) ??
+        L10n.of(context).f_order_direction_menu__label;
+    return MenuAnchor(
+      builder: (_, controller, _) => FilterChip(
+        avatar: Icon(icon),
+        showCheckmark: false,
+        label: Text(label),
+        deleteIcon: const Icon(MdiIcons.close),
+        onDeleted: selected ? () => onTap.call(null) : null,
+        selected: selected,
+        onSelected: (_) => toggleState(controller),
+      ),
+      menuChildren: [
+        for (final option in OrderDirection.values)
+          MenuItemButton(
+            leadingIcon: Icon(option.icon),
+            child: Text(option.getName(context)),
+            onPressed: () => onTap.call(option),
+          ),
+      ],
+    );
+  }
+
+  void toggleState(MenuController controller) {
+    controller.isOpen ? controller.close() : controller.open();
+  }
+}
