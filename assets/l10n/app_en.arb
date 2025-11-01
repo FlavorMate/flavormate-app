@@ -438,7 +438,7 @@
   "settings_account_section__change_avatar": "Manage avatar",
   "settings_account_section__change_avatar_failure": "Failed updating avatar",
   "settings_account_section__change_avatar_success": "Successfully updated avatar",
-  "settings_account_section__change_diet": "Change dietary preference",
+  "settings_account_section__change_diet": "Change dietary",
   "settings_account_section__change_diet_failure": "Failed updating dietary preference",
   "settings_account_section__change_diet_success": "Successfully changed dietary preference",
   "settings_account_section__change_email": "Change E-Mail",
