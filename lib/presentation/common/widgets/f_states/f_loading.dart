@@ -18,6 +18,8 @@ class FLoading extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const FLogo(size: 96),
+          const SizedBox(height: PADDING / 2),
+          const CircularProgressIndicator(),
           FText(
             L10n.of(context).f_loading__title,
             style: FTextStyle.titleLarge,
