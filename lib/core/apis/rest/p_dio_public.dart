@@ -17,8 +17,8 @@ class PDioPublic extends _$PDioPublic {
     final dio = Dio();
     // Add base configuration
     dio.options.baseUrl = server;
-    dio.options.connectTimeout = const Duration(seconds: 15);
-    dio.options.receiveTimeout = const Duration(seconds: 15);
+    dio.options.connectTimeout = const Duration(seconds: 5);
+    dio.options.receiveTimeout = const Duration(seconds: 5);
     dio.options.headers['Accept'] = 'application/json, text/plain';
     dio.options.headers['Accept-Language'] = language;
 

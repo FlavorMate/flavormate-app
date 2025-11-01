@@ -23,7 +23,12 @@ void main() async {
     const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent),
   );
 
-  runApp(const ProviderScope(child: _EagerInitialization(child: MyApp())));
+  runApp(
+    ProviderScope(
+      retry: (_, _) => null,
+      child: const _EagerInitialization(child: MyApp()),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {

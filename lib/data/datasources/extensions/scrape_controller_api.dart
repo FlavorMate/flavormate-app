@@ -14,6 +14,7 @@ class ScrapeControllerApi extends ControllerApi {
     return await get(
       url: '$_root/$base64',
       mapper: (data) => data as String,
+      timeout: const Duration(minutes: 1),
     );
   }
 }
