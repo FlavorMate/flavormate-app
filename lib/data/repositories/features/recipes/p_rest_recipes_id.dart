@@ -4,6 +4,9 @@ import 'package:flavormate/data/datasources/extensions/share_controller_api.dart
 import 'package:flavormate/data/datasources/features/recipe_controller_api.dart';
 import 'package:flavormate/data/models/features/recipes/recipe_dto.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
+import 'package:flavormate/data/repositories/features/highlights/p_rest_highlights.dart';
+import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes.dart';
+import 'package:flavormate/data/repositories/features/stories/p_rest_stories.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_rest_recipes_id.g.dart';
@@ -48,6 +51,12 @@ class PRestRecipesId extends _$PRestRecipesId {
     final client = RecipeControllerApi(dio);
 
     final response = await client.deleteRecipesId(id: recipeId);
+
+    if (!response.hasError) {
+      ref.invalidate(pRestRecipesProvider);
+      ref.invalidate(pRestStoriesProvider);
+      ref.invalidate(pRestHighlightsProvider);
+    }
 
     return response;
   }

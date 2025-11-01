@@ -55,7 +55,9 @@ class PRestRecipeDrafts extends _$PRestRecipeDrafts {
 
     final response = await client.scrape(url: url);
 
-    ref.invalidateSelf();
+    if (!response.hasError) {
+      ref.invalidateSelf();
+    }
 
     return response;
   }

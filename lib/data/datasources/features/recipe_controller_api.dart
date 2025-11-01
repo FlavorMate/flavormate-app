@@ -137,7 +137,10 @@ class RecipeControllerApi extends ControllerApi {
   }
 
   Future<ApiResponse<bool>> deleteRecipesId({required String id}) async {
-    return await delete<bool>(url: '$_root/$id', mapper: (res) => res);
+    return await delete<bool>(
+      url: '$_root/$id',
+      mapper: (res) => bool.parse(res),
+    );
   }
 
   Future<ApiResponse<void>> putRecipesIdTransfer({
