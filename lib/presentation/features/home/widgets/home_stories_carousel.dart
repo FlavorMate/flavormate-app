@@ -24,14 +24,17 @@ class HomeStoriesCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return FProviderStruct(
       provider: provider,
-      builder: (_, stories) => FCarousel(
-        title: L10n.of(context).home_stories_carousel__title,
-        data: stories.data,
-        onTap: (story) => context.routes.storiesItem(story.id),
-        coverSelector: (story, resolution) => story.cover?.url(resolution),
-        labelSelector: (story) => story.label,
-        onShowAll: () => context.routes.homeStories(),
-      ),
+      builder: (_, stories) => stories.data.isNotEmpty
+          ? FCarousel(
+              title: L10n.of(context).home_stories_carousel__title,
+              data: stories.data,
+              onTap: (story) => context.routes.storiesItem(story.id),
+              coverSelector: (story, resolution) =>
+                  story.cover?.url(resolution),
+              labelSelector: (story) => story.label,
+              onShowAll: () => context.routes.homeStories(),
+            )
+          : const SizedBox.shrink(),
       onError: FEmptyMessage(
         title: L10n.of(context).home_stories_carousel__on_error,
         icon: StateIconConstants.stories.errorIcon,

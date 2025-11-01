@@ -25,17 +25,20 @@ class HomeHighlightsCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return FProviderStruct(
       provider: provider,
-      builder: (context, highlights) => FCarousel(
-        title: L10n.of(context).home_highlights_carousel__title,
-        data: highlights.data,
-        onTap: (highlight) => context.routes.recipesItem(highlight.recipe.id),
-        coverSelector: (highlight, resolution) =>
-            highlight.cover?.url(resolution),
-        labelSelector: (highlight) => highlight.recipe.label,
-        subLabelSelector: (highlight) =>
-            highlight.date.toLocalDateString(context),
-        onShowAll: () => context.routes.homeHighlights(),
-      ),
+      builder: (context, highlights) => highlights.data.isNotEmpty
+          ? FCarousel(
+              title: L10n.of(context).home_highlights_carousel__title,
+              data: highlights.data,
+              onTap: (highlight) =>
+                  context.routes.recipesItem(highlight.recipe.id),
+              coverSelector: (highlight, resolution) =>
+                  highlight.cover?.url(resolution),
+              labelSelector: (highlight) => highlight.recipe.label,
+              subLabelSelector: (highlight) =>
+                  highlight.date.toLocalDateString(context),
+              onShowAll: () => context.routes.homeHighlights(),
+            )
+          : const SizedBox.shrink(),
 
       onError: FEmptyMessage(
         title: L10n.of(context).home_highlights_carousel__on_error,

@@ -25,16 +25,19 @@ class HomeLatestRecipesCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return FProviderStruct(
       provider: provider,
-      builder: (_, recipes) => FCarousel(
-        title: L10n.of(context).home_latest_recipe_carousel__title,
-        data: recipes.data,
-        onTap: (recipe) => context.routes.recipesItem(recipe.id),
-        coverSelector: (recipe, resolution) => recipe.cover?.url(resolution),
-        labelSelector: (recipe) => recipe.label,
-        subLabelSelector: (recipe) =>
-            recipe.createdOn.toLocalDateString(context),
-        onShowAll: () => context.routes.homeLatest(),
-      ),
+      builder: (_, recipes) => recipes.data.isNotEmpty
+          ? FCarousel(
+              title: L10n.of(context).home_latest_recipe_carousel__title,
+              data: recipes.data,
+              onTap: (recipe) => context.routes.recipesItem(recipe.id),
+              coverSelector: (recipe, resolution) =>
+                  recipe.cover?.url(resolution),
+              labelSelector: (recipe) => recipe.label,
+              subLabelSelector: (recipe) =>
+                  recipe.createdOn.toLocalDateString(context),
+              onShowAll: () => context.routes.homeLatest(),
+            )
+          : const SizedBox.shrink(),
       onError: FEmptyMessage(
         title: L10n.of(context).home_latest_recipe_carousel__on_error,
         icon: StateIconConstants.recipes.errorIcon,
