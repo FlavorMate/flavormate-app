@@ -25,9 +25,10 @@ platform :ios do
     app_store_connect_api_key(
       duration: 1200,
       in_house: false,
+      is_key_content_base64: true,
     )
 
-    match(type: "appstore", readonly: false)
+    match(type: "appstore", readonly: true)
 
     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 

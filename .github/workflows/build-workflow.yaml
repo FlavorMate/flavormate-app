@@ -1,0 +1,117 @@
+name: FlavorMate build workflow
+on:
+  push:
+    tags: [ v* ]
+
+env:
+  FLUTTER_VERSION: 3.35.8
+  RUBY_VERSION: 3.4
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set Up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+      
+      # Setting up android signing
+      - name: Decode Android Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 --decode > android/keystore.jks
+          echo "${{ secrets.ANDROID_KEY_PROPERTIES }}" | base64 --decode > android/key.properties
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate sources
+        run: dart run build_runner build -d
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Build AppBundle
+        run: flutter build appbundle --release
+
+      - name: Install ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+          working-directory: android/
+      
+      - name: Install ruby dependencies
+        working-directory: android/
+        run: bundle install
+
+      - name: Deploy to Google Play Console
+        working-directory: android/
+        run: fastlane deployGooglePlayConsole
+        env:
+          SUPPLY_JSON_KEY_DATA: ${{ secrets.ANDROID_CONSOLE_JSON }}
+      
+      - name: Cache APK File
+        id: artifact-upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: flavormate-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 1
+
+      - name: Cache AAB File
+        id: artifact-upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: flavormate-aab
+          path: build/app/outputs/bundle/release/app-release.aab
+          retention-days: 1
+
+      - name: Delete Android keys
+        if: always()  # Ensure this runs regardless of job success or failure
+        run: |
+          rm -f android/keystore.jks
+          rm -f android/key.properties
+
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate sources
+        run: dart run build_runner build -d
+
+      - name: Install ruby dependencies
+        working-directory: ios/
+        run: bundle install
+
+      - name: Build and deploy to Testflight
+        working-directory: ios/
+        run: bundle exec fastlane deployTestflight
+        env:
+          MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+

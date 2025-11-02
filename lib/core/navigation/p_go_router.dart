@@ -34,7 +34,7 @@ class PGoRouter extends _$PGoRouter {
         final isServerEmpty =
             ref.read(pSPCurrentServerProvider)?.isEmpty ?? true;
 
-        if (isServerEmpty && state.fullPath != RouteConstants.Splash.route) {
+        if (isServerEmpty) {
           return RouteConstants.Server.route;
         }
 
