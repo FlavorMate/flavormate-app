@@ -4,7 +4,7 @@ on:
     tags: [ v* ]
 
 env:
-  FLUTTER_VERSION: 3.35.8
+  FLUTTER_VERSION: 3.35.7
   RUBY_VERSION: 3.4
 
 jobs:
@@ -61,20 +61,14 @@ jobs:
         env:
           SUPPLY_JSON_KEY_DATA: ${{ secrets.ANDROID_CONSOLE_JSON }}
       
-      - name: Cache APK File
+      - name: Cache Android Files
         id: artifact-upload
         uses: actions/upload-artifact@v4
         with:
-          name: flavormate-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
-          retention-days: 1
-
-      - name: Cache AAB File
-        id: artifact-upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: flavormate-aab
-          path: build/app/outputs/bundle/release/app-release.aab
+          name: flavormate-android
+          path: |
+            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab
           retention-days: 1
 
       - name: Delete Android keys
