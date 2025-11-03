@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 2.2.1+33
+version: 3.0.0+47
 
 environment:
-  sdk: '>=3.8.1 <4.0.0'
+  sdk: '>=3.9.2 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,45 +31,49 @@ dependencies:
   flutter:
     sdk: flutter
 
-  app_links: ^6.4.0
+  app_links: ^6.4.1
   collection: ^1.19.1
-  dart_mappable: ^4.5.0
+  dart_mappable: ^4.6.0
   data_table_2: ^2.6.0
-  dio: ^5.8.0+1
-  drift: ^2.27.0
-  drift_flutter: ^0.2.4
+  dio: ^5.9.0
   flutter_carousel_widget: ^3.1.0
   flutter_material_design_icons: ^1.1.7447
-  flutter_riverpod: ^2.6.1
-  fl_chart: ^1.0.0
-  go_router: ^15.2.0
+  flutter_riverpod: ^3.0.1
+  fl_chart: ^1.1.1
+  go_router: ^16.3.0
   image: ^4.5.4
-  image_picker: ^1.1.2
-  intl: ^0.20.2
-  package_info_plus: ^8.3.0
-  riverpod_annotation: ^2.6.1
+  image_picker: ^1.2.0
+  intl: 0.20.2
+  package_info_plus: ^9.0.0
+  riverpod_annotation: ^3.0.1
   shared_preferences: ^2.5.3
-  share_plus: ^11.0.0
+  share_plus: ^12.0.1
   system_theme: ^3.1.2
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
   # no strict version because these depend on the SDK version:
   flutter_localizations:
     sdk: flutter
+  jwt_decoder: ^2.0.1
+  cached_network_image: ^3.4.1
+  http: ^1.5.0
+  flutter_svg: ^2.2.1
+  flutter_expandable_fab: ^2.5.2
+  uuid: ^4.5.1
+  photo_view: ^0.15.0
+  flutter_appauth: ^11.0.0
+  synchronized: ^3.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  build_runner: ^2.5.0
-  custom_lint: ^0.7.5
-  dart_mappable_builder: ^4.5.0
-  dependency_validator: ^5.0.2
-  drift_dev: ^2.27.0
-  flutter_gen_runner: ^5.10.0
+  build_runner: ^2.7.0
+  custom_lint: ^0.8.0
+  dart_mappable_builder: ^4.6.0
+  flutter_gen_runner: ^5.12.0
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
-  riverpod_generator: ^2.6.5
-  riverpod_lint: ^2.6.5
+  riverpod_generator: ^3.0.1
+  riverpod_lint: ^3.0.1
 
 flutter_launcher_icons:
   # android
@@ -102,12 +106,18 @@ flutter_launcher_icons:
     generate: true
     image_path: "build_assets/icons/macos/light_icon.png"
 
+flutter_gen:
+  output: lib/generated/flutter_gen
+  integrations:
+    image: true
+    flutter_svg: true
+
 # The following section is specific to Flutter packages.
 flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/icons/logo_transparent.png
+    - assets/icons/logo_dynamic.svg
     - assets/icons/bring.png
     - assets/web/backend_url.txt
     # Changelog

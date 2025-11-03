@@ -1,3 +1,7 @@
+# Android Secrets
+*.jks
+.env
+
 # Miscellaneous
 *.class
 *.log
@@ -12,8 +16,14 @@
 .swiftpm/
 migrate_working_dir/
 
+# Fastlane
+ios/fastlane/Appfile
+
 .build.env
 
+generated/
+
+*.graphql.dart
 *.g.dart
 *.mapper.dart
 

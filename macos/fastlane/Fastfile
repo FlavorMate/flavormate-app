@@ -1,0 +1,69 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:mac)
+
+platform :mac do
+  desc "Push a new release build to TestFlight"
+  lane :deployTestflight do
+    output_directory = "build/appstore_app/"
+
+    setup_ci if ENV['CI']
+
+    app_store_connect_api_key(
+      duration: 1200,
+      in_house: false,
+      is_key_content_base64: true,
+    )
+
+    match(type: "appstore",additional_cert_types: "mac_installer_distribution", readonly: true)
+
+    build_mac_app(workspace: "Runner.xcworkspace", scheme: "Runner",output_directory: output_directory)
+
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+    )
+  end
+
+  desc "Builds and notarizes an .app file"
+  lane :buildAndNotarizeApp do
+    output_directory = "build/notarized_app/"
+    
+    setup_ci if ENV['CI']
+
+    app_store_connect_api_key(
+      duration: 1200,
+      in_house: false,
+      is_key_content_base64: true,
+    )
+
+    match(
+      type: "developer_id",
+      additional_cert_types: "developer_id_installer",
+      readonly: true,
+    )
+
+    package = build_mac_app(workspace: "Runner.xcworkspace", scheme: "Runner",export_method: "developer-id",output_directory: output_directory,)
+
+    notarize(
+      package: package
+    )
+
+    zip_package = zip(
+      path: package,
+      output_path: "FlavorMate.app.zip"
+    )
+  end
+end
