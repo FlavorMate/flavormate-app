@@ -14,7 +14,6 @@ class PSP extends _$PSP {
   Future<void> clear() async {
     for (final key in SPKey.values) {
       if (key == SPKey.RecentServers) continue;
-      if (key == SPKey.CurrentServer) continue;
 
       await state.requireValue.remove(key.name);
     }

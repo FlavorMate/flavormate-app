@@ -1,5 +1,19 @@
 [
   {
+    "version": "3.0.0",
+    "details": [
+      {
+        "change": "Optimierungen von Oberflächen",
+        "icon": "brushOutline"
+      }, {
+        "change": "Performanterer Server",
+        "icon": "desktopClassic"
+      }, {
+        "change": "Rezept-/ und Storyentwürfe können über mehrere Geräte hinweg bearbeitet werden",
+        "icon": "cloudSyncOutline"
+      }
+    ]
+  }, {
     "version": "2.2.0",
     "details": [
       {
