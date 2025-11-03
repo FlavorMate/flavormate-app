@@ -56,7 +56,7 @@ class PAuth extends _$PAuth {
     ref.invalidateSelf();
   }
 
-  Future<void> refreshToken() async {
+  Future<TokensDto?> refreshToken() async {
     try {
       final dio = ref.read(pDioAuthProvider(state.refreshToken));
 
@@ -65,9 +65,12 @@ class PAuth extends _$PAuth {
       final response = await client.postRefreshToken();
 
       await ref.read(pSPJwtProvider.notifier).setValue(response.data!);
+
+      return response.data;
     } catch (e) {
       await logout();
     }
+    return null;
   }
 
   Future<void> logout() async {

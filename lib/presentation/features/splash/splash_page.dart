@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/data/models/core/version/version.dart';
 import 'package:flavormate/data/repositories/core/compatibility/p_compatibility.dart';
 import 'package:flavormate/data/repositories/core/features/p_features.dart';
@@ -130,6 +131,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   }
 
   Future<void> logout() async {
-    return ref.read(pAuthProvider.notifier).logout();
+    await ref.read(pAuthProvider.notifier).logout();
+    await ref.read(pSPCurrentServerProvider.notifier).set(null);
   }
 }

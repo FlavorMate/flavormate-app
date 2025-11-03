@@ -9,11 +9,12 @@ part 'p_dio_private.g.dart';
 
 final Lock _lock = Lock();
 
-@riverpod
+@Riverpod(keepAlive: true)
 class PDioPrivate extends _$PDioPrivate {
   @override
   Dio build() {
     final server = ref.watch(pSPCurrentServerProvider);
+
     if (server == null) throw Exception('No server specified');
 
     final language = currentLocalization().languageCode;
@@ -30,7 +31,7 @@ class PDioPrivate extends _$PDioPrivate {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          options.headers['Authorization'] = await _lock.synchronized(getToken);
+          options.headers['Authorization'] = await getTokenSync();
 
           return handler.next(options);
         },
@@ -39,7 +40,7 @@ class PDioPrivate extends _$PDioPrivate {
             try {
               // Retry the original request
               final opts = error.requestOptions;
-              opts.headers['Authorization'] = await getToken();
+              opts.headers['Authorization'] = await getTokenSync();
               final response = await dio.fetch(opts);
               return handler.resolve(response);
             } catch (e) {
@@ -58,12 +59,18 @@ class PDioPrivate extends _$PDioPrivate {
     return dio;
   }
 
-  Future<String?> getToken() async {
+  Future<String?> getTokenSync() async {
+    return await _lock.synchronized(
+      () async => _getToken(),
+    );
+  }
+
+  Future<String?> _getToken() async {
     final tokens = ref.read(pAuthProvider);
 
     if (tokens.accessTokenAboutToExpire) {
-      await ref.read(pAuthProvider.notifier).refreshToken();
-      return 'Bearer ${ref.read(pAuthProvider).accessToken}';
+      final token = await ref.read(pAuthProvider.notifier).refreshToken();
+      return 'Bearer ${token!.accessToken}';
     } else {
       return 'Bearer ${tokens.accessToken}';
     }
