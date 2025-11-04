@@ -1,19 +1,31 @@
 [
   {
+    "version": "3.0.1",
+    "details": [
+      {
+        "change": "Small bugfixes and improvements",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "3.0.0",
     "details": [
       {
         "change": "Optimized the UI",
         "icon": "brushOutline"
-      }, {
+      },
+      {
         "change": "A new permormant backend",
         "icon": "desktopClassic"
-      }, {
+      },
+      {
         "change": "Recipe-/ and Storydrafts can now be edited across devices",
         "icon": "cloudSyncOutline"
       }
     ]
-  },{
+  },
+  {
     "version": "2.2.0",
     "details": [
       {
