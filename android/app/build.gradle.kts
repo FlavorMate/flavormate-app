@@ -35,8 +35,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
-        manifestPlaceholders["appAuthRedirectScheme"] =  "flavormate"
-        manifestPlaceholders["applicationName"] =  "de.flavormate.Application"
+        manifestPlaceholders.putIfAbsent("appAuthRedirectScheme", "flavormate")
     }
 
     signingConfigs {
