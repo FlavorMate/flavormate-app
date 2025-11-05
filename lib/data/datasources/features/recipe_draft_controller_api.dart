@@ -105,12 +105,13 @@ class RecipeDraftControllerApi extends ControllerApi {
     required String id,
     required MultipartFile file,
   }) async {
-    final data = FormData.fromMap({'file': file});
-    return await post(
-      url: '$_root/$id/files',
-      data: data,
-      mapper: ControllerApi.nullMapper,
-    );
+      final data = FormData.fromMap({'file': file});
+      return await post(
+        url: '$_root/$id/files',
+        data: data,
+        mapper: ControllerApi.nullMapper,
+        timeout: const Duration(minutes: 2),
+      );
   }
 
   Future<ApiResponse<void>> putRecipeDraftsId({

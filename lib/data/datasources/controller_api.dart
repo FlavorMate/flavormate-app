@@ -56,9 +56,14 @@ abstract class ControllerApi {
     required String url,
     required T? Function(dynamic) mapper,
     String? data,
+    Duration? timeout,
   }) async {
     try {
-      final response = await _dio.put(url, data: data);
+      final response = await _dio.put(
+        url,
+        data: data,
+        options: timeout.let((it) => Options(receiveTimeout: it)),
+      );
 
       final result = mapper(response.data);
 
@@ -75,9 +80,14 @@ abstract class ControllerApi {
     required String url,
     required T? Function(dynamic) mapper,
     dynamic data,
+    Duration? timeout,
   }) async {
     try {
-      final response = await _dio.post(url, data: data);
+      final response = await _dio.post(
+        url,
+        data: data,
+        options: timeout.let((it) => Options(receiveTimeout: it)),
+      );
 
       final result = mapper(response.data);
 
