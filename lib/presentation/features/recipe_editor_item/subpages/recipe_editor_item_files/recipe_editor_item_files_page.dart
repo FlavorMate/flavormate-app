@@ -125,7 +125,7 @@ class _RecipeEditorItemFilesPageState
     );
     if (image == null || !context.mounted) return;
 
-    context.showLoadingDialog();
+    context.showLoadingDialog(hint:true);
 
     final response = await ref.read(provider.notifier).addImage(image);
 

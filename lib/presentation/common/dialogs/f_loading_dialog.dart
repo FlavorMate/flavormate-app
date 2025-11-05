@@ -5,7 +5,9 @@ import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 
 class FLoadingDialog extends StatelessWidget {
-  const FLoadingDialog({super.key});
+  final bool hint;
+
+  const FLoadingDialog({super.key, this.hint = false});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,11 @@ class FLoadingDialog extends StatelessWidget {
                   L10n.of(context).f_loading_dialog__loading,
                   style: FTextStyle.titleLarge,
                 ),
+                if (hint)
+                  FText(
+                    L10n.of(context).f_loading_dialog__loading_hint,
+                    style: FTextStyle.bodyMedium,
+                  ),
               ],
             ),
           ),

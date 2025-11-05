@@ -77,11 +77,11 @@ extension EBuildContext on BuildContext {
   }
 
   /// Shows a loading dialog that can be dismissed via [Navigator.pop].
-  void showLoadingDialog() {
+  void showLoadingDialog({bool hint = false}) {
     showDialog(
       barrierDismissible: false,
       context: this,
-      builder: (_) => const FLoadingDialog(),
+      builder: (_) => FLoadingDialog(hint: hint),
     );
   }
 }
