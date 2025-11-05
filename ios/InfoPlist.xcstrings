@@ -39,6 +39,12 @@
       "comment" : "Privacy - Camera Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird benutzt, um das Profilbild oder Rezeptbilder aufzunehmen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -51,6 +57,12 @@
       "comment" : "Privacy - Microphone Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird benutzt, um das Profilbild oder Rezeptbilder aufzunehmen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -63,6 +75,12 @@
       "comment" : "Privacy - Photo Library Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird benutzt, um das Profilbild oder Rezeptbilder auszuwählen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",

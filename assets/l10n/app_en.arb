@@ -189,6 +189,7 @@
   "f_carousel_full_view__title": "Medium",
   "f_loading__title": "Loading...",
   "f_loading_dialog__loading": "Loading...",
+  "f_loading_dialog__loading_hint": "This action can take some time",
   "f_order_by_menu__label": "Order by",
   "f_order_direction_menu__label": "Order direction",
   "f_recipe_author__title": "Author",

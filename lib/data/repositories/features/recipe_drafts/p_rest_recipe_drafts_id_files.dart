@@ -8,6 +8,7 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts.dart';
+import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -58,7 +59,7 @@ class PRestRecipeDraftsIdFiles extends _$PRestRecipeDraftsIdFiles {
     );
 
     ref.invalidateSelf();
-    ref.invalidate(pRestRecipeDraftsProvider(recipeDraftId));
+    ref.invalidate(pRestRecipeDraftsIdProvider(recipeDraftId));
 
     return response;
   }
@@ -74,7 +75,7 @@ class PRestRecipeDraftsIdFiles extends _$PRestRecipeDraftsIdFiles {
     );
 
     ref.invalidateSelf();
-    ref.invalidate(pRestRecipeDraftsProvider(recipeDraftId));
+    ref.invalidate(pRestRecipeDraftsIdProvider(recipeDraftId));
 
     return response;
   }
