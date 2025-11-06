@@ -99,7 +99,8 @@ flutter_launcher_icons:
     icon_size: 48
   # macos config
   macos:
-    generate: false
+    generate: true
+    image_path: "build_assets/icons/macos/light_icon.png"
 
 flutter_gen:
   output: lib/generated/flutter_gen
