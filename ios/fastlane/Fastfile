@@ -20,9 +20,7 @@ platform :ios do
   lane :deployTestflight do
     output_directory = "build/appstore/"
 
-    setup_ci if ENV['CI']
-
-    cocoapods(clean_install: true)
+    setup_ci if ENV["CI"]
 
     app_store_connect_api_key(
       duration: 1200,
@@ -32,10 +30,27 @@ platform :ios do
 
     match(type: "appstore", readonly: true)
 
-    build_app(workspace: "Runner.xcworkspace", scheme: "Runner",output_directory: output_directory)
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner", output_directory: output_directory)
 
     upload_to_testflight(
       skip_waiting_for_build_processing: true,
     )
+  end
+
+  desc "Build a new test build"
+  lane :buildTestBuild do
+    output_directory = "build/appstore/"
+
+    setup_ci if ENV["CI"]
+
+    app_store_connect_api_key(
+      duration: 1200,
+      in_house: false,
+      is_key_content_base64: true,
+    )
+
+    match(type: "appstore", readonly: true)
+
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner", output_directory: output_directory)
   end
 end
