@@ -26,7 +26,6 @@ class SplashPage extends ConsumerStatefulWidget {
 class _SplashPageState extends ConsumerState<SplashPage> {
   Timer? _timer;
   bool _showLogout = false;
-  bool _isError = false;
 
   // for debug purposes
   int _showError = 0;
@@ -34,9 +33,10 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   void initState() {
-    ref
-        .read(pCompatibilityProvider.future)
-        .then((data) async {
+    ref.listenManual(
+      pCompatibilityProvider,
+      (_, next) async => await next.when(
+        data: (comparison) async {
           if (!mounted) return;
 
           await ref.read(pFeaturesProvider.future);
@@ -44,7 +44,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           await ref.read(pRestUnitConversionsProvider.future);
 
           if (!mounted) return;
-          switch (data) {
+          switch (comparison) {
             case VersionComparison.majorIncompatible:
               context.routes.serverOutdated();
               return;
@@ -55,11 +55,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
               context.routes.home(replace: true);
               return;
           }
-        })
-        .catchError((e) {
-          error = e;
-          _isError = true;
-        });
+        },
+        loading: () {},
+        error: (error, stackTrace) {},
+      ),
+      fireImmediately: true,
+    );
 
     _timer = Timer(
       const Duration(seconds: 5),
@@ -76,6 +77,8 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    final compatibilityState = ref.watch(pCompatibilityProvider);
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -89,30 +92,11 @@ class _SplashPageState extends ConsumerState<SplashPage> {
                 style: FTextStyle.headlineLarge,
               ),
               const SizedBox(height: 16),
-              if (!_isError) ...[
-                const CircularProgressIndicator(),
-                FText(
-                  L10n.of(context).splash_page__loading,
-                  style: FTextStyle.titleLarge,
-                ),
-              ] else ...[
-                GestureDetector(
-                  onTap: () => setState(() => _showError += 1),
-                  child: SizedBox(
-                    width: 250,
-                    child: FText(
-                      L10n.of(context).splash_page__on_error,
-                      style: FTextStyle.bodyLarge,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-                if (_showError >= 5)
-                  SizedBox(
-                    height: 150,
-                    child: SingleChildScrollView(child: Text('$error')),
-                  ),
-              ],
+              compatibilityState.when(
+                data: (_) => _buildLoadingWidget(context),
+                error: (error, _) => _buildErrorWidget(context, error),
+                loading: () => _buildLoadingWidget(context),
+              ),
             ],
           ),
         ),
@@ -141,6 +125,41 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildLoadingWidget(BuildContext context) {
+    return Column(
+      children: [
+        const CircularProgressIndicator(),
+        FText(
+          L10n.of(context).splash_page__loading,
+          style: FTextStyle.titleLarge,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildErrorWidget(BuildContext context, dynamic error) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () => setState(() => _showError += 1),
+          child: SizedBox(
+            width: 250,
+            child: FText(
+              L10n.of(context).splash_page__on_error,
+              style: FTextStyle.bodyLarge,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        if (_showError >= 5)
+          SizedBox(
+            height: 150,
+            child: SingleChildScrollView(child: Text('$error')),
+          ),
+      ],
     );
   }
 
