@@ -28,6 +28,10 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   bool _showLogout = false;
   bool _isError = false;
 
+  // for debug purposes
+  int _showError = 0;
+  dynamic error;
+
   @override
   void initState() {
     ref
@@ -53,6 +57,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           }
         })
         .catchError((e) {
+          error = e;
           _isError = true;
         });
 
@@ -90,15 +95,24 @@ class _SplashPageState extends ConsumerState<SplashPage> {
                   L10n.of(context).splash_page__loading,
                   style: FTextStyle.titleLarge,
                 ),
-              ] else
-                SizedBox(
-                  width: 250,
-                  child: FText(
-                    L10n.of(context).splash_page__on_error,
-                    style: FTextStyle.bodyLarge,
-                    textAlign: TextAlign.center,
+              ] else ...[
+                GestureDetector(
+                  onTap: () => setState(() => _showError += 1),
+                  child: SizedBox(
+                    width: 250,
+                    child: FText(
+                      L10n.of(context).splash_page__on_error,
+                      style: FTextStyle.bodyLarge,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
+                if (_showError >= 5)
+                  SizedBox(
+                    height: 150,
+                    child: SingleChildScrollView(child: Text('$error')),
+                  ),
+              ],
             ],
           ),
         ),
