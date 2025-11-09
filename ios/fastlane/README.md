@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Push a new release build to Testflight
 
+### ios buildTestBuild
+
+```sh
+[bundle exec] fastlane ios buildTestBuild
+```
+
+Build a new test build
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
