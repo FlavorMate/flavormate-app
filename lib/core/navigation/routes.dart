@@ -34,6 +34,7 @@ import 'package:flavormate/presentation/features/recipe_editor_item/subpages/rec
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_instruction_groups/recipe_editor_item_instruction_groups_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_instruction_groups_item/recipe_editor_item_instruction_groups_item_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_instruction_groups_item_instruction/recipe_editor_item_instruction_groups_item_instruction_page.dart';
+import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_origin/recipe_editor_item_origin_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_preview/recipe_editor_item_preview_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_preview/subpages/recipe_editor_item_preview_files/recipe_editor_item_preview_files_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_serving/recipe_editor_item_serving_page.dart';
@@ -250,6 +251,10 @@ var routes = [
   _createRoute(
     RouteConstants.RecipeEditorItemFiles,
     (params) => RecipeEditorItemFilesPage(draftId: params['draftId']!),
+  ),
+  _createRoute(
+    RouteConstants.RecipeEditorItemOrigin,
+    (params) => RecipeEditorItemOriginPage(draftId: params['draftId']!),
   ),
   _createRoute(
     RouteConstants.RecipeEditorItemPreview,
