@@ -1,5 +1,14 @@
 [
   {
+    "version": "3.0.4",
+    "details": [
+      {
+        "change": "Einem Rezept kann nun manuell eine Internetseite angehängt werden.",
+        "icon": "web"
+      }
+    ]
+  },
+  {
     "version": "3.0.3",
     "details": [
       {
@@ -7,7 +16,8 @@
         "icon": "creationOutline"
       }
     ]
-  },{
+  },
+  {
     "version": "3.0.2",
     "details": [
       {

@@ -217,6 +217,10 @@ abstract class RouteConstants {
     '/recipe-editor/:draftId/files',
     'recipe-editor_item_files',
   );
+  static const RouteConstant RecipeEditorItemOrigin = RouteConstant(
+    '/recipe-editor/:draftId/origin',
+    'recipe-editor_item_origin',
+  );
   static const RouteConstant RecipeEditorItemPreview = RouteConstant(
     '/recipe-editor/:draftId/preview',
     'recipe-editor_item_preview',

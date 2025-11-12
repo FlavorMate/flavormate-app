@@ -97,6 +97,7 @@ enum AuthState {
       RouteConstants.RecipeEditorItemTags,
       RouteConstants.RecipeEditorItemCategories,
       RouteConstants.RecipeEditorItemFiles,
+      RouteConstants.RecipeEditorItemOrigin,
       RouteConstants.RecipeEditorItemPreview,
       RouteConstants.RecipeEditorItemPreviewFiles,
 

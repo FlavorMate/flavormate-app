@@ -12,4 +12,15 @@ abstract class URiverpod {
       onValue(next.value as T);
     });
   }
+
+  static ProviderSubscription<AsyncValue<T?>> listenManualNullable<T>(
+    WidgetRef ref,
+    ProviderListenable<AsyncValue<T?>> provider,
+    Function(T? data) onValue,
+  ) {
+    return ref.listenManual(provider, fireImmediately: true, (_, next) {
+      if (!next.hasValue) return;
+      onValue(next.value);
+    });
+  }
 }

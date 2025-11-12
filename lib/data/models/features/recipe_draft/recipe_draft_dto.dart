@@ -128,6 +128,8 @@ class RecipeDraftFullDto extends RecipeDraftDto
 
   double get imageProgress => files.isEmpty ? 0 : 1;
 
+  double get originProgress => (url?.isEmpty ?? true) ? 0 : 1;
+
   bool get isValid =>
       commonProgress >= 1 &&
       servingProgress >= 1 &&

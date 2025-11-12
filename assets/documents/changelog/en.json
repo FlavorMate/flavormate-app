@@ -1,5 +1,14 @@
 [
   {
+    "version": "3.0.4",
+    "details": [
+      {
+        "change": "A website can now be manually attached to a recipe.",
+        "icon": "web"
+      }
+    ]
+  },
+  {
     "version": "3.0.3",
     "details": [
       {

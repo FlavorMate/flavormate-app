@@ -344,6 +344,13 @@ class Routes {
       pathParameters: {'draftId': draftId},
     );
   }
+  
+  Future recipeEditorItemOrigin(String draftId) {
+    return context.pushNamed(
+      RouteConstants.RecipeEditorItemOrigin.name,
+      pathParameters: {'draftId': draftId},
+    );
+  }
 
   Future recipeEditorItemPreview(String draftId) {
     return context.pushNamed(

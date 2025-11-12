@@ -50,7 +50,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
             children: [
               FButton(
                 onPressed: () => context.routes.recipeEditorItemCommon(id),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.noteEdit),
                 label: L10n.of(context).recipe_editor_item_page__common,
                 trailing: FProgressColor(
                   state: data.commonProgress,
@@ -59,7 +59,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
               ),
               FButton(
                 onPressed: () => context.routes.recipeEditorItemServing(id),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.silverwareForkKnife),
                 label: L10n.of(context).recipe_editor_item_page__serving,
                 trailing: FProgressColor(
                   state: data.servingProgress,
@@ -68,7 +68,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
               ),
               FButton(
                 onPressed: () => context.routes.recipeEditorItemDurations(id),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.clock),
                 label: L10n.of(context).recipe_editor_item_page__durations,
                 trailing: FProgressColor(
                   state: data.durationProgress,
@@ -78,7 +78,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
               FButton(
                 onPressed: () =>
                     context.routes.recipeEditorItemIngredientGroups(id),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.foodApple),
                 label: L10n.of(
                   context,
                 ).recipe_editor_item_page__ingredient_groups,
@@ -90,7 +90,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
               FButton(
                 onPressed: () =>
                     context.routes.recipeEditorItemInstructionGroups(id),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.formatListChecks),
                 label: L10n.of(
                   context,
                 ).recipe_editor_item_page__instruction_groups,
@@ -101,7 +101,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
               ),
               FButton(
                 onPressed: () => editCourse(context, ref, data.course),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.foodVariant),
                 label: L10n.of(context).recipe_editor_item_page__course,
                 trailing: FProgressColor(
                   state: data.courseProgress,
@@ -110,7 +110,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
               ),
               FButton(
                 onPressed: () => editDiet(context, ref, data.diet),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.leaf),
                 label: L10n.of(context).recipe_editor_item_page__diet,
                 trailing: FProgressColor(
                   state: data.dietProgress,
@@ -119,7 +119,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
               ),
               FButton(
                 onPressed: () => context.routes.recipeEditorItemTags(id),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.tagMultiple),
                 label: L10n.of(context).recipe_editor_item_page__tags,
                 trailing: FProgressColor(
                   state: data.tagsProgress,
@@ -129,7 +129,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
               ),
               FButton(
                 onPressed: () => context.routes.recipeEditorItemCategories(id),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.viewGrid),
                 label: L10n.of(context).recipe_editor_item_page__categories,
                 trailing: FProgressColor(
                   state: data.categoriesProgress,
@@ -139,10 +139,20 @@ class RecipeEditorItemPage extends ConsumerWidget {
               ),
               FButton(
                 onPressed: () => context.routes.recipeEditorItemFiles(id),
-                leading: const Icon(MdiIcons.pen),
+                leading: const Icon(MdiIcons.imageMultiple),
                 label: L10n.of(context).recipe_editor_item_page__media,
                 trailing: FProgressColor(
                   state: data.imageProgress,
+                  color: context.colorScheme.onPrimary,
+                  optional: true,
+                ),
+              ),
+              FButton(
+                onPressed: () => context.routes.recipeEditorItemOrigin(id),
+                leading: const Icon(MdiIcons.web),
+                label: L10n.of(context).recipe_editor_item_page__origin,
+                trailing: FProgressColor(
+                  state: data.originProgress,
                   color: context.colorScheme.onPrimary,
                   optional: true,
                 ),
