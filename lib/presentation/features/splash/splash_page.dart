@@ -27,10 +27,6 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   Timer? _timer;
   bool _showLogout = false;
 
-  // for debug purposes
-  int _showError = 0;
-  dynamic error;
-
   @override
   void initState() {
     ref.listenManual(
@@ -57,7 +53,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           }
         },
         loading: () {},
-        error: (error, stackTrace) {},
+        error: (_, _) {},
       ),
       fireImmediately: true,
     );
@@ -91,8 +87,8 @@ class _SplashPageState extends ConsumerState<SplashPage> {
                 L10n.of(context).flavormate,
                 style: FTextStyle.headlineLarge,
               ),
-              const SizedBox(height: 16),
-              compatibilityState.when(
+              const SizedBox(height: PADDING),
+              ...compatibilityState.when(
                 data: (_) => _buildLoadingWidget(context),
                 error: (error, _) => _buildErrorWidget(context, error),
                 loading: () => _buildLoadingWidget(context),
@@ -108,6 +104,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
             opacity: _showLogout ? 1 : 0,
             duration: const Duration(seconds: 1),
             child: Column(
+              spacing: PADDING,
               children: [
                 FText(
                   L10n.of(context).splash_page__hint_1,
@@ -128,39 +125,27 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     );
   }
 
-  Widget _buildLoadingWidget(BuildContext context) {
-    return Column(
-      children: [
-        const CircularProgressIndicator(),
-        FText(
-          L10n.of(context).splash_page__loading,
-          style: FTextStyle.titleLarge,
-        ),
-      ],
-    );
+  List<Widget> _buildLoadingWidget(BuildContext context) {
+    return [
+      const CircularProgressIndicator(),
+      FText(
+        L10n.of(context).splash_page__loading,
+        style: FTextStyle.titleLarge,
+      ),
+    ];
   }
 
-  Widget _buildErrorWidget(BuildContext context, dynamic error) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () => setState(() => _showError += 1),
-          child: SizedBox(
-            width: 250,
-            child: FText(
-              L10n.of(context).splash_page__on_error,
-              style: FTextStyle.bodyLarge,
-              textAlign: TextAlign.center,
-            ),
-          ),
+  List<Widget> _buildErrorWidget(BuildContext context, dynamic error) {
+    return [
+      SizedBox(
+        width: 250,
+        child: FText(
+          L10n.of(context).splash_page__on_error,
+          style: FTextStyle.bodyLarge,
+          textAlign: TextAlign.center,
         ),
-        if (_showError >= 5)
-          SizedBox(
-            height: 150,
-            child: SingleChildScrollView(child: Text('$error')),
-          ),
-      ],
-    );
+      ),
+    ];
   }
 
   Future<void> logout() async {
