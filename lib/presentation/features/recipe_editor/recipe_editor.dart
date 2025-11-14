@@ -36,55 +36,58 @@ class RecipeEditorPage extends ConsumerWidget {
         onCreate: () => createDraft(context, ref),
         onScrape: () => scrapeDraft(context, ref),
       ),
-      body: FPageable(
-        provider: provider,
-        pageProvider: pageProvider,
-        padding: 0,
-        builder: (_, data) => FDataTable(
-          columns: [
-            FDataColumn(
-              alignment: Alignment.centerLeft,
-              child: Text(L10n.of(context).recipe_editor_page__table_label),
-            ),
-            FDataColumn(
-              width: 72,
-              alignment: Alignment.centerLeft,
-              child: Text(L10n.of(context).recipe_editor_page__table_state),
-            ),
-            FDataColumn(width: 48),
-          ],
-          rows: [
-            for (final draft in data)
-              FDataRow(
-                onSelectChanged: (value) => openDraft(context, value, draft.id),
-                cells: [
-                  Text(
-                    draft.label?.shorten(length: 40) ??
-                        L10n.of(context).recipe_editor_page__table_undefined,
-                  ),
-                  Text(
-                    draft.isNew
-                        ? L10n.of(context).recipe_editor_page__table_new
-                        : L10n.of(context).recipe_editor_page__table_update,
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      MdiIcons.delete,
-                      color: context.blendedColors.error,
-                    ),
-                    onPressed: () => deleteDraft(context, ref, draft.id),
-                  ),
-                ],
+      body: SafeArea(
+        child: FPageable(
+          provider: provider,
+          pageProvider: pageProvider,
+          padding: 0,
+          builder: (_, data) => FDataTable(
+            columns: [
+              FDataColumn(
+                alignment: Alignment.centerLeft,
+                child: Text(L10n.of(context).recipe_editor_page__table_label),
               ),
-          ],
-        ),
-        onError: FEmptyMessage(
-          title: L10n.of(context).recipe_editor_page__on_error,
-          icon: StateIconConstants.drafts.errorIcon,
-        ),
-        onEmpty: FEmptyMessage(
-          title: L10n.of(context).recipe_editor_page__on_empty,
-          icon: StateIconConstants.drafts.emptyIcon,
+              FDataColumn(
+                width: 72,
+                alignment: Alignment.centerLeft,
+                child: Text(L10n.of(context).recipe_editor_page__table_state),
+              ),
+              FDataColumn(width: 48),
+            ],
+            rows: [
+              for (final draft in data)
+                FDataRow(
+                  onSelectChanged: (value) =>
+                      openDraft(context, value, draft.id),
+                  cells: [
+                    Text(
+                      draft.label?.shorten(length: 40) ??
+                          L10n.of(context).recipe_editor_page__table_undefined,
+                    ),
+                    Text(
+                      draft.isNew
+                          ? L10n.of(context).recipe_editor_page__table_new
+                          : L10n.of(context).recipe_editor_page__table_update,
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        MdiIcons.delete,
+                        color: context.blendedColors.error,
+                      ),
+                      onPressed: () => deleteDraft(context, ref, draft.id),
+                    ),
+                  ],
+                ),
+            ],
+          ),
+          onError: FEmptyMessage(
+            title: L10n.of(context).recipe_editor_page__on_error,
+            icon: StateIconConstants.drafts.errorIcon,
+          ),
+          onEmpty: FEmptyMessage(
+            title: L10n.of(context).recipe_editor_page__on_empty,
+            icon: StateIconConstants.drafts.emptyIcon,
+          ),
         ),
       ),
     );
