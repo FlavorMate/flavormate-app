@@ -1,4 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -55,19 +56,7 @@ class FImageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        /// Resolutions smaller than [ImageWideResolution.w480] are not used
-        /// because the height is mostly 200px and lower resolutions would create a blurry image
-        final resolution = switch (constraints.maxWidth) {
-          // <= 160 => ImageWideResolution.w160,
-          // <= 256 => ImageWideResolution.w256,
-          // <= 320 => ImageWideResolution.w320,
-          <= 480 => ImageWideResolution.W480,
-          <= 640 => ImageWideResolution.W640,
-          <= 960 => ImageWideResolution.W960,
-          <= 1280 => ImageWideResolution.W1280,
-          <= 1920 => ImageWideResolution.W1920,
-          _ => ImageWideResolution.Original,
-        };
+        final resolution = UImage.getResolution(context, constraints);
 
         final opacity = calculateOpacity(constraints.maxWidth);
         return Stack(

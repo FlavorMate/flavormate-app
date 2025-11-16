@@ -105,7 +105,7 @@ class AccountsItemPage extends ConsumerWidget {
                         onTap: (book) => context.routes.libraryItem(book.id),
                         labelSelector: (book) => book.label,
                         coverSelector: (book, resolution) =>
-                            book.cover?.url(ImageWideResolution.Original),
+                            book.cover?.url(resolution),
                         onShowAll: () => context.routes.accountsItemBooks(id),
                       )
                     : const SizedBox.shrink(),
