@@ -32,6 +32,7 @@ class ServerTextField extends StatelessWidget {
 
         return null;
       },
+      keyboardType: TextInputType.visiblePassword,
       autocorrect: false,
       onFieldSubmitted: (_) => setServer(),
     );

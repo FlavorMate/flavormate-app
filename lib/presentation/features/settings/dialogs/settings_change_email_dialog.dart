@@ -44,6 +44,7 @@ class _SettingsChangeEmailDialogState extends State<SettingsChangeEmailDialog> {
               ).settings_change_email_dialog__new_e_mail_1,
               controller: _newMail1Controller,
               autocorrect: false,
+              keyboardType: TextInputType.emailAddress,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
                   return L10n.of(context).validator__is_empty;
@@ -62,6 +63,7 @@ class _SettingsChangeEmailDialogState extends State<SettingsChangeEmailDialog> {
                 context,
               ).settings_change_email_dialog__new_e_mail_2,
               autocorrect: false,
+              keyboardType: TextInputType.emailAddress,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
                   return L10n.of(context).validator__is_empty;

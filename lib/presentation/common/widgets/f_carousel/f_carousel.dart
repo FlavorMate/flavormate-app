@@ -1,5 +1,6 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
@@ -71,6 +72,8 @@ class _FCarouselState<T> extends State<FCarousel<T>> {
         );
         final showAllButton = widget.data.length > 1;
 
+        final resolution = UImage.getResolution(context, constraints);
+
         return Column(
           spacing: PADDING / 4,
           children: [
@@ -101,7 +104,7 @@ class _FCarouselState<T> extends State<FCarousel<T>> {
                     FImageCard(
                       label: widget.labelSelector?.call(item),
                       subLabel: widget.subLabelSelector?.call(item),
-                      coverSelector: (resolution) =>
+                      coverSelector: (_) =>
                           widget.coverSelector.call(item, resolution),
                       contentWidth: FCarousel.labelWidth,
                       imageType: widget.imageType,

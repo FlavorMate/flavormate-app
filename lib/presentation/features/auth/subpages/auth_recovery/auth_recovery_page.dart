@@ -67,6 +67,7 @@ class _AuthRecoveryPageState extends ConsumerState<AuthRecoveryPage> {
                         label: L10n.of(context).auth_recovery_page__email,
                         autocorrect: false,
                         autofillHints: const [AutofillHints.username],
+                        keyboardType: TextInputType.visiblePassword,
                         validators: (input) {
                           if (UValidator.isEmpty(input)) {
                             return L10n.of(context).validator__is_empty;

@@ -18,6 +18,7 @@ class LoginUsernameTextField extends StatelessWidget {
       label: L10n.of(context).login_username_text_field__label,
       autocorrect: false,
       autofillHints: const [AutofillHints.username],
+      keyboardType: TextInputType.visiblePassword,
       validators: (input) {
         if (UValidator.isEmpty(input)) {
           return L10n.of(context).validator__is_empty;

@@ -99,12 +99,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       ),
       bottomNavigationBar: SafeArea(
         child: SizedBox(
-          height: 64,
+          height: 70,
           child: AnimatedOpacity(
             opacity: _showLogout ? 1 : 0,
             duration: const Duration(seconds: 1),
             child: Column(
-              spacing: PADDING,
+              spacing: PADDING / 2,
               children: [
                 FText(
                   L10n.of(context).splash_page__hint_1,

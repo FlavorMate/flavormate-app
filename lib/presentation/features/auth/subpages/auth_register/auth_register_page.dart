@@ -79,6 +79,7 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
                         controller: _usernameController,
                         label: L10n.of(context).auth_register_page__username,
                         autocorrect: false,
+                        keyboardType: TextInputType.visiblePassword,
                         validators: (input) {
                           if (UValidator.isEmpty(input)) {
                             return L10n.of(context).validator__is_empty;
@@ -91,6 +92,7 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
                         controller: _mailController,
                         label: L10n.of(context).auth_register_page__email,
                         autocorrect: false,
+                        keyboardType: TextInputType.emailAddress,
                         validators: (input) {
                           if (UValidator.isEmpty(input)) {
                             return L10n.of(context).validator__is_empty;
