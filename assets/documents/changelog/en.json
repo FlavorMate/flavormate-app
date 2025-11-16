@@ -1,5 +1,14 @@
 [
   {
+    "version": "3.0.5",
+    "details": [
+      {
+        "change": "Small bugfixes and improvements",
+        "icon": "creationOutline"
+      }
+    ]
+  },
+  {
     "version": "3.0.4",
     "details": [
       {
