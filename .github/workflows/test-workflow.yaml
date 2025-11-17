@@ -5,7 +5,7 @@ on:
       - dev
 
 env:
-  FLUTTER_VERSION: 3.35.7
+  FLUTTER_VERSION: 3.38.1
   RUBY_VERSION: 3.4
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
@@ -57,10 +57,6 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: "26.0.1"
-
       - uses: actions/checkout@v4
 
       - name: Set Up Flutter
@@ -100,10 +96,6 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: "26.0.1"
-
       - uses: actions/checkout@v4
 
       - name: Set Up Flutter
