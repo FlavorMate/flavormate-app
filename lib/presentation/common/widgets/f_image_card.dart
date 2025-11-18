@@ -4,8 +4,9 @@ import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FImageCard extends StatelessWidget {
+class FImageCard extends ConsumerWidget {
   static const double fadeRange = 40;
 
   final VoidCallback? onTap;
@@ -53,10 +54,10 @@ class FImageCard extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final resolution = UImage.getResolution(context, constraints);
+        final resolution = UImage.getResolution(ref,context, constraints);
 
         final opacity = calculateOpacity(constraints.maxWidth);
         return Stack(
