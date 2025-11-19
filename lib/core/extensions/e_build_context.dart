@@ -344,7 +344,7 @@ class Routes {
       pathParameters: {'draftId': draftId},
     );
   }
-  
+
   Future recipeEditorItemOrigin(String draftId) {
     return context.pushNamed(
       RouteConstants.RecipeEditorItemOrigin.name,
@@ -394,12 +394,12 @@ class Routes {
     }
   }
 
-  Future settingsChangelog() {
-    return context.pushNamed(RouteConstants.SettingsChangelog.name);
-  }
-
   Future settingsTheme() {
     return context.pushNamed(RouteConstants.SettingsTheme.name);
+  }
+
+  Future settingsImageMode() {
+    return context.pushNamed(RouteConstants.SettingsImageMode.name);
   }
 
   Future storyEditorItemPreview(String id) async {

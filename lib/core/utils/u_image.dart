@@ -1,13 +1,24 @@
+import 'package:flavormate/core/storage/shared_preferences/enums/sp_settings_image_mode.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class UImage {
   /// Determines the appropriate ImageWideResolution based on the provided image
   /// metrics and display context.
   static ImageWideResolution getResolution(
+    WidgetRef ref,
     BuildContext context,
     BoxConstraints constraints,
   ) {
+    final useImageMode =
+        ref.read(pSettingsImageModeProvider) == SpSettingsImageMode.FillMode;
+
+    if (useImageMode) {
+      return ImageWideResolution.Original;
+    }
+
     final factor = MediaQuery.devicePixelRatioOf(context);
 
     final width = constraints.maxWidth * factor;

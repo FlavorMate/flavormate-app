@@ -80,13 +80,13 @@ abstract class RouteConstants {
     '/settings',
     'settings',
   );
-  static const RouteConstant SettingsChangelog = RouteConstant(
-    '/settings/changelog',
-    'settings_changelog',
-  );
   static const RouteConstant SettingsTheme = RouteConstant(
     '/settings/theme',
     'settings_theme',
+  );
+  static const RouteConstant SettingsImageMode = RouteConstant(
+    '/settings/image-mode',
+    'settings_image-mode',
   );
 
   // Misc

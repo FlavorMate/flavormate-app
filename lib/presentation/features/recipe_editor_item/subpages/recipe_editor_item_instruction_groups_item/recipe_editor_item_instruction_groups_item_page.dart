@@ -3,7 +3,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
-import 'package:flavormate/core/utils/u_os.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_instruction_group_dto.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
@@ -48,7 +47,6 @@ class _RecipeEditorItemInstructionGroupsItemPageState
 
   final _labelController = TextEditingController();
   final _labelDebouncer = Debouncer();
-  final _listDebouncer = Debouncer();
 
   List<RecipeDraftInstructionGroupItemDto> _instructions = [];
 
@@ -73,7 +71,6 @@ class _RecipeEditorItemInstructionGroupsItemPageState
   void dispose() {
     _labelController.dispose();
     _labelDebouncer.dispose();
-    _listDebouncer.dispose();
     super.dispose();
   }
 
@@ -133,7 +130,7 @@ class _RecipeEditorItemInstructionGroupsItemPageState
                         final ingredient = _instructions.elementAt(index);
                         return FRoundedListTile(
                           key: ValueKey(ingredient.id),
-                          onTap: () => openInstruction(ingredient),
+                          onTap: () => openInstruction(ingredient.id),
                           title: Text(ingredient.label?.shorten() ?? '-'),
                           trailing: Row(
                             spacing: PADDING,
@@ -143,11 +140,10 @@ class _RecipeEditorItemInstructionGroupsItemPageState
                                 state: ingredient.validPercent,
                                 dynamicColors: true,
                               ),
-                              if (UOS.isDesktop)
-                                ReorderableDragStartListener(
-                                  index: index,
-                                  child: const Icon(MdiIcons.reorderHorizontal),
-                                ),
+                              ReorderableDragStartListener(
+                                index: index,
+                                child: const Icon(MdiIcons.reorderHorizontal),
+                              ),
                             ],
                           ),
                         );
@@ -183,21 +179,23 @@ class _RecipeEditorItemInstructionGroupsItemPageState
     context.pop();
   }
 
-  void openInstruction(RecipeDraftInstructionGroupItemDto instruction) {
+  void openInstruction(String id) {
     context.routes.recipeEditorItemInstructionGroupsItemInstruction(
       widget.draftId,
       widget.instructionGroupId,
-      instruction.id,
+      id,
     );
   }
 
   void createGroup() async {
     context.showLoadingDialog();
 
-    await ref.read(widget.provider.notifier).createInstruction();
+    final id = await ref.read(widget.provider.notifier).createInstruction();
 
     if (!mounted) return;
     context.pop();
+
+    openInstruction(id);
   }
 
   void deleteIngredientGroup() async {

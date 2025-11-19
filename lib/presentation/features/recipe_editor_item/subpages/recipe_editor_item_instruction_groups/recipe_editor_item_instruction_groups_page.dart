@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
-import 'package:flavormate/core/utils/u_os.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_instruction_group_dto.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -71,7 +70,7 @@ class _RecipeEditorItemInstructionGroupsPageState
                     final group = data.elementAt(index);
                     return FRoundedListTile(
                       key: ValueKey(group.id),
-                      onTap: () => openGroup(group),
+                      onTap: () => openGroup(group.id),
                       title: Text(getName(context, group.label, index)),
                       trailing: Row(
                         spacing: PADDING,
@@ -81,11 +80,10 @@ class _RecipeEditorItemInstructionGroupsPageState
                             state: group.validPercent,
                             dynamicColors: true,
                           ),
-                          if (UOS.isDesktop)
-                            ReorderableDragStartListener(
-                              index: index,
-                              child: const Icon(MdiIcons.reorderHorizontal),
-                            ),
+                          ReorderableDragStartListener(
+                            index: index,
+                            child: const Icon(MdiIcons.reorderHorizontal),
+                          ),
                         ],
                       ),
                     );
@@ -119,16 +117,18 @@ class _RecipeEditorItemInstructionGroupsPageState
     context.pop();
   }
 
-  void openGroup(RecipeDraftInstructionGroupDto ig) {
-    context.routes.recipeEditorItemInstructionGroupsItem(widget.draftId, ig.id);
+  void openGroup(String id) {
+    context.routes.recipeEditorItemInstructionGroupsItem(widget.draftId, id);
   }
 
   void createGroup() async {
     context.showLoadingDialog();
-    await ref.read(widget.provider.notifier).createGroup();
+    final id = await ref.read(widget.provider.notifier).createGroup();
 
     if (!mounted) return;
     context.pop();
+
+    openGroup(id);
   }
 
   String getName(BuildContext context, String? val, int index) {

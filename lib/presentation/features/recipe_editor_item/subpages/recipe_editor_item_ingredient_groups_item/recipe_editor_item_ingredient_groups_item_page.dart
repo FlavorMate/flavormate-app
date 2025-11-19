@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
-import 'package:flavormate/core/utils/u_os.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
@@ -124,7 +123,7 @@ class _RecipeEditorItemIngredientGroupsItemPageState
                         final ingredient = _ingredients.elementAt(index);
                         return FRoundedListTile(
                           key: ValueKey(ingredient.id),
-                          onTap: () => openIngredient(ingredient),
+                          onTap: () => openIngredient(ingredient.id),
                           title: Text(ingredient.beautify),
                           trailing: Row(
                             spacing: PADDING,
@@ -134,11 +133,10 @@ class _RecipeEditorItemIngredientGroupsItemPageState
                                 state: ingredient.validPercent,
                                 dynamicColors: true,
                               ),
-                              if (UOS.isDesktop)
-                                ReorderableDragStartListener(
-                                  index: index,
-                                  child: const Icon(MdiIcons.reorderHorizontal),
-                                ),
+                              ReorderableDragStartListener(
+                                index: index,
+                                child: const Icon(MdiIcons.reorderHorizontal),
+                              ),
                             ],
                           ),
                         );
@@ -174,21 +172,23 @@ class _RecipeEditorItemIngredientGroupsItemPageState
     context.pop();
   }
 
-  void openIngredient(RecipeDraftIngredientGroupItemDto ingredient) {
+  void openIngredient(String id) {
     context.routes.recipeEditorItemIngredientGroupsItemIngredient(
       widget.draftId,
       widget.ingredientGroupId,
-      ingredient.id,
+      id,
     );
   }
 
   void createIngredient() async {
     context.showLoadingDialog();
 
-    await ref.read(widget.provider.notifier).createIngredient();
+    final id = await ref.read(widget.provider.notifier).createIngredient();
 
     if (!mounted) return;
     context.pop();
+
+    openIngredient(id);
   }
 
   void deleteIngredient() async {

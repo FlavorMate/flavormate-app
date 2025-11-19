@@ -8,8 +8,9 @@ import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FCarousel<T> extends StatefulWidget {
+class FCarousel<T> extends ConsumerStatefulWidget {
   static const double labelWidth = 200;
 
   final double height;
@@ -57,10 +58,10 @@ class FCarousel<T> extends StatefulWidget {
   }
 
   @override
-  State<FCarousel<T>> createState() => _FCarouselState<T>();
+  ConsumerState<FCarousel<T>> createState() => _FCarouselState<T>();
 }
 
-class _FCarouselState<T> extends State<FCarousel<T>> {
+class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -72,7 +73,7 @@ class _FCarouselState<T> extends State<FCarousel<T>> {
         );
         final showAllButton = widget.data.length > 1;
 
-        final resolution = UImage.getResolution(context, constraints);
+        final resolution = UImage.getResolution(ref, context, constraints);
 
         return Column(
           spacing: PADDING / 4,

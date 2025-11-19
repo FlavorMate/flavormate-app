@@ -1,1 +1,8 @@
-enum SPKey { CurrentServer, RecentServers, ThemeMode, JWT, ThemeCustomColor }
+enum SPKey {
+  CurrentServer,
+  RecentServers,
+  ThemeMode,
+  JWT,
+  ThemeCustomColor,
+  SettingsImageMode,
+}
