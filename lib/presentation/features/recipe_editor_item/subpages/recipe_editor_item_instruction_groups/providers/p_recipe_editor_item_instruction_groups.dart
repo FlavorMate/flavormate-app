@@ -22,7 +22,7 @@ class PRecipeEditorItemInstructionGroups
     return groups.sortedBy((v) => v.index);
   }
 
-  Future<void> createGroup() async {
+  Future<String> createGroup() async {
     final id = const Uuid().v4();
     final index = state.value!.length;
 
@@ -33,6 +33,8 @@ class PRecipeEditorItemInstructionGroups
     };
 
     await ref.read(_parentProvider.notifier).setForm(form);
+
+    return id;
   }
 
   Future<void> reorder(int oldIndex, int newIndex) async {

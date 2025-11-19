@@ -68,7 +68,7 @@ class _RecipeEditorItemIngredientGroupsPageState
                     final group = data.elementAt(index);
                     return FRoundedListTile(
                       key: ValueKey(group.id),
-                      onTap: () => openGroup(group),
+                      onTap: () => openGroup(group.id),
                       title: Text(getName(context, group.label, index)),
                       trailing: Row(
                         spacing: PADDING,
@@ -115,16 +115,18 @@ class _RecipeEditorItemIngredientGroupsPageState
     context.pop();
   }
 
-  void openGroup(RecipeDraftIngredientGroupDto ig) {
-    context.routes.recipeEditorItemIngredientGroupsItem(widget.draftId, ig.id);
+  void openGroup(String id) {
+    context.routes.recipeEditorItemIngredientGroupsItem(widget.draftId, id);
   }
 
   void createGroup() async {
     context.showLoadingDialog();
-    await ref.read(widget.provider.notifier).createGroup();
+    final id = await ref.read(widget.provider.notifier).createGroup();
 
     if (!mounted) return;
     context.pop();
+
+    openGroup(id);
   }
 
   String getName(BuildContext context, String? val, int index) {

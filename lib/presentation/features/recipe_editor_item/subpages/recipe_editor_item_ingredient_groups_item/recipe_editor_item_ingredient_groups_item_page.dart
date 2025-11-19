@@ -123,7 +123,7 @@ class _RecipeEditorItemIngredientGroupsItemPageState
                         final ingredient = _ingredients.elementAt(index);
                         return FRoundedListTile(
                           key: ValueKey(ingredient.id),
-                          onTap: () => openIngredient(ingredient),
+                          onTap: () => openIngredient(ingredient.id),
                           title: Text(ingredient.beautify),
                           trailing: Row(
                             spacing: PADDING,
@@ -172,21 +172,23 @@ class _RecipeEditorItemIngredientGroupsItemPageState
     context.pop();
   }
 
-  void openIngredient(RecipeDraftIngredientGroupItemDto ingredient) {
+  void openIngredient(String id) {
     context.routes.recipeEditorItemIngredientGroupsItemIngredient(
       widget.draftId,
       widget.ingredientGroupId,
-      ingredient.id,
+      id,
     );
   }
 
   void createIngredient() async {
     context.showLoadingDialog();
 
-    await ref.read(widget.provider.notifier).createIngredient();
+    final id = await ref.read(widget.provider.notifier).createIngredient();
 
     if (!mounted) return;
     context.pop();
+
+    openIngredient(id);
   }
 
   void deleteIngredient() async {

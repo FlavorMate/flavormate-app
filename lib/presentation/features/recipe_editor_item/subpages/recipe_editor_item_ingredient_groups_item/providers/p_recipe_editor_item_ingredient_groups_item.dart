@@ -29,7 +29,7 @@ class PRecipeEditorItemIngredientGroupsItem
     );
   }
 
-  Future<void> createIngredient() async {
+  Future<String> createIngredient() async {
     final id = const Uuid().v4();
     final index = state.value!.ingredients.length;
 
@@ -40,6 +40,8 @@ class PRecipeEditorItemIngredientGroupsItem
     ];
 
     await ref.read(_parentProvider.notifier).updateChild(form);
+
+    return id;
   }
 
   Future<void> delete() async {
