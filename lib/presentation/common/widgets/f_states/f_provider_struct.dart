@@ -25,9 +25,9 @@ class FProviderStruct<T> extends ConsumerWidget {
         context,
         value,
       ),
-      AsyncError(:final error) => Column(
+      AsyncError() => Column(
+        mainAxisAlignment: .center,
         children: [
-          Text(error.toString()),
           FError(onError: onError),
         ],
       ),
