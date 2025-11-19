@@ -48,4 +48,10 @@ class PLoginPage extends _$PLoginPage {
   Future<void> resetServer() async {
     await ref.read(pSPCurrentServerProvider.notifier).set(null);
   }
+
+  void invalidate() {
+    ref.invalidate(pCompatibilityProvider);
+    ref.invalidate(pOIDCProvider);
+    ref.invalidateSelf();
+  }
 }

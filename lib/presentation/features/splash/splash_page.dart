@@ -53,7 +53,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           }
         },
         loading: () {},
-        error: (_, _) {},
+        error: (_, _) async {
+          if (next.isLoading) return;
+          await Future.delayed(const Duration(seconds: 2));
+          if (!mounted) return;
+          ref.invalidate(pCompatibilityProvider);
+        },
       ),
       fireImmediately: true,
     );
