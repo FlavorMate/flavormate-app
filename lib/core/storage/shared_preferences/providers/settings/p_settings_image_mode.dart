@@ -4,11 +4,11 @@ import 'package:flavormate/core/storage/shared_preferences/enums/sp_settings_ima
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'p_settings_full_image.g.dart';
+part 'p_settings_image_mode.g.dart';
 
 @riverpod
-class PSettingsFullImage extends _$PSettingsFullImage {
-  String get _key => SPKey.SettingsFullImage.name;
+class PSettingsImageMode extends _$PSettingsImageMode {
+  String get _key => SPKey.SettingsImageMode.name;
 
   @override
   SpSettingsImageMode build() {

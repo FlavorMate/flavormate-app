@@ -84,9 +84,9 @@ abstract class RouteConstants {
     '/settings/theme',
     'settings_theme',
   );
-  static const RouteConstant SettingsFullImage = RouteConstant(
-    '/settings/full-image',
-    'settings_full-image',
+  static const RouteConstant SettingsImageMode = RouteConstant(
+    '/settings/image-mode',
+    'settings_image-mode',
   );
 
   // Misc

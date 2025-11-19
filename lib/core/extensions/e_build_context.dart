@@ -398,8 +398,8 @@ class Routes {
     return context.pushNamed(RouteConstants.SettingsTheme.name);
   }
 
-  Future settingsFullImage() {
-    return context.pushNamed(RouteConstants.SettingsFullImage.name);
+  Future settingsImageMode() {
+    return context.pushNamed(RouteConstants.SettingsImageMode.name);
   }
 
   Future storyEditorItemPreview(String id) async {

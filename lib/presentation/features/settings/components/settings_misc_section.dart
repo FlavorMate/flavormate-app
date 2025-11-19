@@ -29,7 +29,7 @@ class SettingsMiscSection extends ConsumerWidget {
             width: BUTTON_WIDTH,
           ),
           FIconButton(
-            onPressed: () => context.routes.settingsFullImage(),
+            onPressed: () => context.routes.settingsImageMode(),
             icon: MdiIcons.imageOutline,
             label: L10n.of(context).settings_misc_section__image_mode,
             width: BUTTON_WIDTH,

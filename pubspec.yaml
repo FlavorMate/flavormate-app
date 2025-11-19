@@ -120,5 +120,5 @@ flutter:
     - assets/icons/bring.png
     - assets/web/backend_url.txt
     # Settings / Full Image
-    - assets/images/settings/full_image/16_9.webp
-    - assets/images/settings/full_image/original.webp
+    - assets/images/settings/image_mode/16_9.webp
+    - assets/images/settings/image_mode/original.webp

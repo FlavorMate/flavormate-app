@@ -4,5 +4,5 @@ enum SPKey {
   ThemeMode,
   JWT,
   ThemeCustomColor,
-  SettingsFullImage,
+  SettingsImageMode,
 }

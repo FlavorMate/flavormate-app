@@ -1,5 +1,5 @@
 import 'package:flavormate/core/storage/shared_preferences/enums/sp_settings_image_mode.dart';
-import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_full_image.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,10 +12,10 @@ abstract class UImage {
     BuildContext context,
     BoxConstraints constraints,
   ) {
-    final useFullImage =
-        ref.read(pSettingsFullImageProvider) == SpSettingsImageMode.FillMode;
+    final useImageMode =
+        ref.read(pSettingsImageModeProvider) == SpSettingsImageMode.FillMode;
 
-    if (useFullImage) {
+    if (useImageMode) {
       return ImageWideResolution.Original;
     }
 

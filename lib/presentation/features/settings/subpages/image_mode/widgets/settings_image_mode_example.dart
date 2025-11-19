@@ -5,14 +5,14 @@ import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 
-class SettingsFullImageExample extends StatelessWidget {
+class SettingsImageModeExample extends StatelessWidget {
   final String label;
   final String image;
   final Function(SpSettingsImageMode) onTap;
   final SpSettingsImageMode value;
   final bool state;
 
-  const SettingsFullImageExample({
+  const SettingsImageModeExample({
     super.key,
     required this.label,
     required this.image,

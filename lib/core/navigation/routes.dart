@@ -45,7 +45,7 @@ import 'package:flavormate/presentation/features/recipes_item/subpages/recipes_i
 import 'package:flavormate/presentation/features/server/server_page.dart';
 import 'package:flavormate/presentation/features/server_outdated/server_outdated_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_page.dart';
-import 'package:flavormate/presentation/features/settings/subpages/full_image/settings_full_image_page.dart';
+import 'package:flavormate/presentation/features/settings/subpages/image_mode/settings_image_mode_page.dart';
 import 'package:flavormate/presentation/features/settings/subpages/theme/settings_theme_page.dart';
 import 'package:flavormate/presentation/features/splash/splash_page.dart';
 import 'package:flavormate/presentation/features/stories_item/stories_item_page.dart';
@@ -125,8 +125,8 @@ var routes = [
   // Settings
   _createRoute(RouteConstants.SettingsTheme, (_) => const SettingsThemePage()),
   _createRoute(
-    RouteConstants.SettingsFullImage,
-    (_) => const SettingsFullImagePage(),
+    RouteConstants.SettingsImageMode,
+    (_) => const SettingsImageModePage(),
   ),
 
   // Admin
