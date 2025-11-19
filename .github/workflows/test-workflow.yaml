@@ -1,8 +1,8 @@
 name: FlavorMate test workflow
 on:
   push:
-    branches:
-      - dev
+    branches-ignore:
+      - main
 
 env:
   FLUTTER_VERSION: 3.38.1
