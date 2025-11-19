@@ -52,8 +52,8 @@ enum AuthState {
 
       // Settings
       RouteConstants.Settings,
-      RouteConstants.SettingsChangelog,
       RouteConstants.SettingsTheme,
+      RouteConstants.SettingsFullImage,
 
       // Misc
       RouteConstants.NoConnection,
@@ -114,7 +114,8 @@ enum AuthState {
       // '/admin/user',
       // '/admin/share',
     ],
-  );
+  )
+  ;
 
   const AuthState({required this.redirectPath, required this.allowedPaths});
 
