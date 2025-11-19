@@ -3,7 +3,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
-import 'package:flavormate/core/utils/u_os.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_instruction_group_dto.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
@@ -143,11 +142,10 @@ class _RecipeEditorItemInstructionGroupsItemPageState
                                 state: ingredient.validPercent,
                                 dynamicColors: true,
                               ),
-                              if (UOS.isDesktop)
-                                ReorderableDragStartListener(
-                                  index: index,
-                                  child: const Icon(MdiIcons.reorderHorizontal),
-                                ),
+                              ReorderableDragStartListener(
+                                index: index,
+                                child: const Icon(MdiIcons.reorderHorizontal),
+                              ),
                             ],
                           ),
                         );

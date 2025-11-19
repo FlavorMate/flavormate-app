@@ -157,6 +157,9 @@ class RecipeEditorItemPage extends ConsumerWidget {
                   optional: true,
                 ),
               ),
+
+              // Needed so items don't get stuck behind the fab
+              const SizedBox(height: 52),
             ],
           ),
         ),
