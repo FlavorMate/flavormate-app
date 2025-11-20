@@ -5,7 +5,6 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
 import 'package:flavormate/data/models/core/version/version.dart';
-import 'package:flavormate/data/repositories/core/compatibility/p_compatibility.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';

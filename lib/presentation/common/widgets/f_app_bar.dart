@@ -8,17 +8,20 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
   final bool showHome;
+  final bool automaticallyImplyLeading;
 
   const FAppBar({
     super.key,
     required this.title,
     this.actions,
     this.showHome = true,
+    this.automaticallyImplyLeading = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: automaticallyImplyLeading,
       leading: showHome ? getBackButton(context) : null,
       centerTitle: true,
       actions: [
