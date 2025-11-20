@@ -1,12 +1,11 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
-import 'package:flavormate/presentation/common/widgets/f_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_scrollable_h.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
+import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_bar.dart';
+import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 class SettingsThemeSectionExample extends StatelessWidget {
   const SettingsThemeSectionExample({super.key});
@@ -15,76 +14,65 @@ class SettingsThemeSectionExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       spacing: PADDING,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       children: [
-        FScrollableH(
-          child: Row(
-            spacing: PADDING,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              FilledButton(
-                onPressed: () {},
-                child: Text(
-                  L10n.of(context).settings_theme_page__example,
-                ),
-              ),
-              Slider(value: 0.5, onChanged: (_) {}),
-              Chip(
-                label: Text(
-                  L10n.of(context).settings_theme_page__example,
-                ),
-              ),
-            ],
-          ),
+        FText(
+          L10n.of(context).settings_theme_section_example__title,
+          style: .headlineMedium,
         ),
-        FCard(
+        Card.outlined(
           child: Column(
             spacing: PADDING,
             children: [
-              FText(
-                L10n.of(context).settings_theme_page__example,
-                style: FTextStyle.headlineMedium,
+              ClipRRect(
+                borderRadius: const .only(
+                  topLeft: .circular(BORDER_RADIUS),
+                  topRight: .circular(BORDER_RADIUS),
+                ),
+                child: FAppBar(
+                  showHome: false,
+                  title: L10n.of(
+                    context,
+                  ).settings_theme_section_example__app_bar,
+                  automaticallyImplyLeading: false,
+                ),
               ),
-              FIconButton(
-                onPressed: () {},
-                icon: MdiIcons.formatPaint,
-                label: L10n.of(
-                  context,
-                ).settings_theme_page__example,
+
+              Padding(
+                padding: const .only(
+                  left: PADDING,
+                  right: PADDING,
+                  bottom: PADDING,
+                ),
+                child: Column(
+                  spacing: PADDING,
+                  children: [
+                    FImageCard.maximized(
+                      label: L10n.of(
+                        context,
+                      ).settings_theme_section_example__recipe_name,
+                      coverSelector: (_) => null,
+                      imageType: .asset,
+                      width: 400,
+                    ),
+                    Row(
+                      mainAxisAlignment: .center,
+                      spacing: PADDING / 2,
+                      children: [
+                        for (int i = 1; i < 5; i++)
+                          FPageableButton(
+                            label: '$i',
+                            width: FPageableBar.buttonWidth,
+                            type: i == 1 ? .current : .other,
+                            onPressed: () {},
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-        ),
-        Row(
-          spacing: PADDING,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Switch(value: false, onChanged: (_) {}),
-            Switch(value: true, onChanged: (_) {}),
-            Checkbox(value: false, onChanged: (_) {}),
-            Checkbox(value: true, onChanged: (_) {}),
-          ],
-        ),
-        FTextFormField(
-          controller: TextEditingController(),
-          label: L10n.of(context).settings_theme_page__example,
-        ),
-        Row(
-          spacing: PADDING,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Radio(
-              value: false,
-              groupValue: null,
-              onChanged: (_) {},
-            ),
-            Radio(value: true, groupValue: true, onChanged: (_) {}),
-            const CircularProgressIndicator(),
-            const SizedBox(
-              width: 48,
-              child: LinearProgressIndicator(),
-            ),
-          ],
         ),
       ],
     );

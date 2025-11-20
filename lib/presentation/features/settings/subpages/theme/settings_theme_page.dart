@@ -108,18 +108,18 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
                   showSelectedIcon: false,
                   segments: [
                     ButtonSegment(
-                      value: FThemeMode.flavormate,
+                      value: .flavormate,
                       label: Text(L10n.of(context).flavormate),
                     ),
                     ButtonSegment(
-                      value: FThemeMode.custom,
+                      value: .custom,
                       label: Text(
                         L10n.of(context).settings_theme_page__mode_custom,
                       ),
                     ),
                     if (_dynamicColors != null)
                       ButtonSegment(
-                        value: FThemeMode.dynamic,
+                        value: .dynamic,
                         label: Text(
                           L10n.of(context).settings_theme_page__mode_system,
                         ),
@@ -128,61 +128,78 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
                   selected: _selection,
                   onSelectionChanged: setMode,
                 ),
-                if (_selection.single == FThemeMode.flavormate)
+                if (_selection.single == .flavormate)
                   Column(
                     spacing: PADDING * 2,
                     children: [
                       FText(
                         L10n.of(context).settings_theme_page__mode_default_hint,
-                        style: FTextStyle.titleLarge,
-                        textAlign: TextAlign.center,
+                        style: .titleLarge,
+                        textAlign: .center,
                       ),
-                      const CircleAvatar(
-                        radius: PADDING * 2,
-                        backgroundColor: FLAVORMATE_COLOR,
-                        foregroundColor: Colors.white,
-                        child: Icon(MdiIcons.check),
+                      const SizedBox(
+                        height: 80,
+                        child: Align(
+                          alignment: .topCenter,
+                          child: CircleAvatar(
+                            radius: PADDING * 2,
+                            backgroundColor: FLAVORMATE_COLOR,
+                            foregroundColor: Colors.white,
+                            child: Icon(MdiIcons.check),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                if (_selection.single == FThemeMode.custom)
+                if (_selection.single == .custom)
                   Column(
                     spacing: PADDING * 2,
                     children: [
                       FText(
                         L10n.of(context).settings_theme_page__mode_custom_hint,
-                        style: FTextStyle.titleLarge,
-                        textAlign: TextAlign.center,
+                        style: .titleLarge,
+                        textAlign: .center,
                       ),
-                      FScrollableH(
-                        child: Row(
-                          spacing: PADDING,
-                          children: [
-                            for (final color in ColorConstants.themeColors)
-                              SettingsThemeColorCard(
-                                onTap: () => setState(() => _color = color),
-                                color: color,
-                                selected: _color.toARGB32() == color.toARGB32(),
-                              ),
-                          ],
+                      SizedBox(
+                        height: 80,
+                        child: FScrollableH(
+                          child: Row(
+                            spacing: PADDING,
+                            children: [
+                              for (final color in ColorConstants.themeColors)
+                                SettingsThemeColorCard(
+                                  onTap: () => setState(() => _color = color),
+                                  color: color,
+                                  selected:
+                                      _color.toARGB32() == color.toARGB32(),
+                                ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
-                if (_selection.single == FThemeMode.dynamic)
+                if (_selection.single == .dynamic)
                   Column(
                     spacing: PADDING * 2,
                     children: [
                       FText(
                         L10n.of(context).settings_theme_page__mode_system_hint,
-                        style: FTextStyle.titleLarge,
-                        textAlign: TextAlign.center,
+                        style: .titleLarge,
+                        textAlign: .center,
                       ),
-                      CircleAvatar(
-                        radius: PADDING * 2,
-                        backgroundColor: _dynamicColors!.light!.inversePrimary,
-                        foregroundColor: Colors.white,
-                        child: const Icon(MdiIcons.check),
+                      SizedBox(
+                        height: 80,
+                        child: Align(
+                          alignment: .topCenter,
+                          child: CircleAvatar(
+                            radius: PADDING * 2,
+                            backgroundColor:
+                                _dynamicColors!.light!.inversePrimary,
+                            foregroundColor: Colors.white,
+                            child: const Icon(MdiIcons.check),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -197,17 +214,17 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
   }
 
   void setMode(Set<FThemeMode> mode) {
-    if (mode.single == FThemeMode.flavormate) {
+    if (mode.single == .flavormate) {
       setState(() {
         _color = FLAVORMATE_COLOR;
         _selection = mode;
       });
-    } else if (mode.single == FThemeMode.custom) {
+    } else if (mode.single == .custom) {
       setState(() {
         _color = _savedColor ?? Colors.red;
         _selection = mode;
       });
-    } else if (mode.single == FThemeMode.dynamic) {
+    } else if (mode.single == .dynamic) {
       setState(() {
         _color = Colors.red;
         _selection = mode;
@@ -216,13 +233,13 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
   }
 
   void setTheme() async {
-    if (_selection.single == FThemeMode.flavormate) {
+    if (_selection.single == .flavormate) {
       await ref.read(pSPThemeCustomColorProvider.notifier).setColor(null);
       await ref.read(pSPThemeModeProvider.notifier).setMode(_selection.single);
-    } else if (_selection.single == FThemeMode.custom) {
+    } else if (_selection.single == .custom) {
       await ref.read(pSPThemeCustomColorProvider.notifier).setColor(_color);
       await ref.read(pSPThemeModeProvider.notifier).setMode(_selection.single);
-    } else if (_selection.single == FThemeMode.dynamic) {
+    } else if (_selection.single == .dynamic) {
       await ref.read(pSPThemeCustomColorProvider.notifier).setColor(null);
       await ref.read(pSPThemeModeProvider.notifier).setMode(_selection.single);
     }
