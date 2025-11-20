@@ -7,7 +7,7 @@ part 'f_text_style.dart';
 class FText extends StatelessWidget {
   final String label;
   final FTextStyle style;
-  final double textHeight;
+  final double? textHeight;
   final FTextColor? color;
   final TextAlign? textAlign;
   final TextOverflow? textOverflow;
