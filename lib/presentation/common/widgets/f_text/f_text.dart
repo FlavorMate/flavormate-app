@@ -16,7 +16,7 @@ class FText extends StatelessWidget {
   const FText(
     this.label, {
     required this.style,
-    this.textHeight = 1,
+    this.textHeight,
     this.textAlign,
     this.color,
     this.textOverflow,

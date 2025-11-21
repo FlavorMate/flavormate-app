@@ -45,6 +45,7 @@ class MyApp extends ConsumerWidget {
         brightness: Brightness.light,
         colorScheme: colors.light,
         extensions: [colors.lightBlendedColors],
+        fontFamily: 'GoogleSansFlex',
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
