@@ -10,7 +10,7 @@ class FRecipeTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return FText(
       title,
-      style: FTextStyle.displayMedium,
+      style: FTextStyle.displaySmall,
       textAlign: TextAlign.center,
     );
   }
