@@ -36,6 +36,9 @@ class SettingsImageModePage extends ConsumerWidget {
                 label: L10n.of(
                   context,
                 ).settings_image_mode_page__fit_mode,
+                hint: L10n.of(
+                  context,
+                ).settings_image_mode_page__hint_2,
                 image: Assets.images.settings.imageMode.a169.path,
                 value: SpSettingsImageMode.FitMode,
                 state: state == SpSettingsImageMode.FitMode,
@@ -45,6 +48,9 @@ class SettingsImageModePage extends ConsumerWidget {
                 label: L10n.of(
                   context,
                 ).settings_image_mode_page__fill_mode,
+                hint: L10n.of(
+                  context,
+                ).settings_image_mode_page__hint_3,
                 image: Assets.images.settings.imageMode.original.path,
                 value: SpSettingsImageMode.FillMode,
                 state: state == SpSettingsImageMode.FillMode,
