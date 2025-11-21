@@ -69,11 +69,13 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
         return ThemeData(
           colorScheme: _dynamicColors!.light,
           extensions: [_dynamicColors!.lightBlendedColors],
+          fontFamily: 'GoogleSansFlex',
         );
       } else {
         return ThemeData(
           colorScheme: _dynamicColors!.dark,
           extensions: [_dynamicColors!.darkBlendedColors],
+          fontFamily: 'GoogleSansFlex',
         );
       }
     }
@@ -83,7 +85,7 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
         brightness: Theme.of(context).brightness,
       ),
       extensions: [BlendedColors.fromPrimary(_color)],
-      useMaterial3: true,
+      fontFamily: 'GoogleSansFlex',
     );
   }
 
