@@ -51,6 +51,7 @@ class MyApp extends ConsumerWidget {
         brightness: Brightness.dark,
         colorScheme: colors.dark,
         extensions: [colors.darkBlendedColors],
+        fontFamily: 'GoogleSansFlex',
       ),
       themeMode: ThemeMode.system,
       localizationsDelegates: L10n.localizationsDelegates,

@@ -1,4 +1,5 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flutter/material.dart';
 
 part 'f_text_color.dart';
@@ -11,6 +12,7 @@ class FText extends StatelessWidget {
   final FTextColor? color;
   final TextAlign? textAlign;
   final TextOverflow? textOverflow;
+  final FontWeight? weight;
   final int? maxLines;
 
   const FText(
@@ -20,6 +22,7 @@ class FText extends StatelessWidget {
     this.textAlign,
     this.color,
     this.textOverflow,
+    this.weight,
     this.maxLines,
     super.key,
   });
@@ -28,10 +31,20 @@ class FText extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = style.geFTextStyle(context);
     final c = color?.getThemeColor(context);
+    final variation = weight?.let(
+      (it) => [
+        FontVariation.weight(it.value.toDouble()),
+      ],
+    );
     return Text(
       label,
       textAlign: textAlign,
-      style: s?.copyWith(color: c, height: textHeight),
+      style: s?.copyWith(
+        color: c,
+        height: textHeight,
+        fontWeight: weight,
+        fontVariations: variation,
+      ),
       overflow: textOverflow,
       maxLines: maxLines,
     );
