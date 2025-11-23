@@ -27,13 +27,18 @@ class FRecipeInstructionGroupList extends StatelessWidget {
         FText(
           L10n.of(context).f_recipe_instruction_group_list__title,
           style: FTextStyle.headlineMedium,
+          weight: FontWeight.w500,
         ),
-
-        for (final group in sortedInstructionGroups)
-          FRecipeInstructionList(
-            instructionGroup: group,
-            amountFactor: amountFactor,
-          ),
+        Column(
+          spacing: PADDING * 2,
+          children: [
+            for (final group in sortedInstructionGroups)
+              FRecipeInstructionList(
+                instructionGroup: group,
+                amountFactor: amountFactor,
+              ),
+          ],
+        ),
       ],
     );
   }

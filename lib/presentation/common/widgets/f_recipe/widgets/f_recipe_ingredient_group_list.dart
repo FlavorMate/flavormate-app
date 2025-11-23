@@ -40,6 +40,7 @@ class FRecipeIngredientGroupList extends StatelessWidget {
         FText(
           L10n.of(context).f_recipe_ingredient_group_list__title,
           style: FTextStyle.headlineMedium,
+          weight: FontWeight.w500,
         ),
 
         Row(
@@ -51,12 +52,16 @@ class FRecipeIngredientGroupList extends StatelessWidget {
             FIconButton(onPressed: increaseServing, icon: MdiIcons.plus),
           ],
         ),
-
-        for (final ingredientGroup in sortedIngredientGroups)
-          FRecipeIngredientList(
-            ingredientGroup: ingredientGroup,
-            factor: amountFactor,
-          ),
+        Column(
+          spacing: PADDING * 2,
+          children: [
+            for (final ingredientGroup in sortedIngredientGroups)
+              FRecipeIngredientList(
+                ingredientGroup: ingredientGroup,
+                factor: amountFactor,
+              ),
+          ],
+        ),
       ],
     );
   }

@@ -84,7 +84,11 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
                 child: Row(
                   spacing: PADDING / 4,
                   children: [
-                    FText(widget.title!, style: FTextStyle.headlineSmall),
+                    FText(
+                      widget.title!,
+                      style: FTextStyle.headlineSmall,
+                      weight: .w500,
+                    ),
                     if (showAllButton)
                       IconButton(
                         onPressed: widget.onShowAll,

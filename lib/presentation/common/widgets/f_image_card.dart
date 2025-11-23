@@ -57,7 +57,7 @@ class FImageCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final resolution = UImage.getResolution(ref,context, constraints);
+        final resolution = UImage.getResolution(ref, context, constraints);
 
         final opacity = calculateOpacity(constraints.maxWidth);
         return Stack(
@@ -95,7 +95,7 @@ class FImageCard extends ConsumerWidget {
                               label!,
                               style: FTextStyle.titleLarge,
                               maxLines: 2,
-                              textHeight: 1.25,
+                              weight: FontWeight.w600,
                               textOverflow: TextOverflow.ellipsis,
                               color: FTextColor.white,
                             ),
@@ -104,7 +104,6 @@ class FImageCard extends ConsumerWidget {
                               subLabel!,
                               style: FTextStyle.bodyMedium,
                               maxLines: 2,
-                              textHeight: 1.25,
                               textOverflow: TextOverflow.ellipsis,
                               color: FTextColor.white,
                             ),

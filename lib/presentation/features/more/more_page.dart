@@ -30,6 +30,7 @@ class MorePage extends ConsumerWidget {
                 FText(
                   L10n.of(context).more_page__recipes,
                   style: FTextStyle.headlineMedium,
+                  weight: FontWeight.w500,
                 ),
                 FIconButton(
                   width: 250,
@@ -56,6 +57,7 @@ class MorePage extends ConsumerWidget {
                 FText(
                   L10n.of(context).more_page__more,
                   style: FTextStyle.headlineMedium,
+                  weight: .w500,
                 ),
                 FIconButton(
                   width: 250,

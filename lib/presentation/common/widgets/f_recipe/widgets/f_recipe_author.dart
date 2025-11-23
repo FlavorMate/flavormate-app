@@ -26,6 +26,7 @@ class FRecipeAuthor extends StatelessWidget {
           FText(
             L10n.of(context).f_recipe_author__title,
             style: FTextStyle.headlineMedium,
+            weight: .w500,
           ),
           OutlinedButton(
             onPressed: readOnly

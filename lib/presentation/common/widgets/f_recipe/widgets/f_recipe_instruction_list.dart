@@ -25,7 +25,11 @@ class FRecipeInstructionList extends StatelessWidget {
       spacing: PADDING,
       children: [
         if (instructionGroup.label != null)
-          FText(instructionGroup.label!, style: FTextStyle.titleLarge),
+          FText(
+            instructionGroup.label!,
+            style: FTextStyle.titleLarge,
+            weight: .w500,
+          ),
 
         for (final instruction in sortedInstructions)
           Row(
