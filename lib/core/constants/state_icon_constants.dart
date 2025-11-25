@@ -55,6 +55,10 @@ abstract class StateIconConstants {
     MdiIcons.star,
     MdiIcons.starOff,
   );
+  static const reviews = StateIconConstant(
+    MdiIcons.star,
+    MdiIcons.starOff,
+  );
 }
 
 class StateIconConstant {

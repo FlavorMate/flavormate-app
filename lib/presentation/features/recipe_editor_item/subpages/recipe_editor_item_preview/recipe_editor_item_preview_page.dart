@@ -56,6 +56,7 @@ class _RecipeEditorPreviewPageState
         recipe: data,
         enableBookmark: false,
         enableBring: false,
+        enableReview: false,
         readOnly: true,
         hasFab: true,
         showAllFiles: () =>

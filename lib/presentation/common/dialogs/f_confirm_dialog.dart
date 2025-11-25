@@ -1,18 +1,33 @@
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class FConfirmDialog extends StatelessWidget {
   final String title;
   final String? content;
+  final double width;
 
-  const FConfirmDialog({super.key, required this.title, this.content});
+  const FConfirmDialog({
+    super.key,
+    required this.title,
+    this.content,
+    this.width = 450,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(title),
-      content: content != null ? Text(content!) : null,
+      content: content != null
+          ? SizedBox(
+              width: width,
+              child: MarkdownBody(
+                data: content!,
+                shrinkWrap: true,
+              ),
+            )
+          : null,
       actions: [
         TextButton(
           onPressed: () => context.pop(false),

@@ -23,6 +23,22 @@
       }
     }
   },
+  "@f_recipe_published__open_original_warning": {
+    "placeholders": {
+      "url": {
+        "example": "https://example.com",
+        "type": "String"
+      }
+    }
+  },
+  "@f_recipe_ratings__rating": {
+    "placeholders": {
+      "value": {
+        "example": "1",
+        "type": "num"
+      }
+    }
+  },
   "@library_item_info_header__subscribers": {
     "placeholders": {
       "count": {
@@ -206,9 +222,15 @@
   "f_recipe_layout__save_recipe": "Rezept speichern",
   "f_recipe_nutrition_layout__title": "Nährwerte",
   "f_recipe_nutrition_table__title": "Nährwerte",
-  "f_recipe_published__open_original": "Original öffnen",
+  "f_recipe_published__open_original": "Rezeptquelle öffnen",
+  "f_recipe_published__open_original_warning": "Du verlässt diese App.\n\n`{url}` wird in deinem Browser geöffnet.\n\nFlavorMate ist nicht für den Inhalt verantwortlich.",
+  "f_recipe_published__open_original_warning_title": "Webseite öffnen?",
   "f_recipe_published__title": "Veröffentlicht",
   "f_recipe_published__version": "Version",
+  "f_recipe_ratings__on_error": "Fehler beim Laden der Bewertungen",
+  "f_recipe_ratings__rating": "{value, plural , =1{1 Bewertung} other{{value} Bewertungen}}",
+  "f_recipe_ratings__title": "Bewertungen",
+  "f_recipe_ratings__your_rating": "Deine Wertung",
   "f_recipe_tags__title": "Tags",
   "f_search_loading__title": "Suche...",
   "f_search_no_result__title": "Keine Ergebnisse",
