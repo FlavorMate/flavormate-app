@@ -21,7 +21,6 @@ class CommonRecipe with CommonRecipeMappable {
   final AccountDto ownedBy;
   final String label;
   final String? description;
-  final double? ratings;
   final Duration prepTime;
   final Duration cookTime;
   final Duration restTime;
@@ -43,7 +42,6 @@ class CommonRecipe with CommonRecipeMappable {
     this.ownedBy,
     this.label,
     this.description,
-    this.ratings,
     this.prepTime,
     this.cookTime,
     this.restTime,
@@ -72,7 +70,6 @@ class CommonRecipe with CommonRecipeMappable {
       draft.ownedBy,
       draft.label!,
       draft.description,
-      null,
       draft.prepTime,
       draft.cookTime,
       draft.restTime,
@@ -97,7 +94,6 @@ class CommonRecipe with CommonRecipeMappable {
       recipe.ownedBy,
       recipe.label,
       recipe.description,
-      null,
       recipe.prepTime,
       recipe.cookTime,
       recipe.restTime,

@@ -8,7 +8,8 @@ part 'order_direction.mapper.dart';
 @MappableEnum()
 enum OrderDirection {
   Ascending(MdiIcons.sortAscending),
-  Descending(MdiIcons.sortDescending);
+  Descending(MdiIcons.sortDescending)
+  ;
 
   final IconData icon;
 

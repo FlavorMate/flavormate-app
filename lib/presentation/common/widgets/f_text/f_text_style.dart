@@ -15,7 +15,8 @@ enum FTextStyle {
   bodySmall,
   labelLarge,
   labelMedium,
-  labelSmall;
+  labelSmall
+  ;
 
   TextStyle? geFTextStyle(BuildContext context) {
     final textTheme = context.textTheme;

@@ -15,7 +15,8 @@ enum NutritionType {
   fiber(MdiIcons.leaf, Color(0xFFB9E4C9), Color(0xFF76C7A2)),
   proteins(MdiIcons.peanutOutline, Color(0xFFA8D8EB), Color(0xFF5EB3D4)),
   salt(MdiIcons.shakerOutline, Color(0xFFE3E3E3), Color(0xFFA9A9A9)),
-  sodium(MdiIcons.flaskOutline, Color(0xFFD8C2AC), Color(0xFFC19A76));
+  sodium(MdiIcons.flaskOutline, Color(0xFFD8C2AC), Color(0xFFC19A76))
+  ;
 
   final IconData icon;
   final Color colorLight;

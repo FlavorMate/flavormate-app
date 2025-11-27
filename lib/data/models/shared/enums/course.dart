@@ -12,7 +12,8 @@ enum Course {
   Dessert(MdiIcons.cookie),
   SideDish(MdiIcons.bowlMix),
   Bakery(MdiIcons.baguette),
-  Drink(MdiIcons.beer);
+  Drink(MdiIcons.beer)
+  ;
 
   final IconData icon;
 

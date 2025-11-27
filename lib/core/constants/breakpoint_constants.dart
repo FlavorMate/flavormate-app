@@ -5,7 +5,8 @@ enum FBreakpoint {
   sm(smValue),
   md(mdValue),
   lg(lgValue),
-  xl(xlValue);
+  xl(xlValue)
+  ;
 
   static const double xsValue = 325;
   static const double smValue = 600;

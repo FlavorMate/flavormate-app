@@ -1,21 +1,11 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
-import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_nutrition.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
-import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_unit_conversions.dart';
-import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/layouts/f_recipe_desktop_layout.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/layouts/f_recipe_mobile_layout.dart';
-import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_author.dart';
-import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_categories.dart';
-import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_information.dart';
-import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_published.dart';
-import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_tags.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,6 +13,7 @@ class FRecipe extends ConsumerStatefulWidget {
   final CommonRecipe recipe;
   final bool enableBookmark;
   final bool enableBring;
+  final bool enableReview;
   final bool readOnly;
   final bool hasFab;
 
@@ -30,16 +21,19 @@ class FRecipe extends ConsumerStatefulWidget {
 
   final VoidCallback? addToBring;
   final VoidCallback? addBookmark;
+  final Function(double?)? setRating;
 
   const FRecipe({
     super.key,
     required this.recipe,
     required this.enableBookmark,
     required this.enableBring,
+    required this.enableReview,
     required this.readOnly,
     required this.showAllFiles,
     this.addToBring,
     this.addBookmark,
+    this.setRating,
     this.hasFab = false,
   });
 
@@ -66,80 +60,45 @@ class _FRecipeState extends ConsumerState<FRecipe> {
       builder: (_, constraints) {
         final useDesktop = FBreakpoint.gt(context, FBreakpoint.md);
 
-        return FResponsive(
-          maxWidth: useDesktop ? FBreakpoint.lgValue : constraints.maxWidth,
-          child: Column(
-            spacing: PADDING,
-            children: [
-              if (widget.recipe.files.isNotEmpty)
-                FCarousel(
-                  data: widget.recipe.files.toList(),
-                  coverSelector: (image, resolution) => image.url(resolution),
-                  onTap: (s) => context.showFullscreenImage(
-                    s.url(ImageWideResolution.Original),
-                  ),
-                  onShowAll: widget.showAllFiles,
-                ),
-              if (useDesktop)
-                FRecipeDesktopLayout(
-                  recipe: widget.recipe,
-                  nutrition: calculateNutrition(widget.recipe),
-                  amountFactor: amountFactor,
-                  newAmount: newAmount,
-                  decreaseServing: decreaseFactor,
-                  increaseServing: increaseFactor,
-                  enableBring: widget.enableBring,
-                  enableBookmark: widget.enableBookmark,
-                  addToBring: widget.addToBring,
-                  addBookmark: widget.addBookmark,
-                ),
-              if (!useDesktop)
-                FRecipeMobileLayout(
-                  recipe: widget.recipe,
-                  nutrition: calculateNutrition(widget.recipe),
-                  amountFactor: amountFactor,
-                  newAmount: newAmount,
-                  decreaseServing: decreaseFactor,
-                  increaseServing: increaseFactor,
-                  enableBring: widget.enableBring,
-                  enableBookmark: widget.enableBookmark,
-                  addToBring: widget.addToBring,
-                  addBookmark: widget.addBookmark,
-                ),
-              const Divider(),
-              FRecipeInformation(
-                course: widget.recipe.course,
-                diet: widget.recipe.diet,
-              ),
-              if (widget.recipe.categories.isNotEmpty) ...[
-                const Divider(),
-                FRecipeCategories(
-                  readOnly: widget.readOnly,
-                  categories: widget.recipe.categories,
-                ),
-              ],
-              if (widget.recipe.tags.isNotEmpty) ...[
-                const Divider(),
-                FRecipeTags(
-                  readOnly: widget.readOnly,
-                  tags: widget.recipe.tags,
-                ),
-              ],
-              const Divider(),
-              FRecipeAuthor(
-                readOnly: widget.readOnly,
-                account: widget.recipe.ownedBy,
-              ),
-              const Divider(),
-              FRecipePublished(
-                createdOn: widget.recipe.createdOn,
-                version: widget.recipe.version,
-                url: widget.recipe.url,
-              ),
-              if (widget.hasFab) const SizedBox(height: 56),
-            ],
-          ),
-        );
+        if (useDesktop) {
+          return FRecipeDesktopLayout(
+            recipe: widget.recipe,
+            enableBookmark: widget.enableBookmark,
+            enableBring: widget.enableBring,
+            enableReview: widget.enableReview,
+            readOnly: widget.readOnly,
+            hasFab: widget.hasFab,
+            showAllFiles: widget.showAllFiles,
+            addToBring: widget.addToBring,
+            addBookmark: widget.addBookmark,
+            setRating: widget.setRating,
+
+            nutrition: calculateNutrition(widget.recipe),
+            amountFactor: amountFactor,
+            newAmount: newAmount,
+            decreaseServing: decreaseFactor,
+            increaseServing: increaseFactor,
+          );
+        } else {
+          return FRecipeMobileLayout(
+            recipe: widget.recipe,
+            enableBookmark: widget.enableBookmark,
+            enableBring: widget.enableBring,
+            enableReview: widget.enableReview,
+            readOnly: widget.readOnly,
+            hasFab: widget.hasFab,
+            showAllFiles: widget.showAllFiles,
+            addToBring: widget.addToBring,
+            addBookmark: widget.addBookmark,
+            setRating: widget.setRating,
+
+            nutrition: calculateNutrition(widget.recipe),
+            amountFactor: amountFactor,
+            newAmount: newAmount,
+            decreaseServing: decreaseFactor,
+            increaseServing: increaseFactor,
+          );
+        }
       },
     );
   }

@@ -1,6 +1,7 @@
 enum SearchState {
   storyEditor,
-  unused;
+  unused
+  ;
 
   String getId(String id) => '${name}_$id';
 }

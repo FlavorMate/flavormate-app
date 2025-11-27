@@ -8,6 +8,10 @@ class FRecipeDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FText(description, style: FTextStyle.bodyMedium);
+    return FText(
+      description,
+      style: FTextStyle.bodyMedium,
+      textAlign: .center,
+    );
   }
 }
