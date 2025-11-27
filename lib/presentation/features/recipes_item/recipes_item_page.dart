@@ -49,9 +49,8 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final ratingsEnabled = ref.watch(pFeatureRatingsProvider);
-    
+
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, data) => FAppBar(
