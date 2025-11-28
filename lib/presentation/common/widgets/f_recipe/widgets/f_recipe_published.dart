@@ -101,6 +101,6 @@ class FRecipePublished extends StatelessWidget {
 
     if (response != true) return;
 
-    launchUrl(Uri.parse(url!));
+    launchUrl(Uri.parse(url!),mode: LaunchMode.externalApplication);
   }
 }

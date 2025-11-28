@@ -97,7 +97,8 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
     if (!mounted) return;
     context.pop();
 
-    if (uri == null || !await launchUrl(uri)) {
+    if (uri == null ||
+        !await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       if (!mounted) return;
       context.showTextSnackBar(
         L10n.of(context).recipes_item_page__bring_on_error,
