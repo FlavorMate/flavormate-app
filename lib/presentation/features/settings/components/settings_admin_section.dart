@@ -20,6 +20,7 @@ class SettingsAdminSection extends StatelessWidget {
           FText(
             L10n.of(context).settings_admin_section__title,
             style: FTextStyle.headlineMedium,
+            weight: .w500,
           ),
           FIconButton(
             width: BUTTON_WIDTH,

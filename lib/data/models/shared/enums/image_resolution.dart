@@ -30,7 +30,8 @@ enum ImageSquareResolution {
   Original(
     width: 4096,
     height: 4096,
-  );
+  )
+  ;
 
   final int width;
   final int height;
@@ -61,7 +62,8 @@ enum ImageWideResolution {
   Original(
     width: 4096,
     height: 4096,
-  );
+  )
+  ;
 
   final int width;
   final int height;

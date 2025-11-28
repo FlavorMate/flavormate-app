@@ -2,6 +2,7 @@ import 'package:flavormate/core/config/features/p_feature_bring.dart';
 import 'package:flavormate/core/config/features/p_feature_share.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
+import 'package:flavormate/data/repositories/extension/ratings/p_rest_ratings_id.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_id.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_unit_conversions.dart';
@@ -48,5 +49,9 @@ class PRecipesItemPage extends _$PRecipesItemPage {
 
   Future<ApiResponse<String>> shareRecipe() async {
     return await ref.read(pRestRecipesIdProvider(id).notifier).shareRecipe();
+  }
+
+  Future<ApiResponse<void>> setRating(double? val) async {
+    return await ref.read(pRestRatingsIdProvider(id).notifier).setRating(val);
   }
 }

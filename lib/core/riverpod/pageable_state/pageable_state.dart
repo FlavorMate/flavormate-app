@@ -23,7 +23,8 @@ enum PageableState {
   storyDrafts,
   recipeAddBook,
   recipeAccountList,
-  unused;
+  unused
+  ;
 
   String getId(String id) => '${name}_$id';
 }

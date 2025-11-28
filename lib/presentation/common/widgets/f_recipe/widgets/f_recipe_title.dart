@@ -12,6 +12,7 @@ class FRecipeTitle extends StatelessWidget {
       title,
       style: FTextStyle.displaySmall,
       textAlign: TextAlign.center,
+      weight: FontWeight.bold,
     );
   }
 }

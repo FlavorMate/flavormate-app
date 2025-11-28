@@ -19,6 +19,7 @@ abstract class ApiConstants {
 
   static const ExtensionBring = '$Root/bring';
   static const ExtensionOIDC = '$Root/oidc';
+  static const ExtensionRatings = '$Root/ratings';
   static const ExtensionScrape = '$Root/scraper';
   static const ExtensionShare = '$Root/share';
 

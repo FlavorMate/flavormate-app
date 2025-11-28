@@ -15,7 +15,8 @@ enum OrderBy {
 
   // Only used for AccountEntity
   DisplayName(MdiIcons.labelOutline),
-  Username(MdiIcons.accountOutline);
+  Username(MdiIcons.accountOutline)
+  ;
 
   final IconData icon;
 

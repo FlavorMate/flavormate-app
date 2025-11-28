@@ -10,7 +10,8 @@ enum Diet {
   Meat(MdiIcons.foodDrumstick),
   Fish(MdiIcons.fish),
   Vegetarian(MdiIcons.eggFried),
-  Vegan(MdiIcons.foodApple);
+  Vegan(MdiIcons.foodApple)
+  ;
 
   final IconData icon;
 

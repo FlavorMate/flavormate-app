@@ -26,7 +26,11 @@ class FRecipeIngredientList extends StatelessWidget {
       spacing: PADDING,
       children: [
         if (ingredientGroup.label != null)
-          FText(ingredientGroup.label!, style: FTextStyle.titleLarge),
+          FText(
+            ingredientGroup.label!,
+            style: FTextStyle.titleLarge,
+            weight: FontWeight.w500,
+          ),
 
         FTable(
           header: [

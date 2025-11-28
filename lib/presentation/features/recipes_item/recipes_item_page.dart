@@ -1,3 +1,4 @@
+import 'package:flavormate/core/config/features/p_feature_ratings.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
@@ -48,6 +49,8 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ratingsEnabled = ref.watch(pFeatureRatingsProvider);
+
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, data) => FAppBar(
@@ -72,8 +75,10 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
         recipe: data.recipe,
         enableBookmark: true,
         enableBring: data.isBringEnabled,
+        enableReview: ratingsEnabled,
         addToBring: addToBring,
         addBookmark: () => addToBook(data.recipe),
+        setRating: (val) => setRating(val),
         showAllFiles: () => context.routes.recipesItemFiles(data.recipe.id),
         readOnly: false,
       ),
@@ -105,6 +110,17 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
       context: context,
       builder: (_) => RecipesItemSaveInBookDialog(recipe: recipe),
     );
+  }
+
+  Future<void> setRating(double? val) async {
+    context.showLoadingDialog();
+
+    final response = await ref.read(widget.provider.notifier).setRating(val);
+
+    if (!mounted) return;
+    context.pop();
+
+    print(response);
   }
 
   void decreaseFactor() {

@@ -21,6 +21,7 @@ class SettingsMiscSection extends ConsumerWidget {
           FText(
             L10n.of(context).settings_misc_section__title,
             style: FTextStyle.headlineMedium,
+            weight: .w500,
           ),
           FIconButton(
             onPressed: () => context.routes.settingsTheme(),
