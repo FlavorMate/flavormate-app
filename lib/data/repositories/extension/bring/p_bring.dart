@@ -32,7 +32,11 @@ class PBring extends _$PBring {
 
       final url = jsonDecode(deepLink.body)['deeplink'];
 
-      return Uri.parse(url);
+      final uri = Uri.parse(url);
+      
+      final redirectionLink = uri.queryParameters['deep_link_value']!;
+
+      return Uri.parse(redirectionLink);
     } catch (_) {
       return null;
     }
