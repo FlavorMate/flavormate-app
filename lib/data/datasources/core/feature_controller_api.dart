@@ -11,9 +11,14 @@ class FeatureControllerApi extends ControllerApi {
   Future<ApiResponse<List<FeatureType>>> getFeatures() async {
     return await get(
       url: '$_root/',
-      mapper: (data) => List<dynamic>.from(
-        data,
-      ).map(FeatureTypeMapper.fromValue).toList(),
+      mapper: (data) {
+        /// If the server provides more Features that the app knows, ignore them.
+        final values = FeatureType.values.map((it) => it.name);
+        return List<dynamic>.from(data)
+            .where((data) => values.contains(data))
+            .map(FeatureTypeMapper.fromValue)
+            .toList();
+      },
     );
   }
 }

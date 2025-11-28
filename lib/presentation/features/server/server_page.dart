@@ -129,8 +129,7 @@ class _ServerPageState extends ConsumerState<ServerPage> {
 
   void openHelp() async {
     final uri = Uri.parse(FLAVORMATE_GETTING_STARTED);
-    if (await canLaunchUrl(uri)) {
-      launchUrl(uri);
-    }
+
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 }
