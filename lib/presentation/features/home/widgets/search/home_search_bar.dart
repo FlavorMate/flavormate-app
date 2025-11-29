@@ -96,6 +96,10 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
       ),
       suggestionsBuilder: (_, _) => [],
       viewOnChanged: onChange,
+      viewOnClose: () async {
+        await Future.delayed(Duration.zero);
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
     );
   }
 
