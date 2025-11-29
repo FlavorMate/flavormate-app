@@ -104,7 +104,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       ),
       bottomNavigationBar: SafeArea(
         child: SizedBox(
-          height: 70,
+          height: 76,
           child: AnimatedOpacity(
             opacity: _showLogout ? 1 : 0,
             duration: const Duration(seconds: 1),
