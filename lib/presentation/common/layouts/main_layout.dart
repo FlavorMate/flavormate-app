@@ -1,6 +1,5 @@
 import 'package:flavormate/data/models/local/destination.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
-import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
@@ -58,27 +57,28 @@ class MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     final destinations = buildDestinations(context);
     return Scaffold(
-      appBar: FAppBar(title: L10n.of(context).flavormate, showHome: false),
-      body: Row(
-        children: [
-          if (wideScreen)
-            SizedBox(
-              width: _drawerWidth,
-              child: NavigationDrawer(
-                onDestinationSelected: _goBranch,
-                selectedIndex: widget.navigationShell.currentIndex,
-                children: [
-                  const SizedBox(height: 12),
-                  for (var destination in destinations)
-                    NavigationDrawerDestination(
-                      icon: Icon(destination.icon),
-                      label: Text(destination.label),
-                    ),
-                ],
+      body: SafeArea(
+        child: Row(
+          children: [
+            if (wideScreen)
+              SizedBox(
+                width: _drawerWidth,
+                child: NavigationDrawer(
+                  onDestinationSelected: _goBranch,
+                  selectedIndex: widget.navigationShell.currentIndex,
+                  children: [
+                    const SizedBox(height: 12),
+                    for (var destination in destinations)
+                      NavigationDrawerDestination(
+                        icon: Icon(destination.icon),
+                        label: Text(destination.label),
+                      ),
+                  ],
+                ),
               ),
-            ),
-          Expanded(child: widget.navigationShell),
-        ],
+            Expanded(child: widget.navigationShell),
+          ],
+        ),
       ),
       bottomNavigationBar: wideScreen
           ? null

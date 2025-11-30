@@ -41,47 +41,60 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        FFixedResponsive(
-          child: FPageable(
-            provider: provider,
-            pageProvider: widget.providerPage,
-            padding: 0,
-            filterBuilder: (padding) => FPageableSort(
-              currentOrderBy: orderBy,
-              currentDirection: orderDirection,
-              setOrderBy: setOrderBy,
-              setOrderDirection: setOrderDirection,
-              options: const [
-                OrderBy.Label,
-                OrderBy.CreatedOn,
-                OrderBy.Visible,
-              ],
-              padding: padding,
+        Column(
+          children: [
+            AppBar(
+              title: const Text('FlavorMate'),
+              centerTitle: true,
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              surfaceTintColor: Colors.transparent,
             ),
-
-            builder: (_, library) => FWrap(
-              children: [
-                for (final book in library)
-                  FImageCard.maximized(
-                    label: book.label,
-                    subLabel: book.visible
-                        ? L10n.of(context).library_page__book_public
-                        : L10n.of(context).library_page__book_private,
-                    coverSelector: (resolution) => book.cover?.url(resolution),
-                    width: 400,
-                    onTap: () => context.routes.libraryItem(book.id),
+            Expanded(
+              child: FFixedResponsive(
+                child: FPageable(
+                  provider: provider,
+                  pageProvider: widget.providerPage,
+                  padding: 0,
+                  filterBuilder: (padding) => FPageableSort(
+                    currentOrderBy: orderBy,
+                    currentDirection: orderDirection,
+                    setOrderBy: setOrderBy,
+                    setOrderDirection: setOrderDirection,
+                    options: const [
+                      OrderBy.Label,
+                      OrderBy.CreatedOn,
+                      OrderBy.Visible,
+                    ],
+                    padding: padding,
                   ),
-              ],
+
+                  builder: (_, library) => FWrap(
+                    children: [
+                      for (final book in library)
+                        FImageCard.maximized(
+                          label: book.label,
+                          subLabel: book.visible
+                              ? L10n.of(context).library_page__book_public
+                              : L10n.of(context).library_page__book_private,
+                          coverSelector: (resolution) =>
+                              book.cover?.url(resolution),
+                          width: 400,
+                          onTap: () => context.routes.libraryItem(book.id),
+                        ),
+                    ],
+                  ),
+                  onEmpty: FEmptyMessage(
+                    icon: MdiIcons.bookOffOutline,
+                    title: L10n.of(context).library_page__on_empty,
+                  ),
+                  onError: FEmptyMessage(
+                    title: L10n.of(context).library_page__on_error,
+                    icon: StateIconConstants.books.errorIcon,
+                  ),
+                ),
+              ),
             ),
-            onEmpty: FEmptyMessage(
-              icon: MdiIcons.bookOffOutline,
-              title: L10n.of(context).library_page__on_empty,
-            ),
-            onError: FEmptyMessage(
-              title: L10n.of(context).library_page__on_error,
-              icon: StateIconConstants.books.errorIcon,
-            ),
-          ),
+          ],
         ),
         Positioned(
           right: 16,
