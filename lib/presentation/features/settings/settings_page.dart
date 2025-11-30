@@ -19,28 +19,43 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final packageInfo = ref.watch(pPackageInfoProvider).requireValue;
-    return FResponsive(
-      child: Column(
-        spacing: PADDING,
-        children: [
-          const SettingsAccountSection(),
-          const SettingsMiscSection(),
-          FProviderStruct(
-            provider: pRestAccountsSelfProvider,
-            builder: (_, account) => account.isAdmin
-                ? const SettingsAdminSection()
-                : const SizedBox.shrink(),
-            onError: FEmptyMessage(
-              title: L10n.of(context).settings_page__on_error,
-              icon: StateIconConstants.authors.errorIcon,
+    return Column(
+      children: [
+        AppBar(
+          title: const Text('FlavorMate'),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          surfaceTintColor: Colors.transparent,
+        ),
+        Expanded(
+          child: FResponsive(
+            child: Column(
+              spacing: PADDING,
+              children: [
+                const SettingsAccountSection(),
+                const SettingsMiscSection(),
+                FProviderStruct(
+                  provider: pRestAccountsSelfProvider,
+                  builder: (_, account) => account.isAdmin
+                      ? const SettingsAdminSection()
+                      : const SizedBox.shrink(),
+                  onError: FEmptyMessage(
+                    title: L10n.of(context).settings_page__on_error,
+                    icon: StateIconConstants.authors.errorIcon,
+                  ),
+                ),
+
+                Center(
+                  child: FText(
+                    packageInfo.version,
+                    style: FTextStyle.bodySmall,
+                  ),
+                ),
+              ],
             ),
           ),
-
-          Center(
-            child: FText(packageInfo.version, style: FTextStyle.bodySmall),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

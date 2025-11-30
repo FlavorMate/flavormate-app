@@ -16,67 +16,79 @@ class MorePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final storiesEnabled = ref.watch(pFeatureStoryProvider);
-    return FResponsive(
-      child: Column(
-        spacing: PADDING,
-        children: [
-          FCard(
-            child: Wrap(
-              direction: Axis.vertical,
+    return Column(
+      children: [
+        AppBar(
+          title: const Text('FlavorMate'),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          surfaceTintColor: Colors.transparent,
+        ),
+        Expanded(
+          child: FResponsive(
+            child: Column(
               spacing: PADDING,
-              runAlignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                FText(
-                  L10n.of(context).more_page__recipes,
-                  style: FTextStyle.headlineMedium,
-                  weight: FontWeight.w500,
-                ),
-                FIconButton(
-                  width: 250,
-                  onPressed: () => context.routes.categories(),
-                  icon: MdiIcons.archive,
-                  label: L10n.of(context).more_page__categories,
-                ),
-                FIconButton(
-                  width: 250,
-                  onPressed: () => context.routes.tags(),
-                  icon: MdiIcons.tag,
-                  label: L10n.of(context).more_page__tags,
-                ),
-              ],
-            ),
-          ),
-          FCard(
-            child: Wrap(
-              direction: Axis.vertical,
-              spacing: PADDING,
-              runAlignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                FText(
-                  L10n.of(context).more_page__more,
-                  style: FTextStyle.headlineMedium,
-                  weight: .w500,
-                ),
-                FIconButton(
-                  width: 250,
-                  onPressed: () => context.routes.recipeEditor(),
-                  icon: MdiIcons.bookPlus,
-                  label: L10n.of(context).more_page__recipe_editor,
-                ),
-                if (storiesEnabled)
-                  FIconButton(
-                    width: 250,
-                    onPressed: () => context.routes.storyEditor(),
-                    icon: MdiIcons.newspaperVariantOutline,
-                    label: L10n.of(context).more_page__story_editor,
+                FCard(
+                  child: Wrap(
+                    direction: Axis.vertical,
+                    spacing: PADDING,
+                    runAlignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      FText(
+                        L10n.of(context).more_page__recipes,
+                        style: FTextStyle.headlineMedium,
+                        weight: FontWeight.w500,
+                      ),
+                      FIconButton(
+                        width: 250,
+                        onPressed: () => context.routes.categories(),
+                        icon: MdiIcons.archive,
+                        label: L10n.of(context).more_page__categories,
+                      ),
+                      FIconButton(
+                        width: 250,
+                        onPressed: () => context.routes.tags(),
+                        icon: MdiIcons.tag,
+                        label: L10n.of(context).more_page__tags,
+                      ),
+                    ],
                   ),
+                ),
+                FCard(
+                  child: Wrap(
+                    direction: Axis.vertical,
+                    spacing: PADDING,
+                    runAlignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      FText(
+                        L10n.of(context).more_page__more,
+                        style: FTextStyle.headlineMedium,
+                        weight: .w500,
+                      ),
+                      FIconButton(
+                        width: 250,
+                        onPressed: () => context.routes.recipeEditor(),
+                        icon: MdiIcons.bookPlus,
+                        label: L10n.of(context).more_page__recipe_editor,
+                      ),
+                      if (storiesEnabled)
+                        FIconButton(
+                          width: 250,
+                          onPressed: () => context.routes.storyEditor(),
+                          icon: MdiIcons.newspaperVariantOutline,
+                          label: L10n.of(context).more_page__story_editor,
+                        ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

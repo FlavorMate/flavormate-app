@@ -349,10 +349,10 @@ packages:
     dependency: "direct main"
     description:
       name: data_table_2
-      sha256: a6584f7bd0d1115b9eef36c1a7181840e24a33c38bbd8255491c297502d0f2a2
+      sha256: cb31d465dcf1e1598a662d06d3d2c16c73700ae9e837a3d91588f1dda7519abc
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.1"
+    version: "2.7.2"
   dio:
     dependency: "direct main"
     description:

@@ -39,4 +39,27 @@ abstract class UImage {
 
     return resolution;
   }
+  
+  static ImageSquareResolution getSquareResolution(
+    BuildContext context,
+    double radius,
+  ) {
+
+    final factor = MediaQuery.devicePixelRatioOf(context);
+
+    final width = radius * 2 * factor;
+
+    final resolution = switch (width) {
+      <= 16 => ImageSquareResolution.P16,
+      <= 32 => ImageSquareResolution.P32,
+      <= 64 => ImageSquareResolution.P64,
+      <= 128 => ImageSquareResolution.P128,
+      <= 256 => ImageSquareResolution.P256,
+      <= 512 => ImageSquareResolution.P512,
+      <= 1024 => ImageSquareResolution.P1024,
+      _ => ImageSquareResolution.Original,
+    };
+
+    return resolution;
+  }
 }

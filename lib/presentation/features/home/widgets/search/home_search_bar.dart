@@ -14,7 +14,8 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeSearchBar extends ConsumerStatefulWidget {
-  const HomeSearchBar({super.key});
+  final double elevation;
+  const HomeSearchBar({super.key, this.elevation = 6.0});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeSearchBarState();
@@ -48,6 +49,7 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
       keyboardType: TextInputType.visiblePassword,
       searchController: _controller,
       builder: (_, controller) => SearchBar(
+        elevation: .all(widget.elevation),
         leading: const IconButton(
           icon: Icon(MdiIcons.magnify),
           onPressed: null,
@@ -96,6 +98,10 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
       ),
       suggestionsBuilder: (_, _) => [],
       viewOnChanged: onChange,
+      viewOnClose: () async {
+        await Future.delayed(Duration.zero);
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
     );
   }
 
