@@ -23,7 +23,7 @@ class HomeAppBar extends StatelessWidget {
       toolbarHeight: 64,
       titleSpacing: 0,
       title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: PADDING),
         child: Row(
           mainAxisAlignment: .spaceBetween,
           spacing: PADDING,
