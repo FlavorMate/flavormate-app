@@ -3,10 +3,10 @@ import 'package:flavormate/data/datasources/core/feature_controller_api.dart';
 import 'package:flavormate/data/models/core/features/feature_type.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'p_features.g.dart';
+part 'p_server_features.g.dart';
 
 @Riverpod(keepAlive: true)
-class PFeatures extends _$PFeatures {
+class PServerFeatures extends _$PServerFeatures {
   @override
   Future<List<FeatureType>> build() async {
     final dio = ref.watch(pDioPublicProvider);
