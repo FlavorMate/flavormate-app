@@ -76,17 +76,21 @@ abstract class RouteConstants {
   );
 
   // Settings
-  static const RouteConstant Settings = RouteConstant(
-    '/settings',
-    'settings',
+  static const RouteConstant SettingsAccount = RouteConstant(
+    '/settings/account',
+    'settings_account',
   );
-  static const RouteConstant SettingsTheme = RouteConstant(
-    '/settings/theme',
-    'settings_theme',
+  static const RouteConstant SettingsApp = RouteConstant(
+    '/settings/app',
+    'settings_app',
   );
-  static const RouteConstant SettingsImageMode = RouteConstant(
-    '/settings/image-mode',
-    'settings_image-mode',
+  static const RouteConstant SettingsAppTheme = RouteConstant(
+    '/settings/app/theme',
+    'settings_app_theme',
+  );
+  static const RouteConstant SettingsAppImageMode = RouteConstant(
+    '/settings/app/image-mode',
+    'settings_app_image-mode',
   );
 
   // Misc

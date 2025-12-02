@@ -6,15 +6,15 @@ import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsChangePasswordDialog extends StatefulWidget {
-  const SettingsChangePasswordDialog({super.key});
+class SettingsAccountPasswordDialog extends StatefulWidget {
+  const SettingsAccountPasswordDialog({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SettingsChangePasswordDialogState();
+  State<StatefulWidget> createState() => _SettingsAccountPasswordDialogState();
 }
 
-class _SettingsChangePasswordDialogState
-    extends State<SettingsChangePasswordDialog> {
+class _SettingsAccountPasswordDialogState
+    extends State<SettingsAccountPasswordDialog> {
   final _oldPasswordController = TextEditingController();
   final _newPassword1Controller = TextEditingController();
   final _newPassword2Controller = TextEditingController();
@@ -32,7 +32,7 @@ class _SettingsChangePasswordDialogState
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).settings_change_password_dialog__title,
+      title: L10n.of(context).settings_account_password_dialog__title,
       scrollable: true,
       submit: apply,
       child: Form(
@@ -45,7 +45,7 @@ class _SettingsChangePasswordDialogState
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(
-                  L10n.of(context).settings_change_password_dialog__old_pwd,
+                  L10n.of(context).settings_account_password_dialog__old_pwd,
                 ),
               ),
               obscureText: true,
@@ -63,7 +63,7 @@ class _SettingsChangePasswordDialogState
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(
-                  L10n.of(context).settings_change_password_dialog__new_pwd_1,
+                  L10n.of(context).settings_account_password_dialog__new_pwd_1,
                 ),
               ),
               obscureText: true,
@@ -84,7 +84,7 @@ class _SettingsChangePasswordDialogState
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(
-                  L10n.of(context).settings_change_password_dialog__new_pwd_2,
+                  L10n.of(context).settings_account_password_dialog__new_pwd_2,
                 ),
               ),
               obscureText: true,

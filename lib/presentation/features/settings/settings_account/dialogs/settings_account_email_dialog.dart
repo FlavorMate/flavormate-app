@@ -7,14 +7,15 @@ import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsChangeEmailDialog extends StatefulWidget {
-  const SettingsChangeEmailDialog({super.key});
+class SettingsAccountEmailDialog extends StatefulWidget {
+  const SettingsAccountEmailDialog({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SettingsChangeEmailDialogState();
+  State<StatefulWidget> createState() => _SettingsAccountEmailDialogState();
 }
 
-class _SettingsChangeEmailDialogState extends State<SettingsChangeEmailDialog> {
+class _SettingsAccountEmailDialogState
+    extends State<SettingsAccountEmailDialog> {
   final _newMail1Controller = TextEditingController();
   final _newMail2Controller = TextEditingController();
 
@@ -30,7 +31,7 @@ class _SettingsChangeEmailDialogState extends State<SettingsChangeEmailDialog> {
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).settings_change_email_dialog__title,
+      title: L10n.of(context).settings_account_email_dialog__title,
       scrollable: true,
       submit: apply,
       child: Form(
@@ -41,7 +42,7 @@ class _SettingsChangeEmailDialogState extends State<SettingsChangeEmailDialog> {
             FTextFormField(
               label: L10n.of(
                 context,
-              ).settings_change_email_dialog__new_e_mail_1,
+              ).settings_account_email_dialog__new_e_mail_1,
               controller: _newMail1Controller,
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
@@ -61,7 +62,7 @@ class _SettingsChangeEmailDialogState extends State<SettingsChangeEmailDialog> {
               controller: _newMail2Controller,
               label: L10n.of(
                 context,
-              ).settings_change_email_dialog__new_e_mail_2,
+              ).settings_account_email_dialog__new_e_mail_2,
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
               validators: (value) {

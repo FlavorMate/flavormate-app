@@ -5,7 +5,7 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/data/models/core/version/version.dart';
-import 'package:flavormate/data/repositories/core/compatibility/p_compatibility.dart';
+import 'package:flavormate/data/repositories/core/server/p_server_compatibility.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +86,7 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
   }
 
   Future<void> _checkIfServerIsCompatible(Timer timer) async {
-    final response = await ref.read(pCompatibilityProvider.future);
+    final response = await ref.read(pServerCompatibilityProvider.future);
 
     if (response != VersionComparison.majorIncompatible && mounted) {
       await context.routes.splash(replace: true);

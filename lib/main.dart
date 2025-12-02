@@ -7,6 +7,7 @@ import 'package:flavormate/core/storage/root_bundle/backend_url/p_rb_backend_url
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
 import 'package:flavormate/core/theme/providers/p_theme.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +15,7 @@ import 'package:system_theme/system_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  registerManualLicenses();
   await SystemTheme.accentColor.load();
   MapperContainer.globals.useAll(customMappers);
 
@@ -83,4 +85,27 @@ class _EagerInitialization extends ConsumerWidget {
 
     return const SizedBox();
   }
+}
+
+void registerManualLicenses() async {
+  LicenseRegistry.addLicense(() async* {
+    yield LicenseEntryWithLineBreaks(
+      ['FlavorMate App'],
+      await rootBundle.loadString('LICENSE.txt'),
+    );
+  });
+
+  LicenseRegistry.addLicense(() async* {
+    yield LicenseEntryWithLineBreaks(
+      ['Google Sans Code'],
+      await rootBundle.loadString('assets/fonts/Google_Sans_Code/OFL.txt'),
+    );
+  });
+
+  LicenseRegistry.addLicense(() async* {
+    yield LicenseEntryWithLineBreaks(
+      ['Google Sans Flex'],
+      await rootBundle.loadString('assets/fonts/Google_Sans_Flex/OFL.txt'),
+    );
+  });
 }

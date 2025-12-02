@@ -7,8 +7,8 @@ import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_but
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 
-class SettingsThemeSectionExample extends StatelessWidget {
-  const SettingsThemeSectionExample({super.key});
+class SettingsAppThemeSectionExample extends StatelessWidget {
+  const SettingsAppThemeSectionExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SettingsThemeSectionExample extends StatelessWidget {
       mainAxisAlignment: .center,
       children: [
         FText(
-          L10n.of(context).settings_theme_section_example__title,
+          L10n.of(context).settings_app_theme_section_example__title,
           style: .headlineMedium,
         ),
         Card.outlined(
@@ -33,7 +33,7 @@ class SettingsThemeSectionExample extends StatelessWidget {
                   showHome: false,
                   title: L10n.of(
                     context,
-                  ).settings_theme_section_example__app_bar,
+                  ).settings_app_theme_section_example__app_bar,
                   automaticallyImplyLeading: false,
                 ),
               ),
@@ -50,7 +50,7 @@ class SettingsThemeSectionExample extends StatelessWidget {
                     FImageCard.maximized(
                       label: L10n.of(
                         context,
-                      ).settings_theme_section_example__recipe_name,
+                      ).settings_app_theme_section_example__recipe_name,
                       coverSelector: (_) => null,
                       imageType: .asset,
                       width: 400,

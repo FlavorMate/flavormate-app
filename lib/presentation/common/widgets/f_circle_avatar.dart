@@ -7,8 +7,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class FCircleAvatar extends ConsumerWidget {
   final AccountDto account;
   final double radius;
+  final VoidCallback? onTap;
+  final Widget? child;
 
-  const FCircleAvatar({super.key, required this.account, this.radius = 20});
+  const FCircleAvatar({
+    super.key,
+    required this.account,
+    this.radius = 20,
+    this.onTap,
+    this.child,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,11 +28,23 @@ class FCircleAvatar extends ConsumerWidget {
       pCachedImageProvider(account.avatar?.url(resolution)),
     );
 
-    return CircleAvatar(
-      minRadius: radius,
-      maxRadius: radius,
-      foregroundImage: image.value,
-      child: Text(initials),
+    return InkWell(
+      borderRadius: .circular(128),
+      onTap: onTap,
+      child: Stack(
+        children: [
+          CircleAvatar(
+            radius: radius,
+            child: CircleAvatar(
+              minRadius: radius - (radius * 0.075),
+              maxRadius: radius - (radius * 0.075),
+              foregroundImage: image.value,
+              child: Text(initials),
+            ),
+          ),
+          ?child,
+        ],
+      ),
     );
   }
 }

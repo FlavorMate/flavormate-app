@@ -2,11 +2,12 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
+import 'package:flavormate/presentation/features/home/widgets/home_account_dialog.dart';
 import 'package:flavormate/presentation/features/home/widgets/search/home_search_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget {
-  final AccountDto? account;
+  final AccountFullDto? account;
 
   const HomeAppBar({super.key, required this.account});
 
@@ -22,7 +23,7 @@ class HomeAppBar extends StatelessWidget {
       toolbarHeight: 64,
       titleSpacing: 0,
       title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: PADDING),
         child: Row(
           mainAxisAlignment: .spaceBetween,
           spacing: PADDING,
@@ -35,11 +36,35 @@ class HomeAppBar extends StatelessWidget {
 
             SizedBox(
               width: 40,
-              child: account?.let((it) => FCircleAvatar(account: it)),
+              child: account?.let(
+                (it) => FCircleAvatar(
+                  account: it,
+                  onTap: () => showModal(context, it),
+                ),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void showModal(BuildContext context, AccountFullDto account) {
+    showGeneralDialog(
+      fullscreenDialog: true,
+      barrierDismissible: true,
+      barrierLabel: 'dismiss account dialog',
+      context: context,
+      pageBuilder: (context, _, _) => const HomeAccountDialog(),
+      transitionBuilder: (context, anim1, anim2, child) {
+        return SlideTransition(
+          position: Tween(
+            begin: const Offset(1, 0),
+            end: const Offset(0, 0),
+          ).animate(anim1),
+          child: child,
+        );
+      },
     );
   }
 }

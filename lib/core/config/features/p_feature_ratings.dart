@@ -1,5 +1,5 @@
 import 'package:flavormate/data/models/core/features/feature_type.dart';
-import 'package:flavormate/data/repositories/core/features/p_features.dart';
+import 'package:flavormate/data/repositories/core/server/p_server_features.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_feature_ratings.g.dart';
@@ -8,7 +8,7 @@ part 'p_feature_ratings.g.dart';
 class PFeatureRatings extends _$PFeatureRatings {
   @override
   bool build() {
-    final features = ref.watch(pFeaturesProvider).requireValue;
+    final features = ref.watch(pServerFeaturesProvider).requireValue;
 
     return features.contains(FeatureType.Ratings);
   }

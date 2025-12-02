@@ -394,12 +394,20 @@ class Routes {
     }
   }
 
-  Future settingsTheme() {
-    return context.pushNamed(RouteConstants.SettingsTheme.name);
+  Future settingsAccount() {
+    return context.pushNamed(RouteConstants.SettingsAccount.name);
   }
 
-  Future settingsImageMode() {
-    return context.pushNamed(RouteConstants.SettingsImageMode.name);
+  Future settingsApp() {
+    return context.pushNamed(RouteConstants.SettingsApp.name);
+  }
+
+  Future settingsAppTheme() {
+    return context.pushNamed(RouteConstants.SettingsAppTheme.name);
+  }
+
+  Future settingsAppImageMode() {
+    return context.pushNamed(RouteConstants.SettingsAppImageMode.name);
   }
 
   Future storyEditorItemPreview(String id) async {
