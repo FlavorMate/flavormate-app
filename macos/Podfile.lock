@@ -7,8 +7,6 @@ PODS:
   - AppAuth/Core (2.0.0)
   - AppAuth/ExternalUserAgent (2.0.0):
     - AppAuth/Core
-  - dynamic_color (0.0.2):
-    - FlutterMacOS
   - file_selector_macos (0.0.1):
     - FlutterMacOS
   - flutter_appauth (0.0.1):
@@ -35,7 +33,6 @@ PODS:
 
 DEPENDENCIES:
   - app_links (from `Flutter/ephemeral/.symlinks/plugins/app_links/macos`)
-  - dynamic_color (from `Flutter/ephemeral/.symlinks/plugins/dynamic_color/macos`)
   - file_selector_macos (from `Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos`)
   - flutter_appauth (from `Flutter/ephemeral/.symlinks/plugins/flutter_appauth/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
@@ -54,8 +51,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   app_links:
     :path: Flutter/ephemeral/.symlinks/plugins/app_links/macos
-  dynamic_color:
-    :path: Flutter/ephemeral/.symlinks/plugins/dynamic_color/macos
   file_selector_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos
   flutter_appauth:
@@ -80,7 +75,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   app_links: 05a6ec2341985eb05e9f97dc63f5837c39895c3f
   AppAuth: 1c1a8afa7e12f2ec3a294d9882dfa5ab7d3cb063
-  dynamic_color: cb7c2a300ee67ed3bd96c3e852df3af0300bf610
   file_selector_macos: 9e9e068e90ebee155097d00e89ae91edb2374db7
   flutter_appauth: 84cbf57c7926a898a612726e99241a031e33fac3
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1

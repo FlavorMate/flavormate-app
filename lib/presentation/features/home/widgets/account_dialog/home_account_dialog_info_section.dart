@@ -27,16 +27,20 @@ class HomeAccountDialogInfoSection extends ConsumerWidget {
       child: Column(
         children: [
           Row(
+            spacing: PADDING,
             mainAxisAlignment: .spaceBetween,
             children: [
               FText(
                 L10n.of(context).home_account_dialog_info_section__server_url,
                 style: .bodyMedium,
               ),
-              FText(
-                server!,
-                style: .bodyMedium,
-                fontFamily: .monospace,
+              Flexible(
+                child: FText(
+                  server!,
+                  style: .bodyMedium,
+                  fontFamily: .monospace,
+                  textOverflow: .ellipsis,
+                ),
               ),
             ],
           ),

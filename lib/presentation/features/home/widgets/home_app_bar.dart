@@ -52,13 +52,15 @@ class HomeAppBar extends StatelessWidget {
   void showModal(BuildContext context, AccountFullDto account) {
     showGeneralDialog(
       fullscreenDialog: true,
+      barrierDismissible: true,
+      barrierLabel: 'dismiss account dialog',
       context: context,
       pageBuilder: (context, _, _) => const HomeAccountDialog(),
       transitionBuilder: (context, anim1, anim2, child) {
         return SlideTransition(
           position: Tween(
-            begin: Offset(1, 0),
-            end: Offset(0, 0),
+            begin: const Offset(1, 0),
+            end: const Offset(0, 0),
           ).animate(anim1),
           child: child,
         );

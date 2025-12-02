@@ -34,80 +34,80 @@ class HomeAccountDialog extends StatelessWidget {
         icon: StateIconConstants.authors.errorIcon,
       ),
       builder: (context, account) {
-        return LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            final desktop = constraints.maxWidth > FBreakpoint.smValue;
+        final size = MediaQuery.sizeOf(context);
+        final width = size.width > FBreakpoint.smValue ? 450.0 : null;
 
-            final w = Scaffold(
-              appBar: AppBar(
-                automaticallyImplyLeading: false,
-                title: FText(
-                  account.username,
-                  style: .bodyLarge,
-                  weight: .w500,
-                ),
-                actions: [
-                  IconButton(
-                    onPressed: () => context.pop(),
-                    icon: const Icon(MdiIcons.close),
+        return Align(
+          alignment: .centerRight,
+          child: SizedBox(
+            width: width,
+            child: Center(
+              child: Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  title: FText(
+                    account.username,
+                    style: .bodyLarge,
+                    weight: .w500,
                   ),
-                ],
-              ),
-              body: SafeArea(
-                child: FResponsive(
-                  child: Column(
-                    spacing: PADDING,
-                    children: [
-                      HomeAccountDialogAccountSection(account: account),
+                  actions: [
+                    IconButton(
+                      onPressed: () => context.pop(),
+                      icon: const Icon(MdiIcons.close),
+                    ),
+                  ],
+                ),
+                body: SafeArea(
+                  child: FResponsive(
+                    child: Column(
+                      spacing: PADDING,
+                      children: [
+                        HomeAccountDialogAccountSection(account: account),
 
-                      FTileGroup(
-                        items: [
-                          FTile(
-                            label: L10n.of(
-                              context,
-                            ).home_account_dialog__my_profile,
-                            icon: MdiIcons.accountOutline,
-                            onTap: () => openAccount(context, account.id),
-                          ),
-                        ],
-                      ),
-
-                      const HomeAccountDialogSettingsSection(),
-
-                      if (account.isAdmin)
-                        const HomeAccountDialogAdminSection(),
-
-                      const HomeAccountDialogInfoSection(),
-
-                      Row(
-                        mainAxisAlignment: .center,
-                        children: [
-                          TextButton(
-                            onPressed: openGitHub,
-                            child: const Text('GitHub'),
-                          ),
-                          const Text('-'),
-                          TextButton(
-                            onPressed: () => openLicences(context),
-                            child: Text(
-                              L10n.of(context).home_account_dialog__licences,
+                        FTileGroup(
+                          items: [
+                            FTile(
+                              label: L10n.of(
+                                context,
+                              ).home_account_dialog__my_profile,
+                              icon: MdiIcons.accountOutline,
+                              onTap: () => openAccount(context, account.id),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+
+                        const HomeAccountDialogSettingsSection(),
+
+                        if (account.isAdmin)
+                          const HomeAccountDialogAdminSection(),
+
+                        const HomeAccountDialogInfoSection(),
+
+                        Row(
+                          mainAxisAlignment: .center,
+                          children: [
+                            TextButton(
+                              onPressed: openGitHub,
+                              child: const Text('GitHub'),
+                            ),
+                            const Text('-'),
+                            TextButton(
+                              onPressed: () => openLicences(context),
+                              child: Text(
+                                L10n.of(
+                                  context,
+                                ).home_account_dialog__licences,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            );
-
-            return desktop
-                ? Align(
-                    alignment: .centerRight,
-                    child: SizedBox(width: 600, child: w),
-                  )
-                : w;
-          },
+            ),
+          ),
         );
       },
     );
