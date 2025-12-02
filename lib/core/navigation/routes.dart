@@ -44,9 +44,10 @@ import 'package:flavormate/presentation/features/recipes_item/recipes_item_page.
 import 'package:flavormate/presentation/features/recipes_item/subpages/recipes_item_files_page.dart';
 import 'package:flavormate/presentation/features/server/server_page.dart';
 import 'package:flavormate/presentation/features/server_outdated/server_outdated_page.dart';
-import 'package:flavormate/presentation/features/settings/settings_page.dart';
-import 'package:flavormate/presentation/features/settings/subpages/image_mode/settings_image_mode_page.dart';
-import 'package:flavormate/presentation/features/settings/subpages/theme/settings_theme_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_account/settings_account_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/settings_app_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/subpages/image_mode/settings_app_image_mode_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/settings_app_theme_page.dart';
 import 'package:flavormate/presentation/features/splash/splash_page.dart';
 import 'package:flavormate/presentation/features/stories_item/stories_item_page.dart';
 import 'package:flavormate/presentation/features/story_editor/story_editor_page.dart';
@@ -74,11 +75,6 @@ var routes = [
       ),
       StatefulShellBranch(
         routes: [_createRoute(RouteConstants.More, (_) => const MorePage())],
-      ),
-      StatefulShellBranch(
-        routes: [
-          _createRoute(RouteConstants.Settings, (_) => const SettingsPage()),
-        ],
       ),
     ],
   ),
@@ -123,10 +119,22 @@ var routes = [
   ),
 
   // Settings
-  _createRoute(RouteConstants.SettingsTheme, (_) => const SettingsThemePage()),
+  // Settings Account
   _createRoute(
-    RouteConstants.SettingsImageMode,
-    (_) => const SettingsImageModePage(),
+    RouteConstants.SettingsAccount,
+    (_) => const SettingsAccountPage(),
+  ),
+  // Settings App
+  _createRoute(RouteConstants.SettingsApp, (_) => const SettingsAppPage()),
+
+  // Settings App
+  _createRoute(
+    RouteConstants.SettingsAppTheme,
+    (_) => const SettingsAppThemePage(),
+  ),
+  _createRoute(
+    RouteConstants.SettingsAppImageMode,
+    (_) => const SettingsAppImageModePage(),
   ),
 
   // Admin
