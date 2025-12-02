@@ -92,11 +92,11 @@ class HomeAccountDialog extends StatelessWidget {
                             ),
                             const Text('-'),
                             TextButton(
-                              onPressed: () => openLicences(context),
+                              onPressed: () => openLicenses(context),
                               child: Text(
                                 L10n.of(
                                   context,
-                                ).home_account_dialog__licences,
+                                ).home_account_dialog__licenses,
                               ),
                             ),
                           ],
@@ -125,9 +125,12 @@ class HomeAccountDialog extends StatelessWidget {
     );
   }
 
-  void openLicences(
+  void openLicenses(
     BuildContext context,
   ) {
-    // context.routes.licences();
+    showLicensePage(
+      context: context,
+      applicationName: 'FlavorMate',
+    );
   }
 }

@@ -236,7 +236,7 @@
   "f_search_no_result__title": "Keine Ergebnisse",
   "f_search_term_too_short__title": "Suchbegriff zu kurz",
   "flavormate": "FlavorMate",
-  "home_account_dialog__licences": "Lizenzen",
+  "home_account_dialog__licenses": "Lizenzen",
   "home_account_dialog__my_profile": "Mein Profil",
   "home_account_dialog__on_error": "Fehler beim Laden des Accounts",
   "home_account_dialog_account_section__change_avatar_failure": "Profilbild wurde nicht geändert",
