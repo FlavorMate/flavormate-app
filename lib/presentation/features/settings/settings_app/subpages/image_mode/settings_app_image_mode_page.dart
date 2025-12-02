@@ -6,12 +6,12 @@ import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flavormate/presentation/features/settings/subpages/image_mode/widgets/settings_image_mode_example.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/subpages/image_mode/widgets/settings_app_image_mode_example.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsImageModePage extends ConsumerWidget {
-  const SettingsImageModePage({super.key});
+class SettingsAppImageModePage extends ConsumerWidget {
+  const SettingsAppImageModePage({super.key});
 
   final PSettingsImageModeProvider provider = pSettingsImageModeProvider;
 
@@ -21,7 +21,7 @@ class SettingsImageModePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: FAppBar(
-        title: L10n.of(context).settings_image_mode_page__title,
+        title: L10n.of(context).settings_app_image_mode_page__title,
       ),
       body: SafeArea(
         child: FResponsive(
@@ -29,28 +29,28 @@ class SettingsImageModePage extends ConsumerWidget {
             spacing: PADDING,
             children: [
               FText(
-                L10n.of(context).settings_image_mode_page__hint_1,
+                L10n.of(context).settings_app_image_mode_page__hint_1,
                 style: .bodyLarge,
               ),
-              SettingsImageModeExample(
+              SettingsAppImageModeExample(
                 label: L10n.of(
                   context,
-                ).settings_image_mode_page__fit_mode,
+                ).settings_app_image_mode_page__fit_mode,
                 hint: L10n.of(
                   context,
-                ).settings_image_mode_page__hint_2,
+                ).settings_app_image_mode_page__hint_2,
                 image: Assets.images.settings.imageMode.a169.path,
                 value: SpSettingsImageMode.FitMode,
                 state: state == SpSettingsImageMode.FitMode,
                 onTap: (val) => setMode(ref, val),
               ),
-              SettingsImageModeExample(
+              SettingsAppImageModeExample(
                 label: L10n.of(
                   context,
-                ).settings_image_mode_page__fill_mode,
+                ).settings_app_image_mode_page__fill_mode,
                 hint: L10n.of(
                   context,
-                ).settings_image_mode_page__hint_3,
+                ).settings_app_image_mode_page__hint_3,
                 image: Assets.images.settings.imageMode.original.path,
                 value: SpSettingsImageMode.FillMode,
                 state: state == SpSettingsImageMode.FillMode,

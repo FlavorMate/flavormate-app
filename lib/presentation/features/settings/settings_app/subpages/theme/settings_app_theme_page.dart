@@ -13,22 +13,22 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_scrollable_h.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flavormate/presentation/features/settings/subpages/theme/widgets/settings_theme_color_card.dart';
-import 'package:flavormate/presentation/features/settings/subpages/theme/widgets/settings_theme_section_example.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_color_card.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_section_example.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsThemePage extends ConsumerStatefulWidget {
-  const SettingsThemePage({super.key});
+class SettingsAppThemePage extends ConsumerStatefulWidget {
+  const SettingsAppThemePage({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _ChangeThemeDialogState();
+      _SettingsAppThemePageState();
 }
 
-class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
+class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
   late Set<FThemeMode> _selection;
   Color _color = Colors.red;
 
@@ -95,7 +95,7 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
       data: _theme,
       child: Scaffold(
         appBar: FAppBar(
-          title: L10n.of(context).settings_theme_page__title,
+          title: L10n.of(context).settings_app_theme_page__title,
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: setTheme,
@@ -116,14 +116,14 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
                     ButtonSegment(
                       value: .custom,
                       label: Text(
-                        L10n.of(context).settings_theme_page__mode_custom,
+                        L10n.of(context).settings_app_theme_page__mode_custom,
                       ),
                     ),
                     if (_dynamicColors != null)
                       ButtonSegment(
                         value: .dynamic,
                         label: Text(
-                          L10n.of(context).settings_theme_page__mode_system,
+                          L10n.of(context).settings_app_theme_page__mode_system,
                         ),
                       ),
                   ],
@@ -135,7 +135,9 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
                     spacing: PADDING * 2,
                     children: [
                       FText(
-                        L10n.of(context).settings_theme_page__mode_default_hint,
+                        L10n.of(
+                          context,
+                        ).settings_app_theme_page__mode_default_hint,
                         style: .titleLarge,
                         textAlign: .center,
                       ),
@@ -158,7 +160,9 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
                     spacing: PADDING * 2,
                     children: [
                       FText(
-                        L10n.of(context).settings_theme_page__mode_custom_hint,
+                        L10n.of(
+                          context,
+                        ).settings_app_theme_page__mode_custom_hint,
                         style: .titleLarge,
                         textAlign: .center,
                       ),
@@ -169,7 +173,7 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
                             spacing: PADDING,
                             children: [
                               for (final color in ColorConstants.themeColors)
-                                SettingsThemeColorCard(
+                                SettingsAppThemeColorCard(
                                   onTap: () => setState(() => _color = color),
                                   color: color,
                                   selected:
@@ -186,7 +190,9 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
                     spacing: PADDING * 2,
                     children: [
                       FText(
-                        L10n.of(context).settings_theme_page__mode_system_hint,
+                        L10n.of(
+                          context,
+                        ).settings_app_theme_page__mode_system_hint,
                         style: .titleLarge,
                         textAlign: .center,
                       ),
@@ -206,7 +212,7 @@ class _ChangeThemeDialogState extends ConsumerState<SettingsThemePage> {
                     ],
                   ),
                 const Divider(),
-                const SettingsThemeSectionExample(),
+                const SettingsAppThemeSectionExample(),
               ],
             ),
           ),
