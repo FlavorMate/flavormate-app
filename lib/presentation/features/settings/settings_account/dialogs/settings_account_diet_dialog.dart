@@ -8,15 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsChangeDietDialog extends StatelessWidget {
+class SettingsAccountDietDialog extends StatelessWidget {
   final Diet currentDiet;
 
-  const SettingsChangeDietDialog({super.key, required this.currentDiet});
+  const SettingsAccountDietDialog({super.key, required this.currentDiet});
 
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).settings_change_diet_dialog__title,
+      title: L10n.of(context).settings_account_diet_dialog__title,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: PADDING,

@@ -22,7 +22,6 @@ class HomePage extends ConsumerWidget {
 
     return CustomScrollView(
       slivers: [
-        const FSizedBoxSliver(height: PADDING),
         SliverPadding(
           padding: const .symmetric(horizontal: PADDING),
           sliver: FConstrainedBoxSliver(
