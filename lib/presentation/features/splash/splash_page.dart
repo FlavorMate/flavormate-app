@@ -5,8 +5,8 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/data/models/core/version/version.dart';
-import 'package:flavormate/data/repositories/core/compatibility/p_compatibility.dart';
-import 'package:flavormate/data/repositories/core/features/p_features.dart';
+import 'package:flavormate/data/repositories/core/server/p_server_compatibility.dart';
+import 'package:flavormate/data/repositories/core/server/p_server_features.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_unit_conversions.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_units.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
@@ -30,12 +30,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     ref.listenManual(
-      pCompatibilityProvider,
+      pServerCompatibilityProvider,
       (_, next) async => await next.when(
         data: (comparison) async {
           if (!mounted) return;
 
-          await ref.read(pFeaturesProvider.future);
+          await ref.read(pServerFeaturesProvider.future);
           await ref.read(pRestUnitsProvider(pageSize: -1).future);
           await ref.read(pRestUnitConversionsProvider.future);
 
@@ -57,7 +57,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           if (next.isLoading) return;
           await Future.delayed(const Duration(seconds: 2));
           if (!mounted) return;
-          ref.invalidate(pCompatibilityProvider);
+          ref.invalidate(pServerCompatibilityProvider);
         },
       ),
       fireImmediately: true,
@@ -78,7 +78,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    final compatibilityState = ref.watch(pCompatibilityProvider);
+    final compatibilityState = ref.watch(pServerCompatibilityProvider);
 
     return Scaffold(
       body: SafeArea(
