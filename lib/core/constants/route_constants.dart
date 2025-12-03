@@ -92,6 +92,10 @@ abstract class RouteConstants {
     '/settings/app/image-mode',
     'settings_app_image-mode',
   );
+  static const RouteConstant SettingsAppAppIconMode = RouteConstant(
+    '/settings/app/app-icon',
+    'settings_app_app-icon',
+  );
 
   // Misc
   static const RouteConstant NoConnection = RouteConstant(

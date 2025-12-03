@@ -10,7 +10,6 @@ import 'package:flavormate/presentation/features/home/widgets/home_latest_recipe
 import 'package:flavormate/presentation/features/home/widgets/home_quick_actions.dart';
 import 'package:flavormate/presentation/features/home/widgets/home_stories_carousel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
@@ -28,18 +27,6 @@ class HomePage extends ConsumerWidget {
           sliver: HomeAppBar(account: account.value),
         ),
         const FSizedBoxSliver(height: PADDING),
-        SliverList.list(
-          children: [
-            FilledButton(
-              onPressed: () async => setIcon('AppIcon'),
-              child: Text('Default'),
-            ),
-            FilledButton(
-              onPressed: () async => setIcon('Winter2025Icon'),
-              child: Text('Winter2025Icon'),
-            ),
-          ],
-        ),
         SliverPadding(
           padding: const .only(left: PADDING, right: PADDING, bottom: PADDING),
           sliver: FConstrainedBoxSliver(
@@ -56,13 +43,5 @@ class HomePage extends ConsumerWidget {
         ),
       ],
     );
-  }
-
-  Future<void> setIcon(String? icon) async {
-    const platform = MethodChannel('flavormate/icon');
-    final response = await platform.invokeMethod('changeIcon', {
-      'iconName': icon,
-    });
-    print(response);
   }
 }
