@@ -44,7 +44,11 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
       children: [
         Column(
           children: [
-            FAppBar(title: L10n.of(context).flavormate),
+            FAppBar(
+              title: L10n.of(context).flavormate,
+              automaticallyImplyLeading: false,
+              showHome: false,
+            ),
             Expanded(
               child: FFixedResponsive(
                 child: FPageable(

@@ -19,7 +19,11 @@ class MorePage extends ConsumerWidget {
     final storiesEnabled = ref.watch(pFeatureStoryProvider);
     return Column(
       children: [
-        FAppBar(title: L10n.of(context).flavormate),
+        FAppBar(
+          title: L10n.of(context).flavormate,
+          automaticallyImplyLeading: false,
+          showHome: false,
+        ),
         Expanded(
           child: FResponsive(
             child: Column(
