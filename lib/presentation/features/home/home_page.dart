@@ -34,8 +34,13 @@ class HomePage extends ConsumerWidget {
             sliver: SliverList.list(
               children: [
                 const HomeQuickActions(),
-                if (storyEnabled) const HomeStoriesCarousel(),
+                if (storyEnabled) ...[
+                  const SizedBox(height: PADDING),
+                  const HomeStoriesCarousel(),
+                ],
+                const SizedBox(height: PADDING),
                 const HomeHighlightsCarousel(),
+                const SizedBox(height: PADDING),
                 const HomeLatestRecipesCarousel(),
               ],
             ),

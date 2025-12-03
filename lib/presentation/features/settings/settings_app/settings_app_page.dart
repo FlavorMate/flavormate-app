@@ -1,7 +1,7 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +14,7 @@ class SettingsAppPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: FText(
-          L10n.of(context).settings_app_page__title,
-          style: .bodyLarge,
-        ),
-      ),
+      appBar: FAppBar(title: L10n.of(context).settings_app_page__title),
       body: SafeArea(
         child: FResponsive(
           child: Column(

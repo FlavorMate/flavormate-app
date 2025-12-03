@@ -2,6 +2,7 @@ import 'package:flavormate/core/config/features/p_feature_story.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -18,11 +19,10 @@ class MorePage extends ConsumerWidget {
     final storiesEnabled = ref.watch(pFeatureStoryProvider);
     return Column(
       children: [
-        AppBar(
-          title: const Text('FlavorMate'),
-          centerTitle: true,
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          surfaceTintColor: Colors.transparent,
+        FAppBar(
+          title: L10n.of(context).flavormate,
+          automaticallyImplyLeading: false,
+          showHome: false,
         ),
         Expanded(
           child: FResponsive(
