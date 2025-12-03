@@ -17,36 +17,36 @@ class MainActivity : FlutterActivity() {
     }
 
     fun registerIconPlugin(flutterEngine: FlutterEngine) {
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "flavormate/icon")
-                .setMethodCallHandler { call: MethodCall?, result: MethodChannel.Result? ->
-                    if (call!!.method != "changeIcon") {
-                        result!!.notImplemented()
-                        return@setMethodCallHandler
-                    }
-
-                    val iconName = call.argument<String?>("iconName")
-
-                    if (iconName == null || aliases.contains(iconName)) {
-                        result!!.error("404", "Unknown icon", null)
-                        return@setMethodCallHandler
-                    }
-
-                    changeAppIcon(iconName)
-                    result!!.success(null)
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            "flavormate/icon"
+        ).setMethodCallHandler { call: MethodCall?, result: MethodChannel.Result? ->
+                if (call!!.method != "changeIcon") {
+                    result!!.notImplemented()
+                    return@setMethodCallHandler
                 }
+
+                val iconName = call.argument<String?>("iconName")
+
+                if (iconName == null || !aliases.contains(iconName)) {
+                    result!!.error("404", "Unknown icon", null)
+                    return@setMethodCallHandler
+                }
+
+                changeAppIcon(iconName)
+                result!!.success(null)
+            }
     }
 
     fun changeAppIcon(newIcon: String) {
         val pm = packageManager
 
         for (alias in aliases) {
-            val enabled =
-                    if (alias == newIcon) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                    else PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+            val enabled = if (alias == newIcon) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            else PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+
             pm.setComponentEnabledSetting(
-                    ComponentName(this, "$packageName.$newIcon"),
-                    enabled,
-                    PackageManager.DONT_KILL_APP
+                ComponentName(this, "$packageName.$alias"), enabled, PackageManager.DONT_KILL_APP
             )
         }
     }
