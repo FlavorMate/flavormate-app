@@ -47,10 +47,6 @@ class MainLayoutState extends State<MainLayout> {
       icon: MdiIcons.shape,
       label: L10n.of(context).main_layout__more,
     ),
-    Destination(
-      icon: MdiIcons.cog,
-      label: L10n.of(context).main_layout__settings,
-    ),
   ];
 
   @override

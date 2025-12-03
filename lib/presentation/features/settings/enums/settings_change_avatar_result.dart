@@ -1,1 +1,0 @@
-enum SettingsChangeAvatarResult { Delete, Change }

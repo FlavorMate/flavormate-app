@@ -39,12 +39,11 @@ abstract class UImage {
 
     return resolution;
   }
-  
+
   static ImageSquareResolution getSquareResolution(
     BuildContext context,
     double radius,
   ) {
-
     final factor = MediaQuery.devicePixelRatioOf(context);
 
     final width = radius * 2 * factor;

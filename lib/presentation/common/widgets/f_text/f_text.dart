@@ -3,6 +3,7 @@ import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flutter/material.dart';
 
 part 'f_text_color.dart';
+part 'f_text_font_family.dart';
 part 'f_text_style.dart';
 
 class FText extends StatelessWidget {
@@ -13,6 +14,7 @@ class FText extends StatelessWidget {
   final TextAlign? textAlign;
   final TextOverflow? textOverflow;
   final FontWeight? weight;
+  final FTextFontFamily? fontFamily;
   final int? maxLines;
 
   const FText(
@@ -23,6 +25,7 @@ class FText extends StatelessWidget {
     this.color,
     this.textOverflow,
     this.weight,
+    this.fontFamily,
     this.maxLines,
     super.key,
   });
@@ -42,6 +45,7 @@ class FText extends StatelessWidget {
       style: s?.copyWith(
         color: c,
         height: textHeight,
+        fontFamily: fontFamily?.geFTextFontFamily(),
         fontWeight: weight,
         fontVariations: variation,
       ),
