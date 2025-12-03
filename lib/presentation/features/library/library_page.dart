@@ -6,6 +6,7 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
@@ -43,12 +44,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
       children: [
         Column(
           children: [
-            AppBar(
-              title: const Text('FlavorMate'),
-              centerTitle: true,
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              surfaceTintColor: Colors.transparent,
-            ),
+            FAppBar(title: L10n.of(context).flavormate),
             Expanded(
               child: FFixedResponsive(
                 child: FPageable(

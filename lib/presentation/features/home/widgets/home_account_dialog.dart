@@ -4,10 +4,10 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_account_section.dart';
@@ -43,13 +43,9 @@ class HomeAccountDialog extends StatelessWidget {
             width: width,
             child: Center(
               child: Scaffold(
-                appBar: AppBar(
+                appBar: FAppBar(
                   automaticallyImplyLeading: false,
-                  title: FText(
-                    account.username,
-                    style: .bodyLarge,
-                    weight: .w500,
-                  ),
+                  title: account.username,
                   actions: [
                     IconButton(
                       onPressed: () => context.pop(),

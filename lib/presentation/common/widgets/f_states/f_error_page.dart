@@ -1,4 +1,4 @@
-import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_error.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +16,7 @@ class FErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar
-          ? AppBar(
-              backgroundColor: context.colorScheme.inversePrimary,
-            )
-          : null,
+      appBar: showAppBar ? const FAppBar(title: '') : null,
       body: FError(
         onError: onError,
       ),

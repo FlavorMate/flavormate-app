@@ -31,10 +31,8 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
       ],
       title: FText(
         title,
-        style: .titleLarge,
-        weight: .w500,
+        style: .bodyLarge,
       ),
-      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
     );
   }
 

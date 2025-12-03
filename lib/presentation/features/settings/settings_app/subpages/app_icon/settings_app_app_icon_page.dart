@@ -5,6 +5,7 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/theme/utils/u_app_icon.dart';
 import 'package:flavormate/generated/flutter_gen/assets.gen.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -18,11 +19,8 @@ class SettingsAppAppIconPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: FText(
-          L10n.of(context).settings_app_app_icon_page__title,
-          style: .bodyLarge,
-        ),
+      appBar: FAppBar(
+        title: L10n.of(context).settings_app_app_icon_page__title,
       ),
       body: SafeArea(
         child: FResponsive(

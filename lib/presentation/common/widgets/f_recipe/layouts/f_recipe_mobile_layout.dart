@@ -127,7 +127,7 @@ class FRecipeMobileLayout extends StatelessWidget {
               amountFactor: amountFactor,
             ),
 
-            if (recipe.categories.isNotEmpty) ...[
+            ...[
               const Divider(),
               FRecipeCategories(
                 course: recipe.course,
