@@ -5,7 +5,6 @@ import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,14 +27,19 @@ class SettingsAppPage extends ConsumerWidget {
               FTileGroup(
                 items: [
                   FTile(
-                    label: L10n.of(context).settings_app_page__theme_title,
-                    icon: MdiIcons.formatPaint,
-                    onTap: () => openThemePage(context),
+                    label: L10n.of(context).settings_app_page__app_icon_title,
+                    icon: MdiIcons.paletteOutline,
+                    onTap: () => openAppIconPage(context),
                   ),
                   FTile(
                     label: L10n.of(context).settings_app_page__image_mode_title,
                     icon: MdiIcons.imageOutline,
                     onTap: () => openImageModePage(context),
+                  ),
+                  FTile(
+                    label: L10n.of(context).settings_app_page__theme_title,
+                    icon: MdiIcons.formatPaint,
+                    onTap: () => openThemePage(context),
                   ),
                 ],
               ),
@@ -46,11 +50,15 @@ class SettingsAppPage extends ConsumerWidget {
     );
   }
 
-  void openThemePage(BuildContext context) {
-    context.routes.settingsAppTheme();
+  void openAppIconPage(BuildContext context) {
+    context.routes.settingsAppAppIcon();
   }
 
   void openImageModePage(BuildContext context) {
     context.routes.settingsAppImageMode();
+  }
+
+  void openThemePage(BuildContext context) {
+    context.routes.settingsAppTheme();
   }
 }

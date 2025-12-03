@@ -410,6 +410,10 @@ class Routes {
     return context.pushNamed(RouteConstants.SettingsAppImageMode.name);
   }
 
+  Future settingsAppAppIcon() {
+    return context.pushNamed(RouteConstants.SettingsAppAppIconMode.name);
+  }
+
   Future storyEditorItemPreview(String id) async {
     return context.pushNamed(
       RouteConstants.StoryEditorItemPreview.name,

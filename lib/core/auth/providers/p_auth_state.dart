@@ -55,6 +55,7 @@ enum AuthState {
       RouteConstants.SettingsApp,
       RouteConstants.SettingsAppTheme,
       RouteConstants.SettingsAppImageMode,
+      RouteConstants.SettingsAppAppIconMode,
 
       // Misc
       RouteConstants.NoConnection,
