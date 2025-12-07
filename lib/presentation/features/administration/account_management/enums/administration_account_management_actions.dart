@@ -1,1 +1,6 @@
-enum AdministrationAccountManagementActions { Enable, ResetPassword, Delete }
+enum AdministrationAccountManagementActions {
+  Avatar,
+  Enable,
+  ResetPassword,
+  Delete,
+}

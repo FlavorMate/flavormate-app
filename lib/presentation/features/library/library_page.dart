@@ -1,3 +1,4 @@
+import 'package:flavormate/core/constants/order_by_constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
@@ -6,13 +7,10 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
-import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_sort.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
-import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flavormate/presentation/features/library/dialogs/create_book_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -40,72 +38,38 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          children: [
-            FAppBar(
-              title: L10n.of(context).flavormate,
-              automaticallyImplyLeading: false,
-              showHome: false,
-              enableScrollColor: false,
-            ),
-            Expanded(
-              child: FFixedResponsive(
-                child: FPageable(
-                  provider: provider,
-                  pageProvider: widget.providerPage,
-                  padding: 0,
-                  filterBuilder: (padding) => FPageableSort(
-                    currentOrderBy: orderBy,
-                    currentDirection: orderDirection,
-                    setOrderBy: setOrderBy,
-                    setOrderDirection: setOrderDirection,
-                    options: const [
-                      OrderBy.Label,
-                      OrderBy.CreatedOn,
-                      OrderBy.Visible,
-                    ],
-                    padding: padding,
-                  ),
-
-                  builder: (_, library) => FWrap(
-                    children: [
-                      for (final book in library)
-                        FImageCard.maximized(
-                          label: book.label,
-                          subLabel: book.visible
-                              ? L10n.of(context).library_page__book_public
-                              : L10n.of(context).library_page__book_private,
-                          coverSelector: (resolution) =>
-                              book.cover?.url(resolution),
-                          width: 400,
-                          onTap: () => context.routes.libraryItem(book.id),
-                        ),
-                    ],
-                  ),
-                  onEmpty: FEmptyMessage(
-                    icon: MdiIcons.bookOffOutline,
-                    title: L10n.of(context).library_page__on_empty,
-                  ),
-                  onError: FEmptyMessage(
-                    title: L10n.of(context).library_page__on_error,
-                    icon: StateIconConstants.books.errorIcon,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Positioned(
-          right: 16,
-          bottom: 16,
-          child: FloatingActionButton(
-            onPressed: () => addBook(context, ref),
-            child: const Icon(MdiIcons.plus),
-          ),
-        ),
-      ],
+    return FPaginatedPage(
+      title: L10n.of(context).flavormate,
+      emptyAppBar: true,
+      floatingActionBar: FloatingActionButton(
+        onPressed: () => addBook(context, ref),
+        child: const Icon(MdiIcons.plus),
+      ),
+      provider: provider,
+      pageProvider: widget.providerPage,
+      onEmpty: FEmptyMessage(
+        icon: MdiIcons.bookOffOutline,
+        title: L10n.of(context).library_page__on_empty,
+      ),
+      onError: FEmptyMessage(
+        title: L10n.of(context).library_page__on_error,
+        icon: StateIconConstants.books.errorIcon,
+      ),
+      sortBuilder: () => FPaginatedSort(
+        currentOrderBy: orderBy,
+        currentDirection: orderDirection,
+        setOrderBy: setOrderBy,
+        setOrderDirection: setOrderDirection,
+        options: OrderByConstants.book,
+      ),
+      itemBuilder: (item) => FImageCard.maximized(
+        label: item.label,
+        subLabel: item.visible
+            ? L10n.of(context).library_page__book_public
+            : L10n.of(context).library_page__book_private,
+        coverSelector: (resolution) => item.cover?.url(resolution),
+        onTap: () => context.routes.libraryItem(item.id),
+      ),
     );
   }
 

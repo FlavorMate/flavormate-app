@@ -7,6 +7,12 @@ abstract class OrderByConstants {
     OrderBy.Username,
   ];
 
+  static const book = [
+    OrderBy.Label,
+    OrderBy.CreatedOn,
+    OrderBy.Visible,
+  ];
+
   static const category = [
     OrderBy.Label,
   ];
@@ -17,6 +23,8 @@ abstract class OrderByConstants {
     OrderBy.CreatedOn,
     OrderBy.Label,
   ];
+
+  static const story = [OrderBy.Label, OrderBy.CreatedOn];
 
   static const tag = [
     OrderBy.Label,

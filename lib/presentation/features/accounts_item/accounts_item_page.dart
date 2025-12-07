@@ -11,9 +11,8 @@ import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_i
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel.dart';
-import 'package:flavormate/presentation/common/widgets/f_circular_avatar_viewer.dart';
+import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_image_ink_well.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -56,17 +55,10 @@ class AccountsItemPage extends ConsumerWidget {
           child: Column(
             spacing: PADDING,
             children: [
-              Center(
-                child: FImageInkWell(
-                  height: 192,
-                  width: 192,
-                  onTap: () => showAvatar(context, data.avatar!),
-                  child: FCircularAvatarViewer(
-                    account: data,
-                    height: 192,
-                    width: 192,
-                  ),
-                ),
+              FCircleAvatar(
+                account: data,
+                radius: 80,
+                onTap: () => showAvatar(context, data.avatar!),
               ),
               Center(
                 child: FText(

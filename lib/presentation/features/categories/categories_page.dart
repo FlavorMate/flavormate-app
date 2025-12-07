@@ -7,12 +7,10 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/categories/p_rest_categories.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
-import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_sort.dart';
-import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,44 +34,32 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: FAppBar(title: L10n.of(context).categories_page__title),
-      body: SafeArea(
-        child: FPageable(
-          provider: provider,
-          pageProvider: widget.pageProvider,
-          filterBuilder: (padding) => FPageableSort(
-            currentOrderBy: orderBy,
-            currentDirection: orderDirection,
-            setOrderBy: setOrderBy,
-            setOrderDirection: setOrderDirection,
-            options: OrderByConstants.category,
-            padding: padding,
-          ),
-          builder: (_, data) => FWrap(
-            children: [
-              for (final category in data)
-                FImageCard.maximized(
-                  label: category.label,
-                  coverSelector: (resolution) =>
-                      category.cover?.url(resolution),
-                  subLabel: L10n.of(context).categories_page__recipe_counter(
-                    category.recipeCount,
-                  ),
-                  onTap: () => context.routes.categoriesItem(category.id),
-                  width: 400,
-                ),
-            ],
-          ),
-          onEmpty: FEmptyMessage(
-            title: L10n.of(context).categories_page__on_empty,
-            icon: StateIconConstants.categories.emptyIcon,
-          ),
-          onError: FEmptyMessage(
-            title: L10n.of(context).categories_page__on_error,
-            icon: StateIconConstants.categories.errorIcon,
-          ),
+    return FPaginatedPage(
+      title: L10n.of(context).categories_page__title,
+      provider: provider,
+      pageProvider: widget.pageProvider,
+      onEmpty: FEmptyMessage(
+        title: L10n.of(context).categories_page__on_empty,
+        icon: StateIconConstants.categories.emptyIcon,
+      ),
+      onError: FEmptyMessage(
+        title: L10n.of(context).categories_page__on_error,
+        icon: StateIconConstants.categories.errorIcon,
+      ),
+      sortBuilder: () => FPaginatedSort(
+        currentOrderBy: orderBy,
+        currentDirection: orderDirection,
+        setOrderBy: setOrderBy,
+        setOrderDirection: setOrderDirection,
+        options: OrderByConstants.category,
+      ),
+      itemBuilder: (item) => FImageCard.maximized(
+        label: item.label,
+        coverSelector: (resolution) => item.cover?.url(resolution),
+        subLabel: L10n.of(context).categories_page__recipe_counter(
+          item.recipeCount,
         ),
+        onTap: () => context.routes.categoriesItem(item.id),
       ),
     );
   }

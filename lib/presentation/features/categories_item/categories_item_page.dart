@@ -9,16 +9,14 @@ import 'package:flavormate/data/repositories/features/categories/p_rest_categori
 import 'package:flavormate/data/repositories/features/categories/p_rest_categories_id_recipes.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
-import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_sort.dart';
-import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
-import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CategoriesItemPage extends StatefulWidget {
+class CategoriesItemPage extends ConsumerStatefulWidget {
   final String id;
 
   const CategoriesItemPage({required this.id, super.key});
@@ -31,10 +29,10 @@ class CategoriesItemPage extends StatefulWidget {
       pPageableStateProvider(pageProviderId);
 
   @override
-  State<CategoriesItemPage> createState() => _CategoriesItemPageState();
+  ConsumerState<CategoriesItemPage> createState() => _CategoriesItemPageState();
 }
 
-class _CategoriesItemPageState extends State<CategoriesItemPage>
+class _CategoriesItemPageState extends ConsumerState<CategoriesItemPage>
     with FOrderMixin<CategoriesItemPage> {
   PRestCategoriesIdRecipesProvider get providerRecipe =>
       pRestCategoriesIdRecipesProvider(
@@ -46,45 +44,32 @@ class _CategoriesItemPageState extends State<CategoriesItemPage>
 
   @override
   Widget build(BuildContext context) {
-    return FProviderPage(
-      provider: widget.provider,
-      appBarBuilder: (_, data) => FAppBar(title: data.label),
-      builder: (_, data) => FPageable(
-        provider: providerRecipe,
-        pageProvider: widget.providerRecipePage,
-        filterBuilder: (padding) => FPageableSort(
-          currentOrderBy: orderBy,
-          currentDirection: orderDirection,
-          setOrderBy: setOrderBy,
-          setOrderDirection: setOrderDirection,
-          options: OrderByConstants.recipe,
-          padding: padding,
-        ),
-
-        builder: (_, recipes) => FWrap(
-          children: [
-            for (final recipe in recipes)
-              FImageCard.maximized(
-                label: recipe.label,
-                subLabel: recipe.totalTime.beautify(context),
-                coverSelector: (resolution) => recipe.cover?.url(resolution),
-                onTap: () => context.routes.recipesItem(recipe.id),
-                width: 400,
-              ),
-          ],
-        ),
-        onEmpty: FEmptyMessage(
-          title: L10n.of(context).categories_item_page__recipe_on_empty,
-          icon: StateIconConstants.recipes.emptyIcon,
-        ),
-        onError: FEmptyMessage(
-          title: L10n.of(context).categories_item_page__recipe_on_error,
-          icon: StateIconConstants.recipes.errorIcon,
-        ),
+    final category = ref.watch(widget.provider);
+    return FPaginatedPage(
+      title: category.value?.label ?? '',
+      provider: providerRecipe,
+      pageProvider: widget.providerRecipePage,
+      onEmpty: FEmptyMessage(
+        title: L10n.of(context).categories_item_page__recipe_on_empty,
+        icon: StateIconConstants.recipes.emptyIcon,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).categories_item_page__on_error,
-        icon: StateIconConstants.categories.errorIcon,
+        title: L10n.of(context).categories_item_page__recipe_on_error,
+        icon: StateIconConstants.recipes.errorIcon,
+      ),
+      sortBuilder: () => FPaginatedSort(
+        currentOrderBy: orderBy,
+        currentDirection: orderDirection,
+        setOrderBy: setOrderBy,
+        setOrderDirection: setOrderDirection,
+        options: OrderByConstants.recipe,
+      ),
+      itemBuilder: (item) => FImageCard.maximized(
+        label: item.label,
+        subLabel: item.totalTime.beautify(context),
+        coverSelector: (resolution) => item.cover?.url(resolution),
+        onTap: () => context.routes.recipesItem(item.id),
+        width: 400,
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
@@ -12,12 +13,12 @@ import 'package:flavormate/data/repositories/features/admin/p_rest_admin_account
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_simple_dialog.dart';
-import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
+import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_new_account_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_password_dialog.dart';
@@ -45,6 +46,8 @@ class AdministrationAccountManagementPage extends ConsumerStatefulWidget {
 class _AccountManagementPageState
     extends ConsumerState<AdministrationAccountManagementPage>
     with FOrderMixin<AdministrationAccountManagementPage> {
+  final _controller = ScrollController();
+
   PRestAdminAccountsProvider get provider => pRestAdminAccountsProvider(
     pageProviderId: widget.pageProviderId,
     orderBy: orderBy,
@@ -52,55 +55,71 @@ class _AccountManagementPageState
   );
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return FProviderPage(
-      provider: pRestAccountsSelfProvider,
-      appBarBuilder: (_, _) => FAppBar(
+    final self = ref.watch(pRestAccountsSelfProvider).requireValue;
+
+    return Scaffold(
+      appBar: FAppBar(
         title: L10n.of(context).administration_account_management_page__title,
       ),
-      floatingActionButtonBuilder: (_, _) => FloatingActionButton(
-        onPressed: createAccount,
-        child: const Icon(MdiIcons.plus),
-      ),
-      builder: (_, self) => FPageable(
+
+      body: FProviderStruct(
         provider: provider,
-        pageProvider: widget.pageProvider,
-        filterBuilder: (padding) => FPageableSort(
-          currentOrderBy: orderBy,
-          currentDirection: orderDirection,
-          setOrderBy: setOrderBy,
-          setOrderDirection: setOrderDirection,
-          options: OrderByConstants.account,
-          padding: padding,
-        ),
-        builder: (_, data) => FWrap(
-          children: [
-            for (final account in data)
-              AdministrationAccountManagementCard(
-                account: account,
-                isOwnAccount: account.id == self.id,
-                onTap: showOptions,
-              ),
-          ],
-        ),
         onError: FEmptyMessage(
           title: L10n.of(
             context,
           ).administration_account_management_page__on_error,
           icon: StateIconConstants.authors.errorIcon,
         ),
-        onEmpty: FEmptyMessage(
-          title: L10n.of(
-            context,
-          ).administration_account_management_page__on_empty,
-          icon: StateIconConstants.authors.emptyIcon,
-        ),
+        builder: (context, data) {
+          return CustomScrollView(
+            controller: _controller,
+            slivers: [
+              SliverPersistentHeader(
+                floating: true,
+                delegate: FPaginatedSortDelegate(
+                  () => FPaginatedSort(
+                    currentOrderBy: orderBy,
+                    currentDirection: orderDirection,
+                    setOrderBy: setOrderBy,
+                    setOrderDirection: setOrderDirection,
+                    options: OrderByConstants.account,
+                  ),
+                ),
+              ),
+
+              SliverPadding(
+                padding: const .symmetric(horizontal: PADDING),
+                sliver: SliverToBoxAdapter(
+                  child: FWrap(
+                    children: [
+                      for (final item in data.data)
+                        AdministrationAccountManagementCard(
+                          account: item,
+                          isOwnAccount: item.id == self.id,
+                          onTap: showOptions,
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
-      onError: FEmptyMessage(
-        title: L10n.of(
-          context,
-        ).administration_account_management_page__self_on_error,
-        icon: StateIconConstants.authors.errorIcon,
+
+      bottomNavigationBar: SafeArea(
+        child: FPaginatedBar(
+          provider: provider,
+          pageProvider: widget.pageProvider,
+          controller: _controller,
+        ),
       ),
     );
   }
@@ -113,6 +132,14 @@ class _AccountManagementPageState
           context,
         ).administration_account_management_page__actions_title,
         options: [
+          if (account.avatar != null)
+            FSimpleDialogOption(
+              label: L10n.of(
+                context,
+              ).administration_account_management_page__actions_avatar,
+              icon: MdiIcons.imageOutline,
+              value: AdministrationAccountManagementActions.Avatar,
+            ),
           FSimpleDialogOption(
             label: account.enabled
                 ? L10n.of(
@@ -145,6 +172,11 @@ class _AccountManagementPageState
     if (!mounted || result == null) return;
 
     switch (result) {
+      case .Avatar:
+        if (account.avatar != null) {
+          context.showFullscreenImage(account.avatar!.url(.Original));
+        }
+        return;
       case AdministrationAccountManagementActions.Enable:
         await toggleActiveState(account);
         return;

@@ -6,6 +6,7 @@ import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_s
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_random.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_card.dart';
+import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,11 +29,7 @@ class HomeQuickActions extends ConsumerWidget {
           itemSize = (constraints.maxWidth / 2) - PADDING;
         }
 
-        return Wrap(
-          spacing: PADDING,
-          runSpacing: PADDING,
-          alignment: WrapAlignment.spaceEvenly,
-          runAlignment: WrapAlignment.spaceEvenly,
+        return FWrap(
           children: [
             SizedBox(
               width: itemSize,
