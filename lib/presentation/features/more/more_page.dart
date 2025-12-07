@@ -23,6 +23,7 @@ class MorePage extends ConsumerWidget {
           title: L10n.of(context).flavormate,
           automaticallyImplyLeading: false,
           showHome: false,
+          enableScrollColor: false,
         ),
         Expanded(
           child: FResponsive(

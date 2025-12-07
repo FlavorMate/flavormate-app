@@ -48,6 +48,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
               title: L10n.of(context).flavormate,
               automaticallyImplyLeading: false,
               showHome: false,
+              enableScrollColor: false,
             ),
             Expanded(
               child: FFixedResponsive(
