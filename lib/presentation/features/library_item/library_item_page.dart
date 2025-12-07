@@ -1,4 +1,6 @@
+import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/order_by_constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_duration.dart';
@@ -9,15 +11,15 @@ import 'package:flavormate/data/repositories/features/books/p_rest_books_id_reci
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
+import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_content.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_menu_anchor.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_sort.dart';
-import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
-import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
+import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/features/library_item/dialogs/edit_book_dialog.dart';
 import 'package:flavormate/presentation/features/library_item/providers/p_library_item.dart';
 import 'package:flavormate/presentation/features/library_item/widgets/library_item_info_header.dart';
@@ -50,64 +52,76 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
     orderDirection: orderDirection,
   );
 
+  final _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FProviderPage(
+    return FProviderStruct(
       provider: widget.provider,
-      appBarBuilder: (_, data) => FAppBar(
-        title: data.book.label,
-        actions: [
-          FMenuAnchor(
-            children: [
-              if (data.isOwner || data.isAdmin)
-                MenuItemButton(
-                  child: Text(
-                    data.book.visible
-                        ? L10n.of(context).library_item_page__unshare
-                        : L10n.of(context).library_item_page__share,
-                  ),
-                  onPressed: () =>
-                      toggleVisibility(context, ref, !data.book.visible),
-                ),
-              if (data.isOwner || data.isAdmin)
-                MenuItemButton(
-                  child: Text(L10n.of(context).btn_edit),
-                  onPressed: () => changeLabel(context, ref, data.book.label),
-                ),
-              if (data.isOwner || data.isAdmin)
-                MenuItemButton(
-                  child: Text(L10n.of(context).btn_delete),
-                  onPressed: () => deleteBook(context, ref),
-                ),
-            ],
-          ),
-        ],
+      onError: FEmptyMessage(
+        title: L10n.of(context).library_item_page__on_error,
+        icon: StateIconConstants.books.errorIcon,
       ),
-      builder: (_, data) => Column(
-        spacing: PADDING,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: PADDING,
-              left: PADDING,
-              right: PADDING,
+      builder: (context, data) => Scaffold(
+        appBar: FAppBar(
+          title: data.book.label,
+          actions: [
+            if (data.isOwner || data.isAdmin)
+              FMenuAnchor(
+                children: [
+                  MenuItemButton(
+                    child: Text(
+                      data.book.visible
+                          ? L10n.of(context).library_item_page__unshare
+                          : L10n.of(context).library_item_page__share,
+                    ),
+                    onPressed: () =>
+                        toggleVisibility(context, ref, !data.book.visible),
+                  ),
+                  MenuItemButton(
+                    child: Text(L10n.of(context).btn_edit),
+                    onPressed: () => changeLabel(context, ref, data.book.label),
+                  ),
+                  MenuItemButton(
+                    child: Text(L10n.of(context).btn_delete),
+                    onPressed: () => deleteBook(context, ref),
+                  ),
+                ],
+              ),
+          ],
+        ),
+        body: CustomScrollView(
+          controller: _controller,
+          slivers: [
+            FConstrainedBoxSliver(
+              maxWidth: FBreakpoint.smValue,
+              padding: const .symmetric(horizontal: PADDING),
+              sliver: SliverToBoxAdapter(
+                child: LibraryItemInfoHeader(book: data.book),
+              ),
             ),
-            child: LibraryItemInfoHeader(book: data.book),
-          ),
-          if (!data.isOwner)
-            Center(
-              child: SizedBox(
-                width: BUTTON_WIDTH,
-                child: FButton(
-                  onPressed: () => toggleSubscription(context, ref),
-                  label: data.isSubscribed
-                      ? L10n.of(context).library_item_page__unfollow
-                      : L10n.of(context).library_item_page__follow,
+            SliverPersistentHeader(
+              floating: true,
+              delegate: FPaginatedSortDelegate(
+                () => FPaginatedSort(
+                  currentOrderBy: orderBy,
+                  currentDirection: orderDirection,
+                  setOrderBy: setOrderBy,
+                  setOrderDirection: setOrderDirection,
+                  options: OrderByConstants.book,
                 ),
               ),
             ),
-          Expanded(
-            child: FPageable(
+            FPaginatedContent(
+              provider: recipeProvider,
+              pageProvider: widget.pageRecipeProvider,
+              controller: _controller,
               onEmpty: FEmptyMessage(
                 title: L10n.of(context).library_item_page__recipes_on_empty,
                 icon: StateIconConstants.recipes.emptyIcon,
@@ -116,39 +130,23 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
                 title: L10n.of(context).library_item_page__recipes_on_error,
                 icon: StateIconConstants.recipes.errorIcon,
               ),
-              provider: recipeProvider,
-              pageProvider: widget.pageRecipeProvider,
-              filterBuilder: (padding) => FPageableSort(
-                currentOrderBy: orderBy,
-                currentDirection: orderDirection,
-                setOrderBy: setOrderBy,
-                setOrderDirection: setOrderDirection,
-                options: const [
-                  OrderBy.Label,
-                  OrderBy.CreatedOn,
-                ],
-                padding: padding,
-              ),
-              builder: (_, data2) => FWrap(
-                children: [
-                  for (final recipe in data2)
-                    FImageCard.maximized(
-                      label: recipe.label,
-                      subLabel: recipe.totalTime.beautify(context),
-                      coverSelector: (resolution) =>
-                          recipe.cover?.url(resolution),
-                      onTap: () => context.routes.recipesItem(recipe.id),
-                      width: 400,
-                    ),
-                ],
+              itemBuilder: (item) => FImageCard.maximized(
+                label: item.label,
+                subLabel: item.totalTime.beautify(context),
+                coverSelector: (resolution) => item.cover?.url(resolution),
+                onTap: () => context.routes.recipesItem(item.id),
               ),
             ),
+          ],
+        ),
+
+        bottomNavigationBar: SafeArea(
+          child: FPaginatedBar(
+            provider: recipeProvider,
+            pageProvider: widget.pageRecipeProvider,
+            controller: _controller,
           ),
-        ],
-      ),
-      onError: FEmptyMessage(
-        title: L10n.of(context).library_item_page__on_error,
-        icon: StateIconConstants.books.errorIcon,
+        ),
       ),
     );
   }

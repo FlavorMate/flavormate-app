@@ -7,7 +7,7 @@ import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_bubble.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_circular_avatar_viewer.dart';
+import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -53,6 +53,7 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
       ),
       builder: (_, data) => FResponsive(
         child: FCard(
+          color: context.colorScheme.surfaceContainer,
           padding: 0,
           child: Column(
             spacing: PADDING,
@@ -75,23 +76,22 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
                       spacing: PADDING,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FCircularAvatarViewer(
+                        FCircleAvatar(
                           account: data.story.ownedBy,
-                          border: true,
+                          radius: 32,
                         ),
                         Expanded(
                           child: FBubble(
+                            color: context.colorScheme.primaryContainer,
                             topLeft: true,
                             children: [
                               FText(
                                 data.story.label,
                                 style: FTextStyle.titleLarge,
-                                color: FTextColor.filledButton,
                               ),
                               FText(
                                 data.story.content,
                                 style: FTextStyle.bodyMedium,
-                                color: FTextColor.filledButton,
                               ),
                             ],
                           ),

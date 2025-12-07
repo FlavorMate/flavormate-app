@@ -5,36 +5,24 @@ import 'package:flavormate/presentation/common/dialogs/f_loading_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel_full_view.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 extension EBuildContext on BuildContext {
-  /// A convenient way to access [ThemeData.colorScheme] of the current context.
-  ///
-  /// This also prevents confusion with a bunch of other properties of [ThemeData]
-  /// that are less commonly used.
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
   BlendedColors get blendedColors => Theme.of(this).extension<BlendedColors>()!;
 
-  /// A convenient way to access [ThemeData.textTheme] of the current context.
-  ///
-  /// This also prevents confusion with a bunch of other properties of [ThemeData]
-  /// that are less commonly used.
   TextTheme get textTheme => Theme.of(this).textTheme;
-
-  IconThemeData get iconTheme => Theme.of(this).iconTheme;
 
   Routes get routes => Routes(this);
 
-  /// Shows a floating snack bar with text as its content.
+  // Snackbar
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showTextSnackBar(
     String text, {
     Color? color,
   }) => ScaffoldMessenger.of(this).showSnackBar(
     SnackBar(
-      behavior: SnackBarBehavior.floating,
+      behavior: SnackBarBehavior.fixed,
       backgroundColor: color,
       content: Text(text),
     ),
@@ -42,19 +30,7 @@ extension EBuildContext on BuildContext {
 
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showErrorSnackBar(
     String text,
-  ) => ScaffoldMessenger.of(this).showSnackBar(
-    SnackBar(
-      behavior: SnackBarBehavior.floating,
-      backgroundColor: blendedColors.error,
-      content: Text(text),
-    ),
-  );
-
-  void showAppLicensePage() => showLicensePage(
-    context: this,
-    useRootNavigator: true,
-    applicationName: 'DummyMart',
-  );
+  ) => showTextSnackBar(text, color: blendedColors.error);
 
   Future<void> showFullscreenImage(String url) {
     return showDialog(
@@ -67,16 +43,6 @@ extension EBuildContext on BuildContext {
     );
   }
 
-  /// Custom call a provider for reading method only
-  /// It will be helpful for us for calling the read function
-  /// without Consumer,ConsumerWidget or ConsumerStatefulWidget
-  /// In case if you face any issue using this then please wrap your widget
-  /// with consumer and then call your provider
-  T read<T>(ProviderListenable<T> provider) {
-    return ProviderScope.containerOf(this, listen: false).read(provider);
-  }
-
-  /// Shows a loading dialog that can be dismissed via [Navigator.pop].
   void showLoadingDialog({bool hint = false}) {
     showDialog(
       barrierDismissible: false,
@@ -86,18 +52,10 @@ extension EBuildContext on BuildContext {
   }
 }
 
-extension ThemeModeX on ThemeMode {
-  String get label => switch (this) {
-    ThemeMode.system => 'System',
-    ThemeMode.light => 'Light',
-    ThemeMode.dark => 'Dark',
-  };
-}
-
 class Routes {
   final BuildContext context;
 
-  Routes(this.context);
+  const Routes(this.context);
 
   Future categoriesItem(String id) {
     return context.pushNamed(

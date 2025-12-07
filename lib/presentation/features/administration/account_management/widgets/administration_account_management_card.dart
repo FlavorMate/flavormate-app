@@ -1,10 +1,11 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_date_time.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_chip/f_state_chip.dart';
-import 'package:flavormate/presentation/common/widgets/f_circular_avatar_viewer.dart';
+import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +28,14 @@ class AdministrationAccountManagementCard extends StatelessWidget {
     return SizedBox(
       width: 450,
       child: FCard(
+        color: context.colorScheme.surfaceContainer,
         onTap: isOwnAccount ? null : () => onTap.call(account),
         child: Row(
           spacing: PADDING,
           children: [
-            FCircularAvatarViewer(
+            FCircleAvatar(
               account: account,
-              border: true,
+              radius: 30,
             ),
             Expanded(
               child: Column(
@@ -42,6 +44,7 @@ class AdministrationAccountManagementCard extends StatelessWidget {
                   FText(
                     account.displayName,
                     style: FTextStyle.titleMedium,
+                    weight: .bold,
                   ),
                   const SizedBox(height: PADDING / 2),
                   FText(

@@ -10,6 +10,7 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final bool showHome;
   final bool automaticallyImplyLeading;
+  final bool enableScrollColor;
 
   const FAppBar({
     super.key,
@@ -17,6 +18,7 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.showHome = true,
     this.automaticallyImplyLeading = true,
+    this.enableScrollColor = true,
   });
 
   @override
@@ -25,6 +27,9 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: automaticallyImplyLeading,
       leading: showHome ? getBackButton(context) : null,
       centerTitle: true,
+      notificationPredicate: enableScrollColor
+          ? defaultScrollNotificationPredicate
+          : (_) => false,
       actions: [
         ...?actions,
         const SizedBox(width: PADDING),

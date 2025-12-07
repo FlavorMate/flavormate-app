@@ -10,7 +10,9 @@ class ScrapeControllerApi extends ControllerApi {
   const ScrapeControllerApi(super._dio);
 
   Future<ApiResponse<String>> scrape({required String url}) async {
-    final base64 = base64Encode(utf8.encode(url));
+    final uri = Uri.encodeComponent(url);
+    var base64 = base64Encode(utf8.encode(uri));
+
     return await get(
       url: '$_root/$base64',
       mapper: (data) => data as String,
