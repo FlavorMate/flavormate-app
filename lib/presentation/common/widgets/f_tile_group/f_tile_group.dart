@@ -1,4 +1,5 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class FTileGroup extends StatelessWidget {
           final bottomLeft = index == items.length - 1 ? borderRadius : 0.0;
           final bottomRight = index == items.length - 1 ? borderRadius : 0.0;
           return ListTile(
+            contentPadding: .symmetric(vertical: 8, horizontal: 8 * 2),
             visualDensity: .standard,
             shape: RoundedRectangleBorder(
               borderRadius: .only(
@@ -48,8 +50,25 @@ class FTileGroup extends StatelessWidget {
             dense: true,
             onTap: item.onTap,
             tileColor: context.colorScheme.surfaceContainer,
-            leading: Icon(item.icon),
-            title: Text(item.label),
+            leading: CircleAvatar(
+              radius: 20,
+              backgroundColor: item.iconColor?.background,
+              child: Icon(
+                item.icon,
+                color: item.iconColor?.foreground,
+              ),
+            ),
+            title: FText(
+              item.label,
+              style: .titleMedium,
+              weight: .w600,
+            ),
+            subtitle: item.subLabel?.let(
+              (it) => FText(
+                it,
+                style: .bodyMedium,
+              ),
+            ),
           );
         }),
       ],

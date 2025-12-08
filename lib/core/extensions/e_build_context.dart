@@ -1,6 +1,7 @@
 import 'package:flavormate/core/constants/route_constants.dart';
 import 'package:flavormate/core/theme/models/blended_colors.dart';
 import 'package:flavormate/data/models/shared/enums/course.dart';
+import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_loading_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel_full_view.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
@@ -50,6 +51,8 @@ extension EBuildContext on BuildContext {
       builder: (_) => FLoadingDialog(hint: hint),
     );
   }
+
+  L10n get l10n => L10n.of(this);
 }
 
 class Routes {

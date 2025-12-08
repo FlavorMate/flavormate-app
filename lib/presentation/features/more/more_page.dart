@@ -1,6 +1,7 @@
 import 'package:flavormate/core/config/features/p_feature_story.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -16,10 +17,11 @@ class MorePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final storiesEnabled = ref.watch(pFeatureStoryProvider);
+    final user = ref.watch(pRestAccountsSelfProvider);
 
     return Scaffold(
       appBar: FAppBar(
-        title: L10n.of(context).flavormate,
+        title: context.l10n.flavormate,
         automaticallyImplyLeading: false,
         showHome: false,
       ),
@@ -29,36 +31,62 @@ class MorePage extends ConsumerWidget {
           spacing: PADDING,
           children: [
             FTileGroup(
-              title: L10n.of(context).more_page__recipes,
+              title: context.l10n.more_page__recipes,
               items: [
                 FTile(
-                  onTap: () => context.routes.categories(),
+                  label: context.l10n.more_page__categories,
+                  subLabel: context.l10n.more_page__categories_hint,
                   icon: MdiIcons.archive,
-                  label: L10n.of(context).more_page__categories,
+                  iconColor: .lightBlue,
+                  onTap: () => context.routes.categories(),
                 ),
                 FTile(
-                  onTap: () => context.routes.tags(),
+                  label: context.l10n.more_page__tags,
+                  subLabel: context.l10n.more_page__tags_hint,
                   icon: MdiIcons.tag,
-                  label: L10n.of(context).more_page__tags,
+                  iconColor: .pink,
+                  onTap: () => context.routes.tags(),
                 ),
               ],
             ),
             FTileGroup(
-              title: L10n.of(context).more_page__editors,
+              title: context.l10n.more_page__editors,
               items: [
                 FTile(
-                  onTap: () => context.routes.recipeEditor(),
+                  label: context.l10n.more_page__recipe_editor,
+                  subLabel: context.l10n.more_page__recipe_editor_hint,
                   icon: MdiIcons.bookPlus,
-                  label: L10n.of(context).more_page__recipe_editor,
+                  iconColor: .orange,
+                  onTap: () => context.routes.recipeEditor(),
                 ),
                 if (storiesEnabled)
                   FTile(
+                    label: context.l10n.more_page__story_editor,
+                    subLabel: context.l10n.more_page__story_editor_hint,
                     onTap: () => context.routes.storyEditor(),
                     icon: MdiIcons.newspaperVariantOutline,
-                    label: L10n.of(context).more_page__story_editor,
+                    iconColor: .purple,
                   ),
               ],
             ),
+            if (user.value?.isAdmin == true)
+              FTileGroup(
+                title: context.l10n.more_page__admin_title,
+                items: [
+                  FTile(
+                    label: L10n.of(
+                      context,
+                    ).more_page__admin_account_management,
+                    subLabel: L10n.of(
+                      context,
+                    ).more_page__admin_account_management_hint,
+                    icon: MdiIcons.accountGroup,
+                    iconColor: .teal,
+                    onTap: () =>
+                        context.routes.administrationAccountManagement(),
+                  ),
+                ],
+              ),
           ],
         ),
       ),

@@ -16,7 +16,7 @@ class HomeAccountDialogAdminSection extends StatelessWidget {
         FTile(
           label: L10n.of(
             context,
-          ).home_account_dialog_admin_section__account_management,
+          ).more_page__admin_account_management,
           icon: MdiIcons.accountGroupOutline,
           onTap: () => openAdminAccountPage(context),
         ),
