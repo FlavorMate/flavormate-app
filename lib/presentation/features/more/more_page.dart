@@ -35,7 +35,7 @@ class MorePage extends ConsumerWidget {
                 FTile(
                   label: context.l10n.more_page__categories,
                   subLabel: context.l10n.more_page__categories_hint,
-                  icon: MdiIcons.archive,
+                  icon: MdiIcons.package,
                   iconColor: .blue,
                   onTap: () => context.routes.categories(),
                 ),

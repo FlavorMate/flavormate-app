@@ -19,7 +19,7 @@ class HomeAccountDialogInfoSection extends ConsumerWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: .circular(24),
+        borderRadius: .circular(16),
         color: context.colorScheme.surfaceContainer,
       ),
       padding: const .all(PADDING),
