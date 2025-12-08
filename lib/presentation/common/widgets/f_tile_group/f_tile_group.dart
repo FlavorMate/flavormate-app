@@ -37,7 +37,7 @@ class FTileGroup extends StatelessWidget {
           final bottomLeft = index == items.length - 1 ? borderRadius : 0.0;
           final bottomRight = index == items.length - 1 ? borderRadius : 0.0;
           return ListTile(
-            contentPadding: .symmetric(vertical: 8, horizontal: 8 * 2),
+            contentPadding: const .symmetric(vertical: 8, horizontal: 8 * 2),
             visualDensity: .standard,
             shape: RoundedRectangleBorder(
               borderRadius: .only(
@@ -52,10 +52,10 @@ class FTileGroup extends StatelessWidget {
             tileColor: context.colorScheme.surfaceContainer,
             leading: CircleAvatar(
               radius: 20,
-              backgroundColor: item.iconColor?.background,
+              backgroundColor: item.iconColor.background,
               child: Icon(
                 item.icon,
-                color: item.iconColor?.foreground,
+                color: item.iconColor.foreground,
               ),
             ),
             title: FText(
@@ -63,7 +63,7 @@ class FTileGroup extends StatelessWidget {
               style: .titleMedium,
               weight: .w600,
             ),
-            subtitle: item.subLabel?.let(
+            subtitle: item.subLabel.let(
               (it) => FText(
                 it,
                 style: .bodyMedium,

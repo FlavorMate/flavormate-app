@@ -1,5 +1,4 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
@@ -14,7 +13,7 @@ class SettingsAppPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: FAppBar(title: L10n.of(context).settings_app_page__title),
+      appBar: FAppBar(title: context.l10n.settings_app_page__title),
       body: SafeArea(
         child: FResponsive(
           child: Column(
@@ -22,18 +21,25 @@ class SettingsAppPage extends ConsumerWidget {
               FTileGroup(
                 items: [
                   FTile(
-                    label: L10n.of(context).settings_app_page__app_icon_title,
-                    icon: MdiIcons.paletteOutline,
+                    label: context.l10n.settings_app_page__app_icon_title,
+                    subLabel:
+                        context.l10n.settings_app_page__app_icon_title_hint,
+                    icon: MdiIcons.palette,
+                    iconColor: .lightBlue,
                     onTap: () => openAppIconPage(context),
                   ),
                   FTile(
-                    label: L10n.of(context).settings_app_page__image_mode_title,
-                    icon: MdiIcons.imageOutline,
+                    label: context.l10n.settings_app_page__image_mode_title,
+                    subLabel: context.l10n.settings_app_page__image_mode_title_hint,
+                    icon: MdiIcons.image,
+                    iconColor: .purple,
                     onTap: () => openImageModePage(context),
                   ),
                   FTile(
-                    label: L10n.of(context).settings_app_page__theme_title,
+                    label: context.l10n.settings_app_page__theme_title,
+                    subLabel: context.l10n.settings_app_page__theme_title_hint,
                     icon: MdiIcons.formatPaint,
+                    iconColor: .pink,
                     onTap: () => openThemePage(context),
                   ),
                 ],

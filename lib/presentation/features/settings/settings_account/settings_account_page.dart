@@ -78,24 +78,32 @@ class SettingsAccountPage extends ConsumerWidget {
                 FTileGroup(
                   items: [
                     FTile(
-                      label: L10n.of(
-                        context,
-                      ).settings_account_page__change_diet,
-                      icon: MdiIcons.foodOutline,
+                      label: context.l10n.settings_account_page__change_diet,
+                      subLabel:
+                          context.l10n.settings_account_page__change_diet_hint,
+                      icon: MdiIcons.food,
+                      iconColor: .red,
                       onTap: () => manageDiet(context, ref, data.diet),
                     ),
+                  ],
+                ),
+                FTileGroup(
+                  items: [
                     FTile(
-                      label: L10n.of(
-                        context,
-                      ).settings_account_page__change_email,
-                      icon: MdiIcons.emailOutline,
+                      label: context.l10n.settings_account_page__change_email,
+                      subLabel:
+                          context.l10n.settings_account_page__change_email_hint,
+                      icon: MdiIcons.email,
+                      iconColor: .orange,
                       onTap: () => manageEmail(context, ref, data.email),
                     ),
                     FTile(
-                      label: L10n.of(
-                        context,
-                      ).settings_account_page__change_password,
+                      label:
+                          context.l10n.settings_account_page__change_password,
+                      subLabel:
+                          context.l10n.settings_account_page__change_password_hint,
                       icon: MdiIcons.formTextboxPassword,
+                      iconColor: .yellow,
                       onTap: () => managePassword(context, ref),
                     ),
                   ],

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 class FTile {
   final String label;
-  final String? subLabel;
+  final String subLabel;
 
   final IconData icon;
-  final FTileIconColor? iconColor;
+  final FTileIconColor iconColor;
 
   final VoidCallback onTap;
 
   const FTile({
     required this.label,
-    this.subLabel,
+    required this.subLabel,
     required this.icon,
-    this.iconColor,
+    required this.iconColor,
     required this.onTap,
   });
 }

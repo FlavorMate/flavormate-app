@@ -11,7 +11,6 @@ import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struc
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_account_section.dart';
-import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_admin_section.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_info_section.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_settings_section.dart';
 import 'package:flutter/material.dart';
@@ -66,16 +65,17 @@ class HomeAccountDialog extends StatelessWidget {
                               label: L10n.of(
                                 context,
                               ).home_account_dialog__my_profile,
-                              icon: MdiIcons.accountOutline,
+                              subLabel: context
+                                  .l10n
+                                  .home_account_dialog__my_profile_hint,
+                              icon: MdiIcons.account,
+                              iconColor: .teal,
                               onTap: () => openAccount(context, account.id),
                             ),
                           ],
                         ),
 
                         const HomeAccountDialogSettingsSection(),
-
-                        if (account.isAdmin)
-                          const HomeAccountDialogAdminSection(),
 
                         const HomeAccountDialogInfoSection(),
 
