@@ -8,7 +8,6 @@ import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_i
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_id_books.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_id_recipes.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_id_stories.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
@@ -73,7 +72,7 @@ class AccountsItemPage extends ConsumerWidget {
                 provider: storiesProvider,
                 builder: (_, data) => data.data.isNotEmpty
                     ? FCarousel(
-                        title: L10n.of(context).accounts_item_page__stories,
+                        title: context.l10n.accounts_item_page__stories,
                         data: data.data.toList(),
                         onTap: (story) => context.routes.storiesItem(story.id),
                         labelSelector: (story) => story.label,
@@ -83,7 +82,7 @@ class AccountsItemPage extends ConsumerWidget {
                       )
                     : const SizedBox.shrink(),
                 onError: FEmptyMessage(
-                  title: L10n.of(context).accounts_item_page__stories_on_error,
+                  title: context.l10n.accounts_item_page__stories_on_error,
                   icon: StateIconConstants.stories.errorIcon,
                 ),
               ),
@@ -92,7 +91,7 @@ class AccountsItemPage extends ConsumerWidget {
                 provider: booksProvider,
                 builder: (_, data) => data.data.isNotEmpty
                     ? FCarousel(
-                        title: L10n.of(context).accounts_item_page__books,
+                        title: context.l10n.accounts_item_page__books,
                         data: data.data.toList(),
                         onTap: (book) => context.routes.libraryItem(book.id),
                         labelSelector: (book) => book.label,
@@ -103,7 +102,7 @@ class AccountsItemPage extends ConsumerWidget {
                     : const SizedBox.shrink(),
 
                 onError: FEmptyMessage(
-                  title: L10n.of(context).accounts_item_page__books_on_error,
+                  title: context.l10n.accounts_item_page__books_on_error,
                   icon: StateIconConstants.books.errorIcon,
                 ),
               ),
@@ -112,7 +111,7 @@ class AccountsItemPage extends ConsumerWidget {
                 provider: recipesProvider,
                 builder: (_, data) => data.data.isNotEmpty
                     ? FCarousel(
-                        title: L10n.of(context).accounts_item_page__recipes,
+                        title: context.l10n.accounts_item_page__recipes,
                         data: data.data,
                         onTap: (recipe) =>
                             context.routes.recipesItem(recipe.id),
@@ -123,7 +122,7 @@ class AccountsItemPage extends ConsumerWidget {
                       )
                     : const SizedBox.shrink(),
                 onError: FEmptyMessage(
-                  title: L10n.of(context).accounts_item_page__recipes_on_error,
+                  title: context.l10n.accounts_item_page__recipes_on_error,
                   icon: StateIconConstants.recipes.errorIcon,
                 ),
               ),
@@ -132,7 +131,7 @@ class AccountsItemPage extends ConsumerWidget {
         ),
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).accounts_item_page__on_error,
+        title: context.l10n.accounts_item_page__on_error,
         icon: StateIconConstants.authors.errorIcon,
       ),
     );

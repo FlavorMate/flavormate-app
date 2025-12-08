@@ -1,6 +1,6 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +29,8 @@ class _AdministrationAccountManagementPasswordDialogState
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(
-        context,
-      ).administration_account_management_password_dialog__title,
+      title:
+          context.l10n.administration_account_management_password_dialog__title,
       scrollable: true,
       submit: apply,
       child: Form(
@@ -41,17 +40,17 @@ class _AdministrationAccountManagementPasswordDialogState
           children: [
             FTextFormField(
               controller: _newPasswordController,
-              label: L10n.of(
-                context,
-              ).administration_account_management_password_dialog__new_password,
+              label: context
+                  .l10n
+                  .administration_account_management_password_dialog__new_password,
               obscureText: true,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
 
                 if (!UValidator.isSecure(value!)) {
-                  return L10n.of(context).validator__is_secure;
+                  return context.l10n.validator__is_secure;
                 }
 
                 return null;

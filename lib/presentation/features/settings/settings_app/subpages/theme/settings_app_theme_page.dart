@@ -8,7 +8,7 @@ import 'package:flavormate/core/theme/enums/f_theme_mode.dart';
 import 'package:flavormate/core/theme/models/blended_colors.dart';
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/core/theme/providers/p_dynamic_color.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_scrollable_h.dart';
@@ -95,7 +95,7 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
       data: _theme,
       child: Scaffold(
         appBar: FAppBar(
-          title: L10n.of(context).settings_app_theme_page__title,
+          title: context.l10n.settings_app_theme_page__title,
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: setTheme,
@@ -111,19 +111,19 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
                   segments: [
                     ButtonSegment(
                       value: .flavormate,
-                      label: Text(L10n.of(context).flavormate),
+                      label: Text(context.l10n.flavormate),
                     ),
                     ButtonSegment(
                       value: .custom,
                       label: Text(
-                        L10n.of(context).settings_app_theme_page__mode_custom,
+                        context.l10n.settings_app_theme_page__mode_custom,
                       ),
                     ),
                     if (_dynamicColors != null)
                       ButtonSegment(
                         value: .dynamic,
                         label: Text(
-                          L10n.of(context).settings_app_theme_page__mode_system,
+                          context.l10n.settings_app_theme_page__mode_system,
                         ),
                       ),
                   ],
@@ -135,9 +135,7 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
                     spacing: PADDING * 2,
                     children: [
                       FText(
-                        L10n.of(
-                          context,
-                        ).settings_app_theme_page__mode_default_hint,
+                        context.l10n.settings_app_theme_page__mode_default_hint,
                         style: .titleLarge,
                         textAlign: .center,
                       ),
@@ -160,9 +158,7 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
                     spacing: PADDING * 2,
                     children: [
                       FText(
-                        L10n.of(
-                          context,
-                        ).settings_app_theme_page__mode_custom_hint,
+                        context.l10n.settings_app_theme_page__mode_custom_hint,
                         style: .titleLarge,
                         textAlign: .center,
                       ),
@@ -190,9 +186,7 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
                     spacing: PADDING * 2,
                     children: [
                       FText(
-                        L10n.of(
-                          context,
-                        ).settings_app_theme_page__mode_system_hint,
+                        context.l10n.settings_app_theme_page__mode_system_hint,
                         style: .titleLarge,
                         textAlign: .center,
                       ),

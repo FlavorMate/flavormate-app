@@ -2,7 +2,7 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/u_int.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -61,9 +61,8 @@ class _RecipeEditorItemDurationsPageDurationPickerState
   Widget build(BuildContext context) {
     return FAlertDialog(
       scrollable: true,
-      title: L10n.of(
-        context,
-      ).recipe_editor_item_durations_page_duration_picker__title,
+      title:
+          context.l10n.recipe_editor_item_durations_page_duration_picker__title,
       submit: submit,
       child: Form(
         key: _formKey,
@@ -72,44 +71,44 @@ class _RecipeEditorItemDurationsPageDurationPickerState
           children: [
             FTextFormField(
               controller: _daysController,
-              label: L10n.of(context).time__days_long,
+              label: context.l10n.time__days_long,
 
               validators: (input) {
                 if (EString.isNotEmpty(input) && !UValidator.isNumber(input!)) {
-                  return L10n.of(context).validator__is_number;
+                  return context.l10n.validator__is_number;
                 }
                 return null;
               },
             ),
             FTextFormField(
               controller: _hoursController,
-              label: L10n.of(context).time__hours_long,
+              label: context.l10n.time__hours_long,
 
               validators: (input) {
                 if (EString.isNotEmpty(input) && !UValidator.isNumber(input!)) {
-                  return L10n.of(context).validator__is_number;
+                  return context.l10n.validator__is_number;
                 }
                 return null;
               },
             ),
             FTextFormField(
               controller: _minutesController,
-              label: L10n.of(context).time__minutes_long,
+              label: context.l10n.time__minutes_long,
 
               validators: (input) {
                 if (EString.isNotEmpty(input) && !UValidator.isNumber(input!)) {
-                  return L10n.of(context).validator__is_number;
+                  return context.l10n.validator__is_number;
                 }
                 return null;
               },
             ),
             FTextFormField(
               controller: _secondsController,
-              label: L10n.of(context).time__seconds_long,
+              label: context.l10n.time__seconds_long,
 
               validators: (input) {
                 if (EString.isNotEmpty(input) && !UValidator.isNumber(input!)) {
-                  return L10n.of(context).validator__is_number;
+                  return context.l10n.validator__is_number;
                 }
                 return null;
               },

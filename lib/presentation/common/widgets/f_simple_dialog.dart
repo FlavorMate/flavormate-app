@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,7 +25,7 @@ class FSimpleDialog<T> extends StatelessWidget {
           padding: const EdgeInsetsGeometry.only(right: PADDING),
           child: TextButton(
             onPressed: () => context.pop(),
-            child: Text(L10n.of(context).btn_close),
+            child: Text(context.l10n.btn_close),
           ),
         ),
       ],

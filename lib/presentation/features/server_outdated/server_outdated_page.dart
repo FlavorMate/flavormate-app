@@ -6,7 +6,6 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/data/models/core/version/version.dart';
 import 'package:flavormate/data/repositories/core/server/p_server_compatibility.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -54,18 +53,18 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
                 children: [
                   const Icon(MdiIcons.cloudAlertOutline, size: 128),
                   FText(
-                    L10n.of(context).server_outdated_page__hint_1,
+                    context.l10n.server_outdated_page__hint_1,
                     style: FTextStyle.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                   FText(
-                    L10n.of(context).server_outdated_page__hint_2,
+                    context.l10n.server_outdated_page__hint_2,
                     style: FTextStyle.titleSmall,
                     textAlign: TextAlign.center,
                   ),
                   FilledButton(
                     onPressed: logout,
-                    child: Text(L10n.of(context).btn_logout),
+                    child: Text(context.l10n.btn_logout),
                   ),
                 ],
               ),

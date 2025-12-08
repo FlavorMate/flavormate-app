@@ -2,7 +2,7 @@ import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/route_constants.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class FEmptyMessage extends StatelessWidget {
             builder: (context, ref, child) {
               return FButton(
                 width: BUTTON_WIDTH,
-                label: L10n.of(context).btn_logout,
+                label: context.l10n.btn_logout,
                 onPressed: () => logout(context, ref),
               );
             },

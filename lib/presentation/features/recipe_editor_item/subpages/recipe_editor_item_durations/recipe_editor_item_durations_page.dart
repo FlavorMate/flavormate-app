@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
@@ -59,7 +58,7 @@ class _RecipeEditorItemDurationsPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
-          title: L10n.of(context).recipe_editor_item_durations_page__title,
+          title: context.l10n.recipe_editor_item_durations_page__title,
           actions: [
             FProgress(
               provider: widget.provider,
@@ -78,9 +77,9 @@ class _RecipeEditorItemDurationsPageState
                     spacing: PADDING,
                     children: [
                       FText(
-                        L10n.of(
-                          context,
-                        ).recipe_editor_item_durations_page__prep_time,
+                        context
+                            .l10n
+                            .recipe_editor_item_durations_page__prep_time,
                         style: FTextStyle.titleLarge,
                       ),
                       FButton(
@@ -96,9 +95,9 @@ class _RecipeEditorItemDurationsPageState
                     spacing: PADDING,
                     children: [
                       FText(
-                        L10n.of(
-                          context,
-                        ).recipe_editor_item_durations_page__cook_time,
+                        context
+                            .l10n
+                            .recipe_editor_item_durations_page__cook_time,
                         style: FTextStyle.titleLarge,
                       ),
                       FButton(
@@ -114,9 +113,9 @@ class _RecipeEditorItemDurationsPageState
                     spacing: PADDING,
                     children: [
                       FText(
-                        L10n.of(
-                          context,
-                        ).recipe_editor_item_durations_page__rest_time,
+                        context
+                            .l10n
+                            .recipe_editor_item_durations_page__rest_time,
                         style: FTextStyle.titleLarge,
                       ),
                       FButton(

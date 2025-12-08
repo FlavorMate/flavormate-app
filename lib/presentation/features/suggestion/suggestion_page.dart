@@ -5,7 +5,6 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_random.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_content.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -29,9 +28,9 @@ class SuggestionPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final label = switch (course) {
-      Course.MainDish => L10n.of(context).suggestion_page__title_cooking,
-      Course.Bakery => L10n.of(context).suggestion_page__title_bakery,
-      _ => L10n.of(context).suggestion_page__title,
+      Course.MainDish => context.l10n.suggestion_page__title_cooking,
+      Course.Bakery => context.l10n.suggestion_page__title_bakery,
+      _ => context.l10n.suggestion_page__title,
     };
 
     return Scaffold(
@@ -48,11 +47,11 @@ class SuggestionPage extends ConsumerWidget {
               pageProvider: pPageableStateProvider(PageableState.unused.name),
               controller: controller,
               onEmpty: FEmptyMessage(
-                title: L10n.of(context).suggestion_page__on_empty,
+                title: context.l10n.suggestion_page__on_empty,
                 icon: StateIconConstants.suggestions.emptyIcon,
               ),
               onError: FEmptyMessage(
-                title: L10n.of(context).suggestion_page__on_empty,
+                title: context.l10n.suggestion_page__on_empty,
                 icon: StateIconConstants.suggestions.errorIcon,
               ),
               itemBuilder: (item) => FImageCard.maximized(

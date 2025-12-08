@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_list.dart';
 import 'package:flavormate/data/models/shared/models/search_result.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_search/f_search_no_result.dart';
 import 'package:flavormate/presentation/common/widgets/f_search/f_search_term_too_short.dart';
@@ -57,7 +56,7 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
         hintText: _searchHint,
         onTap: controller.openView,
       ),
-      viewHintText: L10n.of(context).home_search_bar__search_hint,
+      viewHintText: context.l10n.home_search_bar__search_hint,
       viewLeading: IconButton(
         onPressed: close,
         icon: const Icon(MdiIcons.arrowLeft),
@@ -90,7 +89,7 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
               );
             },
             onError: FEmptyMessage(
-              title: L10n.of(context).home_search_bar__search_on_error,
+              title: context.l10n.home_search_bar__search_on_error,
               icon: StateIconConstants.search.errorIcon,
             ),
           );
@@ -129,11 +128,11 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
   }
 
   String getMessage(BuildContext context) => [
-    L10n.of(context).home_search_bar__search_authors,
-    L10n.of(context).home_search_bar__search_books,
-    L10n.of(context).home_search_bar__search_categories,
-    L10n.of(context).home_search_bar__search_recipes,
-    L10n.of(context).home_search_bar__search_tags,
+    context.l10n.home_search_bar__search_authors,
+    context.l10n.home_search_bar__search_books,
+    context.l10n.home_search_bar__search_categories,
+    context.l10n.home_search_bar__search_recipes,
+    context.l10n.home_search_bar__search_tags,
   ].random()!;
 
   void onChange(String val) {

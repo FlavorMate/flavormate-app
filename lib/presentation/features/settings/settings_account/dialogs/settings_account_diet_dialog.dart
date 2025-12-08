@@ -1,7 +1,7 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/data/models/features/accounts/account_update_dto.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class SettingsAccountDietDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).settings_account_diet_dialog__title,
+      title: context.l10n.settings_account_diet_dialog__title,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: PADDING,

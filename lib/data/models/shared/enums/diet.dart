@@ -1,5 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
@@ -19,10 +19,10 @@ enum Diet {
 
   String getName(BuildContext context) {
     return switch (this) {
-      Diet.Meat => L10n.of(context).diet__meat,
-      Diet.Fish => L10n.of(context).diet__fish,
-      Diet.Vegetarian => L10n.of(context).diet__vegetarian,
-      Diet.Vegan => L10n.of(context).diet__vegan,
+      Diet.Meat => context.l10n.diet__meat,
+      Diet.Fish => context.l10n.diet__fish,
+      Diet.Vegetarian => context.l10n.diet__vegetarian,
+      Diet.Vegan => context.l10n.diet__vegan,
     };
   }
 

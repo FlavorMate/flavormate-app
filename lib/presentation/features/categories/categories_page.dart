@@ -5,7 +5,6 @@ import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/categories/p_rest_categories.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
@@ -35,15 +34,15 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
   @override
   Widget build(BuildContext context) {
     return FPaginatedPage(
-      title: L10n.of(context).categories_page__title,
+      title: context.l10n.categories_page__title,
       provider: provider,
       pageProvider: widget.pageProvider,
       onEmpty: FEmptyMessage(
-        title: L10n.of(context).categories_page__on_empty,
+        title: context.l10n.categories_page__on_empty,
         icon: StateIconConstants.categories.emptyIcon,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).categories_page__on_error,
+        title: context.l10n.categories_page__on_error,
         icon: StateIconConstants.categories.errorIcon,
       ),
       sortBuilder: () => FPaginatedSort(
@@ -56,7 +55,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
       itemBuilder: (item) => FImageCard.maximized(
         label: item.label,
         coverSelector: (resolution) => item.cover?.url(resolution),
-        subLabel: L10n.of(context).categories_page__recipe_counter(
+        subLabel: context.l10n.categories_page__recipe_counter(
           item.recipeCount,
         ),
         onTap: () => context.routes.categoriesItem(item.id),

@@ -3,7 +3,6 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress_color.dart';
@@ -39,9 +38,7 @@ class _RecipeEditorItemIngredientGroupsPageState
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, data) => FAppBar(
-        title: L10n.of(
-          context,
-        ).recipe_editor_item_ingredient_groups_page__title,
+        title: context.l10n.recipe_editor_item_ingredient_groups_page__title,
         actions: [
           FProgressColor(
             color: context.colorScheme.onSurface,
@@ -52,7 +49,7 @@ class _RecipeEditorItemIngredientGroupsPageState
       floatingActionButtonBuilder: (_, _) => FloatingActionButton.extended(
         icon: const Icon(MdiIcons.plus),
         label: Text(
-          L10n.of(context).recipe_editor_item_ingredient_groups_page__create,
+          context.l10n.recipe_editor_item_ingredient_groups_page__create,
         ),
         onPressed: createGroup,
       ),
@@ -98,9 +95,7 @@ class _RecipeEditorItemIngredientGroupsPageState
         ),
       ),
       onError: FEmptyMessage(
-        title: L10n.of(
-          context,
-        ).recipe_editor_item_ingredient_groups_page__on_empty,
+        title: context.l10n.recipe_editor_item_ingredient_groups_page__on_empty,
         icon: StateIconConstants.drafts.emptyIcon,
       ),
     );
@@ -131,9 +126,9 @@ class _RecipeEditorItemIngredientGroupsPageState
 
   String getName(BuildContext context, String? val, int index) {
     return EString.isEmpty(val)
-        ? L10n.of(
-            context,
-          ).recipe_editor_item_ingredient_groups_page__group(index + 1)
+        ? context.l10n.recipe_editor_item_ingredient_groups_page__group(
+            index + 1,
+          )
         : val!;
   }
 

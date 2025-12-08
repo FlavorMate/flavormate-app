@@ -1,5 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
@@ -24,11 +24,11 @@ enum OrderBy {
 
   String getName(BuildContext context) {
     return switch (this) {
-      OrderBy.CreatedOn => L10n.of(context).order_by__created_on,
-      OrderBy.Label => L10n.of(context).order_by__label,
-      OrderBy.Visible => L10n.of(context).order_by__visible,
-      OrderBy.DisplayName => L10n.of(context).order_by__display_name,
-      OrderBy.Username => L10n.of(context).order_by__username,
+      OrderBy.CreatedOn => context.l10n.order_by__created_on,
+      OrderBy.Label => context.l10n.order_by__label,
+      OrderBy.Visible => context.l10n.order_by__visible,
+      OrderBy.DisplayName => context.l10n.order_by__display_name,
+      OrderBy.Username => context.l10n.order_by__username,
     };
   }
 

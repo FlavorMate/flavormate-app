@@ -6,7 +6,7 @@ import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
 import 'package:flavormate/data/models/features/unit/unit_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_full_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
@@ -103,9 +103,9 @@ class _DNutritionState
   Widget build(BuildContext context) {
     final offFeature = ref.watch(pFeatureOpenFoodFactsProvider);
     return FFullDialog(
-      title: L10n.of(
-        context,
-      ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__title,
+      title: context
+          .l10n
+          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__title,
       submit: submit,
       child: Form(
         key: _formKey,
@@ -119,17 +119,17 @@ class _DNutritionState
                 ButtonSegment(
                   value: 0,
                   label: Text(
-                    L10n.of(
-                      context,
-                    ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_title,
+                    context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_title,
                   ),
                 ),
                 ButtonSegment(
                   value: 1,
                   label: Text(
-                    L10n.of(
-                      context,
-                    ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_title,
+                    context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_title,
                   ),
                 ),
               ],
@@ -150,9 +150,9 @@ class _DNutritionState
                       const Icon(MdiIcons.alertCircleOutline),
                       Expanded(
                         child: FText(
-                          L10n.of(
-                            context,
-                          ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_disabled,
+                          context
+                              .l10n
+                              .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_disabled,
                           style: FTextStyle.titleSmall,
                           color: FTextColor.onPrimaryContainer,
                         ),
@@ -170,38 +170,38 @@ class _DNutritionState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           FText(
-                            L10n.of(
-                              context,
-                            ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_1,
+                            context
+                                .l10n
+                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_1,
                             style: FTextStyle.bodyMedium,
                             color: FTextColor.onPrimaryContainer,
                           ),
                           FText(
-                            L10n.of(
-                              context,
-                            ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_2,
+                            context
+                                .l10n
+                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_2,
                             style: FTextStyle.bodyMedium,
                             color: FTextColor.onPrimaryContainer,
                           ),
                           FText(
-                            L10n.of(
-                              context,
-                            ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_3,
+                            context
+                                .l10n
+                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_3,
                             style: FTextStyle.bodyMedium,
                             color: FTextColor.onPrimaryContainer,
                           ),
                           FText(
-                            L10n.of(
-                              context,
-                            ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_4,
+                            context
+                                .l10n
+                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_4,
                             style: FTextStyle.bodyMedium,
                             color: FTextColor.onPrimaryContainer,
                           ),
                           FButton(
                             onPressed: launchOFF,
-                            label: L10n.of(
-                              context,
-                            ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_launch,
+                            label: context
+                                .l10n
+                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_launch,
                           ),
                         ],
                       ),
@@ -216,9 +216,9 @@ class _DNutritionState
                             const Icon(MdiIcons.alertCircleOutline),
                             Expanded(
                               child: FText(
-                                L10n.of(
-                                  context,
-                                ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_unavailable,
+                                context
+                                    .l10n
+                                    .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_unavailable,
                                 style: FTextStyle.titleSmall,
                                 color: FTextColor.onPrimaryContainer,
                               ),
@@ -228,9 +228,9 @@ class _DNutritionState
                       ),
                     FTextFormField(
                       controller: _openFoodFactsIdController,
-                      label: L10n.of(
-                        context,
-                      ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_ean,
+                      label: context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_ean,
                       prefix: const Icon(MdiIcons.barcodeScan),
                       readOnly: !convertableUnit,
                     ),
@@ -249,9 +249,9 @@ class _DNutritionState
                           const Icon(MdiIcons.alertCircleOutline),
                           Expanded(
                             child: FText(
-                              L10n.of(
-                                context,
-                              ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_unavailable,
+                              context
+                                  .l10n
+                                  .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_unavailable,
                               style: FTextStyle.titleSmall,
                               color: FTextColor.onPrimaryContainer,
                             ),
@@ -261,21 +261,20 @@ class _DNutritionState
                     ),
                   FCard(
                     child: FText(
-                      L10n.of(
-                        context,
-                      ).recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_hint_1(
-                        [
-                          widget.amount?.beautify,
-                          widget.unit?.getLabel(widget.amount),
-                        ].nonNulls.join(' '),
-                      ),
+                      context.l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_hint_1(
+                            [
+                              widget.amount?.beautify,
+                              widget.unit?.getLabel(widget.amount),
+                            ].nonNulls.join(' '),
+                          ),
                       style: FTextStyle.bodyMedium,
                       color: FTextColor.onPrimaryContainer,
                     ),
                   ),
                   FTextFormField(
                     controller: _energyKcalController,
-                    label: L10n.of(context).nutrition__kcal,
+                    label: context.l10n.nutrition__kcal,
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -284,7 +283,7 @@ class _DNutritionState
                   SizedBox(width: _dividerWidth, child: const Divider()),
                   FTextFormField(
                     controller: _carbohydratesController,
-                    label: '${L10n.of(context).nutrition__carbohydrates} (g)',
+                    label: '${context.l10n.nutrition__carbohydrates} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -292,7 +291,7 @@ class _DNutritionState
                   ),
                   FTextFormField(
                     controller: _sugarsController,
-                    label: '${L10n.of(context).nutrition__sugars} (g)',
+                    label: '${context.l10n.nutrition__sugars} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -301,7 +300,7 @@ class _DNutritionState
                   SizedBox(width: _dividerWidth, child: const Divider()),
                   FTextFormField(
                     controller: _fatController,
-                    label: '${L10n.of(context).nutrition__fats} (g)',
+                    label: '${context.l10n.nutrition__fats} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -309,7 +308,7 @@ class _DNutritionState
                   ),
                   FTextFormField(
                     controller: _saturatedFatController,
-                    label: '${L10n.of(context).nutrition__fats_saturated} (g)',
+                    label: '${context.l10n.nutrition__fats_saturated} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -318,7 +317,7 @@ class _DNutritionState
                   SizedBox(width: _dividerWidth, child: const Divider()),
                   FTextFormField(
                     controller: _fiberController,
-                    label: '${L10n.of(context).nutrition__fibers} (g)',
+                    label: '${context.l10n.nutrition__fibers} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -326,7 +325,7 @@ class _DNutritionState
                   ),
                   FTextFormField(
                     controller: _proteinsController,
-                    label: '${L10n.of(context).nutrition__proteins} (g)',
+                    label: '${context.l10n.nutrition__proteins} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -334,7 +333,7 @@ class _DNutritionState
                   ),
                   FTextFormField(
                     controller: _saltController,
-                    label: '${L10n.of(context).nutrition__salt} (g)',
+                    label: '${context.l10n.nutrition__salt} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -342,7 +341,7 @@ class _DNutritionState
                   ),
                   FTextFormField(
                     controller: _sodiumController,
-                    label: '${L10n.of(context).nutrition__sodium} (g)',
+                    label: '${context.l10n.nutrition__sodium} (g)',
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
@@ -365,7 +364,7 @@ class _DNutritionState
     if (EString.isEmpty(input)) return null;
 
     if (!UValidator.isNumber(input!)) {
-      return L10n.of(context).validator__is_number;
+      return context.l10n.validator__is_number;
     }
 
     return null;

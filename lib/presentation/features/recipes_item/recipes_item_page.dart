@@ -4,7 +4,6 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/data/repositories/extension/bring/p_bring.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -83,7 +82,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
         readOnly: false,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).recipes_item_page__on_error,
+        title: context.l10n.recipes_item_page__on_error,
         icon: StateIconConstants.recipes.errorIcon,
       ),
     );
@@ -101,7 +100,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
         !await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       if (!mounted) return;
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__bring_on_error,
+        context.l10n.recipes_item_page__bring_on_error,
       );
     }
   }
@@ -148,7 +147,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
     await SharePlus.instance.share(
       ShareParams(
         text:
-            '${L10n.of(context).recipes_item_page__share_text(recipe.label)}\n${url.data!}',
+            '${context.l10n.recipes_item_page__share_text(recipe.label)}\n${url.data!}',
       ),
     );
   }
@@ -163,7 +162,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
 
     if (response.hasError || !response.hasData) {
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__edit_on_error,
+        context.l10n.recipes_item_page__edit_on_error,
       );
     } else {
       context.routes.recipeEditorItem(response.data!);
@@ -185,11 +184,11 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
 
     if (!response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__transfer_success,
+        context.l10n.recipes_item_page__transfer_success,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__transfer_error,
+        context.l10n.recipes_item_page__transfer_error,
       );
     }
   }
@@ -198,7 +197,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
     final response = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(context).recipes_item_page__delete_title,
+        title: context.l10n.recipes_item_page__delete_title,
       ),
     );
     if (response != true) return;
@@ -208,12 +207,12 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
     if (result.hasError || result.data != true) {
       if (!mounted) return;
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__delete_failure,
+        context.l10n.recipes_item_page__delete_failure,
       );
     } else {
       if (!mounted) return;
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__delete_success,
+        context.l10n.recipes_item_page__delete_success,
       );
       await context.routes.home(replace: true);
     }

@@ -1,4 +1,4 @@
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,12 +36,12 @@ class FAlertDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => context.pop(),
-          child: Text(negativeLabel ?? L10n.of(context).btn_cancel),
+          child: Text(negativeLabel ?? context.l10n.btn_cancel),
         ),
         if (submit != null)
           FilledButton(
             onPressed: submit,
-            child: Text(positiveLabel ?? L10n.of(context).btn_save),
+            child: Text(positiveLabel ?? context.l10n.btn_save),
           ),
       ],
       content: SizedBox(width: width, height: height, child: child),

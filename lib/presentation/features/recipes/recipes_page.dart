@@ -6,7 +6,6 @@ import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
@@ -35,16 +34,16 @@ class _RecipesPageState extends State<RecipesPage>
   @override
   Widget build(BuildContext context) {
     return FPaginatedPage(
-      title: L10n.of(context).recipes_page__title,
+      title: context.l10n.recipes_page__title,
       pageProvider: widget.pageProvider,
       provider: provider,
       onEmpty: FEmptyMessage(
         icon: StateIconConstants.recipes.emptyIcon,
-        title: L10n.of(context).recipes_page__on_empty,
+        title: context.l10n.recipes_page__on_empty,
       ),
       onError: FEmptyMessage(
         icon: StateIconConstants.recipes.errorIcon,
-        title: L10n.of(context).recipes_page__on_error,
+        title: context.l10n.recipes_page__on_error,
       ),
       sortBuilder: () => FPaginatedSort(
         currentOrderBy: orderBy,

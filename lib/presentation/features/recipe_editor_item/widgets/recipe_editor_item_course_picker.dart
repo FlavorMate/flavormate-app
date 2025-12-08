@@ -1,6 +1,6 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/data/models/shared/enums/course.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class RecipeEditorItemCoursePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).recipe_editor_item_course_picker__title,
+      title: context.l10n.recipe_editor_item_course_picker__title,
       child: Column(
         spacing: PADDING,
         mainAxisSize: MainAxisSize.min,

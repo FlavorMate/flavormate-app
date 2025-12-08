@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_date_time.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_chip/f_state_chip.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
@@ -64,22 +63,22 @@ class AdministrationAccountManagementCard extends StatelessWidget {
                         FStateChip(
                           active: account.enabled,
                           label: account.enabled
-                              ? L10n.of(
-                                  context,
-                                ).administration_account_management_page__account_enabled
-                              : L10n.of(
-                                  context,
-                                ).administration_account_management_page__account_disabled,
+                              ? context
+                                    .l10n
+                                    .administration_account_management_page__account_enabled
+                              : context
+                                    .l10n
+                                    .administration_account_management_page__account_disabled,
                         ),
                         FStateChip(
                           active: account.verified,
                           label: account.verified
-                              ? L10n.of(
-                                  context,
-                                ).administration_account_management_page__account_verified
-                              : L10n.of(
-                                  context,
-                                ).administration_account_management_page__account_unverified,
+                              ? context
+                                    .l10n
+                                    .administration_account_management_page__account_verified
+                              : context
+                                    .l10n
+                                    .administration_account_management_page__account_unverified,
                         ),
                         Chip(
                           avatar: const Icon(

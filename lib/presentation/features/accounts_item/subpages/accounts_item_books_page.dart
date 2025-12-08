@@ -5,7 +5,6 @@ import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_id_books.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
@@ -41,15 +40,15 @@ class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
   @override
   Widget build(BuildContext context) {
     return FPaginatedPage(
-      title: L10n.of(context).accounts_item_books_page__title,
+      title: context.l10n.accounts_item_books_page__title,
       provider: provider,
       pageProvider: widget.pageProvider,
       onEmpty: FEmptyMessage(
-        title: L10n.of(context).accounts_item_books_page__on_empty,
+        title: context.l10n.accounts_item_books_page__on_empty,
         icon: StateIconConstants.books.emptyIcon,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).accounts_item_books_page__on_error,
+        title: context.l10n.accounts_item_books_page__on_error,
         icon: StateIconConstants.books.errorIcon,
       ),
       sortBuilder: () => FPaginatedSort(
@@ -64,8 +63,8 @@ class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
           label: item.label,
           coverSelector: (resolution) => item.cover?.url(resolution),
           subLabel: item.visible
-              ? L10n.of(context).accounts_item_books_page__visible
-              : L10n.of(context).accounts_item_books_page__invisible,
+              ? context.l10n.accounts_item_books_page__visible
+              : context.l10n.accounts_item_books_page__invisible,
           onTap: () => context.routes.libraryItem(item.id),
         );
       },

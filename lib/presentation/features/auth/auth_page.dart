@@ -5,7 +5,6 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
 import 'package:flavormate/data/models/core/version/version.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
@@ -55,13 +54,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             children: [
               const FLogo(size: 128),
               FText(
-                L10n.of(context).flavormate,
+                context.l10n.flavormate,
                 style: FTextStyle.headlineLarge,
               ),
               const SizedBox(height: PADDING * 2),
               FButton(
                 width: BUTTON_WIDTH,
-                label: L10n.of(context).auth_page__login,
+                label: context.l10n.auth_page__login,
                 onPressed: () =>
                     context.pushNamed(RouteConstants.AuthLogin.name),
               ),
@@ -70,7 +69,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 const SizedBox(height: PADDING),
                 FButton(
                   width: BUTTON_WIDTH,
-                  label: L10n.of(context).auth_page__register,
+                  label: context.l10n.auth_page__register,
                   onPressed: () =>
                       context.pushNamed(RouteConstants.AuthRegister.name),
                 ),
@@ -86,13 +85,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   spacing: PADDING / 4,
                   children: [
                     const Expanded(child: Divider()),
-                    Text(L10n.of(context).auth_page__or),
+                    Text(context.l10n.auth_page__or),
                     const Expanded(child: Divider()),
                   ],
                 ),
                 const SizedBox(height: PADDING),
                 FText(
-                  L10n.of(context).auth_page__login_with,
+                  context.l10n.auth_page__login_with,
                   style: FTextStyle.bodyMedium,
                 ),
                 const SizedBox(height: PADDING),
@@ -120,13 +119,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           if (!data.isStatic)
             TextButton(
               onPressed: changeServer,
-              child: Text(L10n.of(context).login_page__change_server),
+              child: Text(context.l10n.login_page__change_server),
             ),
         ],
       ),
 
       onError: FEmptyMessage(
-        title: L10n.of(context).login_page__on_error,
+        title: context.l10n.login_page__on_error,
         icon: StateIconConstants.login.errorIcon,
         showLogoutButton: true,
       ),
@@ -151,7 +150,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       if (!mounted) return;
       context.pop();
       context.showTextSnackBar(
-        L10n.of(context).auth_page__oidc_error(provider.name),
+        context.l10n.auth_page__oidc_error(provider.name),
       );
       return;
     }

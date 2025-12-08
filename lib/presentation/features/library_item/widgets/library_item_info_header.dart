@@ -1,7 +1,6 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/features/books/book_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +27,8 @@ class LibraryItemInfoHeader extends StatelessWidget {
                 ),
                 FText(
                   book.visible
-                      ? L10n.of(context).library_item_info_header__public
-                      : L10n.of(context).library_item_info_header__private,
+                      ? context.l10n.library_item_info_header__public
+                      : context.l10n.library_item_info_header__private,
                   style: FTextStyle.bodyMedium,
                 ),
               ],
@@ -40,7 +39,7 @@ class LibraryItemInfoHeader extends StatelessWidget {
                 children: [
                   const Icon(MdiIcons.accountGroupOutline),
                   FText(
-                    L10n.of(context).library_item_info_header__subscribers(
+                    context.l10n.library_item_info_header__subscribers(
                       book.subscriberCount,
                     ),
                     style: FTextStyle.bodyMedium,

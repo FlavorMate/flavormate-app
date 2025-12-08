@@ -7,7 +7,6 @@ import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_file_d
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id_files.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -54,7 +53,7 @@ class _RecipeEditorItemFilesPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
-        title: L10n.of(context).recipe_editor_item_files_page__title,
+        title: context.l10n.recipe_editor_item_files_page__title,
         actions: [
           FProgress(
             provider: provider,
@@ -108,11 +107,11 @@ class _RecipeEditorItemFilesPageState
           ],
         ),
         onError: FEmptyMessage(
-          title: L10n.of(context).recipe_editor_item_files_page__on_error,
+          title: context.l10n.recipe_editor_item_files_page__on_error,
           icon: StateIconConstants.files.errorIcon,
         ),
         onEmpty: FEmptyMessage(
-          title: L10n.of(context).recipe_editor_item_files_page__on_empty,
+          title: context.l10n.recipe_editor_item_files_page__on_empty,
           icon: StateIconConstants.files.emptyIcon,
         ),
       ),
@@ -134,11 +133,11 @@ class _RecipeEditorItemFilesPageState
 
     if (response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_item_files_page__file_add_on_error,
+        context.l10n.recipe_editor_item_files_page__file_add_on_error,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_item_files_page__file_add_on_success,
+        context.l10n.recipe_editor_item_files_page__file_add_on_success,
       );
     }
   }
@@ -151,9 +150,7 @@ class _RecipeEditorItemFilesPageState
     final result = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(
-          context,
-        ).recipe_editor_item_files_page__delete,
+        title: context.l10n.recipe_editor_item_files_page__delete,
       ),
     );
 
@@ -167,11 +164,11 @@ class _RecipeEditorItemFilesPageState
 
     if (response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_item_files_page__file_delete_on_error,
+        context.l10n.recipe_editor_item_files_page__file_delete_on_error,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_item_files_page__file_delete_on_success,
+        context.l10n.recipe_editor_item_files_page__file_delete_on_success,
       );
     }
   }

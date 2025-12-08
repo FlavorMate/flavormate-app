@@ -3,7 +3,7 @@ import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_nutrition.dart';
 import 'package:flavormate/data/models/shared/enums/nutrition_type.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_data_table.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +32,7 @@ class FRecipeNutritionTable extends StatelessWidget {
         FDataColumn(alignment: Alignment.centerLeft, width: 24),
         FDataColumn(
           alignment: Alignment.centerLeft,
-          child: Text(L10n.of(context).f_recipe_nutrition_table__title),
+          child: Text(context.l10n.f_recipe_nutrition_table__title),
         ),
         FDataColumn(
           alignment: Alignment.centerRight,

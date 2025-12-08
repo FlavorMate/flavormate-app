@@ -6,7 +6,6 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
@@ -29,15 +28,15 @@ class HomeLatestPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return FPaginatedPage(
-      title: L10n.of(context).home_latest_page__title,
+      title: context.l10n.home_latest_page__title,
       provider: provider,
       pageProvider: pageProvider,
       onEmpty: FEmptyMessage(
-        title: L10n.of(context).home_latest_page__on_empty,
+        title: context.l10n.home_latest_page__on_empty,
         icon: StateIconConstants.recipes.emptyIcon,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).home_latest_page__on_error,
+        title: context.l10n.home_latest_page__on_error,
         icon: StateIconConstants.recipes.errorIcon,
       ),
       itemBuilder: (item) => FImageCard.maximized(

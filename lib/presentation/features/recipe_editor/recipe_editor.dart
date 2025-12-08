@@ -4,7 +4,6 @@ import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_data_table.dart';
@@ -30,7 +29,7 @@ class RecipeEditorPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: FAppBar(title: L10n.of(context).recipe_editor_page__title),
+      appBar: FAppBar(title: context.l10n.recipe_editor_page__title),
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: RecipeEditorFab(
         onCreate: () => createDraft(context, ref),
@@ -45,12 +44,12 @@ class RecipeEditorPage extends ConsumerWidget {
             columns: [
               FDataColumn(
                 alignment: Alignment.centerLeft,
-                child: Text(L10n.of(context).recipe_editor_page__table_label),
+                child: Text(context.l10n.recipe_editor_page__table_label),
               ),
               FDataColumn(
                 width: 72,
                 alignment: Alignment.centerLeft,
-                child: Text(L10n.of(context).recipe_editor_page__table_state),
+                child: Text(context.l10n.recipe_editor_page__table_state),
               ),
               FDataColumn(width: 48),
             ],
@@ -62,12 +61,12 @@ class RecipeEditorPage extends ConsumerWidget {
                   cells: [
                     Text(
                       draft.label?.shorten(length: 40) ??
-                          L10n.of(context).recipe_editor_page__table_undefined,
+                          context.l10n.recipe_editor_page__table_undefined,
                     ),
                     Text(
                       draft.isNew
-                          ? L10n.of(context).recipe_editor_page__table_new
-                          : L10n.of(context).recipe_editor_page__table_update,
+                          ? context.l10n.recipe_editor_page__table_new
+                          : context.l10n.recipe_editor_page__table_update,
                     ),
                     IconButton(
                       icon: Icon(
@@ -81,11 +80,11 @@ class RecipeEditorPage extends ConsumerWidget {
             ],
           ),
           onError: FEmptyMessage(
-            title: L10n.of(context).recipe_editor_page__on_error,
+            title: context.l10n.recipe_editor_page__on_error,
             icon: StateIconConstants.drafts.errorIcon,
           ),
           onEmpty: FEmptyMessage(
-            title: L10n.of(context).recipe_editor_page__on_empty,
+            title: context.l10n.recipe_editor_page__on_empty,
             icon: StateIconConstants.drafts.emptyIcon,
           ),
         ),
@@ -100,7 +99,7 @@ class RecipeEditorPage extends ConsumerWidget {
 
     if (response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_page__create_error,
+        context.l10n.recipe_editor_page__create_error,
       );
     } else {
       openDraft(context, true, response.data!);
@@ -115,7 +114,7 @@ class RecipeEditorPage extends ConsumerWidget {
     final confirmation = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(context).recipe_editor_page__delete_draft,
+        title: context.l10n.recipe_editor_page__delete_draft,
       ),
     );
 
@@ -130,11 +129,11 @@ class RecipeEditorPage extends ConsumerWidget {
 
     if (response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_page__delete_error,
+        context.l10n.recipe_editor_page__delete_error,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_page__delete_success,
+        context.l10n.recipe_editor_page__delete_success,
       );
     }
   }
@@ -162,11 +161,11 @@ class RecipeEditorPage extends ConsumerWidget {
 
     if (response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_page__import_failure,
+        context.l10n.recipe_editor_page__import_failure,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_page__import_success,
+        context.l10n.recipe_editor_page__import_success,
       );
       openDraft(context, true, response.data!);
     }

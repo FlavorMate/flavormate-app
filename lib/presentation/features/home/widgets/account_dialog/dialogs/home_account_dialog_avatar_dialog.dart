@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/enums/home_account_dialog_avatar_result.dart';
@@ -14,7 +14,7 @@ class HomeAccountDialogAvatarDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).home_account_dialog_avatar_dialog__title,
+      title: context.l10n.home_account_dialog_avatar_dialog__title,
       child: SizedBox(
         child: Column(
           spacing: PADDING,
@@ -24,13 +24,13 @@ class HomeAccountDialogAvatarDialog extends StatelessWidget {
               onPressed: () =>
                   context.pop(HomeAccountDialogAvatarResult.Change),
               icon: MdiIcons.accountPlusOutline,
-              label: L10n.of(context).home_account_dialog_avatar_dialog__change,
+              label: context.l10n.home_account_dialog_avatar_dialog__change,
             ),
             FIconButton(
               onPressed: () =>
                   context.pop(HomeAccountDialogAvatarResult.Delete),
               icon: MdiIcons.accountMinusOutline,
-              label: L10n.of(context).home_account_dialog_avatar_dialog__delete,
+              label: context.l10n.home_account_dialog_avatar_dialog__delete,
             ),
           ],
         ),

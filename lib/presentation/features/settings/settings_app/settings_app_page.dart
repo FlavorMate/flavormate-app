@@ -30,7 +30,8 @@ class SettingsAppPage extends ConsumerWidget {
                   ),
                   FTile(
                     label: context.l10n.settings_app_page__image_mode_title,
-                    subLabel: context.l10n.settings_app_page__image_mode_title_hint,
+                    subLabel:
+                        context.l10n.settings_app_page__image_mode_title_hint,
                     icon: MdiIcons.image,
                     iconColor: .purple,
                     onTap: () => openImageModePage(context),

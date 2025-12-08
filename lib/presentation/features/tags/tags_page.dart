@@ -5,7 +5,6 @@ import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/tags/p_rest_tags.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
@@ -35,15 +34,15 @@ class _TagsPageState extends ConsumerState<TagsPage>
   @override
   Widget build(BuildContext context) {
     return FPaginatedPage(
-      title: L10n.of(context).tags_page__title,
+      title: context.l10n.tags_page__title,
       provider: provider,
       pageProvider: widget.pageProvider,
       onEmpty: FEmptyMessage(
-        title: L10n.of(context).tags_page__on_empty,
+        title: context.l10n.tags_page__on_empty,
         icon: StateIconConstants.tags.emptyIcon,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).tags_page__on_error,
+        title: context.l10n.tags_page__on_error,
         icon: StateIconConstants.tags.emptyIcon,
       ),
       sortBuilder: () => FPaginatedSort(
@@ -56,9 +55,7 @@ class _TagsPageState extends ConsumerState<TagsPage>
       itemBuilder: (item) => FImageCard.maximized(
         label: item.label,
         coverSelector: (resolution) => item.cover?.url(resolution),
-        subLabel: L10n.of(
-          context,
-        ).tags_page__recipe_counter(item.recipeCount),
+        subLabel: context.l10n.tags_page__recipe_counter(item.recipeCount),
         onTap: () => context.routes.tagsItem(item.id),
       ),
     );

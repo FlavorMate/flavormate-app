@@ -5,7 +5,6 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/features/recipes/recipe_file_dto.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_id_files.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
@@ -31,7 +30,7 @@ class RecipesItemFilesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: FAppBar(
-        title: L10n.of(context).recipes_item_files_page__titletitle,
+        title: context.l10n.recipes_item_files_page__titletitle,
       ),
       body: SafeArea(
         child: FPageable(
@@ -48,11 +47,11 @@ class RecipesItemFilesPage extends ConsumerWidget {
             ],
           ),
           onEmpty: FEmptyMessage(
-            title: L10n.of(context).recipes_item_files_page__titleon_empty,
+            title: context.l10n.recipes_item_files_page__titleon_empty,
             icon: StateIconConstants.files.emptyIcon,
           ),
           onError: FEmptyMessage(
-            title: L10n.of(context).recipes_item_files_page__titleon_error,
+            title: context.l10n.recipes_item_files_page__titleon_error,
             icon: StateIconConstants.files.errorIcon,
           ),
         ),

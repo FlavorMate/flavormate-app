@@ -1,7 +1,6 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
@@ -57,7 +56,7 @@ class _AuthLoginPageState extends ConsumerState<AuthLoginPage> {
                     const Icon(MdiIcons.loginVariant, size: 72),
                     const SizedBox(height: PADDING),
                     FText(
-                      L10n.of(context).auth_login_page__title,
+                      context.l10n.auth_login_page__title,
                       style: FTextStyle.titleLarge,
                       textAlign: TextAlign.center,
                     ),
@@ -75,7 +74,7 @@ class _AuthLoginPageState extends ConsumerState<AuthLoginPage> {
                         child: FDenseTextButton(
                           onPressed: startRecovery,
                           child: Text(
-                            L10n.of(context).auth_login_page__forgot_password,
+                            context.l10n.auth_login_page__forgot_password,
                           ),
                         ),
                       ),
@@ -83,7 +82,7 @@ class _AuthLoginPageState extends ConsumerState<AuthLoginPage> {
                     FButton(
                       width: BUTTON_WIDTH,
                       onPressed: login,
-                      label: L10n.of(context).btn_login,
+                      label: context.l10n.btn_login,
                     ),
                   ],
                 ),
@@ -94,7 +93,7 @@ class _AuthLoginPageState extends ConsumerState<AuthLoginPage> {
       ),
 
       onError: FEmptyMessage(
-        title: L10n.of(context).auth_login_page__on_error,
+        title: context.l10n.auth_login_page__on_error,
         icon: StateIconConstants.login.errorIcon,
       ),
     );
@@ -117,7 +116,7 @@ class _AuthLoginPageState extends ConsumerState<AuthLoginPage> {
 
     if (response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).auth_login_page__login_on_error,
+        context.l10n.auth_login_page__login_on_error,
       );
     }
   }

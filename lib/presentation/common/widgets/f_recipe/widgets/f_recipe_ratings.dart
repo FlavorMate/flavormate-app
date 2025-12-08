@@ -1,7 +1,7 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/data/repositories/extension/ratings/p_rest_ratings_id.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -27,7 +27,7 @@ class FRecipeRatings extends StatelessWidget {
       spacing: PADDING,
       children: [
         FText(
-          L10n.of(context).f_recipe_ratings__title,
+          context.l10n.f_recipe_ratings__title,
           style: FTextStyle.headlineMedium,
           weight: FontWeight.w500,
         ),
@@ -91,16 +91,14 @@ class FRecipeRatings extends StatelessWidget {
                         Align(
                           alignment: .centerRight,
                           child: FText(
-                            L10n.of(
-                              context,
-                            ).f_recipe_ratings__rating(data.total),
+                            context.l10n.f_recipe_ratings__rating(data.total),
                             style: .bodyMedium,
                           ),
                         ),
                         const Divider(),
                       ],
                       FText(
-                        L10n.of(context).f_recipe_ratings__your_rating,
+                        context.l10n.f_recipe_ratings__your_rating,
                         style: .titleMedium,
                       ),
                       SingleChildScrollView(
@@ -133,7 +131,7 @@ class FRecipeRatings extends StatelessWidget {
                   );
                 },
                 onError: FEmptyMessage(
-                  title: L10n.of(context).f_recipe_ratings__on_error,
+                  title: context.l10n.f_recipe_ratings__on_error,
                   icon: StateIconConstants.reviews.errorIcon,
                 ),
               ),

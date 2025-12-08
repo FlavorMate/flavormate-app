@@ -6,7 +6,6 @@ import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
 import 'package:flavormate/data/models/features/unit/unit_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
@@ -94,9 +93,9 @@ class _RecipeEditorIngredientPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
-          title: L10n.of(
-            context,
-          ).recipe_editor_item_ingredient_groups_item_ingredient_page__title,
+          title: context
+              .l10n
+              .recipe_editor_item_ingredient_groups_item_ingredient_page__title,
           actions: [
             FProgress(
               provider: widget.provider,
@@ -119,9 +118,9 @@ class _RecipeEditorIngredientPageState
                 children: [
                   FTextFormField(
                     controller: _amountController,
-                    label: L10n.of(
-                      context,
-                    ).recipe_editor_item_ingredient_groups_item_ingredient_page__amount,
+                    label: context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page__amount,
                     onChanged: setAmount,
                     clear: () => setAmount(''),
                   ),
@@ -133,18 +132,18 @@ class _RecipeEditorIngredientPageState
 
                   FTextFormField(
                     controller: _labelController,
-                    label: L10n.of(
-                      context,
-                    ).recipe_editor_item_ingredient_groups_item_ingredient_page__label,
+                    label: context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page__label,
                     onChanged: setLabel,
                     clear: () => setLabel(''),
                   ),
 
                   FButton(
                     onPressed: openNutrition,
-                    label: L10n.of(
-                      context,
-                    ).recipe_editor_item_ingredient_groups_item_ingredient_page__nutrition,
+                    label: context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page__nutrition,
                     trailing: Visibility(
                       visible: _nutrition?.exists ?? false,
                       child: const Icon(MdiIcons.checkCircleOutline),
@@ -205,9 +204,9 @@ class _RecipeEditorIngredientPageState
     final response = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(
-          context,
-        ).recipe_editor_item_ingredient_groups_item_ingredient_page__delete,
+        title: context
+            .l10n
+            .recipe_editor_item_ingredient_groups_item_ingredient_page__delete,
       ),
     );
 

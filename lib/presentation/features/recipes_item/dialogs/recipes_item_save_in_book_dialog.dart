@@ -5,7 +5,7 @@ import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books_own.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -42,8 +42,8 @@ class _RecipesItemSaveInBookDialogState
   Widget build(BuildContext context) {
     return FAlertDialog(
       height: 450,
-      title: L10n.of(context).recipes_item_save_in_book_dialog__title,
-      negativeLabel: L10n.of(context).btn_close,
+      title: context.l10n.recipes_item_save_in_book_dialog__title,
+      negativeLabel: context.l10n.btn_close,
       child: FPageable(
         filterBuilder: (padding) => FPageableSort(
           currentOrderBy: orderBy,
@@ -86,13 +86,11 @@ class _RecipesItemSaveInBookDialogState
           ],
         ),
         onError: FEmptyMessage(
-          title: L10n.of(context).recipes_item_save_in_book_dialog__on_error,
+          title: context.l10n.recipes_item_save_in_book_dialog__on_error,
           icon: StateIconConstants.books.errorIcon,
         ),
         onEmpty: FEmptyMessage(
-          title: L10n.of(
-            context,
-          ).recipes_item_save_in_book_dialog__on_empty,
+          title: context.l10n.recipes_item_save_in_book_dialog__on_empty,
           icon: StateIconConstants.books.emptyIcon,
         ),
       ),
@@ -118,13 +116,11 @@ class _RecipesItemSaveInBookDialogState
       //           },
       //         )
       //       : FEmptyMessage(
-      //           title: L10n.of(
-      //             context,
-      //           ).recipes_item_save_in_book_dialog__on_empty,
+      //           title: context.l10n.recipes_item_save_in_book_dialog__on_empty,
       //           icon: StateIconConstants.books.emptyIcon,
       //         ),
       //   onError: FEmptyMessage(
-      //     title: L10n.of(context).recipes_item_save_in_book_dialog__on_error,
+      //     title: context.l10n.recipes_item_save_in_book_dialog__on_error,
       //     icon: StateIconConstants.books.errorIcon,
       //   ),
       // ),

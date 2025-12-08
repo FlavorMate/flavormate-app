@@ -10,7 +10,6 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/models/account_create_form.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/admin/p_rest_admin_accounts.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
@@ -66,15 +65,13 @@ class _AccountManagementPageState
 
     return Scaffold(
       appBar: FAppBar(
-        title: L10n.of(context).administration_account_management_page__title,
+        title: context.l10n.administration_account_management_page__title,
       ),
 
       body: FProviderStruct(
         provider: provider,
         onError: FEmptyMessage(
-          title: L10n.of(
-            context,
-          ).administration_account_management_page__on_error,
+          title: context.l10n.administration_account_management_page__on_error,
           icon: StateIconConstants.authors.errorIcon,
         ),
         builder: (context, data) {
@@ -128,40 +125,39 @@ class _AccountManagementPageState
     final result = await showDialog<AdministrationAccountManagementActions>(
       context: context,
       builder: (_) => FSimpleDialog<AdministrationAccountManagementActions>(
-        title: L10n.of(
-          context,
-        ).administration_account_management_page__actions_title,
+        title:
+            context.l10n.administration_account_management_page__actions_title,
         options: [
           if (account.avatar != null)
             FSimpleDialogOption(
-              label: L10n.of(
-                context,
-              ).administration_account_management_page__actions_avatar,
+              label: context
+                  .l10n
+                  .administration_account_management_page__actions_avatar,
               icon: MdiIcons.imageOutline,
               value: AdministrationAccountManagementActions.Avatar,
             ),
           FSimpleDialogOption(
             label: account.enabled
-                ? L10n.of(
-                    context,
-                  ).administration_account_management_page__actions_disable
-                : L10n.of(
-                    context,
-                  ).administration_account_management_page__actions_enable,
+                ? context
+                      .l10n
+                      .administration_account_management_page__actions_disable
+                : context
+                      .l10n
+                      .administration_account_management_page__actions_enable,
             icon: MdiIcons.accountCheck,
             value: AdministrationAccountManagementActions.Enable,
           ),
           FSimpleDialogOption(
-            label: L10n.of(
-              context,
-            ).administration_account_management_page__actions_set_password,
+            label: context
+                .l10n
+                .administration_account_management_page__actions_set_password,
             icon: MdiIcons.lockReset,
             value: AdministrationAccountManagementActions.ResetPassword,
           ),
           FSimpleDialogOption(
-            label: L10n.of(
-              context,
-            ).administration_account_management_page__actions_delete,
+            label: context
+                .l10n
+                .administration_account_management_page__actions_delete,
             icon: MdiIcons.delete,
             value: AdministrationAccountManagementActions.Delete,
           ),
@@ -193,12 +189,12 @@ class _AccountManagementPageState
     final confirmation = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(
-          context,
-        ).administration_account_management_page__delete_account_title,
-        content: L10n.of(
-          context,
-        ).administration_account_management_page__delete_account_hint_1,
+        title: context
+            .l10n
+            .administration_account_management_page__delete_account_title,
+        content: context
+            .l10n
+            .administration_account_management_page__delete_account_hint_1,
       ),
     );
 
@@ -212,13 +208,13 @@ class _AccountManagementPageState
       if (!mounted) return;
       context.pop();
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__delete_failure,
+        context.l10n.recipes_item_page__delete_failure,
       );
     } else {
       if (!mounted) return;
       context.pop();
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__delete_success,
+        context.l10n.recipes_item_page__delete_success,
       );
     }
   }
@@ -241,13 +237,13 @@ class _AccountManagementPageState
       if (!mounted) return;
       context.pop();
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__delete_failure,
+        context.l10n.recipes_item_page__delete_failure,
       );
     } else {
       if (!mounted) return;
       context.pop();
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__delete_success,
+        context.l10n.recipes_item_page__delete_success,
       );
     }
   }
@@ -276,13 +272,13 @@ class _AccountManagementPageState
       if (!mounted) return;
       context.pop();
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__create_failure,
+        context.l10n.recipes_item_page__create_failure,
       );
     } else {
       if (!mounted) return;
       context.pop();
       context.showTextSnackBar(
-        L10n.of(context).recipes_item_page__create_success,
+        context.l10n.recipes_item_page__create_success,
       );
     }
   }

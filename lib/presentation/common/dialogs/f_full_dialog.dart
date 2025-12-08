@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flutter/material.dart';
@@ -33,11 +33,11 @@ class FFullDialog extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () => context.pop(),
-                  child: Text(L10n.of(context).btn_cancel),
+                  child: Text(context.l10n.btn_cancel),
                 ),
                 FilledButton(
                   onPressed: submit,
-                  child: Text(L10n.of(context).btn_save),
+                  child: Text(context.l10n.btn_save),
                 ),
               ],
             ),

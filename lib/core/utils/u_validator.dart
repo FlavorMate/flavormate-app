@@ -1,5 +1,5 @@
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 abstract class UValidator {
@@ -42,7 +42,7 @@ abstract class UValidatorPresets {
     if (EString.isEmpty(input)) return null;
 
     if (!UValidator.isNumber(input!)) {
-      return L10n.of(context).validator__is_number;
+      return context.l10n.validator__is_number;
     }
 
     return null;
@@ -50,7 +50,7 @@ abstract class UValidatorPresets {
 
   static String? isNotEmpty(BuildContext context, String? input) {
     if (EString.isEmpty(input)) {
-      return L10n.of(context).validator__is_empty;
+      return context.l10n.validator__is_empty;
     }
 
     return null;
@@ -58,11 +58,11 @@ abstract class UValidatorPresets {
 
   static String? isNumber(BuildContext context, String? input) {
     if (EString.isEmpty(input)) {
-      return L10n.of(context).validator__is_empty;
+      return context.l10n.validator__is_empty;
     }
 
     if (!UValidator.isNumber(input!)) {
-      return L10n.of(context).validator__is_number;
+      return context.l10n.validator__is_number;
     }
 
     return null;

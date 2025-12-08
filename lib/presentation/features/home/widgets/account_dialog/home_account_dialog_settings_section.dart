@@ -1,6 +1,5 @@
 import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class HomeAccountDialogSettingsSection extends ConsumerWidget {
     return FTileGroup(
       items: [
         FTile(
-          label: L10n.of(context).home_account_dialog_settings_section__title,
+          label: context.l10n.home_account_dialog_settings_section__title,
           subLabel:
               context.l10n.home_account_dialog_settings_section__title_hint,
           icon: MdiIcons.cog,
@@ -23,9 +22,7 @@ class HomeAccountDialogSettingsSection extends ConsumerWidget {
           onTap: () => openSettingsPage(context),
         ),
         FTile(
-          label: L10n.of(
-            context,
-          ).btn_logout,
+          label: context.l10n.btn_logout,
           subLabel:
               context.l10n.home_account_dialog_settings_section__logout_hint,
           icon: MdiIcons.logout,

@@ -3,7 +3,7 @@ import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_circular_avatar_viewer.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -27,7 +27,7 @@ class RecipesItemChangeOwnerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return FAlertDialog(
       height: 350,
-      title: L10n.of(context).recipes_item_change_owner_dialog__title,
+      title: context.l10n.recipes_item_change_owner_dialog__title,
       child: FPageable(
         provider: provider,
         pageProvider: pageProvider,
@@ -49,11 +49,11 @@ class RecipesItemChangeOwnerDialog extends StatelessWidget {
           ],
         ),
         onError: FEmptyMessage(
-          title: L10n.of(context).recipes_item_change_owner_dialog__on_error,
+          title: context.l10n.recipes_item_change_owner_dialog__on_error,
           icon: StateIconConstants.authors.errorIcon,
         ),
         onEmpty: FEmptyMessage(
-          title: L10n.of(context).recipes_item_change_owner_dialog__on_error,
+          title: context.l10n.recipes_item_change_owner_dialog__on_error,
           icon: StateIconConstants.authors.emptyIcon,
         ),
       ),

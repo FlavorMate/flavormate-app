@@ -3,7 +3,6 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/root_bundle/backend_url/p_rb_backend_url.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_recent_servers.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -46,7 +45,7 @@ class _ServerPageState extends ConsumerState<ServerPage> {
             child: TextButton.icon(
               onPressed: openHelp,
               icon: const Icon(MdiIcons.helpCircleOutline),
-              label: Text(L10n.of(context).server_page__create_server),
+              label: Text(context.l10n.server_page__create_server),
             ),
           ),
         ),
@@ -74,14 +73,14 @@ class _ServerPageState extends ConsumerState<ServerPage> {
                         child: FButton(
                           tonal: true,
                           onPressed: () => pickServer(recentServers),
-                          label: L10n.of(context).server_page__recent_servers,
+                          label: context.l10n.server_page__recent_servers,
                         ),
                       ),
                     SizedBox(
                       width: 125,
                       child: FButton(
                         onPressed: setServer,
-                        label: L10n.of(context).btn_continue,
+                        label: context.l10n.btn_continue,
                       ),
                     ),
                   ],
@@ -110,7 +109,7 @@ class _ServerPageState extends ConsumerState<ServerPage> {
       context: context,
       builder: (context) => SimpleDialog(
         title: Text(
-          L10n.of(context).server_page__recent_servers,
+          context.l10n.server_page__recent_servers,
         ),
         children: [
           for (final server in recentServers)

@@ -1,5 +1,5 @@
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +27,13 @@ class _EditBookDialogState extends State<EditBookDialog> {
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).edit_book_dialog__title(widget.label),
+      title: context.l10n.edit_book_dialog__title(widget.label),
       submit: submit,
       child: Form(
         key: _formKey,
         child: FTextFormField(
           controller: _controller,
-          label: L10n.of(context).edit_book_dialog__name,
+          label: context.l10n.edit_book_dialog__name,
           validators: (input) => UValidatorPresets.isNotEmpty(context, input),
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -29,7 +28,7 @@ class HomeAccountDialog extends StatelessWidget {
     return FProviderStruct(
       provider: provider,
       onError: FEmptyMessage(
-        title: L10n.of(context).home_account_dialog__on_error,
+        title: context.l10n.home_account_dialog__on_error,
         icon: StateIconConstants.authors.errorIcon,
       ),
       builder: (context, account) {
@@ -62,9 +61,8 @@ class HomeAccountDialog extends StatelessWidget {
                         FTileGroup(
                           items: [
                             FTile(
-                              label: L10n.of(
-                                context,
-                              ).home_account_dialog__my_profile,
+                              label:
+                                  context.l10n.home_account_dialog__my_profile,
                               subLabel: context
                                   .l10n
                                   .home_account_dialog__my_profile_hint,
@@ -90,9 +88,7 @@ class HomeAccountDialog extends StatelessWidget {
                             TextButton(
                               onPressed: () => openLicenses(context),
                               child: Text(
-                                L10n.of(
-                                  context,
-                                ).home_account_dialog__licenses,
+                                context.l10n.home_account_dialog__licenses,
                               ),
                             ),
                           ],

@@ -2,7 +2,6 @@ import 'package:flavormate/core/config/features/p_feature_story.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
@@ -74,12 +73,9 @@ class MorePage extends ConsumerWidget {
                 title: context.l10n.more_page__admin_title,
                 items: [
                   FTile(
-                    label: L10n.of(
-                      context,
-                    ).more_page__admin_account_management,
-                    subLabel: L10n.of(
-                      context,
-                    ).more_page__admin_account_management_hint,
+                    label: context.l10n.more_page__admin_account_management,
+                    subLabel:
+                        context.l10n.more_page__admin_account_management_hint,
                     icon: MdiIcons.accountGroup,
                     iconColor: .yellow,
                     onTap: () =>

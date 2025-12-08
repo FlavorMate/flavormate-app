@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_ingredient_group.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ingredient_list.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -38,7 +38,7 @@ class FRecipeIngredientGroupList extends StatelessWidget {
       spacing: PADDING,
       children: [
         FText(
-          L10n.of(context).f_recipe_ingredient_group_list__title,
+          context.l10n.f_recipe_ingredient_group_list__title,
           style: FTextStyle.headlineMedium,
           weight: FontWeight.w500,
         ),

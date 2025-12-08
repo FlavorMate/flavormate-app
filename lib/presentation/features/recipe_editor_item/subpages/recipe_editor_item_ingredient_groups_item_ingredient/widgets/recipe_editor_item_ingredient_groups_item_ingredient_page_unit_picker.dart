@@ -2,7 +2,7 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/data/models/features/unit/unit_dto.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_units.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
@@ -45,18 +45,18 @@ class RecipeEditorItemIngredientGroupsItemIngredientPageUnitPicker
               VoidCallback onFieldSubmitted,
             ) => FTextFormField(
               controller: fieldTextEditingController,
-              label: L10n.of(
-                context,
-              ).recipe_editor_item_ingredient_groups_item_ingredient_page_unit_picker__title,
+              label: context
+                  .l10n
+                  .recipe_editor_item_ingredient_groups_item_ingredient_page_unit_picker__title,
               focusNode: fieldFocusNode,
               clear: clear,
             ),
         onSelected: onSelected,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(
-          context,
-        ).recipe_editor_item_ingredient_groups_item_ingredient_page_unit_picker__on_error,
+        title: context
+            .l10n
+            .recipe_editor_item_ingredient_groups_item_ingredient_page_unit_picker__on_error,
         icon: StateIconConstants.units.errorIcon,
       ),
     );

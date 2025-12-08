@@ -6,7 +6,6 @@ import 'package:flavormate/core/constants/api_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -53,17 +52,17 @@ class _NoConnectionPageState extends ConsumerState<NoConnectionPage> {
                 children: [
                   const Icon(MdiIcons.cloudOffOutline, size: 128),
                   FText(
-                    L10n.of(context).no_connection_page__hint_1,
+                    context.l10n.no_connection_page__hint_1,
                     style: FTextStyle.titleLarge,
                   ),
                   FText(
-                    L10n.of(context).no_connection_page__hint_2,
+                    context.l10n.no_connection_page__hint_2,
                     style: FTextStyle.titleSmall,
                     textAlign: TextAlign.center,
                   ),
                   FilledButton(
                     onPressed: logout,
-                    child: Text(L10n.of(context).btn_logout),
+                    child: Text(context.l10n.btn_logout),
                   ),
                 ],
               ),

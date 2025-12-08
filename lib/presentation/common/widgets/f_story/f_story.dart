@@ -1,7 +1,6 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_story/common_story.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_bubble.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_circular_avatar_viewer.dart';
@@ -70,7 +69,7 @@ class FStory extends StatelessWidget {
                       onPressed: () =>
                           context.routes.recipesItem(story.recipe.id),
                       child: Text(
-                        L10n.of(context).stories_item_page__open_recipe,
+                        context.l10n.stories_item_page__open_recipe,
                       ),
                     ),
                 ],

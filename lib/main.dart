@@ -6,6 +6,7 @@ import 'package:flavormate/core/riverpod/package_info/p_package_info.dart';
 import 'package:flavormate/core/storage/root_bundle/backend_url/p_rb_backend_url.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
 import 'package:flavormate/core/theme/providers/p_theme.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class MyApp extends ConsumerWidget {
     final colors = ref.watch(pThemeProvider).requireValue;
 
     return MaterialApp.router(
-      onGenerateTitle: (context) => L10n.of(context).flavormate,
+      onGenerateTitle: (context) => context.l10n.flavormate,
       theme: ThemeData(
         brightness: Brightness.light,
         colorScheme: colors.light,
