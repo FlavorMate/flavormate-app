@@ -6,6 +6,7 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_id_recipes.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -59,10 +60,13 @@ class _AccountsItemRecipesPageState
         setOrderDirection: setOrderDirection,
         options: OrderByConstants.recipe,
       ),
-      itemBuilder: (item) => FImageCard.maximized(
-        label: item.label,
-        coverSelector: (resolution) => item.cover?.url(resolution),
-        onTap: () => context.routes.recipesItem(item.id),
+      itemBuilder: (items) => FPaginatedContentCard(
+        data: items,
+        itemBuilder: (item) => FImageCard.maximized(
+          label: item.label,
+          coverSelector: (resolution) => item.cover?.url(resolution),
+          onTap: () => context.routes.recipesItem(item.id),
+        ),
       ),
     );
   }

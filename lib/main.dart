@@ -5,6 +5,7 @@ import 'package:flavormate/core/navigation/p_go_router.dart';
 import 'package:flavormate/core/riverpod/package_info/p_package_info.dart';
 import 'package:flavormate/core/storage/root_bundle/backend_url/p_rb_backend_url.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_tone.dart';
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/core/theme/providers/p_theme.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
@@ -41,12 +42,14 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(pGoRouterProvider);
+
+    final tone = ref.watch(pSPThemeToneProvider);
     final color = ref.watch(pThemeProvider).requireValue;
 
     return MaterialApp.router(
       onGenerateTitle: (context) => context.l10n.flavormate,
-      theme: FTheme.createTheme(color, .light),
-      darkTheme: FTheme.createTheme(color, .dark),
+      theme: FTheme.createTheme(color, .light, tone.tone),
+      darkTheme: FTheme.createTheme(color, .dark, tone.tone),
       themeMode: ThemeMode.system,
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,

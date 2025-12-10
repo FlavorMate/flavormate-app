@@ -86,7 +86,9 @@ class HomeAccountDialogAccountSection extends ConsumerWidget {
 
       if (!result.hasError) {
         context.showTextSnackBar(
-          context.l10n.home_account_dialog_account_section__change_password,
+          context
+              .l10n
+              .home_account_dialog_account_section__change_avatar_success,
         );
       } else {
         context.showTextSnackBar(

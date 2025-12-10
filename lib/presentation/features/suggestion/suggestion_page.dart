@@ -5,6 +5,7 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_random.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_content.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -54,10 +55,13 @@ class SuggestionPage extends ConsumerWidget {
                 title: context.l10n.suggestion_page__on_empty,
                 icon: StateIconConstants.suggestions.errorIcon,
               ),
-              itemBuilder: (item) => FImageCard.maximized(
-                coverSelector: (resolution) => item.cover?.url(resolution),
-                label: item.label,
-                onTap: () => context.routes.recipesItem(item.id),
+              itemBuilder: (items) => FPaginatedContentCard(
+                data: items,
+                itemBuilder: (item) => FImageCard.maximized(
+                  coverSelector: (resolution) => item.cover?.url(resolution),
+                  label: item.label,
+                  onTap: () => context.routes.recipesItem(item.id),
+                ),
               ),
             ),
           ],

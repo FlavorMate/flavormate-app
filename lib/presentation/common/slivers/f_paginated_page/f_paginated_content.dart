@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/data/models/local/pageable_dto.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -19,7 +16,7 @@ class FPaginatedContent<T> extends ConsumerWidget {
   final FEmptyMessage onError;
   final FEmptyMessage onEmpty;
 
-  final Widget Function(T item) itemBuilder;
+  final Widget Function(List<T> item) itemBuilder;
 
   const FPaginatedContent({
     super.key,
@@ -57,29 +54,6 @@ class FPaginatedContent<T> extends ConsumerWidget {
       );
     }
 
-    return SliverPadding(
-      padding: const .symmetric(horizontal: PADDING),
-      sliver: SliverLayoutBuilder(
-        builder: (context, constraints) {
-          final resolution = constraints.crossAxisExtent;
-
-          final int count = (resolution / 355).floor();
-
-          return SliverGrid.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: max(1, count),
-              mainAxisSpacing: PADDING,
-              crossAxisSpacing: PADDING,
-              childAspectRatio: 16 / 9,
-            ),
-            itemCount: data.data.length,
-            itemBuilder: (context, index) {
-              final item = data.data[index];
-              return itemBuilder.call(item);
-            },
-          );
-        },
-      ),
-    );
+    return itemBuilder.call(data.data);
   }
 }

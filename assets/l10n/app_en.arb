@@ -39,6 +39,14 @@
       }
     }
   },
+  "@home_account_dialog_account_section__headline": {
+    "placeholders": {
+      "val": {
+        "example": "John",
+        "type": "String"
+      }
+    }
+  },
   "@library_item_info_header__subscribers": {
     "placeholders": {
       "count": {
@@ -263,7 +271,7 @@
   "home_account_dialog__my_profile_hint": "Opens your books, recipes and stories",
   "home_account_dialog__on_error": "Error while loading the account",
   "home_account_dialog_account_section__change_avatar_failure": "Failed updating avatar",
-  "home_account_dialog_account_section__change_password": "Successfully updated avatar",
+  "home_account_dialog_account_section__change_avatar_success": "Successfully updated avatar",
   "home_account_dialog_account_section__headline": "Hello {val}!",
   "home_account_dialog_account_section__manage_account": "Manage your FlavorMate Account",
   "home_account_dialog_avatar_dialog__change": "Change avatar",
@@ -437,18 +445,28 @@
   "recipe_editor_item_origin_page__label": "URL",
   "recipe_editor_item_origin_page__title": "Recipe origin",
   "recipe_editor_item_page__categories": "Categories",
+  "recipe_editor_item_page__categories_hint": "Categorize recipe",
   "recipe_editor_item_page__common": "Common information",
+  "recipe_editor_item_page__common_hint": "Title, Description",
   "recipe_editor_item_page__course": "Course",
   "recipe_editor_item_page__diet": "Dietary preference",
+  "recipe_editor_item_page__diet_hint": "Meat, Fish, Vegetarian, Vegan",
   "recipe_editor_item_page__durations": "Durations",
+  "recipe_editor_item_page__durations_hint": "Prep-, cook-, resttime",
   "recipe_editor_item_page__ingredient_groups": "Ingredient groups",
+  "recipe_editor_item_page__ingredient_groups_hint": "Ingredients, Nutrition",
   "recipe_editor_item_page__instruction_groups": "Instruction groups",
+  "recipe_editor_item_page__instruction_groups_hint": "Steps and hints",
   "recipe_editor_item_page__media": "Media",
+  "recipe_editor_item_page__media_hint": "Photos and gallery",
   "recipe_editor_item_page__not_complete": "The draft needs more information",
   "recipe_editor_item_page__on_error": "Error while loading the draft",
   "recipe_editor_item_page__origin": "Recipe origin",
+  "recipe_editor_item_page__origin_hint": "Origin or website",
   "recipe_editor_item_page__serving": "Serving",
+  "recipe_editor_item_page__serving_hint": "Amount, Serving",
   "recipe_editor_item_page__tags": "Tags",
+  "recipe_editor_item_page__tags_hint": "Add keywords",
   "recipe_editor_item_page__title": "Recipe editor",
   "recipe_editor_item_preview_files_page__on_empty": "There isn't any media yet",
   "recipe_editor_item_preview_files_page__on_error": "Error while loading the media",
@@ -553,6 +571,7 @@
   "settings_app_page__theme_title": "Change theme",
   "settings_app_page__theme_title_hint": "Customize the app colors",
   "settings_app_page__title": "FlavorMate settings",
+  "settings_app_theme_page__color_mode": "Color mode",
   "settings_app_theme_page__default_colors": "Default colors",
   "settings_app_theme_page__event_colors": "Event colors",
   "settings_app_theme_page__example": "Example",

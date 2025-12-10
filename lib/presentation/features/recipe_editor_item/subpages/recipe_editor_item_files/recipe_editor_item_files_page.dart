@@ -9,14 +9,13 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id_files.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
-import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
-import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,68 +50,61 @@ class _RecipeEditorItemFilesPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: FAppBar(
-        title: context.l10n.recipe_editor_item_files_page__title,
-        actions: [
-          FProgress(
-            provider: provider,
-            color: context.colorScheme.onSurface,
-            optional: true,
-            getProgress: (data) => data.data.isEmpty ? 0 : 1,
-          ),
-        ],
-      ),
+    return FPaginatedPage(
+      title: context.l10n.recipe_editor_item_files_page__title,
+      actions: [
+        FProgress(
+          provider: provider,
+          color: context.colorScheme.onSurface,
+          optional: true,
+          getProgress: (data) => data.data.isEmpty ? 0 : 1,
+        ),
+      ],
       floatingActionButton: FloatingActionButton(
         onPressed: () => addImage(context, ref),
         child: const Icon(MdiIcons.plus),
       ),
-      body: FPageable(
-        provider: provider,
-        pageProvider: widget.pageProvider,
-        filterBuilder: (padding) => FPageableSort(
-          currentOrderBy: orderBy,
-          currentDirection: orderDirection,
-          setOrderBy: setOrderBy,
-          setOrderDirection: setOrderDirection,
-          options: OrderByConstants.files,
-          padding: padding,
-        ),
-        builder: (_, data) => FWrap(
+      provider: provider,
+      pageProvider: widget.pageProvider,
+      onError: FEmptyMessage(
+        title: context.l10n.recipe_editor_item_files_page__on_error,
+        icon: StateIconConstants.files.errorIcon,
+      ),
+      onEmpty: FEmptyMessage(
+        title: context.l10n.recipe_editor_item_files_page__on_empty,
+        icon: StateIconConstants.files.emptyIcon,
+      ),
+      sortBuilder: () => FPaginatedSort(
+        currentOrderBy: orderBy,
+        currentDirection: orderDirection,
+        setOrderBy: setOrderBy,
+        setOrderDirection: setOrderDirection,
+        options: OrderByConstants.files,
+      ),
+      itemBuilder: (items) => FPaginatedContentCard(
+        data: items,
+        itemBuilder: (item) => Stack(
           children: [
-            for (final image in data)
-              Stack(
-                children: [
-                  FImageCard.maximized(
-                    imageType: FImageType.secure,
-                    coverSelector: (resolution) => image.url(resolution),
-                    width: 400,
-                    onTap: () => openFile(context, image),
+            FImageCard.maximized(
+              imageType: FImageType.secure,
+              coverSelector: (resolution) => item.url(resolution),
+              width: 400,
+              onTap: () => openFile(context, item),
+            ),
+            Positioned(
+              right: 8,
+              top: 8,
+              child: CircleAvatar(
+                child: IconButton(
+                  onPressed: () => deleteImage(context, ref, item.id),
+                  icon: Icon(
+                    MdiIcons.delete,
+                    color: context.colorScheme.onPrimaryContainer,
                   ),
-                  Positioned(
-                    right: 8,
-                    top: 8,
-                    child: CircleAvatar(
-                      child: IconButton(
-                        onPressed: () => deleteImage(context, ref, image.id),
-                        icon: Icon(
-                          MdiIcons.delete,
-                          color: context.colorScheme.onPrimaryContainer,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
+            ),
           ],
-        ),
-        onError: FEmptyMessage(
-          title: context.l10n.recipe_editor_item_files_page__on_error,
-          icon: StateIconConstants.files.errorIcon,
-        ),
-        onEmpty: FEmptyMessage(
-          title: context.l10n.recipe_editor_item_files_page__on_empty,
-          icon: StateIconConstants.files.emptyIcon,
         ),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/repositories/features/stories/p_rest_stories.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
@@ -37,10 +38,13 @@ class HomeStoriesPage extends ConsumerWidget {
         title: context.l10n.home_stories_page__on_error,
         icon: StateIconConstants.stories.errorIcon,
       ),
-      itemBuilder: (item) => FImageCard.maximized(
-        label: item.label,
-        coverSelector: (resolution) => item.cover?.url(resolution),
-        onTap: () => context.routes.storiesItem(item.id),
+      itemBuilder: (items) => FPaginatedContentCard(
+        data: items,
+        itemBuilder: (item) => FImageCard.maximized(
+          label: item.label,
+          coverSelector: (resolution) => item.cover?.url(resolution),
+          onTap: () => context.routes.storiesItem(item.id),
+        ),
       ),
     );
   }

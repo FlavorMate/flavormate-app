@@ -19,7 +19,7 @@ class HomeAccountDialogSettingsSection extends ConsumerWidget {
           subLabel:
               context.l10n.home_account_dialog_settings_section__title_hint,
           icon: MdiIcons.cog,
-          iconColor: .green,
+
           onTap: () => openSettingsPage(context),
         ),
         FTile(
@@ -27,7 +27,6 @@ class HomeAccountDialogSettingsSection extends ConsumerWidget {
           subLabel:
               context.l10n.home_account_dialog_settings_section__logout_hint,
           icon: MdiIcons.logout,
-          iconColor: .red,
           onTap: () => logout(ref),
         ),
       ],

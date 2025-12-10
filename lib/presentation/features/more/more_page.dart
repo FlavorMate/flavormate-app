@@ -36,14 +36,12 @@ class MorePage extends ConsumerWidget {
                   label: context.l10n.more_page__categories,
                   subLabel: context.l10n.more_page__categories_hint,
                   icon: MdiIcons.package,
-                  iconColor: .blue,
                   onTap: () => context.routes.categories(),
                 ),
                 FTile(
                   label: context.l10n.more_page__tags,
                   subLabel: context.l10n.more_page__tags_hint,
                   icon: MdiIcons.tag,
-                  iconColor: .lightBlue,
                   onTap: () => context.routes.tags(),
                 ),
               ],
@@ -55,7 +53,6 @@ class MorePage extends ConsumerWidget {
                   label: context.l10n.more_page__recipe_editor,
                   subLabel: context.l10n.more_page__recipe_editor_hint,
                   icon: MdiIcons.bookPlus,
-                  iconColor: .red,
                   onTap: () => context.routes.recipeEditor(),
                 ),
                 if (storiesEnabled)
@@ -63,7 +60,6 @@ class MorePage extends ConsumerWidget {
                     label: context.l10n.more_page__story_editor,
                     subLabel: context.l10n.more_page__story_editor_hint,
                     icon: MdiIcons.newspaperVariantOutline,
-                    iconColor: .orange,
                     onTap: () => context.routes.storyEditor(),
                   ),
               ],
@@ -77,7 +73,6 @@ class MorePage extends ConsumerWidget {
                     subLabel:
                         context.l10n.more_page__admin_account_management_hint,
                     icon: MdiIcons.accountGroup,
-                    iconColor: .yellow,
                     onTap: () =>
                         context.routes.administrationAccountManagement(),
                   ),

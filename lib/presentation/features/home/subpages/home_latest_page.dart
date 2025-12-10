@@ -6,6 +6,7 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
@@ -39,11 +40,14 @@ class HomeLatestPage extends ConsumerWidget {
         title: context.l10n.home_latest_page__on_error,
         icon: StateIconConstants.recipes.errorIcon,
       ),
-      itemBuilder: (item) => FImageCard.maximized(
-        label: item.label,
-        subLabel: item.createdOn.toLocalDateString(context),
-        coverSelector: (resolution) => item.cover?.url(resolution),
-        onTap: () => context.routes.recipesItem(item.id),
+      itemBuilder: (items) => FPaginatedContentCard(
+        data: items,
+        itemBuilder: (item) => FImageCard.maximized(
+          label: item.label,
+          subLabel: item.createdOn.toLocalDateString(context),
+          coverSelector: (resolution) => item.cover?.url(resolution),
+          onTap: () => context.routes.recipesItem(item.id),
+        ),
       ),
     );
   }
