@@ -41,37 +41,38 @@ class FTileGroup extends StatelessWidget {
           final topRight = index == 0 ? borderRadius : 4.0;
           final bottomLeft = index == items.length - 1 ? borderRadius : 4.0;
           final bottomRight = index == items.length - 1 ? borderRadius : 4.0;
-          return ListTile(
-            visualDensity: .standard,
-            shape: RoundedRectangleBorder(
-              borderRadius: .only(
-                topLeft: .circular(topLeft),
-                topRight: .circular(topRight),
-                bottomLeft: .circular(bottomLeft),
-                bottomRight: .circular(bottomRight),
+          return Material(
+            color: context.colorScheme.surfaceContainer,
+            borderRadius: .only(
+              topLeft: .circular(topLeft),
+              topRight: .circular(topRight),
+              bottomLeft: .circular(bottomLeft),
+              bottomRight: .circular(bottomRight),
+            ),
+            child: ListTile(
+              visualDensity: .standard,
+              onTap: item.onTap,
+              leading: CircleAvatar(
+                radius: 20,
+                backgroundColor: context.colorScheme.primaryContainer,
+                child: Icon(
+                  item.icon,
+                  size: 24,
+                  color: context.colorScheme.onPrimaryContainer,
+                ),
               ),
-            ),
-            onTap: item.onTap,
-            tileColor: context.colorScheme.surfaceContainer,
-            leading: CircleAvatar(
-              radius: 20,
-              backgroundColor: context.colorScheme.primaryContainer,
-              child: Icon(
-                item.icon,
-                size: 24,
-                color: context.colorScheme.onPrimaryContainer,
+              trailing: item.trailing,
+              title: FText(
+                item.label,
+                style: .bodyLarge,
+                weight: .w600,
               ),
-            ),
-            title: FText(
-              item.label,
-              style: .bodyLarge,
-              weight: .w600,
-            ),
-            subtitle: item.subLabel.let(
-              (it) => FText(
-                it,
-                style: .bodyMedium,
-                color: .grey,
+              subtitle: item.subLabel.let(
+                (it) => FText(
+                  it,
+                  style: .bodyMedium,
+                  color: .grey,
+                ),
               ),
             ),
           );

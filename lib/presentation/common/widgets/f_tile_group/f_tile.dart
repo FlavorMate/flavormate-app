@@ -6,6 +6,8 @@ class FTile {
 
   final IconData icon;
 
+  final Widget? trailing;
+
   final VoidCallback onTap;
 
   const FTile({
@@ -13,5 +15,6 @@ class FTile {
     required this.subLabel,
     required this.icon,
     required this.onTap,
+    this.trailing,
   });
 }

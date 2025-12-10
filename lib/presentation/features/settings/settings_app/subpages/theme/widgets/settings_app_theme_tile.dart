@@ -22,17 +22,19 @@ class SettingsAppThemeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final contentColor = calcColorForText(color);
 
-    return ListTile(
-      visualDensity: .standard,
-      shape: RoundedRectangleBorder(borderRadius: borderRadiusGeometry),
-      textColor: contentColor,
-      tileColor: color,
-      leading: Icon(
-        isSelected ? MdiIcons.checkCircleOutline : MdiIcons.circleOutline,
-        color: contentColor,
+    return Material(
+      color: color,
+      borderRadius: borderRadiusGeometry,
+      child: ListTile(
+        visualDensity: .standard,
+        textColor: contentColor,
+        leading: Icon(
+          isSelected ? MdiIcons.checkCircleOutline : MdiIcons.circleOutline,
+          color: contentColor,
+        ),
+        title: Text(label),
+        onTap: () => onTap.call(color),
       ),
-      title: Text(label),
-      onTap: () => onTap.call(color),
     );
   }
 }

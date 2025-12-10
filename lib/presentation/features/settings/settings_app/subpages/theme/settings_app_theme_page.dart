@@ -9,7 +9,6 @@ import 'package:flavormate/core/theme/enums/f_theme_tone.dart';
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/core/theme/providers/p_dynamic_color.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/utils/no_bounce_scroll_behavior.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_mode_buttons.dart';
@@ -74,7 +73,6 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
         ),
         body: SafeArea(
           child: FResponsive(
-            scrollBehavior: NoBounceScrollBehavior(),
             child: Column(
               spacing: PADDING,
               children: [
