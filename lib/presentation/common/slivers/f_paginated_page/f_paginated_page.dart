@@ -3,6 +3,7 @@ import 'package:flavormate/data/models/local/pageable_dto.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_content.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class FPaginatedPage<T> extends ConsumerStatefulWidget {
   final String title;
+  final List<Widget>? actions;
   final bool emptyAppBar;
   final $AsyncNotifierProvider<dynamic, PageableDto<T>> provider;
   final PPageableStateProvider pageProvider;
@@ -28,6 +30,7 @@ class FPaginatedPage<T> extends ConsumerStatefulWidget {
   const FPaginatedPage({
     super.key,
     required this.title,
+    this.actions,
     this.emptyAppBar = false,
     required this.provider,
     required this.pageProvider,
@@ -60,26 +63,33 @@ class _FPaginatedPageState<T> extends ConsumerState<FPaginatedPage<T>> {
         title: widget.title,
         showHome: !widget.emptyAppBar,
         automaticallyImplyLeading: !widget.emptyAppBar,
+        actions: widget.actions,
       ),
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
       floatingActionButton: widget.floatingActionButton,
-      body: CustomScrollView(
-        controller: _controller,
-        slivers: [
-          if (widget.sortBuilder != null)
-            SliverPersistentHeader(
-              floating: true,
-              delegate: FPaginatedSortDelegate(widget.sortBuilder!),
+      body: SafeArea(
+        child: CustomScrollView(
+          controller: _controller,
+          slivers: [
+            if (widget.sortBuilder != null)
+              SliverPersistentHeader(
+                floating: true,
+                delegate: FPaginatedSortDelegate(widget.sortBuilder!),
+              ),
+            FPaginatedContent(
+              provider: widget.provider,
+              pageProvider: widget.pageProvider,
+              itemBuilder: widget.itemBuilder,
+              controller: _controller,
+              onEmpty: widget.onEmpty,
+              onError: widget.onError,
             ),
-          FPaginatedContent(
-            provider: widget.provider,
-            pageProvider: widget.pageProvider,
-            itemBuilder: widget.itemBuilder,
-            controller: _controller,
-            onEmpty: widget.onEmpty,
-            onError: widget.onError,
-          ),
-        ],
+
+            // Add some space so content doesn't overlap with FAB
+            if (widget.floatingActionButton != null)
+              const FSizedBoxSliver(height: 56 + 32),
+          ],
+        ),
       ),
       bottomNavigationBar: SafeArea(
         child: FPaginatedBar(

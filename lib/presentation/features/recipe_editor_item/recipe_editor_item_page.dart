@@ -8,12 +8,13 @@ import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress_color.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_save_state.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/widgets/recipe_editor_item_course_picker.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/widgets/recipe_editor_item_diet_picker.dart';
 import 'package:flutter/material.dart';
@@ -47,114 +48,156 @@ class RecipeEditorItemPage extends ConsumerWidget {
           child: Column(
             spacing: PADDING,
             children: [
-              FButton(
-                onPressed: () => context.routes.recipeEditorItemCommon(id),
-                leading: const Icon(MdiIcons.noteEdit),
-                label: context.l10n.recipe_editor_item_page__common,
-                trailing: FProgressColor(
-                  state: data.commonProgress,
-                  color: context.colorScheme.onPrimary,
-                ),
+              FTileGroup(
+                items: [
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__common,
+                    subLabel: context.l10n.recipe_editor_item_page__common_hint,
+                    icon: MdiIcons.noteEdit,
+                    onTap: () => context.routes.recipeEditorItemCommon(id),
+                    trailing: FProgressColor(
+                      state: data.commonProgress,
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__media,
+                    subLabel: context.l10n.recipe_editor_item_page__media_hint,
+                    icon: MdiIcons.imageMultiple,
+                    onTap: () => context.routes.recipeEditorItemFiles(id),
+                    trailing: FProgressColor(
+                      state: data.imageProgress,
+                      color: context.colorScheme.primary,
+                      optional: true,
+                    ),
+                  ),
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__origin,
+                    subLabel: context.l10n.recipe_editor_item_page__origin_hint,
+                    icon: MdiIcons.web,
+                    onTap: () => context.routes.recipeEditorItemOrigin(id),
+                    trailing: FProgressColor(
+                      state: data.originProgress,
+                      color: context.colorScheme.primary,
+                      optional: true,
+                    ),
+                  ),
+                ],
               ),
-              FButton(
-                onPressed: () => context.routes.recipeEditorItemServing(id),
-                leading: const Icon(MdiIcons.silverwareForkKnife),
-                label: context.l10n.recipe_editor_item_page__serving,
-                trailing: FProgressColor(
-                  state: data.servingProgress,
-                  color: context.colorScheme.onPrimary,
-                ),
+              FTileGroup(
+                items: [
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__serving,
+                    subLabel:
+                        context.l10n.recipe_editor_item_page__serving_hint,
+                    icon: MdiIcons.silverwareForkKnife,
+                    onTap: () => context.routes.recipeEditorItemServing(id),
+                    trailing: FProgressColor(
+                      state: data.servingProgress,
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__durations,
+                    subLabel:
+                        context.l10n.recipe_editor_item_page__durations_hint,
+                    icon: MdiIcons.clock,
+                    onTap: () => context.routes.recipeEditorItemDurations(id),
+                    trailing: FProgressColor(
+                      state: data.durationProgress,
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
+                ],
               ),
-              FButton(
-                onPressed: () => context.routes.recipeEditorItemDurations(id),
-                leading: const Icon(MdiIcons.clock),
-                label: context.l10n.recipe_editor_item_page__durations,
-                trailing: FProgressColor(
-                  state: data.durationProgress,
-                  color: context.colorScheme.onPrimary,
-                ),
-              ),
-              FButton(
-                onPressed: () =>
-                    context.routes.recipeEditorItemIngredientGroups(id),
-                leading: const Icon(MdiIcons.foodApple),
-                label: context.l10n.recipe_editor_item_page__ingredient_groups,
-                trailing: FProgressColor(
-                  state: data.ingredientsProgress,
-                  color: context.colorScheme.onPrimary,
-                ),
-              ),
-              FButton(
-                onPressed: () =>
-                    context.routes.recipeEditorItemInstructionGroups(id),
-                leading: const Icon(MdiIcons.formatListChecks),
-                label: context.l10n.recipe_editor_item_page__instruction_groups,
-                trailing: FProgressColor(
-                  state: data.instructionsProgress,
-                  color: context.colorScheme.onPrimary,
-                ),
-              ),
-              FButton(
-                onPressed: () => editCourse(context, ref, data.course),
-                leading: const Icon(MdiIcons.foodVariant),
-                label: context.l10n.recipe_editor_item_page__course,
-                trailing: FProgressColor(
-                  state: data.courseProgress,
-                  color: context.colorScheme.onPrimary,
-                ),
-              ),
-              FButton(
-                onPressed: () => editDiet(context, ref, data.diet),
-                leading: const Icon(MdiIcons.leaf),
-                label: context.l10n.recipe_editor_item_page__diet,
-                trailing: FProgressColor(
-                  state: data.dietProgress,
-                  color: context.colorScheme.onPrimary,
-                ),
-              ),
-              FButton(
-                onPressed: () => context.routes.recipeEditorItemTags(id),
-                leading: const Icon(MdiIcons.tagMultiple),
-                label: context.l10n.recipe_editor_item_page__tags,
-                trailing: FProgressColor(
-                  state: data.tagsProgress,
-                  color: context.colorScheme.onPrimary,
-                  optional: true,
-                ),
-              ),
-              FButton(
-                onPressed: () => context.routes.recipeEditorItemCategories(id),
-                leading: const Icon(MdiIcons.viewGrid),
-                label: context.l10n.recipe_editor_item_page__categories,
-                trailing: FProgressColor(
-                  state: data.categoriesProgress,
-                  color: context.colorScheme.onPrimary,
-                  optional: true,
-                ),
-              ),
-              FButton(
-                onPressed: () => context.routes.recipeEditorItemFiles(id),
-                leading: const Icon(MdiIcons.imageMultiple),
-                label: context.l10n.recipe_editor_item_page__media,
-                trailing: FProgressColor(
-                  state: data.imageProgress,
-                  color: context.colorScheme.onPrimary,
-                  optional: true,
-                ),
-              ),
-              FButton(
-                onPressed: () => context.routes.recipeEditorItemOrigin(id),
-                leading: const Icon(MdiIcons.web),
-                label: context.l10n.recipe_editor_item_page__origin,
-                trailing: FProgressColor(
-                  state: data.originProgress,
-                  color: context.colorScheme.onPrimary,
-                  optional: true,
-                ),
+              FTileGroup(
+                items: [
+                  FTile(
+                    label:
+                        context.l10n.recipe_editor_item_page__ingredient_groups,
+                    subLabel: context
+                        .l10n
+                        .recipe_editor_item_page__ingredient_groups_hint,
+                    icon: MdiIcons.foodApple,
+                    onTap: () =>
+                        context.routes.recipeEditorItemIngredientGroups(id),
+                    trailing: FProgressColor(
+                      state: data.ingredientsProgress,
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
+                  FTile(
+                    label: context
+                        .l10n
+                        .recipe_editor_item_page__instruction_groups,
+                    subLabel: context
+                        .l10n
+                        .recipe_editor_item_page__instruction_groups_hint,
+                    icon: MdiIcons.formatListChecks,
+                    onTap: () =>
+                        context.routes.recipeEditorItemInstructionGroups(id),
+                    trailing: FProgressColor(
+                      state: data.instructionsProgress,
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
+                ],
               ),
 
-              // Needed so items don't get stuck behind the fab
-              const SizedBox(height: 52),
+              FTileGroup(
+                items: [
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__course,
+                    subLabel: 'Vorspeise, Hauptspeise, Dessert, etc.',
+                    icon: MdiIcons.foodVariant,
+                    onTap: () => editCourse(context, ref, data.course),
+                    trailing: FProgressColor(
+                      state: data.courseProgress,
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__diet,
+                    subLabel: context.l10n.recipe_editor_item_page__diet_hint,
+                    icon: MdiIcons.leaf,
+                    onTap: () => editDiet(context, ref, data.diet),
+                    trailing: FProgressColor(
+                      state: data.dietProgress,
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
+                ],
+              ),
+
+              FTileGroup(
+                items: [
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__tags,
+                    subLabel: context.l10n.recipe_editor_item_page__tags_hint,
+                    icon: MdiIcons.tagMultiple,
+                    onTap: () => context.routes.recipeEditorItemTags(id),
+                    trailing: FProgressColor(
+                      state: data.tagsProgress,
+                      color: context.colorScheme.primary,
+                      optional: true,
+                    ),
+                  ),
+                  FTile(
+                    label: context.l10n.recipe_editor_item_page__categories,
+                    subLabel: context.l10n.recipe_editor_item_page__categories_hint,
+                    icon: MdiIcons.package,
+                    onTap: () => context.routes.recipeEditorItemCategories(id),
+                    trailing: FProgressColor(
+                      state: data.categoriesProgress,
+                      color: context.colorScheme.primary,
+                      optional: true,
+                    ),
+                  ),
+                ],
+              ),
+
+              // Add spacer to prevent overlap with floating action button
+              const SizedBox(height: 56),
             ],
           ),
         ),

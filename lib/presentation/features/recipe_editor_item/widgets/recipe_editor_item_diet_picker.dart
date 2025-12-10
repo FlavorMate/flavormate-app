@@ -1,8 +1,8 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
@@ -14,23 +14,34 @@ class RecipeEditorItemDietPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FAlertDialog(
-      title: context.l10n.recipe_editor_item_diet_picker__title,
-      child: Column(
-        spacing: PADDING,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (final diet in Diet.values)
-            FButton(
-              onPressed: () => context.pop(diet),
-              leading: Icon(diet.icon),
-              label: diet.getName(context),
-              trailing: this.diet == diet
-                  ? const Icon(MdiIcons.checkCircleOutline)
-                  : null,
-            ),
-        ],
+    return AlertDialog(
+      title: Text(context.l10n.recipe_editor_item_diet_picker__title),
+      scrollable: true,
+      constraints: const BoxConstraints(
+        minWidth: 560,
+        maxWidth: 560,
       ),
+      insetPadding: const .all(PADDING),
+      content: FTileGroup(
+        iconBackgroundColor: Colors.transparent,
+        items: List.generate(Diet.values.length, (index) {
+          final item = Diet.values[index];
+          return FTile(
+            label: item.getName(context),
+            subLabel: null,
+            icon: diet == item
+                ? MdiIcons.checkCircleOutline
+                : MdiIcons.circleOutline,
+            onTap: () => context.pop(item),
+          );
+        }),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => context.pop(),
+          child: Text(context.l10n.btn_close),
+        ),
+      ],
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FTile {
   final String label;
-  final String subLabel;
+  final String? subLabel;
 
   final IconData icon;
 

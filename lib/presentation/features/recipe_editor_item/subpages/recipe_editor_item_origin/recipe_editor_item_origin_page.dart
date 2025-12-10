@@ -74,36 +74,34 @@ class _RecipeEditorItemOriginPageState
         body: Form(
           key: _key,
           child: SafeArea(
-            child: Center(
-              child: FResponsive(
-                child: Column(
-                  spacing: PADDING,
-                  children: [
-                    Icon(
-                      MdiIcons.web,
-                      size: 96,
-                      color: context.colorScheme.onPrimaryContainer,
-                    ),
-                    FText(
-                      context.l10n.recipe_editor_item_origin_page__hint_1,
-                      style: FTextStyle.bodyLarge,
-                    ),
-                    const SizedBox(height: PADDING / 4),
-                    FTextFormField(
-                      controller: _originController,
-                      label: context.l10n.recipe_editor_item_origin_page__label,
-                      onChanged: setOrigin,
-                      clear: () => setOrigin(''),
-                      validators: (val) {
-                        if (val == null || val.isEmpty) return null;
-                        if (!UValidator.isHttpUrl(val)) {
-                          return context.l10n.validator__is_http_url;
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
+            child: FResponsive(
+              child: Column(
+                spacing: PADDING,
+                children: [
+                  Icon(
+                    MdiIcons.web,
+                    size: 96,
+                    color: context.colorScheme.onPrimaryContainer,
+                  ),
+                  FText(
+                    context.l10n.recipe_editor_item_origin_page__hint_1,
+                    style: FTextStyle.bodyLarge,
+                  ),
+                  const SizedBox(height: PADDING / 4),
+                  FTextFormField(
+                    controller: _originController,
+                    label: context.l10n.recipe_editor_item_origin_page__label,
+                    onChanged: setOrigin,
+                    clear: () => setOrigin(''),
+                    validators: (val) {
+                      if (val == null || val.isEmpty) return null;
+                      if (!UValidator.isHttpUrl(val)) {
+                        return context.l10n.validator__is_http_url;
+                      }
+                      return null;
+                    },
+                  ),
+                ],
               ),
             ),
           ),
