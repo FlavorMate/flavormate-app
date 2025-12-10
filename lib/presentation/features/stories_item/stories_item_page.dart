@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/repositories/features/stories/p_rest_stories.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_bubble.dart';
@@ -102,7 +101,7 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
                       onPressed: () =>
                           context.routes.recipesItem(data.story.recipe.id),
                       child: Text(
-                        L10n.of(context).stories_item_page__open_recipe,
+                        context.l10n.stories_item_page__open_recipe,
                       ),
                     ),
                   ],
@@ -113,7 +112,7 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
         ),
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).stories_item_page__on_error,
+        title: context.l10n.stories_item_page__on_error,
         icon: StateIconConstants.stories.errorIcon,
       ),
     );
@@ -129,7 +128,7 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
 
     if (response.hasError || !response.hasData) {
       context.showTextSnackBar(
-        L10n.of(context).stories_item_page__edit_on_error,
+        context.l10n.stories_item_page__edit_on_error,
       );
     } else {
       await context.routes.storyEditorItem(response.data!);
@@ -140,7 +139,7 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
     final result = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(context).stories_item_page__delete,
+        title: context.l10n.stories_item_page__delete,
       ),
     );
     if (result != true || !mounted) return;
@@ -153,14 +152,14 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
 
     if (response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).stories_item_page__delete_failure,
+        context.l10n.stories_item_page__delete_failure,
       );
     } else {
       ref.invalidate(pRestStoriesProvider);
 
       context.routes.home(replace: true);
       context.showTextSnackBar(
-        L10n.of(context).stories_item_page__delete_success,
+        context.l10n.stories_item_page__delete_success,
       );
     }
   }

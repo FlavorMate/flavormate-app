@@ -3,7 +3,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -11,7 +10,6 @@ import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struc
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_account_section.dart';
-import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_admin_section.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_info_section.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_settings_section.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +28,7 @@ class HomeAccountDialog extends StatelessWidget {
     return FProviderStruct(
       provider: provider,
       onError: FEmptyMessage(
-        title: L10n.of(context).home_account_dialog__on_error,
+        title: context.l10n.home_account_dialog__on_error,
         icon: StateIconConstants.authors.errorIcon,
       ),
       builder: (context, account) {
@@ -63,19 +61,19 @@ class HomeAccountDialog extends StatelessWidget {
                         FTileGroup(
                           items: [
                             FTile(
-                              label: L10n.of(
-                                context,
-                              ).home_account_dialog__my_profile,
-                              icon: MdiIcons.accountOutline,
+                              label:
+                                  context.l10n.home_account_dialog__my_profile,
+                              subLabel: context
+                                  .l10n
+                                  .home_account_dialog__my_profile_hint,
+                              icon: MdiIcons.account,
+                              iconColor: .teal,
                               onTap: () => openAccount(context, account.id),
                             ),
                           ],
                         ),
 
                         const HomeAccountDialogSettingsSection(),
-
-                        if (account.isAdmin)
-                          const HomeAccountDialogAdminSection(),
 
                         const HomeAccountDialogInfoSection(),
 
@@ -90,9 +88,7 @@ class HomeAccountDialog extends StatelessWidget {
                             TextButton(
                               onPressed: () => openLicenses(context),
                               child: Text(
-                                L10n.of(
-                                  context,
-                                ).home_account_dialog__licenses,
+                                context.l10n.home_account_dialog__licenses,
                               ),
                             ),
                           ],

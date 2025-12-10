@@ -4,7 +4,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_dio.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
@@ -57,32 +56,30 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
                     children: [
                       const Icon(MdiIcons.accountPlusOutline, size: 72),
                       FText(
-                        L10n.of(context).auth_register_page__hint_1,
+                        context.l10n.auth_register_page__hint_1,
                         style: FTextStyle.titleLarge,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox.shrink(),
                       FTextFormField(
                         controller: _displayNameController,
-                        label: L10n.of(
-                          context,
-                        ).auth_register_page__display_name,
+                        label: context.l10n.auth_register_page__display_name,
                         autocorrect: false,
                         validators: (input) {
                           if (UValidator.isEmpty(input)) {
-                            return L10n.of(context).validator__is_empty;
+                            return context.l10n.validator__is_empty;
                           }
                           return null;
                         },
                       ),
                       FTextFormField(
                         controller: _usernameController,
-                        label: L10n.of(context).auth_register_page__username,
+                        label: context.l10n.auth_register_page__username,
                         autocorrect: false,
                         keyboardType: TextInputType.visiblePassword,
                         validators: (input) {
                           if (UValidator.isEmpty(input)) {
-                            return L10n.of(context).validator__is_empty;
+                            return context.l10n.validator__is_empty;
                           }
 
                           return null;
@@ -90,16 +87,16 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
                       ),
                       FTextFormField(
                         controller: _mailController,
-                        label: L10n.of(context).auth_register_page__email,
+                        label: context.l10n.auth_register_page__email,
                         autocorrect: false,
                         keyboardType: TextInputType.emailAddress,
                         validators: (input) {
                           if (UValidator.isEmpty(input)) {
-                            return L10n.of(context).validator__is_empty;
+                            return context.l10n.validator__is_empty;
                           }
 
                           if (!UValidator.isMail(input!)) {
-                            return L10n.of(context).validator__is_email;
+                            return context.l10n.validator__is_email;
                           }
 
                           return null;
@@ -109,7 +106,7 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
                         controller: _passwordController,
                         decoration: InputDecoration(
                           label: Text(
-                            L10n.of(context).auth_register_page__password,
+                            context.l10n.auth_register_page__password,
                           ),
                           border: const OutlineInputBorder(),
                         ),
@@ -117,11 +114,11 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
                         obscureText: true,
                         validator: (input) {
                           if (UValidator.isEmpty(input)) {
-                            return L10n.of(context).validator__is_empty;
+                            return context.l10n.validator__is_empty;
                           }
 
                           if (!UValidator.isSecure(input!)) {
-                            return L10n.of(context).validator__is_secure;
+                            return context.l10n.validator__is_secure;
                           }
 
                           return null;
@@ -131,7 +128,7 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
                       FButton(
                         width: BUTTON_WIDTH,
                         onPressed: createUser,
-                        label: L10n.of(context).btn_register,
+                        label: context.l10n.btn_register,
                       ),
                     ],
                   ),
@@ -173,9 +170,9 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
 
     if (isOK) {
       context.pop();
-      context.showTextSnackBar(L10n.of(context).auth_register_page__success);
+      context.showTextSnackBar(context.l10n.auth_register_page__success);
     } else {
-      context.showTextSnackBar(L10n.of(context).auth_register_page__failure);
+      context.showTextSnackBar(context.l10n.auth_register_page__failure);
     }
   }
 }

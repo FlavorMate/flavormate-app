@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/dialogs/home_account_dialog_avatar_dialog.dart';
@@ -44,7 +43,7 @@ class HomeAccountDialogAccountSection extends ConsumerWidget {
         const SizedBox(height: PADDING / 2),
         Center(
           child: FText(
-            L10n.of(context).home_account_dialog_account_section__headline(
+            context.l10n.home_account_dialog_account_section__headline(
               account.displayName,
             ),
             style: .titleLarge,
@@ -54,9 +53,7 @@ class HomeAccountDialogAccountSection extends ConsumerWidget {
         OutlinedButton(
           onPressed: () => openSettingsAccount(context),
           child: Text(
-            L10n.of(
-              context,
-            ).home_account_dialog_account_section__manage_account,
+            context.l10n.home_account_dialog_account_section__manage_account,
           ),
         ),
       ],
@@ -89,13 +86,13 @@ class HomeAccountDialogAccountSection extends ConsumerWidget {
 
       if (!result.hasError) {
         context.showTextSnackBar(
-          L10n.of(context).home_account_dialog_account_section__change_password,
+          context.l10n.home_account_dialog_account_section__change_password,
         );
       } else {
         context.showTextSnackBar(
-          L10n.of(
-            context,
-          ).home_account_dialog_account_section__change_avatar_failure,
+          context
+              .l10n
+              .home_account_dialog_account_section__change_avatar_failure,
         );
       }
     }

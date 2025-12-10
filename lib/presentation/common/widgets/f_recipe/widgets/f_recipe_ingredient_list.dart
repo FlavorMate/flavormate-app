@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_ingredient.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_ingredient_group.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +34,8 @@ class FRecipeIngredientList extends StatelessWidget {
 
         FTable(
           header: [
-            L10n.of(context).f_recipe_ingredient_list__amount,
-            L10n.of(context).f_recipe_ingredient_list__ingredient,
+            context.l10n.f_recipe_ingredient_list__amount,
+            context.l10n.f_recipe_ingredient_list__ingredient,
           ],
           rows: [
             for (final ingredient in sortedIngredients)

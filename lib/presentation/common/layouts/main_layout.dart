@@ -1,5 +1,5 @@
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/destination.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
@@ -38,14 +38,14 @@ class MainLayoutState extends State<MainLayout> {
   }
 
   List<Destination> buildDestinations(BuildContext context) => [
-    Destination(icon: MdiIcons.home, label: L10n.of(context).main_layout__home),
+    Destination(icon: MdiIcons.home, label: context.l10n.main_layout__home),
     Destination(
       icon: MdiIcons.bookshelf,
-      label: L10n.of(context).main_layout__library,
+      label: context.l10n.main_layout__library,
     ),
     Destination(
       icon: MdiIcons.shape,
-      label: L10n.of(context).main_layout__more,
+      label: context.l10n.main_layout__more,
     ),
   ];
 

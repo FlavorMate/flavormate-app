@@ -9,7 +9,6 @@ import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/features/story_drafts/story_draft_dto.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_id.dart';
 import 'package:flavormate/data/repositories/features/story_drafts/p_rest_story_drafts_id.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
@@ -84,7 +83,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, _) => FAppBar(
-        title: L10n.of(context).story_editor_item_page__title,
+        title: context.l10n.story_editor_item_page__title,
         actions: [FSaveState(provider: widget.autosaveProvider)],
       ),
       floatingActionButtonBuilder: (_, data) => FloatingActionButton(
@@ -125,21 +124,19 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
                     ],
                   ),
                   onError: FEmptyMessage(
-                    title: L10n.of(
-                      context,
-                    ).story_editor_item_page__recipe_on_error,
+                    title: context.l10n.story_editor_item_page__recipe_on_error,
                     icon: StateIconConstants.recipes.errorIcon,
                   ),
                 ),
 
               FTextFormField(
                 controller: _labelController,
-                label: L10n.of(context).story_editor_item_page__label,
+                label: context.l10n.story_editor_item_page__label,
                 onChanged: setLabel,
                 clear: () => setLabel(''),
                 validators: (value) {
                   if (UValidator.isEmpty(value)) {
-                    return L10n.of(context).validator__is_empty;
+                    return context.l10n.validator__is_empty;
                   }
 
                   return null;
@@ -147,13 +144,13 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
               ),
               FTextFormField(
                 controller: _contentController,
-                label: L10n.of(context).story_editor_item_page__content,
+                label: context.l10n.story_editor_item_page__content,
                 onChanged: setContent,
                 clear: () => setContent(''),
                 maxLines: null,
                 validators: (value) {
                   if (UValidator.isEmpty(value)) {
-                    return L10n.of(context).validator__is_empty;
+                    return context.l10n.validator__is_empty;
                   }
 
                   return null;
@@ -165,9 +162,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
         ),
       ),
       onError: FEmptyMessage(
-        title: L10n.of(
-          context,
-        ).story_editor_item_page__recipe_on_error,
+        title: context.l10n.story_editor_item_page__recipe_on_error,
         icon: StateIconConstants.recipes.errorIcon,
       ),
     );
@@ -176,7 +171,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
   Future<void> showPreview(BuildContext context, StoryDraftDto draft) async {
     if (draft.recipe == null || !_formKey.currentState!.validate()) {
       context.showTextSnackBar(
-        L10n.of(context).story_editor_item_page__not_complete,
+        context.l10n.story_editor_item_page__not_complete,
       );
       return;
     }

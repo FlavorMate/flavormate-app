@@ -8,7 +8,6 @@ import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/categories/category_dto.dart';
 import 'package:flavormate/data/models/features/category_drafts/category_group_dto.dart';
 import 'package:flavormate/data/repositories/features/category_groups/p_rest_category_groups.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
@@ -67,7 +66,7 @@ class _RecipeEditorItemCategoriesPageState
     return FProviderPage(
       provider: widget.categoryGroupProvider,
       appBarBuilder: (_, _) => FAppBar(
-        title: L10n.of(context).recipe_editor_item_categories_page__title,
+        title: context.l10n.recipe_editor_item_categories_page__title,
         actions: [
           FProgress(
             provider: widget.provider,
@@ -85,7 +84,7 @@ class _RecipeEditorItemCategoriesPageState
         ),
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).recipe_editor_item_categories_page__on_error,
+        title: context.l10n.recipe_editor_item_categories_page__on_error,
         icon: StateIconConstants.recipes.errorIcon,
       ),
     );

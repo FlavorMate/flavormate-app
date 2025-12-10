@@ -4,7 +4,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/theme/utils/u_app_icon.dart';
 import 'package:flavormate/generated/flutter_gen/assets.gen.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -20,7 +19,7 @@ class SettingsAppAppIconPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
-        title: L10n.of(context).settings_app_app_icon_page__title,
+        title: context.l10n.settings_app_app_icon_page__title,
       ),
       body: SafeArea(
         child: FResponsive(
@@ -29,9 +28,7 @@ class SettingsAppAppIconPage extends StatelessWidget {
             children: [
               FCard(
                 child: FText(
-                  L10n.of(
-                    context,
-                  ).settings_app_app_icon_page__hint,
+                  context.l10n.settings_app_app_icon_page__hint,
                   style: .bodyMedium,
                 ),
               ),
@@ -39,16 +36,16 @@ class SettingsAppAppIconPage extends StatelessWidget {
                 children: [
                   SettingsAppAppIconCard(
                     imagePath: Assets.appIcons.flavormate.path,
-                    label: L10n.of(
-                      context,
-                    ).settings_app_app_icon_page__icon_flavormate,
+                    label: context
+                        .l10n
+                        .settings_app_app_icon_page__icon_flavormate,
                     onTap: () => setIcon(context, .appIcon),
                   ),
                   SettingsAppAppIconCard(
                     imagePath: Assets.appIcons.winter2025.path,
-                    label: L10n.of(
-                      context,
-                    ).settings_app_app_icon_page__icon_winter_2025,
+                    label: context
+                        .l10n
+                        .settings_app_app_icon_page__icon_winter_2025,
                     onTap: () => setIcon(context, .winter2025),
                   ),
                 ],
@@ -77,11 +74,11 @@ class SettingsAppAppIconPage extends StatelessWidget {
 
     if (success) {
       context.showTextSnackBar(
-        L10n.of(context).settings_app_app_icon_page__on_success,
+        context.l10n.settings_app_app_icon_page__on_success,
       );
     } else {
       context.showErrorSnackBar(
-        L10n.of(context).settings_app_app_icon_page__on_error,
+        context.l10n.settings_app_app_icon_page__on_error,
       );
     }
   }

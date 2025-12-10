@@ -5,7 +5,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_oidc/f_oidc_icon.dart';
@@ -69,7 +68,7 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
         _expiresAtTimer?.cancel();
         context.pop();
         context.showTextSnackBar(
-          L10n.of(context).login_oidc_link_dialog__token_expired,
+          context.l10n.login_oidc_link_dialog__token_expired,
         );
       },
     );
@@ -113,7 +112,7 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
                       SizedBox(
                         width: BUTTON_WIDTH,
                         child: FText(
-                          L10n.of(context).login_oidc_link_dialog__hint_1(
+                          context.l10n.login_oidc_link_dialog__hint_1(
                             widget.displayName ?? '',
                           ),
                           style: FTextStyle.headlineMedium,
@@ -124,7 +123,7 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
                       SizedBox(
                         width: BUTTON_WIDTH,
                         child: FText(
-                          L10n.of(context).login_oidc_link_dialog__hint_2(
+                          context.l10n.login_oidc_link_dialog__hint_2(
                             widget.provider.name,
                           ),
                           style: FTextStyle.bodyMedium,
@@ -152,7 +151,7 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
                       FButton(
                         width: BUTTON_WIDTH,
                         onPressed: linkAccount,
-                        label: L10n.of(context).btn_link_account,
+                        label: context.l10n.btn_link_account,
                       ),
                     ],
                   ),
@@ -183,11 +182,11 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
 
     if (response) {
       context.showTextSnackBar(
-        L10n.of(context).login_oidc_link_dialog__on_success,
+        context.l10n.login_oidc_link_dialog__on_success,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).login_oidc_link_dialog__on_error,
+        context.l10n.login_oidc_link_dialog__on_error,
       );
     }
   }

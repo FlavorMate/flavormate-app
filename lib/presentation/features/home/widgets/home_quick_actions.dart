@@ -4,7 +4,6 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_random.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +38,7 @@ class HomeQuickActions extends ConsumerWidget {
                   height: _size,
                   width: _size,
                   icon: MdiIcons.pasta,
-                  label: L10n.of(context).home_quick_actions__cooking,
+                  label: context.l10n.home_quick_actions__cooking,
                   onTap: () => openSuggestion(context, course: Course.MainDish),
                 ),
               ),
@@ -52,7 +51,7 @@ class HomeQuickActions extends ConsumerWidget {
                   height: _size,
                   width: _size,
                   icon: MdiIcons.cupcake,
-                  label: L10n.of(context).home_quick_actions__baking,
+                  label: context.l10n.home_quick_actions__baking,
                   onTap: () => openSuggestion(context, course: Course.Bakery),
                 ),
               ),
@@ -65,7 +64,7 @@ class HomeQuickActions extends ConsumerWidget {
                   height: _size,
                   width: _size,
                   icon: MdiIcons.diceMultiple,
-                  label: L10n.of(context).home_quick_actions__random,
+                  label: context.l10n.home_quick_actions__random,
                   onTap: () => openRecipe(context, ref),
                 ),
               ),
@@ -78,7 +77,7 @@ class HomeQuickActions extends ConsumerWidget {
                   height: _size,
                   width: _size,
                   icon: MdiIcons.bookOpen,
-                  label: L10n.of(context).home_quick_actions__all_recipes,
+                  label: context.l10n.home_quick_actions__all_recipes,
                   onTap: () => context.routes.recipes(),
                 ),
               ),
@@ -117,7 +116,7 @@ class HomeQuickActions extends ConsumerWidget {
     } catch (e) {
       if (!context.mounted) return;
       context.showTextSnackBar(
-        L10n.of(context).home_quick_actions__no_recipe_available,
+        context.l10n.home_quick_actions__no_recipe_available,
       );
     }
   }

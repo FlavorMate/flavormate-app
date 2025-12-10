@@ -1,5 +1,5 @@
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -18,16 +18,16 @@ class ServerTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FTextFormField(
-      label: L10n.of(context).server_text_field__title,
+      label: context.l10n.server_text_field__title,
       controller: controller,
       readOnly: readOnly,
       validators: (input) {
         if (UValidator.isEmpty(input)) {
-          return L10n.of(context).validator__is_empty;
+          return context.l10n.validator__is_empty;
         }
 
         if (!UValidator.isHttpUrl(input!)) {
-          return L10n.of(context).validator__is_http_url;
+          return context.l10n.validator__is_http_url;
         }
 
         return null;

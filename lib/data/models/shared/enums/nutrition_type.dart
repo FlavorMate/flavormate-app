@@ -1,4 +1,4 @@
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
@@ -26,15 +26,15 @@ enum NutritionType {
 
   String getName(BuildContext context) {
     return switch (this) {
-      NutritionType.carbohydrates => L10n.of(context).nutrition__carbohydrates,
-      NutritionType.energyKcal => L10n.of(context).nutrition__kcal,
-      NutritionType.fat => L10n.of(context).nutrition__fats,
-      NutritionType.saturatedFat => L10n.of(context).nutrition__fats_saturated,
-      NutritionType.sugars => L10n.of(context).nutrition__sugars,
-      NutritionType.fiber => L10n.of(context).nutrition__fibers,
-      NutritionType.proteins => L10n.of(context).nutrition__proteins,
-      NutritionType.salt => L10n.of(context).nutrition__salt,
-      NutritionType.sodium => L10n.of(context).nutrition__sodium,
+      NutritionType.carbohydrates => context.l10n.nutrition__carbohydrates,
+      NutritionType.energyKcal => context.l10n.nutrition__kcal,
+      NutritionType.fat => context.l10n.nutrition__fats,
+      NutritionType.saturatedFat => context.l10n.nutrition__fats_saturated,
+      NutritionType.sugars => context.l10n.nutrition__sugars,
+      NutritionType.fiber => context.l10n.nutrition__fibers,
+      NutritionType.proteins => context.l10n.nutrition__proteins,
+      NutritionType.salt => context.l10n.nutrition__salt,
+      NutritionType.sodium => context.l10n.nutrition__sodium,
     };
   }
 

@@ -1,1 +1,1 @@
-enum FThemeMode { flavormate, dynamic, custom }
+enum FThemeMode { dynamic, custom }

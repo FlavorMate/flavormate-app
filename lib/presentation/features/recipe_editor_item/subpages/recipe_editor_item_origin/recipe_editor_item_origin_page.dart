@@ -3,7 +3,6 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -62,7 +61,7 @@ class _RecipeEditorItemOriginPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
-          title: L10n.of(context).recipe_editor_item_origin_page__title,
+          title: context.l10n.recipe_editor_item_origin_page__title,
           actions: [
             FProgress(
               provider: widget.provider,
@@ -86,21 +85,19 @@ class _RecipeEditorItemOriginPageState
                       color: context.colorScheme.onPrimaryContainer,
                     ),
                     FText(
-                      L10n.of(context).recipe_editor_item_origin_page__hint_1,
+                      context.l10n.recipe_editor_item_origin_page__hint_1,
                       style: FTextStyle.bodyLarge,
                     ),
                     const SizedBox(height: PADDING / 4),
                     FTextFormField(
                       controller: _originController,
-                      label: L10n.of(
-                        context,
-                      ).recipe_editor_item_origin_page__label,
+                      label: context.l10n.recipe_editor_item_origin_page__label,
                       onChanged: setOrigin,
                       clear: () => setOrigin(''),
                       validators: (val) {
                         if (val == null || val.isEmpty) return null;
                         if (!UValidator.isHttpUrl(val)) {
-                          return L10n.of(context).validator__is_http_url;
+                          return context.l10n.validator__is_http_url;
                         }
                         return null;
                       },

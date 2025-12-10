@@ -2,7 +2,7 @@ import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -122,7 +122,7 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: widget.onShowAll,
-                  child: Text(L10n.of(context).btn_show_more),
+                  child: Text(context.l10n.btn_show_more),
                 ),
               ),
           ],

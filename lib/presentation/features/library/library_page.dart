@@ -5,7 +5,6 @@ import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
@@ -39,7 +38,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
   @override
   Widget build(BuildContext context) {
     return FPaginatedPage(
-      title: L10n.of(context).flavormate,
+      title: context.l10n.flavormate,
       emptyAppBar: true,
       floatingActionBar: FloatingActionButton(
         onPressed: () => addBook(context, ref),
@@ -49,10 +48,10 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
       pageProvider: widget.providerPage,
       onEmpty: FEmptyMessage(
         icon: MdiIcons.bookOffOutline,
-        title: L10n.of(context).library_page__on_empty,
+        title: context.l10n.library_page__on_empty,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).library_page__on_error,
+        title: context.l10n.library_page__on_error,
         icon: StateIconConstants.books.errorIcon,
       ),
       sortBuilder: () => FPaginatedSort(
@@ -65,8 +64,8 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
       itemBuilder: (item) => FImageCard.maximized(
         label: item.label,
         subLabel: item.visible
-            ? L10n.of(context).library_page__book_public
-            : L10n.of(context).library_page__book_private,
+            ? context.l10n.library_page__book_public
+            : context.l10n.library_page__book_private,
         coverSelector: (resolution) => item.cover?.url(resolution),
         onTap: () => context.routes.libraryItem(item.id),
       ),

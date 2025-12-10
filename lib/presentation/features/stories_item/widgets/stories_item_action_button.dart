@@ -1,4 +1,4 @@
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
@@ -30,13 +30,13 @@ class StoriesItemActionButton extends StatelessWidget {
           MenuItemButton(
             leadingIcon: const Icon(MdiIcons.pencil),
             onPressed: edit,
-            child: Text(L10n.of(context).stories_item_action_button__edit),
+            child: Text(context.l10n.stories_item_action_button__edit),
           ),
         if (isOwner || isAdmin)
           MenuItemButton(
             leadingIcon: const Icon(MdiIcons.trashCan),
             onPressed: delete,
-            child: Text(L10n.of(context).stories_item_action_button__delete),
+            child: Text(context.l10n.stories_item_action_button__delete),
           ),
       ],
     );

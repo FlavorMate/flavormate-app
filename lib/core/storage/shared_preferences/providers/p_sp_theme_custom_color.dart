@@ -1,6 +1,6 @@
+import 'package:flavormate/core/constants/color_constants.dart';
 import 'package:flavormate/core/storage/shared_preferences/enums/sp_key.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
-import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,24 +11,23 @@ final _key = SPKey.ThemeCustomColor.name;
 @riverpod
 class PSPThemeCustomColor extends _$PSPThemeCustomColor {
   @override
-  FTheme? build() {
+  Color build() {
     final instance = ref.watch(pSPProvider).requireValue;
 
     final color = instance.getInt(_key);
 
-    if (color == null) return null;
+    if (color == null) {
+      setColor(MiscColor.flavormate.color);
+      return MiscColor.flavormate.color;
+    }
 
-    return FTheme.fromColor(Color(color));
+    return Color(color);
   }
 
-  Future<void> setColor(Color? color) async {
+  Future<void> setColor(Color color) async {
     final instance = ref.read(pSPProvider).requireValue;
 
-    if (color == null) {
-      await instance.remove(_key);
-    } else {
-      await instance.setInt(_key, color.toARGB32());
-    }
+    await instance.setInt(_key, color.toARGB32());
 
     ref.invalidateSelf();
   }

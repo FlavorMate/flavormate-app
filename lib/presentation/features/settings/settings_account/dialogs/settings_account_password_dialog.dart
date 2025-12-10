@@ -1,7 +1,7 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/features/accounts/account_update_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,7 +32,7 @@ class _SettingsAccountPasswordDialogState
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).settings_account_password_dialog__title,
+      title: context.l10n.settings_account_password_dialog__title,
       scrollable: true,
       submit: apply,
       child: Form(
@@ -45,13 +45,13 @@ class _SettingsAccountPasswordDialogState
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(
-                  L10n.of(context).settings_account_password_dialog__old_pwd,
+                  context.l10n.settings_account_password_dialog__old_pwd,
                 ),
               ),
               obscureText: true,
               validator: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
 
                 return null;
@@ -63,17 +63,17 @@ class _SettingsAccountPasswordDialogState
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(
-                  L10n.of(context).settings_account_password_dialog__new_pwd_1,
+                  context.l10n.settings_account_password_dialog__new_pwd_1,
                 ),
               ),
               obscureText: true,
               validator: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
 
                 if (!UValidator.isSecure(value!)) {
-                  return L10n.of(context).validator__is_secure;
+                  return context.l10n.validator__is_secure;
                 }
 
                 return null;
@@ -84,21 +84,21 @@ class _SettingsAccountPasswordDialogState
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 label: Text(
-                  L10n.of(context).settings_account_password_dialog__new_pwd_2,
+                  context.l10n.settings_account_password_dialog__new_pwd_2,
                 ),
               ),
               obscureText: true,
               validator: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
 
                 if (!UValidator.isEqual(value!, _newPassword1Controller.text)) {
-                  return L10n.of(context).validator__is_equal;
+                  return context.l10n.validator__is_equal;
                 }
 
                 if (!UValidator.isSecure(value)) {
-                  return L10n.of(context).validator__is_secure;
+                  return context.l10n.validator__is_secure;
                 }
 
                 return null;

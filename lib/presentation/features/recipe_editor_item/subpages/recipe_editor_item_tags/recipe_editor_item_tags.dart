@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
@@ -42,7 +41,7 @@ class _RecipeEditorItemTagsPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
-        title: L10n.of(context).recipe_editor_item_tags__title,
+        title: context.l10n.recipe_editor_item_tags__title,
         actions: [
           FProgress(
             provider: widget.provider,
@@ -61,7 +60,7 @@ class _RecipeEditorItemTagsPageState
                 key: _formKey,
                 child: FTextFormField(
                   controller: _tagController,
-                  label: L10n.of(context).recipe_editor_item_tags__add_tag,
+                  label: context.l10n.recipe_editor_item_tags__add_tag,
                   suffix: MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
@@ -90,7 +89,7 @@ class _RecipeEditorItemTagsPageState
                   ],
                 ),
                 onError: FEmptyMessage(
-                  title: L10n.of(context).recipe_editor_item_tags__on_error,
+                  title: context.l10n.recipe_editor_item_tags__on_error,
                   icon: StateIconConstants.tags.errorIcon,
                 ),
               ),

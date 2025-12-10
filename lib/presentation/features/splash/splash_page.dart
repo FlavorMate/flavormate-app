@@ -9,7 +9,6 @@ import 'package:flavormate/data/repositories/core/server/p_server_compatibility.
 import 'package:flavormate/data/repositories/core/server/p_server_features.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_unit_conversions.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_units.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_dense_text_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -89,7 +88,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
             children: [
               const FLogo(size: 160),
               FText(
-                L10n.of(context).flavormate,
+                context.l10n.flavormate,
                 style: FTextStyle.headlineLarge,
               ),
               const SizedBox(height: PADDING),
@@ -112,14 +111,14 @@ class _SplashPageState extends ConsumerState<SplashPage> {
               spacing: PADDING / 2,
               children: [
                 FText(
-                  L10n.of(context).splash_page__hint_1,
+                  context.l10n.splash_page__hint_1,
                   style: FTextStyle.bodyMedium,
                 ),
                 SizedBox(
                   width: 250,
                   child: FDenseTextButton(
                     onPressed: logout,
-                    child: Text(L10n.of(context).btn_logout),
+                    child: Text(context.l10n.btn_logout),
                   ),
                 ),
               ],
@@ -134,7 +133,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     return [
       const CircularProgressIndicator(),
       FText(
-        L10n.of(context).splash_page__loading,
+        context.l10n.splash_page__loading,
         style: FTextStyle.titleLarge,
       ),
     ];
@@ -145,7 +144,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       SizedBox(
         width: 250,
         child: FText(
-          L10n.of(context).splash_page__on_error,
+          context.l10n.splash_page__on_error,
           style: FTextStyle.bodyLarge,
           textAlign: TextAlign.center,
         ),

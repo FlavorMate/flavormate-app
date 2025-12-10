@@ -6,6 +6,7 @@ enum FTextColor {
   onPrimaryContainer,
   filledButton,
   white,
+  grey,
   black
   ;
 
@@ -24,7 +25,7 @@ enum FTextColor {
         isBright ? Colors.white : colorScheme.onPrimary,
 
       FTextColor.white => Colors.white,
-
+      .grey => colorScheme.onSurfaceVariant,
       FTextColor.black => Colors.black,
     };
   }

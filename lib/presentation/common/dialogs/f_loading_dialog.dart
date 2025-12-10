@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +25,12 @@ class FLoadingDialog extends StatelessWidget {
               children: [
                 const CircularProgressIndicator(),
                 FText(
-                  L10n.of(context).f_loading_dialog__loading,
+                  context.l10n.f_loading_dialog__loading,
                   style: FTextStyle.titleLarge,
                 ),
                 if (hint)
                   FText(
-                    L10n.of(context).f_loading_dialog__loading_hint,
+                    context.l10n.f_loading_dialog__loading_hint,
                     style: FTextStyle.bodyMedium,
                   ),
               ],

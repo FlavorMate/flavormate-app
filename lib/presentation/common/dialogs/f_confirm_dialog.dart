@@ -1,4 +1,4 @@
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -31,11 +31,11 @@ class FConfirmDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => context.pop(false),
-          child: Text(L10n.of(context).btn_cancel),
+          child: Text(context.l10n.btn_cancel),
         ),
         FilledButton(
           onPressed: () => context.pop(true),
-          child: Text(L10n.of(context).btn_yes),
+          child: Text(context.l10n.btn_yes),
         ),
       ],
     );

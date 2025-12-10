@@ -8,7 +8,6 @@ import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books_id_recipes.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
@@ -65,7 +64,7 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
     return FProviderStruct(
       provider: widget.provider,
       onError: FEmptyMessage(
-        title: L10n.of(context).library_item_page__on_error,
+        title: context.l10n.library_item_page__on_error,
         icon: StateIconConstants.books.errorIcon,
       ),
       builder: (context, data) => Scaffold(
@@ -78,18 +77,18 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
                   MenuItemButton(
                     child: Text(
                       data.book.visible
-                          ? L10n.of(context).library_item_page__unshare
-                          : L10n.of(context).library_item_page__share,
+                          ? context.l10n.library_item_page__unshare
+                          : context.l10n.library_item_page__share,
                     ),
                     onPressed: () =>
                         toggleVisibility(context, ref, !data.book.visible),
                   ),
                   MenuItemButton(
-                    child: Text(L10n.of(context).btn_edit),
+                    child: Text(context.l10n.btn_edit),
                     onPressed: () => changeLabel(context, ref, data.book.label),
                   ),
                   MenuItemButton(
-                    child: Text(L10n.of(context).btn_delete),
+                    child: Text(context.l10n.btn_delete),
                     onPressed: () => deleteBook(context, ref),
                   ),
                 ],
@@ -123,11 +122,11 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
               pageProvider: widget.pageRecipeProvider,
               controller: _controller,
               onEmpty: FEmptyMessage(
-                title: L10n.of(context).library_item_page__recipes_on_empty,
+                title: context.l10n.library_item_page__recipes_on_empty,
                 icon: StateIconConstants.recipes.emptyIcon,
               ),
               onError: FEmptyMessage(
-                title: L10n.of(context).library_item_page__recipes_on_error,
+                title: context.l10n.library_item_page__recipes_on_error,
                 icon: StateIconConstants.recipes.errorIcon,
               ),
               itemBuilder: (item) => FImageCard.maximized(
@@ -194,11 +193,11 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
 
     if (!result.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).library_item_page__edit_book_success,
+        context.l10n.library_item_page__edit_book_success,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).library_item_page__edit_book_failure,
+        context.l10n.library_item_page__edit_book_failure,
       );
     }
   }
@@ -207,7 +206,7 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
     final response = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(context).library_item_page__delete_book,
+        title: context.l10n.library_item_page__delete_book,
       ),
     );
 
@@ -222,12 +221,12 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
 
     if (!result.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).library_item_page__delete_book_success,
+        context.l10n.library_item_page__delete_book_success,
       );
       context.pop();
     } else {
       context.showTextSnackBar(
-        L10n.of(context).library_item_page__delete_book_failure,
+        context.l10n.library_item_page__delete_book_failure,
       );
     }
   }

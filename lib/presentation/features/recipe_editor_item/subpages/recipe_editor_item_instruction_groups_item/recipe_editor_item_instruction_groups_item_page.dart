@@ -5,7 +5,6 @@ import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_instruction_group_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
@@ -82,9 +81,9 @@ class _RecipeEditorItemInstructionGroupsItemPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
-          title: L10n.of(
-            context,
-          ).recipe_editor_item_instruction_groups_item_page__title,
+          title: context
+              .l10n
+              .recipe_editor_item_instruction_groups_item_page__title,
           actions: [
             FProgress(
               provider: widget.provider,
@@ -101,9 +100,9 @@ class _RecipeEditorItemInstructionGroupsItemPageState
         floatingActionButton: FloatingActionButton.extended(
           icon: const Icon(MdiIcons.plus),
           label: Text(
-            L10n.of(
-              context,
-            ).recipe_editor_item_instruction_groups_item_page__add_instruction,
+            context
+                .l10n
+                .recipe_editor_item_instruction_groups_item_page__add_instruction,
           ),
           onPressed: createGroup,
         ),
@@ -114,9 +113,9 @@ class _RecipeEditorItemInstructionGroupsItemPageState
               children: [
                 FTextFormField(
                   controller: _labelController,
-                  label: L10n.of(
-                    context,
-                  ).recipe_editor_item_instruction_groups_item_page__title,
+                  label: context
+                      .l10n
+                      .recipe_editor_item_instruction_groups_item_page__title,
                   onChanged: setLabel,
                   clear: () => setLabel(''),
                 ),
@@ -202,9 +201,9 @@ class _RecipeEditorItemInstructionGroupsItemPageState
     final response = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(
-          context,
-        ).recipe_editor_item_instruction_groups_item_page__delete,
+        title: context
+            .l10n
+            .recipe_editor_item_instruction_groups_item_page__delete,
       ),
     );
 

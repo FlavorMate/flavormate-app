@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_date_time.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_circular_avatar_viewer.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -33,7 +32,7 @@ class FRecipePublished extends StatelessWidget {
       spacing: PADDING,
       children: [
         FText(
-          L10n.of(context).f_recipe_published__title,
+          context.l10n.f_recipe_published__title,
           style: FTextStyle.headlineMedium,
           weight: FontWeight.w500,
         ),
@@ -82,7 +81,7 @@ class FRecipePublished extends StatelessWidget {
               maximumSize: const Size(_buttonWidth, double.infinity),
             ),
             onPressed: () => _openRecipeSource(context),
-            child: Text(L10n.of(context).f_recipe_published__open_original),
+            child: Text(context.l10n.f_recipe_published__open_original),
           ),
       ],
     );
@@ -92,10 +91,8 @@ class FRecipePublished extends StatelessWidget {
     final response = await showDialog(
       context: context,
       builder: (_) => FConfirmDialog(
-        title: L10n.of(context).f_recipe_published__open_original_warning_title,
-        content: L10n.of(
-          context,
-        ).f_recipe_published__open_original_warning(url!),
+        title: context.l10n.f_recipe_published__open_original_warning_title,
+        content: context.l10n.f_recipe_published__open_original_warning(url!),
       ),
     );
 

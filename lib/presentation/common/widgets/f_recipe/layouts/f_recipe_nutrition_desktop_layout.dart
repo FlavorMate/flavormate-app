@@ -1,6 +1,6 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_nutrition.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_nutrition_chart.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_nutrition_table.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class _FRecipeNutritionDesktopLayoutState
       title: Row(
         children: [
           Expanded(
-            child: Text(L10n.of(context).f_recipe_nutrition_layout__title),
+            child: Text(context.l10n.f_recipe_nutrition_layout__title),
           ),
           if (widget.nutrition!.showChart)
             FRecipeNutritionChart(

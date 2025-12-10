@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -64,7 +63,7 @@ class _RecipeEditorItemCommonPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
-          title: L10n.of(context).recipe_editor_item_common_page__title,
+          title: context.l10n.recipe_editor_item_common_page__title,
           actions: [
             FProgress(
               provider: widget.provider,
@@ -80,15 +79,14 @@ class _RecipeEditorItemCommonPageState
               children: [
                 FTextFormField(
                   controller: _labelController,
-                  label: L10n.of(context).recipe_editor_item_common_page__name,
+                  label: context.l10n.recipe_editor_item_common_page__name,
                   onChanged: setLabel,
                   clear: () => setLabel(''),
                 ),
                 FTextFormField(
                   controller: _descriptionController,
-                  label: L10n.of(
-                    context,
-                  ).recipe_editor_item_common_page__description,
+                  label:
+                      context.l10n.recipe_editor_item_common_page__description,
                   onChanged: setDescription,
                   clear: () => setDescription(''),
                 ),

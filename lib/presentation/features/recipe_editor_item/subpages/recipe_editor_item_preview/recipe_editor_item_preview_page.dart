@@ -1,7 +1,6 @@
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe.dart';
@@ -46,7 +45,7 @@ class _RecipeEditorPreviewPageState
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, _) => FAppBar(
-        title: L10n.of(context).recipe_editor_item_preview_page__title,
+        title: context.l10n.recipe_editor_item_preview_page__title,
       ),
       floatingActionButtonBuilder: (_, _) => FloatingActionButton(
         onPressed: uploadRecipe,
@@ -63,7 +62,7 @@ class _RecipeEditorPreviewPageState
             context.routes.recipeEditorItemPreviewFiles(data.id),
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).recipe_editor_item_preview_page__on_error,
+        title: context.l10n.recipe_editor_item_preview_page__on_error,
         icon: StateIconConstants.recipes.errorIcon,
       ),
     );
@@ -79,12 +78,12 @@ class _RecipeEditorPreviewPageState
 
     if (response.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_item_preview_page__upload_failure,
+        context.l10n.recipe_editor_item_preview_page__upload_failure,
       );
     } else {
       context.routes.home(replace: true);
       context.showTextSnackBar(
-        L10n.of(context).recipe_editor_item_preview_page__upload_success,
+        context.l10n.recipe_editor_item_preview_page__upload_success,
       );
     }
   }

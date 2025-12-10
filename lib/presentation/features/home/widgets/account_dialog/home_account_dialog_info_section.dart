@@ -4,7 +4,6 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/package_info/p_package_info_version.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/data/repositories/core/server/p_server_version.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -20,7 +19,7 @@ class HomeAccountDialogInfoSection extends ConsumerWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: .circular(24),
+        borderRadius: .circular(16),
         color: context.colorScheme.surfaceContainer,
       ),
       padding: const .all(PADDING),
@@ -31,7 +30,7 @@ class HomeAccountDialogInfoSection extends ConsumerWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               FText(
-                L10n.of(context).home_account_dialog_info_section__server_url,
+                context.l10n.home_account_dialog_info_section__server_url,
                 style: .bodyMedium,
               ),
               Flexible(
@@ -49,17 +48,14 @@ class HomeAccountDialogInfoSection extends ConsumerWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               FText(
-                L10n.of(
-                  context,
-                ).home_account_dialog_info_section__server_version,
+                context.l10n.home_account_dialog_info_section__server_version,
                 style: .bodyMedium,
               ),
               FProviderStruct(
                 provider: pServerVersionProvider,
                 onError: FEmptyMessage(
-                  title: L10n.of(
-                    context,
-                  ).home_account_dialog_info_section__on_error,
+                  title:
+                      context.l10n.home_account_dialog_info_section__on_error,
                   icon: StateIconConstants.login.errorIcon,
                 ),
                 builder: (context, data) => FText(
@@ -75,15 +71,14 @@ class HomeAccountDialogInfoSection extends ConsumerWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               FText(
-                L10n.of(context).home_account_dialog_info_section__app_version,
+                context.l10n.home_account_dialog_info_section__app_version,
                 style: .bodyMedium,
               ),
               FProviderStruct(
                 provider: pPackageInfoVersionProvider,
                 onError: FEmptyMessage(
-                  title: L10n.of(
-                    context,
-                  ).home_account_dialog_info_section__on_error,
+                  title:
+                      context.l10n.home_account_dialog_info_section__on_error,
                   icon: StateIconConstants.login.errorIcon,
                 ),
                 builder: (context, data) => FText(

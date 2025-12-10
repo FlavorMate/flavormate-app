@@ -4,7 +4,6 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/features/accounts/account_update_dto.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -34,14 +33,14 @@ class SettingsAccountPage extends ConsumerWidget {
           icon: const Icon(MdiIcons.close),
         ),
         title: FText(
-          L10n.of(context).settings_account_page__title,
+          context.l10n.settings_account_page__title,
           style: .bodyLarge,
         ),
       ),
       body: FProviderPage(
         provider: provider,
         onError: FEmptyMessage(
-          title: L10n.of(context).settings_account_page__on_error,
+          title: context.l10n.settings_account_page__on_error,
           icon: StateIconConstants.authors.errorIcon,
         ),
         builder: (context, data) {
@@ -78,24 +77,33 @@ class SettingsAccountPage extends ConsumerWidget {
                 FTileGroup(
                   items: [
                     FTile(
-                      label: L10n.of(
-                        context,
-                      ).settings_account_page__change_diet,
-                      icon: MdiIcons.foodOutline,
+                      label: context.l10n.settings_account_page__change_diet,
+                      subLabel:
+                          context.l10n.settings_account_page__change_diet_hint,
+                      icon: MdiIcons.food,
+                      iconColor: .red,
                       onTap: () => manageDiet(context, ref, data.diet),
                     ),
+                  ],
+                ),
+                FTileGroup(
+                  items: [
                     FTile(
-                      label: L10n.of(
-                        context,
-                      ).settings_account_page__change_email,
-                      icon: MdiIcons.emailOutline,
+                      label: context.l10n.settings_account_page__change_email,
+                      subLabel:
+                          context.l10n.settings_account_page__change_email_hint,
+                      icon: MdiIcons.email,
+                      iconColor: .orange,
                       onTap: () => manageEmail(context, ref, data.email),
                     ),
                     FTile(
-                      label: L10n.of(
-                        context,
-                      ).settings_account_page__change_password,
+                      label:
+                          context.l10n.settings_account_page__change_password,
+                      subLabel: context
+                          .l10n
+                          .settings_account_page__change_password_hint,
                       icon: MdiIcons.formTextboxPassword,
+                      iconColor: .yellow,
                       onTap: () => managePassword(context, ref),
                     ),
                   ],
@@ -131,11 +139,11 @@ class SettingsAccountPage extends ConsumerWidget {
 
     if (!result.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).settings_account_page__change_diet_success,
+        context.l10n.settings_account_page__change_diet_success,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).settings_account_page__change_diet_failure,
+        context.l10n.settings_account_page__change_diet_failure,
       );
     }
   }
@@ -163,11 +171,11 @@ class SettingsAccountPage extends ConsumerWidget {
 
     if (!result.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).settings_account_page__change_email_success,
+        context.l10n.settings_account_page__change_email_success,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).settings_account_page__change_email_failure,
+        context.l10n.settings_account_page__change_email_failure,
       );
     }
   }
@@ -189,11 +197,11 @@ class SettingsAccountPage extends ConsumerWidget {
 
     if (!result.hasError) {
       context.showTextSnackBar(
-        L10n.of(context).settings_account_page__change_password_success,
+        context.l10n.settings_account_page__change_password_success,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).settings_account_page__change_password_failure,
+        context.l10n.settings_account_page__change_password_failure,
       );
     }
   }

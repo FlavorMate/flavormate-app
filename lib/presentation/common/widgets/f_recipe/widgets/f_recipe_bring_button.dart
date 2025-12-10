@@ -1,5 +1,5 @@
 import 'package:flavormate/generated/flutter_gen/assets.gen.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 
 class FRecipeBringButton extends StatelessWidget {
@@ -31,7 +31,7 @@ class FRecipeBringButton extends StatelessWidget {
             Assets.icons.bring.image(height: 32),
             Expanded(
               child: Text(
-                L10n.of(context).f_recipe_bring_button__title,
+                context.l10n.f_recipe_bring_button__title,
                 textAlign: TextAlign.center,
               ),
             ),

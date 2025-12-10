@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable_bar.dart';
@@ -17,7 +17,7 @@ class SettingsAppThemeSectionExample extends StatelessWidget {
       mainAxisAlignment: .center,
       children: [
         FText(
-          L10n.of(context).settings_app_theme_section_example__title,
+          context.l10n.settings_app_theme_section_example__title,
           style: .headlineMedium,
         ),
         Card.outlined(
@@ -31,9 +31,8 @@ class SettingsAppThemeSectionExample extends StatelessWidget {
                 ),
                 child: FAppBar(
                   showHome: false,
-                  title: L10n.of(
-                    context,
-                  ).settings_app_theme_section_example__app_bar,
+                  title:
+                      context.l10n.settings_app_theme_section_example__app_bar,
                   automaticallyImplyLeading: false,
                 ),
               ),
@@ -48,9 +47,9 @@ class SettingsAppThemeSectionExample extends StatelessWidget {
                   spacing: PADDING,
                   children: [
                     FImageCard.maximized(
-                      label: L10n.of(
-                        context,
-                      ).settings_app_theme_section_example__recipe_name,
+                      label: context
+                          .l10n
+                          .settings_app_theme_section_example__recipe_name,
                       coverSelector: (_) => null,
                       imageType: .asset,
                       width: 400,

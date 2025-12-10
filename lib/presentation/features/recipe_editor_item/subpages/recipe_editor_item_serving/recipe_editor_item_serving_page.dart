@@ -4,7 +4,6 @@ import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
 import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -69,7 +68,7 @@ class _RecipeEditorItemServingPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
-          title: L10n.of(context).recipe_editor_item_serving_page__title,
+          title: context.l10n.recipe_editor_item_serving_page__title,
           actions: [
             FProgress(
               provider: widget.provider,
@@ -86,17 +85,13 @@ class _RecipeEditorItemServingPageState
               children: [
                 FTextFormField(
                   controller: _amountController,
-                  label: L10n.of(
-                    context,
-                  ).recipe_editor_item_serving_page__amount,
+                  label: context.l10n.recipe_editor_item_serving_page__amount,
                   onChanged: setAmount,
                   clear: () => setAmount(''),
                 ),
                 FTextFormField(
                   controller: _labelController,
-                  label: L10n.of(
-                    context,
-                  ).recipe_editor_item_serving_page__label,
+                  label: context.l10n.recipe_editor_item_serving_page__label,
                   onChanged: setLabel,
                   clear: () => setLabel(''),
                 ),

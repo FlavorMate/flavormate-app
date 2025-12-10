@@ -1,4 +1,4 @@
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 
 extension EDuration on Duration {
@@ -17,22 +17,22 @@ extension EDuration on Duration {
     List<String> parts = [];
 
     if (inDays != 0) {
-      parts.add('$inDays ${L10n.of(context).time__days_short}');
+      parts.add('$inDays ${context.l10n.time__days_short}');
     }
 
     String twoDigitHours = _filterDigits(inHours.remainder(24));
     if (twoDigitHours.isNotEmpty) {
-      parts.add('$twoDigitHours ${L10n.of(context).time__hours_short}');
+      parts.add('$twoDigitHours ${context.l10n.time__hours_short}');
     }
 
     String twoDigitMinutes = _twoDigits(inMinutes.remainder(60));
     if (twoDigitMinutes.isNotEmpty) {
-      parts.add('$twoDigitMinutes ${L10n.of(context).time__minutes_short}');
+      parts.add('$twoDigitMinutes ${context.l10n.time__minutes_short}');
     }
 
     String twoDigitSeconds = _twoDigits(inSeconds.remainder(60));
     if (twoDigitSeconds.isNotEmpty) {
-      parts.add('$twoDigitSeconds ${L10n.of(context).time__seconds_short}');
+      parts.add('$twoDigitSeconds ${context.l10n.time__seconds_short}');
     }
 
     return parts.join(' ');
@@ -45,10 +45,10 @@ extension EDuration on Duration {
     int minutes = inMinutes.remainder(60);
     int seconds = inSeconds.remainder(60);
 
-    list.add('$days ${L10n.of(context).time__days_short}');
-    list.add('$hours ${L10n.of(context).time__hours_short}');
-    list.add('$minutes ${L10n.of(context).time__minutes_short}');
-    list.add('$seconds ${L10n.of(context).time__seconds_short}');
+    list.add('$days ${context.l10n.time__days_short}');
+    list.add('$hours ${context.l10n.time__hours_short}');
+    list.add('$minutes ${context.l10n.time__minutes_short}');
+    list.add('$seconds ${context.l10n.time__seconds_short}');
 
     return list.join(' - ');
   }

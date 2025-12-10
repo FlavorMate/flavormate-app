@@ -1,7 +1,7 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/shared/models/account_create_form.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +36,9 @@ class _AdministrationAccountManagementNewAccountDialogState
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(
-        context,
-      ).administration_account_management_new_account_dialog__title,
+      title: context
+          .l10n
+          .administration_account_management_new_account_dialog__title,
       scrollable: true,
       submit: apply,
       child: Form(
@@ -48,56 +48,56 @@ class _AdministrationAccountManagementNewAccountDialogState
           children: [
             FTextFormField(
               controller: _displayNameController,
-              label: L10n.of(
-                context,
-              ).administration_account_management_new_account_dialog__display_name,
+              label: context
+                  .l10n
+                  .administration_account_management_new_account_dialog__display_name,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
                 return null;
               },
             ),
             FTextFormField(
               controller: _usernameController,
-              label: L10n.of(
-                context,
-              ).administration_account_management_new_account_dialog__username,
+              label: context
+                  .l10n
+                  .administration_account_management_new_account_dialog__username,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
                 return null;
               },
             ),
             FTextFormField(
               controller: _passwordController,
-              label: L10n.of(
-                context,
-              ).administration_account_management_new_account_dialog__password,
+              label: context
+                  .l10n
+                  .administration_account_management_new_account_dialog__password,
               obscureText: true,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
                 if (!UValidator.isSecure(value!)) {
-                  return L10n.of(context).validator__is_secure;
+                  return context.l10n.validator__is_secure;
                 }
                 return null;
               },
             ),
             FTextFormField(
               controller: _emailController,
-              label: L10n.of(
-                context,
-              ).administration_account_management_new_account_dialog__email,
+              label: context
+                  .l10n
+                  .administration_account_management_new_account_dialog__email,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
 
                 if (!UValidator.isMail(value!)) {
-                  return L10n.of(context).validator__is_email;
+                  return context.l10n.validator__is_email;
                 }
                 return null;
               },

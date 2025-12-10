@@ -21,7 +21,7 @@ class FCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color ?? context.colorScheme.primaryContainer,
+      color: color ?? context.colorScheme.surfaceContainer,
       margin: EdgeInsets.all(margin),
       child: InkWell(
         borderRadius: BorderRadius.circular(BORDER_RADIUS),

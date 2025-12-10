@@ -4,7 +4,7 @@ import 'package:flavormate/core/riverpod/search_state/p_search_state.dart';
 import 'package:flavormate/core/riverpod/search_state/search_state.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_search.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_search/f_search_no_result.dart';
@@ -52,14 +52,10 @@ class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
       searchController: _controller,
       builder: (_, controller) => FIconButton(
         onPressed: controller.openView,
-        label: L10n.of(
-          context,
-        ).story_editor_item_recipe_search__search_recipes,
+        label: context.l10n.story_editor_item_recipe_search__search_recipes,
         icon: MdiIcons.magnify,
       ),
-      viewHintText: L10n.of(
-        context,
-      ).story_editor_item_recipe_search__search_hint,
+      viewHintText: context.l10n.story_editor_item_recipe_search__search_hint,
       viewLeading: IconButton(
         onPressed: close,
         icon: const Icon(MdiIcons.arrowLeft),
@@ -94,7 +90,7 @@ class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
               );
             },
             onError: FEmptyMessage(
-              title: L10n.of(context).story_editor_item_recipe_search__on_error,
+              title: context.l10n.story_editor_item_recipe_search__on_error,
               icon: StateIconConstants.search.errorIcon,
             ),
           );

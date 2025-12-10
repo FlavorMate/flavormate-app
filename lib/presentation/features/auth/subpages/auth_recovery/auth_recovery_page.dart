@@ -4,7 +4,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_dio.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
@@ -50,38 +49,38 @@ class _AuthRecoveryPageState extends ConsumerState<AuthRecoveryPage> {
                     children: [
                       const Icon(MdiIcons.lockRemoveOutline, size: 72),
                       FText(
-                        L10n.of(context).auth_recovery_page__hint_1,
+                        context.l10n.auth_recovery_page__hint_1,
                         style: FTextStyle.titleLarge,
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
                         width: BUTTON_WIDTH,
                         child: FText(
-                          L10n.of(context).auth_recovery_page__hint_2,
+                          context.l10n.auth_recovery_page__hint_2,
                           style: FTextStyle.bodyMedium,
                           textAlign: TextAlign.center,
                         ),
                       ),
                       FTextFormField(
                         controller: _emailController,
-                        label: L10n.of(context).auth_recovery_page__email,
+                        label: context.l10n.auth_recovery_page__email,
                         autocorrect: false,
                         autofillHints: const [AutofillHints.username],
                         keyboardType: TextInputType.visiblePassword,
                         validators: (input) {
                           if (UValidator.isEmpty(input)) {
-                            return L10n.of(context).validator__is_empty;
+                            return context.l10n.validator__is_empty;
                           }
 
                           if (!UValidator.isMail(input!)) {
-                            return L10n.of(context).validator__is_email;
+                            return context.l10n.validator__is_email;
                           }
 
                           return null;
                         },
                       ),
                       FButton(
-                        label: L10n.of(context).btn_reset_password,
+                        label: context.l10n.btn_reset_password,
                         onPressed: resetPassword,
                         width: BUTTON_WIDTH,
                       ),
@@ -117,13 +116,13 @@ class _AuthRecoveryPageState extends ConsumerState<AuthRecoveryPage> {
 
     if (!isOk) {
       context.showTextSnackBar(
-        L10n.of(context).auth_recovery_page__recovery_failure,
+        context.l10n.auth_recovery_page__recovery_failure,
       );
     } else {
       _emailController.clear();
       context.pop();
       context.showTextSnackBar(
-        L10n.of(context).auth_recovery_page__recovery_success,
+        context.l10n.auth_recovery_page__recovery_success,
       );
     }
   }

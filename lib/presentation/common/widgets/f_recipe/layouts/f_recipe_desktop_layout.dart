@@ -3,7 +3,6 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_nutrition.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/layouts/f_recipe_nutrition_desktop_layout.dart';
@@ -123,9 +122,9 @@ class FRecipeDesktopLayout extends StatelessWidget {
                                   child: FIconButton(
                                     onPressed: addBookmark,
                                     icon: MdiIcons.bookmark,
-                                    label: L10n.of(
-                                      context,
-                                    ).f_recipe_layout__save_recipe,
+                                    label: context
+                                        .l10n
+                                        .f_recipe_layout__save_recipe,
                                   ),
                                 ),
                             ],

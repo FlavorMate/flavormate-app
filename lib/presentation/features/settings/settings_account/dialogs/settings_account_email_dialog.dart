@@ -1,7 +1,7 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/features/accounts/account_update_dto.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class _SettingsAccountEmailDialogState
   @override
   Widget build(BuildContext context) {
     return FAlertDialog(
-      title: L10n.of(context).settings_account_email_dialog__title,
+      title: context.l10n.settings_account_email_dialog__title,
       scrollable: true,
       submit: apply,
       child: Form(
@@ -40,19 +40,17 @@ class _SettingsAccountEmailDialogState
           spacing: PADDING,
           children: [
             FTextFormField(
-              label: L10n.of(
-                context,
-              ).settings_account_email_dialog__new_e_mail_1,
+              label: context.l10n.settings_account_email_dialog__new_e_mail_1,
               controller: _newMail1Controller,
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
 
                 if (!UValidator.isMail(value!)) {
-                  return L10n.of(context).validator__is_email;
+                  return context.l10n.validator__is_email;
                 }
 
                 return null;
@@ -60,18 +58,16 @@ class _SettingsAccountEmailDialogState
             ),
             FTextFormField(
               controller: _newMail2Controller,
-              label: L10n.of(
-                context,
-              ).settings_account_email_dialog__new_e_mail_2,
+              label: context.l10n.settings_account_email_dialog__new_e_mail_2,
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
               validators: (value) {
                 if (UValidator.isEmpty(value)) {
-                  return L10n.of(context).validator__is_empty;
+                  return context.l10n.validator__is_empty;
                 }
 
                 if (!UValidator.isEqual(value!, _newMail1Controller.text)) {
-                  return L10n.of(context).validator__is_equal;
+                  return context.l10n.validator__is_equal;
                 }
                 return null;
               },

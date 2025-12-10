@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_story/common_story.dart';
 import 'package:flavormate/data/repositories/features/story_drafts/p_rest_story_drafts_id.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
@@ -34,7 +33,7 @@ class StoryEditorItemPreviewPage extends ConsumerWidget {
         readOnly: true,
       ),
       onError: FEmptyMessage(
-        title: L10n.of(context).story_editor_item_preview_page__on_error,
+        title: context.l10n.story_editor_item_preview_page__on_error,
         icon: StateIconConstants.drafts.errorIcon,
       ),
     );
@@ -52,11 +51,11 @@ class StoryEditorItemPreviewPage extends ConsumerWidget {
     if (!result.hasError) {
       context.routes.home(replace: true);
       context.showTextSnackBar(
-        L10n.of(context).story_editor_item_preview_page__upload_success,
+        context.l10n.story_editor_item_preview_page__upload_success,
       );
     } else {
       context.showTextSnackBar(
-        L10n.of(context).story_editor_item_preview_page__upload_failure,
+        context.l10n.story_editor_item_preview_page__upload_failure,
       );
     }
   }

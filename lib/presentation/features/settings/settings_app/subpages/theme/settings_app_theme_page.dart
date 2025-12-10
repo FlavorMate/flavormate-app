@@ -1,20 +1,16 @@
 import 'package:flavormate/core/constants/color_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/storage/shared_preferences/enums/sp_key.dart';
-import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
+import 'package:flavormate/core/extensions/e_color.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_custom_color.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_mode.dart';
 import 'package:flavormate/core/theme/enums/f_theme_mode.dart';
-import 'package:flavormate/core/theme/models/blended_colors.dart';
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/core/theme/providers/p_dynamic_color.dart';
-import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
-import 'package:flavormate/presentation/common/widgets/f_scrollable_h.dart';
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_color_card.dart';
-import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_section_example.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,190 +25,99 @@ class SettingsAppThemePage extends ConsumerStatefulWidget {
 }
 
 class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
-  late Set<FThemeMode> _selection;
-  Color _color = Colors.red;
-
-  // values from shared preferences
-  Color? _savedColor;
-  FTheme? _dynamicColors;
+  late FThemeMode _themeMode;
+  late FThemeMode _activeThemeMode;
+  late Color _activeColor;
+  late final Color? _deviceThemeColor;
 
   @override
   void initState() {
     // get current selection
-    _selection = {ref.read(pSPThemeModeProvider)!};
+    _themeMode = ref.read(pSPThemeModeProvider);
+    _activeThemeMode = _themeMode;
 
     // get system design
-    _dynamicColors = ref.read(pDynamicColorProvider);
+    _deviceThemeColor = ref.read(pDynamicColorProvider);
 
-    // get chosen color
-    final colorInt = ref
-        .read(pSPProvider)
-        .requireValue
-        .getInt(SPKey.ThemeCustomColor.name);
+    final savedColor = ref.read(pSPThemeCustomColorProvider);
 
-    if (colorInt != null) {
-      _savedColor = Color(colorInt);
-    }
-
-    if (_selection.single == FThemeMode.flavormate) {
-      _color = FLAVORMATE_COLOR;
-    } else if (_selection.single == FThemeMode.custom) {
-      _color = _savedColor ?? Colors.red;
+    if (_themeMode == .dynamic && _deviceThemeColor != null) {
+      _activeColor = _deviceThemeColor;
+    } else {
+      _activeColor = savedColor;
     }
 
     super.initState();
   }
 
-  ThemeData get _theme {
-    if (_selection.single == FThemeMode.dynamic) {
-      if (Theme.of(context).brightness == Brightness.light) {
-        return ThemeData(
-          colorScheme: _dynamicColors!.light,
-          extensions: [_dynamicColors!.lightBlendedColors],
-          fontFamily: 'GoogleSansFlex',
-        );
-      } else {
-        return ThemeData(
-          colorScheme: _dynamicColors!.dark,
-          extensions: [_dynamicColors!.darkBlendedColors],
-          fontFamily: 'GoogleSansFlex',
-        );
-      }
-    }
-    return ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: _color,
-        brightness: Theme.of(context).brightness,
-      ),
-      extensions: [BlendedColors.fromPrimary(_color)],
-      fontFamily: 'GoogleSansFlex',
-    );
-  }
+  ThemeData get _theme =>
+      FTheme.createTheme(_activeColor, Theme.brightnessOf(context));
 
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: _theme,
       child: Scaffold(
-        appBar: FAppBar(
-          title: L10n.of(context).settings_app_theme_page__title,
-        ),
+        appBar: FAppBar(title: context.l10n.settings_app_theme_page__title),
         floatingActionButton: FloatingActionButton(
           onPressed: setTheme,
           child: const Icon(MdiIcons.contentSave),
         ),
         body: SafeArea(
           child: FResponsive(
+            // scrollBehavior: NoBounceScrollBehavior(),
+            // physics: const ClampingScrollPhysics(),
             child: Column(
               spacing: PADDING,
               children: [
-                SegmentedButton<FThemeMode>(
-                  showSelectedIcon: false,
-                  segments: [
-                    ButtonSegment(
-                      value: .flavormate,
-                      label: Text(L10n.of(context).flavormate),
-                    ),
-                    ButtonSegment(
-                      value: .custom,
-                      label: Text(
-                        L10n.of(context).settings_app_theme_page__mode_custom,
+                SettingsAppThemeTileList(
+                  title: context.l10n.settings_app_theme_page__special_colors,
+                  values: [
+                    SettingsAppThemeTileData(
+                      isSelected: _activeColor.isColor(
+                        MiscColor.flavormate.color,
                       ),
+                      color: MiscColor.flavormate.color,
+                      label: context.l10n.flavormate,
+                      onTap: setColor,
                     ),
-                    if (_dynamicColors != null)
-                      ButtonSegment(
-                        value: .dynamic,
-                        label: Text(
-                          L10n.of(context).settings_app_theme_page__mode_system,
-                        ),
+                    if (_deviceThemeColor != null)
+                      SettingsAppThemeTileData(
+                        isSelected: _activeThemeMode == .dynamic,
+                        color: _deviceThemeColor,
+                        label: context.l10n.color__device_specific,
+                        onTap: (color) => setColor(color, themeMode: .dynamic),
                       ),
                   ],
-                  selected: _selection,
-                  onSelectionChanged: setMode,
                 ),
-                if (_selection.single == .flavormate)
-                  Column(
-                    spacing: PADDING * 2,
-                    children: [
-                      FText(
-                        L10n.of(
-                          context,
-                        ).settings_app_theme_page__mode_default_hint,
-                        style: .titleLarge,
-                        textAlign: .center,
-                      ),
-                      const SizedBox(
-                        height: 80,
-                        child: Align(
-                          alignment: .topCenter,
-                          child: CircleAvatar(
-                            radius: PADDING * 2,
-                            backgroundColor: FLAVORMATE_COLOR,
-                            foregroundColor: Colors.white,
-                            child: Icon(MdiIcons.check),
-                          ),
+
+                SettingsAppThemeTileList(
+                  title: context.l10n.settings_app_theme_page__default_colors,
+                  values: DefaultColor.values
+                      .map(
+                        (it) => SettingsAppThemeTileData(
+                          isSelected: _activeColor.isColor(it.color),
+                          color: it.color,
+                          label: it.l10n(context),
+                          onTap: setColor,
                         ),
-                      ),
-                    ],
-                  ),
-                if (_selection.single == .custom)
-                  Column(
-                    spacing: PADDING * 2,
-                    children: [
-                      FText(
-                        L10n.of(
-                          context,
-                        ).settings_app_theme_page__mode_custom_hint,
-                        style: .titleLarge,
-                        textAlign: .center,
-                      ),
-                      SizedBox(
-                        height: 80,
-                        child: FScrollableH(
-                          child: Row(
-                            spacing: PADDING,
-                            children: [
-                              for (final color in ColorConstants.themeColors)
-                                SettingsAppThemeColorCard(
-                                  onTap: () => setState(() => _color = color),
-                                  color: color,
-                                  selected:
-                                      _color.toARGB32() == color.toARGB32(),
-                                ),
-                            ],
-                          ),
+                      )
+                      .toList(),
+                ),
+
+                SettingsAppThemeTileList(
+                  title: context.l10n.settings_app_theme_page__event_colors,
+                  values: EventColor.values
+                      .map(
+                        (it) => SettingsAppThemeTileData(
+                          isSelected: _activeColor.isColor(it.color),
+                          color: it.color,
+                          label: it.l10n(context),
+                          onTap: setColor,
                         ),
-                      ),
-                    ],
-                  ),
-                if (_selection.single == .dynamic)
-                  Column(
-                    spacing: PADDING * 2,
-                    children: [
-                      FText(
-                        L10n.of(
-                          context,
-                        ).settings_app_theme_page__mode_system_hint,
-                        style: .titleLarge,
-                        textAlign: .center,
-                      ),
-                      SizedBox(
-                        height: 80,
-                        child: Align(
-                          alignment: .topCenter,
-                          child: CircleAvatar(
-                            radius: PADDING * 2,
-                            backgroundColor:
-                                _dynamicColors!.light!.inversePrimary,
-                            foregroundColor: Colors.white,
-                            child: const Icon(MdiIcons.check),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                const Divider(),
-                const SettingsAppThemeSectionExample(),
+                      )
+                      .toList(),
+                ),
               ],
             ),
           ),
@@ -221,39 +126,30 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
     );
   }
 
-  void setMode(Set<FThemeMode> mode) {
-    if (mode.single == .flavormate) {
-      setState(() {
-        _color = FLAVORMATE_COLOR;
-        _selection = mode;
-      });
-    } else if (mode.single == .custom) {
-      setState(() {
-        _color = _savedColor ?? Colors.red;
-        _selection = mode;
-      });
-    } else if (mode.single == .dynamic) {
-      setState(() {
-        _color = Colors.red;
-        _selection = mode;
-      });
-    }
-  }
-
   void setTheme() async {
-    if (_selection.single == .flavormate) {
-      await ref.read(pSPThemeCustomColorProvider.notifier).setColor(null);
-      await ref.read(pSPThemeModeProvider.notifier).setMode(_selection.single);
-    } else if (_selection.single == .custom) {
-      await ref.read(pSPThemeCustomColorProvider.notifier).setColor(_color);
-      await ref.read(pSPThemeModeProvider.notifier).setMode(_selection.single);
-    } else if (_selection.single == .dynamic) {
-      await ref.read(pSPThemeCustomColorProvider.notifier).setColor(null);
-      await ref.read(pSPThemeModeProvider.notifier).setMode(_selection.single);
+    // Set theme mode
+    await ref.read(pSPThemeModeProvider.notifier).setMode(_activeThemeMode);
+
+    // If dynamic, set default color, else set user specified color
+    if (_activeThemeMode == .dynamic) {
+      await ref
+          .read(pSPThemeCustomColorProvider.notifier)
+          .setColor(MiscColor.flavormate.color);
+    } else {
+      await ref
+          .read(pSPThemeCustomColorProvider.notifier)
+          .setColor(_activeColor);
     }
 
     await Future.delayed(const Duration(milliseconds: 250));
 
     if (mounted) context.pop();
+  }
+
+  void setColor(Color color, {FThemeMode themeMode = .custom}) {
+    setState(() {
+      _activeColor = color;
+      _activeThemeMode = themeMode;
+    });
   }
 }
