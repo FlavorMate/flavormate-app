@@ -10,24 +10,24 @@ final _key = SPKey.ThemeMode.name;
 @riverpod
 class PSPThemeMode extends _$PSPThemeMode {
   @override
-  FThemeMode? build() {
+  FThemeMode build() {
     final instance = ref.watch(pSPProvider).requireValue;
 
     final modeString = instance.getString(_key);
 
-    if (modeString == null) return null;
+    if (modeString == null ||
+        !FThemeMode.values.map((it) => it.name).contains(modeString)) {
+      setMode(.custom);
+      return .custom;
+    }
 
     return FThemeMode.values.byName(modeString);
   }
 
-  Future<void> setMode(FThemeMode? themeMode) async {
+  Future<void> setMode(FThemeMode themeMode) async {
     final instance = ref.watch(pSPProvider).requireValue;
 
-    if (themeMode == null) {
-      await instance.remove(_key);
-    } else {
-      await instance.setString(_key, themeMode.name);
-    }
+    await instance.setString(_key, themeMode.name);
 
     ref.invalidateSelf();
   }

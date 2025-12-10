@@ -1,3 +1,4 @@
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
@@ -32,16 +33,16 @@ class FIconCard extends StatelessWidget {
           children: [
             Expanded(
               child: Icon(
+                color: context.colorScheme.primary,
                 icon,
                 size: iconSize,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
             ),
             FText(
               label,
               style: FTextStyle.bodyMedium,
               textAlign: TextAlign.center,
-              color: FTextColor.onPrimaryContainer,
+              color: FTextColor.primary,
             ),
           ],
         ),

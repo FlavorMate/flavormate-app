@@ -5,6 +5,7 @@ import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeAccountDialogSettingsSection extends ConsumerWidget {
   const HomeAccountDialogSettingsSection({super.key});
@@ -34,6 +35,7 @@ class HomeAccountDialogSettingsSection extends ConsumerWidget {
   }
 
   void openSettingsPage(BuildContext context) {
+    context.pop();
     context.routes.settingsApp();
   }
 

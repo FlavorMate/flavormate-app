@@ -5,6 +5,7 @@ import 'package:flavormate/core/navigation/p_go_router.dart';
 import 'package:flavormate/core/riverpod/package_info/p_package_info.dart';
 import 'package:flavormate/core/storage/root_bundle/backend_url/p_rb_backend_url.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
+import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/core/theme/providers/p_theme.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
@@ -40,22 +41,12 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(pGoRouterProvider);
-    final colors = ref.watch(pThemeProvider).requireValue;
+    final color = ref.watch(pThemeProvider).requireValue;
 
     return MaterialApp.router(
       onGenerateTitle: (context) => context.l10n.flavormate,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        colorScheme: colors.light,
-        extensions: [colors.lightBlendedColors],
-        fontFamily: 'GoogleSansFlex',
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        colorScheme: colors.dark,
-        extensions: [colors.darkBlendedColors],
-        fontFamily: 'GoogleSansFlex',
-      ),
+      theme: FTheme.createTheme(color, .light),
+      darkTheme: FTheme.createTheme(color, .dark),
       themeMode: ThemeMode.system,
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
