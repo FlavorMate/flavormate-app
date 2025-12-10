@@ -6,6 +6,7 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/tags/p_rest_tags.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -52,11 +53,14 @@ class _TagsPageState extends ConsumerState<TagsPage>
         setOrderDirection: setOrderDirection,
         options: OrderByConstants.tag,
       ),
-      itemBuilder: (item) => FImageCard.maximized(
-        label: item.label,
-        coverSelector: (resolution) => item.cover?.url(resolution),
-        subLabel: context.l10n.tags_page__recipe_counter(item.recipeCount),
-        onTap: () => context.routes.tagsItem(item.id),
+      itemBuilder: (items) => FPaginatedContentCard(
+        data: items,
+        itemBuilder: (item) => FImageCard.maximized(
+          label: item.label,
+          coverSelector: (resolution) => item.cover?.url(resolution),
+          subLabel: context.l10n.tags_page__recipe_counter(item.recipeCount),
+          onTap: () => context.routes.tagsItem(item.id),
+        ),
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_id_books.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -58,16 +59,17 @@ class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
         setOrderDirection: setOrderDirection,
         options: OrderByConstants.book,
       ),
-      itemBuilder: (item) {
-        return FImageCard.maximized(
+      itemBuilder: (items) => FPaginatedContentCard(
+        data: items,
+        itemBuilder: (item) => FImageCard.maximized(
           label: item.label,
           coverSelector: (resolution) => item.cover?.url(resolution),
           subLabel: item.visible
               ? context.l10n.accounts_item_books_page__visible
               : context.l10n.accounts_item_books_page__invisible,
           onTap: () => context.routes.libraryItem(item.id),
-        );
-      },
+        ),
+      ),
     );
   }
 

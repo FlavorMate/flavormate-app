@@ -6,6 +6,7 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -40,7 +41,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
     return FPaginatedPage(
       title: context.l10n.flavormate,
       emptyAppBar: true,
-      floatingActionBar: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () => addBook(context, ref),
         child: const Icon(MdiIcons.plus),
       ),
@@ -61,13 +62,16 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
         setOrderDirection: setOrderDirection,
         options: OrderByConstants.book,
       ),
-      itemBuilder: (item) => FImageCard.maximized(
-        label: item.label,
-        subLabel: item.visible
-            ? context.l10n.library_page__book_public
-            : context.l10n.library_page__book_private,
-        coverSelector: (resolution) => item.cover?.url(resolution),
-        onTap: () => context.routes.libraryItem(item.id),
+      itemBuilder: (items) => FPaginatedContentCard(
+        data: items,
+        itemBuilder: (item) => FImageCard.maximized(
+          label: item.label,
+          subLabel: item.visible
+              ? context.l10n.library_page__book_public
+              : context.l10n.library_page__book_private,
+          coverSelector: (resolution) => item.cover?.url(resolution),
+          onTap: () => context.routes.libraryItem(item.id),
+        ),
       ),
     );
   }

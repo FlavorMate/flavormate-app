@@ -11,6 +11,7 @@ import 'package:flavormate/data/repositories/features/books/p_rest_books_id_reci
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_content.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
@@ -129,11 +130,14 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
                 title: context.l10n.library_item_page__recipes_on_error,
                 icon: StateIconConstants.recipes.errorIcon,
               ),
-              itemBuilder: (item) => FImageCard.maximized(
-                label: item.label,
-                subLabel: item.totalTime.beautify(context),
-                coverSelector: (resolution) => item.cover?.url(resolution),
-                onTap: () => context.routes.recipesItem(item.id),
+              itemBuilder: (items) => FPaginatedContentCard(
+                data: items,
+                itemBuilder: (item) => FImageCard.maximized(
+                  label: item.label,
+                  subLabel: item.totalTime.beautify(context),
+                  coverSelector: (resolution) => item.cover?.url(resolution),
+                  onTap: () => context.routes.recipesItem(item.id),
+                ),
               ),
             ),
           ],

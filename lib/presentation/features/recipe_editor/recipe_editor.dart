@@ -5,10 +5,10 @@ import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
-import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_table.dart';
+import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_data_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
 import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog.dart';
 import 'package:flavormate/presentation/features/recipe_editor/widgets/recipe_editor_fab.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class RecipeEditorPage extends ConsumerWidget {
+class RecipeEditorPage extends ConsumerStatefulWidget {
   const RecipeEditorPage({super.key});
 
   PRestRecipeDraftsProvider get provider =>
@@ -27,73 +27,78 @@ class RecipeEditorPage extends ConsumerWidget {
       pPageableStateProvider(PageableState.recipeDrafts.name);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: FAppBar(title: context.l10n.recipe_editor_page__title),
+  ConsumerState<RecipeEditorPage> createState() => _RecipeEditorPageState();
+}
+
+class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage> {
+  final ScrollController _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FPaginatedPage(
+      title: context.l10n.recipe_editor_page__title,
+      provider: widget.provider,
+      pageProvider: widget.pageProvider,
+      onEmpty: FEmptyMessage(
+        title: context.l10n.recipe_editor_page__on_empty,
+        icon: StateIconConstants.drafts.emptyIcon,
+      ),
+      onError: FEmptyMessage(
+        title: context.l10n.recipe_editor_page__on_error,
+        icon: StateIconConstants.drafts.errorIcon,
+      ),
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: RecipeEditorFab(
-        onCreate: () => createDraft(context, ref),
-        onScrape: () => scrapeDraft(context, ref),
+        onCreate: () => createDraft(context),
+        onScrape: () => scrapeDraft(context),
       ),
-      body: SafeArea(
-        child: FPageable(
-          provider: provider,
-          pageProvider: pageProvider,
-          padding: 0,
-          builder: (_, data) => FDataTable(
-            columns: [
-              FDataColumn(
-                alignment: Alignment.centerLeft,
-                child: Text(context.l10n.recipe_editor_page__table_label),
+      itemBuilder: (items) => FPaginatedContentTable(
+        data: items,
+        columnBuilder: [
+          FDataColumn(
+            alignment: Alignment.centerLeft,
+            child: Text(context.l10n.recipe_editor_page__table_label),
+          ),
+          FDataColumn(
+            width: 72,
+            alignment: Alignment.centerLeft,
+            child: Text(context.l10n.recipe_editor_page__table_state),
+          ),
+          FDataColumn(width: 48),
+        ],
+        rowBuilder: (item) => FDataRow(
+          onSelectChanged: (value) => openDraft(context, value, item.id),
+          cells: [
+            Text(
+              item.label?.shorten(length: 40) ??
+                  context.l10n.recipe_editor_page__table_undefined,
+            ),
+            Text(
+              item.isNew
+                  ? context.l10n.recipe_editor_page__table_new
+                  : context.l10n.recipe_editor_page__table_update,
+            ),
+            IconButton(
+              icon: Icon(
+                MdiIcons.delete,
+                color: context.blendedColors.error,
               ),
-              FDataColumn(
-                width: 72,
-                alignment: Alignment.centerLeft,
-                child: Text(context.l10n.recipe_editor_page__table_state),
-              ),
-              FDataColumn(width: 48),
-            ],
-            rows: [
-              for (final draft in data)
-                FDataRow(
-                  onSelectChanged: (value) =>
-                      openDraft(context, value, draft.id),
-                  cells: [
-                    Text(
-                      draft.label?.shorten(length: 40) ??
-                          context.l10n.recipe_editor_page__table_undefined,
-                    ),
-                    Text(
-                      draft.isNew
-                          ? context.l10n.recipe_editor_page__table_new
-                          : context.l10n.recipe_editor_page__table_update,
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        MdiIcons.delete,
-                        color: context.blendedColors.error,
-                      ),
-                      onPressed: () => deleteDraft(context, ref, draft.id),
-                    ),
-                  ],
-                ),
-            ],
-          ),
-          onError: FEmptyMessage(
-            title: context.l10n.recipe_editor_page__on_error,
-            icon: StateIconConstants.drafts.errorIcon,
-          ),
-          onEmpty: FEmptyMessage(
-            title: context.l10n.recipe_editor_page__on_empty,
-            icon: StateIconConstants.drafts.emptyIcon,
-          ),
+              onPressed: () => deleteDraft(context, item.id),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Future<void> createDraft(BuildContext context, WidgetRef ref) async {
-    final response = await ref.read(provider.notifier).createDraft();
+  Future<void> createDraft(BuildContext context) async {
+    final response = await ref.read(widget.provider.notifier).createDraft();
 
     if (!context.mounted) return;
 
@@ -108,7 +113,6 @@ class RecipeEditorPage extends ConsumerWidget {
 
   Future<void> deleteDraft(
     BuildContext context,
-    WidgetRef ref,
     String id,
   ) async {
     final confirmation = await showDialog<bool>(
@@ -122,7 +126,7 @@ class RecipeEditorPage extends ConsumerWidget {
 
     context.showLoadingDialog();
 
-    final response = await ref.read(provider.notifier).deleteDraft(id);
+    final response = await ref.read(widget.provider.notifier).deleteDraft(id);
 
     if (!context.mounted) return;
     context.pop();
@@ -144,7 +148,7 @@ class RecipeEditorPage extends ConsumerWidget {
     context.routes.recipeEditorItem(id);
   }
 
-  void scrapeDraft(BuildContext context, WidgetRef ref) async {
+  void scrapeDraft(BuildContext context) async {
     final result = await showDialog<String>(
       context: context,
       builder: (_) => const RecipeEditorScrapeDialog(),
@@ -154,7 +158,7 @@ class RecipeEditorPage extends ConsumerWidget {
 
     context.showLoadingDialog();
 
-    final response = await ref.read(provider.notifier).scrape(result);
+    final response = await ref.read(widget.provider.notifier).scrape(result);
 
     if (!context.mounted) return;
     context.pop();

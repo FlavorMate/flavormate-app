@@ -12,26 +12,29 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 class FPaginatedPage<T> extends ConsumerStatefulWidget {
   final String title;
   final bool emptyAppBar;
-  final Widget? floatingActionBar;
   final $AsyncNotifierProvider<dynamic, PageableDto<T>> provider;
   final PPageableStateProvider pageProvider;
 
   final FEmptyMessage onError;
   final FEmptyMessage onEmpty;
 
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final Widget? floatingActionButton;
+
   final FPaginatedSort Function()? sortBuilder;
 
-  final Widget Function(T item) itemBuilder;
+  final Widget Function(List<T> item) itemBuilder;
 
   const FPaginatedPage({
     super.key,
     required this.title,
     this.emptyAppBar = false,
-    this.floatingActionBar,
     required this.provider,
     required this.pageProvider,
     required this.onEmpty,
     required this.onError,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
     this.sortBuilder,
     required this.itemBuilder,
   });
@@ -58,7 +61,8 @@ class _FPaginatedPageState<T> extends ConsumerState<FPaginatedPage<T>> {
         showHome: !widget.emptyAppBar,
         automaticallyImplyLeading: !widget.emptyAppBar,
       ),
-      floatingActionButton: widget.floatingActionBar,
+      floatingActionButtonLocation: widget.floatingActionButtonLocation,
+      floatingActionButton: widget.floatingActionButton,
       body: CustomScrollView(
         controller: _controller,
         slivers: [
