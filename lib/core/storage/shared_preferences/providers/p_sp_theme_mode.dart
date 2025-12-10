@@ -1,3 +1,4 @@
+import 'package:flavormate/core/extensions/e_shared_preferences.dart';
 import 'package:flavormate/core/storage/shared_preferences/enums/sp_key.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
 import 'package:flavormate/core/theme/enums/f_theme_mode.dart';
@@ -13,21 +14,20 @@ class PSPThemeMode extends _$PSPThemeMode {
   FThemeMode build() {
     final instance = ref.watch(pSPProvider).requireValue;
 
-    final modeString = instance.getString(_key);
+    final mode = instance.getEnum(_key, FThemeMode.values);
 
-    if (modeString == null ||
-        !FThemeMode.values.map((it) => it.name).contains(modeString)) {
+    if (mode == null) {
       setMode(.custom);
       return .custom;
     }
 
-    return FThemeMode.values.byName(modeString);
+    return mode;
   }
 
   Future<void> setMode(FThemeMode themeMode) async {
     final instance = ref.watch(pSPProvider).requireValue;
 
-    await instance.setString(_key, themeMode.name);
+    await instance.setEnum(_key, themeMode);
 
     ref.invalidateSelf();
   }

@@ -67,7 +67,6 @@ class HomeAccountDialog extends StatelessWidget {
                                   .l10n
                                   .home_account_dialog__my_profile_hint,
                               icon: MdiIcons.account,
-                              iconColor: .teal,
                               onTap: () => openAccount(context, account.id),
                             ),
                           ],

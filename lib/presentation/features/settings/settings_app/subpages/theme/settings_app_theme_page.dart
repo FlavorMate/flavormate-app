@@ -3,12 +3,16 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_color.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_custom_color.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_mode.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_tone.dart';
 import 'package:flavormate/core/theme/enums/f_theme_mode.dart';
+import 'package:flavormate/core/theme/enums/f_theme_tone.dart';
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/core/theme/providers/p_dynamic_color.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/utils/no_bounce_scroll_behavior.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
+import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_mode_buttons.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile_list.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +31,14 @@ class SettingsAppThemePage extends ConsumerStatefulWidget {
 class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
   late FThemeMode _themeMode;
   late FThemeMode _activeThemeMode;
+  late FThemeTone _themeTone;
   late Color _activeColor;
   late final Color? _deviceThemeColor;
 
   @override
   void initState() {
     // get current selection
+    _themeTone = ref.read(pSPThemeToneProvider);
     _themeMode = ref.read(pSPThemeModeProvider);
     _activeThemeMode = _themeMode;
 
@@ -50,8 +56,11 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
     super.initState();
   }
 
-  ThemeData get _theme =>
-      FTheme.createTheme(_activeColor, Theme.brightnessOf(context));
+  ThemeData get _theme => FTheme.createTheme(
+    _activeColor,
+    Theme.brightnessOf(context),
+    _themeTone.tone,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +74,15 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
         ),
         body: SafeArea(
           child: FResponsive(
-            // scrollBehavior: NoBounceScrollBehavior(),
-            // physics: const ClampingScrollPhysics(),
+            scrollBehavior: NoBounceScrollBehavior(),
             child: Column(
               spacing: PADDING,
               children: [
+                SettingsAppThemeModeButtons(
+                  selected: _themeTone,
+                  onTap: setTone,
+                ),
+
                 SettingsAppThemeTileList(
                   title: context.l10n.settings_app_theme_page__special_colors,
                   values: [
@@ -129,6 +142,7 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
   void setTheme() async {
     // Set theme mode
     await ref.read(pSPThemeModeProvider.notifier).setMode(_activeThemeMode);
+    await ref.read(pSPThemeToneProvider.notifier).setMode(_themeTone);
 
     // If dynamic, set default color, else set user specified color
     if (_activeThemeMode == .dynamic) {
@@ -146,10 +160,10 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
     if (mounted) context.pop();
   }
 
-  void setColor(Color color, {FThemeMode themeMode = .custom}) {
-    setState(() {
-      _activeColor = color;
-      _activeThemeMode = themeMode;
-    });
-  }
+  void setColor(Color color, {FThemeMode themeMode = .custom}) => setState(() {
+    _activeColor = color;
+    _activeThemeMode = themeMode;
+  });
+
+  void setTone(FThemeTone tone) => setState(() => _themeTone = tone);
 }

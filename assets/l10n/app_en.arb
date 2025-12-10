@@ -39,6 +39,14 @@
       }
     }
   },
+  "@home_account_dialog_account_section__headline": {
+    "placeholders": {
+      "val": {
+        "example": "John",
+        "type": "String"
+      }
+    }
+  },
   "@library_item_info_header__subscribers": {
     "placeholders": {
       "count": {
@@ -553,6 +561,7 @@
   "settings_app_page__theme_title": "Change theme",
   "settings_app_page__theme_title_hint": "Customize the app colors",
   "settings_app_page__title": "FlavorMate settings",
+  "settings_app_theme_page__color_mode": "Color mode",
   "settings_app_theme_page__default_colors": "Default colors",
   "settings_app_theme_page__event_colors": "Event colors",
   "settings_app_theme_page__example": "Example",

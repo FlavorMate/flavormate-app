@@ -81,7 +81,6 @@ class SettingsAccountPage extends ConsumerWidget {
                       subLabel:
                           context.l10n.settings_account_page__change_diet_hint,
                       icon: MdiIcons.food,
-                      iconColor: .red,
                       onTap: () => manageDiet(context, ref, data.diet),
                     ),
                   ],
@@ -93,7 +92,6 @@ class SettingsAccountPage extends ConsumerWidget {
                       subLabel:
                           context.l10n.settings_account_page__change_email_hint,
                       icon: MdiIcons.email,
-                      iconColor: .orange,
                       onTap: () => manageEmail(context, ref, data.email),
                     ),
                     FTile(
@@ -103,7 +101,6 @@ class SettingsAccountPage extends ConsumerWidget {
                           .l10n
                           .settings_account_page__change_password_hint,
                       icon: MdiIcons.formTextboxPassword,
-                      iconColor: .yellow,
                       onTap: () => managePassword(context, ref),
                     ),
                   ],

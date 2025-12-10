@@ -3,19 +3,24 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class FResponsive extends StatelessWidget {
+  final ScrollBehavior? scrollBehavior;
   final double maxWidth;
   final Widget child;
 
   const FResponsive({
-    required this.child,
-    this.maxWidth = FBreakpoint.smValue,
     super.key,
+    this.maxWidth = FBreakpoint.smValue,
+    this.scrollBehavior,
+    required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: FFixedResponsive(maxWidth: maxWidth, child: child),
+    return ScrollConfiguration(
+      behavior: scrollBehavior ?? ScrollConfiguration.of(context),
+      child: SingleChildScrollView(
+        child: FFixedResponsive(maxWidth: maxWidth, child: child),
+      ),
     );
   }
 }

@@ -25,7 +25,6 @@ class SettingsAppPage extends ConsumerWidget {
                     subLabel:
                         context.l10n.settings_app_page__app_icon_title_hint,
                     icon: MdiIcons.palette,
-                    iconColor: .lightBlue,
                     onTap: () => openAppIconPage(context),
                   ),
                   FTile(
@@ -33,14 +32,12 @@ class SettingsAppPage extends ConsumerWidget {
                     subLabel:
                         context.l10n.settings_app_page__image_mode_title_hint,
                     icon: MdiIcons.image,
-                    iconColor: .purple,
                     onTap: () => openImageModePage(context),
                   ),
                   FTile(
                     label: context.l10n.settings_app_page__theme_title,
                     subLabel: context.l10n.settings_app_page__theme_title_hint,
                     icon: MdiIcons.formatPaint,
-                    iconColor: .pink,
                     onTap: () => openThemePage(context),
                   ),
                 ],
