@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  FLUTTER_VERSION: 3.38.3
+  FLUTTER_VERSION: 3.38.4
   RUBY_VERSION: 3.4
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
@@ -178,3 +178,42 @@ jobs:
         run: |
           cd build
           tar -czf web_build.tar.gz web
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Set Up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate sources
+        run: dart run build_runner build -d
+
+      - name: Build windows app
+        run: flutter build windows --release
+      
+      - name: Prepare windows Setup
+        run: |
+           $versionLine = Select-String -Path pubspec.yaml -Pattern '^version:' | ForEach-Object { $_.Line }
+           $version = $versionLine -replace '^version: (.*?)\+.*?$', '$1'
+           get-content build_assets/windows/setup_builder.iss.tmpl | %{$_ -replace "APP_VERSION","$version"}  | set-content build_assets/windows/setup_builder.iss
+
+      - name: Compile .ISS to .EXE Installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: build_assets/windows/setup_builder.iss
+          options: /O+
