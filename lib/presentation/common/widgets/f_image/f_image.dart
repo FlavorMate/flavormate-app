@@ -13,64 +13,59 @@ part 'f_image_type.dart';
 class FImage extends StatelessWidget {
   final String? imageSrc;
   final FImageType? type;
-  final double borderRadius;
   final BoxFit fit;
 
   const FImage({
     super.key,
     required this.imageSrc,
     required this.type,
-    this.borderRadius = BORDER_RADIUS,
     this.fit = BoxFit.cover,
   });
 
   @override
   Widget build(BuildContext context) {
     if (imageSrc != null) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius),
-        child: switch (type!) {
-          FImageType.asset => Image.asset(
-            imageSrc!,
-            fit: fit,
-            errorBuilder: (_, _, _) => _NoImage(),
-          ),
-          FImageType.secure => Consumer(
-            builder: (context, ref, child) {
-              final server = ref.read(pSPCurrentServerProvider);
-              return FutureBuilder(
-                future: ref.read(pDioPrivateProvider.notifier).getTokenSync(),
-                builder: (context, asyncSnapshot) {
-                  if (asyncSnapshot.hasData) {
-                    final token = asyncSnapshot.data;
-                    if (token == null) return _NoImage();
-                    return CachedNetworkImage(
-                      httpHeaders: {'Authorization': token},
-                      imageUrl: '$server$imageSrc',
-                      fit: fit,
-                      errorWidget: (_, _, _) => _NoImage(),
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              );
-            },
-          ),
-          FImageType.network => Image.network(
-            imageSrc!,
-            fit: fit,
-            errorBuilder: (_, _, _) => _NoImage(),
-          ),
-          FImageType.memory => Image.memory(
-            base64Decode(imageSrc!),
-            fit: fit,
-            errorBuilder: (_, _, _) => _NoImage(),
-          ),
-        },
-      );
+      return switch (type!) {
+        FImageType.asset => Image.asset(
+          imageSrc!,
+          fit: fit,
+          errorBuilder: (_, _, _) => _NoImage(),
+        ),
+        FImageType.secure => Consumer(
+          builder: (context, ref, child) {
+            final server = ref.read(pSPCurrentServerProvider);
+            return FutureBuilder(
+              future: ref.read(pDioPrivateProvider.notifier).getTokenSync(),
+              builder: (context, asyncSnapshot) {
+                if (asyncSnapshot.hasData) {
+                  final token = asyncSnapshot.data;
+                  if (token == null) return _NoImage();
+                  return CachedNetworkImage(
+                    httpHeaders: {'Authorization': token},
+                    imageUrl: '$server$imageSrc',
+                    fit: fit,
+                    errorWidget: (_, _, _) => _NoImage(),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            );
+          },
+        ),
+        FImageType.network => Image.network(
+          imageSrc!,
+          fit: fit,
+          errorBuilder: (_, _, _) => _NoImage(),
+        ),
+        FImageType.memory => Image.memory(
+          base64Decode(imageSrc!),
+          fit: fit,
+          errorBuilder: (_, _, _) => _NoImage(),
+        ),
+      };
     } else {
       return _NoImage();
     }

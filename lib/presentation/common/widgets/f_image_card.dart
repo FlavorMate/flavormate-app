@@ -60,69 +60,71 @@ class FImageCard extends ConsumerWidget {
         final resolution = UImage.getResolution(ref, context, constraints);
 
         final opacity = calculateOpacity(constraints.maxWidth);
-        return Stack(
-          fit: StackFit.expand,
-          children: [
-            FImage(imageSrc: coverSelector.call(resolution), type: imageType),
-            if (label != null || subLabel != null)
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(BORDER_RADIUS),
-                  gradient: const LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [Colors.black54, Colors.transparent],
+        return ClipRRect(
+          borderRadius: .circular(BORDER_RADIUS),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              FImage(imageSrc: coverSelector.call(resolution), type: imageType),
+              if (label != null || subLabel != null)
+                Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [Colors.black54, Colors.transparent],
+                    ),
                   ),
                 ),
-              ),
-            if (label != null || subLabel != null)
-              OverflowBox(
-                alignment: Alignment.bottomLeft,
-                minWidth: contentWidth,
-                maxWidth: contentWidth,
-                child: Padding(
-                  padding: const EdgeInsets.all(PADDING),
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Opacity(
-                      opacity: opacity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (label != null)
-                            FText(
-                              label!,
-                              style: FTextStyle.titleLarge,
-                              maxLines: 2,
-                              weight: FontWeight.w600,
-                              textOverflow: TextOverflow.ellipsis,
-                              color: FTextColor.white,
-                            ),
-                          if (subLabel != null)
-                            FText(
-                              subLabel!,
-                              style: FTextStyle.bodyMedium,
-                              maxLines: 2,
-                              textOverflow: TextOverflow.ellipsis,
-                              color: FTextColor.white,
-                            ),
-                        ],
+              if (label != null || subLabel != null)
+                OverflowBox(
+                  alignment: Alignment.bottomLeft,
+                  minWidth: contentWidth,
+                  maxWidth: contentWidth,
+                  child: Padding(
+                    padding: const EdgeInsets.all(PADDING),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Opacity(
+                        opacity: opacity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (label != null)
+                              FText(
+                                label!,
+                                style: FTextStyle.titleLarge,
+                                maxLines: 2,
+                                weight: FontWeight.w600,
+                                textOverflow: TextOverflow.ellipsis,
+                                color: FTextColor.white,
+                              ),
+                            if (subLabel != null)
+                              FText(
+                                subLabel!,
+                                style: FTextStyle.bodyMedium,
+                                maxLines: 2,
+                                textOverflow: TextOverflow.ellipsis,
+                                color: FTextColor.white,
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(BORDER_RADIUS),
-                  onTap: onTap,
+              Positioned.fill(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(BORDER_RADIUS),
+                    onTap: onTap,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
