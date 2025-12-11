@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/p_cached_image.dart';
@@ -28,23 +30,41 @@ class FCircleAvatar extends ConsumerWidget {
       pCachedImageProvider(account.avatar?.url(resolution)),
     );
 
-    return InkWell(
-      borderRadius: .circular(128),
-      onTap: onTap,
-      child: Stack(
-        children: [
-          CircleAvatar(
-            radius: radius,
-            child: CircleAvatar(
-              minRadius: radius - (radius * 0.075),
-              maxRadius: radius - (radius * 0.075),
-              foregroundImage: image.value,
-              child: Text(initials),
+    if (onTap != null) {
+      return InkWell(
+        borderRadius: .circular(radius),
+        onTap: onTap,
+        child: _buildWidget(context, image.value, initials),
+      );
+    } else {
+      return _buildWidget(context, image.value, initials);
+    }
+  }
+
+  Widget _buildWidget(
+    BuildContext context,
+    CachedNetworkImageProvider? image,
+    String initials,
+  ) {
+    return Stack(
+      children: [
+        CircleAvatar(
+          backgroundColor: context.colorScheme.primary,
+          radius: radius,
+          child: CircleAvatar(
+            minRadius: radius - (radius * 0.075),
+            maxRadius: radius - (radius * 0.075),
+            foregroundImage: image,
+            child: Text(
+              initials,
+              style: context.textTheme.bodyMedium!.copyWith(
+                fontSize: radius,
+              ),
             ),
           ),
-          ?child,
-        ],
-      ),
+        ),
+        ?child,
+      ],
     );
   }
 }

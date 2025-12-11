@@ -49,6 +49,7 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
       searchController: _controller,
       builder: (_, controller) => SearchBar(
         elevation: .all(widget.elevation),
+        readOnly: true,
         leading: const IconButton(
           icon: Icon(MdiIcons.magnify),
           onPressed: null,

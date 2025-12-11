@@ -4,7 +4,7 @@ on:
     tags: [v*]
 
 env:
-  FLUTTER_VERSION: 3.38.3
+  FLUTTER_VERSION: 3.38.4
   RUBY_VERSION: 3.4
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
@@ -277,12 +277,61 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           package: flavormate-webapp
 
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Set Up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate sources
+        run: dart run build_runner build -d
+
+      - name: Build windows app
+        run: flutter build windows --release
+
+      - name: Prepare windows Setup
+        run: |
+           $versionLine = Select-String -Path pubspec.yaml -Pattern '^version:' | ForEach-Object { $_.Line }
+           $version = $versionLine -replace '^version: (.*?)\+.*?$', '$1'
+           get-content build_assets/windows/setup_builder.iss.tmpl | %{$_ -replace "APP_VERSION","$version"}  | set-content build_assets/windows/setup_builder.iss
+
+      - name: Compile .ISS to .EXE Installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: build_assets/windows/setup_builder.iss
+          options: /O+
+      
+      - name: Cache Windows Setup
+        id: artifact-upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: flavormate-windows
+          path: |
+            build/windows/x64/runner/Release/flavormate-setup.exe
+          retention-days: 1
+
   create-release:
     needs:
       - build-android
       - build-ios
       - build-macos
       - build-webapp
+      - build-windows
 
     runs-on: ubuntu-latest
 
@@ -307,6 +356,12 @@ jobs:
         with:
           name: flavormate-android
           path: build
+      
+      - name: Download windows archive
+        uses: actions/download-artifact@v4
+        with:
+          name: flavormate-windows
+          path: build
 
       - name: List files
         working-directory: build
@@ -316,7 +371,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: "build/flutter-apk/app-release.apk,build/bundle/release/app-release.aab,build/FlavorMate.app.zip,build/web_build.tar.gz"
+          artifacts: "build/flutter-apk/app-release.apk,build/bundle/release/app-release.aab,build/FlavorMate.app.zip,build/web_build.tar.gz,build/flavormate-setup.exe"
           artifactErrorsFailBuild: true
           generateReleaseNotes: true
           removeArtifacts: true

@@ -4,6 +4,7 @@ enum FTextColor {
   primary,
   surfaceContainerHighest,
   onPrimaryContainer,
+  onInverseSurface,
   filledButton,
   white,
   grey,
@@ -19,13 +20,17 @@ enum FTextColor {
 
       FTextColor.surfaceContainerHighest => colorScheme.surfaceContainerHighest,
 
+      FTextColor.onInverseSurface => colorScheme.inverseSurface,
+
       FTextColor.onPrimaryContainer => colorScheme.onPrimaryContainer,
 
       FTextColor.filledButton =>
         isBright ? Colors.white : colorScheme.onPrimary,
 
       FTextColor.white => Colors.white,
-      .grey => colorScheme.onSurfaceVariant,
+
+      .grey => Colors.grey.shade600,
+
       FTextColor.black => Colors.black,
     };
   }

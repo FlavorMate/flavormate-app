@@ -1,17 +1,12 @@
-import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/data/models/local/common_story/common_story.dart';
 import 'package:flavormate/data/repositories/features/stories/p_rest_stories.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
-import 'package:flavormate/presentation/common/widgets/f_bubble.dart';
-import 'package:flavormate/presentation/common/widgets/f_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
+import 'package:flavormate/presentation/common/widgets/f_story/f_story.dart';
 import 'package:flavormate/presentation/features/stories_item/providers/p_stories_item_page.dart';
 import 'package:flavormate/presentation/features/stories_item/widgets/stories_item_action_button.dart';
 import 'package:flutter/material.dart';
@@ -50,67 +45,7 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
           ),
         ],
       ),
-      builder: (_, data) => FResponsive(
-        child: FCard(
-          color: context.colorScheme.surfaceContainer,
-          padding: 0,
-          child: Column(
-            spacing: PADDING,
-            children: [
-              FImageCard.maximized(
-                label: data.story.recipe.label,
-                coverSelector: (resolution) =>
-                    data.story.cover?.url(resolution),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: PADDING,
-                  right: PADDING,
-                  bottom: PADDING,
-                ),
-                child: Column(
-                  spacing: PADDING,
-                  children: [
-                    Row(
-                      spacing: PADDING,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FCircleAvatar(
-                          account: data.story.ownedBy,
-                          radius: 32,
-                        ),
-                        Expanded(
-                          child: FBubble(
-                            color: context.colorScheme.primaryContainer,
-                            topLeft: true,
-                            children: [
-                              FText(
-                                data.story.label,
-                                style: FTextStyle.titleLarge,
-                              ),
-                              FText(
-                                data.story.content,
-                                style: FTextStyle.bodyMedium,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    FilledButton(
-                      onPressed: () =>
-                          context.routes.recipesItem(data.story.recipe.id),
-                      child: Text(
-                        context.l10n.stories_item_page__open_recipe,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      builder: (_, data) => FStory(story: CommonStory.fromStory(data.story)),
       onError: FEmptyMessage(
         title: context.l10n.stories_item_page__on_error,
         icon: StateIconConstants.stories.errorIcon,

@@ -16,7 +16,7 @@ class FCarousel<T> extends ConsumerStatefulWidget {
   final double height;
 
   final String? title;
-  final void Function()? onShowAll;
+  final void Function() onShowAll;
   final List<T> data;
   final void Function(T)? onTap;
   final String? Function(T, ImageWideResolution) coverSelector;
@@ -32,7 +32,7 @@ class FCarousel<T> extends ConsumerStatefulWidget {
     this.subLabelSelector,
     this.title,
     this.onTap,
-    this.onShowAll,
+    required this.onShowAll,
     this.height = 250,
     this.imageType = FImageType.secure,
   });
@@ -71,14 +71,15 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
           currentBreakpoint,
           widget.data.length,
         );
-        final showAllButton = widget.data.length > 1;
 
         final resolution = UImage.getResolution(ref, context, constraints);
+
+        final hasTitle = widget.title?.isNotEmpty ?? false;
 
         return Column(
           spacing: PADDING / 4,
           children: [
-            if (widget.title?.isNotEmpty ?? false)
+            if (hasTitle)
               SizedBox(
                 height: 40,
                 child: Row(
@@ -89,11 +90,10 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
                       style: FTextStyle.headlineSmall,
                       weight: .w500,
                     ),
-                    if (showAllButton)
-                      IconButton(
-                        onPressed: widget.onShowAll,
-                        icon: const Icon(MdiIcons.arrowRight),
-                      ),
+                    IconButton(
+                      onPressed: widget.onShowAll,
+                      icon: const Icon(MdiIcons.arrowRight),
+                    ),
                   ],
                 ),
               ),
@@ -117,7 +117,7 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
                 ],
               ),
             ),
-            if (showAllButton && (widget.title?.isEmpty ?? true))
+            if (!hasTitle)
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
