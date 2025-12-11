@@ -3,7 +3,7 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_date_time.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
-import 'package:flavormate/presentation/common/widgets/f_circular_avatar_viewer.dart';
+import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -49,15 +49,10 @@ class FRecipePublished extends StatelessWidget {
             maximumSize: const Size(_buttonWidth, double.infinity),
           ),
           child: Row(
-            mainAxisSize: .min,
-            spacing: 8,
+            spacing: PADDING,
+            mainAxisAlignment: .start,
             children: [
-              FCircularAvatarViewer(
-                account: account,
-                height: 32,
-                width: 32,
-                borderRadius: 8,
-              ),
+              FCircleAvatar(account: account),
               Column(
                 crossAxisAlignment: .start,
                 children: [
