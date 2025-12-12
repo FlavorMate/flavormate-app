@@ -7,6 +7,7 @@ import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_random.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_content.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
@@ -64,6 +65,9 @@ class SuggestionPage extends ConsumerWidget {
                 ),
               ),
             ),
+
+            // Add some space so content doesn't overlap with FAB
+            const FSizedBoxSliver(height: 56 + 32),
           ],
         ),
       ),
