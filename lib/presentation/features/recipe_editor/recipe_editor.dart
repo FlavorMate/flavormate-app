@@ -69,9 +69,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage> {
           FDataColumn(
             width: 108,
             alignment: Alignment.centerLeft,
-            child: Expanded(
-              child: Text(context.l10n.recipe_editor_page__table_state),
-            ),
+            child: Text(context.l10n.recipe_editor_page__table_state),
           ),
           FDataColumn(width: 48),
         ],
