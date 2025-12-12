@@ -13,8 +13,8 @@ class FOidcIcon extends ConsumerWidget {
   const FOidcIcon({
     super.key,
     required this.provider,
-    this.height = 50,
-    this.width = 50,
+    this.height = 40,
+    this.width = 40,
   });
 
   @override

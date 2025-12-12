@@ -8,11 +8,12 @@ import 'package:flavormate/data/models/core/version/version.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
-import 'package:flavormate/presentation/common/widgets/f_oidc/f_oidc_card.dart';
+import 'package:flavormate/presentation/common/widgets/f_oidc/f_oidc_icon.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/auth/dialogs/login_oidc_link_dialog.dart';
 import 'package:flavormate/presentation/features/auth/providers/p_login_page.dart';
 import 'package:flavormate/presentation/features/auth/widgets/login_compatibility_admonition.dart';
@@ -68,6 +69,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               if (data.enableRegistration) ...[
                 const SizedBox(height: PADDING),
                 FButton(
+                  tonal: true,
                   width: BUTTON_WIDTH,
                   label: context.l10n.auth_page__register,
                   onPressed: () =>
@@ -95,14 +97,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   style: FTextStyle.bodyMedium,
                 ),
                 const SizedBox(height: PADDING),
-                FWrap(
-                  children: [
-                    for (final provider in data.oidcProviders)
-                      FOidcCard(
-                        provider: provider,
-                        onTap: () => openOIDC(provider),
-                      ),
-                  ],
+                SizedBox(
+                  width: BUTTON_WIDTH,
+                  child: FTileGroup(
+                    items: [
+                      for (final provider in data.oidcProviders)
+                        FTile(
+                          label: provider.name,
+                          subLabel: null,
+                          leading: FOidcIcon(provider: provider),
+                          onTap: () => openOIDC(provider),
+                        ),
+                    ],
+                  ),
                 ),
               ],
             ],
