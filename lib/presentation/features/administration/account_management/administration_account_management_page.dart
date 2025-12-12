@@ -14,6 +14,7 @@ import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_simple_dialog.dart';
@@ -67,7 +68,10 @@ class _AccountManagementPageState
       appBar: FAppBar(
         title: context.l10n.administration_account_management_page__title,
       ),
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: createAccount,
+        child: const Icon(MdiIcons.plus),
+      ),
       body: FProviderStruct(
         provider: provider,
         onError: FEmptyMessage(
@@ -106,6 +110,9 @@ class _AccountManagementPageState
                   ),
                 ),
               ),
+
+              // Add some space so content doesn't overlap with FAB
+              const FSizedBoxSliver(height: 56 + 16 + 16),
             ],
           );
         },

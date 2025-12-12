@@ -22,6 +22,7 @@ class FPaginatedPage<T> extends ConsumerStatefulWidget {
 
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Widget? floatingActionButton;
+  final bool floatingActionPadding;
 
   final FPaginatedSort Function()? sortBuilder;
 
@@ -38,6 +39,7 @@ class FPaginatedPage<T> extends ConsumerStatefulWidget {
     required this.onError,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
+    this.floatingActionPadding = true,
     this.sortBuilder,
     required this.itemBuilder,
   });
@@ -86,7 +88,8 @@ class _FPaginatedPageState<T> extends ConsumerState<FPaginatedPage<T>> {
             ),
 
             // Add some space so content doesn't overlap with FAB
-            if (widget.floatingActionButton != null)
+            if (widget.floatingActionButton != null &&
+                widget.floatingActionPadding)
               const FSizedBoxSliver(height: 56 + 32),
           ],
         ),

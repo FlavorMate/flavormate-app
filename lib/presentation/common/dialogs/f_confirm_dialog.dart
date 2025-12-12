@@ -1,7 +1,7 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 
 class FConfirmDialog extends StatelessWidget {
   final String title;

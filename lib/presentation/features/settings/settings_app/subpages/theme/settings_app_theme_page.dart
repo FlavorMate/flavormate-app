@@ -129,6 +129,9 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
                       )
                       .toList(),
                 ),
+
+                // Add some space so content doesn't overlap with FAB
+                const SizedBox(height: 56),
               ],
             ),
           ),

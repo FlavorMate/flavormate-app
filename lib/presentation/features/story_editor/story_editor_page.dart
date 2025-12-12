@@ -54,6 +54,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
         onPressed: () => createDraft(context),
         child: const Icon(MdiIcons.plus),
       ),
+      floatingActionPadding: false,
       itemBuilder: (items) => FPaginatedContentTable(
         data: items,
         columnBuilder: [
@@ -62,7 +63,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage> {
             child: Text(context.l10n.story_editor_page__table_label),
           ),
           FDataColumn(
-            width: 72,
+            width: 108,
             alignment: Alignment.centerLeft,
             child: Text(context.l10n.story_editor_page__table_state),
           ),

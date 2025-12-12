@@ -104,7 +104,9 @@ class SettingsAccountPage extends ConsumerWidget {
                           .l10n
                           .settings_account_page__change_password_hint,
 
-                      leading: const FTileIcon(icon: MdiIcons.formTextboxPassword),
+                      leading: const FTileIcon(
+                        icon: MdiIcons.formTextboxPassword,
+                      ),
                       onTap: () => managePassword(context, ref),
                     ),
                   ],

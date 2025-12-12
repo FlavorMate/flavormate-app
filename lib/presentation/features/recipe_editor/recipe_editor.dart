@@ -58,6 +58,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage> {
         onCreate: () => createDraft(context),
         onScrape: () => scrapeDraft(context),
       ),
+      floatingActionPadding: false,
       itemBuilder: (items) => FPaginatedContentTable(
         data: items,
         columnBuilder: [
@@ -66,9 +67,11 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage> {
             child: Text(context.l10n.recipe_editor_page__table_label),
           ),
           FDataColumn(
-            width: 72,
+            width: 108,
             alignment: Alignment.centerLeft,
-            child: Text(context.l10n.recipe_editor_page__table_state),
+            child: Expanded(
+              child: Text(context.l10n.recipe_editor_page__table_state),
+            ),
           ),
           FDataColumn(width: 48),
         ],
