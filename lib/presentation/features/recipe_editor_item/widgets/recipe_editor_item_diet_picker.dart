@@ -3,6 +3,7 @@ import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
@@ -23,15 +24,17 @@ class RecipeEditorItemDietPicker extends StatelessWidget {
       ),
       insetPadding: const .all(PADDING),
       content: FTileGroup(
-        iconBackgroundColor: Colors.transparent,
         items: List.generate(Diet.values.length, (index) {
           final item = Diet.values[index];
           return FTile(
             label: item.getName(context),
             subLabel: null,
-            icon: diet == item
-                ? MdiIcons.checkCircleOutline
-                : MdiIcons.circleOutline,
+            leading: FTileIcon(
+              iconBackgroundColor: Colors.transparent,
+              icon: diet == item
+                  ? MdiIcons.checkCircleOutline
+                  : MdiIcons.circleOutline,
+            ),
             onTap: () => context.pop(item),
           );
         }),

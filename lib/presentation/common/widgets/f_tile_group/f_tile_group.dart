@@ -1,5 +1,3 @@
-import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +10,11 @@ class FTileGroup extends StatelessWidget {
 
   final List<FTile> items;
 
-  final Color? iconBackgroundColor;
-
   const FTileGroup({
     super.key,
     this.title,
     required this.items,
     this.borderRadius = 16,
-    this.iconBackgroundColor,
   });
 
   @override
@@ -51,37 +46,7 @@ class FTileGroup extends StatelessWidget {
               bottomLeft: .circular(bottomLeft),
               bottomRight: .circular(bottomRight),
             ),
-            child: Material(
-              color: context.colorScheme.surfaceContainer,
-              child: ListTile(
-                visualDensity: .standard,
-                onTap: item.onTap,
-                leading: CircleAvatar(
-                  radius: 20,
-                  backgroundColor:
-                      iconBackgroundColor ??
-                      context.colorScheme.primaryContainer,
-                  child: Icon(
-                    item.icon,
-                    size: 24,
-                    color: context.colorScheme.onPrimaryContainer,
-                  ),
-                ),
-                trailing: item.trailing,
-                title: FText(
-                  item.label,
-                  style: .bodyLarge,
-                  weight: .w600,
-                ),
-                subtitle: item.subLabel?.let(
-                  (it) => FText(
-                    it,
-                    style: .bodyMedium,
-                    color: .grey,
-                  ),
-                ),
-              ),
-            ),
+            child: item,
           );
         }),
       ],

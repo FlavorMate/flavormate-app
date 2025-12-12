@@ -7,7 +7,11 @@ class FPaginatedContentCard<T> extends StatelessWidget {
   final List<T> data;
   final Widget Function(T) itemBuilder;
 
-  const FPaginatedContentCard({super.key,required this.data, required this.itemBuilder});
+  const FPaginatedContentCard({
+    super.key,
+    required this.data,
+    required this.itemBuilder,
+  });
 
   @override
   Widget build(BuildContext context) {

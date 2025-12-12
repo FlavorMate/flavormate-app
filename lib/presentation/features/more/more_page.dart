@@ -6,6 +6,7 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,13 +36,13 @@ class MorePage extends ConsumerWidget {
                 FTile(
                   label: context.l10n.more_page__categories,
                   subLabel: context.l10n.more_page__categories_hint,
-                  icon: MdiIcons.package,
+                  leading: const FTileIcon(icon: MdiIcons.package),
                   onTap: () => context.routes.categories(),
                 ),
                 FTile(
                   label: context.l10n.more_page__tags,
                   subLabel: context.l10n.more_page__tags_hint,
-                  icon: MdiIcons.tag,
+                  leading: const FTileIcon(icon: MdiIcons.tag),
                   onTap: () => context.routes.tags(),
                 ),
               ],
@@ -52,14 +53,14 @@ class MorePage extends ConsumerWidget {
                 FTile(
                   label: context.l10n.more_page__recipe_editor,
                   subLabel: context.l10n.more_page__recipe_editor_hint,
-                  icon: MdiIcons.bookPlus,
+                  leading: const FTileIcon(icon: MdiIcons.bookPlus),
                   onTap: () => context.routes.recipeEditor(),
                 ),
                 if (storiesEnabled)
                   FTile(
                     label: context.l10n.more_page__story_editor,
                     subLabel: context.l10n.more_page__story_editor_hint,
-                    icon: MdiIcons.newspaperVariantOutline,
+                    leading: const FTileIcon(icon: MdiIcons.newspaperVariant),
                     onTap: () => context.routes.storyEditor(),
                   ),
               ],
@@ -72,7 +73,7 @@ class MorePage extends ConsumerWidget {
                     label: context.l10n.more_page__admin_account_management,
                     subLabel:
                         context.l10n.more_page__admin_account_management_hint,
-                    icon: MdiIcons.accountGroup,
+                    leading: const FTileIcon(icon: MdiIcons.accountGroup),
                     onTap: () =>
                         context.routes.administrationAccountManagement(),
                   ),

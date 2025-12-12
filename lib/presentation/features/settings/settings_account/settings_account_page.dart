@@ -11,6 +11,7 @@ import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/dialogs/settings_account_diet_dialog.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/dialogs/settings_account_email_dialog.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/dialogs/settings_account_password_dialog.dart';
@@ -80,7 +81,8 @@ class SettingsAccountPage extends ConsumerWidget {
                       label: context.l10n.settings_account_page__change_diet,
                       subLabel:
                           context.l10n.settings_account_page__change_diet_hint,
-                      icon: MdiIcons.food,
+
+                      leading: const FTileIcon(icon: MdiIcons.food),
                       onTap: () => manageDiet(context, ref, data.diet),
                     ),
                   ],
@@ -91,7 +93,8 @@ class SettingsAccountPage extends ConsumerWidget {
                       label: context.l10n.settings_account_page__change_email,
                       subLabel:
                           context.l10n.settings_account_page__change_email_hint,
-                      icon: MdiIcons.email,
+
+                      leading: const FTileIcon(icon: MdiIcons.email),
                       onTap: () => manageEmail(context, ref, data.email),
                     ),
                     FTile(
@@ -100,7 +103,8 @@ class SettingsAccountPage extends ConsumerWidget {
                       subLabel: context
                           .l10n
                           .settings_account_page__change_password_hint,
-                      icon: MdiIcons.formTextboxPassword,
+
+                      leading: const FTileIcon(icon: MdiIcons.formTextboxPassword),
                       onTap: () => managePassword(context, ref),
                     ),
                   ],

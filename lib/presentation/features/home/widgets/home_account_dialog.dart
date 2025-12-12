@@ -9,6 +9,7 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_account_section.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_info_section.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_settings_section.dart';
@@ -66,7 +67,7 @@ class HomeAccountDialog extends StatelessWidget {
                               subLabel: context
                                   .l10n
                                   .home_account_dialog__my_profile_hint,
-                              icon: MdiIcons.account,
+                              leading: const FTileIcon(icon: MdiIcons.account),
                               onTap: () => openAccount(context, account.id),
                             ),
                           ],

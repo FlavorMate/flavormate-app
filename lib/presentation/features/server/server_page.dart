@@ -7,7 +7,6 @@ import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flavormate/presentation/features/server/widgets/server_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -59,31 +58,30 @@ class _ServerPageState extends ConsumerState<ServerPage> {
                 const FLogo(size: 128),
                 const FText(FLAVORMATE, style: FTextStyle.headlineLarge),
                 const SizedBox(height: PADDING * 2),
-                ServerTextField(
-                  controller: _serverController,
-                  readOnly: readOnly,
-                  setServer: setServer,
-                ),
-                const SizedBox(height: PADDING),
-                FWrap(
+                Row(
+                  spacing: PADDING,
                   children: [
                     if (recentServers.isNotEmpty)
-                      SizedBox(
-                        width: 160,
-                        child: FButton(
-                          tonal: true,
-                          onPressed: () => pickServer(recentServers),
-                          label: context.l10n.server_page__recent_servers,
-                        ),
+                      IconButton(
+                        onPressed: () => pickServer(recentServers),
+                        icon: const Icon(MdiIcons.history),
                       ),
-                    SizedBox(
-                      width: 125,
-                      child: FButton(
-                        onPressed: setServer,
-                        label: context.l10n.btn_continue,
+                    Expanded(
+                      child: ServerTextField(
+                        controller: _serverController,
+                        readOnly: readOnly,
+                        setServer: setServer,
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(height: PADDING),
+                SizedBox(
+                  width: BUTTON_WIDTH,
+                  child: FButton(
+                    onPressed: setServer,
+                    label: context.l10n.btn_continue,
+                  ),
                 ),
               ],
             ),

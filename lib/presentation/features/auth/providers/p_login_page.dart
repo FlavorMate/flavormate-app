@@ -8,6 +8,7 @@ import 'package:flavormate/data/models/core/auth/auth_login_form.dart';
 import 'package:flavormate/data/models/core/auth/tokens_dto.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
 import 'package:flavormate/data/repositories/core/server/p_server_compatibility.dart';
+import 'package:flavormate/data/repositories/core/server/p_server_features.dart';
 import 'package:flavormate/presentation/features/auth/models/login_page_wrapper.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -19,6 +20,7 @@ class PLoginPage extends _$PLoginPage {
   Future<LoginPageWrapper> build() async {
     final fixedServer = ref.watch(pRBBackendUrlProvider).requireValue;
     final server = ref.watch(pSPCurrentServerProvider)!;
+    await ref.watch(pServerFeaturesProvider.future);
     final compatibility = await ref.watch(pServerCompatibilityProvider.future);
     final enableRegistration = ref.watch(pFeatureRegistrationProvider);
     final enableRecovery = ref.watch(pFeatureRecoveryProvider);
