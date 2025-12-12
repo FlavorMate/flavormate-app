@@ -8,6 +8,7 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_durations/providers/p_recipe_editor_item_durations.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_durations/widgets/recipe_editor_item_durations_page_duration_picker.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class _RecipeEditorItemDurationsPageState
                           .l10n
                           .recipe_editor_item_durations_page__prep_time,
                       subLabel: _prepTime.beautify2(context),
-                      icon: MdiIcons.knife,
+                      leading: const FTileIcon(icon: MdiIcons.knife),
                       onTap: setPrepTime,
                     ),
                     FTile(
@@ -86,7 +87,7 @@ class _RecipeEditorItemDurationsPageState
                           .l10n
                           .recipe_editor_item_durations_page__cook_time,
                       subLabel: _cookTime.beautify2(context),
-                      icon: MdiIcons.stove,
+                      leading: const FTileIcon(icon: MdiIcons.stove),
                       onTap: setCookTime,
                     ),
                     FTile(
@@ -94,7 +95,7 @@ class _RecipeEditorItemDurationsPageState
                           .l10n
                           .recipe_editor_item_durations_page__rest_time,
                       subLabel: _restTime.beautify2(context),
-                      icon: MdiIcons.bedClock,
+                      leading: const FTileIcon(icon: MdiIcons.bedClock),
                       onTap: setRestTime,
                     ),
                   ],
