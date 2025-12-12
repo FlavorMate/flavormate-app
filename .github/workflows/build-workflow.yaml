@@ -21,6 +21,7 @@ jobs:
         with:
           java-version: "21"
           distribution: "temurin"
+          cache: "gradle"
 
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
