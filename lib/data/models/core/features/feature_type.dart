@@ -6,6 +6,7 @@ part 'feature_type.mapper.dart';
 enum FeatureType {
   Bring,
   ImportExport,
+  EnhancedResolutions,
   OpenFoodFacts,
   Ratings,
   Recovery,
