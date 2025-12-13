@@ -115,12 +115,10 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
   Future<void> setRating(double? val) async {
     context.showLoadingDialog();
 
-    final response = await ref.read(widget.provider.notifier).setRating(val);
+    await ref.read(widget.provider.notifier).setRating(val);
 
     if (!mounted) return;
     context.pop();
-
-    print(response);
   }
 
   void decreaseFactor() {

@@ -9,4 +9,9 @@ class PSecureStorage extends _$PSecureStorage {
   FlutterSecureStorage build() {
     return const FlutterSecureStorage();
   }
+
+  Future<void> clear() async {
+    await state.deleteAll();
+    ref.invalidateSelf();
+  }
 }

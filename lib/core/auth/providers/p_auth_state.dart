@@ -17,7 +17,7 @@ class PAuthState extends _$PAuthState {
     if (jwt.value == null) return .unauthenticated;
 
     return .authenticated;
- }
+  }
 }
 
 /// The possible authentication states of the app.

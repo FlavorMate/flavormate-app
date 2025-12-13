@@ -1,13 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flavormate/core/auth/providers/p_auth.dart';
+import 'package:flavormate/core/auth/providers/p_auth_header.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/core/utils/u_localizations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:synchronized/synchronized.dart';
 
 part 'p_dio_private.g.dart';
-
-final Lock _lock = Lock();
 
 @Riverpod(keepAlive: true)
 class PDioPrivate extends _$PDioPrivate {
@@ -29,9 +26,11 @@ class PDioPrivate extends _$PDioPrivate {
 
     // Add interceptors for token management
     dio.interceptors.add(
-      InterceptorsWrapper(
+      QueuedInterceptorsWrapper(
         onRequest: (options, handler) async {
-          options.headers['Authorization'] = await getTokenSync();
+          options.headers['Authorization'] = await ref
+              .read(pAuthHeaderProvider.notifier)
+              .authHeader();
 
           return handler.next(options);
         },
@@ -40,7 +39,9 @@ class PDioPrivate extends _$PDioPrivate {
             try {
               // Retry the original request
               final opts = error.requestOptions;
-              opts.headers['Authorization'] = await getTokenSync();
+              opts.headers['Authorization'] = await ref
+                  .read(pAuthHeaderProvider.notifier)
+                  .authHeader(forceRefresh: true);
               final response = await dio.fetch(opts);
               return handler.resolve(response);
             } catch (e) {
@@ -57,22 +58,5 @@ class PDioPrivate extends _$PDioPrivate {
     ref.keepAlive();
 
     return dio;
-  }
-
-  Future<String?> getTokenSync() async {
-    return await _lock.synchronized(
-      () async => _getToken(),
-    );
-  }
-
-  Future<String?> _getToken() async {
-    final tokens = ref.read(pAuthProvider);
-
-    if (tokens.accessTokenAboutToExpire) {
-      final token = await ref.read(pAuthProvider.notifier).refreshToken();
-      return 'Bearer ${token!.accessToken}';
-    } else {
-      return 'Bearer ${tokens.accessToken}';
-    }
   }
 }

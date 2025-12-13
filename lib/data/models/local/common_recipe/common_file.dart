@@ -32,6 +32,5 @@ class CommonFile with CommonFileMappable {
   String url(ImageResolution resolution) =>
       '$path?resolution=${resolution.name}';
 
-  String publicUrl(ImageResolution resolution) =>
-      '${url(resolution)}/public';
+  String publicUrl(ImageResolution resolution) => '${url(resolution)}/public';
 }

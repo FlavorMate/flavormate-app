@@ -67,7 +67,7 @@ class _AuthLoginPageState extends ConsumerState<AuthLoginPage> {
                     const SizedBox(height: PADDING),
                     LoginPasswordTextField(
                       passwordController: _passwordController,
-                      onFieldSubmitted: login
+                      onFieldSubmitted: login,
                     ),
                     if (data.enableRecovery)
                       Align(

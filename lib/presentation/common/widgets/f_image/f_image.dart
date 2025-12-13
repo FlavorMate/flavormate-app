@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flavormate/core/apis/rest/p_dio_private.dart';
+import 'package:flavormate/core/apis/rest/p_secure_image_cache_manager.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flutter/material.dart';
@@ -33,25 +33,15 @@ class FImage extends StatelessWidget {
         ),
         FImageType.secure => Consumer(
           builder: (context, ref, child) {
+            final cacheManager = ref.watch(pSecureImageCacheManagerProvider);
             final server = ref.read(pSPCurrentServerProvider);
-            return FutureBuilder(
-              future: ref.read(pDioPrivateProvider.notifier).getTokenSync(),
-              builder: (context, asyncSnapshot) {
-                if (asyncSnapshot.hasData) {
-                  final token = asyncSnapshot.data;
-                  if (token == null) return _NoImage();
-                  return CachedNetworkImage(
-                    httpHeaders: {'Authorization': token},
-                    imageUrl: '$server$imageSrc',
-                    fit: fit,
-                    errorWidget: (_, _, _) => _NoImage(),
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
+            final url = '$server$imageSrc';
+            return CachedNetworkImage(
+              cacheManager: cacheManager,
+              cacheKey: url,
+              imageUrl: url,
+              fit: fit,
+              errorWidget: (_, _, _) => _NoImage(),
             );
           },
         ),

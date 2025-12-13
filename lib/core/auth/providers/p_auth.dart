@@ -1,5 +1,8 @@
 import 'package:flavormate/core/apis/rest/p_dio_auth.dart';
 import 'package:flavormate/core/apis/rest/p_dio_public.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/navigation/p_go_router.dart';
+import 'package:flavormate/core/storage/secure_storage/providers/p_secure_storage.dart';
 import 'package:flavormate/core/storage/secure_storage/providers/p_ss_jwt.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_recent_servers.dart';
@@ -68,13 +71,15 @@ class PAuth extends _$PAuth {
 
       return response.data;
     } catch (e) {
-      await logout();
+      // await logout();
     }
     return null;
   }
 
   Future<void> logout() async {
     // Clear shared preferences
+    await ref.read(pSecureStorageProvider.notifier).clear();
     await ref.read(pSPProvider.notifier).clear();
+    navigationKey.currentContext!.routes.server(replace: true);
   }
 }
