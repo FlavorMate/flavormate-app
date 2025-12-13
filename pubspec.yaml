@@ -63,6 +63,7 @@ dependencies:
   synchronized: ^3.4.0
   flutter_markdown_plus: ^1.0.5
   flex_seed_scheme: ^4.0.1
+  flutter_secure_storage: ^10.0.0
 
 dev_dependencies:
   flutter_test:
