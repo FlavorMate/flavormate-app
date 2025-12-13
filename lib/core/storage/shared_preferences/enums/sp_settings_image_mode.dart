@@ -1,1 +1,0 @@
-enum SpSettingsImageMode { FitMode, FillMode }

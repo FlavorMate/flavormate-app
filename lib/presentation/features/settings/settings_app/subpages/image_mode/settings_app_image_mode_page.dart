@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/storage/shared_preferences/enums/sp_settings_image_mode.dart';
+import 'package:flavormate/core/storage/shared_preferences/enums/image_mode.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/generated/flutter_gen/assets.gen.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
@@ -36,16 +36,16 @@ class SettingsAppImageModePage extends ConsumerWidget {
                 label: context.l10n.settings_app_image_mode_page__fit_mode,
                 hint: context.l10n.settings_app_image_mode_page__hint_2,
                 image: Assets.images.settings.imageMode.a169.path,
-                value: SpSettingsImageMode.FitMode,
-                state: state == SpSettingsImageMode.FitMode,
+                value: ImageMode.Wide,
+                state: state == ImageMode.Wide,
                 onTap: (val) => setMode(ref, val),
               ),
               SettingsAppImageModeExample(
                 label: context.l10n.settings_app_image_mode_page__fill_mode,
                 hint: context.l10n.settings_app_image_mode_page__hint_3,
                 image: Assets.images.settings.imageMode.original.path,
-                value: SpSettingsImageMode.FillMode,
-                state: state == SpSettingsImageMode.FillMode,
+                value: ImageMode.Scale,
+                state: state == ImageMode.Scale,
                 onTap: (val) => setMode(ref, val),
               ),
             ],
@@ -55,7 +55,7 @@ class SettingsAppImageModePage extends ConsumerWidget {
     );
   }
 
-  void setMode(WidgetRef ref, SpSettingsImageMode value) {
+  void setMode(WidgetRef ref, ImageMode value) {
     ref.read(pSettingsImageModeProvider.notifier).set(value);
   }
 }
