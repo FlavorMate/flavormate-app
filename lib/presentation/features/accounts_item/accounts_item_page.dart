@@ -142,7 +142,7 @@ class AccountsItemPage extends ConsumerWidget {
     AccountFileDto avatar,
   ) {
     return context.showFullscreenImage(
-      avatar.url(ImageSquareResolution.Original),
+      avatar.url(ImageResolution.Original),
     );
   }
 }

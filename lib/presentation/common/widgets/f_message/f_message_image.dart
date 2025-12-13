@@ -1,4 +1,5 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FMessageImage extends ConsumerWidget implements FMessage {
-  final String Function(ImageWideResolution) imageBuilder;
+  final String Function(ImageResolution) imageBuilder;
 
   const FMessageImage({
     super.key,
@@ -16,6 +17,7 @@ class FMessageImage extends ConsumerWidget implements FMessage {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final imageMode = ref.read(pSettingsImageModeProvider);
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 300),
       child: GestureDetector(
@@ -27,7 +29,8 @@ class FMessageImage extends ConsumerWidget implements FMessage {
               final resolution = UImage.getResolution(
                 ref,
                 context,
-                constraints,
+                imageMode,
+                constraints.maxWidth,
               );
 
               return FImage(

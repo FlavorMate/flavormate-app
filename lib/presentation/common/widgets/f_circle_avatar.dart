@@ -24,7 +24,7 @@ class FCircleAvatar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final initials = account.displayName[0];
 
-    final resolution = UImage.getSquareResolution(context, radius);
+    final resolution = UImage.getResolution(ref, context, .Plane, radius * 2);
 
     final image = ref.watch(
       pCachedImageProvider(account.avatar?.url(resolution)),

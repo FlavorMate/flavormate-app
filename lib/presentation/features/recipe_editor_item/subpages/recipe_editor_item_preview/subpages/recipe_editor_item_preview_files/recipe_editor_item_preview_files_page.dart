@@ -63,6 +63,6 @@ class RecipeEditorItemPreviewFilesPage extends ConsumerWidget {
   }
 
   Future openFile(BuildContext context, RecipeDraftFileDto file) {
-    return context.showFullscreenImage(file.url(ImageWideResolution.Original));
+    return context.showFullscreenImage(file.url(ImageResolution.Original));
   }
 }
