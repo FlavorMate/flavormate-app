@@ -1,11 +1,12 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
-import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_circular_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FCircularAvatarViewer extends StatelessWidget {
+class FCircularAvatarViewer extends ConsumerWidget {
   final AccountDto account;
 
   final bool border;
@@ -23,7 +24,7 @@ class FCircularAvatarViewer extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     if (account.avatar == null) {
       return FCircularAvatar(
         label: account.displayName,
@@ -33,18 +34,7 @@ class FCircularAvatarViewer extends StatelessWidget {
         borderRadius: borderRadius,
       );
     } else {
-      final factor = MediaQuery.devicePixelRatioOf(context);
-
-      final quality = switch (width * factor) {
-        <= 16 => ImageSquareResolution.P16,
-        <= 32 => ImageSquareResolution.P32,
-        <= 64 => ImageSquareResolution.P64,
-        <= 128 => ImageSquareResolution.P128,
-        <= 256 => ImageSquareResolution.P256,
-        <= 512 => ImageSquareResolution.P512,
-        <= 1024 => ImageSquareResolution.P1024,
-        _ => ImageSquareResolution.Original,
-      };
+      final resolution = UImage.getResolution(ref, context, .Plane, width);
 
       return SizedBox(
         height: height,
@@ -52,7 +42,7 @@ class FCircularAvatarViewer extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
           child: FImage(
-            imageSrc: account.avatar?.url(quality),
+            imageSrc: account.avatar?.url(resolution),
             type: FImageType.secure,
           ),
         ),

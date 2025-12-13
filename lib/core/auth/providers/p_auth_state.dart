@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/route_constants.dart';
-import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_jwt.dart';
+import 'package:flavormate/core/storage/secure_storage/providers/p_ss_jwt.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_auth_state.g.dart';
@@ -12,9 +12,11 @@ part 'p_auth_state.g.dart';
 class PAuthState extends _$PAuthState {
   @override
   AuthState build() {
-    final jwt = ref.watch(pSPJwtProvider);
+    final jwt = ref.watch(pSSJwtProvider);
 
-    return jwt != null ? AuthState.authenticated : AuthState.unauthenticated;
+    if (jwt.value == null) return .unauthenticated;
+
+    return .authenticated;
   }
 }
 

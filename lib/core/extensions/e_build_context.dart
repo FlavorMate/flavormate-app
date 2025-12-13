@@ -3,8 +3,7 @@ import 'package:flavormate/core/theme/models/blended_colors.dart';
 import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_loading_dialog.dart';
-import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel_full_view.dart';
-import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
+import 'package:flavormate/presentation/common/widgets/f_fullscreen_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,10 +36,7 @@ extension EBuildContext on BuildContext {
     return showDialog(
       context: this,
       useSafeArea: false,
-      builder: (_) => FCarouselFullView(
-        url: url,
-        imageType: FImageType.secure,
-      ),
+      builder: (_) => FFullscreenImage(imageSrc: url),
     );
   }
 

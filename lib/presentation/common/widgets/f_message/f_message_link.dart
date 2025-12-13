@@ -1,5 +1,6 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FMessageLink extends ConsumerWidget implements FMessage {
-  final String Function(ImageWideResolution) imageBuilder;
+  final String Function(ImageResolution) imageBuilder;
   final VoidCallback onTap;
 
   final String linkLabel;
@@ -24,6 +25,7 @@ class FMessageLink extends ConsumerWidget implements FMessage {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final imageMode = ref.read(pSettingsImageModeProvider);
     return Container(
       color: context.colorScheme.surfaceContainer,
       constraints: const BoxConstraints(maxWidth: 300),
@@ -36,7 +38,8 @@ class FMessageLink extends ConsumerWidget implements FMessage {
               final resolution = UImage.getResolution(
                 ref,
                 context,
-                constraints,
+                imageMode,
+                constraints.maxWidth,
               );
 
               return Column(

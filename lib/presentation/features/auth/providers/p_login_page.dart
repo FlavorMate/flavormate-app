@@ -52,6 +52,7 @@ class PLoginPage extends _$PLoginPage {
   }
 
   void invalidate() {
+    ref.invalidate(pServerFeaturesProvider);
     ref.invalidate(pServerCompatibilityProvider);
     ref.invalidate(pOIDCProvider);
     ref.invalidateSelf();

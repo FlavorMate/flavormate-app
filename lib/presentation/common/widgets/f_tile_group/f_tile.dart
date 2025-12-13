@@ -30,11 +30,13 @@ class FTile extends StatelessWidget {
         onTap: onTap,
         leading: leading,
         trailing: trailing,
-        title: FText(
-          label,
-          style: .bodyLarge,
-          weight: .w600,
-        ),
+        title: subLabel == null
+            ? FText(label, style: .bodyMedium)
+            : FText(
+                label,
+                style: .bodyLarge,
+                weight: .w600,
+              ),
         subtitle: subLabel?.let(
           (it) => FText(
             it,

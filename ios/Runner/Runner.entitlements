@@ -7,5 +7,7 @@
 		<string>webcredentials:flavormate.de</string>
 		<string>applinks:flavormate.de</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array/>
 </dict>
 </plist>

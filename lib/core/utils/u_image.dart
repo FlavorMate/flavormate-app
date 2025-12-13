@@ -1,64 +1,102 @@
-import 'package:flavormate/core/storage/shared_preferences/enums/sp_settings_image_mode.dart';
-import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
+import 'package:flavormate/core/config/features/p_feature_enhanced_resolutions.dart';
+import 'package:flavormate/core/storage/shared_preferences/enums/image_mode.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class UImage {
-  /// Determines the appropriate ImageWideResolution based on the provided image
+  /// Determines the appropriate [ImageResolution] based on the provided image
   /// metrics and display context.
-  static ImageWideResolution getResolution(
+  static ImageResolution getResolution(
     WidgetRef ref,
     BuildContext context,
-    BoxConstraints constraints,
+    ImageMode imageMode,
+    double width,
   ) {
-    final useImageMode =
-        ref.read(pSettingsImageModeProvider) == SpSettingsImageMode.FillMode;
+    final enableMoreResolutions = ref.read(pFeatureEnhancedResolutionsProvider);
 
-    if (useImageMode) {
-      return ImageWideResolution.Original;
+    return switch (imageMode) {
+      ImageMode.Wide => getWideResolution(
+        context,
+        width,
+        enableMoreResolutions,
+      ),
+      ImageMode.Scale => getScaledResolution(
+        context,
+        width,
+        enableMoreResolutions,
+      ),
+      ImageMode.Plane => getPlaneResolution(
+        context,
+        width,
+        enableMoreResolutions,
+      ),
+    };
+  }
+
+  static ImageResolution getPlaneResolution(
+    BuildContext context,
+    double width,
+    bool enableMoreResolutions,
+  ) {
+    var resolutions = ImageResolution.planeResolutions;
+
+    if (!enableMoreResolutions) {
+      resolutions.remove(ImageResolution.P2048);
+      resolutions.remove(ImageResolution.P3072);
     }
 
     final factor = MediaQuery.devicePixelRatioOf(context);
 
-    final width = constraints.maxWidth * factor;
+    final realWidth = width * factor;
 
-    /// Resolutions smaller than [ImageWideResolution.w480] are not used
-    /// because the height is mostly 200px and lower resolutions would create a blurry image
-    final resolution = switch (width) {
-      // <= 160 => ImageWideResolution.w160,
-      // <= 256 => ImageWideResolution.w256,
-      // <= 320 => ImageWideResolution.w320,
-      <= 480 => ImageWideResolution.W480,
-      <= 640 => ImageWideResolution.W640,
-      <= 960 => ImageWideResolution.W960,
-      <= 1280 => ImageWideResolution.W1280,
-      <= 1920 => ImageWideResolution.W1920,
-      _ => ImageWideResolution.Original,
-    };
-
-    return resolution;
+    return _findBestMatchByWidth(resolutions, realWidth);
   }
 
-  static ImageSquareResolution getSquareResolution(
+  static ImageResolution getScaledResolution(
     BuildContext context,
-    double radius,
+    double width,
+    bool enableMoreResolutions,
   ) {
+    var resolutions = enableMoreResolutions
+        ? ImageResolution.scaledResolutions
+        : [ImageResolution.Original];
+
     final factor = MediaQuery.devicePixelRatioOf(context);
 
-    final width = radius * 2 * factor;
+    final realWidth = width * factor;
 
-    final resolution = switch (width) {
-      <= 16 => ImageSquareResolution.P16,
-      <= 32 => ImageSquareResolution.P32,
-      <= 64 => ImageSquareResolution.P64,
-      <= 128 => ImageSquareResolution.P128,
-      <= 256 => ImageSquareResolution.P256,
-      <= 512 => ImageSquareResolution.P512,
-      <= 1024 => ImageSquareResolution.P1024,
-      _ => ImageSquareResolution.Original,
-    };
+    return _findBestMatchByWidth(resolutions, realWidth);
+  }
 
-    return resolution;
+  static ImageResolution getWideResolution(
+    BuildContext context,
+    double width,
+    bool enableMoreResolutions,
+  ) {
+    var resolutions = ImageResolution.wideResolutions;
+
+    if (!enableMoreResolutions) {
+      resolutions.remove(ImageResolution.W2560);
+      resolutions.remove(ImageResolution.W3840);
+    }
+
+    final factor = MediaQuery.devicePixelRatioOf(context);
+
+    final realWidth = width * factor;
+
+    return _findBestMatchByWidth(resolutions, realWidth);
+  }
+
+  static ImageResolution _findBestMatchByWidth(
+    List<ImageResolution> resolutions,
+    double targetWidth,
+  ) {
+    ImageResolution bestMatch = resolutions[0];
+    for (final resolution in resolutions.skip(1)) {
+      if (bestMatch.width >= targetWidth) break;
+      bestMatch = resolution;
+    }
+    return bestMatch;
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flavormate/core/apis/rest/p_dio_auth.dart';
 import 'package:flavormate/core/apis/rest/p_dio_public.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/navigation/p_go_router.dart';
+import 'package:flavormate/core/storage/secure_storage/providers/p_secure_storage.dart';
+import 'package:flavormate/core/storage/secure_storage/providers/p_ss_jwt.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
-import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_jwt.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_recent_servers.dart';
 import 'package:flavormate/data/datasources/core/auth_controller_api.dart';
 import 'package:flavormate/data/datasources/extensions/oidc_controller_api.dart';
@@ -16,9 +19,9 @@ part 'p_auth.g.dart';
 class PAuth extends _$PAuth {
   @override
   TokensDto build() {
-    final jwt = ref.watch(pSPJwtProvider);
-    if (jwt == null) throw Exception('No JWT found!');
-    return jwt;
+    final jwt = ref.watch(pSSJwtProvider);
+    if (jwt.value == null) throw Exception('No JWT found!');
+    return jwt.value!;
   }
 
   Future<ApiResponse<TokensDto>> login(AuthLoginForm loginForm) async {
@@ -49,7 +52,7 @@ class PAuth extends _$PAuth {
   }
 
   Future<void> setJwt(TokensDto jwt) async {
-    ref.read(pSPJwtProvider.notifier).setValue(jwt);
+    await ref.read(pSSJwtProvider.notifier).setValue(jwt);
 
     await ref.read(pSPRecentServersProvider.notifier).addServer();
 
@@ -64,17 +67,19 @@ class PAuth extends _$PAuth {
 
       final response = await client.postRefreshToken();
 
-      await ref.read(pSPJwtProvider.notifier).setValue(response.data!);
+      await ref.read(pSSJwtProvider.notifier).setValue(response.data!);
 
       return response.data;
     } catch (e) {
-      await logout();
+      // await logout();
     }
     return null;
   }
 
   Future<void> logout() async {
     // Clear shared preferences
+    await ref.read(pSecureStorageProvider.notifier).clear();
     await ref.read(pSPProvider.notifier).clear();
+    navigationKey.currentContext!.routes.server(replace: true);
   }
 }

@@ -11,13 +11,20 @@ class PSP extends _$PSP {
     return SharedPreferences.getInstance();
   }
 
+  // Clear anything but recent servers
   Future<void> clear() async {
-    for (final key in SPKey.values) {
-      if (key == SPKey.RecentServers) continue;
-      if (key == SPKey.CurrentServer) continue;
+    final recentServers =
+        state.requireValue.getStringList(
+          SPKey.RecentServers.name,
+        ) ??
+        [];
 
-      await state.requireValue.remove(key.name);
-    }
+    await state.requireValue.clear();
+
+    await state.requireValue.setStringList(
+      SPKey.RecentServers.name,
+      recentServers,
+    );
 
     ref.invalidateSelf();
   }

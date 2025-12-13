@@ -7,6 +7,8 @@ import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/server/widgets/server_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -105,16 +107,25 @@ class _ServerPageState extends ConsumerState<ServerPage> {
   void pickServer(List<String> recentServers) async {
     final response = await showDialog(
       context: context,
-      builder: (context) => SimpleDialog(
+      builder: (context) => AlertDialog(
         title: Text(
           context.l10n.server_page__recent_servers,
         ),
-        children: [
-          for (final server in recentServers)
-            SimpleDialogOption(
-              child: Text(server),
-              onPressed: () => context.pop(server),
-            ),
+        content: FTileGroup(
+          items: [
+            for (final server in recentServers)
+              FTile(
+                label: server,
+                subLabel: null,
+                onTap: () => context.pop(server),
+              ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => context.pop(),
+            child: Text(context.l10n.btn_close),
+          ),
         ],
       ),
     );

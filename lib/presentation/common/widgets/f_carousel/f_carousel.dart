@@ -1,5 +1,6 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
@@ -19,7 +20,7 @@ class FCarousel<T> extends ConsumerStatefulWidget {
   final void Function() onShowAll;
   final List<T> data;
   final void Function(T)? onTap;
-  final String? Function(T, ImageWideResolution) coverSelector;
+  final String? Function(T, ImageResolution) coverSelector;
   final String Function(T)? labelSelector;
   final String Function(T)? subLabelSelector;
   final FImageType imageType;
@@ -64,6 +65,7 @@ class FCarousel<T> extends ConsumerStatefulWidget {
 class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
   @override
   Widget build(BuildContext context) {
+    final imageMode = ref.read(pSettingsImageModeProvider);
     return LayoutBuilder(
       builder: (context, constraints) {
         final currentBreakpoint = FBreakpoint.getCurrent(constraints.maxWidth);
@@ -72,7 +74,12 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
           widget.data.length,
         );
 
-        final resolution = UImage.getResolution(ref, context, constraints);
+        final resolution = UImage.getResolution(
+          ref,
+          context,
+          imageMode,
+          constraints.maxWidth,
+        );
 
         final hasTitle = widget.title?.isNotEmpty ?? false;
 
