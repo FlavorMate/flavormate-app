@@ -1,4 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
@@ -12,7 +13,7 @@ class FImageCard extends ConsumerWidget {
   final VoidCallback? onTap;
   final double contentWidth;
   final String? label;
-  final String? Function(ImageWideResolution) coverSelector;
+  final String? Function(ImageResolution) coverSelector;
   final String? subLabel;
   final FImageType imageType;
 
@@ -28,7 +29,7 @@ class FImageCard extends ConsumerWidget {
 
   static SizedBox maximized({
     String? label,
-    required String? Function(ImageWideResolution) coverSelector,
+    required String? Function(ImageResolution) coverSelector,
     double height = 200,
     double width = double.infinity,
     FImageType imageType = FImageType.secure,
@@ -55,9 +56,16 @@ class FImageCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final imageMode = ref.read(pSettingsImageModeProvider);
+
     return LayoutBuilder(
       builder: (context, constraints) {
-        final resolution = UImage.getResolution(ref, context, constraints);
+        final resolution = UImage.getResolution(
+          ref,
+          context,
+          imageMode,
+          constraints.maxWidth,
+        );
 
         final opacity = calculateOpacity(constraints.maxWidth);
         return ClipRRect(

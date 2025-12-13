@@ -73,7 +73,7 @@ class FRecipeMobileLayout extends StatelessWidget {
                 data: recipe.files,
                 coverSelector: (image, resolution) => image.url(resolution),
                 onTap: (s) => context.showFullscreenImage(
-                  s.url(ImageWideResolution.Original),
+                  s.url(ImageResolution.Original),
                 ),
                 onShowAll: showAllFiles,
               ),

@@ -12,6 +12,6 @@ class AccountFileDto with AccountFileDtoMappable {
 
   const AccountFileDto({required this.id, required this.path});
 
-  String url(ImageSquareResolution resolution) =>
+  String url(ImageResolution resolution) =>
       '$path?resolution=${resolution.name}';
 }

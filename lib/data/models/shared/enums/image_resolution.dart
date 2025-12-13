@@ -1,74 +1,62 @@
-enum ImageSquareResolution {
-  P16(
-    width: 16,
-    height: 16,
-  ),
-  P32(
-    width: 32,
-    height: 32,
-  ),
-  P64(
-    width: 64,
-    height: 64,
-  ),
-  P128(
-    width: 128,
-    height: 128,
-  ),
-  P256(
-    width: 256,
-    height: 256,
-  ),
-  P512(
-    width: 512,
-    height: 512,
-  ),
-  P1024(
-    width: 1024,
-    height: 1024,
-  ),
-  Original(
-    width: 4096,
-    height: 4096,
-  )
+import 'package:collection/collection.dart';
+
+enum ImageResolution {
+  // defines the upper bounds
+  Original(4096, 4096),
+
+  // 1:1 - Square / Plane
+  P16(16, 16),
+  P32(32, 32),
+  P64(64, 64),
+  P128(128, 128),
+  P256(256, 256),
+  P512(512, 512),
+  P1024(1024, 1024),
+  P2048(2048, 2048),
+  P3072(3072, 3072),
+
+  // 16:9 - Wide
+  W160(160, 90),
+  W256(256, 144),
+  W320(320, 180),
+  W480(480, 270),
+  W640(640, 360),
+  W960(960, 540),
+  W1280(1280, 720),
+  W1920(1920, 1080),
+  W2560(2560, 1440),
+  W3840(3840, 2160),
+
+  // Original - Scaled
+  S32(32, 32),
+  S64(64, 64),
+  S128(128, 128),
+  S256(256, 256),
+  S512(512, 512),
+  S1024(1024, 1024),
+  S2048(2048, 2048),
+  S3072(3072, 3072)
   ;
 
   final int width;
   final int height;
 
-  const ImageSquareResolution({required this.width, required this.height});
+  const ImageResolution(this.width, this.height);
 
   String get resolution => '${width}x$height';
-}
 
-enum ImageWideResolution {
-  W160(
-    width: 160,
-    height: 90,
-  ),
-  W256(width: 256, height: 144),
-  W320(width: 320, height: 180),
-  W480(width: 480, height: 270),
-  W640(width: 640, height: 360),
-  W960(width: 960, height: 540),
-  W1280(
-    width: 1280,
-    height: 720,
-  ),
-  W1920(
-    width: 1920,
-    height: 1080,
-  ),
-  Original(
-    width: 4096,
-    height: 4096,
-  )
-  ;
+  static List<ImageResolution> planeResolutions = ImageResolution.values
+      .where((it) => it.name.startsWith('P'))
+      .sortedBy((it) => it.width)
+      .toList();
 
-  final int width;
-  final int height;
+  static List<ImageResolution> scaledResolutions = ImageResolution.values
+      .where((it) => it.name.startsWith('S'))
+      .sortedBy((it) => it.width)
+      .toList();
 
-  const ImageWideResolution({required this.width, required this.height});
-
-  String get resolution => '${width}x$height';
+  static List<ImageResolution> wideResolutions = ImageResolution.values
+      .where((it) => it.name.startsWith('W'))
+      .sortedBy((it) => it.width)
+      .toList();
 }

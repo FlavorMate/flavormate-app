@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/storage/shared_preferences/enums/sp_settings_image_mode.dart';
+import 'package:flavormate/core/storage/shared_preferences/enums/image_mode.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
@@ -11,9 +11,9 @@ class SettingsAppImageModeExample extends StatelessWidget {
   final String label;
   final String hint;
   final String image;
-  final SpSettingsImageMode value;
+  final ImageMode value;
   final bool state;
-  final void Function(SpSettingsImageMode) onTap;
+  final void Function(ImageMode) onTap;
 
   const SettingsAppImageModeExample({
     super.key,

@@ -20,6 +20,7 @@ class FTileGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: .min,
       crossAxisAlignment: .start,
       spacing: 2,
       children: [

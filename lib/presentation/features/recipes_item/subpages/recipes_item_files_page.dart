@@ -60,6 +60,6 @@ class RecipesItemFilesPage extends ConsumerWidget {
   }
 
   Future openFile(BuildContext context, RecipeFileDto file) {
-    return context.showFullscreenImage(file.url(ImageWideResolution.Original));
+    return context.showFullscreenImage(file.url(ImageResolution.Original));
   }
 }

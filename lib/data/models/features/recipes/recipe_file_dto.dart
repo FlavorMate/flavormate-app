@@ -12,6 +12,6 @@ class RecipeFileDto with RecipeFileDtoMappable {
 
   const RecipeFileDto({required this.id, required this.path});
 
-  String url(ImageWideResolution resolution) =>
+  String url(ImageResolution resolution) =>
       '$path?resolution=${resolution.name}';
 }
