@@ -7,9 +7,11 @@ class LoginPasswordTextField extends StatelessWidget {
   const LoginPasswordTextField({
     super.key,
     required TextEditingController passwordController,
+    required this.onFieldSubmitted,
   }) : _passwordController = passwordController;
 
   final TextEditingController _passwordController;
+  final void Function() onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class LoginPasswordTextField extends StatelessWidget {
 
         return null;
       },
+      onFieldSubmitted: (_) => onFieldSubmitted(),
     );
   }
 }

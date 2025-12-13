@@ -142,6 +142,7 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
                               const SizedBox(height: PADDING),
                               LoginPasswordTextField(
                                 passwordController: _passwordController,
+                                onFieldSubmitted: linkAccount,
                               ),
                             ],
                           ),
