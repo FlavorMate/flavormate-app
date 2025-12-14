@@ -32,6 +32,8 @@ class PDioPrivate extends _$PDioPrivate {
               .read(pAuthHeaderProvider.notifier)
               .authHeader();
 
+          options.extra['retry-count'] = 0;
+
           return handler.next(options);
         },
         onError: (error, handler) async {
@@ -39,6 +41,11 @@ class PDioPrivate extends _$PDioPrivate {
             try {
               // Retry the original request
               final opts = error.requestOptions;
+
+              if (opts.extra['retry-count'] >= 2) return handler.reject(error);
+
+              opts.extra['retry-count'] += 1;
+
               opts.headers['Authorization'] = await ref
                   .read(pAuthHeaderProvider.notifier)
                   .authHeader(forceRefresh: true);
