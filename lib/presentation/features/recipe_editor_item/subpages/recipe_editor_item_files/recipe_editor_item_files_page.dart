@@ -116,6 +116,18 @@ class _RecipeEditorItemFilesPageState
     );
     if (image == null || !context.mounted) return;
 
+    final fileLength = await image.length();
+    final fileSize = fileLength / 1024 / 1024;
+
+    if (!context.mounted) return;
+
+    if (fileSize >= 10) {
+      context.showTextSnackBar(
+        context.l10n.recipe_editor_item_files_page__file_add_too_large,
+      );
+      return;
+    }
+
     context.showLoadingDialog(hint: true);
 
     final response = await ref.read(provider.notifier).addImage(image);

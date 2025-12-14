@@ -1,6 +1,10 @@
+import 'dart:io' as io;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:flavormate/core/auth/providers/p_auth_header.dart';
 
@@ -50,25 +54,49 @@ class _AuthRefreshingHttpFileService extends FileService {
 }
 
 @Riverpod(keepAlive: true)
-BaseCacheManager pSecureImageCacheManager(Ref ref) {
-  final fileService = _AuthRefreshingHttpFileService(
-    headersProvider: ({required bool forceRefresh}) async {
-      final auth = await ref
-          .read(pAuthHeaderProvider.notifier)
-          .authHeader(forceRefresh: forceRefresh);
+class PSecureImageCacheManager extends _$PSecureImageCacheManager {
+  static const String _key = 'flavormate_cached_images';
 
-      if (auth == null || auth.isEmpty) return const <String, String>{};
+  @override
+  BaseCacheManager build() {
+    final fileService = _AuthRefreshingHttpFileService(
+      headersProvider: ({required bool forceRefresh}) async {
+        final auth = await ref
+            .read(pAuthHeaderProvider.notifier)
+            .authHeader(forceRefresh: forceRefresh);
 
-      return <String, String>{'Authorization': auth};
-    },
-  );
+        if (auth == null || auth.isEmpty) return const <String, String>{};
 
-  return CacheManager(
-    Config(
-      'secure_images',
-      stalePeriod: const Duration(days: 7),
-      maxNrOfCacheObjects: 500,
+        return <String, String>{'Authorization': auth};
+      },
+    );
+
+    final config = Config(
+      _key,
       fileService: fileService,
-    ),
-  );
+    );
+
+    return CacheManager(config);
+  }
+
+  Future<void> clear() async {
+    if (kIsWeb) return;
+    await state.emptyCache();
+    await _deleteCachedFiles(_key, recreate: true);
+
+    // old values used in former app versions
+    await _deleteCachedFiles('libCachedImageData');
+    await _deleteCachedFiles('secure_images');
+  }
+
+  Future<void> _deleteCachedFiles(String key, {bool recreate = false}) async {
+    final baseDir = await getTemporaryDirectory();
+
+    final directory = io.Directory('${baseDir.path}/$key');
+
+    if (await directory.exists()) {
+      await directory.delete(recursive: true);
+      if (recreate) await directory.create(recursive: true);
+    }
+  }
 }

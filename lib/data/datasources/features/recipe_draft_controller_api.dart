@@ -8,6 +8,7 @@ import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_file_d
 import 'package:flavormate/data/models/local/pageable_dto.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
+import 'package:flavormate/data/models/shared/models/api_error.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
 import 'package:flutter/foundation.dart';
 
@@ -105,13 +106,19 @@ class RecipeDraftControllerApi extends ControllerApi {
     required String id,
     required MultipartFile file,
   }) async {
-    final data = FormData.fromMap({'file': file});
-    return await post(
-      url: '$_root/$id/files',
-      data: data,
-      mapper: ControllerApi.nullMapper,
-      timeout: const Duration(minutes: 2),
-    );
+    try {
+      final data = FormData.fromMap({'file': file});
+      return await post(
+        url: '$_root/$id/files',
+        data: data,
+        mapper: ControllerApi.nullMapper,
+        timeout: const Duration(minutes: 2),
+      );
+    } catch (e) {
+      return ApiResponse.fromError(
+        ApiError('$_root/$id/files', -1, '', e.toString(), id),
+      );
+    }
   }
 
   Future<ApiResponse<void>> putRecipeDraftsId({

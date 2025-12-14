@@ -395,6 +395,7 @@
   "recipe_editor_item_files_page__delete": "Delete file?",
   "recipe_editor_item_files_page__file_add_on_error": "Error while uploading the image.",
   "recipe_editor_item_files_page__file_add_on_success": "Image uploaded successfully.",
+  "recipe_editor_item_files_page__file_add_too_large": "The image is too large (max. 10 Mb)",
   "recipe_editor_item_files_page__file_delete_on_error": "Error while deleting the image.",
   "recipe_editor_item_files_page__file_delete_on_success": "Image deleted successfully.",
   "recipe_editor_item_files_page__on_empty": "There isn't any media yet.",
