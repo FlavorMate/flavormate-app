@@ -395,6 +395,7 @@
   "recipe_editor_item_files_page__delete": "Datei löschen?",
   "recipe_editor_item_files_page__file_add_on_error": "Fehler beim Hochladen des Bildes.",
   "recipe_editor_item_files_page__file_add_on_success": "Bild erfolgreich hochgeladen.",
+  "recipe_editor_item_files_page__file_add_too_large": "Das Bild ist zu groß (max. 10 Mb)",
   "recipe_editor_item_files_page__file_delete_on_error": "Fehler beim Löschen des Bildes.",
   "recipe_editor_item_files_page__file_delete_on_success": "Bild erfolgreich gelöscht.",
   "recipe_editor_item_files_page__on_empty": "Es sind noch keine Medien vorhanden.",
