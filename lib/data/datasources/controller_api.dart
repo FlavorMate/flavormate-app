@@ -93,7 +93,7 @@ abstract class ControllerApi {
 
       return ApiResponse.fromData(result);
     } on DioException catch (e) {
-      if (e.response == null) rethrow;
+      if (e.response == null || e.response!.data is! Map) rethrow;
 
       final error = ApiErrorMapper.fromMap(e.response!.data);
       return ApiResponse.fromError(error);
