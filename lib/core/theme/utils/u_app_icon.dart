@@ -4,9 +4,11 @@ class UAppIcon {
   static Future<dynamic> changeIcon(AppIcon icon) async {
     const platform = MethodChannel('flavormate/icon');
 
-    final response = await platform.invokeMethod('changeIcon', {
-      'iconName': icon.value,
-    });
+    final response = await platform
+        .invokeMethod('changeIcon', {
+          'iconName': icon.value,
+        })
+        .timeout(const Duration(seconds: 5));
 
     return response;
   }

@@ -10,15 +10,18 @@ class FTile extends StatelessWidget {
   final Widget? leading;
   final Widget? trailing;
 
+  final double? height;
+
   final VoidCallback onTap;
 
   const FTile({
     super.key,
     required this.label,
     required this.subLabel,
-    required this.onTap,
     this.leading,
     this.trailing,
+    this.height,
+    required this.onTap,
   });
 
   @override
@@ -27,6 +30,8 @@ class FTile extends StatelessWidget {
       color: context.colorScheme.surfaceContainer,
       child: ListTile(
         visualDensity: .standard,
+        minTileHeight: height,
+
         onTap: onTap,
         leading: leading,
         trailing: trailing,
