@@ -33,7 +33,8 @@ class CacheImageProvider extends ImageProvider<String> {
     final codecFuture = imageLoader
         .call(key)
         .then<ImmutableBuffer>(ImmutableBuffer.fromUint8List)
-        .then<Codec>(decode);
+        .then<Codec>(decode)
+        .whenComplete(() => scheduleMicrotask(() => chunkEvents.close()));
 
     return MultiFrameImageStreamCompleter(
       codec: codecFuture,

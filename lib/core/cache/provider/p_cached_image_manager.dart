@@ -10,7 +10,7 @@ import 'package:path/path.dart';
 
 part 'p_cached_image_manager.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class PCachedImageManager extends _$PCachedImageManager {
   final cacheName = 'de.flavormate.image_cache';
   late final Directory _filePath;
