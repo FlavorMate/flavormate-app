@@ -1,8 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flavormate/core/cache/cache_image_provider.dart';
+import 'package:flavormate/core/cache/provider/p_cached_image.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
-import 'package:flavormate/presentation/common/widgets/f_image/p_cached_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,24 +28,24 @@ class FCircleAvatar extends ConsumerWidget {
 
     final resolution = UImage.getResolution(ref, context, .Plane, radius * 2);
 
-    final image = ref.watch(
-      pCachedImageProvider(account.avatar?.url(resolution)),
-    );
+    final image = account.avatar
+        ?.url(resolution)
+        .let((it) => ref.watch(pCachedImageProvider(it)));
 
     if (onTap != null) {
       return InkWell(
         borderRadius: .circular(radius),
         onTap: onTap,
-        child: _buildWidget(context, image.value, initials),
+        child: _buildWidget(context, image, initials),
       );
     } else {
-      return _buildWidget(context, image.value, initials);
+      return _buildWidget(context, image, initials);
     }
   }
 
   Widget _buildWidget(
     BuildContext context,
-    CachedNetworkImageProvider? image,
+    CacheImageProvider? image,
     String initials,
   ) {
     return Stack(

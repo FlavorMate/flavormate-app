@@ -25,7 +25,7 @@ class PDioPrivate extends _$PDioPrivate {
     dio.options.baseUrl = server;
     dio.options.connectTimeout = const Duration(seconds: 15);
     dio.options.receiveTimeout = const Duration(seconds: 15);
-    dio.options.headers['Accept'] = 'application/json, text/plain';
+    dio.options.headers['Accept'] = 'application/json, text/plain, image/webp';
     dio.options.headers['Accept-Language'] = language;
 
     // Add interceptors for token management
