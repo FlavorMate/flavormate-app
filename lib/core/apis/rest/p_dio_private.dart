@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/auth/providers/p_auth_header.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/core/utils/u_localizations.dart';
@@ -8,6 +9,9 @@ part 'p_dio_private.g.dart';
 
 @Riverpod(keepAlive: true)
 class PDioPrivate extends _$PDioPrivate {
+  static const retryDuration = Duration(seconds: 1);
+  static const maxRetries = 3;
+
   @override
   Dio build() {
     final server = ref.watch(pSPCurrentServerProvider);
@@ -25,45 +29,65 @@ class PDioPrivate extends _$PDioPrivate {
     dio.options.headers['Accept-Language'] = language;
 
     // Add interceptors for token management
-    dio.interceptors.add(
-      QueuedInterceptorsWrapper(
+    dio.interceptors.addAll([
+      InterceptorsWrapper(
         onRequest: (options, handler) async {
-          options.headers['Authorization'] = await ref
-              .read(pAuthHeaderProvider.notifier)
-              .authHeader();
-
-          options.extra['retry-count'] = 0;
+          try {
+            options.headers['Authorization'] = await ref
+                .read(pAuthHeaderProvider.notifier)
+                .authHeader();
+          } catch (_) {}
 
           return handler.next(options);
         },
+      ),
+      QueuedInterceptorsWrapper(
         onError: (error, handler) async {
-          if (error.response?.statusCode == 401) {
+          int retryCount = 0;
+
+          if (!_shouldRetry(error)) return handler.next(error);
+          while (retryCount < maxRetries) {
             try {
+              retryCount++;
+
+              await Future.delayed(retryDuration * retryCount);
+
               // Retry the original request
               final opts = error.requestOptions;
-
-              if (opts.extra['retry-count'] >= 2) return handler.reject(error);
-
-              opts.extra['retry-count'] += 1;
 
               opts.headers['Authorization'] = await ref
                   .read(pAuthHeaderProvider.notifier)
                   .authHeader(forceRefresh: true);
+
               final response = await dio.fetch(opts);
+
               return handler.resolve(response);
-            } catch (e) {
-              // Handle refresh token failure
-              return handler.reject(error);
+            } on DioException catch (_) {
+              if (retryCount >= maxRetries) {
+                // Handle refresh token failure
+                await ref.read(pAuthProvider.notifier).logout();
+                return handler.reject(error);
+              }
             }
           }
+
           return handler.next(error);
         },
       ),
-    );
+    ]);
 
     // Keep the Dio instance alive
     ref.keepAlive();
 
     return dio;
+  }
+
+  bool _shouldRetry(DioException error) {
+    final statusCode = error.response?.statusCode;
+    return switch (error.type) {
+          DioExceptionType.badResponse => true,
+          _ => false,
+        } &&
+        statusCode == 401;
   }
 }
