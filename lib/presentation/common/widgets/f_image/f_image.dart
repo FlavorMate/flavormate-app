@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flavormate/core/apis/rest/p_secure_image_cache_manager.dart';
+import 'package:flavormate/core/cache/provider/p_cached_image.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +32,13 @@ class FImage extends StatelessWidget {
         ),
         FImageType.secure => Consumer(
           builder: (context, ref, child) {
-            final cacheManager = ref.watch(pSecureImageCacheManagerProvider);
             final server = ref.read(pSPCurrentServerProvider);
             final url = '$server$imageSrc';
-            return CachedNetworkImage(
-              cacheManager: cacheManager,
-              cacheKey: url,
-              imageUrl: url,
+            final imageProvider = ref.watch(pCachedImageProvider(url));
+            return Image(
+              image: imageProvider,
               fit: fit,
-              errorWidget: (_, _, _) => _NoImage(),
+              errorBuilder: (_, _, e) => _NoImage(),
             );
           },
         ),

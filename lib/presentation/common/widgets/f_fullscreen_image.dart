@@ -1,5 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flavormate/core/apis/rest/p_secure_image_cache_manager.dart';
+import 'package:flavormate/core/cache/provider/p_cached_image.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +17,9 @@ class FFullscreenImage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cacheManager = ref.watch(pSecureImageCacheManagerProvider);
     final server = ref.watch(pSPCurrentServerProvider);
-
     final url = '$server$imageSrc';
+    final imageProvider = ref.watch(pCachedImageProvider(url));
     return Dialog.fullscreen(
       child: Material(
         color: Colors.black,
@@ -29,11 +27,7 @@ class FFullscreenImage extends ConsumerWidget {
           child: Stack(
             children: [
               PhotoView(
-                imageProvider: CachedNetworkImageProvider(
-                  url,
-                  cacheKey: url,
-                  cacheManager: cacheManager,
-                ),
+                imageProvider: imageProvider,
               ),
               Positioned(
                 top: PADDING,

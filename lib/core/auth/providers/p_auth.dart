@@ -1,6 +1,6 @@
 import 'package:flavormate/core/apis/rest/p_dio_auth.dart';
 import 'package:flavormate/core/apis/rest/p_dio_public.dart';
-import 'package:flavormate/core/apis/rest/p_secure_image_cache_manager.dart';
+import 'package:flavormate/core/cache/provider/p_cached_image_manager.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/navigation/p_go_router.dart';
 import 'package:flavormate/core/storage/secure_storage/providers/p_secure_storage.dart';
@@ -61,21 +61,20 @@ class PAuth extends _$PAuth {
   }
 
   Future<TokensDto?> refreshToken() async {
+    final dio = ref.read(pDioAuthProvider(state.refreshToken));
 
-      final dio = ref.read(pDioAuthProvider(state.refreshToken));
+    final client = AuthControllerApi(dio);
 
-      final client = AuthControllerApi(dio);
+    final response = await client.postRefreshToken();
 
-      final response = await client.postRefreshToken();
+    await ref.read(pSSJwtProvider.notifier).setValue(response.data!);
 
-      await ref.read(pSSJwtProvider.notifier).setValue(response.data!);
-
-      return response.data;
+    return response.data;
   }
 
   Future<void> logout() async {
     // Clear shared preferences
-    await ref.read(pSecureImageCacheManagerProvider.notifier).clear();
+    await ref.read(pCachedImageManagerProvider.notifier).clear();
     await ref.read(pSecureStorageProvider.notifier).clear();
     await ref.read(pSPProvider.notifier).clear();
 
