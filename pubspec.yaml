@@ -63,6 +63,7 @@ dependencies:
   flutter_secure_storage: ^10.0.0
   path_provider: ^2.1.5
   sembast: ^3.8.5+2
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:

@@ -77,7 +77,7 @@ class _EagerInitialization extends ConsumerWidget {
     ];
 
     if (values.every((value) => value.hasValue)) {
-      ref.read(pCachedImageManagerProvider.notifier).clear();
+      ref.read(pCachedImageManagerProvider.notifier).housekeeping();
       return child;
     }
 
