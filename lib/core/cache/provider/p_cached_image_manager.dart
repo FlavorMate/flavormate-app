@@ -25,7 +25,7 @@ class PCachedImageManager extends _$PCachedImageManager {
     if (kIsWeb) return null;
 
     // get the application documents directory
-    final dir = await getApplicationDocumentsDirectory();
+    final dir = await getApplicationSupportDirectory();
 
     // make sure it exists
     await dir.create(recursive: true);

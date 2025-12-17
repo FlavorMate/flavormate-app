@@ -1,6 +1,5 @@
 import 'package:flavormate/core/cache/provider/p_cached_image.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,9 +16,7 @@ class FFullscreenImage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final server = ref.watch(pSPCurrentServerProvider);
-    final url = '$server$imageSrc';
-    final imageProvider = ref.watch(pCachedImageProvider(url));
+    final imageProvider = ref.watch(pCachedImageProvider(imageSrc));
     return Dialog.fullscreen(
       child: Material(
         color: Colors.black,
