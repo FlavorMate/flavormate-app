@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/core/cache/provider/p_cached_image_manager.dart';
 import 'package:flavormate/core/config/app_links/p_app_links.dart';
 import 'package:flavormate/core/mappers/custom_mappers.dart';
 import 'package:flavormate/core/navigation/p_go_router.dart';
@@ -11,7 +12,7 @@ import 'package:flavormate/core/theme/providers/p_theme.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ImageCache;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:system_theme/system_theme.dart';
@@ -72,9 +73,11 @@ class _EagerInitialization extends ConsumerWidget {
       ref.watch(pRBBackendUrlProvider),
       ref.watch(pThemeProvider),
       ref.watch(pPackageInfoProvider),
+      ref.watch(pCachedImageManagerProvider),
     ];
 
     if (values.every((value) => value.hasValue)) {
+      ref.read(pCachedImageManagerProvider.notifier).housekeeping();
       return child;
     }
 
