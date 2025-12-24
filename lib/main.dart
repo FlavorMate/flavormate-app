@@ -1,3 +1,4 @@
+import 'package:app_links/app_links.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/core/cache/provider/p_cached_image_manager.dart';
 import 'package:flavormate/core/config/app_links/p_app_links.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:system_theme/system_theme.dart';
 
 void main() async {
+  AppLinks();
   WidgetsFlutterBinding.ensureInitialized();
   registerManualLicenses();
   await SystemTheme.accentColor.load();
@@ -67,7 +69,6 @@ class _EagerInitialization extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(pAppLinksProvider);
     final values = [
       ref.watch(pSPProvider),
       ref.watch(pRBBackendUrlProvider),
@@ -77,6 +78,7 @@ class _EagerInitialization extends ConsumerWidget {
     ];
 
     if (values.every((value) => value.hasValue)) {
+      ref.watch(pAppLinksProvider);
       ref.read(pCachedImageManagerProvider.notifier).housekeeping();
       return child;
     }

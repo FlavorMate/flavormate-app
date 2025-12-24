@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:app_links/app_links.dart';
 import 'package:flavormate/core/auth/providers/p_auth.dart';
+import 'package:flavormate/core/config/app_links/p_app_links.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
@@ -44,11 +46,16 @@ class _SplashPageState extends ConsumerState<SplashPage> {
               context.routes.serverOutdated();
               return;
             case VersionComparison.minorIncompatible:
-              context.routes.home(replace: true);
-              return;
             case VersionComparison.fullyCompatible:
-              context.routes.home(replace: true);
-              return;
+              final appLink = AppLinks();
+              final latestAppLink = await appLink.getLatestLink();
+
+              if (!mounted) return;
+              await context.routes.home(replace: true);
+
+              if (latestAppLink != null) {
+                return ref.read(pAppLinksProvider.notifier).listener(latestAppLink);
+              }
           }
         },
         loading: () {},

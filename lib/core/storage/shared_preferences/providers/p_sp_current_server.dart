@@ -11,7 +11,7 @@ final _key = SPKey.CurrentServer.name;
 class PSPCurrentServer extends _$PSPCurrentServer {
   @override
   String? build() {
-    final backendUrl = ref.read(pRBBackendUrlProvider).requireValue;
+    final backendUrl = ref.watch(pRBBackendUrlProvider).value;
     if (backendUrl != null) {
       return backendUrl;
     }

@@ -1,5 +1,4 @@
 import 'package:app_links/app_links.dart';
-import 'package:flavormate/core/constants/route_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/navigation/p_go_router.dart';
@@ -44,6 +43,9 @@ class PAppLinks extends _$PAppLinks {
         type?.trimToNull == null ||
         id?.trimToNull == null ||
         token?.trimToNull == null) {
+      navigationKey.currentContext!.showErrorSnackBar(
+        'Request is not valid!',
+      );
       return;
     }
 
@@ -57,12 +59,7 @@ class PAppLinks extends _$PAppLinks {
     }
 
     if (type == 'recipe') {
-      ref
-          .read(pGoRouterProvider)
-          .pushNamed(
-            RouteConstants.RecipesItem.name,
-            pathParameters: {'id': id!},
-          );
+      navigationKey.currentContext!.routes.recipesItem(id!);
     }
 
     return;
