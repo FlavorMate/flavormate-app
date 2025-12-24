@@ -378,6 +378,8 @@
   "order_by__visible": "Sichtbarkeit",
   "order_direction__ascending": "Aufsteigend",
   "order_direction__descending": "Absteigend",
+  "p_app_links__foreign_server": "Fremde Server werden noch nicht unterstützt",
+  "p_app_links__invalid_request": "Die Anfrage ist ungültig",
   "recipe_editor_fab__create_recipe": "Rezept erstellen",
   "recipe_editor_fab__import_recipe": "Rezept importieren",
   "recipe_editor_item_categories_page__on_error": "Fehler beim Laden der Kategorien.",
