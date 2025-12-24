@@ -51,10 +51,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
               final latestAppLink = await appLink.getLatestLink();
 
               if (!mounted) return;
-              await context.routes.home(replace: true);
-
               if (latestAppLink != null) {
-                return ref.read(pAppLinksProvider.notifier).listener(latestAppLink);
+                await ref
+                    .read(pAppLinksProvider.notifier)
+                    .listener(latestAppLink);
+              } else {
+                await context.routes.home(replace: true);
               }
           }
         },

@@ -63,11 +63,18 @@ class Routes {
     );
   }
 
-  Future recipesItem(String id) {
-    return context.pushNamed(
-      RouteConstants.RecipesItem.name,
-      pathParameters: {'id': id},
-    );
+  Future<void> recipesItem(String id, {bool replace = false}) async {
+    if (replace) {
+      context.pushReplacementNamed(
+        RouteConstants.RecipesItem.name,
+        pathParameters: {'id': id},
+      );
+    } else {
+      await context.pushNamed(
+        RouteConstants.RecipesItem.name,
+        pathParameters: {'id': id},
+      );
+    }
   }
 
   Future recipesItemFiles(String id) {

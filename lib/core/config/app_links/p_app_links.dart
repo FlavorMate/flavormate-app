@@ -33,7 +33,9 @@ class PAppLinks extends _$PAppLinks {
   /// - token   -> the token to get temporary access to the server
   ///
   /// e.g. `flavormate://open?server=http://localhost:8080&page=recipe&id=111&token=2222e1ad-76cf-4aa6-ab41-78a2337e6ba5`
-  void listener(Uri uri) async {
+  Future<void> listener(Uri uri) async {
+    if (uri.scheme != 'flavormate') return;
+
     final action = uri.host;
 
     final server = uri.queryParameters['server'];
@@ -58,7 +60,7 @@ class PAppLinks extends _$PAppLinks {
     }
 
     if (type == 'recipe') {
-      _context.routes.recipesItem(id!);
+      _context.routes.recipesItem(id!, replace: true);
     }
 
     return;
