@@ -1,15 +1,17 @@
 import 'package:app_links/app_links.dart';
-import 'package:flavormate/core/constants/route_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/navigation/p_go_router.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_app_links.g.dart';
 
 @riverpod
 class PAppLinks extends _$PAppLinks {
+  BuildContext get _context => navigationKey.currentContext!;
+
   @override
   void build() {
     final appLinks = AppLinks();
@@ -44,25 +46,19 @@ class PAppLinks extends _$PAppLinks {
         type?.trimToNull == null ||
         id?.trimToNull == null ||
         token?.trimToNull == null) {
+      _context.showErrorSnackBar(_context.l10n.p_app_links__invalid_request);
       return;
     }
 
     final currentServer = ref.read(pSPCurrentServerProvider);
 
     if (currentServer != server!) {
-      navigationKey.currentContext!.showErrorSnackBar(
-        'Foreign servers are not supported yet!',
-      );
+      _context.showErrorSnackBar(_context.l10n.p_app_links__foreign_server);
       return;
     }
 
     if (type == 'recipe') {
-      ref
-          .read(pGoRouterProvider)
-          .pushNamed(
-            RouteConstants.RecipesItem.name,
-            pathParameters: {'id': id!},
-          );
+      _context.routes.recipesItem(id!);
     }
 
     return;
