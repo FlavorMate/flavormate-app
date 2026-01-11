@@ -2,3 +2,6 @@ source "https://rubygems.org"
 
 gem "dotenv"
 gem "fastlane"
+
+# fix vulnerabilities
+gem "json", ">= 2.3.0"
