@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:app_links/app_links.dart';
 import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/config/app_links/p_app_links.dart';
 import 'package:flavormate/core/constants/constants.dart';
@@ -47,8 +46,9 @@ class _SplashPageState extends ConsumerState<SplashPage> {
               return;
             case VersionComparison.minorIncompatible:
             case VersionComparison.fullyCompatible:
-              final appLink = AppLinks();
-              final latestAppLink = await appLink.getLatestLink();
+              final latestAppLink = await ref
+                  .read(pAppLinksProvider.notifier)
+                  .getInitialUri();
 
               if (!mounted) return;
               if (latestAppLink != null) {

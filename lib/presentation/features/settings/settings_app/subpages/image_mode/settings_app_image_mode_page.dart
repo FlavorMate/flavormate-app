@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsAppImageModePage extends ConsumerWidget {
-  const SettingsAppImageModePage({super.key});
+  SettingsAppImageModePage({super.key});
 
   final PSettingsImageModeProvider provider = pSettingsImageModeProvider;
 

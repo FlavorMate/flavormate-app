@@ -135,7 +135,7 @@ var routes = [
   ),
   _createRoute(
     RouteConstants.SettingsAppImageMode,
-    (_) => const SettingsAppImageModePage(),
+    (_) => SettingsAppImageModePage(),
   ),
   _createRoute(
     RouteConstants.SettingsAppAppIconMode,
