@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_links/app_links.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
@@ -13,7 +15,7 @@ class PAppLinks extends _$PAppLinks {
   BuildContext get _context => navigationKey.currentContext!;
 
   @override
-  void build() {
+  AppLinks build() {
     final appLinks = AppLinks();
 
     ref.keepAlive();
@@ -24,6 +26,8 @@ class PAppLinks extends _$PAppLinks {
     ref.onDispose(() {
       sub.cancel();
     });
+
+    return appLinks;
   }
 
   /// The url contains the following information:
@@ -34,23 +38,12 @@ class PAppLinks extends _$PAppLinks {
   ///
   /// e.g. `flavormate://open?server=http://localhost:8080&page=recipe&id=111&token=2222e1ad-76cf-4aa6-ab41-78a2337e6ba5`
   Future<void> listener(Uri uri) async {
-    if (uri.scheme != 'flavormate') return;
-
-    final action = uri.host;
+    if (!validateLink(uri)) return;
 
     final server = uri.queryParameters['server'];
     final type = uri.queryParameters['type'];
     final id = uri.queryParameters['id'];
-    final token = uri.queryParameters['token'];
-
-    if (action != 'open' ||
-        server?.trimToNull == null ||
-        type?.trimToNull == null ||
-        id?.trimToNull == null ||
-        token?.trimToNull == null) {
-      _context.showErrorSnackBar(_context.l10n.p_app_links__invalid_request);
-      return;
-    }
+    // final token = uri.queryParameters['token'];
 
     final currentServer = ref.read(pSPCurrentServerProvider);
 
@@ -64,5 +57,49 @@ class PAppLinks extends _$PAppLinks {
     }
 
     return;
+  }
+
+  Future<Uri?> getInitialUri() async {
+    final uri = await state.getInitialLink();
+
+    if (uri == null) return null;
+
+    return validateLink(uri) ? uri : null;
+  }
+
+  bool validateLink(Uri uri) {
+    if (uri.scheme != 'flavormate') return false;
+    if (uri.host != 'open') return false;
+
+    final server = uri.queryParameters['server'];
+    final type = uri.queryParameters['type'];
+    final id = uri.queryParameters['id'];
+    final token = uri.queryParameters['token'];
+
+    if (server?.trimToNull == null ||
+        type?.trimToNull == null ||
+        id?.trimToNull == null ||
+        token?.trimToNull == null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  Future<Uri> waitForNextElement() async {
+    // Create a Completer
+    Completer<Uri> completer = Completer<Uri>();
+
+    // Listen to the stream
+    late StreamSubscription<Uri> subscription;
+
+    subscription = state.uriLinkStream.listen((data) {
+      // Complete the future with the first element received
+      completer.complete(data);
+      subscription.cancel(); // Cancel the subscription to stop listening
+    });
+
+    // Return the value when it's available
+    return completer.future.timeout(const Duration(minutes: 1));
   }
 }
