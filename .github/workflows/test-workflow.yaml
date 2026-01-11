@@ -5,8 +5,8 @@ on:
       - main
 
 env:
-  FLUTTER_VERSION: 3.38.5
-  RUBY_VERSION: 3.4
+  FLUTTER_VERSION: 3.38.6
+  RUBY_VERSION: 4.0
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
 
@@ -23,6 +23,12 @@ jobs:
           java-version: "21"
           distribution: "temurin"
           cache: "gradle"
+      
+      - name: Set Up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
 
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
@@ -59,6 +65,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set Up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
 
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
@@ -98,6 +110,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set Up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
 
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
