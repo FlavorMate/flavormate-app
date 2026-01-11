@@ -30,6 +30,8 @@
 		50D1369149F016376C5295FF /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D49D82D92BCC585137E0CC9 /* Pods_Runner.framework */; };
 		A0F50BE48DB72FC1798DAF5E /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5BE9EFCC90732020B224427 /* Pods_RunnerTests.framework */; };
 		F14686F22C6FAF13005E92ED /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F14686F12C6FAF13005E92ED /* InfoPlist.xcstrings */; };
+		F1A519FC2F1423BD0017017A /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1A519FA2F1423BD0017017A /* AppIcon.icon */; };
+		F1A519FD2F1423BD0017017A /* Winter2025Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1A519FB2F1423BD0017017A /* Winter2025Icon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		F14686F12C6FAF13005E92ED /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		F18586BC2C6D1373008FB24E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		F1A519FA2F1423BD0017017A /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		F1A519FB2F1423BD0017017A /* Winter2025Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Winter2025Icon.icon; sourceTree = "<group>"; };
 		F47DE1EA58CCF36B6B9269A1 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		F5BE9EFCC90732020B224427 /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F746105503E5B348E0792008 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 				33E51914231749380026EE4D /* Release.entitlements */,
 				33CC11242044D66E0003C045 /* Resources */,
 				33BA886A226E78AF003329D5 /* Configs */,
+				F1A519FA2F1423BD0017017A /* AppIcon.icon */,
+				F1A519FB2F1423BD0017017A /* Winter2025Icon.icon */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -320,6 +326,8 @@
 			files = (
 				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
 				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
+				F1A519FC2F1423BD0017017A /* AppIcon.icon in Resources */,
+				F1A519FD2F1423BD0017017A /* Winter2025Icon.icon in Resources */,
 				F14686F22C6FAF13005E92ED /* InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

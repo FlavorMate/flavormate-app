@@ -17,6 +17,8 @@
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		CB735F21556714E5F7F2538C /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DBF6AF161BFCC4EF164344A /* Pods_Runner.framework */; };
 		F14686EE2C6FAE67005E92ED /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F14686ED2C6FAE67005E92ED /* InfoPlist.xcstrings */; };
+		F1A519F82F1420620017017A /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1A519F62F1420620017017A /* AppIcon.icon */; };
+		F1A519F92F1420620017017A /* Winter2025Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1A519F72F1420620017017A /* Winter2025Icon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		F15ADF0D2C7E66B70049B7AE /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		F18586BA2C6D1301008FB24E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F18586BB2C6D1301008FB24E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F1A519F62F1420620017017A /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		F1A519F72F1420620017017A /* Winter2025Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Winter2025Icon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,8 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				F1A519F62F1420620017017A /* AppIcon.icon */,
+				F1A519F72F1420620017017A /* Winter2025Icon.icon */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -267,6 +273,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1A519F82F1420620017017A /* AppIcon.icon in Resources */,
+				F1A519F92F1420620017017A /* Winter2025Icon.icon in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				F14686EE2C6FAE67005E92ED /* InfoPlist.xcstrings in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
