@@ -145,6 +145,6 @@ class POIDC extends _$POIDC {
         )
         .toString();
 
-    await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 }
