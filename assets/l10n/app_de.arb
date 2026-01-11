@@ -333,7 +333,7 @@
   "login_compatibility_admonition__major": "Diese App ist nicht mit dem Server kompatibel.\\\nBitte aktualisiere den Server.",
   "login_compatibility_admonition__minor": "Diese App ist möglicherweise nicht vollständig mit dem Server kompatibel.\\\nBitte aktualisiere den Server.",
   "login_oidc_link_dialog__hint_1": "Hi {name},",
-  "login_oidc_link_dialog__hint_2": "Bitte melde dich mit deinem FlavorMate-Konto an, um es mit {label} zu verknüpfen.",
+  "login_oidc_link_dialog__hint_2": "bitte melde dich mit deinem FlavorMate-Konto an, um es mit {label} zu verknüpfen.",
   "login_oidc_link_dialog__on_error": "Dein Konto konnte nicht verknüpft werden.",
   "login_oidc_link_dialog__on_success": "Dein Konto wurde erfolgreich verknüpft.",
   "login_oidc_link_dialog__token_expired": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
