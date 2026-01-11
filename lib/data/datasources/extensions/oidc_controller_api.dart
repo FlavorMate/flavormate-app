@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flavormate/core/constants/api_constants.dart';
 import 'package:flavormate/data/datasources/controller_api.dart';
 import 'package:flavormate/data/models/core/auth/auth_login_form.dart';
@@ -33,6 +35,24 @@ class OIDCControllerApi extends ControllerApi {
       url: '$_root/link',
       data: form.toJson(),
       mapper: (data) => TokensDtoMapper.fromMap(data),
+    );
+  }
+
+  Future<ApiResponse<String>> exchangeCode({
+    required String id,
+    required String code,
+    required String codeVerifier,
+    required String redirectUri,
+  }) async {
+    return await post(
+      url: '$_root/exchange-code',
+      data: jsonEncode({
+        'providerId': id,
+        'code': code,
+        'codeVerifier': codeVerifier,
+        'redirectUri': redirectUri,
+      }),
+      mapper: (data) => data as String,
     );
   }
 }

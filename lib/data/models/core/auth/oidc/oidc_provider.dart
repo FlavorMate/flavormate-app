@@ -8,6 +8,7 @@ class OIDCProvider with OIDCProviderMappable {
   final String url;
   final String clientId;
   final String id;
+  final String redirectUri;
   final String? iconPath;
 
   const OIDCProvider(
@@ -15,6 +16,7 @@ class OIDCProvider with OIDCProviderMappable {
     this.url,
     this.clientId,
     this.id,
-    this.iconPath,
-  );
+    this.iconPath, {
+    this.redirectUri = 'flavormate://oauth',
+  });
 }
