@@ -3,17 +3,16 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_dense_text_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
+import 'package:flavormate/presentation/common/widgets/f_logo.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
+import 'package:flavormate/presentation/common/widgets/f_text_button.dart';
+import 'package:flavormate/presentation/common/widgets/f_responsive_card.dart';
 import 'package:flavormate/presentation/features/auth/providers/p_login_page.dart';
 import 'package:flavormate/presentation/features/auth/widgets/login_password_text_field.dart';
 import 'package:flavormate/presentation/features/auth/widgets/login_username_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -45,50 +44,65 @@ class _AuthLoginPageState extends ConsumerState<AuthLoginPage> {
       provider: widget.provider,
       bottomNavigationBarBuilder: (_, _) => const FBottomNavigationBackBar(),
       builder: (_, data) => Center(
-        child: FResponsive(
-          child: AutofillGroup(
-            child: Form(
-              key: _formKey,
-              child: FCard(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(MdiIcons.loginVariant, size: 72),
-                    const SizedBox(height: PADDING),
-                    FText(
-                      context.l10n.auth_login_page__title,
-                      style: FTextStyle.titleLarge,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: PADDING * 2),
-                    LoginUsernameTextField(
-                      usernameController: _usernameController,
-                    ),
-                    const SizedBox(height: PADDING),
-                    LoginPasswordTextField(
-                      passwordController: _passwordController,
-                      onFieldSubmitted: login,
-                    ),
-                    if (data.enableRecovery)
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: FDenseTextButton(
-                          onPressed: startRecovery,
-                          child: Text(
-                            context.l10n.auth_login_page__forgot_password,
+        child: FResponsiveCard(
+          child: Column(
+            crossAxisAlignment: .start,
+            spacing: PADDING * 1.5,
+            mainAxisSize: .min,
+            children: [
+              const FLogo(size: 76),
+              Column(
+                spacing: PADDING / 2,
+                crossAxisAlignment: .start,
+                children: [
+                  FText(
+                    context.l10n.auth_login_page__title,
+                    style: .headlineMedium,
+                  ),
+                  FText(
+                    context.l10n.auth_login_page__hint_1,
+                    style: .titleMedium,
+                  ),
+                ],
+              ),
+              AutofillGroup(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    spacing: PADDING / 2,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LoginUsernameTextField(
+                        usernameController: _usernameController,
+                      ),
+                      LoginPasswordTextField(
+                        passwordController: _passwordController,
+                        onFieldSubmitted: login,
+                      ),
+                      if (data.enableRecovery)
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: FTextButton(
+                            onPressed: startRecovery,
+                            value:
+                                context.l10n.auth_login_page__forgot_password,
                           ),
                         ),
-                      ),
-                    const SizedBox(height: PADDING),
-                    FButton(
-                      width: BUTTON_WIDTH,
-                      onPressed: login,
-                      label: context.l10n.btn_login,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
+              Row(
+                mainAxisAlignment: .end,
+                children: [
+                  FButton(
+                    width: 125,
+                    onPressed: login,
+                    label: context.l10n.btn_login,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
