@@ -1,10 +1,10 @@
 import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/core/riverpod/search_state/p_search_state.dart';
 import 'package:flavormate/core/riverpod/search_state/search_state.dart';
 import 'package:flavormate/core/utils/debouncer.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_search.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_search/f_search_no_result.dart';
@@ -81,7 +81,7 @@ class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
                   final suggestion = data.data[index];
                   return ListTile(
                     title: Text(suggestion.label),
-                    leading: const Icon(MdiIcons.bookOutline),
+                    leading: const Icon(MdiIcons.book),
                     onTap: () {
                       widget.onTap(suggestion.id);
                     },

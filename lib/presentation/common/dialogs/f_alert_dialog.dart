@@ -1,3 +1,4 @@
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,6 +33,11 @@ class FAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: scrollable,
+      constraints: const BoxConstraints(
+        minWidth: 560,
+        maxWidth: 560,
+      ),
+      insetPadding: const .all(PADDING),
       title: Text(title),
       actions: [
         TextButton(

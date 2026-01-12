@@ -1,12 +1,12 @@
 import 'package:flavormate/core/config/features/p_feature_open_food_facts.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
 import 'package:flavormate/data/models/features/unit/unit_dto.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_full_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
@@ -147,7 +147,7 @@ class _DNutritionState
                   child: Row(
                     spacing: PADDING,
                     children: [
-                      const Icon(MdiIcons.alertCircleOutline),
+                      const Icon(MdiIcons.alertCircle),
                       Expanded(
                         child: FText(
                           context
@@ -213,7 +213,7 @@ class _DNutritionState
                         child: Row(
                           spacing: PADDING,
                           children: [
-                            const Icon(MdiIcons.alertCircleOutline),
+                            const Icon(MdiIcons.alertCircle),
                             Expanded(
                               child: FText(
                                 context
@@ -246,7 +246,7 @@ class _DNutritionState
                       child: Row(
                         spacing: PADDING,
                         children: [
-                          const Icon(MdiIcons.alertCircleOutline),
+                          const Icon(MdiIcons.alertCircle),
                           Expanded(
                             child: FText(
                               context
@@ -295,7 +295,7 @@ class _DNutritionState
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
-                    prefix: const Icon(MdiIcons.cubeOutline),
+                    prefix: const Icon(MdiIcons.cube),
                   ),
                   SizedBox(width: _dividerWidth, child: const Divider()),
                   FTextFormField(
@@ -304,7 +304,7 @@ class _DNutritionState
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
-                    prefix: const Icon(MdiIcons.waterOutline),
+                    prefix: const Icon(MdiIcons.water),
                   ),
                   FTextFormField(
                     controller: _saturatedFatController,
@@ -312,7 +312,7 @@ class _DNutritionState
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
-                    prefix: const Icon(MdiIcons.foodDrumstickOutline),
+                    prefix: const Icon(MdiIcons.foodDrumstick),
                   ),
                   SizedBox(width: _dividerWidth, child: const Divider()),
                   FTextFormField(
@@ -329,7 +329,7 @@ class _DNutritionState
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
-                    prefix: const Icon(MdiIcons.peanutOutline),
+                    prefix: const Icon(MdiIcons.peanut),
                   ),
                   FTextFormField(
                     controller: _saltController,
@@ -337,7 +337,7 @@ class _DNutritionState
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
-                    prefix: const Icon(MdiIcons.shakerOutline),
+                    prefix: const Icon(MdiIcons.shaker),
                   ),
                   FTextFormField(
                     controller: _sodiumController,
@@ -345,7 +345,7 @@ class _DNutritionState
                     keyboardType: TextInputType.number,
                     readOnly: !enableCustom,
                     validators: validate,
-                    prefix: const Icon(MdiIcons.flaskOutline),
+                    prefix: const Icon(MdiIcons.flask),
                   ),
                 ],
               ),

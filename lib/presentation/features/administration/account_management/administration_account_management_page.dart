@@ -10,6 +10,7 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/models/account_create_form.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/admin/p_rest_admin_accounts.dart';
+import 'package:flavormate/presentation/common/dialogs/avatar/avatar_utils.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
@@ -17,9 +18,9 @@ import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_pagina
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_simple_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
+import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_actions_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_new_account_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_password_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/enums/administration_account_management_actions.dart';
@@ -128,57 +129,28 @@ class _AccountManagementPageState
     );
   }
 
-  void showOptions(AccountFullDto account) async {
+  void showOptions(AccountFullDto account, bool isCurrent) async {
     final result = await showDialog<AdministrationAccountManagementActions>(
       context: context,
-      builder: (_) => FSimpleDialog<AdministrationAccountManagementActions>(
-        title:
-            context.l10n.administration_account_management_page__actions_title,
-        options: [
-          if (account.avatar != null)
-            FSimpleDialogOption(
-              label: context
-                  .l10n
-                  .administration_account_management_page__actions_avatar,
-              icon: MdiIcons.imageOutline,
-              value: AdministrationAccountManagementActions.Avatar,
-            ),
-          FSimpleDialogOption(
-            label: account.enabled
-                ? context
-                      .l10n
-                      .administration_account_management_page__actions_disable
-                : context
-                      .l10n
-                      .administration_account_management_page__actions_enable,
-            icon: MdiIcons.accountCheck,
-            value: AdministrationAccountManagementActions.Enable,
-          ),
-          FSimpleDialogOption(
-            label: context
-                .l10n
-                .administration_account_management_page__actions_set_password,
-            icon: MdiIcons.lockReset,
-            value: AdministrationAccountManagementActions.ResetPassword,
-          ),
-          FSimpleDialogOption(
-            label: context
-                .l10n
-                .administration_account_management_page__actions_delete,
-            icon: MdiIcons.delete,
-            value: AdministrationAccountManagementActions.Delete,
-          ),
-        ],
+      builder: (_) => AdministrationAccountManagementActionsDialog(
+        account: account,
+        isCurrent: isCurrent,
       ),
     );
 
     if (!mounted || result == null) return;
 
     switch (result) {
+      case .Open:
+        await openAccount(account);
+        return;
       case .Avatar:
         if (account.avatar != null) {
           context.showFullscreenImage(account.avatar!.url(.Original));
         }
+        return;
+      case .AvatarChange:
+        await changeAvatar(account);
         return;
       case AdministrationAccountManagementActions.Enable:
         await toggleActiveState(account);
@@ -290,6 +262,16 @@ class _AccountManagementPageState
     }
   }
 
+  Future<void> openAccount(AccountFullDto account) async {
+    await context.routes.accountsItem(account.id);
+  }
+
   @override
   OrderBy get defaultOrderBy => OrderBy.Username;
+
+  Future<void> changeAvatar(AccountFullDto account) async {
+    await AvatarUtils.manageAvatar(context, ref, account);
+
+    ref.invalidate(provider);
+  }
 }

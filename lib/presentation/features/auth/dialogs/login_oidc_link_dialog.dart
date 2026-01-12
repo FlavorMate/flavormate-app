@@ -7,6 +7,7 @@ import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
+import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_oidc/f_oidc_icon.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -101,60 +102,61 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
               ),
               Center(
                 child: FResponsive(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FOidcIcon(
-                        provider: widget.provider,
-                        width: 128,
-                        height: 128,
-                      ),
-                      SizedBox(
-                        width: BUTTON_WIDTH,
-                        child: FText(
-                          context.l10n.login_oidc_link_dialog__hint_1(
-                            widget.displayName ?? '',
-                          ),
-                          style: FTextStyle.headlineMedium,
-                          textAlign: TextAlign.start,
+                  child: FCard(
+                    child: Column(
+                      spacing: PADDING,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FOidcIcon(
+                          provider: widget.provider,
+                          width: 92,
+                          height: 92,
                         ),
-                      ),
-                      const SizedBox(height: PADDING / 2),
-                      SizedBox(
-                        width: BUTTON_WIDTH,
-                        child: FText(
-                          context.l10n.login_oidc_link_dialog__hint_2(
-                            widget.provider.name,
-                          ),
-                          style: FTextStyle.bodyMedium,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      const SizedBox(height: PADDING),
-                      AutofillGroup(
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              LoginUsernameTextField(
-                                usernameController: _usernameController,
+                        Column(
+                          spacing: PADDING / 4,
+                          crossAxisAlignment: .start,
+                          children: [
+                            FText(
+                              context.l10n.login_oidc_link_dialog__hint_1(
+                                widget.displayName ?? '',
                               ),
-                              const SizedBox(height: PADDING),
-                              LoginPasswordTextField(
-                                passwordController: _passwordController,
-                                onFieldSubmitted: linkAccount,
+                              style: FTextStyle.headlineMedium,
+                              textAlign: TextAlign.start,
+                            ),
+                            FText(
+                              context.l10n.login_oidc_link_dialog__hint_2(
+                                widget.provider.name,
                               ),
-                            ],
+                              style: FTextStyle.bodyMedium,
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+
+                        AutofillGroup(
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              spacing: PADDING,
+                              children: [
+                                LoginUsernameTextField(
+                                  usernameController: _usernameController,
+                                ),
+                                LoginPasswordTextField(
+                                  passwordController: _passwordController,
+                                  onFieldSubmitted: linkAccount,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: PADDING * 2),
-                      FButton(
-                        width: BUTTON_WIDTH,
-                        onPressed: linkAccount,
-                        label: context.l10n.btn_link_account,
-                      ),
-                    ],
+                        FButton(
+                          width: BUTTON_WIDTH,
+                          onPressed: linkAccount,
+                          label: context.l10n.btn_link_account,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

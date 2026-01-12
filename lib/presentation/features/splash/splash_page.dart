@@ -10,9 +10,9 @@ import 'package:flavormate/data/repositories/core/server/p_server_compatibility.
 import 'package:flavormate/data/repositories/core/server/p_server_features.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_unit_conversions.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_units.dart';
-import 'package:flavormate/presentation/common/widgets/f_dense_text_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
+import 'package:flavormate/presentation/common/widgets/f_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -125,9 +125,9 @@ class _SplashPageState extends ConsumerState<SplashPage> {
                 ),
                 SizedBox(
                   width: 250,
-                  child: FDenseTextButton(
+                  child: FTextButton(
                     onPressed: logout,
-                    child: Text(context.l10n.btn_logout),
+                    value: context.l10n.btn_logout,
                   ),
                 ),
               ],

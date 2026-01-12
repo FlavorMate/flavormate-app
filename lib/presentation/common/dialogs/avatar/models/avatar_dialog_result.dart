@@ -1,0 +1,1 @@
+enum AvatarDialogResult { Change, Delete }

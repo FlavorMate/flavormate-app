@@ -6,12 +6,11 @@ import 'package:flavormate/core/extensions/e_dio.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
+import 'package:flavormate/presentation/common/widgets/f_logo.dart';
+import 'package:flavormate/presentation/common/widgets/f_responsive_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -45,12 +44,117 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
     return Scaffold(
       bottomNavigationBar: const FBottomNavigationBackBar(),
       body: SafeArea(
-        child: FFixedResponsive(
+        child: Center(
+          child: FResponsiveCard(
+            child: Column(
+              crossAxisAlignment: .start,
+              spacing: PADDING * 1.5,
+              mainAxisSize: .min,
+              children: [
+                const FLogo(size: 76),
+                Column(
+                  spacing: PADDING / 2,
+                  crossAxisAlignment: .start,
+                  children: [
+                    FText(
+                      context.l10n.auth_register_page__title,
+                      style: .headlineMedium,
+                    ),
+                    FText(
+                      context.l10n.auth_register_page__hint_1,
+                      style: .titleMedium,
+                    ),
+                  ],
+                ),
+                Form(
+                  key: _form,
+                  child: Column(
+                    spacing: PADDING,
+                    children: [
+                      FTextFormField(
+                        controller: _displayNameController,
+                        label: context.l10n.auth_register_page__display_name,
+                        autocorrect: false,
+                        validators: (input) {
+                          if (UValidator.isEmpty(input)) {
+                            return context.l10n.validator__is_empty;
+                          }
+                          return null;
+                        },
+                      ),
+                      FTextFormField(
+                        controller: _usernameController,
+                        label: context.l10n.auth_register_page__username,
+                        autocorrect: false,
+                        keyboardType: TextInputType.visiblePassword,
+                        validators: (input) {
+                          if (UValidator.isEmpty(input)) {
+                            return context.l10n.validator__is_empty;
+                          }
+
+                          return null;
+                        },
+                      ),
+                      FTextFormField(
+                        controller: _mailController,
+                        label: context.l10n.auth_register_page__email,
+                        autocorrect: false,
+                        keyboardType: TextInputType.emailAddress,
+                        validators: (input) {
+                          if (UValidator.isEmpty(input)) {
+                            return context.l10n.validator__is_empty;
+                          }
+
+                          if (!UValidator.isMail(input!)) {
+                            return context.l10n.validator__is_email;
+                          }
+
+                          return null;
+                        },
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          label: Text(
+                            context.l10n.auth_register_page__password,
+                          ),
+                          border: const OutlineInputBorder(),
+                        ),
+                        autocorrect: false,
+                        obscureText: true,
+                        validator: (input) {
+                          if (UValidator.isEmpty(input)) {
+                            return context.l10n.validator__is_empty;
+                          }
+
+                          if (!UValidator.isSecure(input!)) {
+                            return context.l10n.validator__is_secure;
+                          }
+
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: .centerRight,
+                  child: FButton(
+                    width: 135,
+                    onPressed: createUser,
+                    label: context.l10n.btn_register,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        /*child: FFixedResponsive(
           child: Center(
             child: SingleChildScrollView(
+                child: FCard(
               child: Form(
                 key: _form,
-                child: FCard(
                   child: Column(
                     spacing: PADDING,
                     children: [
@@ -136,7 +240,7 @@ class _AuthRegisterPageState extends ConsumerState<AuthRegisterPage> {
               ),
             ),
           ),
-        ),
+        ),*/
       ),
     );
   }

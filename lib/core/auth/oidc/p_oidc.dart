@@ -31,7 +31,7 @@ class POIDC extends _$POIDC {
 
   Future<String?> requestTokens(OIDCProvider provider) async {
     try {
-      final scopes = ['openid'];
+      final scopes = ['openid', 'profile'];
 
       // 1. PKCE
       final codeVerifier = _generateCodeVerifier();

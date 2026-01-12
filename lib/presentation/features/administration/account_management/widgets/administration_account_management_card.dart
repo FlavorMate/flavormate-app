@@ -13,7 +13,7 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 class AdministrationAccountManagementCard extends StatelessWidget {
   final AccountFullDto account;
   final bool isOwnAccount;
-  final Function(AccountFullDto) onTap;
+  final Function(AccountFullDto, bool) onTap;
 
   const AdministrationAccountManagementCard({
     super.key,
@@ -28,7 +28,7 @@ class AdministrationAccountManagementCard extends StatelessWidget {
       width: 450,
       child: FCard(
         color: context.colorScheme.surfaceContainer,
-        onTap: isOwnAccount ? null : () => onTap.call(account),
+        onTap: () => onTap.call(account, isOwnAccount),
         child: Row(
           spacing: PADDING,
           children: [

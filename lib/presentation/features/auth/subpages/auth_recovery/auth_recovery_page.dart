@@ -6,12 +6,11 @@ import 'package:flavormate/core/extensions/e_dio.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
+import 'package:flavormate/presentation/common/widgets/f_logo.dart';
+import 'package:flavormate/presentation/common/widgets/f_responsive_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,56 +37,60 @@ class _AuthRecoveryPageState extends ConsumerState<AuthRecoveryPage> {
     return Scaffold(
       bottomNavigationBar: const FBottomNavigationBackBar(),
       body: SafeArea(
-        child: FFixedResponsive(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Form(
-                key: _form,
-                child: FCard(
-                  child: Column(
-                    spacing: PADDING,
-                    children: [
-                      const Icon(MdiIcons.lockRemoveOutline, size: 72),
-                      FText(
-                        context.l10n.auth_recovery_page__hint_1,
-                        style: FTextStyle.titleLarge,
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        width: BUTTON_WIDTH,
-                        child: FText(
-                          context.l10n.auth_recovery_page__hint_2,
-                          style: FTextStyle.bodyMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      FTextFormField(
-                        controller: _emailController,
-                        label: context.l10n.auth_recovery_page__email,
-                        autocorrect: false,
-                        autofillHints: const [AutofillHints.username],
-                        keyboardType: TextInputType.visiblePassword,
-                        validators: (input) {
-                          if (UValidator.isEmpty(input)) {
-                            return context.l10n.validator__is_empty;
-                          }
+        child: Center(
+          child: FResponsiveCard(
+            child: Column(
+              crossAxisAlignment: .start,
+              spacing: PADDING * 1.5,
+              mainAxisSize: .min,
+              children: [
+                const FLogo(size: 76),
+                Column(
+                  spacing: PADDING / 2,
+                  crossAxisAlignment: .start,
+                  children: [
+                    FText(
+                      context.l10n.auth_recovery_page__title,
+                      style: .headlineMedium,
+                    ),
+                    FText(
+                      context.l10n.auth_recovery_page__hint_1,
+                      style: .titleMedium,
+                    ),
+                  ],
+                ),
+                AutofillGroup(
+                  child: Form(
+                    key: _form,
+                    child: FTextFormField(
+                      controller: _emailController,
+                      label: context.l10n.auth_recovery_page__email,
+                      autocorrect: false,
+                      autofillHints: const [AutofillHints.username],
+                      keyboardType: TextInputType.visiblePassword,
+                      validators: (input) {
+                        if (UValidator.isEmpty(input)) {
+                          return context.l10n.validator__is_empty;
+                        }
 
-                          if (!UValidator.isMail(input!)) {
-                            return context.l10n.validator__is_email;
-                          }
+                        if (!UValidator.isMail(input!)) {
+                          return context.l10n.validator__is_email;
+                        }
 
-                          return null;
-                        },
-                      ),
-                      FButton(
-                        label: context.l10n.btn_reset_password,
-                        onPressed: resetPassword,
-                        width: BUTTON_WIDTH,
-                      ),
-                    ],
+                        return null;
+                      },
+                    ),
                   ),
                 ),
-              ),
+                Align(
+                  alignment: .centerRight,
+                  child: FButton(
+                    label: context.l10n.btn_continue,
+                    onPressed: resetPassword,
+                    width: 125,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

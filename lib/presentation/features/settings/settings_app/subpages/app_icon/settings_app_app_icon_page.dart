@@ -18,8 +18,8 @@ import 'package:go_router/go_router.dart';
 class SettingsAppAppIconPage extends StatelessWidget {
   const SettingsAppAppIconPage({super.key});
 
-  bool get _notSupported => kIsWeb ||
-      !Platform.isAndroid && !Platform.isIOS && !Platform.isMacOS;
+  bool get _notSupported =>
+      kIsWeb || !Platform.isAndroid && !Platform.isIOS && !Platform.isMacOS;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class SettingsAppAppIconPage extends StatelessWidget {
                   child: Row(
                     spacing: PADDING,
                     children: [
-                      const Icon(MdiIcons.alertCircleOutline),
+                      const Icon(MdiIcons.alertCircle),
                       Expanded(
                         child: FText(
                           context.l10n.settings_app_app_icon_page__hint,

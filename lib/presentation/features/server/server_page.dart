@@ -45,7 +45,7 @@ class _ServerPageState extends ConsumerState<ServerPage> {
           child: Center(
             child: TextButton.icon(
               onPressed: openHelp,
-              icon: const Icon(MdiIcons.helpCircleOutline),
+              icon: const Icon(MdiIcons.helpCircle),
               label: Text(context.l10n.server_page__create_server),
             ),
           ),

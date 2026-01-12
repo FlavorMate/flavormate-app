@@ -56,7 +56,7 @@ class RecipeDuration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      avatar: const Icon(MdiIcons.clockOutline),
+      avatar: const Icon(MdiIcons.clock),
       label: Text('$label: ${duration.beautify(context)}'),
     );
   }

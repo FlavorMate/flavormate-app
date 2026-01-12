@@ -7,15 +7,15 @@ part 'order_by.mapper.dart';
 
 @MappableEnum()
 enum OrderBy {
-  CreatedOn(MdiIcons.calendarOutline),
-  Label(MdiIcons.labelOutline),
+  CreatedOn(MdiIcons.calendar),
+  Label(MdiIcons.label),
 
   // Only used for BookEntity
-  Visible(MdiIcons.eyeOutline),
+  Visible(MdiIcons.eye),
 
   // Only used for AccountEntity
-  DisplayName(MdiIcons.labelOutline),
-  Username(MdiIcons.accountOutline)
+  DisplayName(MdiIcons.label),
+  Username(MdiIcons.account)
   ;
 
   final IconData icon;

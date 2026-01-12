@@ -12,6 +12,7 @@ import 'package:flavormate/presentation/common/widgets/f_oidc/f_oidc_icon.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
+import 'package:flavormate/presentation/common/widgets/f_text_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/auth/dialogs/login_oidc_link_dialog.dart';
@@ -124,9 +125,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         children: [
           Text('☁️ ${data.server}'),
           if (!data.isStatic)
-            TextButton(
+            FTextButton(
               onPressed: changeServer,
-              child: Text(context.l10n.login_page__change_server),
+              value: context.l10n.login_page__change_server,
             ),
         ],
       ),
