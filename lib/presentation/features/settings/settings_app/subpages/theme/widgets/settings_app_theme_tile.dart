@@ -6,7 +6,6 @@ class SettingsAppThemeTile extends StatelessWidget {
   final bool isSelected;
   final Color color;
   final String label;
-  final BorderRadiusGeometry borderRadiusGeometry;
   final void Function(Color) onTap;
 
   const SettingsAppThemeTile({
@@ -14,7 +13,6 @@ class SettingsAppThemeTile extends StatelessWidget {
     required this.isSelected,
     required this.color,
     required this.label,
-    this.borderRadiusGeometry = .zero,
     required this.onTap,
   });
 
@@ -24,7 +22,6 @@ class SettingsAppThemeTile extends StatelessWidget {
 
     return Material(
       color: color,
-      borderRadius: borderRadiusGeometry,
       child: ListTile(
         visualDensity: .standard,
         textColor: contentColor,

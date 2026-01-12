@@ -38,17 +38,19 @@ class SettingsAppThemeTileList extends StatelessWidget {
             final bottomLeft = index == values.length - 1 ? borderRadius : 4.0;
             final bottomRight = index == values.length - 1 ? borderRadius : 4.0;
 
-            return SettingsAppThemeTile(
-              isSelected: value.isSelected,
-              color: value.color,
-              label: value.label,
-              borderRadiusGeometry: .only(
+            return ClipRRect(
+              borderRadius: .only(
                 topLeft: .circular(topLeft),
                 topRight: .circular(topRight),
                 bottomLeft: .circular(bottomLeft),
                 bottomRight: .circular(bottomRight),
               ),
-              onTap: value.onTap,
+              child: SettingsAppThemeTile(
+                isSelected: value.isSelected,
+                color: value.color,
+                label: value.label,
+                onTap: value.onTap,
+              ),
             );
           },
         ),
