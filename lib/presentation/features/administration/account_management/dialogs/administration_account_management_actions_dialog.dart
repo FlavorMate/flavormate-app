@@ -40,6 +40,10 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
                 leading: const FTileIcon(icon: MdiIcons.account),
                 onTap: () => pop(context, .Open),
               ),
+            ],
+          ),
+          FTileGroup(
+            items: [
               FTile(
                 label: context
                     .l10n
@@ -48,6 +52,14 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
                 leading: const FTileIcon(icon: MdiIcons.image),
                 onTap: () => pop(context, .Avatar),
                 disabled: account.avatar == null,
+              ),
+              FTile(
+                label: context
+                    .l10n
+                    .administration_account_management_actions_dialog__actions_avatar_change,
+                subLabel: null,
+                leading: const FTileIcon(icon: MdiIcons.imageEdit),
+                onTap: () => pop(context, .AvatarChange),
               ),
             ],
           ),

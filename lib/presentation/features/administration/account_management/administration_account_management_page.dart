@@ -10,6 +10,7 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/models/account_create_form.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/admin/p_rest_admin_accounts.dart';
+import 'package:flavormate/presentation/common/dialogs/avatar/avatar_utils.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
@@ -148,6 +149,9 @@ class _AccountManagementPageState
           context.showFullscreenImage(account.avatar!.url(.Original));
         }
         return;
+      case .AvatarChange:
+        await changeAvatar(account);
+        return;
       case AdministrationAccountManagementActions.Enable:
         await toggleActiveState(account);
         return;
@@ -264,4 +268,10 @@ class _AccountManagementPageState
 
   @override
   OrderBy get defaultOrderBy => OrderBy.Username;
+
+  Future<void> changeAvatar(AccountFullDto account) async {
+    await AvatarUtils.manageAvatar(context, ref, account);
+
+    ref.invalidate(provider);
+  }
 }
