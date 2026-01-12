@@ -12,6 +12,8 @@ class FTile extends StatelessWidget {
 
   final double? height;
 
+  final bool disabled;
+
   final VoidCallback onTap;
 
   const FTile({
@@ -21,6 +23,7 @@ class FTile extends StatelessWidget {
     this.leading,
     this.trailing,
     this.height,
+    this.disabled = false,
     required this.onTap,
   });
 
@@ -31,16 +34,20 @@ class FTile extends StatelessWidget {
       child: ListTile(
         visualDensity: .standard,
         minTileHeight: height,
-
-        onTap: onTap,
+        onTap: disabled ? null : onTap,
         leading: leading,
         trailing: trailing,
         title: subLabel == null
-            ? FText(label, style: .bodyMedium)
+            ? FText(
+                label,
+                style: .bodyMedium,
+                color: disabled ? .grey : null,
+              )
             : FText(
                 label,
                 style: .bodyLarge,
                 weight: .w600,
+                color: disabled ? .grey : null,
               ),
         subtitle: subLabel?.let(
           (it) => FText(
