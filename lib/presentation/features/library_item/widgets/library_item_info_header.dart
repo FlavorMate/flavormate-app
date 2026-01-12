@@ -37,7 +37,7 @@ class LibraryItemInfoHeader extends StatelessWidget {
               Row(
                 spacing: PADDING / 2,
                 children: [
-                  const Icon(MdiIcons.accountGroupOutline),
+                  const Icon(MdiIcons.accountGroup),
                   FText(
                     context.l10n.library_item_info_header__subscribers(
                       book.subscriberCount,

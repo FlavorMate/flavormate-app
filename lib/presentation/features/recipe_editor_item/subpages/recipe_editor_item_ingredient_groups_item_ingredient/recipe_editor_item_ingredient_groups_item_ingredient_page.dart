@@ -146,7 +146,7 @@ class _RecipeEditorIngredientPageState
                         .recipe_editor_item_ingredient_groups_item_ingredient_page__nutrition,
                     trailing: Visibility(
                       visible: _nutrition?.exists ?? false,
-                      child: const Icon(MdiIcons.checkCircleOutline),
+                      child: const Icon(MdiIcons.checkCircle),
                     ),
                   ),
 
