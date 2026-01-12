@@ -70,6 +70,7 @@ class AccountControllerApi extends ControllerApi {
       url: '$_root/$id/avatar',
       data: data,
       mapper: ControllerApi.nullMapper,
+      timeout: const Duration(minutes: 2),
     );
   }
 

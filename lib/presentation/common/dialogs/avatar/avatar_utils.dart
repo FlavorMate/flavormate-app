@@ -32,7 +32,7 @@ abstract class AvatarUtils {
       );
       if (image == null || !context.mounted) return;
 
-      context.showLoadingDialog();
+      context.showLoadingDialog(hint: true);
 
       final bytes = await image.readAsBytes();
 
