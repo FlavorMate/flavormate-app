@@ -17,9 +17,9 @@ import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_pagina
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_simple_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
+import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_actions_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_new_account_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_password_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/enums/administration_account_management_actions.dart';
@@ -128,53 +128,21 @@ class _AccountManagementPageState
     );
   }
 
-  void showOptions(AccountFullDto account) async {
+  void showOptions(AccountFullDto account, bool isCurrent) async {
     final result = await showDialog<AdministrationAccountManagementActions>(
       context: context,
-      builder: (_) => FSimpleDialog<AdministrationAccountManagementActions>(
-        title:
-            context.l10n.administration_account_management_page__actions_title,
-        options: [
-          if (account.avatar != null)
-            FSimpleDialogOption(
-              label: context
-                  .l10n
-                  .administration_account_management_page__actions_avatar,
-              icon: MdiIcons.imageOutline,
-              value: AdministrationAccountManagementActions.Avatar,
-            ),
-          FSimpleDialogOption(
-            label: account.enabled
-                ? context
-                      .l10n
-                      .administration_account_management_page__actions_disable
-                : context
-                      .l10n
-                      .administration_account_management_page__actions_enable,
-            icon: MdiIcons.accountCheck,
-            value: AdministrationAccountManagementActions.Enable,
-          ),
-          FSimpleDialogOption(
-            label: context
-                .l10n
-                .administration_account_management_page__actions_set_password,
-            icon: MdiIcons.lockReset,
-            value: AdministrationAccountManagementActions.ResetPassword,
-          ),
-          FSimpleDialogOption(
-            label: context
-                .l10n
-                .administration_account_management_page__actions_delete,
-            icon: MdiIcons.delete,
-            value: AdministrationAccountManagementActions.Delete,
-          ),
-        ],
+      builder: (_) => AdministrationAccountManagementActionsDialog(
+        account: account,
+        isCurrent: isCurrent,
       ),
     );
 
     if (!mounted || result == null) return;
 
     switch (result) {
+      case .Open:
+        await openAccount(account);
+        return;
       case .Avatar:
         if (account.avatar != null) {
           context.showFullscreenImage(account.avatar!.url(.Original));
@@ -288,6 +256,10 @@ class _AccountManagementPageState
         context.l10n.recipes_item_page__create_success,
       );
     }
+  }
+
+  Future<void> openAccount(AccountFullDto account) async {
+    await context.routes.accountsItem(account.id);
   }
 
   @override
