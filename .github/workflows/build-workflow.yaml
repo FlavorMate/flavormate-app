@@ -1,10 +1,10 @@
 name: FlavorMate build workflow
 on:
   push:
-    tags: [v*]
+    tags: [ v* ]
 
 env:
-  FLUTTER_VERSION: 3.38.6
+  FLUTTER_VERSION: 3.38.7
   RUBY_VERSION: 3.4.8
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
@@ -325,16 +325,16 @@ jobs:
 
       - name: Prepare windows Setup
         run: |
-           $versionLine = Select-String -Path pubspec.yaml -Pattern '^version:' | ForEach-Object { $_.Line }
-           $version = $versionLine -replace '^version: (.*?)\+.*?$', '$1'
-           get-content build_assets/windows/setup_builder.iss.tmpl | %{$_ -replace "APP_VERSION","$version"}  | set-content build_assets/windows/setup_builder.iss
+          $versionLine = Select-String -Path pubspec.yaml -Pattern '^version:' | ForEach-Object { $_.Line }
+          $version = $versionLine -replace '^version: (.*?)\+.*?$', '$1'
+          get-content build_assets/windows/setup_builder.iss.tmpl | %{$_ -replace "APP_VERSION","$version"}  | set-content build_assets/windows/setup_builder.iss
 
       - name: Compile .ISS to .EXE Installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
           path: build_assets/windows/setup_builder.iss
           options: /O+
-      
+
       - name: Cache Windows Setup
         id: artifact-upload
         uses: actions/upload-artifact@v4
@@ -375,7 +375,7 @@ jobs:
         with:
           name: flavormate-android
           path: build
-      
+
       - name: Download windows archive
         uses: actions/download-artifact@v4
         with:

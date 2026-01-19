@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  FLUTTER_VERSION: 3.38.6
+  FLUTTER_VERSION: 3.38.7
   RUBY_VERSION: 3.4.8
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
@@ -23,7 +23,7 @@ jobs:
           java-version: "21"
           distribution: "temurin"
           cache: "gradle"
-      
+
       - name: Set Up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -212,12 +212,12 @@ jobs:
 
       - name: Build windows app
         run: flutter build windows --release
-      
+
       - name: Prepare windows Setup
         run: |
-           $versionLine = Select-String -Path pubspec.yaml -Pattern '^version:' | ForEach-Object { $_.Line }
-           $version = $versionLine -replace '^version: (.*?)\+.*?$', '$1'
-           get-content build_assets/windows/setup_builder.iss.tmpl | %{$_ -replace "APP_VERSION","$version"}  | set-content build_assets/windows/setup_builder.iss
+          $versionLine = Select-String -Path pubspec.yaml -Pattern '^version:' | ForEach-Object { $_.Line }
+          $version = $versionLine -replace '^version: (.*?)\+.*?$', '$1'
+          get-content build_assets/windows/setup_builder.iss.tmpl | %{$_ -replace "APP_VERSION","$version"}  | set-content build_assets/windows/setup_builder.iss
 
       - name: Compile .ISS to .EXE Installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
