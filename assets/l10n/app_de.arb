@@ -103,6 +103,14 @@
       }
     }
   },
+  "@settings_account_oidc_link_page__delete_hint": {
+    "placeholders": {
+      "val": {
+        "example": "Authentik",
+        "type": "String"
+      }
+    }
+  },
   "@tags_page__recipe_counter": {
     "placeholders": {
       "count": {
@@ -538,6 +546,21 @@
   "settings_account_email_dialog__new_e_mail_1": "Neue E-Mail",
   "settings_account_email_dialog__new_e_mail_2": "Neue E-Mail wiederholen",
   "settings_account_email_dialog__title": "E-Mail ändern",
+  "settings_account_oidc_link_info_dialog__created_on": "Hinzugefügt am",
+  "settings_account_oidc_link_info_dialog__host": "Adresse",
+  "settings_account_oidc_link_info_dialog__id": "Id",
+  "settings_account_oidc_link_info_dialog__issuer": "Herausgeber",
+  "settings_account_oidc_link_info_dialog__name": "Name",
+  "settings_account_oidc_link_info_dialog__subject": "Benutzer Id",
+  "settings_account_oidc_link_info_dialog__title": "Informationen",
+  "settings_account_oidc_link_info_dialog__user": "Benutzer",
+  "settings_account_oidc_link_page__delete_failure": "Verbindung konnte nicht gelöscht werden",
+  "settings_account_oidc_link_page__delete_hint": "Dadurch wird deine Verbindung mit {val} gelöscht. Du kannst später eine neue Verbindung zu {val} herstellen.",
+  "settings_account_oidc_link_page__delete_success": "Verbindung erfolgreich gelöscht",
+  "settings_account_oidc_link_page__delete_title": "Verbindung löschen?",
+  "settings_account_oidc_link_page__on_empty": "Du hast noch keine Verbindungen",
+  "settings_account_oidc_link_page__on_error": "Fehler beim Laden der Verbindungen",
+  "settings_account_oidc_link_page__title": "Externe-Verbindungen",
   "settings_account_page__change_diet": "Ernährungsweise ändern",
   "settings_account_page__change_diet_failure": "Ernährungsweise konnte nicht aktualisiert werden.",
   "settings_account_page__change_diet_hint": "Fleisch, Fisch, vegetarisch, vegan",
@@ -550,6 +573,8 @@
   "settings_account_page__change_password_failure": "Passwort konnte nicht aktualisiert werden.",
   "settings_account_page__change_password_hint": "Aktualisiere dein Passwort",
   "settings_account_page__change_password_success": "Passwort erfolgreich aktualisiert.",
+  "settings_account_page__oidc_links": "Externe Verbindungen",
+  "settings_account_page__oidc_links_hint": "Verwalte deine Accountverbindungen",
   "settings_account_page__on_error": "Fehler beim Laden des Kontos.",
   "settings_account_page__title": "FlavorMate-Konto",
   "settings_account_password_dialog__new_pwd_1": "Neues Passwort",

@@ -104,9 +104,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     items: [
                       for (final provider in data.oidcProviders)
                         FTile(
-                          label: provider.name,
+                          label: provider.label,
                           subLabel: null,
-                          leading: FOidcIcon(provider: provider),
+                          leading: FOidcIcon(
+                            data: provider.icon,
+                            label: provider.label,
+                          ),
                           onTap: () => openOIDC(provider),
                         ),
                     ],
@@ -158,7 +161,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       if (!mounted) return;
       context.pop();
       context.showTextSnackBar(
-        context.l10n.auth_page__oidc_error(provider.name),
+        context.l10n.auth_page__oidc_error(provider.label),
       );
       return;
     }

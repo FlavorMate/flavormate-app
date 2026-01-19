@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/data/models/core/auth/oidc/oidc_link_dto.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/data/models/features/books/book_dto.dart';
 import 'package:flavormate/data/models/features/categories/category_dto.dart';
@@ -35,6 +36,7 @@ class PageableDto<T> with PageableDtoMappable<T> {
       const (CategoryDto) => CategoryDtoMapper.fromMap,
       const (CategoryGroupDto) => CategoryGroupDtoMapper.fromMap,
       const (HighlightDto) => HighlightDtoMapper.fromMap,
+      const (OidcLinkDto) => OidcLinkDtoMapper.fromMap,
       const (RecipePreviewDto) => RecipePreviewDtoMapper.fromMap,
       const (RecipeFileDto) => RecipeFileDtoMapper.fromMap,
       const (RecipeDraftPreviewDto) => RecipeDraftPreviewDtoMapper.fromMap,

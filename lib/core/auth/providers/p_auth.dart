@@ -46,9 +46,6 @@ class PAuth extends _$PAuth {
 
     final jwt = await client.login(accessToken: oidcAccessToken);
 
-    // TODO: handle this case
-    if (jwt.hasError) return;
-
     await setJwt(jwt.data!);
   }
 

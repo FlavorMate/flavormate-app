@@ -1,3 +1,4 @@
+import 'package:flavormate/core/config/features/p_feature_oidc2.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
@@ -24,8 +25,10 @@ class SettingsAccountPage extends ConsumerWidget {
   const SettingsAccountPage({super.key});
 
   PRestAccountsSelfProvider get provider => pRestAccountsSelfProvider;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final oidc2Support = ref.watch(pFeatureOidc2Provider);
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -109,6 +112,16 @@ class SettingsAccountPage extends ConsumerWidget {
                       ),
                       onTap: () => managePassword(context, ref),
                     ),
+                    if (oidc2Support)
+                      FTile(
+                        label: context.l10n.settings_account_page__oidc_links,
+                        subLabel:
+                            context.l10n.settings_account_page__oidc_links_hint,
+                        leading: const FTileIcon(
+                          icon: MdiIcons.linkVariant,
+                        ),
+                        onTap: () => manageOidcLinks(context),
+                      ),
                   ],
                 ),
               ],
@@ -207,5 +220,9 @@ class SettingsAccountPage extends ConsumerWidget {
         context.l10n.settings_account_page__change_password_failure,
       );
     }
+  }
+
+  void manageOidcLinks(BuildContext context) {
+    context.routes.settingsAccountOidc();
   }
 }

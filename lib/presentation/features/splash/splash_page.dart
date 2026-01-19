@@ -111,27 +111,23 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         ),
       ),
       bottomNavigationBar: SafeArea(
-        child: SizedBox(
-          height: 76,
-          child: AnimatedOpacity(
-            opacity: _showLogout ? 1 : 0,
-            duration: const Duration(seconds: 1),
-            child: Column(
-              spacing: PADDING / 2,
-              children: [
-                FText(
-                  context.l10n.splash_page__hint_1,
-                  style: FTextStyle.bodyMedium,
-                ),
-                SizedBox(
-                  width: 250,
-                  child: FTextButton(
-                    onPressed: logout,
-                    value: context.l10n.btn_logout,
-                  ),
-                ),
-              ],
-            ),
+        minimum: const .only(bottom: PADDING),
+        child: AnimatedOpacity(
+          opacity: _showLogout ? 1 : 0,
+          duration: const Duration(seconds: 1),
+          child: Column(
+            mainAxisSize: .min,
+            spacing: PADDING / 2,
+            children: [
+              FText(
+                context.l10n.splash_page__hint_1,
+                style: FTextStyle.bodyMedium,
+              ),
+              FTextButton(
+                onPressed: logout,
+                value: context.l10n.btn_logout,
+              ),
+            ],
           ),
         ),
       ),

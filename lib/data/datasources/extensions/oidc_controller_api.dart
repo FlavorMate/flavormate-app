@@ -3,12 +3,16 @@ import 'dart:convert';
 import 'package:flavormate/core/constants/api_constants.dart';
 import 'package:flavormate/data/datasources/controller_api.dart';
 import 'package:flavormate/data/models/core/auth/auth_login_form.dart';
+import 'package:flavormate/data/models/core/auth/oidc/oidc_link_dto.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
 import 'package:flavormate/data/models/core/auth/tokens_dto.dart';
+import 'package:flavormate/data/models/local/pageable_dto.dart';
+import 'package:flavormate/data/models/shared/enums/order_by.dart';
+import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
 
 class OIDCControllerApi extends ControllerApi {
-  static const _root = ApiConstants.ExtensionOIDC;
+  static const _root = ApiConstants.ExtensionOIDC2;
 
   const OIDCControllerApi(super.dio);
 
@@ -38,8 +42,36 @@ class OIDCControllerApi extends ControllerApi {
     );
   }
 
+  Future<PageableDto<OidcLinkDto>> getLinks({
+    int? page,
+    int? pageSize,
+    OrderBy? orderBy,
+    OrderDirection? orderDirection,
+  }) async {
+    final response = await get(
+      url: '$_root/link',
+      queryParameters: {
+        'page': page,
+        'pageSize': pageSize,
+        'orderBy': orderBy?.name,
+        'orderDirection': orderDirection?.name,
+      },
+      mapper: (data) => PageableDto.fromAPI<OidcLinkDto>(data, OidcLinkDto),
+    );
+
+    return response.data!;
+  }
+
+  Future<ApiResponse<bool>> deleteLink({required String providerId}) async {
+    return await delete(
+      url: '$_root/link/$providerId',
+      mapper: (data) => bool.parse(data),
+    );
+  }
+
   Future<ApiResponse<String>> exchangeCode({
-    required String id,
+    required String issuer,
+    required String clientId,
     required String code,
     required String codeVerifier,
     required String redirectUri,
@@ -47,7 +79,8 @@ class OIDCControllerApi extends ControllerApi {
     return await post(
       url: '$_root/exchange-code',
       data: jsonEncode({
-        'providerId': id,
+        'issuer': issuer,
+        'clientId': clientId,
         'code': code,
         'codeVerifier': codeVerifier,
         'redirectUri': redirectUri,

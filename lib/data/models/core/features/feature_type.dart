@@ -7,6 +7,7 @@ enum FeatureType {
   Bring,
   ImportExport,
   EnhancedResolutions,
+  Oidc2,
   OpenFoodFacts,
   Ratings,
   Recovery,
