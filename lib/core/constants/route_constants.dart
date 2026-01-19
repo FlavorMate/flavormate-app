@@ -80,6 +80,10 @@ abstract class RouteConstants {
     '/settings/account',
     'settings_account',
   );
+  static const RouteConstant SettingsAccountOidc = RouteConstant(
+    '/settings/account/oidc',
+    'settings_account_oidc',
+  );
   static const RouteConstant SettingsApp = RouteConstant(
     '/settings/app',
     'settings_app',

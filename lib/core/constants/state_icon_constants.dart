@@ -26,6 +26,10 @@ abstract class StateIconConstants {
     MdiIcons.file,
     MdiIcons.fileAlert,
   );
+  static const oidc = StateIconConstant(
+    MdiIcons.linkVariant,
+    MdiIcons.linkVariantOff,
+  );
   static const drafts = StateIconConstant(
     MdiIcons.fileDocumentEdit,
     MdiIcons.fileDocumentAlert,

@@ -19,6 +19,11 @@ abstract class OrderByConstants {
 
   static const files = [OrderBy.CreatedOn];
 
+  static const oidc = [
+    OrderBy.CreatedOn,
+    OrderBy.Label,
+  ];
+
   static const recipe = [
     OrderBy.CreatedOn,
     OrderBy.Label,

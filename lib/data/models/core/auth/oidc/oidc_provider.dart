@@ -1,22 +1,26 @@
+import 'dart:typed_data';
+
 import 'package:dart_mappable/dart_mappable.dart';
 
 part 'oidc_provider.mapper.dart';
 
 @MappableClass()
 class OIDCProvider with OIDCProviderMappable {
-  final String name;
+  final String label;
   final String url;
+  final String issuer;
   final String clientId;
   final String id;
   final String redirectUri;
-  final String? iconPath;
+  final Uint8List? icon;
 
   const OIDCProvider(
-    this.name,
+    this.label,
     this.url,
+    this.issuer,
     this.clientId,
     this.id,
-    this.iconPath, {
+    this.icon, {
     this.redirectUri = 'flavormate://oauth',
   });
 }

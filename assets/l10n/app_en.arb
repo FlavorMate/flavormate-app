@@ -103,6 +103,14 @@
       }
     }
   },
+  "@settings_account_oidc_link_page__delete_hint": {
+    "placeholders": {
+      "val": {
+        "example": "Authentik",
+        "type": "String"
+      }
+    }
+  },
   "@tags_page__recipe_counter": {
     "placeholders": {
       "count": {
@@ -538,6 +546,21 @@
   "settings_account_email_dialog__new_e_mail_1": "New email",
   "settings_account_email_dialog__new_e_mail_2": "Repeat new email",
   "settings_account_email_dialog__title": "Change email",
+  "settings_account_oidc_link_info_dialog__created_on": "Added on",
+  "settings_account_oidc_link_info_dialog__host": "Address",
+  "settings_account_oidc_link_info_dialog__id": "Id",
+  "settings_account_oidc_link_info_dialog__issuer": "Issuer",
+  "settings_account_oidc_link_info_dialog__name": "Name",
+  "settings_account_oidc_link_info_dialog__subject": "User id",
+  "settings_account_oidc_link_info_dialog__title": "Information",
+  "settings_account_oidc_link_info_dialog__user": "User",
+  "settings_account_oidc_link_page__delete_failure": "Couldn't delete connection",
+  "settings_account_oidc_link_page__delete_hint": "This will delete your connection to {val}. You can re-establish a new connection to {val} later.",
+  "settings_account_oidc_link_page__delete_success": "Connection successfully deleted",
+  "settings_account_oidc_link_page__delete_title": "Delete connection?",
+  "settings_account_oidc_link_page__on_empty": "You don't have any connections yet",
+  "settings_account_oidc_link_page__on_error": "Error while loading the connections",
+  "settings_account_oidc_link_page__title": "External connections",
   "settings_account_page__change_diet": "Change dietary preference",
   "settings_account_page__change_diet_failure": "Failed to update dietary preference.",
   "settings_account_page__change_diet_hint": "Meat, fish, vegetarian, vegan",
@@ -550,6 +573,8 @@
   "settings_account_page__change_password_failure": "Failed to update password.",
   "settings_account_page__change_password_hint": "Update your password",
   "settings_account_page__change_password_success": "Password updated successfully.",
+  "settings_account_page__oidc_links": "External connections",
+  "settings_account_page__oidc_links_hint": "Manage your account connections",
   "settings_account_page__on_error": "Error while loading the account.",
   "settings_account_page__title": "FlavorMate account",
   "settings_account_password_dialog__new_pwd_1": "New password",

@@ -108,7 +108,8 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FOidcIcon(
-                          provider: widget.provider,
+                          data: widget.provider.icon,
+                          label: widget.provider.label,
                           width: 92,
                           height: 92,
                         ),
@@ -125,7 +126,7 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
                             ),
                             FText(
                               context.l10n.login_oidc_link_dialog__hint_2(
-                                widget.provider.name,
+                                widget.provider.label,
                               ),
                               style: FTextStyle.bodyMedium,
                               textAlign: TextAlign.start,

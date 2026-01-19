@@ -1,3 +1,4 @@
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_error_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading_page.dart';
@@ -52,6 +53,9 @@ class FProviderPage<T> extends ConsumerWidget {
   Widget? getBottomNavigationBar(BuildContext context, T value) {
     if (bottomNavigationBarBuilder == null) return null;
 
-    return SafeArea(child: bottomNavigationBarBuilder!.call(context, value));
+    return SafeArea(
+      minimum: const .only(bottom: PADDING),
+      child: bottomNavigationBarBuilder!.call(context, value),
+    );
   }
 }
