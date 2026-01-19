@@ -39,6 +39,7 @@ Get inspired by a selection of your recipes.
 Manage your recipes in a beautiful and easy way.
 
 - Add all your recipes to your [bring!](https://getbring.com) shopping list[^1]
+- Rate recipes and share them with friends[^1]
 - See nutritional information
 
 <img src="docs/features/recipe/phone.png" alt="Recipe phone screenshot" height="200px">
@@ -91,11 +92,11 @@ Adapt the app to your liking by choosing your favorite color.
 <details>
 <summary>Android</summary>
 
-The FlavorMate App is currently available as closed beta.
+Get FlavorMate from the [Google Play Store](https://play.google.com/store/apps/details?id=de.flavormate)
 
-You can enter the beta program by joining [this Google Group](https://groups.google.com/g/flavormate) and
+You can join the public beta:
 
-- [Apply on Android](https://play.google.com/store/apps/details?id=de.flavormate)<br>
+- [Apply on Android](https://play.google.com/store/apps/details?id=de.flavormate)
 - [Apply on the Web](https://play.google.com/apps/testing/de.flavormate)
 
 ---
@@ -108,7 +109,9 @@ You can also download the `.apk` file from the [releases](https://github.com/Fla
 
 FlavorMate is available on the [Apple App Store](https://apps.apple.com/us/app/flavormate/id6670196195).
 
-If you want to join the public beta, you can join it via [TestFlight here](https://testflight.apple.com/join/yp5BtJGx).
+You can join the public beta:
+
+- [Apply on TestFlight](https://testflight.apple.com/join/yp5BtJGx)
 
 </details>
 <br>
@@ -116,14 +119,16 @@ If you want to join the public beta, you can join it via [TestFlight here](https
 <summary>Web</summary>
 
 You can self-host your FlavorMate web app with docker.
-Download a `docker-compose.yaml` and `.env` file from
-the [example page](https://github.com/FlavorMate/flavormate-app/tree/main/examples) <br>- or -<br> create one yourself
-with the
-`ghcr.io/flavormate/flavormate-webapp:2`
-image.
 
-If you don't want to use docker you can download the web archive from
+Download the `docker-compose.yaml` and `.env` file template from
+the [example page](https://github.com/FlavorMate/flavormate-app/tree/main/examples)
+
+---
+
+If you don't want to use Docker you can download the web archive from
 the [releases](https://github.com/FlavorMate/flavormate-app/releases) page and host it with a web server.
+
+---
 
 #### Environment Variables
 
