@@ -15,7 +15,6 @@ import 'package:flavormate/presentation/features/home/widgets/account_dialog/hom
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_settings_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -36,70 +35,83 @@ class HomeAccountDialog extends StatelessWidget {
         final size = MediaQuery.sizeOf(context);
         final width = size.width > FBreakpoint.smValue ? 450.0 : null;
 
-        return Align(
-          alignment: .centerRight,
-          child: SizedBox(
-            width: width,
-            child: Center(
-              child: Scaffold(
-                appBar: FAppBar(
-                  automaticallyImplyLeading: false,
-                  title: account.username,
-                  actions: [
-                    IconButton(
-                      onPressed: () => context.pop(),
-                      icon: const Icon(MdiIcons.close),
-                    ),
-                  ],
-                ),
-                body: SafeArea(
-                  child: FResponsive(
-                    child: Column(
-                      spacing: PADDING,
-                      children: [
-                        HomeAccountDialogAccountSection(account: account),
-
-                        FTileGroup(
-                          items: [
-                            FTile(
-                              label:
-                                  context.l10n.home_account_dialog__my_profile,
-                              subLabel: context
-                                  .l10n
-                                  .home_account_dialog__my_profile_hint,
-                              leading: const FTileIcon(icon: MdiIcons.account),
-                              onTap: () => openAccount(context, account.id),
-                            ),
-                          ],
-                        ),
-
-                        const HomeAccountDialogSettingsSection(),
-
-                        const HomeAccountDialogInfoSection(),
-
-                        Row(
-                          mainAxisAlignment: .center,
-                          children: [
-                            TextButton(
-                              onPressed: openGitHub,
-                              child: const Text('GitHub'),
-                            ),
-                            const Text('-'),
-                            TextButton(
-                              onPressed: () => openLicenses(context),
-                              child: Text(
-                                context.l10n.home_account_dialog__licenses,
-                              ),
-                            ),
-                          ],
+        return Stack(
+          fit: .expand,
+          children: [
+            GestureDetector(
+              behavior: .opaque,
+              onTapUp: (details) => handleBackgroundPop(context, details),
+              child: const SizedBox.expand(),
+            ),
+            Align(
+              alignment: .centerRight,
+              child: SizedBox(
+                width: width,
+                child: Center(
+                  child: Scaffold(
+                    appBar: FAppBar(
+                      automaticallyImplyLeading: false,
+                      title: account.username,
+                      actions: [
+                        IconButton(
+                          onPressed: () => context.pop(),
+                          icon: const Icon(MdiIcons.close),
                         ),
                       ],
+                    ),
+                    body: SafeArea(
+                      child: FResponsive(
+                        child: Column(
+                          spacing: PADDING,
+                          children: [
+                            HomeAccountDialogAccountSection(account: account),
+
+                            FTileGroup(
+                              items: [
+                                FTile(
+                                  label: context
+                                      .l10n
+                                      .home_account_dialog__my_profile,
+                                  subLabel: context
+                                      .l10n
+                                      .home_account_dialog__my_profile_hint,
+                                  leading: const FTileIcon(
+                                    icon: MdiIcons.account,
+                                  ),
+                                  onTap: () => openAccount(context, account.id),
+                                ),
+                              ],
+                            ),
+
+                            const HomeAccountDialogSettingsSection(),
+
+                            const HomeAccountDialogInfoSection(),
+
+                            Row(
+                              mainAxisAlignment: .center,
+                              children: [
+                                TextButton(
+                                  onPressed: openGitHub,
+                                  child: const Text('GitHub'),
+                                ),
+                                const Text('-'),
+                                TextButton(
+                                  onPressed: () => openLicenses(context),
+                                  child: Text(
+                                    context.l10n.home_account_dialog__licenses,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
+          ],
         );
       },
     );
@@ -124,5 +136,11 @@ class HomeAccountDialog extends StatelessWidget {
       context: context,
       applicationName: 'FlavorMate',
     );
+  }
+
+  void handleBackgroundPop(BuildContext context, TapUpDetails? details) {
+    if (details?.globalPosition != Offset.zero) {
+      context.pop();
+    }
   }
 }
