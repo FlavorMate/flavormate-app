@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/core/utils/u_localizations.dart';
+import 'package:flavormate/data/repositories/core/userAgent/p_user_agent.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_dio_public.g.dart';
@@ -12,6 +13,8 @@ class PDioPublic extends _$PDioPublic {
     final server = ref.watch(pSPCurrentServerProvider);
     if (server == null) throw Exception('No server specified!');
 
+    final userAgent = ref.watch(pUserAgentProvider).value;
+
     final language = currentLocalization().languageCode;
 
     final dio = Dio();
@@ -21,6 +24,7 @@ class PDioPublic extends _$PDioPublic {
     dio.options.receiveTimeout = const Duration(seconds: 5);
     dio.options.headers['Accept'] = 'application/json, text/plain';
     dio.options.headers['Accept-Language'] = language;
+    dio.options.headers['User-Agent'] = userAgent;
 
     return dio;
   }

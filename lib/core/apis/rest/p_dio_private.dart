@@ -3,6 +3,7 @@ import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/auth/providers/p_auth_header.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/core/utils/u_localizations.dart';
+import 'package:flavormate/data/repositories/core/userAgent/p_user_agent.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_dio_private.g.dart';
@@ -18,6 +19,8 @@ class PDioPrivate extends _$PDioPrivate {
 
     if (server == null) throw Exception('No server specified');
 
+    final userAgent = ref.watch(pUserAgentProvider).value;
+
     final language = currentLocalization().languageCode;
 
     final dio = Dio();
@@ -27,6 +30,7 @@ class PDioPrivate extends _$PDioPrivate {
     dio.options.receiveTimeout = const Duration(seconds: 15);
     dio.options.headers['Accept'] = 'application/json, text/plain, image/webp';
     dio.options.headers['Accept-Language'] = language;
+    dio.options.headers['User-Agent'] = userAgent;
 
     // Add interceptors for token management
     dio.interceptors.addAll([

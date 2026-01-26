@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
@@ -42,7 +43,7 @@ class FPageableSort extends StatelessWidget {
             ),
             FOrderByMenu(
               current: currentOrderBy,
-              options: options,
+              options: options.sortedBy((it) => it.getName(context)),
               onTap: setOrderBy,
             ),
           ],
