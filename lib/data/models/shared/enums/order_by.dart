@@ -15,7 +15,11 @@ enum OrderBy {
 
   // Only used for AccountEntity
   DisplayName(MdiIcons.label),
-  Username(MdiIcons.account)
+  Username(MdiIcons.account),
+
+  // Only used for TokenEntity
+  ExpiresAt(MdiIcons.clockEnd),
+  Revoked(MdiIcons.lockReset),
   ;
 
   final IconData icon;
@@ -29,6 +33,8 @@ enum OrderBy {
       OrderBy.Visible => context.l10n.order_by__visible,
       OrderBy.DisplayName => context.l10n.order_by__display_name,
       OrderBy.Username => context.l10n.order_by__username,
+      OrderBy.ExpiresAt => context.l10n.order_by__expires_at,
+      OrderBy.Revoked => context.l10n.order_by__revoked,
     };
   }
 

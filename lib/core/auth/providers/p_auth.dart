@@ -64,12 +64,21 @@ class PAuth extends _$PAuth {
 
     final response = await client.postRefreshToken();
 
-    await ref.read(pSSJwtProvider.notifier).setValue(response.data!);
+    await ref.read(pSSJwtProvider.notifier).setValue(response.data);
 
     return response.data;
   }
 
   Future<void> logout() async {
+    try {
+      final dio = ref.read(pDioAuthProvider(state.refreshToken));
+      final client = AuthControllerApi(dio);
+
+      await client.logout();
+    } catch (_) {
+      print("Couldn't logout on server");
+    }
+
     // Clear shared preferences
     await ref.read(pCachedImageManagerProvider.notifier).clear();
     await ref.read(pSecureStorageProvider.notifier).clear();

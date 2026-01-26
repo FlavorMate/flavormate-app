@@ -29,6 +29,12 @@ abstract class OrderByConstants {
     OrderBy.Label,
   ];
 
+  static const session = [
+    OrderBy.Revoked,
+    OrderBy.ExpiresAt,
+    OrderBy.CreatedOn,
+  ];
+
   static const story = [OrderBy.Label, OrderBy.CreatedOn];
 
   static const tag = [
