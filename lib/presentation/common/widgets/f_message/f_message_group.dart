@@ -57,7 +57,7 @@ class FMessageGroup extends StatelessWidget {
               FText(
                 account.displayName,
                 style: .bodyMedium,
-                weight: .w500,
+                fontWeight: .w500,
                 color: .primary,
               ),
 

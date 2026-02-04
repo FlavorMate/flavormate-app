@@ -23,7 +23,7 @@ class SettingsAppThemeTileList extends StatelessWidget {
         FText(
           title,
           style: .bodyMedium,
-          weight: .w500,
+          fontWeight: .w500,
           color: .primary,
         ),
         const SizedBox(height: 4),

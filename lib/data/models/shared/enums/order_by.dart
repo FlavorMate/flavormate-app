@@ -37,8 +37,4 @@ enum OrderBy {
       OrderBy.Revoked => context.l10n.order_by__revoked,
     };
   }
-
-  static String toGqlJson(OrderBy searchOrderBy) {
-    return searchOrderBy.name;
-  }
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +15,12 @@ class FText extends StatelessWidget {
   final FTextColor? color;
   final TextAlign? textAlign;
   final TextOverflow? textOverflow;
-  final FontWeight? weight;
+  final FontWeight? fontWeight;
   final FTextFontFamily? fontFamily;
   final int? maxLines;
+
+  final double? fontWidth;
+  final double fontRoundness;
 
   const FText(
     this.label, {
@@ -24,9 +29,11 @@ class FText extends StatelessWidget {
     this.textAlign,
     this.color,
     this.textOverflow,
-    this.weight,
+    this.fontWeight,
     this.fontFamily,
     this.maxLines,
+    this.fontWidth,
+    this.fontRoundness = 0,
     super.key,
   });
 
@@ -34,11 +41,6 @@ class FText extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = style.geFTextStyle(context);
     final c = color?.getThemeColor(context);
-    final variation = weight?.let(
-      (it) => [
-        FontVariation.weight(it.value.toDouble()),
-      ],
-    );
     return Text(
       label,
       textAlign: textAlign,
@@ -46,8 +48,12 @@ class FText extends StatelessWidget {
         color: c,
         height: textHeight,
         fontFamily: fontFamily?.geFTextFontFamily(),
-        fontWeight: weight,
-        fontVariations: variation,
+        fontWeight: fontWeight,
+        fontVariations: [
+          ?fontWeight?.let((it) => FontVariation.weight(it.value.toDouble())),
+          ?fontWidth?.let(FontVariation.width),
+          FontVariation('ROND', clampDouble(fontRoundness, 0, 100)),
+        ],
       ),
       overflow: textOverflow,
       maxLines: maxLines,

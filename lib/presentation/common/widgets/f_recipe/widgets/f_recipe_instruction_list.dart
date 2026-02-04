@@ -28,7 +28,7 @@ class FRecipeInstructionList extends StatelessWidget {
           FText(
             instructionGroup.label!,
             style: FTextStyle.titleLarge,
-            weight: .w500,
+            fontWeight: .w500,
           ),
 
         for (final instruction in sortedInstructions)

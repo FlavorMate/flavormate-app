@@ -63,9 +63,9 @@ class _FButtonInternal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (leading != null) leading!,
+        ?leading,
         Expanded(child: Text(label, textAlign: TextAlign.center)),
-        if (trailing != null) trailing!,
+        ?trailing,
       ],
     );
   }

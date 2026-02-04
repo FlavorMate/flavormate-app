@@ -2,6 +2,7 @@ import 'package:flavormate/core/extensions/e_shared_preferences.dart';
 import 'package:flavormate/core/storage/shared_preferences/enums/sp_key.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
 import 'package:flavormate/core/theme/enums/f_theme_mode.dart';
+import 'package:flavormate/core/theme/utils/u_theme.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_sp_theme_mode.g.dart';
@@ -17,8 +18,13 @@ class PSPThemeMode extends _$PSPThemeMode {
     final mode = instance.getEnum(_key, FThemeMode.values);
 
     if (mode == null) {
-      setMode(.custom);
-      return .custom;
+      if (UTheme.supportAccentColor()) {
+        setMode(.dynamic);
+        return .dynamic;
+      } else {
+        setMode(.custom);
+        return .custom;
+      }
     }
 
     return mode;

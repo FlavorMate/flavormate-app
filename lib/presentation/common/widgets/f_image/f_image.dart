@@ -13,11 +13,14 @@ class FImage extends StatelessWidget {
   final FImageType? type;
   final BoxFit fit;
 
+  final Widget onError;
+
   const FImage({
     super.key,
     required this.imageSrc,
     required this.type,
     this.fit = BoxFit.cover,
+    this.onError = const FImageError(),
   });
 
   @override
@@ -27,7 +30,7 @@ class FImage extends StatelessWidget {
         FImageType.asset => Image.asset(
           imageSrc!,
           fit: fit,
-          errorBuilder: (_, _, _) => const FImageError(),
+          errorBuilder: (_, _, _) => onError,
         ),
         FImageType.secure => Consumer(
           builder: (context, ref, child) {
@@ -41,16 +44,16 @@ class FImage extends StatelessWidget {
         FImageType.network => Image.network(
           imageSrc!,
           fit: fit,
-          errorBuilder: (_, _, _) => const FImageError(),
+          errorBuilder: (_, _, _) => onError,
         ),
         FImageType.memory => Image.memory(
           base64Decode(imageSrc!),
           fit: fit,
-          errorBuilder: (_, _, _) => const FImageError(),
+          errorBuilder: (_, _, _) => onError,
         ),
       };
     } else {
-      return const FImageError();
+      return onError;
     }
   }
 }

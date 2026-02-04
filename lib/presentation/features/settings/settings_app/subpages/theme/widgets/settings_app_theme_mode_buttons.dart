@@ -27,7 +27,7 @@ class SettingsAppThemeModeButtons extends StatelessWidget {
           FText(
             context.l10n.settings_app_theme_page__color_mode,
             style: .bodyMedium,
-            weight: .w500,
+            fontWeight: .w500,
             color: .primary,
           ),
           SizedBox(

@@ -25,7 +25,7 @@ class FStory extends StatelessWidget {
             DateTime.now().toLocalDateString(context),
             style: .bodyMedium,
             color: .grey,
-            weight: .w400,
+            fontWeight: .w400,
           ),
           FMessageGroup(
             account: story.ownedBy,
