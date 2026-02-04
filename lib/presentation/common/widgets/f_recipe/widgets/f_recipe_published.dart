@@ -34,7 +34,7 @@ class FRecipePublished extends StatelessWidget {
         FText(
           context.l10n.f_recipe_published__title,
           style: FTextStyle.headlineMedium,
-          weight: FontWeight.w500,
+          fontWeight: FontWeight.w500,
         ),
         OutlinedButton(
           onPressed: readOnly
@@ -60,7 +60,7 @@ class FRecipePublished extends StatelessWidget {
                     account.displayName,
                     style: .titleMedium,
                     color: .primary,
-                    weight: .bold,
+                    fontWeight: .bold,
                   ),
                   Text(createdOn.toLocalDateString(context)),
                 ],

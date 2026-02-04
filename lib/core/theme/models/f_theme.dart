@@ -19,6 +19,13 @@ abstract class FTheme {
     Brightness brightness,
     FlexTones Function(Brightness) flextones,
   ) => ThemeData(
+    actionIconTheme: ActionIconThemeData(
+      backButtonIconBuilder: (context) => const Icon(Icons.arrow_back_rounded),
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      scrolledUnderElevation: 0,
+    ),
     brightness: brightness,
     colorScheme: createColorScheme(color, brightness, flextones),
     extensions: [BlendedColors.fromPrimary(color)],

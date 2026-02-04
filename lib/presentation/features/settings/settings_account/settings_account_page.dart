@@ -72,7 +72,7 @@ class SettingsAccountPage extends ConsumerWidget {
                           FText(
                             data.displayName,
                             style: .titleLarge,
-                            weight: .bold,
+                            fontWeight: .bold,
                           ),
                           FText(data.email, style: .bodyMedium),
                         ],

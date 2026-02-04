@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 3.5.0+88
+version: 3.6.0+90
 
 environment:
-  sdk: '>=3.10.7 <4.0.0'
+  sdk: '>=3.10.8 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,12 +35,12 @@ dependencies:
   collection: ^1.19.1
   dart_mappable: ^4.6.1
   data_table_2: ^2.7.2
-  dio: ^5.9.0
+  dio: ^5.9.1
   flutter_material_design_icons: ^1.1.7447
   flutter_riverpod: ^3.1.0
   fl_chart: ^1.1.1
   device_info_plus: ^12.3.0
-  go_router: ^17.0.1
+  go_router: ^17.1.0
   image_picker: ^1.2.1
   intl: 0.20.2
   package_info_plus: ^9.0.0
@@ -65,13 +65,14 @@ dependencies:
   sembast: ^3.8.6
   path: ^1.9.1
   crypto: ^3.0.7
+  flutter_m3shapes: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^2.10.5
   custom_lint: ^0.8.1
-  dart_mappable_builder: ^4.6.3
+  dart_mappable_builder: ^4.6.4
   flutter_gen_runner: ^5.12.0
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0

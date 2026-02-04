@@ -29,7 +29,7 @@ class FRecipeCategories extends StatelessWidget {
         FText(
           context.l10n.f_recipe_categories__title,
           style: FTextStyle.headlineMedium,
-          weight: FontWeight.w500,
+          fontWeight: FontWeight.w500,
         ),
 
         FWrap(

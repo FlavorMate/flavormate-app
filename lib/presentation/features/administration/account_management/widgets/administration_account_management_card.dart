@@ -43,7 +43,7 @@ class AdministrationAccountManagementCard extends StatelessWidget {
                   FText(
                     account.displayName,
                     style: FTextStyle.titleMedium,
-                    weight: .bold,
+                    fontWeight: .bold,
                   ),
                   const SizedBox(height: PADDING / 2),
                   FText(

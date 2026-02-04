@@ -151,7 +151,7 @@ class _FTableState extends State<FTable> {
                   head,
                   style: FTextStyle.labelLarge,
                   textAlign: _headerTextAligns.elementAt(index),
-                  weight: FontWeight.bold,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
           ],

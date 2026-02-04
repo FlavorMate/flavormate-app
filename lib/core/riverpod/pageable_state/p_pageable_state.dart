@@ -6,6 +6,9 @@ part 'p_pageable_state.g.dart';
 class PPageableState extends _$PPageableState {
   @override
   int build(String pageId) {
+    ref.onDispose(() {
+      print('Disposed $pageId');
+    });
     return 0;
   }
 
@@ -21,5 +24,9 @@ class PPageableState extends _$PPageableState {
 
   void setPage(int newPage) {
     state = newPage;
+  }
+
+  void reset() {
+    state = 0;
   }
 }

@@ -3,7 +3,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
@@ -11,19 +10,19 @@ import 'package:flavormate/data/repositories/features/books/p_rest_books_id_reci
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_bar.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_content.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
+import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/widgets/f_content_side_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_menu_anchor.dart';
+import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/features/library_item/dialogs/edit_book_dialog.dart';
 import 'package:flavormate/presentation/features/library_item/providers/p_library_item.dart';
 import 'package:flavormate/presentation/features/library_item/widgets/library_item_info_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -72,6 +71,11 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
         appBar: FAppBar(
           title: data.book.label,
           actions: [
+            IconButton(
+              icon: const Icon(MdiIcons.filter),
+              onPressed: handleFilterDialog,
+            ),
+
             if (data.isOwner || data.isAdmin)
               FMenuAnchor(
                 children: [
@@ -96,58 +100,94 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
               ),
           ],
         ),
-        body: CustomScrollView(
-          controller: _controller,
-          slivers: [
-            FConstrainedBoxSliver(
-              maxWidth: FBreakpoint.smValue,
-              padding: const .symmetric(horizontal: PADDING),
-              sliver: SliverToBoxAdapter(
-                child: LibraryItemInfoHeader(book: data.book),
-              ),
+        body: SafeArea(
+          child: FProviderState(
+            onEmpty: FEmptyMessage(
+              title: context.l10n.library_item_page__recipes_on_empty,
+              icon: StateIconConstants.recipes.emptyIcon,
             ),
-            SliverPersistentHeader(
-              floating: true,
-              delegate: FPaginatedSortDelegate(
-                () => FPaginatedSort(
-                  currentOrderBy: orderBy,
-                  currentDirection: orderDirection,
-                  setOrderBy: setOrderBy,
-                  setOrderDirection: setOrderDirection,
-                  options: OrderByConstants.book,
-                ),
-              ),
+            onError: FEmptyMessage(
+              title: context.l10n.library_item_page__recipes_on_error,
+              icon: StateIconConstants.recipes.errorIcon,
             ),
-            FPaginatedContent(
-              provider: recipeProvider,
-              pageProvider: widget.pageRecipeProvider,
-              controller: _controller,
-              onEmpty: FEmptyMessage(
-                title: context.l10n.library_item_page__recipes_on_empty,
-                icon: StateIconConstants.recipes.emptyIcon,
-              ),
-              onError: FEmptyMessage(
-                title: context.l10n.library_item_page__recipes_on_error,
-                icon: StateIconConstants.recipes.errorIcon,
-              ),
-              itemBuilder: (items) => FPaginatedContentCard(
-                data: items,
-                itemBuilder: (item) => FImageCard.maximized(
-                  label: item.label,
-                  subLabel: item.totalTime.beautify(context),
-                  coverSelector: (resolution) => item.cover?.url(resolution),
-                  onTap: () => context.routes.recipesItem(item.id),
-                ),
-              ),
-            ),
-          ],
-        ),
-
-        bottomNavigationBar: SafeArea(
-          child: FPaginatedBar(
             provider: recipeProvider,
-            pageProvider: widget.pageRecipeProvider,
-            controller: _controller,
+            child: CustomScrollView(
+              controller: _controller,
+              slivers: [
+                FConstrainedBoxSliver(
+                  maxWidth: FBreakpoint.smValue,
+                  padding: const .only(
+                    left: PADDING,
+                    right: PADDING,
+                    bottom: PADDING,
+                  ),
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      FConstrainedBoxSliver(
+                        maxWidth: FBreakpoint.smValue,
+                        padding: const .symmetric(horizontal: PADDING),
+                        sliver: SliverToBoxAdapter(
+                          child: LibraryItemInfoHeader(book: data.book),
+                        ),
+                      ),
+
+                      const FSizedBoxSliver(height: PADDING),
+
+                      FLazySliverList(
+                        key: orderKey,
+                        provider: recipeProvider,
+                        pageProvider: widget.pageRecipeProvider,
+                        scrollController: _controller,
+
+                        itemBuilder: (item, index, first, last) =>
+                            FContentSideCard(
+                              title: item.label,
+                              imageSelector: item.cover?.url,
+                              onTap: () => context.routes.recipesItem(item.id),
+                              first: first,
+                              last: last,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // SliverPersistentHeader(
+                //   floating: true,
+                //   delegate: FPaginatedSortDelegate(
+                //     () => FPaginatedSort(
+                //       currentOrderBy: orderBy,
+                //       currentDirection: orderDirection,
+                //       setOrderBy: setOrderBy,
+                //       setOrderDirection: setOrderDirection,
+                //       options: OrderByConstants.book,
+                //     ),
+                //   ),
+                // ),
+                // FPaginatedContent(
+                //   provider: recipeProvider,
+                //   pageProvider: widget.pageRecipeProvider,
+                //   controller: _controller,
+                //   onEmpty: FEmptyMessage(
+                //     title: context.l10n.library_item_page__recipes_on_empty,
+                //     icon: StateIconConstants.recipes.emptyIcon,
+                //   ),
+                //   onError: FEmptyMessage(
+                //     title: context.l10n.library_item_page__recipes_on_error,
+                //     icon: StateIconConstants.recipes.errorIcon,
+                //   ),
+                //   itemBuilder: (items) => FPaginatedContentCard(
+                //     data: items,
+                //     itemBuilder: (item) => FImageCard.maximized(
+                //       label: item.label,
+                //       subLabel: item.totalTime.beautify(context),
+                //       coverSelector: (resolution) => item.cover?.url(resolution),
+                //       onTap: () => context.routes.recipesItem(item.id),
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
           ),
         ),
       ),
@@ -235,6 +275,16 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
     }
   }
 
+  void handleFilterDialog() async {
+    final result = await openFilterDialog();
+    if (result != null) {
+      ref.read(widget.pageRecipeProvider.notifier).reset();
+    }
+  }
+
   @override
   OrderBy get defaultOrderBy => OrderBy.Label;
+
+  @override
+  List<OrderBy> get allowedFilters => OrderByConstants.recipe;
 }

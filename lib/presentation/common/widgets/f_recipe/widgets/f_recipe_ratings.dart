@@ -29,7 +29,7 @@ class FRecipeRatings extends StatelessWidget {
         FText(
           context.l10n.f_recipe_ratings__title,
           style: FTextStyle.headlineMedium,
-          weight: FontWeight.w500,
+          fontWeight: FontWeight.w500,
         ),
         SizedBox(
           width: 450,
@@ -51,7 +51,7 @@ class FRecipeRatings extends StatelessWidget {
                               child: FText(
                                 data.average.toStringAsFixed(1),
                                 style: .headlineMedium,
-                                weight: .bold,
+                                fontWeight: .bold,
                               ),
                             ),
                             const SizedBox(width: PADDING * 2),
@@ -147,6 +147,7 @@ class _StarBar extends StatelessWidget {
   final int level;
   final int count;
   final int allCount;
+
   const _StarBar({
     required this.level,
     required this.count,

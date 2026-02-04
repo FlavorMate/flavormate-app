@@ -28,7 +28,7 @@ class FMessageText extends ConsumerWidget implements FMessage {
           content,
           style: textStyle ?? .bodyMedium,
           color: .onInverseSurface,
-          weight: fontWeight,
+          fontWeight: fontWeight,
         ),
       ),
     );

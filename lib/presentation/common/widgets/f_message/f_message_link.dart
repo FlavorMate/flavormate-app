@@ -57,7 +57,7 @@ class FMessageLink extends ConsumerWidget implements FMessage {
                         FText(
                           linkLabel,
                           style: .bodyMedium,
-                          weight: .w600,
+                          fontWeight: .w600,
                         ),
                       ],
                     ),

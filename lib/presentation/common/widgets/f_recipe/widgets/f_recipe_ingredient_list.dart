@@ -29,7 +29,7 @@ class FRecipeIngredientList extends StatelessWidget {
           FText(
             ingredientGroup.label!,
             style: FTextStyle.titleLarge,
-            weight: FontWeight.w500,
+            fontWeight: FontWeight.w500,
           ),
 
         FTable(

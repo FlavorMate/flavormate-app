@@ -16,6 +16,7 @@ class FImageCard extends ConsumerWidget {
   final String? Function(ImageResolution) coverSelector;
   final String? subLabel;
   final FImageType imageType;
+  final BorderRadiusGeometry? borderRadius;
 
   const FImageCard({
     super.key,
@@ -25,6 +26,7 @@ class FImageCard extends ConsumerWidget {
     this.imageType = FImageType.secure,
     this.onTap,
     this.subLabel,
+    this.borderRadius,
   });
 
   static SizedBox maximized({
@@ -35,6 +37,7 @@ class FImageCard extends ConsumerWidget {
     FImageType imageType = FImageType.secure,
     VoidCallback? onTap,
     String? subLabel,
+    BorderRadiusGeometry? borderRadius,
   }) {
     return SizedBox(
       height: height,
@@ -48,6 +51,7 @@ class FImageCard extends ConsumerWidget {
             onTap: onTap,
             imageType: imageType,
             subLabel: subLabel,
+            borderRadius: borderRadius,
           );
         },
       ),
@@ -56,7 +60,7 @@ class FImageCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageMode = ref.read(pSettingsImageModeProvider);
+    final imageMode = ref.watch(pSettingsImageModeProvider);
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -69,7 +73,7 @@ class FImageCard extends ConsumerWidget {
 
         final opacity = calculateOpacity(constraints.maxWidth);
         return ClipRRect(
-          borderRadius: .circular(BORDER_RADIUS),
+          borderRadius: borderRadius ?? .circular(BORDER_RADIUS),
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -104,7 +108,7 @@ class FImageCard extends ConsumerWidget {
                                 label!,
                                 style: FTextStyle.titleLarge,
                                 maxLines: 2,
-                                weight: FontWeight.w600,
+                                fontWeight: FontWeight.w600,
                                 textOverflow: TextOverflow.ellipsis,
                                 color: FTextColor.white,
                               ),

@@ -95,7 +95,7 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
                     FText(
                       widget.title!,
                       style: FTextStyle.headlineSmall,
-                      weight: .w500,
+                      fontWeight: .w500,
                     ),
                     IconButton(
                       onPressed: widget.onShowAll,

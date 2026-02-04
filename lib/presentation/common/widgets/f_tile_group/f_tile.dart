@@ -27,6 +27,27 @@ class FTile extends StatelessWidget {
     required this.onTap,
   });
 
+  static Widget manual({
+    required bool first,
+    required bool last,
+    double borderRadius = 16,
+    required FTile tile,
+  }) {
+    final topLeft = first ? borderRadius : 4.0;
+    final topRight = first ? borderRadius : 4.0;
+    final bottomLeft = last ? borderRadius : 4.0;
+    final bottomRight = last ? borderRadius : 4.0;
+    return ClipRRect(
+      borderRadius: .only(
+        topLeft: .circular(topLeft),
+        topRight: .circular(topRight),
+        bottomLeft: .circular(bottomLeft),
+        bottomRight: .circular(bottomRight),
+      ),
+      child: tile,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -46,7 +67,7 @@ class FTile extends StatelessWidget {
             : FText(
                 label,
                 style: .bodyLarge,
-                weight: .w600,
+                fontWeight: .w600,
                 color: disabled ? .grey : null,
               ),
         subtitle: subLabel?.let(

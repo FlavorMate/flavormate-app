@@ -64,6 +64,8 @@ class PAuth extends _$PAuth {
 
     final response = await client.postRefreshToken();
 
+    if (response.hasError) return null;
+
     await ref.read(pSSJwtProvider.notifier).setValue(response.data);
 
     return response.data;
