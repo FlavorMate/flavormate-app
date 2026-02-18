@@ -102,25 +102,15 @@ class _RecipeEditorItemTagsPageState
                   SliverToBoxAdapter(
                     child: FProviderStruct(
                       provider: widget.provider,
-                      builder: (_, data) {
-                        if (data.isEmpty) {
-                          return FEmptyMessage(
-                            title:
-                                context.l10n.recipe_editor_item_tags__on_empty,
-                            icon: StateIconConstants.tags.emptyIcon,
-                          );
-                        }
-
-                        return FWrap(
-                          children: [
-                            for (final tag in data)
-                              Chip(
-                                label: Text('#$tag'),
-                                onDeleted: () => deleteTag(tag),
-                              ),
-                          ],
-                        );
-                      },
+                      builder: (_, data) => FWrap(
+                        children: [
+                          for (final tag in data)
+                            Chip(
+                              label: Text('#$tag'),
+                              onDeleted: () => deleteTag(tag),
+                            ),
+                        ],
+                      ),
                       onError: FEmptyMessage(
                         title: context.l10n.recipe_editor_item_tags__on_error,
                         icon: StateIconConstants.tags.errorIcon,
