@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 3.6.0+90
+version: 4.0.0+92
 
 environment:
-  sdk: '>=3.10.8 <4.0.0'
+  sdk: '>=3.11.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -32,87 +32,50 @@ dependencies:
     sdk: flutter
 
   app_links: ^7.0.0
+  crypto: ^3.0.7
   collection: ^1.19.1
   dart_mappable: ^4.6.1
-  data_table_2: ^2.7.2
-  dio: ^5.9.1
-  flutter_material_design_icons: ^1.1.7447
-  flutter_riverpod: ^3.1.0
-  fl_chart: ^1.1.1
   device_info_plus: ^12.3.0
+  dio: ^5.9.1
+  fl_chart: ^1.1.1
+  flex_seed_scheme: ^4.0.1
+  flutter_expandable_fab: ^2.5.2
+  flutter_m3shapes: ^1.0.0+2
+  flutter_markdown_plus: ^1.0.7
+  flutter_material_design_icons: ^1.1.7447
+  flutter_secure_storage: ^10.0.0
+  flutter_svg: ^2.2.3
+  flutter_riverpod: ^3.2.1
   go_router: ^17.1.0
+  http: ^1.6.0
   image_picker: ^1.2.1
-  intl: 0.20.2
+  intl: ^0.20.2
+  jwt_decoder: ^2.0.1
   package_info_plus: ^9.0.0
-  riverpod_annotation: ^4.0.0
+  path: ^1.9.1
+  path_provider: ^2.1.5
+  photo_view: ^0.15.0
+  riverpod_annotation: ^4.0.2
+  sembast: ^3.8.6
   shared_preferences: ^2.5.4
   share_plus: ^12.0.1
   system_theme: ^3.2.0
+  two_dimensional_scrollables: ^0.3.8
   url_launcher: ^6.3.2
+  uuid: ^4.5.2
+  vector_graphics: ^1.1.19
   # no strict version because these depend on the SDK version:
   flutter_localizations:
     sdk: flutter
-  jwt_decoder: ^2.0.1
-  http: ^1.6.0
-  flutter_svg: ^2.2.3
-  flutter_expandable_fab: ^2.5.2
-  uuid: ^4.5.2
-  photo_view: ^0.15.0
-  flutter_markdown_plus: ^1.0.7
-  flex_seed_scheme: ^4.0.1
-  flutter_secure_storage: ^10.0.0
-  path_provider: ^2.1.5
-  sembast: ^3.8.6
-  path: ^1.9.1
-  crypto: ^3.0.7
-  flutter_m3shapes: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.10.5
-  custom_lint: ^0.8.1
+  build_runner: ^2.11.1
   dart_mappable_builder: ^4.6.4
   flutter_gen_runner: ^5.12.0
-  flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
-  riverpod_generator: ^4.0.0+1
-  riverpod_lint: ^3.1.0
-
-# until flutter 3.41 is released (see https://github.com/dart-lang/native/issues/2968)
-dependency_overrides:
-  objective_c: 9.1.0
-
-flutter_launcher_icons:
-  # android
-  android: true
-  image_path_android: "build_assets/icons/android/light_icon.png"
-  min_sdk_android: 31
-  adaptive_icon_background: "build_assets/icons/android/adaptive_background.png"
-  adaptive_icon_foreground: "build_assets/icons/android/adaptive_foreground.png"
-  adaptive_icon_foreground_inset: 24
-  adaptive_icon_monochrome: "build_assets/icons/android/monochrome.png"
-  # ios config
-  ios: true
-  image_path_ios: "build_assets/icons/ios/light_icon.png"
-  image_path_ios_dark_transparent: "build_assets/icons/ios/dark_icon.png"
-  image_path_ios_tinted_grayscale: "build_assets/icons/ios/tinted_icon.png"
-  desaturate_tinted_to_grayscale_ios: true
-  # web config
-  web:
-    generate: true
-    image_path: "build_assets/icons/web/light_icon.png"
-    background_color: "#FFFFFF"
-    theme_color: "#8BC34A"
-  # windows config
-  windows:
-    generate: true
-    image_path: "build_assets/icons/windows/light_icon.png"
-    icon_size: 48
-  # macos config
-  macos:
-    generate: true
-    image_path: "build_assets/icons/macos/light_icon.png"
+  riverpod_generator: ^4.0.3
 
 flutter_gen:
   output: lib/generated/flutter_gen

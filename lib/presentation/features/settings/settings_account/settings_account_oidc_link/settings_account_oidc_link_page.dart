@@ -50,7 +50,7 @@ class _SettingsAccountOidcLinkPageState
     orderDirection: orderDirection,
   );
 
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _SettingsAccountOidcLinkPageState
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -68,7 +68,7 @@ class _SettingsAccountOidcLinkPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
-        controller: _controller,
+        scrollController: _scrollController,
         title: context.l10n.settings_account_oidc_link_page__title,
         actions: [
           IconButton(
@@ -89,7 +89,7 @@ class _SettingsAccountOidcLinkPageState
             icon: StateIconConstants.oidc.errorIcon,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -110,7 +110,7 @@ class _SettingsAccountOidcLinkPageState
                       key: ValueKey('${orderKey.value}-$seed'),
                       provider: provider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _controller,
+                      scrollController: _scrollController,
 
                       itemBuilder: (link, index, first, last) {
                         return FTile.manual(

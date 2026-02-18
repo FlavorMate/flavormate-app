@@ -1,6 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_link_dto.dart';
 import 'package:flavormate/data/models/core/auth/session_dto.dart';
+import 'package:flavormate/data/models/features/search/search_dto.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/data/models/features/books/book_dto.dart';
 import 'package:flavormate/data/models/features/categories/category_dto.dart';
@@ -27,6 +28,18 @@ class PageableDto<T> with PageableDtoMappable<T> {
 
   const PageableDto({required this.metadata, required this.data});
 
+  factory PageableDto.empty() {
+    return const PageableDto(
+      metadata: Metadata(
+        totalElements: 0,
+        pageSize: 6,
+        currentPage: 0,
+        totalPages: 0,
+      ),
+      data: [],
+    );
+  }
+
   static PageableDto<T> fromAPI<T>(dynamic wrapper, Type clazz) {
     final metadata = MetadataMapper.fromMap(wrapper['metadata']);
 
@@ -42,6 +55,7 @@ class PageableDto<T> with PageableDtoMappable<T> {
       const (RecipeFileDto) => RecipeFileDtoMapper.fromMap,
       const (RecipeDraftPreviewDto) => RecipeDraftPreviewDtoMapper.fromMap,
       const (RecipeDraftFileDto) => RecipeDraftFileDtoMapper.fromMap,
+      const (SearchDto) => SearchDtoMapper.fromMap,
       const (SessionDto) => SessionDtoMapper.fromMap,
       const (StoryPreviewDto) => StoryPreviewDtoMapper.fromMap,
       const (StoryDraftPreviewDto) => StoryDraftPreviewDtoMapper.fromMap,

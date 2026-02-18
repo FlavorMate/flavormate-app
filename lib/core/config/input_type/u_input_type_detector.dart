@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 
-class InputTypeDetector {
+class UInputTypeDetector {
   // Track the last detected input type
   PointerDeviceKind? _lastInputType;
 

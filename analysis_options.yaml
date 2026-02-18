@@ -33,18 +33,14 @@ linter:
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
 
+plugins:
+  riverpod_lint: ^3.1.3
+
 # riverpod linting
 analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.mapper.dart"
-    - "**/*.graphql.dart"
-  plugins:
-    - custom_lint
 
 formatter:
   trailing_commas: preserve
-
-custom_lint:
-  rules:
-    provider_dependencies: false

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 const double PADDING = 16.0;
 const double BORDER_RADIUS = 12;
+const double BORDER_RADIUS_OUT = 16;
+const double BORDER_RADIUS_IN = 4;
 const double TABLE_ICON_WIDTH = 48;
 const double BUTTON_WIDTH = 250.0;
 const double WIDGET_WIDTH = 450.0;

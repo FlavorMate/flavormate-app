@@ -51,11 +51,11 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
     orderDirection: orderDirection,
   );
 
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -70,6 +70,7 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
       builder: (context, data) => Scaffold(
         appBar: FAppBar(
           title: data.book.label,
+          scrollController: _scrollController,
           actions: [
             IconButton(
               icon: const Icon(MdiIcons.filter),
@@ -112,23 +113,15 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
             ),
             provider: recipeProvider,
             child: CustomScrollView(
-              controller: _controller,
+              controller: _scrollController,
               slivers: [
                 FConstrainedBoxSliver(
                   maxWidth: FBreakpoint.smValue,
-                  padding: const .only(
-                    left: PADDING,
-                    right: PADDING,
-                    bottom: PADDING,
-                  ),
+                  padding: const .all(PADDING),
                   sliver: SliverMainAxisGroup(
                     slivers: [
-                      FConstrainedBoxSliver(
-                        maxWidth: FBreakpoint.smValue,
-                        padding: const .symmetric(horizontal: PADDING),
-                        sliver: SliverToBoxAdapter(
-                          child: LibraryItemInfoHeader(book: data.book),
-                        ),
+                      SliverToBoxAdapter(
+                        child: LibraryItemInfoHeader(book: data.book),
                       ),
 
                       const FSizedBoxSliver(height: PADDING),
@@ -137,7 +130,7 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
                         key: orderKey,
                         provider: recipeProvider,
                         pageProvider: widget.pageRecipeProvider,
-                        scrollController: _controller,
+                        scrollController: _scrollController,
 
                         itemBuilder: (item, index, first, last) =>
                             FContentSideCard(
@@ -151,41 +144,6 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
                     ],
                   ),
                 ),
-
-                // SliverPersistentHeader(
-                //   floating: true,
-                //   delegate: FPaginatedSortDelegate(
-                //     () => FPaginatedSort(
-                //       currentOrderBy: orderBy,
-                //       currentDirection: orderDirection,
-                //       setOrderBy: setOrderBy,
-                //       setOrderDirection: setOrderDirection,
-                //       options: OrderByConstants.book,
-                //     ),
-                //   ),
-                // ),
-                // FPaginatedContent(
-                //   provider: recipeProvider,
-                //   pageProvider: widget.pageRecipeProvider,
-                //   controller: _controller,
-                //   onEmpty: FEmptyMessage(
-                //     title: context.l10n.library_item_page__recipes_on_empty,
-                //     icon: StateIconConstants.recipes.emptyIcon,
-                //   ),
-                //   onError: FEmptyMessage(
-                //     title: context.l10n.library_item_page__recipes_on_error,
-                //     icon: StateIconConstants.recipes.errorIcon,
-                //   ),
-                //   itemBuilder: (items) => FPaginatedContentCard(
-                //     data: items,
-                //     itemBuilder: (item) => FImageCard.maximized(
-                //       label: item.label,
-                //       subLabel: item.totalTime.beautify(context),
-                //       coverSelector: (resolution) => item.cover?.url(resolution),
-                //       onTap: () => context.routes.recipesItem(item.id),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

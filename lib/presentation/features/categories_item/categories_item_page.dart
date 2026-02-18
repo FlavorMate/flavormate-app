@@ -3,7 +3,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
@@ -13,14 +12,10 @@ import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
 import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_side_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -43,7 +38,7 @@ class CategoriesItemPage extends ConsumerStatefulWidget {
 
 class _CategoriesItemPageState extends ConsumerState<CategoriesItemPage>
     with FOrderMixin<CategoriesItemPage> {
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   PRestCategoriesIdRecipesProvider get recipeProvider =>
       pRestCategoriesIdRecipesProvider(
@@ -55,7 +50,7 @@ class _CategoriesItemPageState extends ConsumerState<CategoriesItemPage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -65,7 +60,7 @@ class _CategoriesItemPageState extends ConsumerState<CategoriesItemPage>
 
     return Scaffold(
       appBar: FAppBar(
-        controller: _controller,
+        scrollController: _scrollController,
         title: category.value?.label ?? '',
         actions: [
           IconButton(
@@ -86,7 +81,7 @@ class _CategoriesItemPageState extends ConsumerState<CategoriesItemPage>
             title: context.l10n.recipes_page__on_error,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -108,7 +103,7 @@ class _CategoriesItemPageState extends ConsumerState<CategoriesItemPage>
                       key: orderKey,
                       provider: recipeProvider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _controller,
+                      scrollController: _scrollController,
 
                       itemBuilder: (item, index, first, last) =>
                           FContentSideCard(
@@ -124,37 +119,6 @@ class _CategoriesItemPageState extends ConsumerState<CategoriesItemPage>
               ),
             ],
           ),
-        ),
-      ),
-    );
-
-    return FPaginatedPage(
-      title: category.value?.label ?? '',
-      provider: recipeProvider,
-      pageProvider: widget.pageProvider,
-      onEmpty: FEmptyMessage(
-        title: context.l10n.categories_item_page__recipe_on_empty,
-        icon: StateIconConstants.recipes.emptyIcon,
-      ),
-      onError: FEmptyMessage(
-        title: context.l10n.categories_item_page__recipe_on_error,
-        icon: StateIconConstants.recipes.errorIcon,
-      ),
-      sortBuilder: () => FPaginatedSort(
-        currentOrderBy: orderBy,
-        currentDirection: orderDirection,
-        setOrderBy: setOrderBy,
-        setOrderDirection: setOrderDirection,
-        options: OrderByConstants.recipe,
-      ),
-      itemBuilder: (items) => FPaginatedContentCard(
-        data: items,
-        itemBuilder: (item) => FImageCard.maximized(
-          label: item.label,
-          subLabel: item.totalTime.beautify(context),
-          coverSelector: (resolution) => item.cover?.url(resolution),
-          onTap: () => context.routes.recipesItem(item.id),
-          width: 400,
         ),
       ),
     );

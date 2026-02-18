@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
-import 'package:flavormate/core/utils/debouncer.dart';
+import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_instruction_group_dto.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
@@ -42,10 +42,12 @@ class RecipeEditorItemInstructionGroupsItemPage extends ConsumerStatefulWidget {
 
 class _RecipeEditorItemInstructionGroupsItemPageState
     extends ConsumerState<RecipeEditorItemInstructionGroupsItemPage> {
+  final _scrollController = ScrollController();
+
   bool _ready = false;
 
   final _labelController = TextEditingController();
-  final _labelDebouncer = Debouncer();
+  final _labelDebouncer = UDebouncer();
 
   List<RecipeDraftInstructionGroupItemDto> _instructions = [];
 
@@ -68,6 +70,7 @@ class _RecipeEditorItemInstructionGroupsItemPageState
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _labelController.dispose();
     _labelDebouncer.dispose();
     super.dispose();
@@ -81,6 +84,7 @@ class _RecipeEditorItemInstructionGroupsItemPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
+          scrollController: _scrollController,
           title: context
               .l10n
               .recipe_editor_item_instruction_groups_item_page__title,
@@ -124,6 +128,7 @@ class _RecipeEditorItemInstructionGroupsItemPageState
                   child: Card.outlined(
                     margin: EdgeInsets.zero,
                     child: ReorderableListView.builder(
+                      scrollController: _scrollController,
                       buildDefaultDragHandles: false,
                       itemBuilder: (context, index) {
                         final ingredient = _instructions.elementAt(index);

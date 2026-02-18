@@ -11,7 +11,7 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class StoryEditorItemPreviewPage extends ConsumerWidget {
+class StoryEditorItemPreviewPage extends ConsumerStatefulWidget {
   final String id;
 
   const StoryEditorItemPreviewPage({super.key, required this.id});
@@ -20,15 +20,34 @@ class StoryEditorItemPreviewPage extends ConsumerWidget {
       pRestStoryDraftsIdProvider(storyDraftId: id);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _StoryEditorItemPreviewPageState();
+}
+
+class _StoryEditorItemPreviewPageState
+    extends ConsumerState<StoryEditorItemPreviewPage> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return FProviderPage(
-      provider: provider,
-      appBarBuilder: (_, data) => FAppBar(title: data.label!),
+      provider: widget.provider,
+      appBarBuilder: (_, data) => FAppBar(
+        scrollController: _scrollController,
+        title: data.label!,
+      ),
       floatingActionButtonBuilder: (context, _) => FloatingActionButton(
         onPressed: () => uploadStory(context, ref),
         child: const Icon(MdiIcons.upload),
       ),
       builder: (_, data) => FStory(
+        controller: _scrollController,
         story: CommonStory.fromDraft(data),
         readOnly: true,
       ),
@@ -42,7 +61,7 @@ class StoryEditorItemPreviewPage extends ConsumerWidget {
   Future<void> uploadStory(BuildContext context, WidgetRef ref) async {
     context.showLoadingDialog();
 
-    final result = await ref.read(provider.notifier).upload();
+    final result = await ref.read(widget.provider.notifier).upload();
 
     if (!context.mounted) return;
 

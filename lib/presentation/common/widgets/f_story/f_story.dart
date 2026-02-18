@@ -10,19 +10,26 @@ import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 
 class FStory extends StatelessWidget {
+  final ScrollController controller;
   final CommonStory story;
   final bool readOnly;
 
-  const FStory({super.key, required this.story, this.readOnly = false});
+  const FStory({
+    super.key,
+    required this.controller,
+    required this.story,
+    this.readOnly = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FResponsive(
+      controller: controller,
       child: Column(
         spacing: PADDING,
         children: [
           FText(
-            DateTime.now().toLocalDateString(context),
+            DateTime.now().formatter.date.yyyyMMMMdd(context),
             style: .bodyMedium,
             color: .grey,
             fontWeight: .w400,

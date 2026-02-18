@@ -60,61 +60,61 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 style: FTextStyle.headlineLarge,
               ),
               const SizedBox(height: PADDING * 2),
-              FButton(
-                width: BUTTON_WIDTH,
-                label: context.l10n.auth_page__login,
-                onPressed: () =>
-                    context.pushNamed(RouteConstants.AuthLogin.name),
-              ),
-
-              if (data.enableRegistration) ...[
-                const SizedBox(height: PADDING),
-                FButton(
-                  tonal: true,
-                  width: BUTTON_WIDTH,
-                  label: context.l10n.auth_page__register,
-                  onPressed: () =>
-                      context.pushNamed(RouteConstants.AuthRegister.name),
-                ),
-              ],
               if (data.compatibility ==
                   VersionComparison.majorIncompatible) ...[
-                const SizedBox(height: PADDING),
                 LoginCompatibilityAdmonition(compatibility: data.compatibility),
-              ],
-              if (data.oidcProviders.isNotEmpty) ...[
-                const SizedBox(height: PADDING),
-                Row(
-                  spacing: PADDING / 4,
-                  children: [
-                    const Expanded(child: Divider()),
-                    Text(context.l10n.auth_page__or),
-                    const Expanded(child: Divider()),
-                  ],
-                ),
-                const SizedBox(height: PADDING),
-                FText(
-                  context.l10n.auth_page__login_with,
-                  style: FTextStyle.bodyMedium,
-                ),
-                const SizedBox(height: PADDING),
-                SizedBox(
+              ] else ...[
+                FButton(
                   width: BUTTON_WIDTH,
-                  child: FTileGroup(
-                    items: [
-                      for (final provider in data.oidcProviders)
-                        FTile(
-                          label: provider.label,
-                          subLabel: null,
-                          leading: FOidcIcon(
-                            data: provider.icon,
-                            label: provider.label,
-                          ),
-                          onTap: () => openOIDC(provider),
-                        ),
+                  label: context.l10n.auth_page__login,
+                  onPressed: () =>
+                      context.pushNamed(RouteConstants.AuthLogin.name),
+                ),
+
+                if (data.enableRegistration) ...[
+                  const SizedBox(height: PADDING),
+                  FButton(
+                    tonal: true,
+                    width: BUTTON_WIDTH,
+                    label: context.l10n.auth_page__register,
+                    onPressed: () =>
+                        context.pushNamed(RouteConstants.AuthRegister.name),
+                  ),
+                ],
+                if (data.oidcProviders.isNotEmpty) ...[
+                  const SizedBox(height: PADDING),
+                  Row(
+                    spacing: PADDING / 4,
+                    children: [
+                      const Expanded(child: Divider()),
+                      Text(context.l10n.auth_page__or),
+                      const Expanded(child: Divider()),
                     ],
                   ),
-                ),
+                  const SizedBox(height: PADDING),
+                  FText(
+                    context.l10n.auth_page__login_with,
+                    style: FTextStyle.bodyMedium,
+                  ),
+                  const SizedBox(height: PADDING),
+                  SizedBox(
+                    width: BUTTON_WIDTH,
+                    child: FTileGroup(
+                      items: [
+                        for (final provider in data.oidcProviders)
+                          FTile(
+                            label: provider.label,
+                            subLabel: null,
+                            leading: FOidcIcon(
+                              data: provider.icon,
+                              label: provider.label,
+                            ),
+                            onTap: () => openOIDC(provider),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ],
           ),

@@ -386,6 +386,10 @@ class Routes {
     return context.pushNamed(RouteConstants.SettingsAppAppIconMode.name);
   }
 
+  Future search() {
+    return context.pushNamed(RouteConstants.Search.name);
+  }
+
   Future storyEditorItemPreview(String id) async {
     return context.pushNamed(
       RouteConstants.StoryEditorItemPreview.name,

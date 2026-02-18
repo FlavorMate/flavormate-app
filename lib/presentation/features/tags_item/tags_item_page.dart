@@ -38,7 +38,7 @@ class TagsItemPage extends ConsumerStatefulWidget {
 
 class _TagsItemPageState extends ConsumerState<TagsItemPage>
     with FOrderMixin<TagsItemPage> {
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   PRestTagsIdRecipesProvider get recipeProvider => pRestTagsIdRecipesProvider(
     widget.id,
@@ -49,7 +49,7 @@ class _TagsItemPageState extends ConsumerState<TagsItemPage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -59,7 +59,7 @@ class _TagsItemPageState extends ConsumerState<TagsItemPage>
 
     return Scaffold(
       appBar: FAppBar(
-        controller: _controller,
+        scrollController: _scrollController,
         title: tag.value?.label ?? '',
         actions: [
           IconButton(
@@ -80,7 +80,7 @@ class _TagsItemPageState extends ConsumerState<TagsItemPage>
             icon: StateIconConstants.tags.errorIcon,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -101,7 +101,7 @@ class _TagsItemPageState extends ConsumerState<TagsItemPage>
                       key: orderKey,
                       provider: recipeProvider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _controller,
+                      scrollController: _scrollController,
 
                       itemBuilder: (item, index, first, last) =>
                           FContentSideCard(

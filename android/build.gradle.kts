@@ -4,7 +4,7 @@ allprojects {
         mavenCentral()
     }
 }
- 
+
 val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../../build").get()
 rootProject.layout.buildDirectory.value(newBuildDir)
 
@@ -23,7 +23,7 @@ subprojects {
 
                 compileSdkVersion(36)
 
-                ndkVersion = "28.2.13676358"
+                ndkVersion = "29.0.14206865"
 
                 compileOptions {
                     sourceCompatibility = JavaVersion.VERSION_21
@@ -33,8 +33,8 @@ subprojects {
                 externalNativeBuild {
                     cmake {
                         version = "3.31.6"
-                     }
-                } 
+                    }
+                }
             }
         }
 

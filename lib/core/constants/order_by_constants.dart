@@ -7,6 +7,13 @@ abstract class OrderByConstants {
     OrderBy.Username,
   ];
 
+  static const adminAccount = [
+    OrderBy.CreatedOn,
+    OrderBy.DisplayName,
+    OrderBy.LastActivity,
+    OrderBy.Username,
+  ];
+
   static const book = [
     OrderBy.Label,
     OrderBy.CreatedOn,

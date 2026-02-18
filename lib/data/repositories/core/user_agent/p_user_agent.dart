@@ -8,7 +8,7 @@ part 'p_user_agent.g.dart';
 /// Created an user-agent in the following form:
 /// FlavorMate/AppVersion (Device; OS)
 /// e.g. FlavorMate/3.0.0 (iPhone 14; iOS 15.4.1)
-@riverpod
+@Riverpod(keepAlive: true)
 class PUserAgent extends _$PUserAgent {
   @override
   Future<String?> build() async {

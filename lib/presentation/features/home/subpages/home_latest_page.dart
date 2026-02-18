@@ -35,7 +35,7 @@ class HomeLatestPage extends ConsumerStatefulWidget {
 
 class _HomeLatestPageState extends ConsumerState<HomeLatestPage>
     with FOrderMixin {
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   PRestRecipesProvider get provider => pRestRecipesProvider(
     HomeLatestPage.pageKey,
@@ -45,7 +45,7 @@ class _HomeLatestPageState extends ConsumerState<HomeLatestPage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -56,7 +56,7 @@ class _HomeLatestPageState extends ConsumerState<HomeLatestPage>
     return Scaffold(
       appBar: FAppBar(
         title: context.l10n.home_latest_page__title,
-        controller: _controller,
+        scrollController: _scrollController,
       ),
       body: SafeArea(
         child: FProviderState(
@@ -70,7 +70,7 @@ class _HomeLatestPageState extends ConsumerState<HomeLatestPage>
             icon: StateIconConstants.recipes.errorIcon,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -89,12 +89,14 @@ class _HomeLatestPageState extends ConsumerState<HomeLatestPage>
                       key: orderKey,
                       provider: provider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _controller,
+                      scrollController: _scrollController,
 
                       itemBuilder: (item, index, first, last) =>
                           FContentSideCard(
                             title: item.label,
-                            subtitle: item.createdOn.toLocalDateString(context),
+                            subtitle: item.createdOn.formatter.date.yyyyMMMMdd(
+                              context,
+                            ),
                             imageSelector: item.cover?.url,
                             onTap: () => context.routes.recipesItem(item.id),
                             first: first,

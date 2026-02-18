@@ -35,7 +35,7 @@ class HomeStoriesPage extends ConsumerStatefulWidget {
 
 class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
     with FOrderMixin {
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   PRestStoriesProvider get provider => pRestStoriesProvider(
     HomeStoriesPage.pageKey,
@@ -45,7 +45,7 @@ class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -53,7 +53,7 @@ class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
-        controller: _controller,
+        scrollController: _scrollController,
         title: context.l10n.home_stories_page__title,
         actions: [
           IconButton(
@@ -74,7 +74,7 @@ class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
             icon: StateIconConstants.stories.errorIcon,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -93,7 +93,7 @@ class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
                       key: orderKey,
                       provider: provider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _controller,
+                      scrollController: _scrollController,
 
                       itemBuilder: (item, index, first, last) =>
                           FContentSideCard(

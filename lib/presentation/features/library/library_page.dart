@@ -36,7 +36,7 @@ class LibraryPage extends ConsumerStatefulWidget {
 
 class _LibraryPageState extends ConsumerState<LibraryPage>
     with FOrderMixin<LibraryPage> {
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   PRestBooksProvider get provider => pRestBooksProvider(
     pageProviderId: LibraryPage.pageKey,
@@ -46,7 +46,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -56,7 +56,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
 
     return Scaffold(
       appBar: FAppBar(
-        controller: _controller,
+        scrollController: _scrollController,
         title: context.l10n.flavormate,
         showHome: false,
         actions: [
@@ -72,7 +72,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
       ),
       body: SafeArea(
         child: CustomScrollView(
-          controller: _controller,
+          controller: _scrollController,
           slivers: [
             FConstrainedBoxSliver(
               maxWidth: FBreakpoint.smValue,
@@ -125,7 +125,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
                     key: orderKey,
                     provider: provider,
                     pageProvider: widget.pageProvider,
-                    scrollController: _controller,
+                    scrollController: _scrollController,
 
                     itemBuilder: (item, index, first, last) {
                       final stateLabel = item.visible

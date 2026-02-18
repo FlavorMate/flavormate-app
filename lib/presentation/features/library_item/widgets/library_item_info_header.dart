@@ -14,7 +14,7 @@ class LibraryItemInfoHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      spacing: PADDING,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,20 +48,33 @@ class LibraryItemInfoHeader extends StatelessWidget {
               ),
           ],
         ),
-        InkWell(
-          onTap: () => context.routes.accountsItem(book.ownedBy.id),
-          child: Row(
-            spacing: PADDING,
-            children: [
-              FCircleAvatar(
-                account: book.ownedBy,
-                radius: 24,
+        Expanded(
+          child: Align(
+            alignment: .centerRight,
+            child: InkWell(
+              borderRadius: .circular(BORDER_RADIUS),
+              onTap: () => context.routes.accountsItem(book.ownedBy.id),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Row(
+                  mainAxisSize: .min,
+                  spacing: PADDING / 2,
+                  children: [
+                    FCircleAvatar(
+                      account: book.ownedBy,
+                      radius: 24,
+                    ),
+                    Flexible(
+                      child: FText(
+                        book.ownedBy.displayName,
+                        style: FTextStyle.titleLarge,
+                        textOverflow: .ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              FText(
-                book.ownedBy.displayName,
-                style: FTextStyle.titleLarge,
-              ),
-            ],
+            ),
           ),
         ),
       ],

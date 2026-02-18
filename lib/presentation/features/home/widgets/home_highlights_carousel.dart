@@ -34,7 +34,7 @@ class HomeHighlightsCarousel extends StatelessWidget {
                   highlight.cover?.url(resolution),
               labelSelector: (highlight) => highlight.recipe.label,
               subLabelSelector: (highlight) =>
-                  highlight.date.toLocalDateString(context),
+                  highlight.date.formatter.date.yyyyMMMMdd(context),
               onShowAll: () => context.routes.homeHighlights(),
             )
           : const SizedBox.shrink(),

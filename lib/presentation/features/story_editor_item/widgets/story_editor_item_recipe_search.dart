@@ -3,7 +3,7 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/core/riverpod/search_state/p_search_state.dart';
 import 'package:flavormate/core/riverpod/search_state/search_state.dart';
-import 'package:flavormate/core/utils/debouncer.dart';
+import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_search.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
@@ -32,7 +32,7 @@ class StoryEditorItemRecipeSearch extends ConsumerStatefulWidget {
 }
 
 class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
-  final _debouncer = Debouncer();
+  final _debouncer = UDebouncer();
   final _controller = SearchController();
 
   @override

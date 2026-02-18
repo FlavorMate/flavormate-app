@@ -27,11 +27,20 @@ class StoriesItemPage extends ConsumerStatefulWidget {
 }
 
 class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, data) => FAppBar(
+        scrollController: _scrollController,
         title: data.story.label,
         actions: [
           Visibility(
@@ -45,7 +54,10 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
           ),
         ],
       ),
-      builder: (_, data) => FStory(story: CommonStory.fromStory(data.story)),
+      builder: (_, data) => FStory(
+        controller: _scrollController,
+        story: CommonStory.fromStory(data.story),
+      ),
       onError: FEmptyMessage(
         title: context.l10n.stories_item_page__on_error,
         icon: StateIconConstants.stories.errorIcon,

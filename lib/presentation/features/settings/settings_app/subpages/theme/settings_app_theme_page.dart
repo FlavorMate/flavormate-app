@@ -1,5 +1,6 @@
 import 'package:flavormate/core/constants/color_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_color.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_custom_color.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_mode.dart';
@@ -8,7 +9,6 @@ import 'package:flavormate/core/theme/enums/f_theme_mode.dart';
 import 'package:flavormate/core/theme/enums/f_theme_tone.dart';
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/core/theme/providers/p_dynamic_color.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_mode_buttons.dart';
@@ -28,6 +28,8 @@ class SettingsAppThemePage extends ConsumerStatefulWidget {
 }
 
 class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
+  final _scrollController = ScrollController();
+
   late FThemeMode _themeMode;
   late FThemeMode _activeThemeMode;
   late FThemeTone _themeTone;
@@ -55,6 +57,12 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   ThemeData get _theme => FTheme.createTheme(
     _activeColor,
     Theme.brightnessOf(context),
@@ -66,13 +74,17 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
     return Theme(
       data: _theme,
       child: Scaffold(
-        appBar: FAppBar(title: context.l10n.settings_app_theme_page__title),
+        appBar: FAppBar(
+          scrollController: _scrollController,
+          title: context.l10n.settings_app_theme_page__title,
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: setTheme,
           child: const Icon(MdiIcons.contentSave),
         ),
         body: SafeArea(
           child: FResponsive(
+            controller: _scrollController,
             child: Column(
               spacing: PADDING,
               children: [

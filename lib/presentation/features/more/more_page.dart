@@ -21,6 +21,7 @@ class MorePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: FAppBar(
+        scrollController: null,
         title: context.l10n.flavormate,
         automaticallyImplyLeading: false,
         showHome: false,

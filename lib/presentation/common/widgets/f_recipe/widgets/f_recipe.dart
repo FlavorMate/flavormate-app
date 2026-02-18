@@ -23,6 +23,8 @@ class FRecipe extends ConsumerStatefulWidget {
   final VoidCallback? addBookmark;
   final Function(double?)? setRating;
 
+  final ScrollController controller;
+
   const FRecipe({
     super.key,
     required this.recipe,
@@ -35,6 +37,7 @@ class FRecipe extends ConsumerStatefulWidget {
     this.addBookmark,
     this.setRating,
     this.hasFab = false,
+    required this.controller,
   });
 
   @override
@@ -78,6 +81,7 @@ class _FRecipeState extends ConsumerState<FRecipe> {
             newAmount: newAmount,
             decreaseServing: decreaseFactor,
             increaseServing: increaseFactor,
+            controller: widget.controller,
           );
         } else {
           return FRecipeMobileLayout(
@@ -97,6 +101,7 @@ class _FRecipeState extends ConsumerState<FRecipe> {
             newAmount: newAmount,
             decreaseServing: decreaseFactor,
             increaseServing: increaseFactor,
+            controller: widget.controller,
           );
         }
       },

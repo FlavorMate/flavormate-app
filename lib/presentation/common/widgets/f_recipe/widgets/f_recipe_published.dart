@@ -62,7 +62,7 @@ class FRecipePublished extends StatelessWidget {
                     color: .primary,
                     fontWeight: .bold,
                   ),
-                  Text(createdOn.toLocalDateString(context)),
+                  Text(createdOn.formatter.date.yyyyMMMMdd(context)),
                 ],
               ),
             ],

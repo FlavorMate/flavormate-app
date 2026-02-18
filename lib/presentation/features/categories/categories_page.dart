@@ -33,7 +33,7 @@ class CategoriesPage extends ConsumerStatefulWidget {
 
 class _CategoriesPageState extends ConsumerState<CategoriesPage>
     with FOrderMixin<CategoriesPage> {
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   PRestCategoriesProvider get provider => pRestCategoriesProvider(
     CategoriesPage.pageKey,
@@ -43,7 +43,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -51,7 +51,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
-        controller: _controller,
+        scrollController: _scrollController,
         title: context.l10n.categories_page__title,
         actions: [
           IconButton(
@@ -72,7 +72,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
             icon: StateIconConstants.categories.errorIcon,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -91,7 +91,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
                       key: orderKey,
                       provider: provider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _controller,
+                      scrollController: _scrollController,
 
                       itemBuilder: (item, index, first, last) =>
                           FContentFullCard(

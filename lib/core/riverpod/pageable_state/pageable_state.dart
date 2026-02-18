@@ -25,7 +25,8 @@ enum PageableState {
   recipeAccountList,
   unused,
   oidcLink,
-  sessions
+  sessions,
+  search
   ;
 
   String getId(String id) => '${name}_$id';

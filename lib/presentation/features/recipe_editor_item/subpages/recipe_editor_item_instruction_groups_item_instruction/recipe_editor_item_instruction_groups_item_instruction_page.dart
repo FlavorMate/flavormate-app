@@ -1,6 +1,6 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/utils/debouncer.dart';
+import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -45,7 +45,7 @@ class _RecipeEditorItemInstructionGroupsItemInstructionPageState
   bool _ready = false;
 
   final _labelController = TextEditingController();
-  final _labelDebouncer = Debouncer();
+  final _labelDebouncer = UDebouncer();
 
   @override
   void initState() {
@@ -75,6 +75,7 @@ class _RecipeEditorItemInstructionGroupsItemInstructionPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
+          scrollController: null,
           title: context
               .l10n
               .recipe_editor_item_instruction_groups_item_instruction_page__title,

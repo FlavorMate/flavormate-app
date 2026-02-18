@@ -2,7 +2,6 @@ import 'package:app_links/app_links.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/core/cache/provider/p_cached_image_manager.dart';
 import 'package:flavormate/core/config/app_links/p_app_links.dart';
-import 'package:flavormate/core/config/input_type/input_type_aware_app.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/mappers/custom_mappers.dart';
 import 'package:flavormate/core/navigation/p_go_router.dart';
@@ -13,6 +12,7 @@ import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_theme_
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/core/theme/providers/p_theme.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
+import 'package:flavormate/presentation/common/widgets/f_input_type/f_input_type_aware_app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide ImageCache;
 import 'package:flutter/services.dart';
@@ -33,10 +33,10 @@ void main() async {
   );
 
   runApp(
-    InputTypeAwareApp(
-      child: ProviderScope(
-        retry: (_, _) => null,
-        child: const _EagerInitialization(child: MyApp()),
+    ProviderScope(
+      retry: (_, _) => null,
+      child: const FInputTypeAwareApp(
+        child: _EagerInitialization(child: MyApp()),
       ),
     ),
   );

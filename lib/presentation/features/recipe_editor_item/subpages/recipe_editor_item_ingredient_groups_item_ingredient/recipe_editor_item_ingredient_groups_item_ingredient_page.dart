@@ -1,7 +1,7 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_number.dart';
-import 'package:flavormate/core/utils/debouncer.dart';
+import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
@@ -48,14 +48,16 @@ class RecipeEditorItemIngredientGroupsItemIngredientPage
 
 class _RecipeEditorIngredientPageState
     extends ConsumerState<RecipeEditorItemIngredientGroupsItemIngredientPage> {
+  final _scrollController = ScrollController();
+
   bool _ready = false;
 
   final _formKey = GlobalKey<FormState>();
 
   final _amountController = TextEditingController();
-  final _amountDebouncer = Debouncer();
+  final _amountDebouncer = UDebouncer();
   final _labelController = TextEditingController();
-  final _labelDebouncer = Debouncer();
+  final _labelDebouncer = UDebouncer();
 
   UnitLocalizedDto? _unit;
   RecipeDraftIngredientGroupItemNutritionDto? _nutrition;
@@ -78,6 +80,7 @@ class _RecipeEditorIngredientPageState
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _amountController.dispose();
     _amountDebouncer.dispose();
     _labelController.dispose();
@@ -93,6 +96,7 @@ class _RecipeEditorIngredientPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
+          scrollController: _scrollController,
           title: context
               .l10n
               .recipe_editor_item_ingredient_groups_item_ingredient_page__title,
@@ -111,6 +115,7 @@ class _RecipeEditorIngredientPageState
         ),
         body: SafeArea(
           child: FResponsive(
+            controller: _scrollController,
             child: Form(
               key: _formKey,
               child: Column(

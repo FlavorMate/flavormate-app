@@ -1,3 +1,4 @@
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flutter/material.dart';
@@ -6,15 +7,12 @@ import 'package:flutter/material.dart';
 class FTileGroup extends StatelessWidget {
   final String? title;
 
-  final double borderRadius;
-
   final List<FTile> items;
 
   const FTileGroup({
     super.key,
     this.title,
     required this.items,
-    this.borderRadius = 16,
   });
 
   @override
@@ -36,16 +34,18 @@ class FTileGroup extends StatelessWidget {
         ...List.generate(items.length, (index) {
           final item = items[index];
 
-          final topLeft = index == 0 ? borderRadius : 4.0;
-          final topRight = index == 0 ? borderRadius : 4.0;
-          final bottomLeft = index == items.length - 1 ? borderRadius : 4.0;
-          final bottomRight = index == items.length - 1 ? borderRadius : 4.0;
+          final top = index == 0 ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
+
+          final bottom = index == items.length - 1
+              ? BORDER_RADIUS_OUT
+              : BORDER_RADIUS_IN;
+
           return ClipRRect(
             borderRadius: .only(
-              topLeft: .circular(topLeft),
-              topRight: .circular(topRight),
-              bottomLeft: .circular(bottomLeft),
-              bottomRight: .circular(bottomRight),
+              topLeft: .circular(top),
+              topRight: .circular(top),
+              bottomLeft: .circular(bottom),
+              bottomRight: .circular(bottom),
             ),
             child: item,
           );

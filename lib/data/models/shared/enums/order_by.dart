@@ -17,6 +17,10 @@ enum OrderBy {
   DisplayName(MdiIcons.label),
   Username(MdiIcons.account),
 
+  // Only used for AccountEntity (Admin view)
+  EMail(MdiIcons.email),
+  LastActivity(MdiIcons.clock),
+
   // Only used for TokenEntity
   ExpiresAt(MdiIcons.clockEnd),
   Revoked(MdiIcons.lockReset),
@@ -32,7 +36,9 @@ enum OrderBy {
       OrderBy.Label => context.l10n.order_by__label,
       OrderBy.Visible => context.l10n.order_by__visible,
       OrderBy.DisplayName => context.l10n.order_by__display_name,
+      OrderBy.LastActivity => context.l10n.order_by__last_activity,
       OrderBy.Username => context.l10n.order_by__username,
+      OrderBy.EMail => context.l10n.order_by__email,
       OrderBy.ExpiresAt => context.l10n.order_by__expires_at,
       OrderBy.Revoked => context.l10n.order_by__revoked,
     };

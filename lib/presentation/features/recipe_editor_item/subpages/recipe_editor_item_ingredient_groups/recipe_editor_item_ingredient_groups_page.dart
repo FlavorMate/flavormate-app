@@ -33,11 +33,20 @@ class RecipeEditorItemIngredientGroupsPage extends ConsumerStatefulWidget {
 
 class _RecipeEditorItemIngredientGroupsPageState
     extends ConsumerState<RecipeEditorItemIngredientGroupsPage> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, data) => FAppBar(
+        scrollController: _scrollController,
         title: context.l10n.recipe_editor_item_ingredient_groups_page__title,
         actions: [
           FProgressColor(
@@ -60,6 +69,7 @@ class _RecipeEditorItemIngredientGroupsPageState
             Expanded(
               child: Card.outlined(
                 child: ReorderableListView.builder(
+                  scrollController: _scrollController,
                   buildDefaultDragHandles: false,
                   itemBuilder: (context, index) {
                     final group = data.elementAt(index);

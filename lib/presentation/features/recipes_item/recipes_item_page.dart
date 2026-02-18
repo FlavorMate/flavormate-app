@@ -37,6 +37,14 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
 
   double get amountFactor => newAmount / defaultAmount;
 
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -53,6 +61,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, data) => FAppBar(
+        scrollController: _scrollController,
         title: data.recipe.label,
         actions: [
           if (data.isShareEnabled)
@@ -80,6 +89,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
         setRating: (val) => setRating(val),
         showAllFiles: () => context.routes.recipesItemFiles(data.recipe.id),
         readOnly: false,
+        controller: _scrollController,
       ),
       onError: FEmptyMessage(
         title: context.l10n.recipes_item_page__on_error,

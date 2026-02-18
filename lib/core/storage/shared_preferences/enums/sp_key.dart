@@ -6,4 +6,5 @@ enum SPKey {
   JWT,
   ThemeCustomColor,
   SettingsImageMode,
+  SearchHistory,
 }

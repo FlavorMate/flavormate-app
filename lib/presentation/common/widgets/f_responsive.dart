@@ -6,11 +6,13 @@ class FResponsive extends StatelessWidget {
   final ScrollBehavior? scrollBehavior;
   final double maxWidth;
   final Widget child;
+  final ScrollController? controller;
 
   const FResponsive({
     super.key,
     this.maxWidth = FBreakpoint.smValue,
     this.scrollBehavior,
+    this.controller,
     required this.child,
   });
 
@@ -19,6 +21,7 @@ class FResponsive extends StatelessWidget {
     return ScrollConfiguration(
       behavior: scrollBehavior ?? ScrollConfiguration.of(context),
       child: SingleChildScrollView(
+        controller: controller,
         child: FFixedResponsive(maxWidth: maxWidth, child: child),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_device_info.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class PDeviceInfo extends _$PDeviceInfo {
   @override
   Future<BaseDeviceInfo> build() async {

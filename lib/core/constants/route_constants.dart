@@ -115,6 +115,12 @@ abstract class RouteConstants {
     'server-outdated',
   );
 
+  // Search
+  static const RouteConstant Search = RouteConstant(
+    '/search',
+    'search',
+  );
+
   // Recipe
   static const RouteConstant Recipes = RouteConstant(
     '/recipes',

@@ -8,6 +8,7 @@ class FAlertDialog extends StatelessWidget {
 
   final String title;
   final Widget child;
+  final List<Widget>? actions;
 
   final double width;
   final double? height;
@@ -22,6 +23,7 @@ class FAlertDialog extends StatelessWidget {
     this.scrollable = false,
     required this.title,
     required this.child,
+    this.actions,
     this.width = 450,
     this.height,
     this.submit,
@@ -40,6 +42,7 @@ class FAlertDialog extends StatelessWidget {
       insetPadding: const .all(PADDING),
       title: Text(title),
       actions: [
+        ...?actions,
         TextButton(
           onPressed: () => context.pop(),
           child: Text(negativeLabel ?? context.l10n.btn_cancel),

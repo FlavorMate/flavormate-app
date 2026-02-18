@@ -25,6 +25,7 @@ class SettingsAppAppIconPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
+        scrollController: null,
         title: context.l10n.settings_app_app_icon_page__title,
       ),
       body: SafeArea(

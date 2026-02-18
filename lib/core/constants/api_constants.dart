@@ -31,6 +31,7 @@ abstract class ApiConstants {
   static const FeatureHighlights = '$Root/highlights';
   static const FeatureRecipes = '$Root/recipes';
   static const FeatureRecipeDrafts = '$Root/recipe-drafts';
+  static const FeatureSearch = '$Root/search';
   static const FeatureStories = '$Root/stories';
   static const FeatureStoryDrafts = '$Root/story-drafts';
   static const FeatureTags = '$Root/tags';

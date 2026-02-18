@@ -1,21 +1,21 @@
 import 'dart:async';
 
-class Debouncer {
+class UDebouncer {
   final Duration _duration;
   Timer? _timer;
 
-  DebouncerState state = DebouncerState.Idle;
+  UDebouncerState state = UDebouncerState.idle;
 
-  Debouncer({Duration duration = const Duration(seconds: 1)})
+  UDebouncer({Duration duration = const Duration(seconds: 1)})
     : _duration = duration;
 
   void run(void Function() action) {
-    state = DebouncerState.Pending;
+    state = UDebouncerState.pending;
     _timer?.cancel();
     _timer = Timer(_duration, () {
-      state = DebouncerState.Saving;
+      state = UDebouncerState.saving;
       action.call();
-      state = DebouncerState.Idle;
+      state = UDebouncerState.idle;
     });
   }
 
@@ -25,4 +25,4 @@ class Debouncer {
   }
 }
 
-enum DebouncerState { Idle, Pending, Saving }
+enum UDebouncerState { idle, pending, saving }

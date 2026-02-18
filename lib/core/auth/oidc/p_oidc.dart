@@ -7,7 +7,6 @@ import 'package:flavormate/core/apis/rest/p_dio_auth.dart';
 import 'package:flavormate/core/apis/rest/p_dio_public.dart';
 import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/config/app_links/p_app_links.dart';
-import 'package:flavormate/core/config/features/p_feature_oidc2.dart';
 import 'package:flavormate/data/datasources/extensions/oidc_controller_api.dart';
 import 'package:flavormate/data/models/core/auth/auth_login_form.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
@@ -21,10 +20,6 @@ part 'p_oidc.g.dart';
 class POIDC extends _$POIDC {
   @override
   Future<List<OIDCProvider>> build() async {
-    final supportOidc2 = ref.watch(pFeatureOidc2Provider);
-
-    if (!supportOidc2) return [];
-
     final dio = ref.watch(pDioPublicProvider);
 
     final client = OIDCControllerApi(dio);

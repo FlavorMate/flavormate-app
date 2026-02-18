@@ -10,7 +10,12 @@ class FLoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar ? const FAppBar(title: '') : null,
+      appBar: showAppBar
+          ? const FAppBar(
+              title: '',
+              scrollController: null,
+            )
+          : null,
       body: const FLoading(),
     );
   }

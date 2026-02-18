@@ -12,7 +12,10 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool automaticallyImplyLeading;
   final bool enableScrollColor;
 
-  final ScrollController? controller;
+  final ScrollController? scrollController;
+
+  MouseCursor get _cursor =>
+      scrollController != null ? SystemMouseCursors.click : .defer;
 
   const FAppBar({
     super.key,
@@ -21,7 +24,7 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showHome = true,
     this.automaticallyImplyLeading = true,
     this.enableScrollColor = true,
-    this.controller,
+    required this.scrollController,
   });
 
   @override
@@ -38,13 +41,16 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(width: PADDING),
       ],
 
-      title: GestureDetector(
-        onTap: () => scrollToTop(),
-        child: FText(
-          title,
-          style: .titleLarge,
-          fontWeight: .w600,
-          fontRoundness: 100,
+      title: MouseRegion(
+        cursor: _cursor,
+        child: GestureDetector(
+          onTap: () => scrollToTop(),
+          child: FText(
+            title,
+            style: .titleLarge,
+            fontWeight: .w600,
+            fontRoundness: 100,
+          ),
         ),
       ),
     );
@@ -64,7 +70,7 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   void scrollToTop() {
-    controller?.animateTo(
+    scrollController?.animateTo(
       0,
       duration: const Duration(milliseconds: 250),
       curve: Curves.easeInOut,

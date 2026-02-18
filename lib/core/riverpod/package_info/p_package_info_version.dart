@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_package_info_version.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class PPackageInfoVersion extends _$PPackageInfoVersion {
   @override
   Future<Version> build() async {

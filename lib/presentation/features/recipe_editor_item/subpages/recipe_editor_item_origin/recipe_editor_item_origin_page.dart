@@ -1,13 +1,15 @@
+import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/utils/debouncer.dart';
+import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
+import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading_page.dart';
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_origin/providers/p_recipe_editor_item_origin.dart';
 import 'package:flutter/material.dart';
@@ -30,10 +32,12 @@ class RecipeEditorItemOriginPage extends ConsumerStatefulWidget {
 class _RecipeEditorItemOriginPageState
     extends ConsumerState<RecipeEditorItemOriginPage> {
   final _key = GlobalKey<FormState>();
+  final _scrollController = ScrollController();
+
   bool _ready = false;
 
   final _originController = TextEditingController();
-  final _originDebouncer = Debouncer();
+  final _originDebouncer = UDebouncer();
 
   @override
   void initState() {
@@ -48,6 +52,7 @@ class _RecipeEditorItemOriginPageState
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _originController.dispose();
     _originDebouncer.dispose();
     super.dispose();
@@ -61,6 +66,7 @@ class _RecipeEditorItemOriginPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
+          scrollController: _scrollController,
           title: context.l10n.recipe_editor_item_origin_page__title,
           actions: [
             FProgress(
@@ -71,39 +77,48 @@ class _RecipeEditorItemOriginPageState
             ),
           ],
         ),
-        body: Form(
-          key: _key,
-          child: SafeArea(
-            child: FResponsive(
-              child: Column(
-                spacing: PADDING,
-                children: [
-                  Icon(
-                    MdiIcons.web,
-                    size: 96,
-                    color: context.colorScheme.onPrimaryContainer,
-                  ),
-                  FText(
-                    context.l10n.recipe_editor_item_origin_page__hint_1,
-                    style: FTextStyle.bodyLarge,
-                  ),
-                  const SizedBox(height: PADDING / 4),
-                  FTextFormField(
-                    controller: _originController,
-                    label: context.l10n.recipe_editor_item_origin_page__label,
-                    onChanged: setOrigin,
-                    clear: () => setOrigin(''),
-                    validators: (val) {
-                      if (val == null || val.isEmpty) return null;
-                      if (!UValidator.isHttpUrl(val)) {
-                        return context.l10n.validator__is_http_url;
-                      }
-                      return null;
-                    },
-                  ),
-                ],
+        body: SafeArea(
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              FConstrainedBoxSliver(
+                padding: const .all(PADDING),
+                maxWidth: FBreakpoint.smValue,
+                sliver: SliverMainAxisGroup(
+                  slivers: [
+                    FPageIntroductionSliver(
+                      shape: .c7_sided_cookie,
+                      icon: MdiIcons.web,
+                      description:
+                          context.l10n.recipe_editor_item_origin_page__hint_1,
+                    ),
+
+                    const FSizedBoxSliver(height: PADDING),
+
+                    SliverToBoxAdapter(
+                      child: Form(
+                        key: _key,
+                        child: FTextFormField(
+                          controller: _originController,
+                          label: context
+                              .l10n
+                              .recipe_editor_item_origin_page__label,
+                          onChanged: setOrigin,
+                          clear: () => setOrigin(''),
+                          validators: (val) {
+                            if (val == null || val.isEmpty) return null;
+                            if (!UValidator.isHttpUrl(val)) {
+                              return context.l10n.validator__is_http_url;
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       );

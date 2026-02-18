@@ -26,7 +26,7 @@ class FLazySliverList<T> extends ConsumerStatefulWidget {
 }
 
 class _FLazySliverList<T> extends ConsumerState<FLazySliverList<T>> {
-  int _currentPage = 0;
+  int _currentPage = -1;
   int _maxPages = 0;
 
   bool _loadingInProgress = true;
@@ -47,6 +47,8 @@ class _FLazySliverList<T> extends ConsumerState<FLazySliverList<T>> {
   @override
   void initState() {
     ref.listenManual(widget.provider, fireImmediately: true, (_, asyncData) {
+      if (asyncData.isLoading) return;
+
       final value = asyncData.value;
       if (value == null) return;
 
@@ -59,6 +61,11 @@ class _FLazySliverList<T> extends ConsumerState<FLazySliverList<T>> {
         _loadingInProgress = false;
         _currentPage = nextPage;
         _maxPages = metadata.totalPages;
+
+        if (nextPage == 0) {
+          _data.clear();
+        }
+
         _data.addAll(value.data);
 
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -88,7 +95,8 @@ class _FLazySliverList<T> extends ConsumerState<FLazySliverList<T>> {
   }
 
   void _loadMoreItems() {
-    final canLoadMore = _currentPage < _maxPages && !_loadingInProgress;
+    final canLoadMore =
+        !_loadingInProgress && _maxPages > 0 && _currentPage < _maxPages;
 
     if (!canLoadMore) return;
 

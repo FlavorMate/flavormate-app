@@ -3,7 +3,7 @@ import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/timer/p_timer.dart';
 import 'package:flavormate/core/riverpod/timer/timer_state.dart';
-import 'package:flavormate/core/utils/debouncer.dart';
+import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/features/story_drafts/story_draft_dto.dart';
@@ -39,14 +39,16 @@ class StoryEditorItemPage extends ConsumerStatefulWidget {
 }
 
 class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
+  final _scrollController = ScrollController();
+
   bool _ready = false;
 
   final _formKey = GlobalKey<FormState>();
 
   final _contentController = TextEditingController();
-  final _contentDebouncer = Debouncer();
+  final _contentDebouncer = UDebouncer();
   final _labelController = TextEditingController();
-  final _labelDebouncer = Debouncer();
+  final _labelDebouncer = UDebouncer();
 
   @override
   void initState() {
@@ -63,6 +65,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _contentController.dispose();
     _contentDebouncer.dispose();
     _labelController.dispose();
@@ -83,6 +86,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, _) => FAppBar(
+        scrollController: _scrollController,
         title: context.l10n.story_editor_item_page__title,
         actions: [FSaveState(provider: widget.autosaveProvider)],
       ),
@@ -94,6 +98,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
         ),
       ),
       builder: (_, data) => FResponsive(
+        controller: _scrollController,
         child: Form(
           key: _formKey,
           child: Column(
