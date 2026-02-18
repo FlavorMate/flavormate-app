@@ -1,8 +1,8 @@
 import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/route_constants.dart';
-import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class FEmptyMessage extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
   final String title;
   final String? subtitle;
   final bool showLogoutButton;
@@ -30,7 +30,7 @@ class FEmptyMessage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 96),
+        if (icon != null) Icon(icon, size: 96),
         FText(title, style: FTextStyle.titleLarge, textAlign: TextAlign.center),
         if (subtitle != null)
           FText(

@@ -8,15 +8,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsAppPage extends ConsumerWidget {
+class SettingsAppPage extends ConsumerStatefulWidget {
   const SettingsAppPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SettingsAppPageState();
+}
+
+class _SettingsAppPageState extends ConsumerState<SettingsAppPage> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: FAppBar(title: context.l10n.settings_app_page__title),
+      appBar: FAppBar(
+        scrollController: _scrollController,
+        title: context.l10n.settings_app_page__title,
+      ),
       body: SafeArea(
         child: FResponsive(
+          controller: _scrollController,
           child: Column(
             children: [
               FTileGroup(

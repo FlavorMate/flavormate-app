@@ -13,14 +13,10 @@ import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
 import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_side_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -43,7 +39,7 @@ class AccountsItemBooksPage extends ConsumerStatefulWidget {
 
 class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
     with FOrderMixin<AccountsItemBooksPage> {
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   PRestAccountsIdBooksProvider get provider => pRestAccountsIdBooksProvider(
     accountId: widget.id,
@@ -54,7 +50,7 @@ class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -64,7 +60,7 @@ class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
 
     return Scaffold(
       appBar: FAppBar(
-        controller: _controller,
+        scrollController: _scrollController,
         title: context.l10n.accounts_item_books_page__title,
         actions: [
           IconButton(
@@ -85,7 +81,7 @@ class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
             icon: StateIconConstants.books.errorIcon,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -107,7 +103,7 @@ class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
                       key: orderKey,
                       provider: provider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _controller,
+                      scrollController: _scrollController,
 
                       itemBuilder: (item, index, first, last) =>
                           FContentSideCard(
@@ -128,38 +124,6 @@ class _AccountsItemBooksPageState extends ConsumerState<AccountsItemBooksPage>
               ),
             ],
           ),
-        ),
-      ),
-    );
-
-    return FPaginatedPage(
-      title: context.l10n.accounts_item_books_page__title,
-      provider: provider,
-      pageProvider: widget.pageProvider,
-      onEmpty: FEmptyMessage(
-        title: context.l10n.accounts_item_books_page__on_empty,
-        icon: StateIconConstants.books.emptyIcon,
-      ),
-      onError: FEmptyMessage(
-        title: context.l10n.accounts_item_books_page__on_error,
-        icon: StateIconConstants.books.errorIcon,
-      ),
-      sortBuilder: () => FPaginatedSort(
-        currentOrderBy: orderBy,
-        currentDirection: orderDirection,
-        setOrderBy: setOrderBy,
-        setOrderDirection: setOrderDirection,
-        options: OrderByConstants.book,
-      ),
-      itemBuilder: (items) => FPaginatedContentCard(
-        data: items,
-        itemBuilder: (item) => FImageCard.maximized(
-          label: item.label,
-          coverSelector: (resolution) => item.cover?.url(resolution),
-          subLabel: item.visible
-              ? context.l10n.accounts_item_books_page__visible
-              : context.l10n.accounts_item_books_page__invisible,
-          onTap: () => context.routes.libraryItem(item.id),
         ),
       ),
     );

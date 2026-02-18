@@ -1,4 +1,5 @@
-import 'package:flavormate/core/constants/order_by_constants.dart';
+import 'package:flavormate/core/constants/breakpoint_constants.dart';
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
@@ -9,13 +10,15 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id_files.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/contents/f_paginated_content_card.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_page.dart';
-import 'package:flavormate/presentation/common/slivers/f_paginated_page/f_paginated_sort.dart';
+import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_sliver_list.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/widgets/f_content_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
-import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
+import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,6 +43,8 @@ class RecipeEditorItemFilesPage extends ConsumerStatefulWidget {
 class _RecipeEditorItemFilesPageState
     extends ConsumerState<RecipeEditorItemFilesPage>
     with FOrderMixin<RecipeEditorItemFilesPage> {
+  final _scrollController = ScrollController();
+
   PRestRecipeDraftsIdFilesProvider get provider =>
       pRestRecipeDraftsIdFilesProvider(
         pageProviderId: widget.pageProviderId,
@@ -49,68 +54,100 @@ class _RecipeEditorItemFilesPageState
       );
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return FPaginatedPage(
-      title: context.l10n.recipe_editor_item_files_page__title,
-      actions: [
-        FProgress(
-          provider: provider,
-          color: context.colorScheme.onSurface,
-          optional: true,
-          getProgress: (data) => data.data.isEmpty ? 0 : 1,
-        ),
-      ],
+    return Scaffold(
+      appBar: FAppBar(
+        scrollController: _scrollController,
+        title: context.l10n.recipe_editor_item_files_page__title,
+        actions: [
+          FProgress(
+            provider: provider,
+            color: context.colorScheme.onSurface,
+            optional: true,
+            getProgress: (data) => data.data.isEmpty ? 0 : 1,
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => addImage(context, ref),
+        onPressed: () => addImage(),
         child: const Icon(MdiIcons.plus),
       ),
-      provider: provider,
-      pageProvider: widget.pageProvider,
-      onError: FEmptyMessage(
-        title: context.l10n.recipe_editor_item_files_page__on_error,
-        icon: StateIconConstants.files.errorIcon,
-      ),
-      onEmpty: FEmptyMessage(
-        title: context.l10n.recipe_editor_item_files_page__on_empty,
-        icon: StateIconConstants.files.emptyIcon,
-      ),
-      sortBuilder: () => FPaginatedSort(
-        currentOrderBy: orderBy,
-        currentDirection: orderDirection,
-        setOrderBy: setOrderBy,
-        setOrderDirection: setOrderDirection,
-        options: OrderByConstants.files,
-      ),
-      itemBuilder: (items) => FPaginatedContentCard(
-        data: items,
-        itemBuilder: (item) => Stack(
-          children: [
-            FImageCard.maximized(
-              imageType: FImageType.secure,
-              coverSelector: (resolution) => item.url(resolution),
-              width: 400,
-              onTap: () => openFile(context, item),
-            ),
-            Positioned(
-              right: 8,
-              top: 8,
-              child: CircleAvatar(
-                child: IconButton(
-                  onPressed: () => deleteImage(context, ref, item.id),
-                  icon: Icon(
-                    MdiIcons.delete,
-                    color: context.colorScheme.onPrimaryContainer,
-                  ),
+      body: SafeArea(
+        child: FProviderState(
+          provider: provider,
+          onError: FEmptyMessage(
+            title: context.l10n.recipe_editor_item_files_page__on_error,
+            icon: StateIconConstants.files.errorIcon,
+          ),
+          onEmpty: FEmptyMessage(
+            title: context.l10n.recipe_editor_item_files_page__on_empty,
+            icon: StateIconConstants.files.emptyIcon,
+          ),
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              FConstrainedBoxSliver(
+                maxWidth: FBreakpoint.smValue,
+                padding: const .all(PADDING),
+                sliver: SliverMainAxisGroup(
+                  slivers: [
+                    FPageIntroductionSliver(
+                      shape: .c7_sided_cookie,
+                      icon: MdiIcons.imageMultiple,
+                      description: context
+                          .l10n
+                          .recipe_editor_item_files_page__description,
+                    ),
+
+                    const FSizedBoxSliver(height: PADDING),
+
+                    FSliverList(
+                      provider: provider,
+                      pageProvider: widget.pageProvider,
+                      scrollController: _scrollController,
+                      itemBuilder: (item, index, first, last) {
+                        return FContentImageCard(
+                          key: ValueKey(item.id),
+                          first: first,
+                          last: last,
+                          imageSelector: item.url,
+                          onTap: () => context.showFullscreenImage(
+                            item.url(.Original),
+                          ),
+                          children: [
+                            Positioned(
+                              top: PADDING,
+                              right: PADDING,
+                              child: CircleAvatar(
+                                child: IconButton(
+                                  onPressed: () => deleteImage(item.id),
+                                  icon: const Icon(MdiIcons.delete),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+              const FSizedBoxSliver(height: PADDING),
+              const FSizedBoxSliver(height: kFabHeight),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void addImage(BuildContext context, WidgetRef ref) async {
+  void addImage() async {
     final XFile? image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
     );
@@ -119,7 +156,7 @@ class _RecipeEditorItemFilesPageState
     final fileLength = await image.length();
     final fileSize = fileLength / 1024 / 1024;
 
-    if (!context.mounted) return;
+    if (!mounted) return;
 
     if (fileSize >= 10) {
       context.showTextSnackBar(
@@ -132,7 +169,7 @@ class _RecipeEditorItemFilesPageState
 
     final response = await ref.read(provider.notifier).addImage(image);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
     context.pop();
 
     if (response.hasError) {
@@ -147,8 +184,6 @@ class _RecipeEditorItemFilesPageState
   }
 
   void deleteImage(
-    BuildContext context,
-    WidgetRef ref,
     String id,
   ) async {
     final result = await showDialog<bool>(
@@ -158,12 +193,12 @@ class _RecipeEditorItemFilesPageState
       ),
     );
 
-    if (!context.mounted || result != true) return;
+    if (!mounted || result != true) return;
     context.showLoadingDialog();
 
     final response = await ref.read(provider.notifier).deleteImage(id);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
     context.pop();
 
     if (response.hasError) {

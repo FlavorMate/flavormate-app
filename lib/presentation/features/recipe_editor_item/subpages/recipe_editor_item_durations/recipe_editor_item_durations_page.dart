@@ -1,10 +1,13 @@
+import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
+import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
@@ -32,6 +35,8 @@ class _RecipeEditorItemDurationsPageState
     extends ConsumerState<RecipeEditorItemDurationsPage> {
   bool _ready = false;
 
+  final _scrollController = ScrollController();
+
   Duration _prepTime = Duration.zero;
   Duration _cookTime = Duration.zero;
   Duration _restTime = Duration.zero;
@@ -50,6 +55,12 @@ class _RecipeEditorItemDurationsPageState
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ref.watch(widget.provider);
 
@@ -58,6 +69,7 @@ class _RecipeEditorItemDurationsPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
+          scrollController: _scrollController,
           title: context.l10n.recipe_editor_item_durations_page__title,
           actions: [
             FProgress(
@@ -68,40 +80,65 @@ class _RecipeEditorItemDurationsPageState
           ],
         ),
         body: SafeArea(
-          child: FResponsive(
-            child: Column(
-              spacing: PADDING,
-              children: [
-                FTileGroup(
-                  items: [
-                    FTile(
-                      label: context
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              FConstrainedBoxSliver(
+                maxWidth: FBreakpoint.smValue,
+                padding: const .all(PADDING),
+                sliver: SliverMainAxisGroup(
+                  slivers: [
+                    FPageIntroductionSliver(
+                      shape: .c7_sided_cookie,
+                      icon: MdiIcons.clock,
+                      description: context
                           .l10n
-                          .recipe_editor_item_durations_page__prep_time,
-                      subLabel: _prepTime.beautify2(context),
-                      leading: const FTileIcon(icon: MdiIcons.knife),
-                      onTap: setPrepTime,
+                          .recipe_editor_item_durations_page__description,
                     ),
-                    FTile(
-                      label: context
-                          .l10n
-                          .recipe_editor_item_durations_page__cook_time,
-                      subLabel: _cookTime.beautify2(context),
-                      leading: const FTileIcon(icon: MdiIcons.stove),
-                      onTap: setCookTime,
-                    ),
-                    FTile(
-                      label: context
-                          .l10n
-                          .recipe_editor_item_durations_page__rest_time,
-                      subLabel: _restTime.beautify2(context),
-                      leading: const FTileIcon(icon: MdiIcons.bedClock),
-                      onTap: setRestTime,
+
+                    const FSizedBoxSliver(height: PADDING),
+
+                    SliverToBoxAdapter(
+                      child: Column(
+                        spacing: PADDING,
+                        children: [
+                          FTileGroup(
+                            items: [
+                              FTile(
+                                label: context
+                                    .l10n
+                                    .recipe_editor_item_durations_page__prep_time,
+                                subLabel: _prepTime.beautify2(context),
+                                leading: const FTileIcon(icon: MdiIcons.knife),
+                                onTap: setPrepTime,
+                              ),
+                              FTile(
+                                label: context
+                                    .l10n
+                                    .recipe_editor_item_durations_page__cook_time,
+                                subLabel: _cookTime.beautify2(context),
+                                leading: const FTileIcon(icon: MdiIcons.stove),
+                                onTap: setCookTime,
+                              ),
+                              FTile(
+                                label: context
+                                    .l10n
+                                    .recipe_editor_item_durations_page__rest_time,
+                                subLabel: _restTime.beautify2(context),
+                                leading: const FTileIcon(
+                                  icon: MdiIcons.bedClock,
+                                ),
+                                onTap: setRestTime,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );

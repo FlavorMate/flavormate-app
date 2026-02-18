@@ -42,6 +42,7 @@ import 'package:flavormate/presentation/features/recipe_editor_item/subpages/rec
 import 'package:flavormate/presentation/features/recipes/recipes_page.dart';
 import 'package:flavormate/presentation/features/recipes_item/recipes_item_page.dart';
 import 'package:flavormate/presentation/features/recipes_item/subpages/recipes_item_files_page.dart';
+import 'package:flavormate/presentation/features/search/search_page.dart';
 import 'package:flavormate/presentation/features/server/server_page.dart';
 import 'package:flavormate/presentation/features/server_outdated/server_outdated_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_oidc_link/settings_account_oidc_link_page.dart';
@@ -145,12 +146,15 @@ var routes = [
   ),
   _createRoute(
     RouteConstants.SettingsAppImageMode,
-    (_) => SettingsAppImageModePage(),
+    (_) => const SettingsAppImageModePage(),
   ),
   _createRoute(
     RouteConstants.SettingsAppAppIconMode,
     (_) => const SettingsAppAppIconPage(),
   ),
+
+  // Search
+  _createRoute(RouteConstants.Search, (_) => const SearchPage()),
 
   // Admin
   _createRoute(

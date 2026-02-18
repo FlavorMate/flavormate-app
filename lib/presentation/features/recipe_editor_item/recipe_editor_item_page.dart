@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RecipeEditorItemPage extends ConsumerWidget {
+class RecipeEditorItemPage extends ConsumerStatefulWidget {
   final String id;
 
   const RecipeEditorItemPage({required this.id, super.key});
@@ -33,12 +33,27 @@ class RecipeEditorItemPage extends ConsumerWidget {
       pTimerProvider(TimerState.recipeEditor.getId(id));
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _RecipeEditorItemPageState();
+}
+
+class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
+  final _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return FProviderPage(
-      provider: provider,
+      provider: widget.provider,
       appBarBuilder: (_, data) => FAppBar(
+        scrollController: _controller,
         title: data.label ?? context.l10n.recipe_editor_item_page__title,
-        actions: [FSaveState(provider: timerProvider)],
+        actions: [FSaveState(provider: widget.timerProvider)],
       ),
       floatingActionButtonBuilder: (context, data) => FloatingActionButton(
         onPressed: () => openPreview(context, data),
@@ -46,6 +61,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
       ),
       builder: (_, data) => SafeArea(
         child: FResponsive(
+          controller: _controller,
           child: Column(
             spacing: PADDING,
             children: [
@@ -56,7 +72,8 @@ class RecipeEditorItemPage extends ConsumerWidget {
                     subLabel: context.l10n.recipe_editor_item_page__common_hint,
 
                     leading: const FTileIcon(icon: MdiIcons.noteEdit),
-                    onTap: () => context.routes.recipeEditorItemCommon(id),
+                    onTap: () =>
+                        context.routes.recipeEditorItemCommon(widget.id),
                     trailing: FProgressColor(
                       state: data.commonProgress,
                       color: context.colorScheme.primary,
@@ -67,7 +84,8 @@ class RecipeEditorItemPage extends ConsumerWidget {
                     subLabel: context.l10n.recipe_editor_item_page__media_hint,
 
                     leading: const FTileIcon(icon: MdiIcons.imageMultiple),
-                    onTap: () => context.routes.recipeEditorItemFiles(id),
+                    onTap: () =>
+                        context.routes.recipeEditorItemFiles(widget.id),
                     trailing: FProgressColor(
                       state: data.imageProgress,
                       color: context.colorScheme.primary,
@@ -79,7 +97,8 @@ class RecipeEditorItemPage extends ConsumerWidget {
                     subLabel: context.l10n.recipe_editor_item_page__origin_hint,
 
                     leading: const FTileIcon(icon: MdiIcons.web),
-                    onTap: () => context.routes.recipeEditorItemOrigin(id),
+                    onTap: () =>
+                        context.routes.recipeEditorItemOrigin(widget.id),
                     trailing: FProgressColor(
                       state: data.originProgress,
                       color: context.colorScheme.primary,
@@ -98,7 +117,8 @@ class RecipeEditorItemPage extends ConsumerWidget {
                     leading: const FTileIcon(
                       icon: MdiIcons.silverwareForkKnife,
                     ),
-                    onTap: () => context.routes.recipeEditorItemServing(id),
+                    onTap: () =>
+                        context.routes.recipeEditorItemServing(widget.id),
                     trailing: FProgressColor(
                       state: data.servingProgress,
                       color: context.colorScheme.primary,
@@ -110,7 +130,8 @@ class RecipeEditorItemPage extends ConsumerWidget {
                         context.l10n.recipe_editor_item_page__durations_hint,
 
                     leading: const FTileIcon(icon: MdiIcons.clock),
-                    onTap: () => context.routes.recipeEditorItemDurations(id),
+                    onTap: () =>
+                        context.routes.recipeEditorItemDurations(widget.id),
                     trailing: FProgressColor(
                       state: data.durationProgress,
                       color: context.colorScheme.primary,
@@ -128,8 +149,8 @@ class RecipeEditorItemPage extends ConsumerWidget {
                         .recipe_editor_item_page__ingredient_groups_hint,
 
                     leading: const FTileIcon(icon: MdiIcons.foodApple),
-                    onTap: () =>
-                        context.routes.recipeEditorItemIngredientGroups(id),
+                    onTap: () => context.routes
+                        .recipeEditorItemIngredientGroups(widget.id),
                     trailing: FProgressColor(
                       state: data.ingredientsProgress,
                       color: context.colorScheme.primary,
@@ -144,8 +165,8 @@ class RecipeEditorItemPage extends ConsumerWidget {
                         .recipe_editor_item_page__instruction_groups_hint,
 
                     leading: const FTileIcon(icon: MdiIcons.formatListChecks),
-                    onTap: () =>
-                        context.routes.recipeEditorItemInstructionGroups(id),
+                    onTap: () => context.routes
+                        .recipeEditorItemInstructionGroups(widget.id),
                     trailing: FProgressColor(
                       state: data.instructionsProgress,
                       color: context.colorScheme.primary,
@@ -188,7 +209,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
                     subLabel: context.l10n.recipe_editor_item_page__tags_hint,
 
                     leading: const FTileIcon(icon: MdiIcons.tagMultiple),
-                    onTap: () => context.routes.recipeEditorItemTags(id),
+                    onTap: () => context.routes.recipeEditorItemTags(widget.id),
                     trailing: FProgressColor(
                       state: data.tagsProgress,
                       color: context.colorScheme.primary,
@@ -201,7 +222,8 @@ class RecipeEditorItemPage extends ConsumerWidget {
                         context.l10n.recipe_editor_item_page__categories_hint,
 
                     leading: const FTileIcon(icon: MdiIcons.package),
-                    onTap: () => context.routes.recipeEditorItemCategories(id),
+                    onTap: () =>
+                        context.routes.recipeEditorItemCategories(widget.id),
                     trailing: FProgressColor(
                       state: data.categoriesProgress,
                       color: context.colorScheme.primary,
@@ -236,7 +258,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
 
     if (!context.mounted || response == null) return;
 
-    await ref.read(provider.notifier).setCourse(response);
+    await ref.read(widget.provider.notifier).setCourse(response);
   }
 
   Future<void> editDiet(BuildContext context, WidgetRef ref, Diet? diet) async {
@@ -247,7 +269,7 @@ class RecipeEditorItemPage extends ConsumerWidget {
 
     if (!context.mounted || response == null) return;
 
-    await ref.read(provider.notifier).setDiet(response);
+    await ref.read(widget.provider.notifier).setDiet(response);
   }
 
   Future<void> openPreview(
@@ -260,6 +282,6 @@ class RecipeEditorItemPage extends ConsumerWidget {
       );
       return;
     }
-    return context.routes.recipeEditorItemPreview(id);
+    return context.routes.recipeEditorItemPreview(widget.id);
   }
 }

@@ -65,6 +65,9 @@ enum AuthState {
       RouteConstants.NoConnection,
       RouteConstants.ServerOutdated,
 
+      // Search
+      RouteConstants.Search,
+
       // Suggestion
       RouteConstants.Suggestion,
 

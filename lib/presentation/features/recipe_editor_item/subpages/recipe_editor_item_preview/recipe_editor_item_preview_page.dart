@@ -26,6 +26,8 @@ class RecipeEditorItemPreviewPage extends ConsumerStatefulWidget {
 
 class _RecipeEditorPreviewPageState
     extends ConsumerState<RecipeEditorItemPreviewPage> {
+  final _controller = ScrollController();
+
   double defaultAmount = -1;
   double newAmount = -1;
 
@@ -41,10 +43,17 @@ class _RecipeEditorPreviewPageState
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FProviderPage(
       provider: widget.provider,
       appBarBuilder: (_, _) => FAppBar(
+        scrollController: _controller,
         title: context.l10n.recipe_editor_item_preview_page__title,
       ),
       floatingActionButtonBuilder: (_, _) => FloatingActionButton(
@@ -60,6 +69,7 @@ class _RecipeEditorPreviewPageState
         hasFab: true,
         showAllFiles: () =>
             context.routes.recipeEditorItemPreviewFiles(data.id),
+        controller: _controller,
       ),
       onError: FEmptyMessage(
         title: context.l10n.recipe_editor_item_preview_page__on_error,

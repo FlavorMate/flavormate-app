@@ -1,13 +1,17 @@
+import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
+import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
+import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_tags/providers/p_recipe_editor_item_tags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -28,11 +32,14 @@ class RecipeEditorItemTagsPage extends ConsumerStatefulWidget {
 
 class _RecipeEditorItemTagsPageState
     extends ConsumerState<RecipeEditorItemTagsPage> {
+  final _scrollController = ScrollController();
+
   final _formKey = GlobalKey<FormState>();
   final _tagController = TextEditingController();
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _tagController.dispose();
     super.dispose();
   }
@@ -41,6 +48,7 @@ class _RecipeEditorItemTagsPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
+        scrollController: _scrollController,
         title: context.l10n.recipe_editor_item_tags__title,
         actions: [
           FProgress(
@@ -52,49 +60,77 @@ class _RecipeEditorItemTagsPageState
         ],
       ),
       body: SafeArea(
-        child: FResponsive(
-          child: Column(
-            spacing: PADDING,
-            children: [
-              Form(
-                key: _formKey,
-                child: FTextFormField(
-                  controller: _tagController,
-                  label: context.l10n.recipe_editor_item_tags__add_tag,
-                  suffix: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      onTap: addTag,
-                      child: const Icon(MdiIcons.plus),
+        child: CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            FConstrainedBoxSliver(
+              maxWidth: FBreakpoint.smValue,
+              padding: const .all(PADDING),
+              sliver: SliverMainAxisGroup(
+                slivers: [
+                  FPageIntroductionSliver(
+                    shape: .c7_sided_cookie,
+                    icon: MdiIcons.tagMultiple,
+                    description:
+                        context.l10n.recipe_editor_item_tags__description,
+                  ),
+
+                  const FSizedBoxSliver(height: PADDING),
+
+                  SliverToBoxAdapter(
+                    child: Form(
+                      key: _formKey,
+                      child: FTextFormField(
+                        controller: _tagController,
+                        label: context.l10n.recipe_editor_item_tags__add_tag,
+                        suffix: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: addTag,
+                            child: const Icon(MdiIcons.plus),
+                          ),
+                        ),
+                        onFieldSubmitted: (_) => addTag(),
+                        validators: (input) =>
+                            UValidatorPresets.isNotEmpty(context, input),
+                      ),
                     ),
                   ),
-                  onFieldSubmitted: (_) => addTag(),
-                  validators: (input) =>
-                      UValidatorPresets.isNotEmpty(context, input),
-                ),
-              ),
-              FProviderStruct(
-                provider: widget.provider,
-                builder: (_, data) => Wrap(
-                  spacing: PADDING,
-                  runSpacing: PADDING,
-                  alignment: WrapAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  children: [
-                    for (final tag in data)
-                      Chip(
-                        label: Text('#$tag'),
-                        onDeleted: () => deleteTag(tag),
+
+                  const FSizedBoxSliver(height: PADDING),
+
+                  SliverToBoxAdapter(
+                    child: FProviderStruct(
+                      provider: widget.provider,
+                      builder: (_, data) {
+                        if (data.isEmpty) {
+                          return FEmptyMessage(
+                            title:
+                                context.l10n.recipe_editor_item_tags__on_empty,
+                            icon: StateIconConstants.tags.emptyIcon,
+                          );
+                        }
+
+                        return FWrap(
+                          children: [
+                            for (final tag in data)
+                              Chip(
+                                label: Text('#$tag'),
+                                onDeleted: () => deleteTag(tag),
+                              ),
+                          ],
+                        );
+                      },
+                      onError: FEmptyMessage(
+                        title: context.l10n.recipe_editor_item_tags__on_error,
+                        icon: StateIconConstants.tags.errorIcon,
                       ),
-                  ],
-                ),
-                onError: FEmptyMessage(
-                  title: context.l10n.recipe_editor_item_tags__on_error,
-                  icon: StateIconConstants.tags.errorIcon,
-                ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

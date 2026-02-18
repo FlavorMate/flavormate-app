@@ -51,6 +51,7 @@ class HomeAccountDialog extends StatelessWidget {
                   child: Scaffold(
                     appBar: FAppBar(
                       automaticallyImplyLeading: false,
+                      scrollController: null,
                       title: account.username,
                       actions: [
                         IconButton(

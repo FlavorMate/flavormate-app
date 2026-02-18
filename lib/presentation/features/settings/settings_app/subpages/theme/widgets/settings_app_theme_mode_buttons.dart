@@ -36,18 +36,18 @@ class SettingsAppThemeModeButtons extends StatelessWidget {
               onSelectionChanged: setTone,
               segments: [
                 ButtonSegment(
-                  value: FThemeTone.Material,
-                  label: Text(FThemeTone.Material.l10n(context)),
+                  value: FThemeTone.material,
+                  label: Text(FThemeTone.material.l10n(context)),
                   icon: const Icon(MdiIcons.brush),
                 ),
                 ButtonSegment(
-                  value: FThemeTone.Vivid,
-                  label: Text(FThemeTone.Vivid.l10n(context)),
+                  value: FThemeTone.vivid,
+                  label: Text(FThemeTone.vivid.l10n(context)),
                   icon: const Icon(MdiIcons.paletteSwatch),
                 ),
                 ButtonSegment(
-                  value: FThemeTone.Chroma,
-                  label: Text(FThemeTone.Chroma.l10n(context)),
+                  value: FThemeTone.chroma,
+                  label: Text(FThemeTone.chroma.l10n(context)),
                   icon: const Icon(MdiIcons.palette),
                 ),
               ],

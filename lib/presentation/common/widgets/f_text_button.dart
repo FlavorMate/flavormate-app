@@ -1,4 +1,4 @@
-import 'package:flavormate/core/config/input_type/input_type_aware_app.dart';
+import 'package:flavormate/presentation/common/widgets/f_input_type/f_input_type_aware_app.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class FTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTouch = InputTypeAwareApp.of(context).isTouch;
+    final isTouch = FInputTypeAwareApp.of(context).isTouch;
 
     if (isTouch) {
       return TextButton(onPressed: onPressed, child: Text(value));

@@ -20,6 +20,8 @@ class FContentSideCard extends ConsumerWidget {
   final bool first;
   final bool last;
 
+  static const double _imageWidth = 128;
+
   const FContentSideCard({
     super.key,
     required this.title,
@@ -34,8 +36,8 @@ class FContentSideCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final imageMode = ref.watch(pSettingsImageModeProvider);
 
-    final top = first ? 16.0 : 4.0;
-    final bottom = last ? 16.0 : 4.0;
+    final top = first ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
+    final bottom = last ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -43,7 +45,7 @@ class FContentSideCard extends ConsumerWidget {
           ref,
           context,
           imageMode,
-          constraints.maxWidth,
+          _imageWidth,
         );
 
         return SizedBox(
@@ -63,7 +65,7 @@ class FContentSideCard extends ConsumerWidget {
                   Row(
                     children: [
                       SizedBox(
-                        width: 128,
+                        width: _imageWidth,
                         height: double.infinity,
                         child: FImage(
                           imageSrc: imageSelector?.call(resolution),

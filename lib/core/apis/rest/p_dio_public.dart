@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/core/utils/u_localizations.dart';
-import 'package:flavormate/data/repositories/core/userAgent/p_user_agent.dart';
+import 'package:flavormate/data/repositories/core/user_agent/p_user_agent.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_dio_public.g.dart';

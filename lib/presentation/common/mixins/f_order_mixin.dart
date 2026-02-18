@@ -14,9 +14,16 @@ mixin FOrderMixin<T extends StatefulWidget> on State<T> {
   late OrderBy? orderBy = defaultOrderBy;
   late OrderDirection? orderDirection = defaultOrderDirection;
 
-  int get orderHash => orderBy.hashCode + orderDirection.hashCode;
+  int orderKeySeed = 1;
 
-  ValueKey get orderKey => ValueKey(orderHash);
+  ValueKey get orderKey => ValueKey((orderBy, orderDirection, orderKeySeed));
+
+  void resetLazyList(VoidCallback callback) {
+    setState(() {
+      orderKeySeed++;
+      callback.call();
+    });
+  }
 
   void setOrderBy(OrderBy? value) => setState(() {
     if (value == null) {

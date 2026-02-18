@@ -1,1 +1,0 @@
-enum FPageableType { current, other }

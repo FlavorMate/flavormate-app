@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/utils/debouncer.dart';
+import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
@@ -38,10 +38,12 @@ class RecipeEditorItemIngredientGroupsItemPage extends ConsumerStatefulWidget {
 
 class _RecipeEditorItemIngredientGroupsItemPageState
     extends ConsumerState<RecipeEditorItemIngredientGroupsItemPage> {
+  final _scrollController = ScrollController();
+
   bool _ready = false;
 
   final _labelController = TextEditingController();
-  final _labelDebounce = Debouncer();
+  final _labelDebounce = UDebouncer();
 
   List<RecipeDraftIngredientGroupItemDto> _ingredients = [];
 
@@ -61,6 +63,7 @@ class _RecipeEditorItemIngredientGroupsItemPageState
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _labelController.dispose();
     _labelDebounce.dispose();
     super.dispose();
@@ -74,6 +77,7 @@ class _RecipeEditorItemIngredientGroupsItemPageState
     } else {
       return Scaffold(
         appBar: FAppBar(
+          scrollController: _scrollController,
           title: context
               .l10n
               .recipe_editor_item_ingredient_groups_item_page__title,
@@ -117,6 +121,7 @@ class _RecipeEditorItemIngredientGroupsItemPageState
                   child: Card.outlined(
                     margin: EdgeInsets.zero,
                     child: ReorderableListView.builder(
+                      scrollController: _scrollController,
                       buildDefaultDragHandles: false,
                       itemBuilder: (context, index) {
                         final ingredient = _ingredients.elementAt(index);

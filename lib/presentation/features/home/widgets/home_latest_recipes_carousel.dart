@@ -33,7 +33,7 @@ class HomeLatestRecipesCarousel extends StatelessWidget {
                   recipe.cover?.url(resolution),
               labelSelector: (recipe) => recipe.label,
               subLabelSelector: (recipe) =>
-                  recipe.createdOn.toLocalDateString(context),
+                  recipe.createdOn.formatter.date.yyyyMMMMdd(context),
               onShowAll: () => context.routes.homeLatest(),
             )
           : const SizedBox.shrink(),

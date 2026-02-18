@@ -18,37 +18,55 @@ import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AccountsItemPage extends ConsumerWidget {
+class AccountsItemPage extends ConsumerStatefulWidget {
   final String id;
 
   const AccountsItemPage({super.key, required this.id});
 
-  PRestAccountsIdProvider get provider => pRestAccountsIdProvider(id);
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AccountsItemPageState();
+}
+
+class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
+  final _scrollController = ScrollController();
+
+  PRestAccountsIdProvider get provider => pRestAccountsIdProvider(widget.id);
 
   PRestAccountsIdBooksProvider get booksProvider =>
       pRestAccountsIdBooksProvider(
-        accountId: id,
+        accountId: widget.id,
         pageProviderId: PageableState.unused.name,
       );
 
   PRestAccountsIdRecipesProvider get recipesProvider =>
       pRestAccountsIdRecipesProvider(
-        accountId: id,
+        accountId: widget.id,
         pageProviderId: PageableState.unused.name,
       );
 
   PRestAccountsIdStoriesProvider get storiesProvider =>
       pRestAccountsIdStoriesProvider(
-        accountId: id,
+        accountId: widget.id,
         pageProviderId: PageableState.unused.name,
       );
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return FProviderPage(
       provider: provider,
-      appBarBuilder: (_, data) => FAppBar(title: data.displayName),
+      appBarBuilder: (_, data) => FAppBar(
+        title: data.displayName,
+        scrollController: _scrollController,
+      ),
       builder: (context, data) => SingleChildScrollView(
+        controller: _scrollController,
         child: Padding(
           padding: const EdgeInsets.all(PADDING),
           child: Column(
@@ -78,7 +96,8 @@ class AccountsItemPage extends ConsumerWidget {
                         labelSelector: (story) => story.label,
                         coverSelector: (story, resolution) =>
                             story.cover?.url(resolution),
-                        onShowAll: () => context.routes.accountsItemStories(id),
+                        onShowAll: () =>
+                            context.routes.accountsItemStories(widget.id),
                       )
                     : const SizedBox.shrink(),
                 onError: FEmptyMessage(
@@ -97,7 +116,8 @@ class AccountsItemPage extends ConsumerWidget {
                         labelSelector: (book) => book.label,
                         coverSelector: (book, resolution) =>
                             book.cover?.url(resolution),
-                        onShowAll: () => context.routes.accountsItemBooks(id),
+                        onShowAll: () =>
+                            context.routes.accountsItemBooks(widget.id),
                       )
                     : const SizedBox.shrink(),
 
@@ -118,7 +138,8 @@ class AccountsItemPage extends ConsumerWidget {
                         labelSelector: (recipe) => recipe.label,
                         coverSelector: (recipe, resolution) =>
                             recipe.cover?.url(resolution),
-                        onShowAll: () => context.routes.accountsItemRecipes(id),
+                        onShowAll: () =>
+                            context.routes.accountsItemRecipes(widget.id),
                       )
                     : const SizedBox.shrink(),
                 onError: FEmptyMessage(

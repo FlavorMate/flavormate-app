@@ -30,7 +30,7 @@ class SuggestionPage extends ConsumerStatefulWidget {
 }
 
 class _SuggestionPageState extends ConsumerState<SuggestionPage> {
-  final ScrollController _controller = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   Diet get _diet => ref.read(pRestAccountsSelfProvider).requireValue.diet;
 
@@ -60,14 +60,17 @@ class _SuggestionPageState extends ConsumerState<SuggestionPage> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: FAppBar(title: _title),
+      appBar: FAppBar(
+        scrollController: _scrollController,
+        title: _title,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => reset(ref),
         child: const Icon(MdiIcons.refresh),
@@ -84,7 +87,7 @@ class _SuggestionPageState extends ConsumerState<SuggestionPage> {
             icon: StateIconConstants.suggestions.errorIcon,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -104,7 +107,7 @@ class _SuggestionPageState extends ConsumerState<SuggestionPage> {
                       pageProvider: pPageableStateProvider(
                         PageableState.unused.name,
                       ),
-                      scrollController: _controller,
+                      scrollController: _scrollController,
                       itemBuilder: (item, index, first, last) =>
                           FContentSideCard(
                             title: item.label,

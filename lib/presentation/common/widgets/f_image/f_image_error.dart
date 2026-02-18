@@ -13,7 +13,7 @@ class FImageError extends StatelessWidget {
         Colors.black,
         0.15,
       ),
-    
+
       child: const Icon(
         MdiIcons.cameraOffOutline,
         size: 64,

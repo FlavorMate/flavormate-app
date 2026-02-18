@@ -21,7 +21,10 @@ class FFullDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog.fullscreen(
       child: Scaffold(
-        appBar: FAppBar(title: title),
+        appBar: FAppBar(
+          title: title,
+          scrollController: null,
+        ),
         body: FResponsive(child: child),
         bottomNavigationBar: SafeArea(
           child: Container(

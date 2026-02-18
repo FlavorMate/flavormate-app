@@ -28,6 +28,7 @@ class FTile extends StatelessWidget {
   });
 
   static Widget manual({
+    Key? key,
     required bool first,
     required bool last,
     double borderRadius = 16,
@@ -38,6 +39,7 @@ class FTile extends StatelessWidget {
     final bottomLeft = last ? borderRadius : 4.0;
     final bottomRight = last ? borderRadius : 4.0;
     return ClipRRect(
+      key: key,
       borderRadius: .only(
         topLeft: .circular(topLeft),
         topRight: .circular(topRight),

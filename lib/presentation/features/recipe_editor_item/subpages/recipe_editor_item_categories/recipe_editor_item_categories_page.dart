@@ -1,20 +1,25 @@
+import 'package:flavormate/core/constants/breakpoint_constants.dart';
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_list.dart';
 import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
-import 'package:flavormate/core/utils/debouncer.dart';
+import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/features/categories/category_dto.dart';
 import 'package:flavormate/data/models/features/category_drafts/category_group_dto.dart';
 import 'package:flavormate/data/repositories/features/category_groups/p_rest_category_groups.dart';
+import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
-import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
+import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_categories/providers/p_recipe_editor_item_categories.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RecipeEditorItemCategoriesPage extends ConsumerStatefulWidget {
@@ -40,7 +45,9 @@ class _RecipeEditorItemCategoriesPageState
     extends ConsumerState<RecipeEditorItemCategoriesPage> {
   bool _ready = false;
 
-  final _debouncer = Debouncer();
+  final _scrollController = ScrollController();
+
+  final _debouncer = UDebouncer();
   List<CategoryDto> _categories = [];
 
   @override
@@ -57,15 +64,16 @@ class _RecipeEditorItemCategoriesPageState
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _debouncer.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FProviderPage(
-      provider: widget.categoryGroupProvider,
-      appBarBuilder: (_, _) => FAppBar(
+    return Scaffold(
+      appBar: FAppBar(
+        scrollController: _scrollController,
         title: context.l10n.recipe_editor_item_categories_page__title,
         actions: [
           FProgress(
@@ -76,16 +84,46 @@ class _RecipeEditorItemCategoriesPageState
           ),
         ],
       ),
-      builder: (_, data) => SafeArea(
-        child: FResponsive(
-          child: Card.outlined(
-            child: Column(children: _buildTiles(data.data)),
-          ),
+      body: SafeArea(
+        child: CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            FConstrainedBoxSliver(
+              maxWidth: FBreakpoint.smValue,
+              padding: const .all(PADDING),
+              sliver: SliverMainAxisGroup(
+                slivers: [
+                  FPageIntroductionSliver(
+                    shape: .c7_sided_cookie,
+                    icon: MdiIcons.package,
+                    description: context
+                        .l10n
+                        .recipe_editor_item_categories_page__description,
+                  ),
+
+                  const FSizedBoxSliver(height: PADDING),
+
+                  SliverToBoxAdapter(
+                    child: FProviderStruct(
+                      provider: widget.categoryGroupProvider,
+                      onError: FEmptyMessage(
+                        title: context
+                            .l10n
+                            .recipe_editor_item_categories_page__on_error,
+                        icon: StateIconConstants.recipes.errorIcon,
+                      ),
+                      builder: (_, data) {
+                        return Card.outlined(
+                          child: Column(children: _buildTiles(data.data)),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ),
-      onError: FEmptyMessage(
-        title: context.l10n.recipe_editor_item_categories_page__on_error,
-        icon: StateIconConstants.recipes.errorIcon,
       ),
     );
   }

@@ -59,7 +59,7 @@ class SettingsAccountOidcLinkInfoDialog extends StatelessWidget {
             const Divider(),
             _buildRow(
               context.l10n.settings_account_oidc_link_info_dialog__created_on,
-              link.createdOn.toLocalDateTimeString(context),
+              link.createdOn.formatter.dateTime.yyMMddHHmm(context),
             ),
           ],
         ),

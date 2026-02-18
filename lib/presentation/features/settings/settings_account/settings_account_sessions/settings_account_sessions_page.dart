@@ -53,7 +53,7 @@ class _SettingsAccountSessionsPageState
     orderDirection: orderDirection,
   );
 
-  final _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _SettingsAccountSessionsPageState
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -74,7 +74,7 @@ class _SettingsAccountSessionsPageState
 
     return Scaffold(
       appBar: FAppBar(
-        controller: _controller,
+        scrollController: _scrollController,
         title: context.l10n.settings_account_sessions_page__title,
         actions: [
           IconButton(
@@ -100,7 +100,7 @@ class _SettingsAccountSessionsPageState
             icon: StateIconConstants.login.errorIcon,
           ),
           child: CustomScrollView(
-            controller: _controller,
+            controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
                 maxWidth: FBreakpoint.smValue,
@@ -120,7 +120,7 @@ class _SettingsAccountSessionsPageState
                       key: ValueKey('${orderKey.value}-$seed'),
                       provider: provider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _controller,
+                      scrollController: _scrollController,
 
                       itemBuilder: (item, index, first, last) {
                         final link = item;
@@ -132,9 +132,8 @@ class _SettingsAccountSessionsPageState
                           last: last,
                           tile: FTile(
                             label: link.userAgent?.device ?? '-',
-                            subLabel: link.createdAt.toLocalDateTimeString(
-                              context,
-                            ),
+                            subLabel: link.createdAt.formatter.dateTime
+                                .yyMMddHHmm(context),
                             onTap: () => openInfoDialog(context, link),
                             trailing: IconButton(
                               color: context.blendedColors.error,

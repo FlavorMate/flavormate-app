@@ -34,19 +34,19 @@ class SettingsAccountSessionsInfoDialog extends StatelessWidget {
             const Divider(),
             _buildRow(
               context.l10n.settings_account_sessions_info_dialog__created_at,
-              session.createdAt.toLocalDateTimeString(context),
+              session.createdAt.formatter.dateTime.yyMMddHHmm(context),
             ),
             const Divider(),
             _buildRow(
               context
                   .l10n
                   .settings_account_sessions_info_dialog__last_modified_at,
-              session.lastModifiedAt.toLocalDateTimeString(context),
+              session.lastModifiedAt.formatter.dateTime.yyMMddHHmm(context),
             ),
             const Divider(),
             _buildRow(
               context.l10n.settings_account_sessions_info_dialog__expires_at,
-              session.expiresAt.toLocalDateTimeString(context),
+              session.expiresAt.formatter.dateTime.yyMMddHHmm(context),
             ),
             const Divider(),
             _buildRow(

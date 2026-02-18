@@ -1,1 +1,0 @@
-enum HomeAccountDialogAvatarResult { Delete, Change }

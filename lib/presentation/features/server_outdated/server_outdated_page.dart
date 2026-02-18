@@ -6,6 +6,8 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/data/models/core/version/version.dart';
 import 'package:flavormate/data/repositories/core/server/p_server_compatibility.dart';
+import 'package:flavormate/presentation/common/widgets/f_badge.dart';
+import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -51,7 +53,7 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
                 spacing: PADDING,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(MdiIcons.cloudAlertOutline, size: 128),
+                  const FBadge(shape: .burst, icon: MdiIcons.cloudAlert),
                   FText(
                     context.l10n.server_outdated_page__hint_1,
                     style: FTextStyle.titleLarge,
@@ -62,19 +64,23 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
                     style: FTextStyle.titleSmall,
                     textAlign: TextAlign.center,
                   ),
-                  FilledButton(
+                  FButton(
+                    width: BUTTON_WIDTH,
                     onPressed: logout,
-                    child: Text(context.l10n.btn_logout),
+                    label: context.l10n.btn_logout,
                   ),
                 ],
               ),
             ),
-            Positioned(
-              bottom: PADDING,
-              right: PADDING,
-              child: FText('☁ $server', style: FTextStyle.bodyMedium),
-            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: SizedBox(
+          height: kToolbarHeight,
+          child: Center(
+            child: FText('☁ $server', style: FTextStyle.bodyMedium),
+          ),
         ),
       ),
     );

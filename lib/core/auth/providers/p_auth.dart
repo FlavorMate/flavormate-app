@@ -12,6 +12,7 @@ import 'package:flavormate/data/datasources/extensions/oidc_controller_api.dart'
 import 'package:flavormate/data/models/core/auth/auth_login_form.dart';
 import 'package:flavormate/data/models/core/auth/tokens_dto.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_auth.g.dart';
@@ -58,17 +59,40 @@ class PAuth extends _$PAuth {
   }
 
   Future<TokensDto?> refreshToken() async {
-    final dio = ref.read(pDioAuthProvider(state.refreshToken));
+    /// Capture the refresh token we are about to use.
+    final tokenUsed = state.refreshToken;
 
-    final client = AuthControllerApi(dio);
+    try {
+      final dio = ref.read(pDioAuthProvider(state.refreshToken));
+      final client = AuthControllerApi(dio);
 
-    final response = await client.postRefreshToken();
+      final response = await client.postRefreshToken();
 
-    if (response.hasError) return null;
+      if (response.hasError) {
+        throw Exception(
+          response.error?.message ?? 'Error while refreshing token',
+        );
+      }
 
-    await ref.read(pSSJwtProvider.notifier).setValue(response.data);
+      await ref.read(pSSJwtProvider.notifier).setValue(response.data);
 
-    return response.data;
+      return response.data;
+    } catch (e) {
+      /// If refresh failed, check whether someone else already refreshed successfully.
+      /// If the refresh token changed since we started, this failure is almost certainly
+      /// due to a race condition (we used an already-rotated refresh token).
+      final currentTokens = ref.read(pSSJwtProvider).value;
+      final refreshTokenChanged = currentTokens?.refreshToken != tokenUsed;
+
+      if (refreshTokenChanged) {
+        /// Ignore: a valid token exists now.
+        return currentTokens;
+      }
+
+      /// Real failure for the current token => log out user.
+      await logout();
+      return null;
+    }
   }
 
   Future<void> logout() async {
@@ -78,7 +102,9 @@ class PAuth extends _$PAuth {
 
       await client.logout();
     } catch (_) {
-      print("Couldn't logout on server");
+      if (kDebugMode) {
+        print("Couldn't logout on server");
+      }
     }
 
     // Clear shared preferences

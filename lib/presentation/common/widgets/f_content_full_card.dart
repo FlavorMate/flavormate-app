@@ -20,6 +20,8 @@ class FContentFullCard extends ConsumerWidget {
   final bool first;
   final bool last;
 
+  final double height;
+
   const FContentFullCard({
     super.key,
     this.first = false,
@@ -29,17 +31,18 @@ class FContentFullCard extends ConsumerWidget {
     this.blurRadius = 4,
     this.imageSelector,
     required this.onTap,
+    this.height = 96,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imageMode = ref.watch(pSettingsImageModeProvider);
 
-    final top = first ? 16.0 : 4.0;
-    final bottom = last ? 16.0 : 4.0;
+    final top = first ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
+    final bottom = last ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
 
     return SizedBox(
-      height: 96,
+      height: height,
       child: LayoutBuilder(
         builder: (context, constraints) {
           final resolution = UImage.getResolution(

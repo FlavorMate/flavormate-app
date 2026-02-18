@@ -41,6 +41,8 @@ class FRecipeMobileLayout extends StatelessWidget {
   final VoidCallback decreaseServing;
   final VoidCallback increaseServing;
 
+  final ScrollController controller;
+
   const FRecipeMobileLayout({
     super.key,
     required this.recipe,
@@ -58,11 +60,13 @@ class FRecipeMobileLayout extends StatelessWidget {
     required this.newAmount,
     required this.decreaseServing,
     required this.increaseServing,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: controller,
       child: Padding(
         padding: const EdgeInsets.all(PADDING),
         child: Column(

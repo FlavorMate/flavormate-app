@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/presentation/common/widgets/f_circular_avatar.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,19 +27,30 @@ class FOidcIcon extends ConsumerWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(BORDER_RADIUS),
         child: data == null
-            ? _errorBuilder(label)
+            ? _errorBuilder(context, label)
             : Image.memory(
                 data!,
-                errorBuilder: (_, _, _) => _errorBuilder(label),
+                errorBuilder: (_, _, _) => _errorBuilder(context, label),
               ),
       ),
     );
   }
 
-  Widget _errorBuilder(String label) {
-    return FCircularAvatar(
-      label: label[0],
-      border: true,
+  Widget _errorBuilder(BuildContext context, String label) {
+    final radius = width / 2;
+    return CircleAvatar(
+      backgroundColor: context.colorScheme.primary,
+      radius: radius,
+      child: CircleAvatar(
+        minRadius: radius - (radius * 0.075),
+        maxRadius: radius - (radius * 0.075),
+        child: Text(
+          label[0],
+          style: context.textTheme.bodyMedium!.copyWith(
+            fontSize: radius,
+          ),
+        ),
+      ),
     );
   }
 }

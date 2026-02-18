@@ -1,3 +1,5 @@
+import 'package:flavormate/core/constants/breakpoint_constants.dart';
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
@@ -5,61 +7,106 @@ import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/features/recipes/recipe_file_dto.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_id_files.dart';
+import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
+import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/widgets/f_content_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_pageable/f_pageable.dart';
-import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
+import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RecipesItemFilesPage extends ConsumerWidget {
+class RecipesItemFilesPage extends ConsumerStatefulWidget {
   final String id;
 
   const RecipesItemFilesPage({super.key, required this.id});
 
-  String get pageProviderId => PageableState.recipeFiles.getId(id);
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _RecipesItemFilesPageState();
 
-  PRestRecipesIdFilesProvider get provider =>
-      pRestRecipesIdFilesProvider(recipeId: id, pageProviderId: pageProviderId);
+  String get pageKey => PageableState.recipeFiles.getId(id);
 
-  PPageableStateProvider get pageProvider =>
-      pPageableStateProvider(pageProviderId);
+  PPageableStateProvider get pageProvider => pPageableStateProvider(pageKey);
+}
+
+class _RecipesItemFilesPageState extends ConsumerState<RecipesItemFilesPage> {
+  PRestRecipesIdFilesProvider get provider => pRestRecipesIdFilesProvider(
+    recipeId: widget.id,
+    pageProviderId: widget.pageKey,
+  );
+
+  final _scrollController = ScrollController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: FAppBar(
-        title: context.l10n.recipes_item_files_page__titletitle,
+        scrollController: _scrollController,
+        title: context.l10n.recipes_item_files_page__title,
       ),
       body: SafeArea(
-        child: FPageable(
+        child: FProviderState(
           provider: provider,
-          pageProvider: pageProvider,
-          builder: (_, data) => FWrap(
-            children: [
-              for (final image in data)
-                FImageCard.maximized(
-                  coverSelector: (resolution) => image.url(resolution),
-                  width: 400,
-                  onTap: () => openFile(context, image),
-                ),
-            ],
-          ),
           onEmpty: FEmptyMessage(
-            title: context.l10n.recipes_item_files_page__titleon_empty,
+            title: context.l10n.recipes_item_files_page__on_empty,
             icon: StateIconConstants.files.emptyIcon,
           ),
           onError: FEmptyMessage(
-            title: context.l10n.recipes_item_files_page__titleon_error,
+            title: context.l10n.recipes_item_files_page__on_error,
             icon: StateIconConstants.files.errorIcon,
+          ),
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              FConstrainedBoxSliver(
+                maxWidth: FBreakpoint.smValue,
+                padding: const .all(PADDING),
+                sliver: SliverMainAxisGroup(
+                  slivers: [
+                    FPageIntroductionSliver(
+                      shape: .sunny,
+                      icon: MdiIcons.imageMultiple,
+                      description:
+                          context.l10n.recipes_item_files_page__description,
+                    ),
+
+                    const FSizedBoxSliver(height: PADDING),
+
+                    FLazySliverList(
+                      key: null,
+                      provider: provider,
+                      pageProvider: widget.pageProvider,
+                      scrollController: _scrollController,
+                      itemBuilder: (item, index, first, last) {
+                        return FContentImageCard(
+                          imageSelector: item.url,
+                          onTap: () => openFile(item),
+                          first: first,
+                          last: last,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Future openFile(BuildContext context, RecipeFileDto file) {
+  Future openFile(RecipeFileDto file) {
     return context.showFullscreenImage(file.url(ImageResolution.Original));
   }
 }

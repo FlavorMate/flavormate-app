@@ -2,7 +2,6 @@ import 'package:flavormate/core/extensions/e_shared_preferences.dart';
 import 'package:flavormate/core/storage/shared_preferences/enums/sp_key.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
 import 'package:flavormate/core/theme/enums/f_theme_tone.dart';
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_sp_theme_tone.g.dart';
@@ -18,8 +17,8 @@ class PSPThemeTone extends _$PSPThemeTone {
     final tone = instance.getEnum(_key, FThemeTone.values);
 
     if (tone == null) {
-      setMode(.Material);
-      return .Material;
+      setMode(.material);
+      return .material;
     }
 
     return tone;
