@@ -17,7 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_panel_kit/sliding_panel_kit.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
 
 class FRecipeGuidedDialog extends ConsumerStatefulWidget {
   final CommonRecipe recipe;
@@ -51,16 +50,9 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
 
   @override
   void initState() {
-    WakelockPlus.enable();
     setupInstructions();
 
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    WakelockPlus.disable();
-    super.dispose();
   }
 
   void setupInstructions() {

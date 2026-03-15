@@ -58,6 +58,7 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
             ),
           ),
         ),
+        const VerticalDivider(),
         Expanded(
           flex: 2,
           child: SizedBox(
