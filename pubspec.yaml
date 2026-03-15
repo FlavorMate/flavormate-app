@@ -67,7 +67,6 @@ dependencies:
   # no strict version because these depend on the SDK version:
   flutter_localizations:
     sdk: flutter
-  easy_stepper: ^1.0.1
   sliding_panel_kit: ^0.3.0
   wakelock_plus: ^1.5.1
 
@@ -76,7 +75,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.12.2
   dart_mappable_builder: ^4.7.0
-  flutter_gen_runner: ^5.13.0
+  flutter_gen_runner: ^5.13.0+1
   flutter_lints: ^6.0.0
   riverpod_generator: ^4.0.3
 
