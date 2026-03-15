@@ -67,6 +67,9 @@ dependencies:
   # no strict version because these depend on the SDK version:
   flutter_localizations:
     sdk: flutter
+  easy_stepper: ^1.0.1
+  sliding_panel_kit: ^0.3.0
+  wakelock_plus: ^1.5.1
 
 dev_dependencies:
   flutter_test:

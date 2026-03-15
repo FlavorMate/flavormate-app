@@ -5,6 +5,7 @@ import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
+import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/layouts/f_recipe_nutrition_desktop_layout.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_bring_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_categories.dart';
@@ -110,29 +111,40 @@ class FRecipeDesktopLayout extends StatelessWidget {
                           restTime: recipe.restTime,
                         ),
 
-                        if (enableBookmark || enableBring)
-                          FWrap(
-                            children: [
-                              if (enableBring)
-                                SizedBox(
-                                  width: BUTTON_WIDTH,
-                                  child: FRecipeBringButton(
-                                    onPressed: addToBring!,
+                        FWrap(
+                          children: [
+                            if (enableBring)
+                              FRecipeBringButton(
+                                width: BUTTON_WIDTH,
+                                onPressed: addToBring!,
+                              ),
+
+                            if (enableBookmark)
+                              FIconButton(
+                                width: BUTTON_WIDTH,
+                                onPressed: addBookmark,
+                                icon: MdiIcons.bookmark,
+                                label:
+                                    context.l10n.f_recipe_layout__save_recipe,
+                              ),
+
+                            FIconButton(
+                              width: BUTTON_WIDTH,
+                              label:
+                                  context.l10n.f_recipe_layout__guided_cooking,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => FRecipeGuidedDialog(
+                                    recipe: recipe,
+                                    amountFactor: amountFactor,
                                   ),
-                                ),
-                              if (enableBookmark)
-                                SizedBox(
-                                  width: BUTTON_WIDTH,
-                                  child: FIconButton(
-                                    onPressed: addBookmark,
-                                    icon: MdiIcons.bookmark,
-                                    label: context
-                                        .l10n
-                                        .f_recipe_layout__save_recipe,
-                                  ),
-                                ),
-                            ],
-                          ),
+                                );
+                              },
+                              icon: MdiIcons.playCircleOutline,
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
