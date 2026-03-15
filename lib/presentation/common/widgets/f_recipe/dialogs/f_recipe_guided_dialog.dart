@@ -9,6 +9,7 @@ import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_complete.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_end.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_instruction.dart';
+import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_desktop_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_dialog_action_row.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_mobile_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -190,8 +191,21 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
               final useDesktop = FBreakpoint.gt(context, FBreakpoint.md);
 
               if (useDesktop) {
-                return SizedBox.shrink();
-                // return FRecipeGuidedDesktopDialog();
+                return SizedBox(
+                  height: fullHeight,
+                  child: FRecipeGuidedDesktopDialog(
+                    currentStep: currentStep,
+                    enablePreviousBtn: enablePreviousBtn,
+                    enableNextBtn: enableNextBtn,
+                    containerHeight: containerHeight,
+                    cardHeight: cardHeight,
+                    onTapPrevious: onTapPrevious,
+                    onTapNext: onTapNext,
+                    slideDirection: _slideDirection,
+                    recipe: widget.recipe,
+                    amountFactor: widget.amountFactor,
+                  ),
+                );
               } else {
                 return FRecipeGuidedMobileDialog(
                   currentStep: currentStep,
