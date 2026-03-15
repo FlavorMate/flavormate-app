@@ -38,33 +38,11 @@ class FRecipeInstructionList extends StatelessWidget {
             spacing: PADDING,
             children: [
               _CheckedIndex(instruction: instruction),
-              Flexible(child: Text(_parseInstructions(instruction.label))),
+              Flexible(child: Text(instruction.format(amountFactor))),
             ],
           ),
       ],
     );
-  }
-
-  String _parseInstructions(String value) {
-    int lIndex = -1;
-    int rIndex = -1;
-    do {
-      lIndex = value.indexOf('[[', lIndex + 1);
-      rIndex = value.indexOf(']]', rIndex + 1);
-
-      if (lIndex != -1) {
-        var foundText = value.substring(lIndex + 2, rIndex);
-        double newValue = double.tryParse(foundText) ?? 1;
-        newValue = newValue * (amountFactor);
-        value = value.replaceAll(
-          '[[$foundText]]',
-          newValue % 1 == 0
-              ? newValue.toStringAsFixed(0)
-              : newValue.toStringAsFixed(2),
-        );
-      }
-    } while (lIndex != -1);
-    return value;
   }
 }
 
