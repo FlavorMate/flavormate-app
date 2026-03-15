@@ -38,7 +38,7 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
   int _slideDirection = 1;
   List<FGuideCard> steps = [];
 
-  double _fontSize = 16.0;
+  double _fontSize = 20.0;
 
   bool get _enableDecreaseFont => _fontSize > 16;
 

@@ -135,6 +135,7 @@ class FRecipeDesktopLayout extends StatelessWidget {
                               onPressed: () {
                                 showDialog(
                                   context: context,
+                                  useSafeArea: false,
                                   builder: (_) => FRecipeGuidedDialog(
                                     recipe: recipe,
                                     amountFactor: amountFactor,
