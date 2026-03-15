@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_ingredient_group.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ingredient_list.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -10,10 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 class FRecipeIngredientGroupList extends StatelessWidget {
+  final bool compact;
+
   final List<CommonIngredientGroup> ingredientGroups;
 
-  final void Function() decreaseServing;
-  final void Function() increaseServing;
+  final void Function()? decreaseServing;
+  final void Function()? increaseServing;
 
   final double amountFactor;
   final double newAmount;
@@ -21,6 +23,7 @@ class FRecipeIngredientGroupList extends StatelessWidget {
 
   const FRecipeIngredientGroupList({
     super.key,
+    this.compact = false,
     required this.ingredientGroups,
     required this.decreaseServing,
     required this.increaseServing,
@@ -34,24 +37,31 @@ class FRecipeIngredientGroupList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!compact) {
+      assert(decreaseServing != null);
+      assert(increaseServing != null);
+    }
     return Column(
       spacing: PADDING,
       children: [
-        FText(
-          context.l10n.f_recipe_ingredient_group_list__title,
-          style: FTextStyle.headlineMedium,
-          fontWeight: FontWeight.w500,
-        ),
+        if (!compact)
+          FText(
+            context.l10n.f_recipe_ingredient_group_list__title,
+            style: FTextStyle.headlineMedium,
+            fontWeight: FontWeight.w500,
+          ),
 
-        Row(
-          spacing: PADDING,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FIconButton(onPressed: decreaseServing, icon: MdiIcons.minus),
-            Text('${newAmount.beautify} $servingLabel'),
-            FIconButton(onPressed: increaseServing, icon: MdiIcons.plus),
-          ],
-        ),
+        if (!compact)
+          Row(
+            spacing: PADDING,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FIconButton(onPressed: decreaseServing, icon: MdiIcons.minus),
+              Text('${newAmount.beautify} $servingLabel'),
+              FIconButton(onPressed: increaseServing, icon: MdiIcons.plus),
+            ],
+          ),
+
         Column(
           spacing: PADDING * 2,
           children: [
