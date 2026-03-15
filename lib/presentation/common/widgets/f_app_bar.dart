@@ -36,10 +36,8 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
       notificationPredicate: enableScrollColor
           ? defaultScrollNotificationPredicate
           : (_) => false,
-      actions: [
-        ...?actions,
-        const SizedBox(width: PADDING),
-      ],
+      actionsPadding: const .symmetric(horizontal: PADDING),
+      actions: actions,
 
       title: MouseRegion(
         cursor: _cursor,
