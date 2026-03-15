@@ -5,21 +5,18 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_carousel.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_complete.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_end.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_instruction.dart';
-import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ingredient_group_list.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
+import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_dialog_action_row.dart';
+import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_mobile_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sliding_panel_kit/sliding_panel_kit.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class FRecipeGuidedDialog extends ConsumerStatefulWidget {
   final CommonRecipe recipe;
@@ -47,11 +44,22 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
   static const _minCardHeight = 150.0;
   static const _maxCardHeight = 450.0;
 
+  bool get enablePreviousBtn => index > 0;
+
+  bool get enableNextBtn => index < steps.length - 1;
+
   @override
   void initState() {
+    WakelockPlus.enable();
     setupInstructions();
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    WakelockPlus.disable();
+    super.dispose();
   }
 
   void setupInstructions() {
@@ -94,7 +102,7 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
     );
   }
 
-  void previousItem() {
+  void onTapPrevious() {
     if (index - 1 >= 0) {
       setState(() {
         _slideDirection = -1;
@@ -103,7 +111,7 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
     }
   }
 
-  void nextItem() {
+  void onTapNext() {
     if (index + 1 < steps.length) {
       setState(() {
         _slideDirection = 1;
@@ -149,124 +157,56 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
           ],
         ),
         body: SafeArea(
-          child: FFixedResponsive(
-            maxWidth: FBreakpoint.lgValue,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final fullHeight = constraints.maxHeight;
+          minimum: const .all(PADDING),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final fullHeight = constraints.maxHeight;
 
-                final heightBottomPadding =
-                    fullHeight -
-                    PADDING -
-                    const SlidingPanelHandle().preferredSize.height;
+              final containerHeight =
+                  fullHeight -
+                  PADDING -
+                  const SlidingPanelHandle().preferredSize.height;
 
-                // 40 = button height
-                final contentHeight = heightBottomPadding - PADDING - 40;
+              final contentHeight =
+                  containerHeight -
+                  PADDING -
+                  FRecipeGuidedDialogActionRow.HEIGHT;
 
-                final cardHeight = clampDouble(
-                  contentHeight,
-                  _minCardHeight,
-                  _maxCardHeight,
+              final cardHeight = clampDouble(
+                contentHeight,
+                _minCardHeight,
+                _maxCardHeight,
+              );
+
+              if (contentHeight < _minCardHeight) {
+                return Center(
+                  child: FText(
+                    context.l10n.f_recipe_guided_dialog__not_available,
+                    style: .titleLarge,
+                  ),
                 );
+              }
 
-                if (contentHeight < _minCardHeight) {
-                  return Center(
-                    child: FText(
-                      context.l10n.f_recipe_guided_dialog__not_available,
-                      style: .titleLarge,
-                    ),
-                  );
-                }
+              final useDesktop = FBreakpoint.gt(context, FBreakpoint.md);
 
-                return Stack(
-                  fit: .expand,
-                  children: [
-                    Align(
-                      alignment: .topCenter,
-                      child: SizedBox(
-                        height: heightBottomPadding,
-                        child: Center(
-                          child: Column(
-                            spacing: PADDING,
-                            mainAxisSize: .min,
-                            children: [
-                              FGuideCardCarousel(
-                                currentKey: currentStep.key,
-                                slideDirection: _slideDirection,
-                                height: cardHeight,
-                                child: currentStep,
-                              ),
-                              SizedBox(
-                                height: 40,
-                                child: Row(
-                                  spacing: PADDING,
-                                  mainAxisAlignment: .center,
-                                  children: [
-                                    if (index > 0)
-                                      FButton(
-                                        width: 150,
-                                        leading: const Icon(
-                                          MdiIcons.chevronLeft,
-                                        ),
-                                        label: context.l10n.btn_back,
-                                        onPressed: previousItem,
-                                      ),
-                                    if (index < steps.length - 1)
-                                      FButton(
-                                        width: 150,
-                                        trailing: const Icon(
-                                          MdiIcons.chevronRight,
-                                        ),
-                                        label: context.l10n.btn_next,
-                                        onPressed: nextItem,
-                                      )
-                                    else
-                                      FButton(
-                                        width: 150,
-                                        leading: const Icon(MdiIcons.close),
-                                        label: context.l10n.btn_close,
-                                        onPressed: () => context.pop(),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SlidingPanelBuilder(
-                      handle: const SlidingPanelHandle(),
-                      snapConfig: SlidingPanelSnapConfig(extents: [1]),
-                      builder: (context, handle) {
-                        return FCard(
-                          padding: 8,
-                          child: Column(
-                            children: [
-                              ?handle,
-                              Expanded(
-                                child: FRecipeIngredientGroupList(
-                                  compact: true,
-                                  ingredientGroups:
-                                      widget.recipe.ingredientGroups,
-                                  decreaseServing: null,
-                                  increaseServing: null,
-                                  amountFactor: widget.amountFactor,
-                                  newAmount:
-                                      widget.amountFactor *
-                                      widget.recipe.serving.amount,
-                                  servingLabel: widget.recipe.serving.label,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+              if (useDesktop) {
+                return SizedBox.shrink();
+                // return FRecipeGuidedDesktopDialog();
+              } else {
+                return FRecipeGuidedMobileDialog(
+                  currentStep: currentStep,
+                  enablePreviousBtn: enablePreviousBtn,
+                  enableNextBtn: enableNextBtn,
+                  containerHeight: containerHeight,
+                  cardHeight: cardHeight,
+                  onTapPrevious: onTapPrevious,
+                  onTapNext: onTapNext,
+                  slideDirection: _slideDirection,
+                  recipe: widget.recipe,
+                  amountFactor: widget.amountFactor,
                 );
-              },
-            ),
+              }
+            },
           ),
         ),
       ),
