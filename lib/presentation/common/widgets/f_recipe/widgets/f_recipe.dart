@@ -8,6 +8,7 @@ import 'package:flavormate/presentation/common/widgets/f_recipe/layouts/f_recipe
 import 'package:flavormate/presentation/common/widgets/f_recipe/layouts/f_recipe_mobile_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class FRecipe extends ConsumerStatefulWidget {
   final CommonRecipe recipe;
@@ -52,9 +53,17 @@ class _FRecipeState extends ConsumerState<FRecipe> {
 
   @override
   void initState() {
-    super.initState();
     defaultAmount = widget.recipe.serving.amount;
     newAmount = widget.recipe.serving.amount;
+
+    WakelockPlus.enable();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WakelockPlus.disable();
+    super.dispose();
   }
 
   @override

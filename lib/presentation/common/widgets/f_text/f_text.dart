@@ -22,6 +22,8 @@ class FText extends StatelessWidget {
   final double? fontWidth;
   final double fontRoundness;
 
+  final double? fontSize;
+
   const FText(
     this.label, {
     required this.style,
@@ -34,6 +36,7 @@ class FText extends StatelessWidget {
     this.maxLines,
     this.fontWidth,
     this.fontRoundness = 0,
+    this.fontSize,
     super.key,
   });
 
@@ -49,6 +52,7 @@ class FText extends StatelessWidget {
         height: textHeight,
         fontFamily: fontFamily?.geFTextFontFamily(),
         fontWeight: fontWeight,
+        fontSize: fontSize,
         fontVariations: [
           ?fontWeight?.let((it) => FontVariation.weight(it.value.toDouble())),
           ?fontWidth?.let(FontVariation.width),

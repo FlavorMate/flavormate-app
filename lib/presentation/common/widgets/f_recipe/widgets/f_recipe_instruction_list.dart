@@ -1,9 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_instruction.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_instruction_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 class FRecipeInstructionList extends StatelessWidget {
   final CommonInstructionGroup instructionGroup;
@@ -35,33 +37,68 @@ class FRecipeInstructionList extends StatelessWidget {
           Row(
             spacing: PADDING,
             children: [
-              CircleAvatar(child: Text('${instruction.index + 1}.')),
-              Flexible(child: Text(_parseInstructions(instruction.label))),
+              _CheckedIndex(instruction: instruction),
+              Flexible(child: Text(instruction.format(amountFactor))),
             ],
           ),
       ],
     );
   }
+}
 
-  String _parseInstructions(String value) {
-    int lIndex = -1;
-    int rIndex = -1;
-    do {
-      lIndex = value.indexOf('[[', lIndex + 1);
-      rIndex = value.indexOf(']]', rIndex + 1);
+class _CheckedIndex extends StatefulWidget {
+  const _CheckedIndex({
+    super.key,
+    required this.instruction,
+  });
 
-      if (lIndex != -1) {
-        var foundText = value.substring(lIndex + 2, rIndex);
-        double newValue = double.tryParse(foundText) ?? 1;
-        newValue = newValue * (amountFactor);
-        value = value.replaceAll(
-          '[[$foundText]]',
-          newValue % 1 == 0
-              ? newValue.toStringAsFixed(0)
-              : newValue.toStringAsFixed(2),
-        );
-      }
-    } while (lIndex != -1);
-    return value;
+  final CommonInstruction instruction;
+
+  @override
+  State<StatefulWidget> createState() => _CheckedIndexState();
+}
+
+class _CheckedIndexState extends State<_CheckedIndex> {
+  final double radius = 20;
+  bool _selected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: .circular(radius),
+      child: Container(
+        width: radius * 2,
+        height: radius * 2,
+        color: context.colorScheme.primaryContainer,
+        child: Stack(
+          fit: .expand,
+          children: [
+            _selected
+                ? const Icon(MdiIcons.check)
+                : Center(
+                    child: FText(
+                      '${widget.instruction.index + 1}.',
+                      style: .titleMedium,
+                      color: .onPrimaryContainer,
+                    ),
+                  ),
+
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: toggle,
+                child: const SizedBox.expand(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void toggle() {
+    setState(() {
+      _selected = !_selected;
+    });
   }
 }
