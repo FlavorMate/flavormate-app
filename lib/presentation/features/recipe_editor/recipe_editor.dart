@@ -186,7 +186,10 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
 
     final response = switch (result.type) {
       .Url => await ref.read(provider.notifier).scrape(result.url!),
-      .File => await ref.read(provider.notifier).import(result.file!, 'de'),
+      .File =>
+        await ref
+            .read(provider.notifier)
+            .import(result.file!, result.language!),
     };
 
     if (!context.mounted) return;

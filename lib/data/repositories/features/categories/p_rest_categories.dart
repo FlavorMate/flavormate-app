@@ -23,7 +23,7 @@ class PRestCategories extends _$PRestCategories {
 
     final page = ref.watch(pPageableStateProvider(pageId));
 
-    final language = currentLocalization().languageCode;
+    final language = currentLanguage().name;
 
     final client = CategoryControllerApi(dio);
 

@@ -32,7 +32,7 @@ class PSearch extends _$PSearch with DebounceProvider {
       await debounce(ref);
     }
 
-    final language = currentLocalization().languageCode;
+    final language = currentLanguage().name;
 
     final dio = ref.watch(pDioPrivateProvider);
     final client = SearchControllerApi(dio);

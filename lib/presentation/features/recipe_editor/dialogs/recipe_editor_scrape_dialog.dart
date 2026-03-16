@@ -2,7 +2,9 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flavormate/core/config/features/p_feature_scraper_import.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/utils/u_localizations.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
+import 'package:flavormate/data/models/shared/enums/language.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_page_introduction.dart';
@@ -26,6 +28,15 @@ class _RecipeEditorScrapeDialogState
     extends ConsumerState<RecipeEditorScrapeDialog> {
   final _formKey = GlobalKey<FormState>();
   final _urlController = TextEditingController();
+
+  late Language _language;
+
+  @override
+  void initState() {
+    _language = currentLanguage();
+
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -113,6 +124,28 @@ class _RecipeEditorScrapeDialogState
                         context.l10n.recipe_editor_scrape_dialog__upload_title,
                         style: .titleMedium,
                       ),
+                      Row(
+                        spacing: PADDING,
+                        children: [
+                          FText(
+                            context
+                                .l10n
+                                .recipe_editor_scrape_dialog__upload_language,
+                            style: .bodyLarge,
+                          ),
+                          SegmentedButton(
+                            segments: [
+                              for (final language in Language.sorted(context))
+                                ButtonSegment<Language>(
+                                  value: language,
+                                  label: Text(language.getL10n(context)),
+                                ),
+                            ],
+                            selected: {_language},
+                            onSelectionChanged: setLanguage,
+                          ),
+                        ],
+                      ),
                       FCard(
                         color: context.colorScheme.primaryContainer,
                         onTap: uploadJSON,
@@ -152,6 +185,12 @@ class _RecipeEditorScrapeDialogState
     context.pop(form);
   }
 
+  void setLanguage(Set<Language> lang) {
+    setState(() {
+      _language = lang.first;
+    });
+  }
+
   void uploadJSON() async {
     const jsonTypeGroup = XTypeGroup(
       label: 'JSON',
@@ -165,7 +204,11 @@ class _RecipeEditorScrapeDialogState
 
     if (file == null || !mounted) return;
 
-    final form = RecipeEditorScrapeDialogResult(type: .File, file: file);
+    final form = RecipeEditorScrapeDialogResult(
+      type: .File,
+      file: file,
+      language: _language,
+    );
 
     context.pop(form);
   }

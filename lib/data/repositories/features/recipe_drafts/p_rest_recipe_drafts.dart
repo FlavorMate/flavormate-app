@@ -6,6 +6,7 @@ import 'package:flavormate/data/datasources/extensions/scrape_controller_api.dar
 import 'package:flavormate/data/datasources/features/recipe_draft_controller_api.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_dto.dart';
 import 'package:flavormate/data/models/local/pageable_dto.dart';
+import 'package:flavormate/data/models/shared/enums/language.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
@@ -76,7 +77,7 @@ class PRestRecipeDrafts extends _$PRestRecipeDrafts {
     return response;
   }
 
-  Future<ApiResponse<String>> import(XFile xFile, String language) async {
+  Future<ApiResponse<String>> import(XFile xFile, Language language) async {
     final dio = ref.watch(pDioPrivateProvider);
 
     final client = ScrapeControllerApi(dio);
@@ -86,7 +87,7 @@ class PRestRecipeDrafts extends _$PRestRecipeDrafts {
       contentType: DioMediaType.parse('application/octet-stream'),
     );
 
-    final response = await client.import(file: file, language: language);
+    final response = await client.import(file: file, language: language.name);
 
     if (!response.hasError) {
       ref.invalidateSelf();

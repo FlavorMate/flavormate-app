@@ -19,7 +19,7 @@ class PRestRecipeDraftsId extends _$PRestRecipeDraftsId {
 
     final client = RecipeDraftControllerApi(dio);
 
-    final language = currentLocalization().languageCode;
+    final language = currentLanguage().name;
 
     final response = await client.getRecipeDraftsId(id: id, language: language);
 

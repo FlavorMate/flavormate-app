@@ -18,7 +18,7 @@ class PRestUnits extends _$PRestUnits {
     OrderBy? orderBy,
     OrderDirection? orderDirection,
   }) async {
-    final language = currentLocalization().languageCode;
+    final language = currentLanguage().name;
 
     final dio = ref.watch(pDioPrivateProvider);
 
