@@ -10,7 +10,7 @@ part 'p_rest_categories_id.g.dart';
 class PRestCategoriesId extends _$PRestCategoriesId {
   @override
   Future<CategoryDto> build(String categoryId) async {
-    final language = currentLocalization().languageCode;
+    final language = currentLanguage().name;
 
     final dio = ref.watch(pDioPrivateProvider);
 

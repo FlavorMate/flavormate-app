@@ -15,7 +15,7 @@ part 'p_rest_recipes_id.g.dart';
 class PRestRecipesId extends _$PRestRecipesId {
   @override
   Future<RecipeFullDto> build(String recipeId) async {
-    final language = currentLocalization().languageCode;
+    final language = currentLanguage().name;
 
     final dio = ref.watch(pDioPrivateProvider);
 

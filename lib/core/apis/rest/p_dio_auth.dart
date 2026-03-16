@@ -15,7 +15,7 @@ class PDioAuth extends _$PDioAuth {
 
     final userAgent = ref.watch(pUserAgentProvider).value;
 
-    final language = currentLocalization().languageCode;
+    final language = currentLanguage().name;
 
     final dio = Dio();
     // Add base configuration

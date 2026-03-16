@@ -79,6 +79,7 @@ abstract class ControllerApi {
   Future<ApiResponse<T>> post<T>({
     required String url,
     required T? Function(dynamic) mapper,
+    Map<String, dynamic>? queryParameters,
     dynamic data,
     Duration? timeout,
   }) async {
@@ -86,6 +87,7 @@ abstract class ControllerApi {
       final response = await _dio.post(
         url,
         data: data,
+        queryParameters: queryParameters,
         options: timeout.let((it) => Options(receiveTimeout: it)),
       );
 

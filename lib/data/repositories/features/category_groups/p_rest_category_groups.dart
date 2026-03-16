@@ -21,7 +21,7 @@ class PRestCategoryGroups extends _$PRestCategoryGroups {
   }) async {
     final page = ref.watch(pPageableStateProvider(pageProviderId));
 
-    final language = currentLocalization().languageCode;
+    final language = currentLanguage().name;
 
     final dio = ref.watch(pDioPrivateProvider);
 
