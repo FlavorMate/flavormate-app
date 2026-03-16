@@ -124,14 +124,15 @@ class _RecipeEditorScrapeDialogState
                         context.l10n.recipe_editor_scrape_dialog__upload_title,
                         style: .titleMedium,
                       ),
-                      Row(
-                        spacing: PADDING,
+                      Column(
+                        crossAxisAlignment: .start,
+                        spacing: PADDING / 2,
                         children: [
                           FText(
                             context
                                 .l10n
                                 .recipe_editor_scrape_dialog__upload_language,
-                            style: .bodyLarge,
+                            style: .bodyMedium,
                           ),
                           SegmentedButton(
                             segments: [
@@ -154,7 +155,7 @@ class _RecipeEditorScrapeDialogState
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(MdiIcons.fileUpload, size: 64),
+                            const Icon(MdiIcons.fileUpload, size: 48),
                             FText(
                               context
                                   .l10n
