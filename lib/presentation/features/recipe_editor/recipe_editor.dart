@@ -13,6 +13,7 @@ import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_lazy_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
 import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog.dart';
+import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog_result.dart';
 import 'package:flavormate/presentation/features/recipe_editor/widgets/recipe_editor_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -56,7 +57,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
       ),
       floatingActionButton: RecipeEditorFab(
         onCreate: () => createDraft(context),
-        onScrape: () => scrapeDraft(context),
+        onScrape: () => draftDialog(context),
       ),
       floatingActionButtonLocation: ExpandableFab.location,
       body: SafeArea(
@@ -172,9 +173,10 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
     context.routes.recipeEditorItem(id);
   }
 
-  void scrapeDraft(BuildContext context) async {
-    final result = await showDialog<String>(
+  void draftDialog(BuildContext context) async {
+    final result = await showDialog<RecipeEditorScrapeDialogResult>(
       context: context,
+      useSafeArea: false,
       builder: (_) => const RecipeEditorScrapeDialog(),
     );
 
@@ -182,7 +184,13 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
 
     context.showLoadingDialog();
 
-    final response = await ref.read(provider.notifier).scrape(result);
+    final response = switch (result.type) {
+      .Url => await ref.read(provider.notifier).scrape(result.url!),
+      .File =>
+        await ref
+            .read(provider.notifier)
+            .import(result.file!, result.language!),
+    };
 
     if (!context.mounted) return;
     context.pop();

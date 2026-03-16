@@ -48,7 +48,6 @@ class FRecipeInstructionList extends StatelessWidget {
 
 class _CheckedIndex extends StatefulWidget {
   const _CheckedIndex({
-    super.key,
     required this.instruction,
   });
 

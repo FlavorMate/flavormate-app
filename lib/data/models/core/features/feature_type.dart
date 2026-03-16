@@ -4,15 +4,12 @@ part 'feature_type.mapper.dart';
 
 @MappableEnum()
 enum FeatureType {
-  Bring,
-  ImportExport,
-  EnhancedResolutions,
-  Oidc2,
-  OpenFoodFacts,
   Ratings,
-  Recovery,
   Registration,
-  Share,
+  Recovery,
+  ScraperImport,
   Story,
-  Token,
+  Bring,
+  OpenFoodFacts,
+  Share,
 }
