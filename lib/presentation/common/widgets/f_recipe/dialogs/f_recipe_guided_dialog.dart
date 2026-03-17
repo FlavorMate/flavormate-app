@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
@@ -59,8 +60,10 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
     steps.clear();
 
     final groups = widget.recipe.instructionGroups;
-    for (final (groupIndex, group) in groups.indexed) {
-      for (final (stepIndex, step) in group.instructions.indexed) {
+    for (final (groupIndex, group)
+        in groups.sortedBy((it) => it.index).indexed) {
+      for (final (stepIndex, step)
+          in group.instructions.sortedBy((it) => it.index).indexed) {
         final guide = FGuideCardInstruction(
           id: step.id,
           content: step.format(widget.amountFactor),
