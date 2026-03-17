@@ -68,32 +68,35 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
             ),
           ),
         ),
-        SlidingPanelBuilder(
-          handle: const SlidingPanelHandle(),
-          snapConfig: SlidingPanelSnapConfig(extents: [1]),
-          builder: (context, handle) {
-            return FCard(
-              padding: 8,
-              child: Column(
-                children: [
-                  ?handle,
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: FRecipeIngredientGroupList(
-                        compact: true,
-                        ingredientGroups: recipe.ingredientGroups,
-                        decreaseServing: null,
-                        increaseServing: null,
-                        amountFactor: amountFactor,
-                        newAmount: amountFactor * recipe.serving.amount,
-                        servingLabel: recipe.serving.label,
+        Padding(
+          padding: const EdgeInsets.all(PADDING),
+          child: SlidingPanelBuilder(
+            handle: const SlidingPanelHandle(),
+            snapConfig: SlidingPanelSnapConfig(extents: [1]),
+            builder: (context, handle) {
+              return FCard(
+                padding: 8,
+                child: Column(
+                  children: [
+                    ?handle,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: FRecipeIngredientGroupList(
+                          compact: true,
+                          ingredientGroups: recipe.ingredientGroups,
+                          decreaseServing: null,
+                          increaseServing: null,
+                          amountFactor: amountFactor,
+                          newAmount: amountFactor * recipe.serving.amount,
+                          servingLabel: recipe.serving.label,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ],
     );

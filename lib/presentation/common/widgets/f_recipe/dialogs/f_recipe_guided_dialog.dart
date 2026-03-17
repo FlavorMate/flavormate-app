@@ -1,9 +1,11 @@
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
+import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_complete.dart';
@@ -13,6 +15,9 @@ import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe
 import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_dialog_action_row.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_mobile_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -59,8 +64,10 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
     steps.clear();
 
     final groups = widget.recipe.instructionGroups;
-    for (final (groupIndex, group) in groups.indexed) {
-      for (final (stepIndex, step) in group.instructions.indexed) {
+    for (final (groupIndex, group)
+        in groups.sortedBy((it) => it.index).indexed) {
+      for (final (stepIndex, step)
+          in group.instructions.sortedBy((it) => it.index).indexed) {
         final guide = FGuideCardInstruction(
           id: step.id,
           content: step.format(widget.amountFactor),
@@ -138,14 +145,9 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
           title: widget.recipe.label,
           scrollController: null,
           actions: [
-            IconButton.filledTonal(
-              onPressed: _enableDecreaseFont ? decreaseFont : null,
-              icon: const Icon(MdiIcons.formatFontSizeDecrease),
-            ),
-            const SizedBox(width: PADDING),
-            IconButton.filledTonal(
-              onPressed: increaseFont,
-              icon: const Icon(MdiIcons.formatFontSizeIncrease),
+            IconButton(
+              onPressed: showOptions,
+              icon: const Icon(MdiIcons.dotsVertical),
             ),
           ],
         ),
@@ -216,6 +218,48 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
           ),
         ),
       ),
+    );
+  }
+
+  void showOptions() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return FAlertDialog(
+          title: context.l10n.f_recipe_guided_dialog__options__title,
+          negativeLabel: context.l10n.btn_close,
+          child: Column(
+            mainAxisSize: .min,
+            children: [
+              FTileGroup(
+                title: context.l10n.f_recipe_guided_dialog__options__font_title,
+                items: [
+                  FTile(
+                    leading: const FTileIcon(
+                      icon: MdiIcons.formatFontSizeDecrease,
+                    ),
+                    label: context
+                        .l10n
+                        .f_recipe_guided_dialog__options__decrease_font__title,
+                    subLabel: null,
+                    onTap: decreaseFont,
+                  ),
+                  FTile(
+                    leading: const FTileIcon(
+                      icon: MdiIcons.formatFontSizeIncrease,
+                    ),
+                    label: context
+                        .l10n
+                        .f_recipe_guided_dialog__options__increase_font__title,
+                    subLabel: null,
+                    onTap: increaseFont,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

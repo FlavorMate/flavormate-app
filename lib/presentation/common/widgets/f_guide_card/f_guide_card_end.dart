@@ -31,6 +31,7 @@ class FGuideCardEnd extends FGuideCard {
             style: .titleMedium,
             textAlign: .center,
             fontSize: fontSize,
+            color: .onPrimaryContainer,
           ),
         ],
       ),
