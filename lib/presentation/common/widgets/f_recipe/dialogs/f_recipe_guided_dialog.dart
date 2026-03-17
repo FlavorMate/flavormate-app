@@ -153,7 +153,6 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
           ],
         ),
         body: SafeArea(
-          minimum: const .all(PADDING),
           child: LayoutBuilder(
             builder: (context, constraints) {
               final fullHeight = constraints.maxHeight;

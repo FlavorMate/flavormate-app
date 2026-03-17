@@ -37,6 +37,7 @@ class FGuideCardInstruction extends FGuideCard {
             FText(
               '$currentStepLabel ($currentGroup / $lastGroup)',
               style: .titleMedium,
+              color: .onPrimaryContainer,
             ),
             const Divider(),
           ],
@@ -49,11 +50,16 @@ class FGuideCardInstruction extends FGuideCard {
                   fontWeight: .normal,
                   textAlign: .center,
                   fontSize: fontSize,
+                  color: .onPrimaryContainer,
                 ),
               ),
             ),
           ),
-          FText('$currentStep / $lastStep', style: .bodyMedium),
+          FText(
+            '$currentStep / $lastStep',
+            style: .bodyMedium,
+            color: .onPrimaryContainer,
+          ),
         ],
       ),
     );

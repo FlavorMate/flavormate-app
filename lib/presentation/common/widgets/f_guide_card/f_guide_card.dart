@@ -1,3 +1,4 @@
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ abstract class FGuideCard extends StatelessWidget {
   Widget builder(BuildContext context, Widget child) {
     return FCard(
       key: key,
+      color: context.colorScheme.primaryContainer,
       child: child,
     );
   }
