@@ -1,3 +1,4 @@
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class FGuideCardCarousel extends StatelessWidget {
@@ -50,7 +51,10 @@ class FGuideCardCarousel extends StatelessWidget {
           return ClipRect(
             child: SlideTransition(
               position: offsetAnimation,
-              child: child,
+              child: Padding(
+                padding: const EdgeInsets.all(PADDING),
+                child: child,
+              ),
             ),
           );
         },

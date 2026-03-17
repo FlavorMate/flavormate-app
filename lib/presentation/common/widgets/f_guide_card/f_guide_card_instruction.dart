@@ -47,7 +47,7 @@ class FGuideCardInstruction extends FGuideCard {
                   content,
                   style: .titleMedium,
                   fontWeight: .normal,
-                  textAlign: .justify,
+                  textAlign: .center,
                   fontSize: fontSize,
                 ),
               ),
