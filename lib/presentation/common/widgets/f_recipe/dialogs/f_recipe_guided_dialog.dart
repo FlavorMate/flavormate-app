@@ -152,7 +152,6 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
           ],
         ),
         body: SafeArea(
-          minimum: const .all(PADDING),
           child: LayoutBuilder(
             builder: (context, constraints) {
               final fullHeight = constraints.maxHeight;
@@ -187,17 +186,23 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
               if (useDesktop) {
                 return SizedBox(
                   height: fullHeight,
-                  child: FRecipeGuidedDesktopDialog(
-                    currentStep: currentStep,
-                    enablePreviousBtn: enablePreviousBtn,
-                    enableNextBtn: enableNextBtn,
-                    containerHeight: containerHeight,
-                    cardHeight: cardHeight,
-                    onTapPrevious: onTapPrevious,
-                    onTapNext: onTapNext,
-                    slideDirection: _slideDirection,
-                    recipe: widget.recipe,
-                    amountFactor: widget.amountFactor,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: PADDING,
+                      vertical: PADDING,
+                    ),
+                    child: FRecipeGuidedDesktopDialog(
+                      currentStep: currentStep,
+                      enablePreviousBtn: enablePreviousBtn,
+                      enableNextBtn: enableNextBtn,
+                      containerHeight: containerHeight,
+                      cardHeight: cardHeight,
+                      onTapPrevious: onTapPrevious,
+                      onTapNext: onTapNext,
+                      slideDirection: _slideDirection,
+                      recipe: widget.recipe,
+                      amountFactor: widget.amountFactor,
+                    ),
                   ),
                 );
               } else {
