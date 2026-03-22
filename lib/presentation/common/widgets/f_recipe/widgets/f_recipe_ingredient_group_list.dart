@@ -21,6 +21,8 @@ class FRecipeIngredientGroupList extends StatelessWidget {
   final double newAmount;
   final String servingLabel;
 
+  final bool checkable;
+
   const FRecipeIngredientGroupList({
     super.key,
     this.compact = false,
@@ -30,6 +32,7 @@ class FRecipeIngredientGroupList extends StatelessWidget {
     required this.amountFactor,
     required this.newAmount,
     required this.servingLabel,
+    this.checkable = false,
   });
 
   List<CommonIngredientGroup> get sortedIngredientGroups =>
@@ -69,6 +72,7 @@ class FRecipeIngredientGroupList extends StatelessWidget {
               FRecipeIngredientList(
                 ingredientGroup: ingredientGroup,
                 factor: amountFactor,
+                checkable: checkable,
               ),
           ],
         ),

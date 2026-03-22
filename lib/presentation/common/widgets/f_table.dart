@@ -1,9 +1,8 @@
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 
 class FTable extends StatefulWidget {
-  final List<String> header;
-  final List<List<String>> rows;
+  final List<Widget> header;
+  final List<List<Widget>> rows;
   final List<TextAlign>? cellTextAlign;
   final List<TextAlign>? headerTextAlign;
   final List<double>? distributions;
@@ -64,8 +63,6 @@ class FTable extends StatefulWidget {
 
 class _FTableState extends State<FTable> {
   late Map<int, FlexColumnWidth> _columnWidth;
-  late List<TextAlign> _cellTextAligns;
-  late List<TextAlign> _headerTextAligns;
 
   @override
   void initState() {
@@ -82,46 +79,6 @@ class _FTableState extends State<FTable> {
         for (var (index, distribution) in widget.distributions!.indexed)
           index: FlexColumnWidth(distribution),
       };
-    }
-
-    // Initialization for text alignment in cells.
-    if (widget.cellTextAlign == null) {
-      // If cellTextAlign property is not specified, set all cell alignments to start.
-      _cellTextAligns = List.generate(
-        widget.header.length,
-        (_) => TextAlign.start,
-      );
-    } else if (widget.header.length == widget.cellTextAlign!.length) {
-      // If cellTextAlign property provided equals the length of headers,
-      // each cell gets separate alignment according to corresponding item from cellTextAlign.
-      _cellTextAligns = widget.cellTextAlign!;
-    } else {
-      // At this point the cellTextAlign length should be 1.
-      // All cells get the same alignment specified by the first item in cellTextAlign.
-      _cellTextAligns = List.generate(
-        widget.header.length,
-        (_) => widget.cellTextAlign!.first,
-      );
-    }
-
-    // Initialization for text alignment in headers.
-    if (widget.headerTextAlign == null) {
-      // If headerTextAlign property is not specified, set all cell alignments to start.
-      _headerTextAligns = List.generate(
-        widget.header.length,
-        (_) => TextAlign.start,
-      );
-    } else if (widget.header.length == widget.headerTextAlign!.length) {
-      // If headerTextAlign property provided equals the length of headers,
-      // each cell gets separate alignment according to corresponding item from headerTextAlign.
-      _headerTextAligns = widget.headerTextAlign!;
-    } else {
-      // At this point the headerTextAlign length should be 1.
-      // All cells get the same alignment specified by the first item in headerTextAlign.
-      _headerTextAligns = List.generate(
-        widget.header.length,
-        (_) => widget.headerTextAlign!.first,
-      );
     }
 
     super.initState();
@@ -141,34 +98,26 @@ class _FTableState extends State<FTable> {
       children: [
         TableRow(
           children: [
-            for (var (index, head) in widget.header.indexed)
+            for (var head in widget.header)
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 8,
                   vertical: 16,
                 ),
-                child: FText(
-                  head,
-                  style: FTextStyle.labelLarge,
-                  textAlign: _headerTextAligns.elementAt(index),
-                  fontWeight: FontWeight.bold,
-                ),
+                child: head,
               ),
           ],
         ),
         for (var row in widget.rows)
           TableRow(
             children: [
-              for (var (index, cell) in row.indexed)
+              for (var cell in row)
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 16,
                     horizontal: 8,
                   ),
-                  child: Text(
-                    cell,
-                    textAlign: _cellTextAligns.elementAt(index),
-                  ),
+                  child: cell,
                 ),
             ],
           ),
