@@ -227,6 +227,10 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
                   slideDirection: _slideDirection,
                   recipe: widget.recipe,
                   amountFactor: widget.amountFactor,
+                  durationCardActive: _durationCardActive,
+                  onDurationCard: toggleDurationCard,
+                  ingredientCardActive: _ingredientCardActive,
+                  onIngredientCard: toggleIngredientsCard,
                 );
               }
             },
