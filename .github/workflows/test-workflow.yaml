@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  FLUTTER_VERSION: 3.41.4
+  FLUTTER_VERSION: 3.41.5
   RUBY_VERSION: 3.4.9
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
@@ -19,7 +19,7 @@ jobs:
 
       # Using JDK 21 until https://github.com/flutter/flutter/issues/181383 is fixed
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: "21"
           distribution: "temurin"
@@ -221,7 +221,7 @@ jobs:
           get-content build_assets/windows/setup_builder.iss.tmpl | %{$_ -replace "APP_VERSION","$version"}  | set-content build_assets/windows/setup_builder.iss
 
       - name: Compile .ISS to .EXE Installer
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
         with:
           path: build_assets/windows/setup_builder.iss
           options: /O+
