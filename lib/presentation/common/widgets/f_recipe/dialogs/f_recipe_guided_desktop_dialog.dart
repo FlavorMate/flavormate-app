@@ -4,6 +4,7 @@ import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_carousel.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_dialog_action_row.dart';
+import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_durations_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ingredient_group_list.dart';
 import 'package:flutter/material.dart';
 
@@ -44,19 +45,33 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
       children: [
         Expanded(
           flex: 1,
-          child: FCard(
-            child: SingleChildScrollView(
-              child: FRecipeIngredientGroupList(
-                compact: true,
-                ingredientGroups: recipe.ingredientGroups,
-                decreaseServing: null,
-                increaseServing: null,
-                amountFactor: amountFactor,
-                newAmount: amountFactor * recipe.serving.amount,
-                servingLabel: recipe.serving.label,
-                checkable: true,
+          child: Column(
+            spacing: PADDING,
+            children: [
+              FCard(
+                child: FRecipeDurationsTable(
+                  prepTime: recipe.prepTime,
+                  cookTime: recipe.prepTime,
+                  restTime: recipe.restTime,
+                ),
               ),
-            ),
+              Expanded(
+                child: FCard(
+                  child: SingleChildScrollView(
+                    child: FRecipeIngredientGroupList(
+                      compact: true,
+                      ingredientGroups: recipe.ingredientGroups,
+                      decreaseServing: null,
+                      increaseServing: null,
+                      amountFactor: amountFactor,
+                      newAmount: amountFactor * recipe.serving.amount,
+                      servingLabel: recipe.serving.label,
+                      checkable: true,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         const VerticalDivider(
