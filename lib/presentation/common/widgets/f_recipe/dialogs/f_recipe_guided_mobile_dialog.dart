@@ -89,6 +89,7 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
                           amountFactor: amountFactor,
                           newAmount: amountFactor * recipe.serving.amount,
                           servingLabel: recipe.serving.label,
+                          checkable: true,
                         ),
                       ),
                     ),
