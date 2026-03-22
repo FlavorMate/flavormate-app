@@ -1,4 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card.dart';
@@ -6,7 +7,9 @@ import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card
 import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe_guided_dialog_action_row.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_durations_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ingredient_group_list.dart';
+import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 class FRecipeGuidedDesktopDialog extends StatelessWidget {
   final FGuideCard currentStep;
@@ -23,6 +26,13 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
   final CommonRecipe recipe;
   final double amountFactor;
 
+  final bool durationCardActive;
+  final VoidCallback onDurationCard;
+  final bool ingredientCardActive;
+  final VoidCallback onIngredientCard;
+
+  bool get _cardsActive => durationCardActive || ingredientCardActive;
+
   const FRecipeGuidedDesktopDialog({
     super.key,
     required this.currentStep,
@@ -35,6 +45,10 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
     required this.slideDirection,
     required this.recipe,
     required this.amountFactor,
+    required this.durationCardActive,
+    required this.onDurationCard,
+    required this.ingredientCardActive,
+    required this.onIngredientCard,
   });
 
   @override
@@ -43,40 +57,82 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
       spacing: PADDING,
       crossAxisAlignment: .stretch,
       children: [
-        Expanded(
-          flex: 1,
-          child: Column(
-            spacing: PADDING,
-            children: [
-              FCard(
-                child: FRecipeDurationsTable(
-                  prepTime: recipe.prepTime,
-                  cookTime: recipe.prepTime,
-                  restTime: recipe.restTime,
-                ),
-              ),
-              Expanded(
-                child: FCard(
-                  child: SingleChildScrollView(
-                    child: FRecipeIngredientGroupList(
-                      compact: true,
-                      ingredientGroups: recipe.ingredientGroups,
-                      decreaseServing: null,
-                      increaseServing: null,
-                      amountFactor: amountFactor,
-                      newAmount: amountFactor * recipe.serving.amount,
-                      servingLabel: recipe.serving.label,
-                      checkable: true,
+        if (_cardsActive)
+          Expanded(
+            flex: 1,
+            child: Column(
+              spacing: PADDING,
+              children: [
+                if (durationCardActive)
+                  FCard(
+                    child: Column(
+                      spacing: PADDING,
+                      children: [
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            FText(
+                              context.l10n.f_recipe_durations,
+                              style: .titleLarge,
+                            ),
+                            IconButton(
+                              onPressed: onDurationCard,
+                              icon: const Icon(MdiIcons.close),
+                            ),
+                          ],
+                        ),
+                        FRecipeDurationsTable(
+                          prepTime: recipe.prepTime,
+                          cookTime: recipe.prepTime,
+                          restTime: recipe.restTime,
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ),
-            ],
+                if (ingredientCardActive)
+                  Expanded(
+                    child: FCard(
+                      child: Column(
+                        spacing: PADDING,
+                        children: [
+                          Row(
+                            mainAxisAlignment: .spaceBetween,
+                            children: [
+                              FText(
+                                context.l10n.f_recipe_ingredients,
+                                style: .titleLarge,
+                              ),
+                              IconButton(
+                                onPressed: onIngredientCard,
+                                icon: const Icon(MdiIcons.close),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: FRecipeIngredientGroupList(
+                                compact: true,
+                                ingredientGroups: recipe.ingredientGroups,
+                                decreaseServing: null,
+                                increaseServing: null,
+                                amountFactor: amountFactor,
+                                newAmount: amountFactor * recipe.serving.amount,
+                                servingLabel: recipe.serving.label,
+                                checkable: true,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
-        const VerticalDivider(
-          width: 0,
-        ),
+        if (_cardsActive)
+          const VerticalDivider(
+            width: 0,
+          ),
         Expanded(
           flex: 2,
           child: SizedBox(

@@ -24,7 +24,6 @@ class FRecipeIngredientList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print([if (checkable) 0.1, 0.25, 0.75]);
     return Column(
       spacing: PADDING,
       children: [

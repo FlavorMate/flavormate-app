@@ -7,6 +7,7 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_complete.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_end.dart';
@@ -52,6 +53,11 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
   bool get enablePreviousBtn => index > 0;
 
   bool get enableNextBtn => index < steps.length - 1;
+
+  bool _durationCardActive = true;
+  bool _ingredientCardActive = true;
+
+  bool get _showCardShortcuts => !_durationCardActive || !_ingredientCardActive;
 
   @override
   void initState() {
@@ -139,6 +145,8 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
   Widget build(BuildContext context) {
     final currentStep = steps[index];
 
+    final useDesktop = FBreakpoint.gt(context, FBreakpoint.md);
+
     return Dialog.fullscreen(
       child: Scaffold(
         appBar: FAppBar(
@@ -181,8 +189,6 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
                 );
               }
 
-              final useDesktop = FBreakpoint.gt(context, FBreakpoint.md);
-
               if (useDesktop) {
                 return SizedBox(
                   height: fullHeight,
@@ -202,6 +208,10 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
                       slideDirection: _slideDirection,
                       recipe: widget.recipe,
                       amountFactor: widget.amountFactor,
+                      durationCardActive: _durationCardActive,
+                      onDurationCard: toggleDurationCard,
+                      ingredientCardActive: _ingredientCardActive,
+                      onIngredientCard: toggleIngredientsCard,
                     ),
                   ),
                 );
@@ -222,6 +232,39 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
             },
           ),
         ),
+        bottomNavigationBar: _showCardShortcuts && useDesktop
+            ? SafeArea(
+                minimum: const .only(bottom: PADDING),
+                child: SizedBox(
+                  height: 48,
+                  child: Center(
+                    child: SingleChildScrollView(
+                      scrollDirection: .horizontal,
+                      child: Row(
+                        spacing: PADDING,
+                        mainAxisSize: .min,
+                        children: [
+                          if (!_durationCardActive)
+                            FButton(
+                              width: 150,
+                              leading: const Icon(MdiIcons.clock),
+                              label: context.l10n.f_recipe_durations,
+                              onPressed: toggleDurationCard,
+                            ),
+                          if (!_ingredientCardActive)
+                            FButton(
+                              width: 150,
+                              leading: const Icon(MdiIcons.foodVariant),
+                              label: context.l10n.f_recipe_ingredients,
+                              onPressed: toggleIngredientsCard,
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : null,
       ),
     );
   }
@@ -266,5 +309,17 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
         );
       },
     );
+  }
+
+  void toggleDurationCard() {
+    setState(() {
+      _durationCardActive = !_durationCardActive;
+    });
+  }
+
+  void toggleIngredientsCard() {
+    setState(() {
+      _ingredientCardActive = !_ingredientCardActive;
+    });
   }
 }
