@@ -86,7 +86,7 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
           padding: const EdgeInsets.all(PADDING),
           child: SlidingPanelBuilder(
             handle: const SlidingPanelHandle(),
-            snapConfig: SlidingPanelSnapConfig(extents: [1]),
+            snapConfig: SnapConfig(extents: [1]),
             builder: (context, handle) {
               return FCard(
                 padding: PADDING / 2,
