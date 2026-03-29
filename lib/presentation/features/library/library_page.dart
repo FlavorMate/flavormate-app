@@ -2,14 +2,12 @@ import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
 import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -26,10 +24,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class LibraryPage extends ConsumerStatefulWidget {
   const LibraryPage({super.key});
 
-  static final pageKey = PageableState.booksOwnView.name;
-
-  PPageableStateProvider get pageProvider => pPageableStateProvider(pageKey);
-
   @override
   ConsumerState<LibraryPage> createState() => _LibraryPageState();
 }
@@ -39,7 +33,8 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
   final _scrollController = ScrollController();
 
   PRestBooksProvider get provider => pRestBooksProvider(
-    pageProviderId: LibraryPage.pageKey,
+    pageProviderId: PageableState.unused.name,
+    pageSize: -1,
     orderBy: orderBy,
     orderDirection: orderDirection,
   );
@@ -53,6 +48,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
   @override
   Widget build(BuildContext context) {
     final self = ref.watch(pRestAccountsSelfProvider).value;
+    final books = ref.watch(provider);
 
     return Scaffold(
       appBar: FAppBar(
@@ -61,7 +57,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
         showHome: false,
         actions: [
           IconButton(
-            onPressed: handleFilterDialog,
+            onPressed: openFilterDialog,
             icon: const Icon(MdiIcons.filter),
           ),
         ],
@@ -121,34 +117,47 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
 
                   const FSizedBoxSliver(height: 4),
 
-                  FLazySliverList(
-                    key: orderKey,
-                    provider: provider,
-                    pageProvider: widget.pageProvider,
-                    scrollController: _scrollController,
+                  if (books.hasValue) ...[
+                    if (books.value!.data.isEmpty)
+                      SliverToBoxAdapter(
+                        child: FText(
+                          context.l10n.library_page__on_empty,
+                          style: .bodyLarge,
+                        ),
+                      )
+                    else
+                      SliverList.separated(
+                        separatorBuilder: (_, _) =>
+                            const SizedBox(height: PADDING / 4),
+                        itemCount: books.value!.data.length,
+                        itemBuilder: (context, index) {
+                          final item = books.value!.data[index];
 
-                    itemBuilder: (item, index, first, last) {
-                      final stateLabel = item.visible
-                          ? context.l10n.library_page__book_public
-                          : context.l10n.library_page__book_private;
+                          final first = index == 0;
+                          final last = index == books.value!.data.length - 1;
 
-                      final recipeCountLabel = context.l10n
-                          .tags_page__recipe_counter(
-                            item.recipeCount,
+                          final stateLabel = item.visible
+                              ? context.l10n.library_page__book_public
+                              : context.l10n.library_page__book_private;
+
+                          final recipeCountLabel = context.l10n
+                              .tags_page__recipe_counter(
+                                item.recipeCount,
+                              );
+
+                          return FContentFullCard(
+                            first: first,
+                            last: last,
+                            title: item.label,
+                            subtitle: '$stateLabel   -   $recipeCountLabel',
+
+                            blurRadius: 2,
+                            imageSelector: item.cover?.url,
+                            onTap: () => context.routes.libraryItem(item.id),
                           );
-
-                      return FContentFullCard(
-                        first: first,
-                        last: last,
-                        title: item.label,
-                        subtitle: '$stateLabel   -   $recipeCountLabel',
-
-                        blurRadius: 2,
-                        imageSelector: item.cover?.url,
-                        onTap: () => context.routes.libraryItem(item.id),
-                      );
-                    },
-                  ),
+                        },
+                      ),
+                  ],
 
                   const FSizedBoxSliver(height: PADDING),
 
@@ -171,13 +180,6 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
     if (response?.isEmpty ?? true) return;
 
     await ref.read(provider.notifier).createBook(response!);
-  }
-
-  void handleFilterDialog() async {
-    final result = await openFilterDialog();
-    if (result != null) {
-      ref.read(widget.pageProvider.notifier).reset();
-    }
   }
 
   @override
