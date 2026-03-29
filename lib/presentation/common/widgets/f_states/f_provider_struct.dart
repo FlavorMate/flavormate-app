@@ -25,8 +25,8 @@ class FProviderStruct<T> extends ConsumerWidget {
         context,
         value,
       ),
-      AsyncError() => FError(onError: onError),
-      _ => const FLoading(),
+      AsyncError() => Material(child: FError(onError: onError)),
+      _ => const Material(child: FLoading()),
     };
   }
 }

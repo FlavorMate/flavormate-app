@@ -1113,10 +1113,10 @@ packages:
     dependency: "direct main"
     description:
       name: shared_preferences
-      sha256: "2939ae520c9024cb197fc20dee269cd8cdbf564c8b5746374ec6cacdc5169e64"
+      sha256: c3025c5534b01739267eb7d76959bbc25a6d10f6988e1c2a3036940133dd10bf
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.4"
+    version: "2.5.5"
   shared_preferences_android:
     dependency: transitive
     description:
@@ -1206,10 +1206,10 @@ packages:
     dependency: "direct main"
     description:
       name: sliding_panel_kit
-      sha256: "423d0569d915f6ca175683d0bcc5036430e96383996e8fe05e976564856b0d98"
+      sha256: "8f611d892daee19efc6d31c901dc7cb027f94f03004ff828cd307d1e30f9cba5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.4.0"
   source_gen:
     dependency: transitive
     description:
@@ -1350,10 +1350,10 @@ packages:
     dependency: "direct main"
     description:
       name: two_dimensional_scrollables
-      sha256: e9397ae372839aecb3135d246bff5cce5e738604c9afd03d65d06c7a246ae958
+      sha256: "45f77f28f3f084ac3c79f74b075c4d719937a3972e71191efc533d6f9487c045"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.8"
+    version: "0.4.1"
   type_plus:
     dependency: transitive
     description:
