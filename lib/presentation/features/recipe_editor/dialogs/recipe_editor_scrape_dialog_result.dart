@@ -1,17 +1,17 @@
 import 'package:file_selector/file_selector.dart';
-import 'package:flavormate/data/models/shared/enums/language.dart';
+import 'package:flavormate/data/models/extensions/importExport/ie_import_type.dart';
 
 class RecipeEditorScrapeDialogResult {
-  final RecipeEditorScrapeDialogResultType type;
-  final String? url;
-  final XFile? file;
-  final Language? language;
+  final String pluginId;
+  final IEImportType type;
+  final List<String>? urls;
+  final List<XFile>? files;
 
   const RecipeEditorScrapeDialogResult({
+    required this.pluginId,
     required this.type,
-    this.url,
-    this.file,
-    this.language,
+    this.urls,
+    this.files,
   });
 }
 

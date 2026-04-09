@@ -184,13 +184,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
 
     context.showLoadingDialog();
 
-    final response = switch (result.type) {
-      .Url => await ref.read(provider.notifier).scrape(result.url!),
-      .File =>
-        await ref
-            .read(provider.notifier)
-            .import(result.file!, result.language!),
-    };
+    final response = await ref.read(provider.notifier).import(result);
 
     if (!context.mounted) return;
     context.pop();
@@ -204,7 +198,6 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
       context.showTextSnackBar(
         context.l10n.recipe_editor_page__import_success,
       );
-      openDraft(context, true, response.data!);
     }
   }
 

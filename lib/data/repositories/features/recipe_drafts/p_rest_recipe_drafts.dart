@@ -1,15 +1,13 @@
-import 'package:dio/dio.dart';
-import 'package:file_selector/file_selector.dart';
 import 'package:flavormate/core/apis/rest/p_dio_private.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
-import 'package:flavormate/data/datasources/extensions/scrape_controller_api.dart';
+import 'package:flavormate/data/datasources/extensions/import_export_controller_api.dart';
 import 'package:flavormate/data/datasources/features/recipe_draft_controller_api.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_dto.dart';
 import 'package:flavormate/data/models/local/pageable_dto.dart';
-import 'package:flavormate/data/models/shared/enums/language.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
+import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_rest_recipe_drafts.g.dart';
@@ -51,12 +49,14 @@ class PRestRecipeDrafts extends _$PRestRecipeDrafts {
     return response;
   }
 
-  Future<ApiResponse<String>> scrape(String url) async {
+  Future<ApiResponse<List<String>>> import(
+    RecipeEditorScrapeDialogResult data,
+  ) async {
     final dio = ref.watch(pDioPrivateProvider);
 
-    final client = ScrapeControllerApi(dio);
+    final client = ImportExportControllerApi(dio);
 
-    final response = await client.scrape(url: url);
+    final response = await client.import(data);
 
     if (!response.hasError) {
       ref.invalidateSelf();
@@ -73,25 +73,6 @@ class PRestRecipeDrafts extends _$PRestRecipeDrafts {
     final response = await client.deleteRecipeDraftsId(id: id);
 
     ref.invalidateSelf();
-
-    return response;
-  }
-
-  Future<ApiResponse<String>> import(XFile xFile, Language language) async {
-    final dio = ref.watch(pDioPrivateProvider);
-
-    final client = ScrapeControllerApi(dio);
-
-    final file = await MultipartFile.fromFile(
-      xFile.path,
-      contentType: DioMediaType.parse('application/octet-stream'),
-    );
-
-    final response = await client.import(file: file, language: language.name);
-
-    if (!response.hasError) {
-      ref.invalidateSelf();
-    }
 
     return response;
   }
