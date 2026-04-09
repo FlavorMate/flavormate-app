@@ -1,13 +1,13 @@
 import 'package:file_selector/file_selector.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_import_type.dart';
 
-class RecipeEditorScrapeDialogResult {
+class RecipeEditorImportDialogResult {
   final String pluginId;
   final IEImportType type;
   final List<String>? urls;
   final List<XFile>? files;
 
-  const RecipeEditorScrapeDialogResult({
+  const RecipeEditorImportDialogResult({
     required this.pluginId,
     required this.type,
     this.urls,
@@ -15,4 +15,4 @@ class RecipeEditorScrapeDialogResult {
   });
 }
 
-enum RecipeEditorScrapeDialogResultType { Url, File }
+enum RecipeEditorImportDialogResultType { Url, File }

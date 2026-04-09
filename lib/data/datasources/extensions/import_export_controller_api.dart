@@ -3,7 +3,7 @@ import 'package:flavormate/core/constants/api_constants.dart';
 import 'package:flavormate/data/datasources/controller_api.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_metadata.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog_result.dart';
+import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog_result.dart';
 
 class ImportExportControllerApi extends ControllerApi {
   static const String _root = ApiConstants.ExtensionImportExport;
@@ -33,7 +33,7 @@ class ImportExportControllerApi extends ControllerApi {
   }
 
   Future<ApiResponse<List<String>>> import(
-    RecipeEditorScrapeDialogResult data,
+    RecipeEditorImportDialogResult data,
   ) async {
     final files = data.files
         ?.map((it) => MultipartFile.fromFileSync(it.path))

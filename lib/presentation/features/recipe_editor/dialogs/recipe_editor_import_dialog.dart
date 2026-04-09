@@ -11,22 +11,22 @@ import 'package:flavormate/presentation/common/widgets/f_page_introduction.dart'
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog_result.dart';
+import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class RecipeEditorScrapeDialog extends ConsumerStatefulWidget {
-  const RecipeEditorScrapeDialog({super.key});
+class RecipeEditorImportDialog extends ConsumerStatefulWidget {
+  const RecipeEditorImportDialog({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _RecipeEditorScrapeDialogState();
+      _RecipeEditorImportDialogState();
 }
 
-class _RecipeEditorScrapeDialogState
-    extends ConsumerState<RecipeEditorScrapeDialog> {
+class _RecipeEditorImportDialogState
+    extends ConsumerState<RecipeEditorImportDialog> {
   final _urlKeys = <GlobalKey<FormState>>[];
   final _urlControllers = <TextEditingController>[];
   final _files = <XFile>[];
@@ -48,7 +48,7 @@ class _RecipeEditorScrapeDialogState
     return Dialog.fullscreen(
       child: Scaffold(
         appBar: FAppBar(
-          title: context.l10n.recipe_editor_scrape_dialog__title,
+          title: context.l10n.recipe_editor_import_dialog__title,
           scrollController: null,
         ),
         body: SafeArea(
@@ -60,7 +60,7 @@ class _RecipeEditorScrapeDialogState
                   shape: .sunny,
                   icon: MdiIcons.cloudDownload,
                   description:
-                      context.l10n.recipe_editor_scrape_dialog__description,
+                      context.l10n.recipe_editor_import_dialog__description,
                 ),
 
                 if (provider.hasValue)
@@ -145,7 +145,7 @@ class _RecipeEditorScrapeDialogState
 
     final urls = _urlControllers.map((it) => it.text).toList();
 
-    final returnValue = RecipeEditorScrapeDialogResult(
+    final returnValue = RecipeEditorImportDialogResult(
       pluginId: _selectedImporter!.id,
       type: .UrlImport,
       urls: urls,
@@ -180,7 +180,7 @@ class _RecipeEditorScrapeDialogState
       return;
     }
 
-    final returnValue = RecipeEditorScrapeDialogResult(
+    final returnValue = RecipeEditorImportDialogResult(
       pluginId: _selectedImporter!.id,
       type: .FileImport,
       files: _files,
@@ -188,37 +188,6 @@ class _RecipeEditorScrapeDialogState
 
     context.pop(returnValue);
   }
-
-  // void submit() {
-  //   if (!_urlKey.currentState!.validate()) return;
-  //   final form = RecipeEditorScrapeDialogResult(
-  //     type: .Url,
-  //     urls: _urlController.text,
-  //   );
-  //   context.pop(form);
-  // }
-  //
-  // void uploadJSON() async {
-  //   const jsonTypeGroup = XTypeGroup(
-  //     label: 'JSON',
-  //     extensions: <String>['json'],
-  //     uniformTypeIdentifiers: <String>['public.json'],
-  //   );
-  //
-  //   final file = await openFile(
-  //     acceptedTypeGroups: [jsonTypeGroup],
-  //   );
-  //
-  //   if (file == null || !mounted) return;
-  //
-  //   final form = RecipeEditorScrapeDialogResult(
-  //     type: .File,
-  //     files: file,
-  //     language: _language,
-  //   );
-  //
-  //   context.pop(form);
-  // }
 }
 
 class _UrlCard extends StatelessWidget {
@@ -245,7 +214,7 @@ class _UrlCard extends StatelessWidget {
         spacing: PADDING,
         children: [
           FText(
-            context.l10n.recipe_editor_scrape_dialog__download_title,
+            context.l10n.recipe_editor_import_dialog__download_title,
             style: .titleMedium,
           ),
 
@@ -262,7 +231,7 @@ class _UrlCard extends StatelessWidget {
                         label: Text(
                           context
                               .l10n
-                              .recipe_editor_scrape_dialog__download_hint,
+                              .recipe_editor_import_dialog__download_hint,
                         ),
                       ),
                       validator: (input) {
@@ -287,7 +256,7 @@ class _UrlCard extends StatelessWidget {
             onPressed: onAdd,
             icon: const Icon(MdiIcons.plus),
             label: Text(
-              context.l10n.recipe_editor_scrape_dialog__add_url,
+              context.l10n.recipe_editor_import_dialog__add_url,
             ),
           ),
 
@@ -295,7 +264,7 @@ class _UrlCard extends StatelessWidget {
             onPressed: onSubmit,
             icon: const Icon(MdiIcons.download),
             label: Text(
-              context.l10n.recipe_editor_scrape_dialog__title,
+              context.l10n.recipe_editor_import_dialog__title,
             ),
           ),
         ],
@@ -326,7 +295,7 @@ class _FileCard extends StatelessWidget {
         spacing: PADDING,
         children: [
           FText(
-            context.l10n.recipe_editor_scrape_dialog__upload_title,
+            context.l10n.recipe_editor_import_dialog__upload_title,
             style: .titleMedium,
           ),
           if (files.isNotEmpty)
@@ -342,7 +311,7 @@ class _FileCard extends StatelessWidget {
           FilledButton.icon(
             onPressed: onAdd,
             label: Text(
-              context.l10n.recipe_editor_scrape_dialog__select_file,
+              context.l10n.recipe_editor_import_dialog__select_file,
             ),
             icon: const Icon(MdiIcons.file),
           ),
@@ -351,7 +320,7 @@ class _FileCard extends StatelessWidget {
             onPressed: onSubmit,
             icon: const Icon(MdiIcons.download),
             label: Text(
-              context.l10n.recipe_editor_scrape_dialog__title,
+              context.l10n.recipe_editor_import_dialog__title,
             ),
           ),
         ],

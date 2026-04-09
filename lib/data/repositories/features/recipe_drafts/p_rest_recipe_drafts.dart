@@ -7,7 +7,7 @@ import 'package:flavormate/data/models/local/pageable_dto.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog_result.dart';
+import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_rest_recipe_drafts.g.dart';
@@ -50,7 +50,7 @@ class PRestRecipeDrafts extends _$PRestRecipeDrafts {
   }
 
   Future<ApiResponse<List<String>>> import(
-    RecipeEditorScrapeDialogResult data,
+    RecipeEditorImportDialogResult data,
   ) async {
     final dio = ref.watch(pDioPrivateProvider);
 
