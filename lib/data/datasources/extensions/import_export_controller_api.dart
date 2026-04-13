@@ -35,11 +35,19 @@ class ImportExportControllerApi extends ControllerApi {
   Future<ApiResponse<List<String>>> import(
     RecipeEditorImportDialogResult data,
   ) async {
-    final files = data.files
-        ?.map((it) => MultipartFile.fromFileSync(it.path))
-        .toList();
+    final formMap = <String, dynamic>{};
 
-    final form = FormData.fromMap({'file': files, 'url': data.urls});
+    if (data.files?.isNotEmpty ?? false) {
+      formMap['file'] = data.files
+          ?.map((it) => MultipartFile.fromFileSync(it.path))
+          .toList();
+    }
+
+    if (data.urls?.isNotEmpty ?? false) {
+      formMap['url'] = data.urls;
+    }
+
+    final form = FormData.fromMap(formMap);
 
     final response = await post(
       url: '$_root/import/${data.pluginId}',

@@ -1,11 +1,15 @@
 import 'package:file_selector/file_selector.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/extensions/e_string.dart';
+import 'package:flavormate/core/utils/u_localizations.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_import_type.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_metadata.dart';
+import 'package:flavormate/data/models/shared/enums/language.dart';
 import 'package:flavormate/data/repositories/extension/import_export/p_ie_importers.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
+import 'package:flavormate/presentation/common/widgets/f_badge.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_page_introduction.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -45,6 +49,8 @@ class _RecipeEditorImportDialogState
   @override
   Widget build(BuildContext context) {
     final provider = ref.watch(pIeImportersProvider);
+    final language = currentLanguage();
+
     return Dialog.fullscreen(
       child: Scaffold(
         appBar: FAppBar(
@@ -56,12 +62,15 @@ class _RecipeEditorImportDialogState
             child: Column(
               spacing: PADDING,
               children: [
-                FPageIntroduction(
-                  shape: .sunny,
-                  icon: MdiIcons.cloudDownload,
-                  description:
-                      context.l10n.recipe_editor_import_dialog__description,
-                ),
+                if (_selectedImporter == null)
+                  FPageIntroduction(
+                    shape: .sunny,
+                    icon: MdiIcons.download,
+                    description:
+                        context.l10n.recipe_editor_import_dialog__description,
+                  )
+                else
+                  const FBadge(shape: .sunny, icon: MdiIcons.download),
 
                 if (provider.hasValue)
                   DropdownMenu(
@@ -70,13 +79,25 @@ class _RecipeEditorImportDialogState
                     selectOnly: true,
                     dropdownMenuEntries: [
                       for (final plugin in provider.value!)
-                        DropdownMenuEntry(value: plugin, label: plugin.name),
+                        DropdownMenuEntry(
+                          value: plugin,
+                          label:
+                              plugin.name[language] ??
+                              plugin.name[Language.en]!,
+                        ),
                     ],
                   )
                 else
                   const CircularProgressIndicator(),
 
                 if (_selectedImporter != null) ...[
+                  if (_selectedImporter!.description?[language]?.isNotBlank ??
+                      false)
+                    FText(
+                      _selectedImporter!.description![language]!,
+                      style: .bodyMedium,
+                    ),
+
                   if (_selectedImporter!.import.contains(
                     IEImportType.UrlImport,
                   ))
@@ -318,7 +339,7 @@ class _FileCard extends StatelessWidget {
 
           FilledButton.icon(
             onPressed: onSubmit,
-            icon: const Icon(MdiIcons.download),
+            icon: const Icon(MdiIcons.upload),
             label: Text(
               context.l10n.recipe_editor_import_dialog__title,
             ),
