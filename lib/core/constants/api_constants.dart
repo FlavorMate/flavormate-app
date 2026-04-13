@@ -18,9 +18,9 @@ abstract class ApiConstants {
   static const CoreVersion = '$Root/version';
 
   static const ExtensionBring = '$Root/bring';
+  static const ExtensionImportExport = '$Root/import-export';
   static const ExtensionOIDC2 = '$Root/oidc2';
   static const ExtensionRatings = '$Root/ratings';
-  static const ExtensionScrape = '$Root/scraper';
   static const ExtensionShare = '$Root/share';
 
   static const FeatureAccounts = '$Root/accounts';

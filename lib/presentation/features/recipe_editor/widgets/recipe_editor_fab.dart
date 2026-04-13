@@ -5,12 +5,12 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 
 class RecipeEditorFab extends StatelessWidget {
   final VoidCallback onCreate;
-  final VoidCallback onScrape;
+  final VoidCallback onImport;
 
   const RecipeEditorFab({
     super.key,
     required this.onCreate,
-    required this.onScrape,
+    required this.onImport,
   });
 
   @override
@@ -37,7 +37,7 @@ class RecipeEditorFab extends StatelessWidget {
           heroTag: UniqueKey(),
           label: Text(context.l10n.recipe_editor_fab__import_recipe),
           icon: const Icon(MdiIcons.download),
-          onPressed: onScrape,
+          onPressed: onImport,
           shape: const StadiumBorder(),
         ),
         FloatingActionButton.extended(

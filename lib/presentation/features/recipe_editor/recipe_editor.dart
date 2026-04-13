@@ -12,8 +12,8 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_lazy_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_scrape_dialog_result.dart';
+import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog.dart';
+import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog_result.dart';
 import 'package:flavormate/presentation/features/recipe_editor/widgets/recipe_editor_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -57,7 +57,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
       ),
       floatingActionButton: RecipeEditorFab(
         onCreate: () => createDraft(context),
-        onScrape: () => draftDialog(context),
+        onImport: () => draftDialog(context),
       ),
       floatingActionButtonLocation: ExpandableFab.location,
       body: SafeArea(
@@ -174,23 +174,17 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
   }
 
   void draftDialog(BuildContext context) async {
-    final result = await showDialog<RecipeEditorScrapeDialogResult>(
+    final result = await showDialog<RecipeEditorImportDialogResult>(
       context: context,
       useSafeArea: false,
-      builder: (_) => const RecipeEditorScrapeDialog(),
+      builder: (_) => const RecipeEditorImportDialog(),
     );
 
     if (!context.mounted || result == null) return;
 
     context.showLoadingDialog();
 
-    final response = switch (result.type) {
-      .Url => await ref.read(provider.notifier).scrape(result.url!),
-      .File =>
-        await ref
-            .read(provider.notifier)
-            .import(result.file!, result.language!),
-    };
+    final response = await ref.read(provider.notifier).import(result);
 
     if (!context.mounted) return;
     context.pop();
@@ -204,7 +198,6 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
       context.showTextSnackBar(
         context.l10n.recipe_editor_page__import_success,
       );
-      openDraft(context, true, response.data!);
     }
   }
 
