@@ -2,7 +2,7 @@ name: flavormate
 description: "A self hosted cookbook"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 5.0.0+100
 
 environment:
-  sdk: '>=3.11.1 <4.0.0'
+  sdk: ">=3.11.4 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -68,7 +68,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   sliding_panel_kit: ^0.4.0
-  wakelock_plus: ^1.5.1
+  wakelock_plus: ^1.5.2
   file_selector: ^1.1.0
 
 dev_dependencies:
@@ -104,7 +104,7 @@ flutter:
     - assets/fonts/Google_Sans_Code/OFL.txt
     - assets/fonts/Google_Sans_Flex/OFL.txt
     - LICENSE.txt
-  
+
   fonts:
     - family: GoogleSansFlex
       fonts:
