@@ -7,7 +7,6 @@ enum FeatureType {
   Ratings,
   Registration,
   Recovery,
-  ScraperImport,
   Story,
   Bring,
   OpenFoodFacts,
