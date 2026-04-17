@@ -14,7 +14,7 @@ class FTile extends StatelessWidget {
 
   final bool disabled;
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const FTile({
     super.key,

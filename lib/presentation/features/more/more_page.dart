@@ -66,6 +66,18 @@ class MorePage extends ConsumerWidget {
                   ),
               ],
             ),
+
+            FTileGroup(
+              title: 'Import - Export',
+              items: [
+                FTile(
+                  label: 'Import recipes',
+                  subLabel: context.l10n.more_page__recipe_editor_hint,
+                  leading: FTileIcon(icon: MdiIcons.download),
+                  onTap: () => context.routes.recipeImport(),
+                ),
+              ],
+            ),
             if (user.value?.isAdmin == true)
               FTileGroup(
                 title: context.l10n.more_page__admin_title,

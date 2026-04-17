@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flavormate/core/constants/api_constants.dart';
 import 'package:flavormate/data/datasources/controller_api.dart';
+import 'package:flavormate/data/models/extensions/importExport/ie_import_wrapper.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_metadata.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog_result.dart';
 
 class ImportExportControllerApi extends ControllerApi {
   static const String _root = ApiConstants.ExtensionImportExport;
@@ -33,17 +33,17 @@ class ImportExportControllerApi extends ControllerApi {
   }
 
   Future<ApiResponse<List<String>>> import(
-    RecipeEditorImportDialogResult data,
+    IEImportWrapper data,
   ) async {
     final formMap = <String, dynamic>{};
 
-    if (data.files?.isNotEmpty ?? false) {
+    if (data.files.isNotEmpty) {
       formMap['file'] = data.files
-          ?.map((it) => MultipartFile.fromFileSync(it.path))
+          .map((it) => MultipartFile.fromFileSync(it.path))
           .toList();
     }
 
-    if (data.urls?.isNotEmpty ?? false) {
+    if (data.urls.isNotEmpty) {
       formMap['url'] = data.urls;
     }
 

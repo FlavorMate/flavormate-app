@@ -415,4 +415,15 @@ class Routes {
       pathParameters: params,
     );
   }
+
+  Future recipeImport() {
+    return context.pushNamed(RouteConstants.RecipeImport.name);
+  }
+
+  Future recipeImportItem(String id) {
+    return context.pushNamed(
+      RouteConstants.RecipeImportItem.name,
+      pathParameters: {'id': id},
+    );
+  }
 }
