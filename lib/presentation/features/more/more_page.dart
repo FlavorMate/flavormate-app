@@ -68,12 +68,13 @@ class MorePage extends ConsumerWidget {
             ),
 
             FTileGroup(
-              title: 'Import - Export',
+              title: context.l10n.more_page__import_export__title,
               items: [
                 FTile(
-                  label: 'Import recipes',
-                  subLabel: context.l10n.more_page__recipe_editor_hint,
-                  leading: FTileIcon(icon: MdiIcons.download),
+                  label: context.l10n.more_page__import_export__import_title,
+                  subLabel:
+                      context.l10n.more_page__import_export__import_description,
+                  leading: const FTileIcon(icon: MdiIcons.databaseImport),
                   onTap: () => context.routes.recipeImport(),
                 ),
               ],
