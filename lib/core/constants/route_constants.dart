@@ -277,6 +277,16 @@ abstract class RouteConstants {
     '/administration/account-management',
     'administration-account-management',
   );
+
+  // Import - Export
+  static const RouteConstant RecipeImport = RouteConstant(
+    '/recipe-import',
+    'recipe-import',
+  );
+  static const RouteConstant RecipeImportItem = RouteConstant(
+    '/recipe-import/:id',
+    'recipe-import.item',
+  );
 }
 
 class RouteConstant {

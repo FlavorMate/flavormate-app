@@ -63,6 +63,10 @@ abstract class StateIconConstants {
     MdiIcons.star,
     MdiIcons.starOff,
   );
+  static const importExport = StateIconConstant(
+    MdiIcons.database,
+    MdiIcons.databaseOff,
+  );
 }
 
 class StateIconConstant {

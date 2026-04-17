@@ -66,6 +66,19 @@ class MorePage extends ConsumerWidget {
                   ),
               ],
             ),
+
+            FTileGroup(
+              title: context.l10n.more_page__import_export__title,
+              items: [
+                FTile(
+                  label: context.l10n.more_page__import_export__import_title,
+                  subLabel:
+                      context.l10n.more_page__import_export__import_description,
+                  leading: const FTileIcon(icon: MdiIcons.databaseImport),
+                  onTap: () => context.routes.recipeImport(),
+                ),
+              ],
+            ),
             if (user.value?.isAdmin == true)
               FTileGroup(
                 title: context.l10n.more_page__admin_title,

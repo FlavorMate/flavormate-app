@@ -8,7 +8,7 @@ class FPageIntroduction extends StatelessWidget {
   final Shapes shape;
   final IconData icon;
 
-  final String description;
+  final String? description;
 
   const FPageIntroduction({
     super.key,
@@ -23,9 +23,11 @@ class FPageIntroduction extends StatelessWidget {
       children: [
         FBadge(shape: shape, icon: icon),
 
-        const SizedBox(height: PADDING),
+        if (description != null) ...[
+          const SizedBox(height: PADDING),
 
-        FText(description, style: .bodyLarge),
+          FText(description!, style: .bodyLarge),
+        ],
       ],
     );
   }

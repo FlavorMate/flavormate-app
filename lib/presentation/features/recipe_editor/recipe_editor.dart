@@ -12,11 +12,7 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_lazy_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog_result.dart';
-import 'package:flavormate/presentation/features/recipe_editor/widgets/recipe_editor_fab.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -55,11 +51,11 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
         title: context.l10n.recipe_editor_page__title,
         scrollController: _scrollController,
       ),
-      floatingActionButton: RecipeEditorFab(
-        onCreate: () => createDraft(context),
-        onImport: () => draftDialog(context),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: createDraft,
+        child: const Icon(MdiIcons.plus),
       ),
-      floatingActionButtonLocation: ExpandableFab.location,
       body: SafeArea(
         child: FProviderState(
           provider: provider,
@@ -104,7 +100,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
                 alignment: Alignment.center,
                 header: const SizedBox.shrink(),
                 cellBuilder: (context, item, rowIndex) => IconButton(
-                  onPressed: () => deleteDraft(context, item.id),
+                  onPressed: () => deleteDraft(item.id),
                   color: context.blendedColors.error,
                   icon: const Icon(MdiIcons.delete),
                   tooltip: MaterialLocalizations.of(
@@ -120,10 +116,10 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
     );
   }
 
-  Future<void> createDraft(BuildContext context) async {
+  Future<void> createDraft() async {
     final response = await ref.read(provider.notifier).createDraft();
 
-    if (!context.mounted) return;
+    if (!mounted) return;
 
     if (response.hasError) {
       context.showTextSnackBar(
@@ -135,10 +131,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
     }
   }
 
-  Future<void> deleteDraft(
-    BuildContext context,
-    String id,
-  ) async {
+  Future<void> deleteDraft(String id) async {
     final confirmation = await showDialog<bool>(
       context: context,
       builder: (_) => FConfirmDialog(
@@ -146,13 +139,13 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
       ),
     );
 
-    if (!context.mounted || confirmation != true) return;
+    if (!mounted || confirmation != true) return;
 
     context.showLoadingDialog();
 
     final response = await ref.read(provider.notifier).deleteDraft(id);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
     context.pop();
 
     if (response.hasError) {
@@ -171,34 +164,6 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
     if (value != true) return;
 
     context.routes.recipeEditorItem(id);
-  }
-
-  void draftDialog(BuildContext context) async {
-    final result = await showDialog<RecipeEditorImportDialogResult>(
-      context: context,
-      useSafeArea: false,
-      builder: (_) => const RecipeEditorImportDialog(),
-    );
-
-    if (!context.mounted || result == null) return;
-
-    context.showLoadingDialog();
-
-    final response = await ref.read(provider.notifier).import(result);
-
-    if (!context.mounted) return;
-    context.pop();
-
-    if (response.hasError) {
-      context.showTextSnackBar(
-        context.l10n.recipe_editor_page__import_failure,
-      );
-    } else {
-      resetLazyList(() => ref.read(widget.pageProvider.notifier).reset());
-      context.showTextSnackBar(
-        context.l10n.recipe_editor_page__import_success,
-      );
-    }
   }
 
   @override
