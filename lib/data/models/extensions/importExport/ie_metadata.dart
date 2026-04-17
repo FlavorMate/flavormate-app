@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:flavormate/core/utils/u_localizations.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_import_type.dart';
 import 'package:flavormate/data/models/shared/enums/language.dart';
 
@@ -35,6 +36,10 @@ class IEMetadata with IEMetadataMappable {
     required this.supportedMimeTypes,
     required this.supportedExtensions,
   });
+
+  String get title => name[currentLanguage()] ?? name[Language.en]!;
+
+  String? get desc => description?[currentLanguage()];
 }
 
 class _ImportTypeHook extends MappingHook {

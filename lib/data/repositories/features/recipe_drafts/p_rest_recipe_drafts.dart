@@ -2,12 +2,12 @@ import 'package:flavormate/core/apis/rest/p_dio_private.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/data/datasources/extensions/import_export_controller_api.dart';
 import 'package:flavormate/data/datasources/features/recipe_draft_controller_api.dart';
+import 'package:flavormate/data/models/extensions/importExport/ie_import_wrapper.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_dto.dart';
 import 'package:flavormate/data/models/local/pageable_dto.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
-import 'package:flavormate/presentation/features/recipe_editor/dialogs/recipe_editor_import_dialog_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_rest_recipe_drafts.g.dart';
@@ -49,16 +49,14 @@ class PRestRecipeDrafts extends _$PRestRecipeDrafts {
     return response;
   }
 
-  Future<ApiResponse<List<String>>> import(
-    RecipeEditorImportDialogResult data,
-  ) async {
+  Future<ApiResponse<List<String>>> import(IEImportWrapper data) async {
     final dio = ref.watch(pDioPrivateProvider);
 
     final client = ImportExportControllerApi(dio);
 
     final response = await client.import(data);
 
-    if (!response.hasError) {
+    if (!response.hasError && ref.mounted) {
       ref.invalidateSelf();
     }
 
