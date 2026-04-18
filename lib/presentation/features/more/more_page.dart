@@ -1,3 +1,5 @@
+import 'package:flavormate/core/config/features/p_feature_export.dart';
+import 'package:flavormate/core/config/features/p_feature_import.dart';
 import 'package:flavormate/core/config/features/p_feature_story.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
@@ -17,7 +19,9 @@ class MorePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final storiesEnabled = ref.watch(pFeatureStoryProvider);
-    final user = ref.watch(pRestAccountsSelfProvider);
+    final importEnabled = ref.watch(pFeatureImportProvider);
+    final exportEnabled = ref.watch(pFeatureExportProvider);
+    final user = ref.watch(pRestAccountsSelfProvider).requireValue;
 
     return Scaffold(
       appBar: FAppBar(
@@ -67,19 +71,24 @@ class MorePage extends ConsumerWidget {
               ],
             ),
 
-            FTileGroup(
-              title: context.l10n.more_page__import_export__title,
-              items: [
-                FTile(
-                  label: context.l10n.more_page__import_export__import_title,
-                  subLabel:
-                      context.l10n.more_page__import_export__import_description,
-                  leading: const FTileIcon(icon: MdiIcons.databaseImport),
-                  onTap: () => context.routes.recipeImport(),
-                ),
-              ],
-            ),
-            if (user.value?.isAdmin == true)
+            if ((user.canExport && exportEnabled) ||
+                (user.canImport && importEnabled))
+              FTileGroup(
+                title: context.l10n.more_page__import_export__title,
+                items: [
+                  if (importEnabled)
+                    FTile(
+                      label:
+                          context.l10n.more_page__import_export__import_title,
+                      subLabel: context
+                          .l10n
+                          .more_page__import_export__import_description,
+                      leading: const FTileIcon(icon: MdiIcons.databaseImport),
+                      onTap: () => context.routes.recipeImport(),
+                    ),
+                ],
+              ),
+            if (user.isAdmin == true)
               FTileGroup(
                 title: context.l10n.more_page__admin_title,
                 items: [

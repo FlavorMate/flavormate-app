@@ -79,8 +79,8 @@ class _RecipeImportPageState extends ConsumerState<RecipeImportPage> {
                               first: index == 0,
                               last: index == data.length - 1,
                               tile: FTile(
-                                label: importer.title,
-                                subLabel: null,
+                                label: importer.name,
+                                subLabel: importer.importShortDescription,
                                 onTap: () {
                                   context.routes.recipeImportItem(importer.id);
                                 },
