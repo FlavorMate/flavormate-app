@@ -35,6 +35,7 @@ class FPageIntroductionSliver extends StatelessWidget {
           child: FText(
             description,
             style: .bodyLarge,
+            textAlign: .center,
           ),
         ),
       ],

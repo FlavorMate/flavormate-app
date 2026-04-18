@@ -26,7 +26,11 @@ class FPageIntroduction extends StatelessWidget {
         if (description != null) ...[
           const SizedBox(height: PADDING),
 
-          FText(description!, style: .bodyLarge),
+          FText(
+            description!,
+            style: .bodyLarge,
+            textAlign: .center,
+          ),
         ],
       ],
     );
