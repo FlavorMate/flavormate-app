@@ -61,7 +61,7 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
         icon: MdiIcons.download,
       ),
       appBarBuilder: (_, data) => FAppBar(
-        title: data.title,
+        title: data.name,
         scrollController: _scrollController,
       ),
       bottomNavigationBarBuilder: (_, data) => Column(
@@ -123,7 +123,7 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
               FPageIntroduction(
                 shape: .sunny,
                 icon: MdiIcons.cloudUpload,
-                description: data.desc,
+                description: data.importLongDescription,
               ),
 
               if (urls.isEmpty && files.isEmpty)
@@ -178,8 +178,8 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
 
   void addFile(IEMetadata importer) async {
     final typeGroup = XTypeGroup(
-      extensions: importer.supportedExtensions,
-      mimeTypes: importer.supportedMimeTypes,
+      extensions: importer.importExtensions,
+      mimeTypes: importer.importMimeTypes,
     );
 
     final selectedFiles = await openFiles(
