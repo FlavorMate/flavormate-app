@@ -11,4 +11,6 @@ enum FeatureType {
   Bring,
   OpenFoodFacts,
   Share,
+  Import,
+  Export,
 }
