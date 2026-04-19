@@ -39,6 +39,8 @@ import 'package:flavormate/presentation/features/recipe_editor_item/subpages/rec
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_preview/subpages/recipe_editor_item_preview_files/recipe_editor_item_preview_files_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_serving/recipe_editor_item_serving_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_tags/recipe_editor_item_tags.dart';
+import 'package:flavormate/presentation/features/recipe_export/recipe_export_page.dart';
+import 'package:flavormate/presentation/features/recipe_export_item/recipe_export_item_page.dart';
 import 'package:flavormate/presentation/features/recipe_import/recipe_import_page.dart';
 import 'package:flavormate/presentation/features/recipe_import_item/recipe_import_item_page.dart';
 import 'package:flavormate/presentation/features/recipes/recipes_page.dart';
@@ -320,6 +322,11 @@ var routes = [
   _createRoute(
     RouteConstants.RecipeImportItem,
     (params) => RecipeImportItemPage(id: params['id']!),
+  ),
+  _createRoute(RouteConstants.RecipeExport, (_) => const RecipeExportPage()),
+  _createRoute(
+    RouteConstants.RecipeExportItem,
+    (params) => RecipeExportItemPage(id: params['id']!),
   ),
 ];
 

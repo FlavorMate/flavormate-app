@@ -86,6 +86,17 @@ class MorePage extends ConsumerWidget {
                       leading: const FTileIcon(icon: MdiIcons.databaseImport),
                       onTap: () => context.routes.recipeImport(),
                     ),
+
+                  if (exportEnabled)
+                    FTile(
+                      label:
+                          context.l10n.more_page__import_export__export_title,
+                      subLabel: context
+                          .l10n
+                          .more_page__import_export__export_description,
+                      leading: const FTileIcon(icon: MdiIcons.databaseExport),
+                      onTap: () => context.routes.recipeExport(),
+                    ),
                 ],
               ),
             if (user.isAdmin == true)

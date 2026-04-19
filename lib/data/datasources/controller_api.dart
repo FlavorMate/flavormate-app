@@ -101,4 +101,35 @@ abstract class ControllerApi {
       return ApiResponse.fromError(error);
     }
   }
+
+  Future<ApiResponse<T>> postBinary<T>({
+    required String url,
+    required T? Function(String, dynamic) mapper,
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Duration? timeout,
+    ResponseType? responseType,
+  }) async {
+    try {
+      final response = await _dio.post(
+        url,
+        data: data,
+        queryParameters: queryParameters,
+        options: timeout.let(
+          (it) => Options(receiveTimeout: it, responseType: .bytes),
+        ),
+      );
+
+      final fileName = response.headers.value('filename')!;
+
+      final result = mapper(fileName, response.data);
+
+      return ApiResponse.fromData(result);
+    } on DioException catch (e) {
+      if (e.response == null || e.response!.data is! Map) rethrow;
+
+      final error = ApiErrorMapper.fromMap(e.response!.data);
+      return ApiResponse.fromError(error);
+    }
+  }
 }

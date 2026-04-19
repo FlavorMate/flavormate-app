@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_import_type.dart';
-import 'package:flavormate/data/models/shared/enums/language.dart';
 
 part 'ie_metadata.mapper.dart';
 

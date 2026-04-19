@@ -234,11 +234,11 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
 
     if (response.hasError) {
       context.showTextSnackBar(
-        context.l10n.recipe_editor_page__import_failure,
+        context.l10n.recipe_import_item_page__import_failure,
       );
     } else {
       context.showTextSnackBar(
-        context.l10n.recipe_editor_page__import_success,
+        context.l10n.recipe_import_item_page__import_success,
       );
 
       context.pop();
