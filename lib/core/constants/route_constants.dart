@@ -285,7 +285,15 @@ abstract class RouteConstants {
   );
   static const RouteConstant RecipeImportItem = RouteConstant(
     '/recipe-import/:id',
-    'recipe-import.item',
+    'recipe-import-item',
+  );
+  static const RouteConstant RecipeExport = RouteConstant(
+    '/recipe-export',
+    'recipe-export',
+  );
+  static const RouteConstant RecipeExportItem = RouteConstant(
+    '/recipe-export/:id',
+    'recipe-export-item',
   );
 }
 

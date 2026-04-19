@@ -426,4 +426,15 @@ class Routes {
       pathParameters: {'id': id},
     );
   }
+
+  Future recipeExport() {
+    return context.pushNamed(RouteConstants.RecipeExport.name);
+  }
+
+  Future recipeExportItem(String id) {
+    return context.pushNamed(
+      RouteConstants.RecipeExportItem.name,
+      pathParameters: {'id': id},
+    );
+  }
 }

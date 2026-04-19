@@ -28,7 +28,8 @@ class PDioPrivate extends _$PDioPrivate {
     dio.options.baseUrl = server;
     dio.options.connectTimeout = const Duration(seconds: 15);
     dio.options.receiveTimeout = const Duration(seconds: 15);
-    dio.options.headers['Accept'] = 'application/json, text/plain, image/webp';
+    dio.options.headers['Accept'] =
+        'application/json, text/plain, image/webp, application/zip';
     dio.options.headers['Accept-Language'] = language;
     dio.options.headers['User-Agent'] = userAgent;
 

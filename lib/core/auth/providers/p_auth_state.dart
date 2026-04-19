@@ -126,6 +126,8 @@ enum AuthState {
       // Import - Export
       RouteConstants.RecipeImport,
       RouteConstants.RecipeImportItem,
+      RouteConstants.RecipeExport,
+      RouteConstants.RecipeExportItem,
     ],
   )
   ;

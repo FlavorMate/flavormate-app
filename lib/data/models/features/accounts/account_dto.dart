@@ -58,4 +58,8 @@ class AccountFullDto extends AccountDto with AccountFullDtoMappable {
   });
 
   bool get isAdmin => roles.contains('Admin');
+
+  bool get canImport => roles.contains('Import');
+
+  bool get canExport => roles.contains('Export');
 }
