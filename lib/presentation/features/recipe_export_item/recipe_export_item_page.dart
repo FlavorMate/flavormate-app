@@ -74,7 +74,7 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
           child: FButton(
             width: _width * 2 + PADDING,
             leading: const Icon(MdiIcons.download),
-            label: context.l10n.btn_download,
+            label: '${context.l10n.btn_download} (${_selected.length})',
             onPressed: _selected.isNotEmpty ? () => export(data.id) : null,
           ),
         ),
@@ -92,6 +92,25 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
                     shape: .sunny,
                     icon: MdiIcons.cloudDownload,
                     description: data.exportLongDescription,
+                  ),
+
+                  const FSizedBoxSliver(height: PADDING),
+
+                  SliverToBoxAdapter(
+                    child: Row(
+                      spacing: PADDING,
+                      mainAxisAlignment: .spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: addAll,
+                          child: Text(context.l10n.btn_add_all),
+                        ),
+                        TextButton(
+                          onPressed: removeAll,
+                          child: Text(context.l10n.btn_remove_all),
+                        ),
+                      ],
+                    ),
                   ),
 
                   const FSizedBoxSliver(height: PADDING),
@@ -139,7 +158,7 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
   }
 
   void export(String pluginId) async {
-    context.showLoadingDialog();
+    context.showLoadingDialog(hint: true);
 
     final provider = pRestRecipeDraftsProvider(PageableState.recipeDrafts.name);
 
@@ -184,6 +203,33 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
       context.pop();
       context.pop();
     }
+  }
+
+  void addAll() async {
+    context.showLoadingDialog();
+
+    final allRecipes = await ref.read(
+      pRestRecipesProvider(
+        widget.recipePageId,
+        orderBy: orderBy,
+        orderDirection: orderDirection,
+        pageSize: -1,
+      ).future,
+    );
+
+    if (!mounted) return;
+    context.pop();
+
+    setState(() {
+      _selected.clear();
+      _selected.addAll(allRecipes.data.map((it) => it.id));
+    });
+  }
+
+  void removeAll() async {
+    setState(() {
+      _selected.clear();
+    });
   }
 
   @override

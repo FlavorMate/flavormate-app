@@ -32,6 +32,7 @@ class FLoadingDialog extends StatelessWidget {
                   FText(
                     context.l10n.f_loading_dialog__loading_hint,
                     style: FTextStyle.bodyMedium,
+                    textAlign: .center,
                   ),
               ],
             ),
