@@ -84,6 +84,10 @@ abstract class RouteConstants {
     '/settings/account/diet',
     'settings_account_diet',
   );
+  static const RouteConstant SettingsAccountEmail = RouteConstant(
+    '/settings/account/email',
+    'settings_account_email',
+  );
   static const RouteConstant SettingsAccountSessions = RouteConstant(
     '/settings/account/sessions',
     'settings_account_sessions',

@@ -50,6 +50,7 @@ import 'package:flavormate/presentation/features/search/search_page.dart';
 import 'package:flavormate/presentation/features/server/server_page.dart';
 import 'package:flavormate/presentation/features/server_outdated/server_outdated_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_diet/settings_account_diet_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_account/settings_account_email/settings_account_email_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_oidc_link/settings_account_oidc_link_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_sessions/settings_account_sessions_page.dart';
@@ -136,6 +137,10 @@ var routes = [
   _createRoute(
     RouteConstants.SettingsAccountDiet,
     (_) => const SettingsAccountDietPage(),
+  ),
+  _createRoute(
+    RouteConstants.SettingsAccountEmail,
+    (_) => const SettingsAccountEmailPage(),
   ),
   _createRoute(
     RouteConstants.SettingsAccountSessions,

@@ -11,7 +11,6 @@ import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
-import 'package:flavormate/presentation/features/settings/settings_account/dialogs/settings_account_email_dialog.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/dialogs/settings_account_password_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -94,7 +93,7 @@ class SettingsAccountPage extends ConsumerWidget {
                           context.l10n.settings_account_page__change_email_hint,
 
                       leading: const FTileIcon(icon: MdiIcons.email),
-                      onTap: () => manageEmail(context, ref, data.email),
+                      onTap: () => manageEmail(context),
                     ),
                     FTile(
                       label:
@@ -144,36 +143,8 @@ class SettingsAccountPage extends ConsumerWidget {
     context.routes.settingsAccountDiet();
   }
 
-  Future<void> manageEmail(
-    BuildContext context,
-    WidgetRef ref,
-    String current,
-  ) async {
-    final response = await showDialog<AccountUpdateDto>(
-      context: context,
-      builder: (_) => const SettingsAccountEmailDialog(),
-    );
-
-    if (!context.mounted || response == null || response.email == current) {
-      return;
-    }
-
-    context.showLoadingDialog();
-
-    final result = await ref.read(provider.notifier).putAccountsId(response);
-
-    if (!context.mounted) return;
-    context.pop();
-
-    if (!result.hasError) {
-      context.showTextSnackBar(
-        context.l10n.settings_account_page__change_email_success,
-      );
-    } else {
-      context.showTextSnackBar(
-        context.l10n.settings_account_page__change_email_failure,
-      );
-    }
+  void manageEmail(BuildContext context) {
+    context.routes.settingsAccountEmail();
   }
 
   Future<void> managePassword(BuildContext context, WidgetRef ref) async {
