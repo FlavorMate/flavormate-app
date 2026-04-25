@@ -80,6 +80,10 @@ abstract class RouteConstants {
     '/settings/account',
     'settings_account',
   );
+  static const RouteConstant SettingsAccountDiet = RouteConstant(
+    '/settings/account/diet',
+    'settings_account_diet',
+  );
   static const RouteConstant SettingsAccountSessions = RouteConstant(
     '/settings/account/sessions',
     'settings_account_sessions',

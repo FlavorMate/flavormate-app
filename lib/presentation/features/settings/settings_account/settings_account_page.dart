@@ -2,7 +2,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/features/accounts/account_update_dto.dart';
-import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -12,7 +11,6 @@ import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
-import 'package:flavormate/presentation/features/settings/settings_account/dialogs/settings_account_diet_dialog.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/dialogs/settings_account_email_dialog.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/dialogs/settings_account_password_dialog.dart';
 import 'package:flutter/material.dart';
@@ -83,8 +81,8 @@ class SettingsAccountPage extends ConsumerWidget {
                       subLabel:
                           context.l10n.settings_account_page__change_diet_hint,
 
-                      leading: const FTileIcon(icon: MdiIcons.food),
-                      onTap: () => manageDiet(context, ref, data.diet),
+                      leading: const FTileIcon(icon: MdiIcons.leaf),
+                      onTap: () => manageDiet(context),
                     ),
                   ],
                 ),
@@ -142,36 +140,8 @@ class SettingsAccountPage extends ConsumerWidget {
     );
   }
 
-  Future<void> manageDiet(
-    BuildContext context,
-    WidgetRef ref,
-    Diet current,
-  ) async {
-    final response = await showDialog<AccountUpdateDto>(
-      context: context,
-      builder: (_) => SettingsAccountDietDialog(currentDiet: current),
-    );
-
-    if (!context.mounted || response == null || response.diet == current) {
-      return;
-    }
-
-    context.showLoadingDialog();
-
-    final result = await ref.read(provider.notifier).putAccountsId(response);
-
-    if (!context.mounted) return;
-    context.pop();
-
-    if (!result.hasError) {
-      context.showTextSnackBar(
-        context.l10n.settings_account_page__change_diet_success,
-      );
-    } else {
-      context.showTextSnackBar(
-        context.l10n.settings_account_page__change_diet_failure,
-      );
-    }
+  void manageDiet(BuildContext context) {
+    context.routes.settingsAccountDiet();
   }
 
   Future<void> manageEmail(
