@@ -49,8 +49,11 @@ import 'package:flavormate/presentation/features/recipes_item/subpages/recipes_i
 import 'package:flavormate/presentation/features/search/search_page.dart';
 import 'package:flavormate/presentation/features/server/server_page.dart';
 import 'package:flavormate/presentation/features/server_outdated/server_outdated_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_account/settings_account_diet/settings_account_diet_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_account/settings_account_email/settings_account_email_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_oidc_link/settings_account_oidc_link_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_account/settings_account_password/settings_account_password_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_sessions/settings_account_sessions_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/settings_app_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/app_icon/settings_app_app_icon_page.dart';
@@ -131,6 +134,18 @@ var routes = [
   _createRoute(
     RouteConstants.SettingsAccount,
     (_) => const SettingsAccountPage(),
+  ),
+  _createRoute(
+    RouteConstants.SettingsAccountDiet,
+    (_) => const SettingsAccountDietPage(),
+  ),
+  _createRoute(
+    RouteConstants.SettingsAccountEmail,
+    (_) => const SettingsAccountEmailPage(),
+  ),
+  _createRoute(
+    RouteConstants.SettingsAccountPassword,
+    (_) => const SettingsAccountPasswordPage(),
   ),
   _createRoute(
     RouteConstants.SettingsAccountSessions,

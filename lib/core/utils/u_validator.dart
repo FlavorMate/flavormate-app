@@ -21,7 +21,7 @@ abstract class UValidator {
 
   static bool isSecure(String input) {
     final passwordRegex = RegExp(
-      r'(?=.*[A-Z])(?=.*[!@#.$&*-])(?=.*[0-9])(?=.*[a-z])',
+      r'(?=.*[A-Z])(?=.*[!@#.$&*-])(?=.*[0-9])(?=.*[a-z]).{8,}',
     );
 
     return passwordRegex.hasMatch(input);

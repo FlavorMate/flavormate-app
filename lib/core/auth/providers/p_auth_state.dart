@@ -54,6 +54,9 @@ enum AuthState {
 
       // Settings
       RouteConstants.SettingsAccount,
+      RouteConstants.SettingsAccountDiet,
+      RouteConstants.SettingsAccountEmail,
+      RouteConstants.SettingsAccountPassword,
       RouteConstants.SettingsAccountSessions,
       RouteConstants.SettingsAccountOidc,
       RouteConstants.SettingsApp,

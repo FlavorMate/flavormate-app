@@ -362,6 +362,18 @@ class Routes {
     return context.pushNamed(RouteConstants.SettingsAccount.name);
   }
 
+  Future settingsAccountDiet() {
+    return context.pushNamed(RouteConstants.SettingsAccountDiet.name);
+  }
+
+  Future settingsAccountEmail() {
+    return context.pushNamed(RouteConstants.SettingsAccountEmail.name);
+  }
+
+  Future settingsAccountPassword() {
+    return context.pushNamed(RouteConstants.SettingsAccountPassword.name);
+  }
+
   Future settingsAccountSessions() {
     return context.pushNamed(RouteConstants.SettingsAccountSessions.name);
   }
