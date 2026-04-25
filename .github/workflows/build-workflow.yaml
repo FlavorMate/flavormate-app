@@ -1,10 +1,10 @@
 name: FlavorMate build workflow
 on:
   push:
-    tags: [v*]
+    tags: [ v* ]
 
 env:
-  FLUTTER_VERSION: 3.41.6
+  FLUTTER_VERSION: 3.41.7
   RUBY_VERSION: 3.4.9
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
