@@ -53,6 +53,7 @@ import 'package:flavormate/presentation/features/settings/settings_account/setti
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_email/settings_account_email_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_oidc_link/settings_account_oidc_link_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_page.dart';
+import 'package:flavormate/presentation/features/settings/settings_account/settings_account_password/settings_account_password_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_sessions/settings_account_sessions_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/settings_app_page.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/app_icon/settings_app_app_icon_page.dart';
@@ -141,6 +142,10 @@ var routes = [
   _createRoute(
     RouteConstants.SettingsAccountEmail,
     (_) => const SettingsAccountEmailPage(),
+  ),
+  _createRoute(
+    RouteConstants.SettingsAccountPassword,
+    (_) => const SettingsAccountPasswordPage(),
   ),
   _createRoute(
     RouteConstants.SettingsAccountSessions,

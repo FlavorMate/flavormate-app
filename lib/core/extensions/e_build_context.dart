@@ -370,6 +370,10 @@ class Routes {
     return context.pushNamed(RouteConstants.SettingsAccountEmail.name);
   }
 
+  Future settingsAccountPassword() {
+    return context.pushNamed(RouteConstants.SettingsAccountPassword.name);
+  }
+
   Future settingsAccountSessions() {
     return context.pushNamed(RouteConstants.SettingsAccountSessions.name);
   }
