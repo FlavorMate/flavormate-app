@@ -1,9 +1,9 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -12,8 +12,6 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FCarousel<T> extends ConsumerStatefulWidget {
-  static const double labelWidth = 200;
-
   final double height;
 
   final String? title;
@@ -83,6 +81,15 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
 
         final hasTitle = widget.title?.isNotEmpty ?? false;
 
+        final contentHeight = widget.height - (hasTitle ? 40 : 48);
+
+        // Subtract padding between cells
+        final width = constraints.maxWidth - (layout.length * 8);
+
+        final layoutCells = layout.fold(0, (a, b) => a + b);
+
+        final biggestCell = width * (layout.first / layoutCells);
+
         return Column(
           spacing: PADDING / 4,
           children: [
@@ -105,7 +112,7 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
                 ),
               ),
             SizedBox(
-              height: widget.height,
+              height: contentHeight,
               child: CarouselView.weighted(
                 flexWeights: layout,
                 itemSnapping: true,
@@ -118,18 +125,21 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
                       subLabel: widget.subLabelSelector?.call(item),
                       coverSelector: (_) =>
                           widget.coverSelector.call(item, resolution),
-                      contentWidth: FCarousel.labelWidth,
+                      contentWidth: biggestCell,
                       imageType: widget.imageType,
                     ),
                 ],
               ),
             ),
             if (!hasTitle)
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: widget.onShowAll,
-                  child: Text(context.l10n.btn_show_more),
+              SizedBox(
+                height: 48,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: widget.onShowAll,
+                    child: Text(context.l10n.btn_show_more),
+                  ),
                 ),
               ),
           ],

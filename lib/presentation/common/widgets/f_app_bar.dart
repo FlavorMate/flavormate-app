@@ -58,6 +58,13 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   Widget? getBackButton(BuildContext context) {
+    if (kIsTest) {
+      return IconButton(
+        onPressed: () {},
+        icon: const Icon(MdiIcons.arrowLeft),
+      );
+    }
+
     if (!context.canPop()) {
       return IconButton(
         onPressed: () => context.routes.home(replace: true),

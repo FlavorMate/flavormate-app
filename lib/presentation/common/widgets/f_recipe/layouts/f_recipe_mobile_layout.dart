@@ -67,6 +67,7 @@ class FRecipeMobileLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      key: const ValueKey('page-scrollable'),
       controller: controller,
       child: Padding(
         padding: const EdgeInsets.all(PADDING),
