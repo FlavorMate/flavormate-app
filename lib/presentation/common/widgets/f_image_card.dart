@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_settings_image_mode.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
@@ -71,7 +74,13 @@ class FImageCard extends ConsumerWidget {
           constraints.maxWidth,
         );
 
+        final (backdropStart, backdropEnd) = calculateBackdrop(
+          context,
+          constraints.maxHeight,
+        );
+
         final opacity = calculateOpacity(constraints.maxWidth);
+
         return ClipRRect(
           borderRadius: borderRadius ?? .circular(BORDER_RADIUS),
           child: Stack(
@@ -79,12 +88,22 @@ class FImageCard extends ConsumerWidget {
             children: [
               FImage(imageSrc: coverSelector.call(resolution), type: imageType),
               if (label != null || subLabel != null)
-                Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [Colors.black54, Colors.transparent],
+                Opacity(
+                  opacity: opacity,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: const [
+                          Colors.black54,
+                          Colors.transparent,
+                        ],
+                        stops: [
+                          backdropStart,
+                          backdropEnd,
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -107,7 +126,8 @@ class FImageCard extends ConsumerWidget {
                               FText(
                                 label!,
                                 style: FTextStyle.titleLarge,
-                                maxLines: 2,
+                                fontSize: 20,
+                                maxLines: 4,
                                 fontWeight: FontWeight.w600,
                                 textOverflow: TextOverflow.ellipsis,
                                 color: FTextColor.white,
@@ -145,9 +165,9 @@ class FImageCard extends ConsumerWidget {
   /// Returns the minimum width for an item by subtracting padding from both sides of parent width.
   double get labelWidth => contentWidth - PADDING * 2;
 
-  double get fadeStart => contentWidth;
+  double get fadeStart => contentWidth - fadeRange;
 
-  double get fadeEnd => contentWidth + fadeRange;
+  double get fadeEnd => contentWidth;
 
   /// Calculates opacity value based on width parameter using a fade range.
   ///
@@ -157,7 +177,42 @@ class FImageCard extends ConsumerWidget {
   ///
   /// The fade range is defined between fadeStart and fadeEnd values.
   /// Linear interpolation is used for values within the fade range.
-  double calculateOpacity(double width) => width <= fadeStart
-      ? 0
-      : (width >= fadeEnd ? 1 : (width - fadeStart) / fadeRange);
+  double calculateOpacity(double width) {
+    return width <= fadeStart
+        ? 0
+        : (width >= fadeEnd ? 1 : (width - fadeStart) / fadeRange);
+  }
+
+  /// Calculates the start and end point for the backdrop,
+  /// so text is always readable.
+  ///
+  /// One label line is 25px tall while a subLabel line is 20px tall.
+  /// Padding is added on top and on bottom
+  (double, double) calculateBackdrop(BuildContext context, double maxHeight) {
+    final span = TextSpan(
+      text: label,
+      style: context.textTheme.titleLarge!.copyWith(
+        fontSize: 20,
+        fontWeight: .w700,
+        fontVariations: [
+          const FontVariation.weight(700),
+        ],
+      ),
+    );
+    final tp = TextPainter(text: span, textDirection: TextDirection.ltr);
+    tp.layout(maxWidth: contentWidth - 2 * PADDING);
+    final numLines = tp.computeLineMetrics().length.clamp(0, 4);
+
+    final titleHeight = numLines * 25;
+    final paddingHeight = titleHeight + 2 * PADDING;
+
+    final subtitleHeight = subLabel != null
+        ? paddingHeight + 20
+        : paddingHeight;
+
+    final backdropStart = subtitleHeight / maxHeight;
+    final backdropEnd = clampDouble(backdropStart + 0.25, backdropStart, 1);
+
+    return (backdropStart, backdropEnd);
+  }
 }

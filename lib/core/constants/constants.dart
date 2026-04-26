@@ -22,3 +22,5 @@ const String OPEN_FOOD_FACTS_US = 'https://us.openfoodfacts.org';
 const FLAVORMATE_COLOR = Colors.lightGreen;
 
 const double kFabHeight = 56.0;
+
+const kIsTest = bool.fromEnvironment('testing_mode', defaultValue: false);

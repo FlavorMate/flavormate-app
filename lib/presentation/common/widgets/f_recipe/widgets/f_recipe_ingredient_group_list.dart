@@ -45,6 +45,7 @@ class FRecipeIngredientGroupList extends StatelessWidget {
       assert(increaseServing != null);
     }
     return Column(
+      key: const ValueKey('ingredient-header'),
       spacing: PADDING,
       children: [
         if (!compact)

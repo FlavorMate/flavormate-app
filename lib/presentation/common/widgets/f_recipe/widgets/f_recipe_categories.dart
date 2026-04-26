@@ -24,6 +24,7 @@ class FRecipeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const ValueKey('category-header'),
       spacing: PADDING,
       children: [
         FText(
