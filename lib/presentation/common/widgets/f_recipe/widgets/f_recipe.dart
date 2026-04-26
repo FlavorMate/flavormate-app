@@ -1,4 +1,5 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_nutrition.dart';
@@ -56,13 +57,17 @@ class _FRecipeState extends ConsumerState<FRecipe> {
     defaultAmount = widget.recipe.serving.amount;
     newAmount = widget.recipe.serving.amount;
 
-    WakelockPlus.enable();
+    if (!kIsTest) {
+      WakelockPlus.enable();
+    }
     super.initState();
   }
 
   @override
   void dispose() {
-    WakelockPlus.disable();
+    if (!kIsTest) {
+      WakelockPlus.disable();
+    }
     super.dispose();
   }
 

@@ -15,6 +15,7 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+metadata/
 
 # Fastlane
 ios/fastlane/Appfile

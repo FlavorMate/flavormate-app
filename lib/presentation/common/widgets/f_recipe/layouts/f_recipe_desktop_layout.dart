@@ -70,6 +70,7 @@ class FRecipeDesktopLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      key: const ValueKey('page-scrollable'),
       controller: controller,
       child: Padding(
         padding: const EdgeInsets.all(PADDING),
@@ -85,6 +86,8 @@ class FRecipeDesktopLayout extends StatelessWidget {
                       child: SizedBox(
                         height: 286,
                         child: FCarousel(
+                          // 2px padding per side
+                          height: 286 - 4,
                           data: recipe.files,
                           coverSelector: (image, resolution) =>
                               image.url(resolution),
