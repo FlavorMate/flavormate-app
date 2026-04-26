@@ -138,6 +138,7 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
   }
 
   Future<void> _checkIfServerIsCompatible(Timer timer) async {
+    ref.invalidate(pServerVersionProvider);
     final response = await ref.read(pServerCompatibilityProvider.future);
 
     if (response != VersionComparison.majorIncompatible && mounted) {
