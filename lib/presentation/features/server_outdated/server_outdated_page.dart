@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:flavormate/core/auth/providers/p_auth.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/riverpod/package_info/p_package_info_version.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/data/models/core/version/version.dart';
 import 'package:flavormate/data/repositories/core/server/p_server_compatibility.dart';
-import 'package:flavormate/presentation/common/widgets/f_badge.dart';
+import 'package:flavormate/data/repositories/core/server/p_server_version.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
+import 'package:flavormate/presentation/common/widgets/f_card.dart';
+import 'package:flavormate/presentation/common/widgets/f_page_introduction.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -43,6 +46,10 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
   @override
   Widget build(BuildContext context) {
     final server = ref.read(pSPCurrentServerProvider);
+
+    final clientVersion = ref.watch(pPackageInfoVersionProvider);
+    final serverVersion = ref.watch(pServerVersionProvider);
+
     return Scaffold(
       body: SafeArea(
         minimum: const EdgeInsets.all(PADDING),
@@ -53,17 +60,57 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
                 spacing: PADDING,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const FBadge(shape: .burst, icon: MdiIcons.cloudAlert),
-                  FText(
-                    context.l10n.server_outdated_page__hint_1,
-                    style: FTextStyle.titleLarge,
-                    textAlign: TextAlign.center,
+                  FPageIntroduction(
+                    shape: .burst,
+                    icon: MdiIcons.cloudAlert,
+                    description: context.l10n.server_outdated_page__hint_1,
                   ),
-                  FText(
-                    context.l10n.server_outdated_page__hint_2,
-                    style: FTextStyle.titleSmall,
-                    textAlign: TextAlign.center,
+                  FCard(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            FText(
+                              context
+                                  .l10n
+                                  .home_account_dialog_info_section__app_version,
+                              style: .bodyMedium,
+                            ),
+                            Flexible(
+                              child: FText(
+                                clientVersion.value?.toString() ?? '...',
+                                style: .bodyMedium,
+                                textOverflow: .ellipsis,
+                                fontFamily: .monospace,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            FText(
+                              context
+                                  .l10n
+                                  .home_account_dialog_info_section__server_version,
+                              style: .bodyMedium,
+                            ),
+                            Flexible(
+                              child: FText(
+                                serverVersion.value?.toString() ?? '...',
+                                style: .bodyMedium,
+                                textOverflow: .ellipsis,
+                                fontFamily: .monospace,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
+
                   FButton(
                     width: BUTTON_WIDTH,
                     onPressed: logout,
@@ -91,6 +138,7 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
   }
 
   Future<void> _checkIfServerIsCompatible(Timer timer) async {
+    ref.invalidate(pServerVersionProvider);
     final response = await ref.read(pServerCompatibilityProvider.future);
 
     if (response != VersionComparison.majorIncompatible && mounted) {

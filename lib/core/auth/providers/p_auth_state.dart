@@ -33,6 +33,7 @@ enum AuthState {
       RouteConstants.AuthLogin,
       RouteConstants.AuthRegister,
       RouteConstants.Server,
+      RouteConstants.ServerOutdated,
       RouteConstants.AuthRecovery,
       RouteConstants.Registration,
     ],

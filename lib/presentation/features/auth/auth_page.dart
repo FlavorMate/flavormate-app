@@ -4,7 +4,6 @@ import 'package:flavormate/core/constants/route_constants.dart';
 import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
-import 'package:flavormate/data/models/core/version/version.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
@@ -17,7 +16,6 @@ import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart'
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/auth/dialogs/login_oidc_link_dialog.dart';
 import 'package:flavormate/presentation/features/auth/providers/p_login_page.dart';
-import 'package:flavormate/presentation/features/auth/widgets/login_compatibility_admonition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -35,11 +33,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   void initState() {
     ref.listenManual(widget.provider, (_, data) async {
-      if (data.isLoading) return;
-      if (data.hasError) {
+      if (data.isLoading) {
+        return;
+      } else if (data.hasError) {
         await Future.delayed(const Duration(seconds: 2));
         if (!mounted) return;
         ref.read(widget.provider.notifier).invalidate();
+      } else if (data.hasValue) {
+        final value = data.value!;
+
+        if (value.compatibility == .majorIncompatible) {
+          context.routes.serverOutdated();
+        }
       }
     });
     super.initState();
@@ -60,61 +65,56 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 style: FTextStyle.headlineLarge,
               ),
               const SizedBox(height: PADDING * 2),
-              if (data.compatibility ==
-                  VersionComparison.majorIncompatible) ...[
-                LoginCompatibilityAdmonition(compatibility: data.compatibility),
-              ] else ...[
-                FButton(
-                  width: BUTTON_WIDTH,
-                  label: context.l10n.auth_page__login,
-                  onPressed: () =>
-                      context.pushNamed(RouteConstants.AuthLogin.name),
-                ),
+              FButton(
+                width: BUTTON_WIDTH,
+                label: context.l10n.auth_page__login,
+                onPressed: () =>
+                    context.pushNamed(RouteConstants.AuthLogin.name),
+              ),
 
-                if (data.enableRegistration) ...[
-                  const SizedBox(height: PADDING),
-                  FButton(
-                    tonal: true,
-                    width: BUTTON_WIDTH,
-                    label: context.l10n.auth_page__register,
-                    onPressed: () =>
-                        context.pushNamed(RouteConstants.AuthRegister.name),
-                  ),
-                ],
-                if (data.oidcProviders.isNotEmpty) ...[
-                  const SizedBox(height: PADDING),
-                  Row(
-                    spacing: PADDING / 4,
-                    children: [
-                      const Expanded(child: Divider()),
-                      Text(context.l10n.auth_page__or),
-                      const Expanded(child: Divider()),
+              if (data.enableRegistration) ...[
+                const SizedBox(height: PADDING),
+                FButton(
+                  tonal: true,
+                  width: BUTTON_WIDTH,
+                  label: context.l10n.auth_page__register,
+                  onPressed: () =>
+                      context.pushNamed(RouteConstants.AuthRegister.name),
+                ),
+              ],
+              if (data.oidcProviders.isNotEmpty) ...[
+                const SizedBox(height: PADDING),
+                Row(
+                  spacing: PADDING / 4,
+                  children: [
+                    const Expanded(child: Divider()),
+                    Text(context.l10n.auth_page__or),
+                    const Expanded(child: Divider()),
+                  ],
+                ),
+                const SizedBox(height: PADDING),
+                FText(
+                  context.l10n.auth_page__login_with,
+                  style: FTextStyle.bodyMedium,
+                ),
+                const SizedBox(height: PADDING),
+                SizedBox(
+                  width: BUTTON_WIDTH,
+                  child: FTileGroup(
+                    items: [
+                      for (final provider in data.oidcProviders)
+                        FTile(
+                          label: provider.label,
+                          subLabel: null,
+                          leading: FOidcIcon(
+                            data: provider.icon,
+                            label: provider.label,
+                          ),
+                          onTap: () => openOIDC(provider),
+                        ),
                     ],
                   ),
-                  const SizedBox(height: PADDING),
-                  FText(
-                    context.l10n.auth_page__login_with,
-                    style: FTextStyle.bodyMedium,
-                  ),
-                  const SizedBox(height: PADDING),
-                  SizedBox(
-                    width: BUTTON_WIDTH,
-                    child: FTileGroup(
-                      items: [
-                        for (final provider in data.oidcProviders)
-                          FTile(
-                            label: provider.label,
-                            subLabel: null,
-                            leading: FOidcIcon(
-                              data: provider.icon,
-                              label: provider.label,
-                            ),
-                            onTap: () => openOIDC(provider),
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ],
             ],
           ),
