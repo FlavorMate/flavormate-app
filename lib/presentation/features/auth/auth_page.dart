@@ -20,8 +20,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+class AuthPage extends ConsumerStatefulWidget {
+  const AuthPage({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
@@ -29,7 +29,7 @@ class LoginPage extends ConsumerStatefulWidget {
   PLoginPageProvider get provider => pLoginPageProvider;
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _LoginPageState extends ConsumerState<AuthPage> {
   @override
   void initState() {
     ref.listenManual(widget.provider, (_, data) async {
