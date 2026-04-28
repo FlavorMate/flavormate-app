@@ -62,6 +62,13 @@ Manage your recipes in a beautiful and easy way.
 <img src="docs/features/recipe/phone-3.webp" alt="Recipe phone screenshot" height="200px">
 <img src="docs/features/recipe/tablet-3.webp" alt="Recipe tablet screenshot" height="200px">
 
+### Guided cooking
+
+Guided cooking gives you step-by-step directions to cook the recipe.
+
+<img src="docs/features/guided-cooking/phone.webp" alt="Guided cooking phone screenshot" height="200px">
+<img src="docs/features/guided-cooking/tablet.webp" alt="Guided cooking tablet screenshot" height="200px">
+
 ### Library
 
 Create a book and save your favorite recipes

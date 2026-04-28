@@ -7,7 +7,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'test_cases/tc_11_auth_page.dart';
+import 'test_cases/tc_12_recipe_guided_cooking.dart';
 import 'utils/disk_asset_bundle.dart';
 
 void main() async {
@@ -28,7 +28,8 @@ void main() async {
     // TC08ExportPage(locale: locale, assets: assets).run();
     // TC09ExportItemPage(locale: locale, assets: assets).run();
     // TC10SearchPage(locale: locale, assets: assets).run();
-    TC11AuthPage(locale: locale, assets: assets).run();
+    // TC11AuthPage(locale: locale, assets: assets).run();
+    TC12RecipeGuidedCooking(locale: locale, assets: assets).run();
   });
 
   group('Screenshot DE:', () {
@@ -44,6 +45,7 @@ void main() async {
     // TC08ExportPage(locale: locale, assets: assets).run();
     // TC09ExportItemPage(locale: locale, assets: assets).run();
     // TC10SearchPage(locale: locale, assets: assets).run();
-    TC11AuthPage(locale: locale, assets: assets).run();
+    // TC11AuthPage(locale: locale, assets: assets).run();
+    TC12RecipeGuidedCooking(locale: locale, assets: assets).run();
   });
 }
