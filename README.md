@@ -18,22 +18,25 @@ tailored just for you.
 > This is the repository for the FlavorMate frontend, which is written in Flutter.<br>
 > For the backend, please visit [this repository](https://github.com/FlavorMate/flavormate-server).
 
-## Features
-
-<details>
-<summary> Features and Screenshots </summary>
+## Features & Screenshots
 
 ### Dashboard
 
 Get inspired by a selection of your recipes.
 
-- Search for recipes, book, authors, tags or categories
-- Let FlavorMate choose a random recipe for you to cook or bake
-- See a highlighted recipe that is chosen once a day
+- Let FlavorMate choose a list of random recipes for you to cook or bake
+- See a list of highlighted recipes that are chosen once a day
 - Get all the newest recipes
 
 <img src="docs/features/dashboard/phone.webp" alt="Dashboard phone screenshot" height="200px">
 <img src="docs/features/dashboard/tablet.webp" alt="Dashboard tablet screenshot" height="200px">
+
+### Search
+
+Search for and filter by recipes, books, authors, tags and categories
+
+<img src="docs/features/search/phone.webp" alt="Search phone screenshot" height="200px">
+<img src="docs/features/search/tablet.webp" alt="Search tablet screenshot" height="200px">
 
 ### Recipe view
 
@@ -43,8 +46,14 @@ Manage your recipes in a beautiful and easy way.
 - Rate recipes and share them with friends[^1]
 - See nutritional information
 
-<img src="docs/features/recipe/phone.webp" alt="Recipe phone screenshot" height="200px">
-<img src="docs/features/recipe/tablet.webp" alt="Recipe tablet screenshot" height="200px">
+<img src="docs/features/recipe/phone-1.webp" alt="Recipe phone screenshot" height="200px">
+<img src="docs/features/recipe/tablet-1.webp" alt="Recipe tablet screenshot" height="200px">
+<br>
+<img src="docs/features/recipe/phone-2.webp" alt="Recipe phone screenshot" height="200px">
+<img src="docs/features/recipe/tablet-2.webp" alt="Recipe tablet screenshot" height="200px">
+<br>
+<img src="docs/features/recipe/phone-3.webp" alt="Recipe phone screenshot" height="200px">
+<img src="docs/features/recipe/tablet-3.webp" alt="Recipe tablet screenshot" height="200px">
 
 ### Library
 
@@ -73,7 +82,7 @@ Easily create or edit your recipes.
 Choose your diet preference and get your preferred recipes.
 You can choose between `meat`, `fish`, `vegetarian` and `vegan`.
 
-<img src="docs/features/diet/tablet.webp" alt="Diet phone screenshot" height="200px">
+<img src="docs/features/diet/phone.webp" alt="Diet phone screenshot" height="200px">
 <img src="docs/features/diet/tablet.webp" alt="Diet tablet screenshot" height="200px">
 
 ### Theme
@@ -86,7 +95,28 @@ Adapt the app to your liking by choosing your favorite color.
 <img src="docs/features/theme/phone.webp" alt="Theme phone screenshot" height="200px">
 <img src="docs/features/theme/tablet.webp" alt="Theme tablet screenshot" height="200px">
 
-</details>
+### Import / Export
+
+You can import and export recipes to different formats.
+
+A list of currently available plugins can be
+found [here](https://github.com/FlavorMate/flavormate-server#import--export-plugins).
+
+#### Import:
+
+<img src="docs/features/import-export/phone-1.webp" alt="Import overview page phone screenshot" height="200px">
+<img src="docs/features/import-export/tablet-1.webp" alt="Import overview page tablet screenshot" height="200px">
+<br>
+<img src="docs/features/import-export/phone-2.webp" alt="Import detail page phone screenshot" height="200px">
+<img src="docs/features/import-export/tablet-2.webp" alt="Import detail page tablet screenshot" height="200px">
+
+#### Export:
+
+<img src="docs/features/import-export/phone-3.webp" alt="Export overview page phone screenshot" height="200px">
+<img src="docs/features/import-export/tablet-3.webp" alt="Export overview page tablet screenshot" height="200px">
+<br>
+<img src="docs/features/import-export/phone-4.webp" alt="Export detail page phone screenshot" height="200px">
+<img src="docs/features/import-export/tablet-4.webp" alt="Export detail page tablet screenshot" height="200px">
 
 ## Getting Started
 
