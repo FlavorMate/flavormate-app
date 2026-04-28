@@ -20,7 +20,7 @@ class AccountFulls {
 }
 
 class AccountPreviews {
-  static final a_d6fc559f_ddc1_4bc2_a9c1_c8a17ff5ffcc = AccountPreviewDto(
+  static const a_d6fc559f_ddc1_4bc2_a9c1_c8a17ff5ffcc = AccountPreviewDto(
     id: 'd6fc559f-ddc1-4bc2-a9c1-c8a17ff5ffcc',
     displayName: 'Thenus',
     avatar: AccountFiles.af_831c0b93_a806_4018_a336_6e4c9082dcc0,

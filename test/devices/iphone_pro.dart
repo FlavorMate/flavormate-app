@@ -26,11 +26,10 @@ class _IPhoneFrame extends StatelessWidget {
   final Widget child;
 
   const _IPhoneFrame({
-    super.key,
     required this.device,
-    this.frameColors,
     required this.assets,
     required this.child,
+    this.frameColors,
   });
 
   double get pixelRatio => device.pixelRatio;

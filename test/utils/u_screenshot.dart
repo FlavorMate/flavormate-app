@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 
-import 'devices/ipad_pro.dart';
-import 'devices/iphone_pro.dart';
-import 'devices/macbook_pro.dart';
+import '../devices/ipad_pro.dart';
+import '../devices/iphone_pro.dart';
+import '../devices/macbook_pro.dart';
 
 class UScreenshot {
   static void screenshot(
@@ -17,7 +17,7 @@ class UScreenshot {
     required Widget home,
     required AssetBundle assets,
     Color primaryColor = FLAVORMATE_COLOR,
-    ThemeMode brightness = .light,
+    ThemeMode themeMode = .light,
     Future<void> Function(WidgetTester tester)? beforeScreenshot,
   }) {
     final devices = [
@@ -43,7 +43,7 @@ class UScreenshot {
                 .dark,
                 FlexTones.material,
               ),
-              themeMode: brightness,
+              themeMode: themeMode,
               locale: locale,
               device: device.device,
               title: 'FlavorMate',
