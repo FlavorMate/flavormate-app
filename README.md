@@ -20,6 +20,13 @@ tailored just for you.
 
 ## Features & Screenshots
 
+### OIDC
+
+FlavorMate supports OpenID Connect authentication. [^1]
+
+<img src="docs/features/oidc/phone.webp" alt="OIDC phone screenshot" height="200px">
+<img src="docs/features/oidc/tablet.webp" alt="OIDC tablet screenshot" height="200px">
+
 ### Dashboard
 
 Get inspired by a selection of your recipes.
