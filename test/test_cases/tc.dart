@@ -1,4 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/presentation/common/widgets/f_input_type/f_input_type_aware_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -31,9 +32,11 @@ abstract class TC {
     UScreenshot.screenshot(
       name,
       locale: locale,
-      home: ProviderScope(
-        overrides: overrides,
-        child: child,
+      home: FInputTypeAwareApp(
+        child: ProviderScope(
+          overrides: overrides,
+          child: child,
+        ),
       ),
       assets: assets,
       primaryColor: primaryColor,
