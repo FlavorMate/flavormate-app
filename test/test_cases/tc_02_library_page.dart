@@ -5,6 +5,7 @@ import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
 import 'package:flavormate/presentation/features/library/library_page.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../test_data/accounts/accounts.dart';
@@ -20,8 +21,11 @@ class TC02LibraryPage extends TC {
   });
 
   @override
+  ThemeMode get themeMode => .dark;
+
+  @override
   List<Override> get overrides {
-    final account = AccountFulls.a_d6fc559f_ddc1_4bc2_a9c1_c8a17ff5ffcc;
+    final account = AccountFulls.aThenus;
 
     final books = Books.getByOrder(
       locale,

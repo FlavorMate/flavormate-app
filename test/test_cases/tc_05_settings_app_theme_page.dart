@@ -18,6 +18,9 @@ class TC05SettingsAppThemePage extends TC {
   Color get primaryColor => Colors.pink;
 
   @override
+  ThemeMode get themeMode => .dark;
+
+  @override
   List<Override> get overrides => [
     pSPThemeToneProvider.overrideWithValue(.vivid),
     // Sets mode to user selected color

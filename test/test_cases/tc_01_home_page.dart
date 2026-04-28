@@ -30,14 +30,14 @@ class TC01HomePage extends TC {
       (a, b) => b.createdOn.compareTo(a.createdOn),
     );
 
-    final account = AccountFulls.a_d6fc559f_ddc1_4bc2_a9c1_c8a17ff5ffcc;
+    final account = AccountFulls.aThenus;
 
     final highlights = Highlights.getByOrder(
       locale,
       (a, b) => b.date.compareTo(a.date),
     );
 
-    final stories = [Stories.s_b5b26f00_2f79_4eb8_9978_e86d29300dec[locale]!];
+    final stories = [Stories.sRocherCake[locale]!];
 
     return [
       pFeatureStoryProvider.overrideWithValue(true),

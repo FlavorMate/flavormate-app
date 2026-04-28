@@ -22,50 +22,37 @@ class TC00RecipeItemPage extends TC {
   });
 
   @override
-  List<Override> get overrides =>
-      [
-        pRecipesItemPageProvider.overrideWithBuild(
-              (ref, it) =>
-              PRecipePageWrapper(
-                recipe: CommonRecipe.fromRecipe(
-                  RecipeFulls.r_9fa077d3_af00_4ec1_ab7e_c27f8cd92920[locale]!(),
-                ),
-                isBringEnabled: false,
-                isShareEnabled: true,
-                isOwner: true,
-                isAdmin: true,
-              ),
+  List<Override> get overrides => [
+    pRecipesItemPageProvider.overrideWithBuild(
+      (ref, it) => PRecipePageWrapper(
+        recipe: CommonRecipe.fromRecipe(
+          RecipeFulls.rAppleCake[locale]!(),
         ),
-        pFeatureRatingsProvider.overrideWithValue(true),
-        pSettingsImageModeProvider.overrideWithValue(.Scale),
-        pRestRatingsIdProvider.overrideWithBuild(
-              (ref, it) => const RecipeRatingDto(
-              'id',
-              0,
-              0,
-              2,
-              6,
-              14,
-              22,
-              4.54,
-              5),
-        ),
-        pCachedImageProvider.overrideWithBuild(
-              (ref, it) =>
-              CacheImageProvider(
-                url: it.url,
-                imageLoader: (url) async {
-                  final asset = await assets.load(url.split('?')[0]);
-                  return asset.buffer.asUint8List();
-                },
-              ),
-        ),
-      ];
+        isBringEnabled: false,
+        isShareEnabled: true,
+        isOwner: true,
+        isAdmin: true,
+      ),
+    ),
+    pFeatureRatingsProvider.overrideWithValue(true),
+    pSettingsImageModeProvider.overrideWithValue(.Scale),
+    pRestRatingsIdProvider.overrideWithBuild(
+      (ref, it) => const RecipeRatingDto('id', 0, 0, 2, 6, 14, 22, 4.54, 5),
+    ),
+    pCachedImageProvider.overrideWithBuild(
+      (ref, it) => CacheImageProvider(
+        url: it.url,
+        imageLoader: (url) async {
+          final asset = await assets.load(url.split('?')[0]);
+          return asset.buffer.asUint8List();
+        },
+      ),
+    ),
+  ];
 
   @override
   void run() {
-    final recipe =
-    RecipeFulls.r_9fa077d3_af00_4ec1_ab7e_c27f8cd92920[locale]!();
+    final recipe = RecipeFulls.rAppleCake[locale]!();
 
     screenshot(
       '0a_recipe_top',
@@ -98,13 +85,15 @@ class TC00RecipeItemPage extends TC {
     );
   }
 
-  Future<void> scrollToPosition(WidgetTester tester,
-      ValueKey target,) async {
+  Future<void> scrollToPosition(
+    WidgetTester tester,
+    ValueKey target,
+  ) async {
     final scrollable = find
         .descendant(
-      of: find.byKey(const ValueKey('page-scrollable')),
-      matching: find.byType(Scrollable),
-    )
+          of: find.byKey(const ValueKey('page-scrollable')),
+          matching: find.byType(Scrollable),
+        )
         .first;
 
     await tester.scrollUntilVisible(

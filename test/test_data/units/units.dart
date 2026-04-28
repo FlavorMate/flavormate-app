@@ -2,7 +2,7 @@ import 'package:flavormate/data/models/features/unit/unit_dto.dart';
 import 'package:flutter/material.dart';
 
 class Units {
-  static final Map<Locale, UnitLocalizedDto> u_milliliter = {
+  static final Map<Locale, UnitLocalizedDto> uMilliliter = {
     const Locale('en'): const UnitLocalizedDto(
       id: '12111ef2-b303-4a72-a4a3-f9cafbf02225',
       unitRef: UnitRefDto(
@@ -27,7 +27,7 @@ class Units {
     ),
   };
 
-  static final Map<Locale, UnitLocalizedDto> u_teaspoon = {
+  static final Map<Locale, UnitLocalizedDto> uTeaspoon = {
     const Locale('en'): const UnitLocalizedDto(
       id: '0b573ec1-b725-470f-a97a-b3eca1bd3d1f',
       unitRef: UnitRefDto(
@@ -52,7 +52,7 @@ class Units {
     ),
   };
 
-  static final Map<Locale, UnitLocalizedDto> u_gram = {
+  static final Map<Locale, UnitLocalizedDto> uGram = {
     const Locale('en'): const UnitLocalizedDto(
       id: '139fd5d3-4f08-4b10-96cf-6d619555a3bd',
       unitRef: UnitRefDto(

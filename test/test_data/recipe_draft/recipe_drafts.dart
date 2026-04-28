@@ -11,7 +11,7 @@ class RecipeDrafts {
     lastModifiedOn: DateTime.now(),
     label: null,
     originId: null,
-    ownedBy: AccountPreviews.a_d6fc559f_ddc1_4bc2_a9c1_c8a17ff5ffcc,
+    ownedBy: AccountPreviews.aThenus,
     description: null,
     prepTime: Duration.zero,
     cookTime: Duration.zero,

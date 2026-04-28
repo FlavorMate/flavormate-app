@@ -18,19 +18,18 @@ class RecipePreviews {
     int Function(RecipePreviewDto, RecipePreviewDto) compare,
   ) {
     return [
-      r_7ad8a257_8b11_4d3d_b4a8_33026db50948[locale]!,
-      r_1840f38b_c554_4ee8_874c_074f69fe9455[locale]!,
-      r_4d822d08_e4cc_4857_9626_2bc423b0e50a[locale]!,
-      r_73bac776_4e0a_4ac2_b39b_a46d5d8b3d29[locale]!,
-      r_279a08c5_32c9_42f2_9550_cc6b4da4d9c9[locale]!,
-      r_2c6e6500_ccf9_4fad_9874_98d2cca1f6a8[locale]!,
-      r_9a56652b_321c_405f_a5ef_84f1e82916ab[locale]!,
-      r_cee6eb3d_3079_4937_a0b8_75d7b6e95c65[locale]!,
+      rOvernightOats[locale]!,
+      rSpaghettiCarbonara[locale]!,
+      rChocolateCake[locale]!,
+      rGreekSalad[locale]!,
+      rPizzaDough[locale]!,
+      rNutBars[locale]!,
+      rLemonCake[locale]!,
+      rGrandmasButterCookies[locale]!,
     ].sorted(compare);
   }
 
-  static final Map<Locale, RecipePreviewDto>
-  r_7ad8a257_8b11_4d3d_b4a8_33026db50948 = {
+  static final Map<Locale, RecipePreviewDto> rOvernightOats = {
     const Locale('en'): RecipePreviewDto(
       id: '7ad8a257-8b11-4d3d-b4a8-33026db50948',
       createdOn: DateTime(2025, 12, 04, 20, 37, 42),
@@ -39,7 +38,7 @@ class RecipePreviews {
       prepTime: const Duration(),
       cookTime: const Duration(minutes: 5),
       restTime: const Duration(hours: 8),
-      cover: RecipeFiles.rf_25480138_78d2_421a_b8a0_2b1c8f7fc679,
+      cover: RecipeFiles.rfOvernightOats,
     ),
     const Locale('de'): RecipePreviewDto(
       id: '7ad8a257-8b11-4d3d-b4a8-33026db50948',
@@ -49,12 +48,11 @@ class RecipePreviews {
       prepTime: const Duration(),
       cookTime: const Duration(minutes: 5),
       restTime: const Duration(hours: 8),
-      cover: RecipeFiles.rf_25480138_78d2_421a_b8a0_2b1c8f7fc679,
+      cover: RecipeFiles.rfOvernightOats,
     ),
   };
 
-  static final Map<Locale, RecipePreviewDto>
-  r_1840f38b_c554_4ee8_874c_074f69fe9455 = {
+  static final Map<Locale, RecipePreviewDto> rSpaghettiCarbonara = {
     const Locale('en'): RecipePreviewDto(
       id: '1840f38b-c554-4ee8-874c-074f69fe9455',
       createdOn: DateTime(2025, 12, 04, 20, 55, 33),
@@ -63,7 +61,7 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 10),
       cookTime: const Duration(minutes: 15),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_3b7910a9_e6a2_4ae3_a73f_6cc543a55ff4,
+      cover: RecipeFiles.rfSpaghettiCarbonara,
     ),
     const Locale('de'): RecipePreviewDto(
       id: '1840f38b-c554-4ee8-874c-074f69fe9455',
@@ -73,12 +71,11 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 10),
       cookTime: const Duration(minutes: 15),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_3b7910a9_e6a2_4ae3_a73f_6cc543a55ff4,
+      cover: RecipeFiles.rfSpaghettiCarbonara,
     ),
   };
 
-  static final Map<Locale, RecipePreviewDto>
-  r_4d822d08_e4cc_4857_9626_2bc423b0e50a = {
+  static final Map<Locale, RecipePreviewDto> rChocolateCake = {
     const Locale('en'): RecipePreviewDto(
       id: '4d822d08-e4cc-4857-9626-2bc423b0e50a',
       createdOn: DateTime(2025, 12, 04, 20, 36, 01),
@@ -87,7 +84,7 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 20),
       cookTime: const Duration(minutes: 35),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_47a23184_f2d0_4c08_8c4a_1535bd82a6a7,
+      cover: RecipeFiles.rfChocolateCake,
     ),
     const Locale('de'): RecipePreviewDto(
       id: '4d822d08-e4cc-4857-9626-2bc423b0e50a',
@@ -97,12 +94,11 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 20),
       cookTime: const Duration(minutes: 35),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_47a23184_f2d0_4c08_8c4a_1535bd82a6a7,
+      cover: RecipeFiles.rfChocolateCake,
     ),
   };
 
-  static final Map<Locale, RecipePreviewDto>
-  r_73bac776_4e0a_4ac2_b39b_a46d5d8b3d29 = {
+  static final Map<Locale, RecipePreviewDto> rGreekSalad = {
     const Locale('en'): RecipePreviewDto(
       id: '73bac776-4e0a-4ac2-b39b-a46d5d8b3d29',
       createdOn: DateTime(2025, 12, 04, 20, 34, 18),
@@ -111,7 +107,7 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 15),
       cookTime: const Duration(),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_1b84752d_7477_4f7a_adc9_de9dfd9af0e5,
+      cover: RecipeFiles.rfGreekSalad,
     ),
     const Locale('de'): RecipePreviewDto(
       id: '73bac776-4e0a-4ac2-b39b-a46d5d8b3d29',
@@ -121,12 +117,11 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 15),
       cookTime: const Duration(),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_1b84752d_7477_4f7a_adc9_de9dfd9af0e5,
+      cover: RecipeFiles.rfGreekSalad,
     ),
   };
 
-  static final Map<Locale, RecipePreviewDto>
-  r_279a08c5_32c9_42f2_9550_cc6b4da4d9c9 = {
+  static final Map<Locale, RecipePreviewDto> rPizzaDough = {
     const Locale('en'): RecipePreviewDto(
       id: '279a08c5-32c9-42f2-9550-cc6b4da4d9c9',
       createdOn: DateTime(2023, 12, 28, 20, 36, 18),
@@ -135,7 +130,7 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 15),
       cookTime: const Duration(minutes: 20),
       restTime: const Duration(days: 2),
-      cover: RecipeFiles.rf_6d484009_ec6f_46cc_926d_322443198ce2,
+      cover: RecipeFiles.rfPizzaDough,
     ),
     const Locale('de'): RecipePreviewDto(
       id: '279a08c5-32c9-42f2-9550-cc6b4da4d9c9',
@@ -145,12 +140,11 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 15),
       cookTime: const Duration(minutes: 20),
       restTime: const Duration(days: 2),
-      cover: RecipeFiles.rf_6d484009_ec6f_46cc_926d_322443198ce2,
+      cover: RecipeFiles.rfPizzaDough,
     ),
   };
 
-  static final Map<Locale, RecipePreviewDto>
-  r_2c6e6500_ccf9_4fad_9874_98d2cca1f6a8 = {
+  static final Map<Locale, RecipePreviewDto> rNutBars = {
     const Locale('en'): RecipePreviewDto(
       id: '2c6e6500-ccf9-4fad-9874-98d2cca1f6a8',
       createdOn: DateTime(2023, 12, 28, 20, 36, 18),
@@ -159,7 +153,7 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 20),
       cookTime: const Duration(minutes: 30),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_6e39c472_c41f_4dd2_b8f3_dcdbfe3c04a8,
+      cover: RecipeFiles.rfNutBars,
     ),
     const Locale('de'): RecipePreviewDto(
       id: '2c6e6500-ccf9-4fad-9874-98d2cca1f6a8',
@@ -169,12 +163,11 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 20),
       cookTime: const Duration(minutes: 30),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_6e39c472_c41f_4dd2_b8f3_dcdbfe3c04a8,
+      cover: RecipeFiles.rfNutBars,
     ),
   };
 
-  static final Map<Locale, RecipePreviewDto>
-  r_9a56652b_321c_405f_a5ef_84f1e82916ab = {
+  static final Map<Locale, RecipePreviewDto> rLemonCake = {
     const Locale('en'): RecipePreviewDto(
       id: '9a56652b-321c-405f-a5ef-84f1e82916ab',
       createdOn: DateTime(2023, 12, 28, 20, 36, 18),
@@ -183,7 +176,7 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 30),
       cookTime: const Duration(hours: 1),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_0b1564ca_b2ba_4378_ac48_02266ca78aab,
+      cover: RecipeFiles.rfLemonCake,
     ),
     const Locale('de'): RecipePreviewDto(
       id: '9a56652b-321c-405f-a5ef-84f1e82916ab',
@@ -193,12 +186,11 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 30),
       cookTime: const Duration(hours: 1),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_0b1564ca_b2ba_4378_ac48_02266ca78aab,
+      cover: RecipeFiles.rfLemonCake,
     ),
   };
 
-  static final Map<Locale, RecipePreviewDto>
-  r_cee6eb3d_3079_4937_a0b8_75d7b6e95c65 = {
+  static final Map<Locale, RecipePreviewDto> rGrandmasButterCookies = {
     const Locale('en'): RecipePreviewDto(
       id: 'cee6eb3d-3079-4937-a0b8-75d7b6e95c65',
       createdOn: DateTime(2023, 12, 28, 20, 36, 18),
@@ -207,7 +199,7 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 20),
       cookTime: const Duration(minutes: 7),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_85ec8169_241e_4096_83aa_ec3cdd8a0a1a,
+      cover: RecipeFiles.rfGrandmasButterCookies,
     ),
     const Locale('de'): RecipePreviewDto(
       id: 'cee6eb3d-3079-4937-a0b8-75d7b6e95c65',
@@ -217,14 +209,13 @@ class RecipePreviews {
       prepTime: const Duration(minutes: 20),
       cookTime: const Duration(minutes: 7),
       restTime: const Duration(),
-      cover: RecipeFiles.rf_85ec8169_241e_4096_83aa_ec3cdd8a0a1a,
+      cover: RecipeFiles.rfGrandmasButterCookies,
     ),
   };
 }
 
 class RecipeFulls {
-  static Map<Locale, RecipeFullDto Function()>
-  r_9fa077d3_af00_4ec1_ab7e_c27f8cd92920 = {
+  static Map<Locale, RecipeFullDto Function()> rAppleCake = {
     const Locale('en'): () {
       const locale = Locale('en');
       return RecipeFullDto(
@@ -235,9 +226,9 @@ class RecipeFulls {
         prepTime: const Duration(minutes: 10),
         cookTime: const Duration(minutes: 55),
         restTime: Duration.zero,
-        cover: RecipeFiles.rf_7b6be04e_8ee6_436e_b1e6_69027746002b,
+        cover: RecipeFiles.rfApplePie,
         version: 1,
-        ownedBy: AccountPreviews.a_d6fc559f_ddc1_4bc2_a9c1_c8a17ff5ffcc,
+        ownedBy: AccountPreviews.aThenus,
         description: null,
         serving: const RecipeServingDto(
           id: '520179fa-4e17-417f-891c-a4688e63b3f0',
@@ -292,7 +283,7 @@ class RecipeFulls {
                 label: 'Cream / Milk',
                 index: 6,
                 amount: 250.0,
-                unit: Units.u_milliliter[locale]!,
+                unit: Units.uMilliliter[locale]!,
                 nutrition: null,
               ),
               RecipeIngredientGroupItemDto(
@@ -300,7 +291,7 @@ class RecipeFulls {
                 label: 'Baking powder',
                 index: 4,
                 amount: 1.0,
-                unit: Units.u_teaspoon[locale]!,
+                unit: Units.uTeaspoon[locale]!,
                 nutrition: null,
               ),
               RecipeIngredientGroupItemDto(
@@ -308,7 +299,7 @@ class RecipeFulls {
                 label: 'Butter',
                 index: 0,
                 amount: 300.0,
-                unit: Units.u_gram[locale]!,
+                unit: Units.uGram[locale]!,
                 nutrition: null,
               ),
               const RecipeIngredientGroupItemDto(
@@ -332,7 +323,7 @@ class RecipeFulls {
                 label: 'Sugar',
                 index: 1,
                 amount: 225.0,
-                unit: Units.u_gram[locale]!,
+                unit: Units.uGram[locale]!,
                 nutrition: null,
               ),
               const RecipeIngredientGroupItemDto(
@@ -348,7 +339,7 @@ class RecipeFulls {
                 label: 'Flour',
                 index: 2,
                 amount: 350.0,
-                unit: Units.u_gram[locale]!,
+                unit: Units.uGram[locale]!,
                 nutrition: null,
               ),
             ],
@@ -358,14 +349,14 @@ class RecipeFulls {
         course: .Bakery,
         url: null,
         categories: [
-          Categories.c_autumn[locale]!,
+          Categories.cAutumn[locale]!,
         ],
         tags: [
-          Tags.t_cake[locale]!,
-          Tags.t_heavy_cream[locale]!,
-          Tags.t_apple[locale]!,
+          Tags.tCake[locale]!,
+          Tags.tHeavyCream[locale]!,
+          Tags.tApple[locale]!,
         ],
-        files: const [RecipeFiles.rf_7b6be04e_8ee6_436e_b1e6_69027746002b],
+        files: const [RecipeFiles.rfApplePie],
       );
     },
     const Locale('de'): () {
@@ -378,9 +369,9 @@ class RecipeFulls {
         prepTime: const Duration(minutes: 10),
         cookTime: const Duration(minutes: 55),
         restTime: Duration.zero,
-        cover: RecipeFiles.rf_7b6be04e_8ee6_436e_b1e6_69027746002b,
+        cover: RecipeFiles.rfApplePie,
         version: 1,
-        ownedBy: AccountPreviews.a_d6fc559f_ddc1_4bc2_a9c1_c8a17ff5ffcc,
+        ownedBy: AccountPreviews.aThenus,
         description: null,
         serving: const RecipeServingDto(
           id: '520179fa-4e17-417f-891c-a4688e63b3f0',
@@ -434,7 +425,7 @@ class RecipeFulls {
                 label: 'Sahne / Milch',
                 index: 6,
                 amount: 250.0,
-                unit: Units.u_milliliter[locale]!,
+                unit: Units.uMilliliter[locale]!,
                 nutrition: null,
               ),
               RecipeIngredientGroupItemDto(
@@ -442,7 +433,7 @@ class RecipeFulls {
                 label: 'Backpulver',
                 index: 4,
                 amount: 1.0,
-                unit: Units.u_teaspoon[locale]!,
+                unit: Units.uTeaspoon[locale]!,
                 nutrition: null,
               ),
               RecipeIngredientGroupItemDto(
@@ -450,7 +441,7 @@ class RecipeFulls {
                 label: 'Butter',
                 index: 0,
                 amount: 300.0,
-                unit: Units.u_gram[locale]!,
+                unit: Units.uGram[locale]!,
                 nutrition: null,
               ),
               const RecipeIngredientGroupItemDto(
@@ -474,7 +465,7 @@ class RecipeFulls {
                 label: 'Zucker',
                 index: 1,
                 amount: 225.0,
-                unit: Units.u_gram[locale]!,
+                unit: Units.uGram[locale]!,
                 nutrition: null,
               ),
               const RecipeIngredientGroupItemDto(
@@ -490,7 +481,7 @@ class RecipeFulls {
                 label: 'Mehl',
                 index: 2,
                 amount: 350.0,
-                unit: Units.u_gram[locale]!,
+                unit: Units.uGram[locale]!,
                 nutrition: null,
               ),
             ],
@@ -500,14 +491,14 @@ class RecipeFulls {
         course: .Bakery,
         url: null,
         categories: [
-          Categories.c_autumn[locale]!,
+          Categories.cAutumn[locale]!,
         ],
         tags: [
-          Tags.t_cake[locale]!,
-          Tags.t_heavy_cream[locale]!,
-          Tags.t_apple[locale]!,
+          Tags.tCake[locale]!,
+          Tags.tHeavyCream[locale]!,
+          Tags.tApple[locale]!,
         ],
-        files: const [RecipeFiles.rf_7b6be04e_8ee6_436e_b1e6_69027746002b],
+        files: const [RecipeFiles.rfApplePie],
       );
     },
   };
