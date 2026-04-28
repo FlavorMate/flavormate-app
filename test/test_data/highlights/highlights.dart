@@ -25,8 +25,8 @@ class Highlights {
     id: '62c45e91-d60c-47fc-b3d0-b33c55290db1',
     date: DateTime(2026, 04, 21),
     diet: .Meat,
-    recipe: RecipePreviews.r_73bac776_4e0a_4ac2_b39b_a46d5d8b3d29[locale]!,
-    cover: RecipePreviews.r_73bac776_4e0a_4ac2_b39b_a46d5d8b3d29[locale]!.cover,
+    recipe: RecipePreviews.rGreekSalad[locale]!,
+    cover: RecipePreviews.rGreekSalad[locale]!.cover,
   );
 
   static HighlightDto h_0296bc3d_d37c_4dec_8018_1f6dc0d67e12(
@@ -35,8 +35,8 @@ class Highlights {
     id: '0296bc3d-d37c-4dec-8018-1f6dc0d67e12',
     date: DateTime(2026, 04, 23),
     diet: .Meat,
-    recipe: RecipePreviews.r_279a08c5_32c9_42f2_9550_cc6b4da4d9c9[locale]!,
-    cover: RecipePreviews.r_279a08c5_32c9_42f2_9550_cc6b4da4d9c9[locale]!.cover,
+    recipe: RecipePreviews.rPizzaDough[locale]!,
+    cover: RecipePreviews.rPizzaDough[locale]!.cover,
   );
 
   static HighlightDto h_81e51141_30b5_41c3_8323_dad0ee17053c(
@@ -45,8 +45,8 @@ class Highlights {
     id: '81e51141-30b5-41c3-8323-dad0ee17053c',
     date: DateTime(2026, 04, 25),
     diet: .Meat,
-    recipe: RecipePreviews.r_2c6e6500_ccf9_4fad_9874_98d2cca1f6a8[locale]!,
-    cover: RecipePreviews.r_2c6e6500_ccf9_4fad_9874_98d2cca1f6a8[locale]!.cover,
+    recipe: RecipePreviews.rNutBars[locale]!,
+    cover: RecipePreviews.rNutBars[locale]!.cover,
   );
 
   static HighlightDto h_c8e4d21f_109b_4eb2_807d_476c12270779(
@@ -55,8 +55,8 @@ class Highlights {
     id: 'c8e4d21f-109b-4eb2-807d-476c12270779',
     date: DateTime(2026, 04, 24),
     diet: .Meat,
-    recipe: RecipePreviews.r_9a56652b_321c_405f_a5ef_84f1e82916ab[locale]!,
-    cover: RecipePreviews.r_9a56652b_321c_405f_a5ef_84f1e82916ab[locale]!.cover,
+    recipe: RecipePreviews.rLemonCake[locale]!,
+    cover: RecipePreviews.rLemonCake[locale]!.cover,
   );
 
   static HighlightDto h_a0cd580a_5f9d_435c_b7c5_030fceafe119(
@@ -65,7 +65,7 @@ class Highlights {
     id: 'a0cd580a-5f9d-435c-b7c5-030fceafe119',
     date: DateTime(2026, 04, 22),
     diet: .Meat,
-    recipe: RecipePreviews.r_cee6eb3d_3079_4937_a0b8_75d7b6e95c65[locale]!,
-    cover: RecipePreviews.r_cee6eb3d_3079_4937_a0b8_75d7b6e95c65[locale]!.cover,
+    recipe: RecipePreviews.rGrandmasButterCookies[locale]!,
+    cover: RecipePreviews.rGrandmasButterCookies[locale]!.cover,
   );
 }

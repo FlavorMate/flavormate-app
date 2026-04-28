@@ -92,7 +92,7 @@ var routes = [
 
   // Auth not required
   _createRoute(RouteConstants.Server, (_) => const ServerPage()),
-  _createRoute(RouteConstants.Auth, (_) => const LoginPage()),
+  _createRoute(RouteConstants.Auth, (_) => const AuthPage()),
   _createRoute(RouteConstants.AuthLogin, (_) => const AuthLoginPage()),
   _createRoute(RouteConstants.AuthRegister, (_) => const AuthRegisterPage()),
   _createRoute(RouteConstants.AuthRecovery, (_) => const AuthRecoveryPage()),

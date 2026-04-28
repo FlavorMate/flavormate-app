@@ -1,8 +1,10 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/destination.dart';
+import 'package:flavormate/presentation/common/layouts/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
+/// Duplicate of [MainLayout] but without the GoRouter dependency
 class MainTestLayout extends StatefulWidget {
   final Widget child;
   final int activeIndex;

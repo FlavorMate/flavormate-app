@@ -26,11 +26,10 @@ class _MacBookFrame extends StatelessWidget {
   final Widget child;
 
   const _MacBookFrame({
-    super.key,
     required this.device,
-    this.frameColors,
     required this.assets,
     required this.child,
+    this.frameColors,
   });
 
   double get pixelRatio => device.pixelRatio;

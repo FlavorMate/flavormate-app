@@ -132,6 +132,7 @@ class FRecipeDesktopLayout extends StatelessWidget {
                               ),
 
                             FIconButton(
+                              key: const ValueKey('guided-cooking-btn'),
                               width: BUTTON_WIDTH,
                               label:
                                   context.l10n.f_recipe_layout__guided_cooking,
