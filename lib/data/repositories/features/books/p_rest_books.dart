@@ -5,6 +5,7 @@ import 'package:flavormate/data/models/features/books/book_dto.dart';
 import 'package:flavormate/data/models/local/pageable_dto.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
+import 'package:flavormate/data/repositories/features/websockets/book/p_socket_book_id.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_rest_books.g.dart';
@@ -30,6 +31,11 @@ class PRestBooks extends _$PRestBooks {
       orderBy: orderBy,
       orderDirection: orderDirection,
     );
+
+    for (final book in response.data) {
+      // If book is updated by server, refresh
+      ref.watch(pSocketBookIdProvider(book.id));
+    }
 
     return response;
   }

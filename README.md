@@ -197,4 +197,17 @@ Follow these steps to build the app locally:
 3. Run `dart run build_runner build` to generate necessary code
 4. Run `flutter run` to run the app
 
+## Generate Screenshots
+
+1. Install and configure Flutter SDK
+2. Download the [Product Bezels](https://developer.apple.com/design/resources/#product-bezels) and place them in
+   `test/_resources/device_frames/insert`. (See [ReadME.md](test/_resources/device_frames/insert/ReadME.md))
+3. *(Optional)* insert OIDC Logos as base64 encoded images in
+   `test/_resources/oidc_logos` ([see example](test/_resources/oidc_files/example_oidc.dart)) and add them
+   to [oidcs.dart](test/test_data/oidc/oidcs.dart)
+4. Run `flutter pub get` to fetch all dependencies
+5. Run `dart run build_runner build` to generate necessary code
+6. Run `flutter test --update-goldens --dart-define=testing_mode=true` to generate screenshots
+7. *(Optional)* Run `convertScreenshots.sh` to convert and downscale the screenshots to use in this GitHub ReadME
+
 [^1]: Feature must be enabled on the server
