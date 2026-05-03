@@ -5,6 +5,7 @@ import 'package:flavormate/data/models/features/books/book_update_dto.dart';
 import 'package:flavormate/data/models/shared/models/api_response.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books_id_subscriber.dart';
+import 'package:flavormate/data/repositories/features/websockets/book/p_socket_book_id.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_rest_books_id.g.dart';
@@ -15,6 +16,9 @@ class PRestBooksId extends _$PRestBooksId {
   Future<BookDto> build({
     required String bookId,
   }) async {
+    // If book is updated by server, refresh
+    ref.watch(pSocketBookIdProvider(bookId));
+
     final dio = ref.watch(pDioPrivateProvider);
 
     final client = BookControllerApi(dio);
