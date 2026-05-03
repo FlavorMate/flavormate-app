@@ -32,7 +32,7 @@ class _FSliverList<T> extends ConsumerState<FSliverList<T>> {
 
   @override
   void initState() {
-    ref.listenManual(widget.provider, (_, asyncData) {
+    ref.listenManual(widget.provider, fireImmediately: true, (_, asyncData) {
       final value = asyncData.value;
       if (value == null) return;
 
