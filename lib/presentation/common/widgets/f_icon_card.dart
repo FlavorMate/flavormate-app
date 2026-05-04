@@ -26,12 +26,14 @@ class FIconCard extends StatelessWidget {
     return SizedBox(
       width: width,
       child: FCard(
+        color: context.colorScheme.primaryContainer,
+        elevation: 0,
         onTap: onTap,
         child: Column(
           spacing: PADDING / 2,
           children: [
             Icon(
-              color: context.colorScheme.primary,
+              color: context.colorScheme.onPrimaryContainer,
               icon,
               size: iconSize,
             ),
@@ -41,7 +43,7 @@ class FIconCard extends StatelessWidget {
                   label,
                   style: FTextStyle.bodyMedium,
                   textAlign: TextAlign.center,
-                  color: FTextColor.primary,
+                  color: FTextColor.onPrimaryContainer,
                 ),
               ),
             ),

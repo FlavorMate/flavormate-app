@@ -8,6 +8,7 @@ class FCard extends StatelessWidget {
   final VoidCallback? onTap;
   final double padding;
   final double margin;
+  final double? elevation;
 
   const FCard({
     super.key,
@@ -16,12 +17,14 @@ class FCard extends StatelessWidget {
     this.onTap,
     this.padding = PADDING,
     this.margin = 0,
+    this.elevation,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: color ?? context.colorScheme.surfaceContainer,
+      elevation: elevation,
       margin: EdgeInsets.all(margin),
       child: InkWell(
         borderRadius: BorderRadius.circular(BORDER_RADIUS),
