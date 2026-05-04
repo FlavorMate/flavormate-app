@@ -1,3 +1,4 @@
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,8 @@ class FIconButton extends StatelessWidget {
   final IconData icon;
 
   final String? label;
-  final double? width, height;
+  final double? width;
+  final double height;
 
   const FIconButton({
     required this.onPressed,
@@ -30,11 +32,12 @@ class FIconButton extends StatelessWidget {
       );
     } else {
       return SizedBox(
-        height: height,
         width: width,
         child: FilledButton(
           onPressed: onPressed,
+          style: FilledButton.styleFrom(minimumSize: .fromHeight(height)),
           child: Row(
+            spacing: PADDING / 2,
             children: [
               Icon(icon),
               Expanded(child: Text(label!, textAlign: TextAlign.center)),
