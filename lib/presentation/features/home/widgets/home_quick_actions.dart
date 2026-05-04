@@ -19,40 +19,43 @@ class HomeQuickActions extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return FScrollable(
-          child: Padding(
-            padding: const EdgeInsets.all(PADDING / 2),
-            child: IntrinsicHeight(
-              child: Row(
-                spacing: PADDING / 2,
-                children: [
-                  FIconCard(
-                    width: _size,
-                    icon: MdiIcons.pasta,
-                    label: context.l10n.home_quick_actions__cooking,
-                    onTap: () =>
-                        openSuggestion(context, course: Course.MainDish),
-                  ),
-                  FIconCard(
-                    width: _size,
-                    icon: MdiIcons.cupcake,
-                    label: context.l10n.home_quick_actions__baking,
-                    onTap: () => openSuggestion(context, course: Course.Bakery),
-                  ),
+        return Center(
+          child: FScrollable(
+            child: Padding(
+              padding: const EdgeInsets.all(PADDING / 2),
+              child: IntrinsicHeight(
+                child: Row(
+                  spacing: PADDING / 2,
+                  children: [
+                    FIconCard(
+                      width: _size,
+                      icon: MdiIcons.pasta,
+                      label: context.l10n.home_quick_actions__cooking,
+                      onTap: () =>
+                          openSuggestion(context, course: Course.MainDish),
+                    ),
+                    FIconCard(
+                      width: _size,
+                      icon: MdiIcons.cupcake,
+                      label: context.l10n.home_quick_actions__baking,
+                      onTap: () =>
+                          openSuggestion(context, course: Course.Bakery),
+                    ),
 
-                  FIconCard(
-                    width: _size,
-                    icon: MdiIcons.diceMultiple,
-                    label: context.l10n.home_quick_actions__random,
-                    onTap: () => openRecipe(context, ref),
-                  ),
-                  FIconCard(
-                    width: _size,
-                    icon: MdiIcons.bookOpen,
-                    label: context.l10n.home_quick_actions__all_recipes,
-                    onTap: () => context.routes.recipes(),
-                  ),
-                ],
+                    FIconCard(
+                      width: _size,
+                      icon: MdiIcons.diceMultiple,
+                      label: context.l10n.home_quick_actions__random,
+                      onTap: () => openRecipe(context, ref),
+                    ),
+                    FIconCard(
+                      width: _size,
+                      icon: MdiIcons.bookOpen,
+                      label: context.l10n.home_quick_actions__all_recipes,
+                      onTap: () => context.routes.recipes(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
