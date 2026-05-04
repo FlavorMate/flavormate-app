@@ -73,7 +73,11 @@ class AuthControllerApi extends ControllerApi {
   }
 
   Future<ApiResponse<bool>> logout() async {
-    return await post(url: '$_root/logout', mapper: (data) => bool.parse(data));
+    return await post(
+      url: '$_root/logout',
+      mapper: (data) => bool.parse(data),
+      timeout: const Duration(seconds: 5),
+    );
   }
 
   Future<ApiResponse<bool>> logoutAll() async {
