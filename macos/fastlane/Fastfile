@@ -49,6 +49,8 @@ platform :mac do
       is_key_content_base64: true,
     )
 
+    match(type: "appstore", additional_cert_types: "mac_installer_distribution", readonly: true)
+
     match(
       type: "developer_id",
       additional_cert_types: "developer_id_installer",
@@ -95,6 +97,8 @@ platform :mac do
       in_house: false,
       is_key_content_base64: true,
     )
+
+    match(type: "appstore", additional_cert_types: "mac_installer_distribution", readonly: true)
 
     match(
       type: "developer_id",

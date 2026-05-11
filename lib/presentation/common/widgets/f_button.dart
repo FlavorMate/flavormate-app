@@ -9,7 +9,7 @@ class FButton extends StatelessWidget {
 
   final VoidCallback? onPressed;
 
-  final double? width, height;
+  final double width, height;
 
   const FButton({
     required this.label,
@@ -25,11 +25,11 @@ class FButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
       width: width,
       child: tonal
           ? FilledButton.tonal(
               onPressed: onPressed,
+              style: .new(minimumSize: .all(Size.fromHeight(height))),
               child: _FButtonInternal(
                 label: label,
                 leading: leading,
@@ -38,6 +38,7 @@ class FButton extends StatelessWidget {
             )
           : FilledButton(
               onPressed: onPressed,
+              style: .new(minimumSize: .all(Size.fromHeight(height))),
               child: _FButtonInternal(
                 label: label,
                 leading: leading,
