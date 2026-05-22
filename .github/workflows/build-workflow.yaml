@@ -114,10 +114,6 @@ jobs:
       - name: Generate Flutter configs
         run: flutter build ios --config-only
 
-      - name: Install Pods
-        working-directory: macos/
-        run: pod install
-
       - name: Install ruby dependencies
         working-directory: ios/
         run: bundle install
@@ -155,10 +151,6 @@ jobs:
 
       - name: Generate sources
         run: dart run build_runner build -d
-
-      - name: Install Pods
-        working-directory: macos/
-        run: pod install
 
       - name: Generate Flutter configs
         run: flutter build macos --config-only
@@ -200,10 +192,6 @@ jobs:
 
       - name: Generate sources
         run: dart run build_runner build -d
-
-      - name: Install Pods
-        working-directory: macos/
-        run: pod install
 
       - name: Generate Flutter configs
         run: flutter build macos --config-only
