@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  FLUTTER_VERSION: 3.41.9
+  FLUTTER_VERSION: 3.44.0
   RUBY_VERSION: 3.4.9
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
@@ -85,10 +85,6 @@ jobs:
       - name: Generate sources
         run: dart run build_runner build -d
 
-      - name: Install Pods
-        working-directory: ios/
-        run: pod install
-
       - name: Generate Flutter configs
         run: flutter build ios --config-only
 
@@ -130,10 +126,6 @@ jobs:
       - name: Generate sources
         run: dart run build_runner build -d
 
-      - name: Install Pods
-        working-directory: macos/
-        run: pod install
-
       - name: Generate Flutter configs
         run: flutter build macos --config-only
 
@@ -174,10 +166,6 @@ jobs:
 
       - name: Generate sources
         run: dart run build_runner build -d
-
-      - name: Install Pods
-        working-directory: macos/
-        run: pod install
 
       - name: Generate Flutter configs
         run: flutter build macos --config-only

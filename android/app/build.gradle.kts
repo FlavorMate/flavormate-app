@@ -3,7 +3,6 @@ import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -28,10 +27,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_21.toString()
     }
 
     defaultConfig {
@@ -59,6 +54,13 @@ android {
         }
     }
 }
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
+    }
+}
+
 
 flutter {
     source = "../.."
