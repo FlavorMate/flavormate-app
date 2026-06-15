@@ -15,7 +15,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "de.flavormate"
-    compileSdk = 36
+    compileSdk = 37
     ndkVersion = "29.0.14206865"
 
     externalNativeBuild {
@@ -32,7 +32,7 @@ android {
     defaultConfig {
         applicationId = "de.flavormate"
         minSdk = 31
-        targetSdk = 36
+        targetSdk = 37
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 

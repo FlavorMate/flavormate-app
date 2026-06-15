@@ -13,41 +13,6 @@ subprojects {
     project.layout.buildDirectory.value(newSubprojectBuildDir)
 }
 
-// Needed until all plugins update their compileSdkVersion
-subprojects {
-    project.afterEvaluate {
-
-        // Apply only to Android modules (Flutter plugins included)
-        if (project.extensions.findByName("android") != null) {
-            project.extensions.configure<com.android.build.gradle.BaseExtension>("android") {
-
-                compileSdkVersion(36)
-
-                ndkVersion = "29.0.14206865"
-
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_21
-                    targetCompatibility = JavaVersion.VERSION_21
-                }
-
-                externalNativeBuild {
-                    cmake {
-                        version = "3.31.6"
-                    }
-                }
-            }
-        }
-
-        // Kotlin JVM target override
-        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_21.toString()
-            }
-        }
-    }
-}
-
-
 subprojects {
     project.evaluationDependsOn(":app")
 }
