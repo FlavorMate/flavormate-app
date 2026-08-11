@@ -36,14 +36,14 @@ dependencies:
   collection: ^1.19.1
   dart_mappable: ^4.8.0
   device_info_plus: ^13.2.0
-  dio: ^5.10.0
+  dio: ^5.11.0
   fl_chart: ^1.2.0
   flex_seed_scheme: ^4.0.1
   flutter_expandable_fab: ^2.5.2
   flutter_m3shapes: ^1.0.0+2
   flutter_markdown_plus: ^1.0.12
   flutter_material_design_icons: ^3.1.0+7447
-  flutter_secure_storage: ^10.3.1
+  flutter_secure_storage: ^11.0.0
   flutter_svg: ^2.3.0
   flutter_riverpod: ^3.3.2
   go_router: ^17.3.0
@@ -63,7 +63,7 @@ dependencies:
   two_dimensional_scrollables: ^0.5.3
   url_launcher: ^6.3.2
   uuid: ^4.6.0
-  vector_graphics: ^1.2.2
+  vector_graphics: ^1.2.3
   # no strict version because these depend on the SDK version:
   flutter_localizations:
     sdk: flutter
