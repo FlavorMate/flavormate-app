@@ -1,6 +1,6 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/generated/flutter_gen/assets.gen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FLogo extends StatelessWidget {
@@ -22,4 +22,6 @@ class FLogo extends StatelessWidget {
       ),
     );
   }
+
+  static FLogo get sm => const FLogo(size: 76);
 }

@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/package_info/p_package_info_version.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
@@ -7,8 +7,8 @@ import 'package:flavormate/data/repositories/core/server/p_server_version.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HomeAccountDialogInfoSection extends ConsumerWidget {
   const HomeAccountDialogInfoSection({super.key});
@@ -56,7 +56,7 @@ class HomeAccountDialogInfoSection extends ConsumerWidget {
                 onError: FEmptyMessage(
                   title:
                       context.l10n.home_account_dialog_info_section__on_error,
-                  icon: StateIconConstants.login.errorIcon,
+                  icon: IconConstants.errorIcon,
                 ),
                 builder: (context, data) => FText(
                   data.toString(),
@@ -79,7 +79,7 @@ class HomeAccountDialogInfoSection extends ConsumerWidget {
                 onError: FEmptyMessage(
                   title:
                       context.l10n.home_account_dialog_info_section__on_error,
-                  icon: StateIconConstants.login.errorIcon,
+                  icon: IconConstants.errorIcon,
                 ),
                 builder: (context, data) => FText(
                   data.toString(),

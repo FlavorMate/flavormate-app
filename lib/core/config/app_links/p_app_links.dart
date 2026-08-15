@@ -5,7 +5,7 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/navigation/p_go_router.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_app_links.g.dart';

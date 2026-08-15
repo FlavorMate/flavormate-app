@@ -1,5 +1,5 @@
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeDescription extends StatelessWidget {
   final String description;

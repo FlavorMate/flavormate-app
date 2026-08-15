@@ -37,7 +37,10 @@ class POidcLink extends _$POidcLink {
     final dio = ref.read(pDioPrivateProvider);
     final client = OIDCControllerApi(dio);
 
-    final response = await client.deleteLink(providerId: link.providerId);
+    final response = await client.deleteLink(
+      providerId: link.providerId,
+      subject: link.subject,
+    );
 
     ref.invalidateSelf();
 

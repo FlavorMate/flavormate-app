@@ -14,10 +14,11 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_mode_buttons.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile_list.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppThemePage extends ConsumerStatefulWidget {
   const SettingsAppThemePage({super.key});
@@ -44,7 +45,7 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
     _activeThemeMode = _themeMode;
 
     // get system design
-    _deviceThemeColor = ref.read(pDynamicColorProvider);
+    _deviceThemeColor = ref.read(pDynamicColorProvider).requireValue;
 
     final savedColor = ref.read(pSPThemeCustomColorProvider);
 
@@ -69,82 +70,88 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
     _themeTone.tone,
   );
 
+  M3EThemeData get _m3eTheme => M3EThemeData.fromMaterial(_theme);
+
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: _theme,
-      child: Scaffold(
-        appBar: FAppBar(
-          scrollController: _scrollController,
-          title: context.l10n.settings_app_theme_page__title,
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: setTheme,
-          child: const Icon(MdiIcons.contentSave),
-        ),
-        body: SafeArea(
-          child: FResponsive(
-            controller: _scrollController,
-            child: Column(
-              spacing: PADDING,
-              children: [
-                SettingsAppThemeModeButtons(
-                  selected: _themeTone,
-                  onTap: setTone,
-                ),
+      child: M3ETheme(
+        data: _m3eTheme,
+        child: Scaffold(
+          appBar: FAppBar(
+            scrollController: _scrollController,
+            title: context.l10n.settings_app_theme_page__title,
+          ),
+          floatingActionButton: M3EFab(
+            onPressed: setTheme,
+            icon: const Icon(Symbols.save_rounded),
+          ),
+          body: SafeArea(
+            child: FResponsive(
+              controller: _scrollController,
+              child: Column(
+                spacing: PADDING,
+                children: [
+                  SettingsAppThemeModeButtons(
+                    selected: _themeTone,
+                    onTap: setTone,
+                  ),
 
-                SettingsAppThemeTileList(
-                  title: context.l10n.settings_app_theme_page__special_colors,
-                  values: [
-                    SettingsAppThemeTileData(
-                      isSelected: _activeColor.isColor(
-                        MiscColor.flavormate.color,
-                      ),
-                      color: MiscColor.flavormate.color,
-                      label: context.l10n.flavormate,
-                      onTap: setColor,
-                    ),
-                    if (_deviceThemeColor != null)
+                  SettingsAppThemeTileList(
+                    title: context.l10n.settings_app_theme_page__special_colors,
+                    values: [
                       SettingsAppThemeTileData(
-                        isSelected: _activeThemeMode == .dynamic,
-                        color: _deviceThemeColor,
-                        label: context.l10n.color__device_specific,
-                        onTap: (color) => setColor(color, themeMode: .dynamic),
+                        isSelected: _activeColor.isColor(
+                          MiscColor.flavormate.color,
+                        ),
+                        color: MiscColor.flavormate.color,
+                        label: context.l10n.flavormate,
+                        onTap: setColor,
                       ),
-                  ],
-                ),
-
-                SettingsAppThemeTileList(
-                  title: context.l10n.settings_app_theme_page__default_colors,
-                  values: DefaultColor.values
-                      .map(
-                        (it) => SettingsAppThemeTileData(
-                          isSelected: _activeColor.isColor(it.color),
-                          color: it.color,
-                          label: it.l10n(context),
-                          onTap: setColor,
+                      if (_deviceThemeColor != null)
+                        SettingsAppThemeTileData(
+                          isSelected: _activeThemeMode == .dynamic,
+                          color: _deviceThemeColor,
+                          label: context.l10n.color__device_specific,
+                          onTap: (color) =>
+                              setColor(color, themeMode: .dynamic),
                         ),
-                      )
-                      .toList(),
-                ),
+                    ],
+                  ),
 
-                SettingsAppThemeTileList(
-                  title: context.l10n.settings_app_theme_page__event_colors,
-                  values: EventColor.values
-                      .map(
-                        (it) => SettingsAppThemeTileData(
-                          isSelected: _activeColor.isColor(it.color),
-                          color: it.color,
-                          label: it.l10n(context),
-                          onTap: setColor,
-                        ),
-                      )
-                      .toList(),
-                ),
+                  SettingsAppThemeTileList(
+                    title: context.l10n.settings_app_theme_page__default_colors,
+                    values: DefaultColor.values
+                        .map(
+                          (it) => SettingsAppThemeTileData(
+                            isSelected: _activeColor.isColor(it.color),
+                            color: it.color,
+                            label: it.l10n(context),
+                            onTap: setColor,
+                          ),
+                        )
+                        .toList(),
+                  ),
 
-                // Add some space so content doesn't overlap with FAB
-                const SizedBox(height: 56),
-              ],
+                  SettingsAppThemeTileList(
+                    title: context.l10n.settings_app_theme_page__event_colors,
+                    values: EventColor.values
+                        .map(
+                          (it) => SettingsAppThemeTileData(
+                            isSelected: _activeColor.isColor(it.color),
+                            color: it.color,
+                            label: it.l10n(context),
+                            onTap: setColor,
+                          ),
+                        )
+                        .toList(),
+                  ),
+
+                  // Add some space so content doesn't overlap with FAB
+                  const SizedBox(height: 56),
+                ],
+              ),
             ),
           ),
         ),

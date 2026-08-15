@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 enum FBreakpoint {
   xs(xsValue),
   sm(smValue),
   md(mdValue),
   lg(lgValue),
-  xl(xlValue)
-  ;
+  xl(xlValue);
 
   static const double xsValue = 325;
   static const double smValue = 600;

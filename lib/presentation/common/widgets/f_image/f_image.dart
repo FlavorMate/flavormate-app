@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flavormate/core/cache/provider/p_cached_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_cached_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image_error.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'f_image_type.dart';
 
@@ -56,5 +57,29 @@ class FImage extends StatelessWidget {
     } else {
       return onError;
     }
+  }
+
+  static Transform blur({
+    required String? imageSrc,
+    FImageType imageType = .secure,
+    BoxFit fit = .cover,
+    double blurRadius = 4,
+    required Widget onError,
+  }) {
+    return Transform.scale(
+      scale: 1.05,
+      child: ImageFiltered(
+        imageFilter: ImageFilter.blur(
+          sigmaX: blurRadius,
+          sigmaY: blurRadius,
+        ),
+        child: FImage(
+          imageSrc: imageSrc,
+          type: imageType,
+          fit: fit,
+          onError: onError,
+        ),
+      ),
+    );
   }
 }

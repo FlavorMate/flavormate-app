@@ -1,8 +1,8 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/theme/enums/f_theme_tone.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppThemeModeButtons extends StatelessWidget {
   final FThemeTone selected;
@@ -38,17 +38,17 @@ class SettingsAppThemeModeButtons extends StatelessWidget {
                 ButtonSegment(
                   value: FThemeTone.material,
                   label: Text(FThemeTone.material.l10n(context)),
-                  icon: const Icon(MdiIcons.brush),
+                  icon: const Icon(Symbols.brush_rounded),
                 ),
                 ButtonSegment(
                   value: FThemeTone.vivid,
                   label: Text(FThemeTone.vivid.l10n(context)),
-                  icon: const Icon(MdiIcons.paletteSwatch),
+                  icon: const Icon(Symbols.imagesearch_roller_rounded),
                 ),
                 ButtonSegment(
                   value: FThemeTone.chroma,
                   label: Text(FThemeTone.chroma.l10n(context)),
-                  icon: const Icon(MdiIcons.palette),
+                  icon: const Icon(Symbols.palette_rounded),
                 ),
               ],
               selected: _selected,

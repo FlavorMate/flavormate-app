@@ -5,7 +5,7 @@ import 'package:flavormate/data/models/local/common_recipe/common_ingredient.dar
 import 'package:flavormate/data/models/local/common_recipe/common_ingredient_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeIngredientList extends StatelessWidget {
   final CommonIngredientGroup ingredientGroup;

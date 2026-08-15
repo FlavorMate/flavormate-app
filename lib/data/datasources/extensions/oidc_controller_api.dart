@@ -62,9 +62,12 @@ class OIDCControllerApi extends ControllerApi {
     return response.data!;
   }
 
-  Future<ApiResponse<bool>> deleteLink({required String providerId}) async {
+  Future<ApiResponse<bool>> deleteLink({
+    required String providerId,
+    required String subject,
+  }) async {
     return await delete(
-      url: '$_root/link/$providerId',
+      url: '$_root/link/$providerId/$subject',
       mapper: (data) => bool.parse(data),
     );
   }

@@ -2,8 +2,9 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FFullDialog extends StatelessWidget {
   final String title;
@@ -27,23 +28,20 @@ class FFullDialog extends StatelessWidget {
         ),
         body: FResponsive(child: child),
         bottomNavigationBar: SafeArea(
-          child: Container(
-            height: 64,
-            padding: const EdgeInsets.symmetric(horizontal: PADDING),
-            child: Row(
-              spacing: PADDING,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () => context.pop(),
-                  child: Text(context.l10n.btn_cancel),
-                ),
-                FilledButton(
-                  onPressed: submit,
-                  child: Text(context.l10n.btn_save),
-                ),
-              ],
-            ),
+          minimum: const .only(right: PADDING, bottom: PADDING),
+          child: Row(
+            spacing: PADDING,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              M3EButton.text(
+                onPressed: () => context.pop(),
+                child: Text(context.l10n.btn_cancel),
+              ),
+              M3EButton(
+                onPressed: submit,
+                child: Text(context.l10n.btn_save),
+              ),
+            ],
           ),
         ),
       ),

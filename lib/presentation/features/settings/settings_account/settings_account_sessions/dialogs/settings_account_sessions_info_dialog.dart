@@ -4,12 +4,22 @@ import 'package:flavormate/core/extensions/e_date_time.dart';
 import 'package:flavormate/data/models/core/auth/session_dto.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAccountSessionsInfoDialog extends StatelessWidget {
   final SessionDto session;
 
   const SettingsAccountSessionsInfoDialog({super.key, required this.session});
+
+  static Future<void> openDialog(
+    BuildContext context, {
+    required SessionDto session,
+  }) async {
+    await openAlertDialog(
+      context,
+      dialog: SettingsAccountSessionsInfoDialog(session: session),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

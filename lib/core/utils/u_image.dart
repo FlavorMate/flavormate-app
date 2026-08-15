@@ -1,6 +1,6 @@
 import 'package:flavormate/core/storage/shared_preferences/enums/image_mode.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class UImage {

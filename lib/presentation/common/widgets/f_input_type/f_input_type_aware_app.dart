@@ -1,5 +1,5 @@
 import 'package:flavormate/core/config/input_type/u_input_type_detector.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FInputTypeAwareApp extends StatefulWidget {
   final Widget child;

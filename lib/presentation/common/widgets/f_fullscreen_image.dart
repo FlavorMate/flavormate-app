@@ -1,9 +1,10 @@
 import 'package:flavormate/core/cache/provider/p_cached_image.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:photo_view/photo_view.dart';
 
 class FFullscreenImage extends ConsumerWidget {
@@ -25,13 +26,21 @@ class FFullscreenImage extends ConsumerWidget {
             children: [
               PhotoView(
                 imageProvider: imageProvider,
+                loadingBuilder: (_, chunk) {
+                  final progress = _calcProgress(chunk);
+                  return Center(
+                    child: progress == null
+                        ? const M3ELoadingIndicator()
+                        : M3EProgressIndicator.circularWavy(value: progress),
+                  );
+                },
               ),
               Positioned(
                 top: PADDING,
                 right: PADDING,
-                child: FloatingActionButton(
+                child: M3EFab(
                   onPressed: () => context.pop(),
-                  child: const Icon(MdiIcons.close),
+                  icon: const Icon(Symbols.close_rounded),
                 ),
               ),
             ],
@@ -39,5 +48,12 @@ class FFullscreenImage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  double? _calcProgress(ImageChunkEvent? progress) {
+    if (progress == null || progress.expectedTotalBytes == null) return null;
+
+    return progress.cumulativeBytesLoaded.toDouble() /
+        progress.expectedTotalBytes!.toDouble();
   }
 }

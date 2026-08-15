@@ -4,8 +4,8 @@ on:
     tags: [ v* ]
 
 env:
-  FLUTTER_VERSION: 3.47.0
-  RUBY_VERSION: 3.4.10
+  FLUTTER_VERSION: 3.47.1
+  RUBY_VERSION: 4.0.6
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
 

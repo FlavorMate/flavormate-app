@@ -19,7 +19,7 @@ class OIDCs {
     'authentik',
     null,
   );
-  
+
   static const google = OIDCProvider(
     'Goolge',
     '',

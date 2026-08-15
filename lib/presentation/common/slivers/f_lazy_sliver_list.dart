@@ -1,8 +1,10 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/data/models/local/pageable_dto.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/components/loading_indicator/m3e_loading_indicator.dart';
+import 'package:material_3_expressive/foundations/foundations.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class FLazySliverList<T> extends ConsumerStatefulWidget {
@@ -107,11 +109,12 @@ class _FLazySliverList<T> extends ConsumerState<FLazySliverList<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = M3ETheme.of(context).listTheme.cardList;
     return SliverMainAxisGroup(
       slivers: [
         SliverList.separated(
           itemCount: _data.length,
-          separatorBuilder: (_, _) => const SizedBox(height: PADDING / 4),
+          separatorBuilder: (_, _) => SizedBox(height: theme.gap),
           itemBuilder: (context, index) => widget.itemBuilder.call(
             _data[index],
             index,
@@ -124,7 +127,7 @@ class _FLazySliverList<T> extends ConsumerState<FLazySliverList<T>> {
             padding: .all(PADDING),
             sliver: SliverToBoxAdapter(
               child: Center(
-                child: CircularProgressIndicator(),
+                child: M3ELoadingIndicator(),
               ),
             ),
           ),

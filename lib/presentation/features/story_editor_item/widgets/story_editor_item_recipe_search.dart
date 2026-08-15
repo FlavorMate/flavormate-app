@@ -1,18 +1,17 @@
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/core/riverpod/search_state/p_search_state.dart';
 import 'package:flavormate/core/riverpod/search_state/search_state.dart';
-import 'package:flavormate/core/utils/u_debouncer.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_search.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_search/f_search_no_result.dart';
-import 'package:flavormate/presentation/common/widgets/f_search/f_search_term_too_short.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class StoryEditorItemRecipeSearch extends ConsumerStatefulWidget {
   final Function(String) onTap;
@@ -32,8 +31,7 @@ class StoryEditorItemRecipeSearch extends ConsumerStatefulWidget {
 }
 
 class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
-  final _debouncer = UDebouncer();
-  final _controller = SearchController();
+  final _controller = M3ESearchController();
 
   @override
   void dispose() {
@@ -41,31 +39,36 @@ class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
     Future.delayed(const Duration(seconds: 1)).then((_) {
       _controller.dispose();
     });
-    _debouncer.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SearchAnchor(
+    return M3ESearchAnchor(
       keyboardType: TextInputType.visiblePassword,
       searchController: _controller,
       builder: (_, controller) => FIconButton(
         onPressed: controller.openView,
         label: context.l10n.story_editor_item_recipe_search__search_recipes,
-        icon: MdiIcons.magnify,
+        icon: Symbols.search_rounded,
       ),
       viewHintText: context.l10n.story_editor_item_recipe_search__search_hint,
-      viewLeading: IconButton(
+      viewLeading: M3EIconButton(
         onPressed: close,
-        icon: const Icon(MdiIcons.arrowLeft),
+        icon: const Icon(Symbols.arrow_back_rounded),
       ),
+      viewTrailing: [
+        M3EIconButton(
+          onPressed: _reset,
+          icon: const Icon(Symbols.close_rounded),
+        ),
+      ],
       viewBuilder: (_) => Consumer(
         builder: (_, ref, _) {
           final searchTerm = ref.watch(widget.searchTermProvider);
 
-          if (searchTerm.length < 3) {
-            return const FSearchTermTooShort();
+          if (searchTerm.isEmpty) {
+            return const SizedBox.shrink();
           }
 
           return FProviderStruct(
@@ -81,7 +84,7 @@ class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
                   final suggestion = data.data[index];
                   return ListTile(
                     title: Text(suggestion.label),
-                    leading: const Icon(MdiIcons.book),
+                    leading: const Icon(Symbols.book_rounded),
                     onTap: () {
                       widget.onTap(suggestion.id);
                     },
@@ -91,7 +94,7 @@ class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
             },
             onError: FEmptyMessage(
               title: context.l10n.story_editor_item_recipe_search__on_error,
-              icon: StateIconConstants.search.errorIcon,
+              icon: IconConstants.errorIcon,
             ),
           );
         },
@@ -102,14 +105,17 @@ class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
   }
 
   void onChange(String val) {
-    _debouncer.run(() {
-      ref.read(widget.searchTermProvider.notifier).set(val);
-    });
+    ref.read(widget.searchTermProvider.notifier).set(val);
   }
 
   void close() {
     _controller.closeView(null);
     _controller.clear();
     ref.read(widget.searchTermProvider.notifier).set(null);
+  }
+
+  void _reset() {
+    _controller.clear();
+    ref.read(widget.searchTermProvider.notifier).set('');
   }
 }

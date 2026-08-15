@@ -4,9 +4,9 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppPage extends ConsumerStatefulWidget {
   const SettingsAppPage({super.key});
@@ -44,7 +44,7 @@ class _SettingsAppPageState extends ConsumerState<SettingsAppPage> {
                     subLabel:
                         context.l10n.settings_app_page__app_icon_title_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.palette),
+                    leading: const FTileIcon(icon: Symbols.palette_rounded),
                     onTap: () => openAppIconPage(context),
                   ),
                   FTile(
@@ -52,14 +52,16 @@ class _SettingsAppPageState extends ConsumerState<SettingsAppPage> {
                     subLabel:
                         context.l10n.settings_app_page__image_mode_title_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.image),
+                    leading: const FTileIcon(icon: Symbols.image_rounded),
                     onTap: () => openImageModePage(context),
                   ),
                   FTile(
                     label: context.l10n.settings_app_page__theme_title,
                     subLabel: context.l10n.settings_app_page__theme_title_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.formatPaint),
+                    leading: const FTileIcon(
+                      icon: Symbols.format_paint_rounded,
+                    ),
                     onTap: () => openThemePage(context),
                   ),
                 ],

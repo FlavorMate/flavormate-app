@@ -242,26 +242,22 @@ class RecipeFulls {
             instructions: [
               RecipeInstructionGroupItemDto(
                 id: '1fef23f9-bea2-491f-b86e-03387136f925',
-                label:
-                    'Mix [[150]]g butter, [[125]]g sugar, [[250]]g flour, [[1]] egg, and baking powder',
+                label: 'Mix [[150]]g butter, [[125]]g sugar, [[250]]g flour, [[1]] egg, and baking powder',
                 index: 0,
               ),
               RecipeInstructionGroupItemDto(
                 id: '15136430-cbc0-417f-894a-82e3246f178d',
-                label:
-                    'Cut the apples into quarters and drizzle lemon juice over them',
+                label: 'Cut the apples into quarters and drizzle lemon juice over them',
                 index: 1,
               ),
               RecipeInstructionGroupItemDto(
                 id: '549c5e0c-11c9-483c-8b35-cb09e4334b01',
-                label:
-                    'Mix the remaining flour, sugar, egg, and butter together with the whipped cream',
+                label: 'Mix the remaining flour, sugar, egg, and butter together with the whipped cream',
                 index: 2,
               ),
               RecipeInstructionGroupItemDto(
                 id: 'c891fc1b-3f0e-4fb4-b3d1-d078d6da457b',
-                label:
-                    'First the crust, then the apples, and finally the liquid topping in a round pan',
+                label: 'First the crust, then the apples, and finally the liquid topping in a round pan',
                 index: 3,
               ),
               RecipeInstructionGroupItemDto(
@@ -385,8 +381,7 @@ class RecipeFulls {
             instructions: [
               RecipeInstructionGroupItemDto(
                 id: '1fef23f9-bea2-491f-b86e-03387136f925',
-                label:
-                    '[[150]]g Butter, [[125]]g Zucker, [[250]]g Mehl, [[1]] Ei und Backpulver vermischen',
+                label: '[[150]]g Butter, [[125]]g Zucker, [[250]]g Mehl, [[1]] Ei und Backpulver vermischen',
                 index: 0,
               ),
               RecipeInstructionGroupItemDto(
@@ -396,14 +391,12 @@ class RecipeFulls {
               ),
               RecipeInstructionGroupItemDto(
                 id: '549c5e0c-11c9-483c-8b35-cb09e4334b01',
-                label:
-                    'Restliches Mehr, Zucker, Ei und Butter zusammen mit der geschlagenen Sahne verrühren',
+                label: 'Restliches Mehr, Zucker, Ei und Butter zusammen mit der geschlagenen Sahne verrühren',
                 index: 2,
               ),
               RecipeInstructionGroupItemDto(
                 id: 'c891fc1b-3f0e-4fb4-b3d1-d078d6da457b',
-                label:
-                    'Erst Boden, dann Äpfel und anschließend den flüssigen Deckel in eine runde Form geben',
+                label: 'Erst Boden, dann Äpfel und anschließend den flüssigen Deckel in eine runde Form geben',
                 index: 3,
               ),
               RecipeInstructionGroupItemDto(

@@ -1,9 +1,9 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeGuidedDialogActionRow extends StatelessWidget {
   static const HEIGHT = 40.0;
@@ -35,7 +35,7 @@ class FRecipeGuidedDialogActionRow extends StatelessWidget {
             FButton(
               width: _BTN_WIDTH,
               leading: const Icon(
-                MdiIcons.chevronLeft,
+                Symbols.chevron_left_rounded,
               ),
               label: context.l10n.btn_back,
               onPressed: onTapPrevious,
@@ -44,7 +44,7 @@ class FRecipeGuidedDialogActionRow extends StatelessWidget {
             FButton(
               width: _BTN_WIDTH,
               trailing: const Icon(
-                MdiIcons.chevronRight,
+                Symbols.chevron_right_rounded,
               ),
               label: context.l10n.btn_next,
               onPressed: onTapNext,
@@ -52,7 +52,7 @@ class FRecipeGuidedDialogActionRow extends StatelessWidget {
           else
             FButton(
               width: _BTN_WIDTH,
-              leading: const Icon(MdiIcons.close),
+              leading: const Icon(Symbols.close_rounded),
               label: context.l10n.btn_close,
               onPressed: () => context.pop(),
             ),

@@ -9,7 +9,7 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
 
-    val aliases = listOf("AppIcon", "Winter2025Icon")
+    val aliases = listOf("AppIcon", "Winter2025Icon", "Spring2026Icon", "Summer2026Icon")
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -21,21 +21,21 @@ class MainActivity : FlutterActivity() {
             flutterEngine.dartExecutor.binaryMessenger,
             "flavormate/icon"
         ).setMethodCallHandler { call: MethodCall?, result: MethodChannel.Result? ->
-                if (call!!.method != "changeIcon") {
-                    result!!.notImplemented()
-                    return@setMethodCallHandler
-                }
-
-                val iconName = call.argument<String?>("iconName")
-
-                if (iconName == null || !aliases.contains(iconName)) {
-                    result!!.error("404", "Unknown icon", null)
-                    return@setMethodCallHandler
-                }
-
-                changeAppIcon(iconName)
-                result!!.success(null)
+            if (call!!.method != "changeIcon") {
+                result!!.notImplemented()
+                return@setMethodCallHandler
             }
+
+            val iconName = call.argument<String?>("iconName")
+
+            if (iconName == null || !aliases.contains(iconName)) {
+                result!!.error("404", "Unknown icon", null)
+                return@setMethodCallHandler
+            }
+
+            changeAppIcon(iconName)
+            result!!.success(null)
+        }
     }
 
     fun changeAppIcon(newIcon: String) {

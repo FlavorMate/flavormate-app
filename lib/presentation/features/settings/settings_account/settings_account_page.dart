@@ -1,7 +1,8 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -10,10 +11,9 @@ import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAccountPage extends ConsumerWidget {
   const SettingsAccountPage({super.key});
@@ -23,22 +23,15 @@ class SettingsAccountPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(MdiIcons.close),
-        ),
-        title: FText(
-          context.l10n.settings_account_page__title,
-          style: .bodyLarge,
-        ),
+      appBar: FAppBar(
+        scrollController: null,
+        title: context.l10n.settings_account_page__title,
       ),
       body: FProviderPage(
         provider: provider,
         onError: FEmptyMessage(
           title: context.l10n.settings_account_page__on_error,
-          icon: StateIconConstants.authors.errorIcon,
+          icon: IconConstants.errorIcon,
         ),
         builder: (context, data) {
           return FResponsive(
@@ -78,7 +71,7 @@ class SettingsAccountPage extends ConsumerWidget {
                       subLabel:
                           context.l10n.settings_account_page__change_diet_hint,
 
-                      leading: const FTileIcon(icon: MdiIcons.leaf),
+                      leading: const FTileIcon(icon: Symbols.eco_rounded),
                       onTap: () => manageDiet(context),
                     ),
                   ],
@@ -90,7 +83,7 @@ class SettingsAccountPage extends ConsumerWidget {
                       subLabel:
                           context.l10n.settings_account_page__change_email_hint,
 
-                      leading: const FTileIcon(icon: MdiIcons.email),
+                      leading: const FTileIcon(icon: Symbols.mail_rounded),
                       onTap: () => manageEmail(context),
                     ),
                     FTile(
@@ -101,7 +94,7 @@ class SettingsAccountPage extends ConsumerWidget {
                           .settings_account_page__change_password_hint,
 
                       leading: const FTileIcon(
-                        icon: MdiIcons.formTextboxPassword,
+                        icon: Symbols.password_rounded,
                       ),
                       onTap: () => managePassword(context),
                     ),
@@ -114,7 +107,7 @@ class SettingsAccountPage extends ConsumerWidget {
                       subLabel:
                           context.l10n.settings_account_page__sessions_hint,
                       leading: const FTileIcon(
-                        icon: MdiIcons.key,
+                        icon: Symbols.key_rounded,
                       ),
                       onTap: () => manageSessions(context),
                     ),
@@ -123,7 +116,7 @@ class SettingsAccountPage extends ConsumerWidget {
                       subLabel:
                           context.l10n.settings_account_page__oidc_links_hint,
                       leading: const FTileIcon(
-                        icon: MdiIcons.linkVariant,
+                        icon: Symbols.link_2_rounded,
                       ),
                       onTap: () => manageOidcLinks(context),
                     ),

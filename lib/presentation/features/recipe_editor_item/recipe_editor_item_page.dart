@@ -1,11 +1,9 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/timer/p_timer.dart';
 import 'package:flavormate/core/riverpod/timer/timer_state.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_dto.dart';
-import 'package:flavormate/data/models/shared/enums/course.dart';
-import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -16,11 +14,10 @@ import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
-import 'package:flavormate/presentation/features/recipe_editor_item/widgets/recipe_editor_item_course_picker.dart';
-import 'package:flavormate/presentation/features/recipe_editor_item/widgets/recipe_editor_item_diet_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/components/floating_action_buttons/m3e_floating_action_buttons.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemPage extends ConsumerStatefulWidget {
   final String id;
@@ -55,9 +52,9 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
         title: data.label ?? context.l10n.recipe_editor_item_page__title,
         actions: [FSaveState(provider: widget.timerProvider)],
       ),
-      floatingActionButtonBuilder: (context, data) => FloatingActionButton(
+      floatingActionButtonBuilder: (context, data) => M3EFab(
         onPressed: () => openPreview(context, data),
-        child: const Icon(MdiIcons.chevronRight),
+        icon: const Icon(Symbols.chevron_right_rounded),
       ),
       builder: (_, data) => SafeArea(
         child: FResponsive(
@@ -71,7 +68,9 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                     label: context.l10n.recipe_editor_item_page__common,
                     subLabel: context.l10n.recipe_editor_item_page__common_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.noteEdit),
+                    leading: const FTileIcon(
+                      icon: Symbols.edit_document_rounded,
+                    ),
                     onTap: () =>
                         context.routes.recipeEditorItemCommon(widget.id),
                     trailing: FProgressColor(
@@ -83,7 +82,9 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                     label: context.l10n.recipe_editor_item_page__media,
                     subLabel: context.l10n.recipe_editor_item_page__media_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.imageMultiple),
+                    leading: const FTileIcon(
+                      icon: Symbols.photo_library_rounded,
+                    ),
                     onTap: () =>
                         context.routes.recipeEditorItemFiles(widget.id),
                     trailing: FProgressColor(
@@ -96,7 +97,7 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                     label: context.l10n.recipe_editor_item_page__origin,
                     subLabel: context.l10n.recipe_editor_item_page__origin_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.web),
+                    leading: const FTileIcon(icon: Symbols.language_rounded),
                     onTap: () =>
                         context.routes.recipeEditorItemOrigin(widget.id),
                     trailing: FProgressColor(
@@ -115,7 +116,7 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                         context.l10n.recipe_editor_item_page__serving_hint,
 
                     leading: const FTileIcon(
-                      icon: MdiIcons.silverwareForkKnife,
+                      icon: Symbols.restaurant_rounded,
                     ),
                     onTap: () =>
                         context.routes.recipeEditorItemServing(widget.id),
@@ -129,7 +130,9 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                     subLabel:
                         context.l10n.recipe_editor_item_page__durations_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.clock),
+                    leading: const FTileIcon(
+                      icon: Symbols.nest_clock_farsight_analog_rounded,
+                    ),
                     onTap: () =>
                         context.routes.recipeEditorItemDurations(widget.id),
                     trailing: FProgressColor(
@@ -148,7 +151,7 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                         .l10n
                         .recipe_editor_item_page__ingredient_groups_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.foodApple),
+                    leading: const FTileIcon(icon: Symbols.nutrition_rounded),
                     onTap: () => context.routes
                         .recipeEditorItemIngredientGroups(widget.id),
                     trailing: FProgressColor(
@@ -164,7 +167,7 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                         .l10n
                         .recipe_editor_item_page__instruction_groups_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.formatListChecks),
+                    leading: const FTileIcon(icon: Symbols.checklist_rounded),
                     onTap: () => context.routes
                         .recipeEditorItemInstructionGroups(widget.id),
                     trailing: FProgressColor(
@@ -179,10 +182,10 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                 items: [
                   FTile(
                     label: context.l10n.recipe_editor_item_page__course,
-                    subLabel: 'Vorspeise, Hauptspeise, Dessert, etc.',
-
-                    leading: const FTileIcon(icon: MdiIcons.foodVariant),
-                    onTap: () => editCourse(context, ref, data.course),
+                    subLabel: context.l10n.recipe_editor_item_page__course_hint,
+                    leading: const FTileIcon(icon: Symbols.grocery_rounded),
+                    onTap: () =>
+                        context.routes.recipeEditorItemCourse(widget.id),
                     trailing: FProgressColor(
                       state: data.courseProgress,
                       color: context.colorScheme.primary,
@@ -192,8 +195,8 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                     label: context.l10n.recipe_editor_item_page__diet,
                     subLabel: context.l10n.recipe_editor_item_page__diet_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.leaf),
-                    onTap: () => editDiet(context, ref, data.diet),
+                    leading: const FTileIcon(icon: Symbols.eco_rounded),
+                    onTap: () => context.routes.recipeEditorItemDiet(widget.id),
                     trailing: FProgressColor(
                       state: data.dietProgress,
                       color: context.colorScheme.primary,
@@ -208,7 +211,7 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                     label: context.l10n.recipe_editor_item_page__tags,
                     subLabel: context.l10n.recipe_editor_item_page__tags_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.tagMultiple),
+                    leading: const FTileIcon(icon: Symbols.sell_rounded),
                     onTap: () => context.routes.recipeEditorItemTags(widget.id),
                     trailing: FProgressColor(
                       state: data.tagsProgress,
@@ -221,7 +224,7 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
                     subLabel:
                         context.l10n.recipe_editor_item_page__categories_hint,
 
-                    leading: const FTileIcon(icon: MdiIcons.package),
+                    leading: const FTileIcon(icon: Symbols.inventory_2_rounded),
                     onTap: () =>
                         context.routes.recipeEditorItemCategories(widget.id),
                     trailing: FProgressColor(
@@ -241,35 +244,9 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
       ),
       onError: FEmptyMessage(
         title: context.l10n.recipe_editor_item_page__on_error,
-        icon: StateIconConstants.drafts.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
     );
-  }
-
-  Future<void> editCourse(
-    BuildContext context,
-    WidgetRef ref,
-    Course? course,
-  ) async {
-    final response = await showDialog<Course>(
-      context: context,
-      builder: (_) => RecipeEditorItemCoursePicker(course: course),
-    );
-
-    if (!context.mounted || response == null) return;
-
-    await ref.read(widget.provider.notifier).setCourse(response);
-  }
-
-  Future<void> editDiet(BuildContext context, WidgetRef ref, Diet? diet) async {
-    final response = await showDialog<Diet>(
-      context: context,
-      builder: (_) => RecipeEditorItemDietPicker(diet: diet),
-    );
-
-    if (!context.mounted || response == null) return;
-
-    await ref.read(widget.provider.notifier).setDiet(response);
   }
 
   Future<void> openPreview(

@@ -1,7 +1,8 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/generated/flutter_gen/assets.gen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeBringButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -12,7 +13,7 @@ class FRecipeBringButton extends StatelessWidget {
 
   const FRecipeBringButton({
     required this.onPressed,
-    this.height = 48,
+    this.height = 40,
     this.width,
     super.key,
   });
@@ -21,9 +22,9 @@ class FRecipeBringButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
-      child: FilledButton(
+      child: M3EButton(
         onPressed: onPressed,
-        style: FilledButton.styleFrom(
+        decoration: .styleFrom(
           backgroundColor: _color,
           foregroundColor: Colors.white,
           minimumSize: .fromHeight(height),
@@ -31,7 +32,10 @@ class FRecipeBringButton extends StatelessWidget {
         child: Row(
           spacing: PADDING / 2,
           children: [
-            Assets.icons.bring.image(height: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: Assets.icons.bring.image(height: 18),
+            ),
             Expanded(
               child: Text(
                 context.l10n.f_recipe_bring_button__title,

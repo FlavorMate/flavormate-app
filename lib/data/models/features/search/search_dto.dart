@@ -2,9 +2,9 @@ import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_m3shapes/flutter_m3shapes.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'search_dto.mapper.dart';
 
@@ -28,8 +28,7 @@ enum SearchDtoSource {
   Category,
   Recipe,
   Story,
-  Tag
-  ;
+  Tag;
 
   String getName(BuildContext context) {
     return switch (this) {
@@ -42,21 +41,21 @@ enum SearchDtoSource {
     };
   }
 
-  Shapes get shape => switch (this) {
-    .Account => Shapes.c6_sided_cookie,
-    .Book => Shapes.very_sunny,
-    .Category => Shapes.l4_leaf_clover,
-    .Recipe => Shapes.square,
-    .Story => Shapes.pentagon,
-    .Tag => Shapes.pill,
+  M3EShapeKind get shape => switch (this) {
+    .Account => .cookie6Sided,
+    .Book => .verySunny,
+    .Category => .clover4Leaf,
+    .Recipe => .square,
+    .Story => .pentagon,
+    .Tag => .pill,
   };
 
   IconData get icon => switch (this) {
-    .Account => MdiIcons.account,
-    .Book => MdiIcons.book,
-    .Category => MdiIcons.archive,
-    .Recipe => MdiIcons.foodVariant,
-    .Story => MdiIcons.chat,
-    .Tag => MdiIcons.tag,
+    .Account => Symbols.group_rounded,
+    .Book => Symbols.book,
+    .Category => Symbols.inventory_2_rounded,
+    .Recipe => Symbols.grocery_rounded,
+    .Story => Symbols.chat_rounded,
+    .Tag => Symbols.sell_rounded,
   };
 }

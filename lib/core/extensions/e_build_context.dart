@@ -4,8 +4,8 @@ import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/dialogs/f_loading_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_fullscreen_image.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension EBuildContext on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
@@ -125,12 +125,21 @@ class Routes {
     }
   }
 
-  Future login({bool replace = false}) async {
+  Future auth({bool replace = false}) async {
     if (replace) {
       context.pushReplacementNamed(RouteConstants.Auth.name);
       return;
     } else {
       return context.pushNamed(RouteConstants.Auth.name);
+    }
+  }
+
+  Future login({bool replace = false}) async {
+    if (replace) {
+      context.pushReplacementNamed(RouteConstants.AuthLogin.name);
+      return;
+    } else {
+      return context.pushNamed(RouteConstants.AuthLogin.name);
     }
   }
 
@@ -285,6 +294,20 @@ class Routes {
         'instructionGroupId': instructionGroupId,
         'instructionId': instructionId,
       },
+    );
+  }
+
+  Future recipeEditorItemCourse(String draftId) {
+    return context.pushNamed(
+      RouteConstants.RecipeEditorItemCourse.name,
+      pathParameters: {'draftId': draftId},
+    );
+  }
+
+  Future recipeEditorItemDiet(String draftId) {
+    return context.pushNamed(
+      RouteConstants.RecipeEditorItemDiet.name,
+      pathParameters: {'draftId': draftId},
     );
   }
 

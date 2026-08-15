@@ -1,6 +1,7 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class StoriesItemActionButton extends StatelessWidget {
   final bool isAdmin;
@@ -19,24 +20,24 @@ class StoriesItemActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MenuAnchor(
-      builder: (_, controller, _) => IconButton(
-        icon: const Icon(MdiIcons.dotsVertical),
-        onPressed: () =>
-            controller.isOpen ? controller.close() : controller.open(),
+    return M3EMenu.entries(
+      anchorBuilder: (_, open) => M3EIconButton(
+        icon: const Icon(Symbols.more_vert_rounded),
+        onPressed: open,
       ),
-      menuChildren: [
+      entries: [
         if (isOwner || isAdmin)
-          MenuItemButton(
-            leadingIcon: const Icon(MdiIcons.pencil),
+          M3EMenuEntry(
+            leading: const Icon(Symbols.edit_rounded),
             onPressed: edit,
-            child: Text(context.l10n.stories_item_action_button__edit),
+            label: context.l10n.stories_item_action_button__edit,
           ),
         if (isOwner || isAdmin)
-          MenuItemButton(
-            leadingIcon: const Icon(MdiIcons.trashCan),
+          M3EMenuEntry(
+            leading: const Icon(Symbols.delete_rounded),
             onPressed: delete,
-            child: Text(context.l10n.stories_item_action_button__delete),
+            isDestructive: true,
+            label: context.l10n.stories_item_action_button__delete,
           ),
       ],
     );

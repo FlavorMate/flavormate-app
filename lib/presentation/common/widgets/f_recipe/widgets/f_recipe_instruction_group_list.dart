@@ -4,7 +4,7 @@ import 'package:flavormate/data/models/local/common_recipe/common_instruction_gr
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_instruction_list.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeInstructionGroupList extends StatelessWidget {
   final List<CommonInstructionGroup> instructionGroups;

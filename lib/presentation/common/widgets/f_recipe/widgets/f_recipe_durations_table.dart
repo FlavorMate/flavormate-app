@@ -2,8 +2,8 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeDurationsTable extends StatelessWidget {
   final Duration prepTime;
@@ -26,21 +26,21 @@ class FRecipeDurationsTable extends StatelessWidget {
           _buildRow(
             context,
             prepTime,
-            MdiIcons.knife,
+            Symbols.countertops_rounded,
             context.l10n.f_recipe_durations__prep_time,
           ),
         if (!cookTime.isEmpty)
           _buildRow(
             context,
             cookTime,
-            MdiIcons.potSteam,
+            Symbols.skillet_rounded,
             context.l10n.f_recipe_durations__cook_time,
           ),
         if (!restTime.isEmpty)
           _buildRow(
             context,
             restTime,
-            MdiIcons.clock,
+            Symbols.snooze_rounded,
             context.l10n.f_recipe_durations__rest_time,
           ),
       ],

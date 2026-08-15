@@ -9,8 +9,9 @@ import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ingredient_group_list.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sliding_panel_kit/sliding_panel_kit.dart';
 
 class FRecipeGuidedMobileDialog extends StatelessWidget {
@@ -102,7 +103,11 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
                               children: [
                                 if (!durationCardActive)
                                   ActionChip(
-                                    avatar: const Icon(MdiIcons.clock),
+                                    mouseCursor: SystemMouseCursors.click,
+                                    avatar: const Icon(
+                                      Symbols
+                                          .nest_clock_farsight_analog_rounded,
+                                    ),
                                     label: Text(
                                       context.l10n.f_recipe_durations,
                                     ),
@@ -110,7 +115,8 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
                                   ),
                                 if (!ingredientCardActive)
                                   ActionChip(
-                                    avatar: const Icon(MdiIcons.foodVariant),
+                                    mouseCursor: SystemMouseCursors.click,
+                                    avatar: const Icon(Symbols.grocery_rounded),
                                     label: Text(
                                       context.l10n.f_recipe_ingredients,
                                     ),
@@ -132,9 +138,11 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
                                           context.l10n.f_recipe_durations,
                                           style: .titleLarge,
                                         ),
-                                        IconButton(
+                                        M3EIconButton(
                                           onPressed: onDurationCard,
-                                          icon: const Icon(MdiIcons.close),
+                                          icon: const Icon(
+                                            Symbols.close_rounded,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -158,9 +166,11 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
                                           context.l10n.f_recipe_ingredients,
                                           style: .titleLarge,
                                         ),
-                                        IconButton(
+                                        M3EIconButton(
                                           onPressed: onIngredientCard,
-                                          icon: const Icon(MdiIcons.close),
+                                          icon: const Icon(
+                                            Symbols.close_rounded,
+                                          ),
                                         ),
                                       ],
                                     ),

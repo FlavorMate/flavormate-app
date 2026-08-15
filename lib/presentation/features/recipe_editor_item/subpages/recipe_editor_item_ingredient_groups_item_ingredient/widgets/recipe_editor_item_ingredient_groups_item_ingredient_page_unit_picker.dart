@@ -1,12 +1,12 @@
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/data/models/features/unit/unit_dto.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_units.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemIngredientGroupsItemIngredientPageUnitPicker
     extends StatelessWidget {
@@ -57,7 +57,7 @@ class RecipeEditorItemIngredientGroupsItemIngredientPageUnitPicker
         title: context
             .l10n
             .recipe_editor_item_ingredient_groups_item_ingredient_page_unit_picker__on_error,
-        icon: StateIconConstants.units.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
     );
   }

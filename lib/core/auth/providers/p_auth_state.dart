@@ -107,6 +107,8 @@ enum AuthState {
       RouteConstants.RecipeEditorItemInstructionGroups,
       RouteConstants.RecipeEditorItemInstructionGroupsItem,
       RouteConstants.RecipeEditorItemInstructionGroupsItemInstruction,
+      RouteConstants.RecipeEditorItemCourse,
+      RouteConstants.RecipeEditorItemDiet,
       RouteConstants.RecipeEditorItemTags,
       RouteConstants.RecipeEditorItemCategories,
       RouteConstants.RecipeEditorItemFiles,
@@ -133,8 +135,7 @@ enum AuthState {
       RouteConstants.RecipeExport,
       RouteConstants.RecipeExportItem,
     ],
-  )
-  ;
+  );
 
   const AuthState({required this.redirectPath, required this.allowedPaths});
 

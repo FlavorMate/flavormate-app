@@ -72,7 +72,7 @@ class POIDC extends _$POIDC {
       );
 
       return idToken.data;
-    } catch (_) {
+    } catch (e) {
       return null;
     }
   }

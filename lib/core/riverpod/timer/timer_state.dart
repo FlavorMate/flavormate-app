@@ -1,7 +1,6 @@
 enum TimerState {
   recipeEditor,
-  storyEditor
-  ;
+  storyEditor;
 
   String getId(String id) => '${name}_$id';
 }

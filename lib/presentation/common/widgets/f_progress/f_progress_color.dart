@@ -1,6 +1,7 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_3_expressive/components/progress_indicators/m3e_progress_indicators.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FProgressColor extends StatelessWidget {
   final double state;
@@ -26,13 +27,17 @@ class FProgressColor extends StatelessWidget {
     final child = switch (state) {
       0 =>
         optional
-            ? Icon(MdiIcons.minusCircleOutline, color: color)
-            : Icon(MdiIcons.alertCircleOutline, color: color),
+            ? Icon(Symbols.do_not_disturb_on_rounded, color: color)
+            : Icon(Symbols.error_rounded, color: color),
 
-      1 => Icon(MdiIcons.checkCircleOutline, color: color),
+      1 => Icon(Symbols.check_circle_rounded, color: color),
       _ => Stack(
         children: [
-          CircularProgressIndicator(value: state, strokeWidth: 3, color: color),
+          M3EProgressIndicator.circular(
+            value: state,
+            strokeWidth: 3,
+            trackColor: Colors.transparent,
+          ),
           Center(
             child: Text(
               (state * 100).toInt().toString(),

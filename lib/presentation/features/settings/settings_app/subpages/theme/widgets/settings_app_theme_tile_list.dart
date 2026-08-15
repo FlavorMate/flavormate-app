@@ -1,6 +1,6 @@
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppThemeTileList extends StatelessWidget {
   final String title;

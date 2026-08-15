@@ -1,4 +1,4 @@
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_story/common_story.dart';
 import 'package:flavormate/data/repositories/features/stories/p_rest_stories.dart';
@@ -9,9 +9,9 @@ import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.
 import 'package:flavormate/presentation/common/widgets/f_story/f_story.dart';
 import 'package:flavormate/presentation/features/stories_item/providers/p_stories_item_page.dart';
 import 'package:flavormate/presentation/features/stories_item/widgets/stories_item_action_button.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class StoriesItemPage extends ConsumerStatefulWidget {
   final String id;
@@ -60,7 +60,7 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
       ),
       onError: FEmptyMessage(
         title: context.l10n.stories_item_page__on_error,
-        icon: StateIconConstants.stories.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
     );
   }
@@ -83,11 +83,9 @@ class _StoriesItemPageState extends ConsumerState<StoriesItemPage> {
   }
 
   void delete() async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.stories_item_page__delete,
-      ),
+    final result = await openConfirmDialog(
+      context,
+      title: context.l10n.stories_item_page__delete,
     );
     if (result != true || !mounted) return;
 

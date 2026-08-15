@@ -1,5 +1,6 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
@@ -16,9 +17,10 @@ import 'package:flavormate/presentation/common/widgets/f_content_search_card.dar
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/features/home/widgets/search/providers/p_search_bar_value.dart';
 import 'package:flavormate/presentation/features/search/dialogs/search_page_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key});
@@ -81,8 +83,8 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               sliver: SliverMainAxisGroup(
                 slivers: [
                   FPageIntroductionSliver(
-                    shape: .c12_sided_cookie,
-                    icon: MdiIcons.magnify,
+                    shape: ShapeConstants.search,
+                    icon: Symbols.search_rounded,
                     description: context.l10n.search_page__description,
                   ),
 
@@ -99,14 +101,15 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                             padding: .all(
                               const .symmetric(horizontal: PADDING),
                             ),
-                            leading: const Icon(MdiIcons.magnify),
+                            elevation: .all(0),
+                            leading: const Icon(Symbols.search_rounded),
                             hintText:
                                 context.l10n.search_page__text_field_label,
                             onChanged: _onSearchChange,
                             trailing: [
-                              IconButton(
+                              M3EIconButton(
                                 onPressed: _openFilterDialog,
-                                icon: const Icon(MdiIcons.filter),
+                                icon: const Icon(Symbols.filter_alt_rounded),
                               ),
                             ],
                           ),
@@ -174,9 +177,9 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   }
 
   void _openFilterDialog() async {
-    final response = await showDialog<Set<SearchDtoSource>>(
-      context: context,
-      builder: (_) => SearchPageFilterDialog(currentFilters: _searchFilter),
+    final response = await SearchPageFilterDialog.openDialog(
+      context,
+      currentFilters: _searchFilter,
     );
 
     if (response == null) return;

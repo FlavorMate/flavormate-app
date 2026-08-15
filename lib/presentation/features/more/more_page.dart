@@ -9,9 +9,9 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MorePage extends ConsumerWidget {
   const MorePage({super.key});
@@ -41,13 +41,13 @@ class MorePage extends ConsumerWidget {
                 FTile(
                   label: context.l10n.more_page__categories,
                   subLabel: context.l10n.more_page__categories_hint,
-                  leading: const FTileIcon(icon: MdiIcons.package),
+                  leading: const FTileIcon(icon: Symbols.inventory_2_rounded),
                   onTap: () => context.routes.categories(),
                 ),
                 FTile(
                   label: context.l10n.more_page__tags,
                   subLabel: context.l10n.more_page__tags_hint,
-                  leading: const FTileIcon(icon: MdiIcons.tag),
+                  leading: const FTileIcon(icon: Symbols.sell_rounded),
                   onTap: () => context.routes.tags(),
                 ),
               ],
@@ -58,14 +58,14 @@ class MorePage extends ConsumerWidget {
                 FTile(
                   label: context.l10n.more_page__recipe_editor,
                   subLabel: context.l10n.more_page__recipe_editor_hint,
-                  leading: const FTileIcon(icon: MdiIcons.bookPlus),
+                  leading: const FTileIcon(icon: Symbols.cake_add_rounded),
                   onTap: () => context.routes.recipeEditor(),
                 ),
                 if (storiesEnabled)
                   FTile(
                     label: context.l10n.more_page__story_editor,
                     subLabel: context.l10n.more_page__story_editor_hint,
-                    leading: const FTileIcon(icon: MdiIcons.newspaperVariant),
+                    leading: const FTileIcon(icon: Symbols.chat_add_on_rounded),
                     onTap: () => context.routes.storyEditor(),
                   ),
               ],
@@ -83,7 +83,9 @@ class MorePage extends ConsumerWidget {
                       subLabel: context
                           .l10n
                           .more_page__import_export__import_description,
-                      leading: const FTileIcon(icon: MdiIcons.databaseImport),
+                      leading: const FTileIcon(
+                        icon: Symbols.cloud_upload_rounded,
+                      ),
                       onTap: () => context.routes.recipeImport(),
                     ),
 
@@ -94,7 +96,9 @@ class MorePage extends ConsumerWidget {
                       subLabel: context
                           .l10n
                           .more_page__import_export__export_description,
-                      leading: const FTileIcon(icon: MdiIcons.databaseExport),
+                      leading: const FTileIcon(
+                        icon: Symbols.cloud_download_rounded,
+                      ),
                       onTap: () => context.routes.recipeExport(),
                     ),
                 ],
@@ -107,7 +111,7 @@ class MorePage extends ConsumerWidget {
                     label: context.l10n.more_page__admin_account_management,
                     subLabel:
                         context.l10n.more_page__admin_account_management_hint,
-                    leading: const FTileIcon(icon: MdiIcons.accountGroup),
+                    leading: const FTileIcon(icon: Symbols.group_rounded),
                     onTap: () =>
                         context.routes.administrationAccountManagement(),
                   ),

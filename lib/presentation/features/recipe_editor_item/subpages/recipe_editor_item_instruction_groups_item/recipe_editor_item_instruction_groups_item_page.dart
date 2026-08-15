@@ -14,10 +14,11 @@ import 'package:flavormate/presentation/common/widgets/f_rounded_list_tile.dart'
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_instruction_groups_item/providers/p_recipe_editor_item_instruction_groups_item.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemInstructionGroupsItemPage extends ConsumerStatefulWidget {
   const RecipeEditorItemInstructionGroupsItemPage({
@@ -94,20 +95,20 @@ class _RecipeEditorItemInstructionGroupsItemPageState
               color: context.colorScheme.onSurface,
               getProgress: (group) => group.validPercent,
             ),
-            IconButton(
+            M3EIconButton(
               onPressed: deleteIngredientGroup,
-              icon: const Icon(MdiIcons.delete),
-              color: context.blendedColors.error,
+              icon: Icon(
+                Symbols.delete_rounded,
+                color: context.blendedColors.error,
+              ),
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          icon: const Icon(MdiIcons.plus),
-          label: Text(
-            context
-                .l10n
-                .recipe_editor_item_instruction_groups_item_page__add_instruction,
-          ),
+        floatingActionButton: M3EExtendedFab(
+          icon: const Icon(Symbols.add_rounded),
+          label: context
+              .l10n
+              .recipe_editor_item_instruction_groups_item_page__add_instruction,
           onPressed: createGroup,
         ),
         body: SafeArea(
@@ -146,14 +147,14 @@ class _RecipeEditorItemInstructionGroupsItemPageState
                               ),
                               ReorderableDragStartListener(
                                 index: index,
-                                child: const Icon(MdiIcons.reorderHorizontal),
+                                child: const Icon(Symbols.reorder_rounded),
                               ),
                             ],
                           ),
                         );
                       },
                       itemCount: _instructions.length,
-                      onReorder: reorderItems,
+                      onReorderItem: reorderItems,
                     ),
                   ),
                 ),
@@ -203,13 +204,10 @@ class _RecipeEditorItemInstructionGroupsItemPageState
   }
 
   void deleteIngredientGroup() async {
-    final response = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context
-            .l10n
-            .recipe_editor_item_instruction_groups_item_page__delete,
-      ),
+    final response = await openConfirmDialog(
+      context,
+      title:
+          context.l10n.recipe_editor_item_instruction_groups_item_page__delete,
     );
 
     if (response != true || !mounted) return;

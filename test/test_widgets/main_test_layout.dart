@@ -1,8 +1,8 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/destination.dart';
 import 'package:flavormate/presentation/common/layouts/main_layout.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Duplicate of [MainLayout] but without the GoRouter dependency
 class MainTestLayout extends StatefulWidget {
@@ -33,13 +33,16 @@ class MainTestLayoutState extends State<MainTestLayout> {
   }
 
   List<Destination> buildDestinations(BuildContext context) => [
-    Destination(icon: MdiIcons.home, label: context.l10n.main_layout__home),
     Destination(
-      icon: MdiIcons.bookshelf,
+      icon: Symbols.home_rounded,
+      label: context.l10n.main_layout__home,
+    ),
+    Destination(
+      icon: Symbols.newsstand_rounded,
       label: context.l10n.main_layout__library,
     ),
     Destination(
-      icon: MdiIcons.shape,
+      icon: Symbols.shapes_rounded,
       label: context.l10n.main_layout__more,
     ),
   ];

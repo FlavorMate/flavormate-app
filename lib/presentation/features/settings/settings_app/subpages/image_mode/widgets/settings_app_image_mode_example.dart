@@ -4,8 +4,8 @@ import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppImageModeExample extends StatelessWidget {
   final String label;
@@ -26,7 +26,7 @@ class SettingsAppImageModeExample extends StatelessWidget {
   });
 
   IconData get _icon =>
-      state ? MdiIcons.checkCircleOutline : MdiIcons.circleOutline;
+      state ? Symbols.check_circle_rounded : Symbols.circle_rounded;
 
   @override
   Widget build(BuildContext context) {

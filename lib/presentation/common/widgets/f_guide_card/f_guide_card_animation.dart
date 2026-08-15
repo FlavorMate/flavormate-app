@@ -1,5 +1,5 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FGuideCardAnimation extends StatelessWidget {
   final IconData icon;

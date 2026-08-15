@@ -6,8 +6,8 @@ import 'package:flavormate/data/models/local/common_recipe/common_ingredient_gro
 import 'package:flavormate/presentation/common/widgets/f_icon_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ingredient_list.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeIngredientGroupList extends StatelessWidget {
   final bool compact;
@@ -60,9 +60,15 @@ class FRecipeIngredientGroupList extends StatelessWidget {
             spacing: PADDING,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FIconButton(onPressed: decreaseServing, icon: MdiIcons.minus),
+              FIconButton(
+                onPressed: decreaseServing,
+                icon: Symbols.remove_rounded,
+              ),
               Text('${newAmount.beautify} $servingLabel'),
-              FIconButton(onPressed: increaseServing, icon: MdiIcons.plus),
+              FIconButton(
+                onPressed: increaseServing,
+                icon: Symbols.add_rounded,
+              ),
             ],
           ),
 

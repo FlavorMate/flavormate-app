@@ -12,9 +12,9 @@ import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_page_introduction.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ServerOutdatedPage extends ConsumerStatefulWidget {
   const ServerOutdatedPage({super.key});
@@ -62,7 +62,7 @@ class _ServerOutdatedPageState extends ConsumerState<ServerOutdatedPage> {
                 children: [
                   FPageIntroduction(
                     shape: .burst,
-                    icon: MdiIcons.cloudAlert,
+                    icon: Symbols.cloud_alert_rounded,
                     description: context.l10n.server_outdated_page__hint_1,
                   ),
                   FCard(

@@ -1,7 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/data/models/features/accounts/account_file_dto.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'account_dto.mapper.dart';
 

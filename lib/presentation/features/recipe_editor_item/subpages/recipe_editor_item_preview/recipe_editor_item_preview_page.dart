@@ -1,4 +1,4 @@
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -6,10 +6,11 @@ import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_preview/providers/p_recipe_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemPreviewPage extends ConsumerStatefulWidget {
   final String draftId;
@@ -56,9 +57,9 @@ class _RecipeEditorPreviewPageState
         scrollController: _controller,
         title: context.l10n.recipe_editor_item_preview_page__title,
       ),
-      floatingActionButtonBuilder: (_, _) => FloatingActionButton(
+      floatingActionButtonBuilder: (_, _) => M3EFab(
         onPressed: uploadRecipe,
-        child: const Icon(MdiIcons.upload),
+        icon: const Icon(Symbols.upload_rounded),
       ),
       builder: (context, data) => FRecipe(
         recipe: data,
@@ -73,7 +74,7 @@ class _RecipeEditorPreviewPageState
       ),
       onError: FEmptyMessage(
         title: context.l10n.recipe_editor_item_preview_page__on_error,
-        icon: StateIconConstants.recipes.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
     );
   }

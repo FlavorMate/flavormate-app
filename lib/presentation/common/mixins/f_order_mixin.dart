@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/presentation/common/dialogs/f_filter_dialog.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 mixin FOrderMixin<T extends StatefulWidget> on State<T> {
   OrderBy get defaultOrderBy;
@@ -55,18 +55,16 @@ mixin FOrderMixin<T extends StatefulWidget> on State<T> {
   }
 
   Future<(OrderDirection, OrderBy)?> openFilterDialog() async {
-    final result = await showDialog<(OrderDirection, OrderBy)>(
-      context: context,
-      builder: (_) => FFilterDialog(
-        currentOrderBy: orderBy,
-        currentOrderDirection: orderDirection,
-        allowedOrderBys: orderBySorted(
-          context,
-          allowedFilters,
-        ),
-        setOrderBy: setOrderBy,
-        setOrderDirection: setOrderDirection,
+    final result = await FFilterDialog.openDialog(
+      context,
+      currentOrderBy: orderBy,
+      currentOrderDirection: orderDirection,
+      allowedOrderBys: orderBySorted(
+        context,
+        allowedFilters,
       ),
+      setOrderBy: setOrderBy,
+      setOrderDirection: setOrderDirection,
     );
 
     if (!mounted || result == null) return null;

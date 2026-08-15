@@ -1,8 +1,5 @@
-import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/presentation/common/widgets/f_logo.dart';
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_3_expressive/components/loading_indicator/m3e_loading_indicator.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FLoading extends StatelessWidget {
   const FLoading({
@@ -11,22 +8,8 @@ class FLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        spacing: PADDING,
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const FLogo(size: 96),
-          const SizedBox(height: PADDING / 2),
-          const CircularProgressIndicator(),
-          FText(
-            context.l10n.f_loading__title,
-            style: FTextStyle.titleLarge,
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
+    return const Center(
+      child: M3ELoadingIndicator(),
     );
   }
 }

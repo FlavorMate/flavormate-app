@@ -6,9 +6,9 @@ import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_message/f_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FMessageLink extends ConsumerWidget implements FMessage {
   final String Function(ImageResolution) imageBuilder;
@@ -53,7 +53,7 @@ class FMessageLink extends ConsumerWidget implements FMessage {
                     child: Row(
                       spacing: PADDING,
                       children: [
-                        const Icon(MdiIcons.link),
+                        const Icon(Symbols.link),
                         FText(
                           linkLabel,
                           style: .bodyMedium,

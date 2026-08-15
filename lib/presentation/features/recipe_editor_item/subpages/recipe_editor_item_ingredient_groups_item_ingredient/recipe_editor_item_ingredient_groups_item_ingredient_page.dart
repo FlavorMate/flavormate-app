@@ -8,7 +8,6 @@ import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingred
 import 'package:flavormate/data/models/features/unit/unit_dto.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading_page.dart';
@@ -16,10 +15,11 @@ import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_ingredient_groups_item_ingredient/dialogs/recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_ingredient_groups_item_ingredient/providers/p_recipe_editor_item_ingredient_groups_item_ingredient.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_ingredient_groups_item_ingredient/widgets/recipe_editor_item_ingredient_groups_item_ingredient_page_unit_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemIngredientGroupsItemIngredientPage
     extends ConsumerStatefulWidget {
@@ -106,10 +106,13 @@ class _RecipeEditorIngredientPageState
               color: context.colorScheme.onSurface,
               getProgress: (instruction) => instruction.validPercent,
             ),
-            IconButton(
+            M3EIconButton(
               onPressed: deleteInstruction,
-              icon: const Icon(MdiIcons.delete),
-              color: context.blendedColors.error,
+              icon: Icon(
+                Symbols.delete_rounded,
+
+                color: context.blendedColors.error,
+              ),
             ),
           ],
         ),
@@ -144,14 +147,17 @@ class _RecipeEditorIngredientPageState
                     clear: () => setLabel(''),
                   ),
 
-                  FButton(
+                  M3EButton.icon(
                     onPressed: openNutrition,
-                    label: context
-                        .l10n
-                        .recipe_editor_item_ingredient_groups_item_ingredient_page__nutrition,
-                    trailing: Visibility(
-                      visible: _nutrition?.exists ?? false,
-                      child: const Icon(MdiIcons.checkCircle),
+                    icon: Icon(
+                      (_nutrition?.exists ?? false)
+                          ? Symbols.check_circle_rounded
+                          : Symbols.circle_rounded,
+                    ),
+                    label: Text(
+                      context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page__nutrition,
                     ),
                   ),
 
@@ -206,13 +212,11 @@ class _RecipeEditorIngredientPageState
   }
 
   void deleteInstruction() async {
-    final response = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context
-            .l10n
-            .recipe_editor_item_ingredient_groups_item_ingredient_page__delete,
-      ),
+    final response = await openConfirmDialog(
+      context,
+      title: context
+          .l10n
+          .recipe_editor_item_ingredient_groups_item_ingredient_page__delete,
     );
 
     if (response != true || !mounted) return;

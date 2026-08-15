@@ -1,5 +1,5 @@
 import 'package:flavormate/core/config/features/p_feature_ratings.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
@@ -13,10 +13,11 @@ import 'package:flavormate/presentation/features/recipes_item/dialogs/recipes_it
 import 'package:flavormate/presentation/features/recipes_item/dialogs/recipes_item_save_in_book_dialog.dart';
 import 'package:flavormate/presentation/features/recipes_item/providers/p_recipes_item_page.dart';
 import 'package:flavormate/presentation/features/recipes_item/widgets/recipes_item_action_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -65,9 +66,9 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
         title: data.recipe.label,
         actions: [
           if (data.isShareEnabled)
-            IconButton(
+            M3EIconButton(
               onPressed: () => share(data.recipe),
-              icon: const Icon(MdiIcons.shareVariant),
+              icon: const Icon(Symbols.share_rounded),
             ),
           if (data.isOwner || data.isAdmin)
             RecipesItemActionButton(
@@ -93,7 +94,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
       ),
       onError: FEmptyMessage(
         title: context.l10n.recipes_item_page__on_error,
-        icon: StateIconConstants.recipes.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
     );
   }
@@ -116,10 +117,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
   }
 
   Future<void> addToBook(CommonRecipe recipe) async {
-    await showDialog(
-      context: context,
-      builder: (_) => RecipesItemSaveInBookDialog(recipe: recipe),
-    );
+    await RecipesItemSaveInBookDialog.openDialog(context, recipe: recipe);
   }
 
   Future<void> setRating(double? val) async {
@@ -178,10 +176,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
   }
 
   Future<void> transfer() async {
-    final account = await showDialog<String>(
-      context: context,
-      builder: (_) => const RecipesItemChangeOwnerDialog(),
-    );
+    final account = await RecipesItemChangeOwnerDialog.openDialog(context);
     if (account == null) return;
 
     final response = await ref
@@ -202,11 +197,9 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
   }
 
   Future<void> delete() async {
-    final response = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.recipes_item_page__delete_title,
-      ),
+    final response = await openConfirmDialog(
+      context,
+      title: context.l10n.recipes_item_page__delete_title,
     );
     if (response != true) return;
 

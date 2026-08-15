@@ -1,10 +1,10 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_m3shapes/flutter_m3shapes.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FBadge extends StatefulWidget {
   final IconData icon;
-  final Shapes shape;
+  final M3EShapeKind shape;
   final double radius;
   final int speed;
 
@@ -48,12 +48,11 @@ class _FBadgeState extends State<FBadge> with SingleTickerProviderStateMixin {
           Center(
             child: RotationTransition(
               turns: _controller,
-              child: M3Container(
-                widget.shape,
+              child: M3EShapeContainer(
+                kind: widget.shape,
                 color: context.colorScheme.primaryContainer,
                 width: widget.radius * 2,
                 height: widget.radius * 2,
-                child: const SizedBox.shrink(),
               ),
             ),
           ),

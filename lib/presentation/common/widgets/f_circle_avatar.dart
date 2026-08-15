@@ -4,9 +4,9 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/components/buttons/m3e_buttons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FCircleAvatar extends ConsumerWidget {
   final AccountDto account;
@@ -32,15 +32,7 @@ class FCircleAvatar extends ConsumerWidget {
         ?.url(resolution)
         .let((it) => ref.watch(pCachedImageProvider(it)));
 
-    if (onTap != null) {
-      return InkWell(
-        borderRadius: .circular(radius),
-        onTap: onTap,
-        child: _buildWidget(context, image, initials),
-      );
-    } else {
-      return _buildWidget(context, image, initials);
-    }
+    return _buildWidget(context, image, initials);
   }
 
   Widget _buildWidget(
@@ -48,25 +40,38 @@ class FCircleAvatar extends ConsumerWidget {
     CacheImageProvider? image,
     String initials,
   ) {
-    return Stack(
-      children: [
-        CircleAvatar(
-          backgroundColor: context.colorScheme.primary,
-          radius: radius,
-          child: CircleAvatar(
-            minRadius: radius - (radius * 0.075),
-            maxRadius: radius - (radius * 0.075),
-            foregroundImage: image,
-            child: Text(
-              initials,
-              style: context.textTheme.bodyMedium!.copyWith(
-                fontSize: radius,
-              ),
+    return SizedBox(
+      height: radius * 2,
+      width: radius * 2,
+      child: M3EButton(
+        onPressed: onTap,
+        decoration: .styleFrom(
+          backgroundBuilder: (_, _, _) => Material(
+            color: context.colorScheme.primary,
+            child: Stack(
+              fit: .expand,
+              children: [
+                Center(
+                  child: Text(
+                    initials,
+                    style: context.textTheme.bodyMedium!.copyWith(
+                      fontSize: radius,
+                      color: context.colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
+                ?image?.let(
+                  (it) => Image(
+                    image: it,
+                    fit: .cover,
+                  ),
+                ),
+                ?child,
+              ],
             ),
           ),
         ),
-        ?child,
-      ],
+      ),
     );
   }
 }

@@ -6,16 +6,24 @@
     {
       "layers" : [
         {
-          "glass" : true,
-          "image-name" : "logo 2.png",
-          "name" : "logo",
-          "opacity" : 1
-        },
-        {
           "blend-mode" : "normal",
           "glass" : true,
           "image-name" : "winter2025.png",
           "name" : "winter2025"
+        },
+        {
+          "fill" : {
+            "solid" : "extended-gray:1.00000,1.00000"
+          },
+          "image-name" : "logo_dynamic.svg",
+          "name" : "logo_dynamic",
+          "position" : {
+            "scale" : 0.75,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
         }
       ],
       "lighting" : "individual",

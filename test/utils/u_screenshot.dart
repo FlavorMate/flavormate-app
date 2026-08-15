@@ -2,7 +2,7 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 

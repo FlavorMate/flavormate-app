@@ -1,7 +1,8 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -20,10 +21,11 @@ import 'package:flavormate/presentation/common/widgets/f_oidc/f_oidc_icon.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_oidc_link/dialogs/settings_account_oidc_link_info_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:uuid/v4.dart';
 
 class SettingsAccountOidcLinkPage extends ConsumerStatefulWidget {
@@ -71,9 +73,9 @@ class _SettingsAccountOidcLinkPageState
         scrollController: _scrollController,
         title: context.l10n.settings_account_oidc_link_page__title,
         actions: [
-          IconButton(
+          M3EIconButton(
             onPressed: handleFilterDialog,
-            icon: const Icon(MdiIcons.filter),
+            icon: const Icon(Symbols.filter_alt_rounded),
           ),
         ],
       ),
@@ -82,11 +84,11 @@ class _SettingsAccountOidcLinkPageState
           provider: provider,
           onEmpty: FEmptyMessage(
             title: context.l10n.settings_account_oidc_link_page__on_empty,
-            icon: StateIconConstants.oidc.emptyIcon,
+            icon: IconConstants.emptyIcon,
           ),
           onError: FEmptyMessage(
             title: context.l10n.settings_account_oidc_link_page__on_error,
-            icon: StateIconConstants.oidc.errorIcon,
+            icon: IconConstants.errorIcon,
           ),
           child: CustomScrollView(
             controller: _scrollController,
@@ -97,8 +99,8 @@ class _SettingsAccountOidcLinkPageState
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     FPageIntroductionSliver(
-                      shape: .puffy_diamond,
-                      icon: MdiIcons.linkVariant,
+                      shape: ShapeConstants.settings,
+                      icon: Symbols.link_2_rounded,
                       description: context
                           .l10n
                           .settings_account_oidc_link_page__description,
@@ -116,6 +118,7 @@ class _SettingsAccountOidcLinkPageState
                         return FTile.manual(
                           first: first,
                           last: last,
+                          context: context,
                           tile: FTile(
                             leading: FOidcIcon(
                               data: link.icon,
@@ -125,10 +128,12 @@ class _SettingsAccountOidcLinkPageState
                             subLabel: link.name,
 
                             onTap: () => openInfoDialog(context, link),
-                            trailing: IconButton(
-                              color: context.blendedColors.error,
+                            trailing: M3EIconButton(
                               onPressed: () => deleteLink(context, ref, link),
-                              icon: const Icon(MdiIcons.delete),
+                              icon: Icon(
+                                Symbols.delete_rounded,
+                                color: context.blendedColors.error,
+                              ),
                             ),
                           ),
                         );
@@ -144,21 +149,16 @@ class _SettingsAccountOidcLinkPageState
     );
   }
 
-  void openInfoDialog(BuildContext context, OidcLinkDto link) {
-    showDialog(
-      context: context,
-      builder: (_) => SettingsAccountOidcLinkInfoDialog(link: link),
-    );
+  void openInfoDialog(BuildContext context, OidcLinkDto link) async {
+    await SettingsAccountOidcLinkInfoDialog.openDialog(context, link: link);
   }
 
   void deleteLink(BuildContext context, WidgetRef ref, OidcLinkDto link) async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.settings_account_oidc_link_page__delete_title,
-        content: context.l10n.settings_account_oidc_link_page__delete_hint(
-          link.providerName,
-        ),
+    final result = await openConfirmDialog(
+      context,
+      title: context.l10n.settings_account_oidc_link_page__delete_title,
+      content: context.l10n.settings_account_oidc_link_page__delete_hint(
+        link.providerName,
       ),
     );
 
