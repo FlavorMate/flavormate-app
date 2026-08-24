@@ -51,17 +51,25 @@ class FRecipePublished extends StatelessWidget {
             mainAxisAlignment: .start,
             children: [
               FCircleAvatar(account: account),
-              Column(
-                crossAxisAlignment: .start,
-                children: [
-                  FText(
-                    account.displayName,
-                    style: .titleMedium,
-                    color: .primary,
-                    fontWeight: .bold,
-                  ),
-                  Text(createdOn.formatter.date.yyyyMMMMdd(context)),
-                ],
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    FText(
+                      account.displayName,
+                      style: .titleMedium,
+                      color: .primary,
+                      fontWeight: .bold,
+                      maxLines: 1,
+                      textOverflow: .ellipsis,
+                    ),
+                    Text(
+                      createdOn.formatter.date.yyyyMMMMdd(context),
+                      overflow: .ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
