@@ -5,6 +5,8 @@ import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group
 import 'package:material_ui/material_ui.dart';
 
 class FTile extends StatelessWidget {
+  final FTextColor? foregroundColor;
+
   final String label;
   final String? subLabel;
 
@@ -22,6 +24,7 @@ class FTile extends StatelessWidget {
     this.leading,
     this.trailing,
     this.disabled = false,
+    this.foregroundColor,
     required this.onTap,
   });
 
@@ -57,7 +60,9 @@ class FTile extends StatelessWidget {
               FText(
                 label,
                 style: .bodyLarge,
-                color: disabled ? .grey : .onPrimaryContainer,
+                color: disabled
+                    ? .grey
+                    : (foregroundColor ?? .onPrimaryContainer),
                 fontRoundness: subLabel == null ? 0 : 100,
                 fontWeight: subLabel == null ? .normal : .w500,
               ),
@@ -65,7 +70,7 @@ class FTile extends StatelessWidget {
                 (it) => FText(
                   it,
                   style: .bodyMedium,
-                  color: .grey,
+                  color: foregroundColor ?? .grey,
                 ),
               ),
             ],

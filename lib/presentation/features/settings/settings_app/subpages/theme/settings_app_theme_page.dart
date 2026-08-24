@@ -12,7 +12,6 @@ import 'package:flavormate/core/theme/providers/p_dynamic_color.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_mode_buttons.dart';
-import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile.dart';
 import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -149,7 +148,7 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
                   ),
 
                   // Add some space so content doesn't overlap with FAB
-                  const SizedBox(height: 56),
+                  const SizedBox(height: kFabHeight),
                 ],
               ),
             ),

@@ -101,8 +101,8 @@ class FTileGroup extends StatelessWidget {
       borderRadius: borderRadius,
       onPressed: disabled ? null : item.onTap,
       padding: const .symmetric(
-        horizontal: PADDING,
-        vertical: PADDING,
+        horizontal: PADDING * 0.75,
+        vertical: PADDING * 0.75,
       ),
       child: item,
     );

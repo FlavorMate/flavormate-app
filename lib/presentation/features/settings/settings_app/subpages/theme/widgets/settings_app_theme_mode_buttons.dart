@@ -1,6 +1,7 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/theme/enums/f_theme_tone.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -32,22 +33,23 @@ class SettingsAppThemeModeButtons extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            child: SegmentedButton(
+            child: M3ESegmentedButton(
               onSelectionChanged: setTone,
+              showSelectedIcon: false,
               segments: [
-                ButtonSegment(
+                M3ESegment(
                   value: FThemeTone.material,
-                  label: Text(FThemeTone.material.l10n(context)),
+                  label: FThemeTone.material.l10n(context),
                   icon: const Icon(Symbols.brush_rounded),
                 ),
-                ButtonSegment(
+                M3ESegment(
                   value: FThemeTone.vivid,
-                  label: Text(FThemeTone.vivid.l10n(context)),
+                  label: FThemeTone.vivid.l10n(context),
                   icon: const Icon(Symbols.imagesearch_roller_rounded),
                 ),
-                ButtonSegment(
+                M3ESegment(
                   value: FThemeTone.chroma,
-                  label: Text(FThemeTone.chroma.l10n(context)),
+                  label: FThemeTone.chroma.l10n(context),
                   icon: const Icon(Symbols.palette_rounded),
                 ),
               ],

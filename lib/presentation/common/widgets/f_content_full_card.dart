@@ -32,7 +32,7 @@ class FContentFullCard extends ConsumerWidget {
     this.blurRadius = 4,
     this.imageSelector,
     required this.onTap,
-    this.height = 96,
+    this.height = 96 - 16 + 4,
   });
 
   @override
@@ -92,12 +92,13 @@ class FContentFullCard extends ConsumerWidget {
                     mainAxisSize: .max,
                     mainAxisAlignment: .spaceEvenly,
                     crossAxisAlignment: .start,
+                    spacing: PADDING / 2,
                     children: [
                       FText(
                         title,
                         style: .bodyLarge,
                         color: .white,
-                        maxLines: 2,
+                        maxLines: 1,
                         fontWeight: .w500,
                         fontRoundness: 100,
                         textOverflow: .ellipsis,
