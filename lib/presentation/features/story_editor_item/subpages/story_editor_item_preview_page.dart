@@ -1,4 +1,4 @@
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_story/common_story.dart';
 import 'package:flavormate/data/repositories/features/story_drafts/p_rest_story_drafts_id.dart';
@@ -6,10 +6,11 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_story/f_story.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class StoryEditorItemPreviewPage extends ConsumerStatefulWidget {
   final String id;
@@ -42,9 +43,9 @@ class _StoryEditorItemPreviewPageState
         scrollController: _scrollController,
         title: data.label!,
       ),
-      floatingActionButtonBuilder: (context, _) => FloatingActionButton(
+      floatingActionButtonBuilder: (context, _) => M3EFab(
         onPressed: () => uploadStory(context, ref),
-        child: const Icon(MdiIcons.upload),
+        icon: const Icon(Symbols.upload_rounded),
       ),
       builder: (_, data) => FStory(
         controller: _scrollController,
@@ -53,7 +54,7 @@ class _StoryEditorItemPreviewPageState
       ),
       onError: FEmptyMessage(
         title: context.l10n.story_editor_item_preview_page__on_error,
-        icon: StateIconConstants.drafts.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
     );
   }

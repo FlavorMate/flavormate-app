@@ -1,18 +1,14 @@
 import 'package:flavormate/core/apis/rest/p_dio_public.dart';
 import 'package:flavormate/core/constants/api_constants.dart';
-import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_dio.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_logo.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive_card.dart';
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
+import 'package:flavormate/presentation/common/layouts/auth_page_template.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
 
 class AuthRecoveryPage extends ConsumerStatefulWidget {
   const AuthRecoveryPage({super.key});
@@ -34,67 +30,46 @@ class _AuthRecoveryPageState extends ConsumerState<AuthRecoveryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: const FBottomNavigationBackBar(),
-      body: SafeArea(
-        child: Center(
-          child: FResponsiveCard(
-            child: Column(
-              crossAxisAlignment: .start,
-              spacing: PADDING * 1.5,
-              mainAxisSize: .min,
-              children: [
-                const FLogo(size: 76),
-                Column(
-                  spacing: PADDING / 2,
-                  crossAxisAlignment: .start,
-                  children: [
-                    FText(
-                      context.l10n.auth_recovery_page__title,
-                      style: .headlineMedium,
-                    ),
-                    FText(
-                      context.l10n.auth_recovery_page__hint_1,
-                      style: .titleMedium,
-                    ),
-                  ],
-                ),
-                AutofillGroup(
-                  child: Form(
-                    key: _form,
-                    child: FTextFormField(
-                      controller: _emailController,
-                      label: context.l10n.auth_recovery_page__email,
-                      autocorrect: false,
-                      autofillHints: const [AutofillHints.username],
-                      keyboardType: TextInputType.visiblePassword,
-                      validators: (input) {
-                        if (UValidator.isEmpty(input)) {
-                          return context.l10n.validator__is_empty;
-                        }
+    return AuthPageTemplate(
+      title: context.l10n.auth_recovery_page__title,
+      subtitle: context.l10n.auth_recovery_page__hint_1,
+      bottomChild: M3EButton.text(
+        onPressed: context.pop,
+        child: Text(context.l10n.btn_back),
+      ),
+      children: [
+        AutofillGroup(
+          child: Form(
+            key: _form,
+            child: FTextFormField(
+              controller: _emailController,
+              label: context.l10n.auth_recovery_page__email,
+              autocorrect: false,
+              autofillHints: const [AutofillHints.username],
+              keyboardType: TextInputType.visiblePassword,
+              onFieldSubmitted: (_) => resetPassword(),
+              validators: (input) {
+                if (UValidator.isEmpty(input)) {
+                  return context.l10n.validator__is_empty;
+                }
 
-                        if (!UValidator.isMail(input!)) {
-                          return context.l10n.validator__is_email;
-                        }
+                if (!UValidator.isMail(input!)) {
+                  return context.l10n.validator__is_email;
+                }
 
-                        return null;
-                      },
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: .centerRight,
-                  child: FButton(
-                    label: context.l10n.btn_continue,
-                    onPressed: resetPassword,
-                    width: 125,
-                  ),
-                ),
-              ],
+                return null;
+              },
             ),
           ),
         ),
-      ),
+        Align(
+          alignment: .centerRight,
+          child: M3EButton(
+            onPressed: resetPassword,
+            child: Text(context.l10n.btn_continue),
+          ),
+        ),
+      ],
     );
   }
 

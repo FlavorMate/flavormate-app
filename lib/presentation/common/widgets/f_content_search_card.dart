@@ -9,9 +9,9 @@ import 'package:flavormate/data/models/features/search/search_dto.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_m3shapes/flutter_m3shapes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/foundations/foundations.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FContentSearchCard extends ConsumerWidget {
   final SearchDto searchDto;
@@ -71,8 +71,8 @@ class FContentSearchCard extends ConsumerWidget {
                     child: Row(
                       spacing: PADDING,
                       children: [
-                        M3Container(
-                          searchDto.source.shape,
+                        M3EShapeContainer(
+                          kind: searchDto.source.shape,
                           height: _height - 2 * PADDING,
                           width: _height - 2 * PADDING,
                           color: context.colorScheme.onPrimaryContainer,

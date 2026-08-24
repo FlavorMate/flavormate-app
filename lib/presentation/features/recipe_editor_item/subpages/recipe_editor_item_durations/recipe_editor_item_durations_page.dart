@@ -1,5 +1,6 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/core/utils/u_riverpod.dart';
@@ -14,9 +15,9 @@ import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_durations/providers/p_recipe_editor_item_durations.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_durations/widgets/recipe_editor_item_durations_page_duration_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemDurationsPage extends ConsumerStatefulWidget {
   final String draftId;
@@ -89,8 +90,8 @@ class _RecipeEditorItemDurationsPageState
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     FPageIntroductionSliver(
-                      shape: .c7_sided_cookie,
-                      icon: MdiIcons.clock,
+                      shape: ShapeConstants.editor,
+                      icon: Symbols.nest_clock_farsight_analog_rounded,
                       description: context
                           .l10n
                           .recipe_editor_item_durations_page__description,
@@ -109,7 +110,9 @@ class _RecipeEditorItemDurationsPageState
                                     .l10n
                                     .recipe_editor_item_durations_page__prep_time,
                                 subLabel: _prepTime.beautify2(context),
-                                leading: const FTileIcon(icon: MdiIcons.knife),
+                                leading: const FTileIcon(
+                                  icon: Symbols.countertops_rounded,
+                                ),
                                 onTap: setPrepTime,
                               ),
                               FTile(
@@ -117,7 +120,9 @@ class _RecipeEditorItemDurationsPageState
                                     .l10n
                                     .recipe_editor_item_durations_page__cook_time,
                                 subLabel: _cookTime.beautify2(context),
-                                leading: const FTileIcon(icon: MdiIcons.stove),
+                                leading: const FTileIcon(
+                                  icon: Symbols.skillet_rounded,
+                                ),
                                 onTap: setCookTime,
                               ),
                               FTile(
@@ -126,7 +131,7 @@ class _RecipeEditorItemDurationsPageState
                                     .recipe_editor_item_durations_page__rest_time,
                                 subLabel: _restTime.beautify2(context),
                                 leading: const FTileIcon(
-                                  icon: MdiIcons.bedClock,
+                                  icon: Symbols.snooze_rounded,
                                 ),
                                 onTap: setRestTime,
                               ),
@@ -146,11 +151,12 @@ class _RecipeEditorItemDurationsPageState
   }
 
   void setPrepTime() async {
-    final response = await showDialog<Duration>(
-      context: context,
-      builder: (_) =>
-          RecipeEditorItemDurationsPageDurationPicker(duration: _prepTime),
-    );
+    final response =
+        await RecipeEditorItemDurationsPageDurationPicker.openDialog(
+          context,
+          duration: _prepTime,
+        );
+
     if (response == null) return;
 
     await ref.read(widget.provider.notifier).setPrepTime(response);
@@ -159,11 +165,12 @@ class _RecipeEditorItemDurationsPageState
   }
 
   void setCookTime() async {
-    final response = await showDialog<Duration>(
-      context: context,
-      builder: (_) =>
-          RecipeEditorItemDurationsPageDurationPicker(duration: _cookTime),
-    );
+    final response =
+        await RecipeEditorItemDurationsPageDurationPicker.openDialog(
+          context,
+          duration: _cookTime,
+        );
+
     if (response == null) return;
 
     await ref.read(widget.provider.notifier).setCookTime(response);
@@ -172,11 +179,12 @@ class _RecipeEditorItemDurationsPageState
   }
 
   void setRestTime() async {
-    final response = await showDialog<Duration>(
-      context: context,
-      builder: (_) =>
-          RecipeEditorItemDurationsPageDurationPicker(duration: _restTime),
-    );
+    final response =
+        await RecipeEditorItemDurationsPageDurationPicker.openDialog(
+          context,
+          duration: _restTime,
+        );
+
     if (response == null) return;
 
     await ref.read(widget.provider.notifier).setRestTime(response);

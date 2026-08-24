@@ -24,8 +24,6 @@ class PSocketBookId extends _$PSocketBookId {
 
     final wsUrl = Uri.parse('$server/$_root/$id').replace(scheme: 'ws');
 
-    print("Create book $id socket");
-
     /// 1. Create webSocket handler:
     final textSocketHandler = IWebSocketHandler<String, String>.createClient(
       wsUrl.toString(),

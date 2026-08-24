@@ -2,11 +2,19 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeImportItemUrlDialog extends StatefulWidget {
   const RecipeImportItemUrlDialog({super.key});
+
+  static Future<String?> openDialog(BuildContext context) async {
+    return await M3EDialog.show(
+      context,
+      dialog: const RecipeImportItemUrlDialog(),
+    );
+  }
 
   @override
   State<StatefulWidget> createState() => _RecipeImportItemUrlDialogState();

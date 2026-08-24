@@ -11,10 +11,12 @@ import 'package:flavormate/data/repositories/core/server/p_server_features.dart'
 import 'package:flavormate/data/repositories/features/units/p_rest_unit_conversions.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_units.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
+import 'package:flavormate/presentation/common/widgets/f_responsive_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flavormate/presentation/common/widgets/f_text_button.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/components/buttons/m3e_buttons.dart';
+import 'package:material_3_expressive/components/loading_indicator/m3e_loading_indicator.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
@@ -24,9 +26,6 @@ class SplashPage extends ConsumerStatefulWidget {
 }
 
 class _SplashPageState extends ConsumerState<SplashPage> {
-  Timer? _timer;
-  bool _showLogout = false;
-
   @override
   void initState() {
     ref.listenManual(
@@ -70,17 +69,11 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       ),
       fireImmediately: true,
     );
-
-    _timer = Timer(
-      const Duration(seconds: 5),
-      () => setState(() => _showLogout = true),
-    );
     super.initState();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     super.dispose();
   }
 
@@ -91,70 +84,57 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Column(
-            spacing: PADDING,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const FLogo(size: 160),
-              FText(
-                context.l10n.flavormate,
-                style: FTextStyle.headlineLarge,
+          child: FResponsiveCard(
+            child: SizedBox(
+              width: double.infinity,
+              child: AnimatedSwitcher(
+                duration: const .new(milliseconds: 250),
+                child: compatibilityState.when(
+                  data: (_) => _buildLoadingWidget(context),
+                  error: (error, _) => _buildErrorWidget(context, error),
+                  loading: () => _buildLoadingWidget(context),
+                ),
               ),
-              const SizedBox(height: PADDING),
-              ...compatibilityState.when(
-                data: (_) => _buildLoadingWidget(context),
-                error: (error, _) => _buildErrorWidget(context, error),
-                loading: () => _buildLoadingWidget(context),
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: SafeArea(
-        minimum: const .only(bottom: PADDING),
-        child: AnimatedOpacity(
-          opacity: _showLogout ? 1 : 0,
-          duration: const Duration(seconds: 1),
-          child: Column(
-            mainAxisSize: .min,
-            spacing: PADDING / 2,
-            children: [
-              FText(
-                context.l10n.splash_page__hint_1,
-                style: FTextStyle.bodyMedium,
-              ),
-              FTextButton(
-                onPressed: logout,
-                value: context.l10n.btn_logout,
-              ),
-            ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  List<Widget> _buildLoadingWidget(BuildContext context) {
-    return [
-      const CircularProgressIndicator(),
-      FText(
-        context.l10n.splash_page__loading,
-        style: FTextStyle.titleLarge,
-      ),
-    ];
+  Widget _buildLoadingWidget(BuildContext context) {
+    return const Center(child: M3ELoadingIndicator());
   }
 
-  List<Widget> _buildErrorWidget(BuildContext context, dynamic error) {
-    return [
-      SizedBox(
-        width: 250,
-        child: FText(
-          context.l10n.splash_page__on_error,
-          style: FTextStyle.bodyLarge,
-          textAlign: TextAlign.center,
+  Widget _buildErrorWidget(BuildContext context, dynamic error) {
+    return Column(
+      crossAxisAlignment: .start,
+      spacing: PADDING * 1.5,
+      children: [
+        FLogo.sm,
+        // TODO: L10n
+        const FText(
+          'Keine Verbindung',
+          style: FTextStyle.headlineMedium,
+          fontRoundness: 100,
         ),
-      ),
-    ];
+        FText(
+          context.l10n.splash_page__on_error,
+          style: FTextStyle.bodyMedium,
+        ),
+        Row(
+          mainAxisAlignment: .spaceBetween,
+          children: [
+            const SizedBox.shrink(),
+            M3EButton(
+              style: .tonal,
+              onPressed: logout,
+              child: Text(context.l10n.btn_logout),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
   Future<void> logout() async {

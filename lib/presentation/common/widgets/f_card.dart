@@ -1,14 +1,13 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FCard extends StatelessWidget {
   final Widget child;
   final Color? color;
   final VoidCallback? onTap;
   final double padding;
-  final double margin;
-  final double? elevation;
 
   const FCard({
     super.key,
@@ -16,24 +15,18 @@ class FCard extends StatelessWidget {
     this.color,
     this.onTap,
     this.padding = PADDING,
-    this.margin = 0,
-    this.elevation,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return M3ECard(
       color: color ?? context.colorScheme.surfaceContainer,
-      elevation: elevation,
-      margin: EdgeInsets.all(margin),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(BORDER_RADIUS),
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.all(padding),
-          width: double.infinity,
-          child: child,
-        ),
+      variant: .filled,
+      onPressed: onTap,
+      padding: EdgeInsets.all(padding),
+      child: SizedBox(
+        width: double.infinity,
+        child: child,
       ),
     );
   }

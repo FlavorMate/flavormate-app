@@ -1,6 +1,6 @@
 import 'package:flavormate/core/constants/color_constants.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppThemeTile extends StatelessWidget {
   final bool isSelected;
@@ -26,7 +26,7 @@ class SettingsAppThemeTile extends StatelessWidget {
         visualDensity: .standard,
         textColor: contentColor,
         leading: Icon(
-          isSelected ? MdiIcons.checkCircleOutline : MdiIcons.circleOutline,
+          isSelected ? Symbols.check_circle_rounded : Symbols.circle_rounded,
           color: contentColor,
         ),
         title: Text(label),

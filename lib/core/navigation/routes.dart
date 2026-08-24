@@ -26,6 +26,8 @@ import 'package:flavormate/presentation/features/recipe_editor/recipe_editor.dar
 import 'package:flavormate/presentation/features/recipe_editor_item/recipe_editor_item_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_categories/recipe_editor_item_categories_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_common/recipe_editor_item_common_page.dart';
+import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_course/recipe_editor_item_course_page.dart';
+import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_diet/recipe_editor_item_diet_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_durations/recipe_editor_item_durations_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_files/recipe_editor_item_files_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_ingredient_groups/recipe_editor_item_ingredient_groups_page.dart';
@@ -67,8 +69,8 @@ import 'package:flavormate/presentation/features/story_editor_item/subpages/stor
 import 'package:flavormate/presentation/features/suggestion/suggestion_page.dart';
 import 'package:flavormate/presentation/features/tags/tags_page.dart';
 import 'package:flavormate/presentation/features/tags_item/tags_item_page.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 var routes = [
   StatefulShellRoute.indexedStack(
@@ -287,6 +289,14 @@ var routes = [
       instructionGroupId: params['instructionGroupId']!,
       instructionId: params['instructionId']!,
     ),
+  ),
+  _createRoute(
+    RouteConstants.RecipeEditorItemCourse,
+    (params) => RecipeEditorItemCoursePage(draftId: params['draftId']!),
+  ),
+  _createRoute(
+    RouteConstants.RecipeEditorItemDiet,
+    (params) => RecipeEditorItemDietPage(draftId: params['draftId']!),
   ),
   _createRoute(
     RouteConstants.RecipeEditorItemTags,

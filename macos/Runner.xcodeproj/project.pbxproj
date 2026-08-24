@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -31,6 +31,8 @@
 		F14686F22C6FAF13005E92ED /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F14686F12C6FAF13005E92ED /* InfoPlist.xcstrings */; };
 		F1A519FC2F1423BD0017017A /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1A519FA2F1423BD0017017A /* AppIcon.icon */; };
 		F1A519FD2F1423BD0017017A /* Winter2025Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1A519FB2F1423BD0017017A /* Winter2025Icon.icon */; };
+		F1DA45633038AFA5001606EA /* Summer2026Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1DA45623038AFA5001606EA /* Summer2026Icon.icon */; };
+		F1DA45653038AFAD001606EA /* Spring2026Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1DA45643038AFAD001606EA /* Spring2026Icon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		F18586BC2C6D1373008FB24E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F1A519FA2F1423BD0017017A /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		F1A519FB2F1423BD0017017A /* Winter2025Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Winter2025Icon.icon; sourceTree = "<group>"; };
+		F1DA45623038AFA5001606EA /* Summer2026Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Summer2026Icon.icon; sourceTree = "<group>"; };
+		F1DA45643038AFAD001606EA /* Spring2026Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Spring2026Icon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,8 @@
 				33BA886A226E78AF003329D5 /* Configs */,
 				F1A519FA2F1423BD0017017A /* AppIcon.icon */,
 				F1A519FB2F1423BD0017017A /* Winter2025Icon.icon */,
+				F1DA45623038AFA5001606EA /* Summer2026Icon.icon */,
+				F1DA45643038AFAD001606EA /* Spring2026Icon.icon */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -278,7 +284,7 @@
 			);
 			mainGroup = 33CC10E42044A3C60003C045;
 			packageReferences = (
-				781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "FlutterGeneratedPluginSwiftPackage" */,
+				781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage" */,
 			);
 			productRefGroup = 33CC10EE2044A3C60003C045 /* Products */;
 			projectDirPath = "";
@@ -303,7 +309,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1DA45633038AFA5001606EA /* Summer2026Icon.icon in Resources */,
 				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
+				F1DA45653038AFAD001606EA /* Spring2026Icon.icon in Resources */,
 				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
 				F1A519FC2F1423BD0017017A /* AppIcon.icon in Resources */,
 				F1A519FD2F1423BD0017017A /* Winter2025Icon.icon in Resources */,
@@ -780,7 +788,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "FlutterGeneratedPluginSwiftPackage" */ = {
+		781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage;
 		};

@@ -1,11 +1,10 @@
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 enum FThemeTone {
   material,
   vivid,
-  chroma
-  ;
+  chroma;
 
   FlexTones Function(Brightness) get tone => switch (this) {
     FThemeTone.material => FlexTones.material,

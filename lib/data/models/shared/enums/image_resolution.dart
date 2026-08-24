@@ -35,8 +35,7 @@ enum ImageResolution {
   S512(512, 512),
   S1024(1024, 1024),
   S2048(2048, 2048),
-  S3072(3072, 3072)
-  ;
+  S3072(3072, 3072);
 
   final int width;
   final int height;

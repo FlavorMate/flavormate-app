@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_object.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'f_text_color.dart';
 part 'f_text_font_family.dart';

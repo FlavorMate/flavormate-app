@@ -2,7 +2,7 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/data/models/local/pageable_dto.dart';
 import 'package:flavormate/presentation/common/widgets/f_2d_table.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

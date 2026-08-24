@@ -7,9 +7,11 @@ import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/components/carousel/components/m3e_carousel_view.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FCarousel<T> extends ConsumerStatefulWidget {
   final double height;
@@ -22,6 +24,8 @@ class FCarousel<T> extends ConsumerStatefulWidget {
   final String Function(T)? labelSelector;
   final String Function(T)? subLabelSelector;
   final FImageType imageType;
+  final bool loading;
+  final String? error;
 
   const FCarousel({
     super.key,
@@ -34,6 +38,8 @@ class FCarousel<T> extends ConsumerStatefulWidget {
     required this.onShowAll,
     this.height = 250,
     this.imageType = FImageType.secure,
+    this.loading = false,
+    this.error,
   });
 
   void Function(int)? get onTapCallback {
@@ -64,87 +70,117 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
   @override
   Widget build(BuildContext context) {
     final imageMode = ref.read(pSettingsImageModeProvider);
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final currentBreakpoint = FBreakpoint.getCurrent(constraints.maxWidth);
-        final layout = widget.getCurrentLayout(
-          currentBreakpoint,
-          widget.data.length,
-        );
 
-        final resolution = UImage.getResolution(
-          ref,
-          context,
-          imageMode,
-          constraints.maxWidth,
-        );
+    if (widget.error != null) {
+      return SizedBox(
+        height: widget.height,
+        child: M3ECard(
+          variant: .outlined,
+          child: Center(
+            child: FText(widget.error!, style: .bodyMedium),
+          ),
+        ),
+      );
+    }
 
-        final hasTitle = widget.title?.isNotEmpty ?? false;
+    return SizedBox(
+      height: widget.height,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final currentBreakpoint = FBreakpoint.getCurrent(
+            constraints.maxWidth,
+          );
+          final layout = widget.getCurrentLayout(
+            currentBreakpoint,
+            widget.data.length,
+          );
 
-        final contentHeight = widget.height - (hasTitle ? 40 : 48);
+          final resolution = UImage.getResolution(
+            ref,
+            context,
+            imageMode,
+            constraints.maxWidth,
+          );
 
-        // Subtract padding between cells
-        final width = constraints.maxWidth - (layout.length * 8);
+          final hasTitle = widget.title?.isNotEmpty ?? false;
 
-        final layoutCells = layout.fold(0, (a, b) => a + b);
+          final contentHeight = widget.height - (hasTitle ? 40 : 48);
 
-        final biggestCell = width * (layout.first / layoutCells);
+          // Subtract padding between cells
+          final width = constraints.maxWidth - (layout.length * 8);
 
-        return Column(
-          spacing: PADDING / 4,
-          children: [
-            if (hasTitle)
-              SizedBox(
-                height: 40,
-                child: Row(
-                  spacing: PADDING / 4,
-                  children: [
-                    FText(
-                      widget.title!,
-                      style: FTextStyle.headlineSmall,
-                      fontWeight: .w500,
-                    ),
-                    IconButton(
-                      onPressed: widget.onShowAll,
-                      icon: const Icon(MdiIcons.arrowRight),
-                    ),
-                  ],
-                ),
-              ),
-            SizedBox(
-              height: contentHeight,
-              child: CarouselView.weighted(
-                flexWeights: layout,
-                itemSnapping: true,
-                onTap: widget.onTapCallback,
-                enableSplash: widget.onTapCallback != null,
-                children: [
-                  for (final item in widget.data)
-                    FImageCard(
-                      label: widget.labelSelector?.call(item),
-                      subLabel: widget.subLabelSelector?.call(item),
-                      coverSelector: (_) =>
-                          widget.coverSelector.call(item, resolution),
-                      contentWidth: biggestCell,
-                      imageType: widget.imageType,
-                    ),
-                ],
-              ),
-            ),
-            if (!hasTitle)
-              SizedBox(
-                height: 48,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: widget.onShowAll,
-                    child: Text(context.l10n.btn_show_more),
+          final layoutCells = layout.fold(0, (a, b) => a + b);
+
+          final biggestCell = width * (layout.first / layoutCells);
+
+          return Column(
+            children: [
+              if (hasTitle)
+                SizedBox(
+                  height: 40,
+                  child: Row(
+                    spacing: PADDING / 4,
+                    children: [
+                      FText(
+                        widget.title!,
+                        style: FTextStyle.headlineSmall,
+                        fontWeight: .w500,
+                      ),
+                      M3EIconButton(
+                        onPressed: widget.onShowAll,
+                        icon: const Icon(Symbols.arrow_forward_rounded),
+                      ),
+                    ],
                   ),
                 ),
+              SizedBox(
+                height: contentHeight,
+                child: AnimatedSwitcher(
+                  duration: const .new(milliseconds: 150),
+                  child: widget.loading
+                      ? const Center(
+                          key: ValueKey('first'),
+                          child: M3ELoadingIndicator(),
+                        )
+                      : M3ECarouselView.weighted(
+                          key: const ValueKey('second'),
+                          flexWeights: layout,
+                          itemSnapping: true,
+                          onTap: widget.onTapCallback,
+                          // Enable when M3E Library has added expressive splash
+                          enableSplash: false,
+                          children: [
+                            for (final item in widget.data)
+                              MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: FImageCard(
+                                  label: widget.labelSelector?.call(item),
+                                  subLabel: widget.subLabelSelector?.call(item),
+                                  coverSelector: (_) => widget.coverSelector
+                                      .call(item, resolution),
+                                  contentWidth: biggestCell,
+                                  imageType: widget.imageType,
+                                ),
+                              ),
+                          ],
+                        ),
+                ),
               ),
-          ],
-        );
-      },
+              if (!hasTitle)
+                SizedBox(
+                  height: 48,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: M3EButton.text(
+                      onPressed: widget.onShowAll,
+                      child: Text(context.l10n.btn_show_more),
+                    ),
+                  ),
+                ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

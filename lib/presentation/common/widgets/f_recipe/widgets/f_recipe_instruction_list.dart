@@ -4,8 +4,9 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_instruction.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_instruction_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_3_expressive/components/buttons/m3e_buttons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeInstructionList extends StatelessWidget {
   final CommonInstructionGroup instructionGroup;
@@ -63,35 +64,25 @@ class _CheckedIndexState extends State<_CheckedIndex> {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: .circular(radius),
-      child: Container(
-        width: radius * 2,
-        height: radius * 2,
-        color: context.colorScheme.primaryContainer,
-        child: Stack(
-          fit: .expand,
-          children: [
-            _selected
-                ? const Icon(MdiIcons.check)
-                : Center(
-                    child: FText(
-                      '${widget.instruction.index + 1}.',
-                      style: .titleMedium,
-                      color: .onPrimaryContainer,
-                    ),
-                  ),
+    return M3EButton(
+      style: .text,
+      onPressed: toggle,
+      decoration: .styleFrom(
+        backgroundColor: context.colorScheme.primaryContainer,
+        minimumSize: .new(radius * 2, radius * 2),
+        maximumSize: .new(radius * 2, radius * 2),
+        padding: .zero,
+      ),
 
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: toggle,
-                child: const SizedBox.expand(),
+      child: _selected
+          ? const Icon(Symbols.check_rounded)
+          : Center(
+              child: FText(
+                '${widget.instruction.index + 1}.',
+                style: .titleMedium,
+                color: .onPrimaryContainer,
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 

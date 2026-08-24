@@ -1,7 +1,8 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_date_time.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
@@ -22,11 +23,11 @@ import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/features/settings/settings_account/settings_account_sessions/dialogs/settings_account_sessions_info_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_m3shapes/flutter_m3shapes.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:uuid/v4.dart';
 
 class SettingsAccountSessionsPage extends ConsumerStatefulWidget {
@@ -77,27 +78,27 @@ class _SettingsAccountSessionsPageState
         scrollController: _scrollController,
         title: context.l10n.settings_account_sessions_page__title,
         actions: [
-          IconButton(
+          M3EIconButton(
             onPressed: handleFilterDialog,
-            icon: const Icon(MdiIcons.filter),
+            icon: const Icon(Symbols.filter_alt_rounded),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: M3EFab(
         onPressed: () => deleteAllSessionsButCurrent(),
-        child: const Icon(MdiIcons.logout),
+        icon: const Icon(Symbols.logout_rounded),
       ),
       body: SafeArea(
         child: FProviderState(
           provider: provider,
-          onEmpty: FEmptyMessage(
+          onEmpty: const FEmptyMessage(
             // This state should never happen
             title: '',
-            icon: StateIconConstants.login.emptyIcon,
+            icon: IconConstants.emptyIcon,
           ),
           onError: FEmptyMessage(
             title: context.l10n.settings_account_sessions_page__on_error,
-            icon: StateIconConstants.login.errorIcon,
+            icon: IconConstants.errorIcon,
           ),
           child: CustomScrollView(
             controller: _scrollController,
@@ -108,8 +109,8 @@ class _SettingsAccountSessionsPageState
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     FPageIntroductionSliver(
-                      shape: Shapes.c4_sided_cookie,
-                      icon: MdiIcons.key,
+                      shape: ShapeConstants.settings,
+                      icon: Symbols.key_rounded,
                       description:
                           context.l10n.settings_account_sessions_page__hint,
                     ),
@@ -130,17 +131,20 @@ class _SettingsAccountSessionsPageState
                         return FTile.manual(
                           first: first,
                           last: last,
+                          context: context,
                           tile: FTile(
                             label: link.userAgent?.device ?? '-',
                             subLabel: link.createdAt.formatter.dateTime
                                 .yyMMddHHmm(context),
                             onTap: () => openInfoDialog(context, link),
-                            trailing: IconButton(
-                              color: context.blendedColors.error,
+                            trailing: M3EIconButton(
                               onPressed: currentSession
                                   ? null
                                   : () => deleteSession(link),
-                              icon: const Icon(MdiIcons.delete),
+                              icon: Icon(
+                                Symbols.delete_rounded,
+                                color: context.blendedColors.error,
+                              ),
                             ),
                           ),
                         );
@@ -160,20 +164,18 @@ class _SettingsAccountSessionsPageState
     );
   }
 
-  void openInfoDialog(BuildContext context, SessionDto session) {
-    showDialog(
-      context: context,
-      builder: (_) => SettingsAccountSessionsInfoDialog(session: session),
+  void openInfoDialog(BuildContext context, SessionDto session) async {
+    await SettingsAccountSessionsInfoDialog.openDialog(
+      context,
+      session: session,
     );
   }
 
   Future<void> deleteSession(SessionDto session) async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.settings_account_sessions_page__delete_title,
-        content: context.l10n.settings_account_sessions_page__delete_hint,
-      ),
+    final result = await openConfirmDialog(
+      context,
+      title: context.l10n.settings_account_sessions_page__delete_title,
+      content: context.l10n.settings_account_sessions_page__delete_hint,
     );
 
     if (!mounted || result != true) return;
@@ -201,12 +203,10 @@ class _SettingsAccountSessionsPageState
   }
 
   Future<void> deleteAllSessionsButCurrent() async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.settings_account_sessions_page__delete_all_title,
-        content: context.l10n.settings_account_sessions_page__delete_all_hint,
-      ),
+    final result = await openConfirmDialog(
+      context,
+      title: context.l10n.settings_account_sessions_page__delete_all_title,
+      content: context.l10n.settings_account_sessions_page__delete_all_hint,
     );
 
     if (!mounted || result != true) return;

@@ -1,4 +1,4 @@
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -12,10 +12,11 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_lazy_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorPage extends ConsumerStatefulWidget {
   const RecipeEditorPage({super.key});
@@ -52,20 +53,20 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
         scrollController: _scrollController,
       ),
 
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: M3EFab(
         onPressed: createDraft,
-        child: const Icon(MdiIcons.plus),
+        icon: const Icon(Symbols.add_rounded),
       ),
       body: SafeArea(
         child: FProviderState(
           provider: provider,
           onEmpty: FEmptyMessage(
             title: context.l10n.recipe_editor_page__on_empty,
-            icon: StateIconConstants.drafts.emptyIcon,
+            icon: IconConstants.emptyIcon,
           ),
           onError: FEmptyMessage(
             title: context.l10n.recipe_editor_page__on_error,
-            icon: StateIconConstants.drafts.errorIcon,
+            icon: IconConstants.errorIcon,
           ),
           child: FLazyTable<RecipeDraftPreviewDto>(
             key: orderKey,
@@ -99,10 +100,12 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
                 enableRowTap: false,
                 alignment: Alignment.center,
                 header: const SizedBox.shrink(),
-                cellBuilder: (context, item, rowIndex) => IconButton(
+                cellBuilder: (context, item, rowIndex) => M3EIconButton(
                   onPressed: () => deleteDraft(item.id),
-                  color: context.blendedColors.error,
-                  icon: const Icon(MdiIcons.delete),
+                  icon: Icon(
+                    Symbols.delete_rounded,
+                    color: context.blendedColors.error,
+                  ),
                   tooltip: MaterialLocalizations.of(
                     context,
                   ).deleteButtonTooltip,
@@ -132,11 +135,9 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
   }
 
   Future<void> deleteDraft(String id) async {
-    final confirmation = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.recipe_editor_page__delete_draft,
-      ),
+    final confirmation = await openConfirmDialog(
+      context,
+      title: context.l10n.recipe_editor_page__delete_draft,
     );
 
     if (!mounted || confirmation != true) return;

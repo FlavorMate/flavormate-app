@@ -1,6 +1,7 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
@@ -17,9 +18,10 @@ import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart'
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/features/library/dialogs/create_book_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class LibraryPage extends ConsumerStatefulWidget {
   const LibraryPage({super.key});
@@ -56,15 +58,15 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
         title: context.l10n.flavormate,
         showHome: false,
         actions: [
-          IconButton(
+          M3EIconButton(
             onPressed: openFilterDialog,
-            icon: const Icon(MdiIcons.filter),
+            icon: const Icon(Symbols.filter_alt_rounded),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: M3EFab(
         onPressed: () => addBook(context, ref),
-        child: const Icon(MdiIcons.plus),
+        icon: const Icon(Symbols.add_rounded),
       ),
       body: SafeArea(
         child: CustomScrollView(
@@ -76,8 +78,8 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
               sliver: SliverMainAxisGroup(
                 slivers: [
                   FPageIntroductionSliver(
-                    shape: .c12_sided_cookie,
-                    icon: MdiIcons.bookshelf,
+                    shape: ShapeConstants.firstLevel,
+                    icon: Symbols.newsstand_rounded,
                     description: context.l10n.library_page__description,
                   ),
 
@@ -90,7 +92,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
                         items: [
                           FTile(
                             leading: const FTileIcon(
-                              icon: MdiIcons.foodVariant,
+                              icon: Symbols.grocery_rounded,
                             ),
                             label: context.l10n.library_page__qa_recipes_title,
                             subLabel: context
@@ -172,10 +174,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
   }
 
   Future<void> addBook(BuildContext context, WidgetRef ref) async {
-    final response = await showDialog<String?>(
-      context: context,
-      builder: (_) => const CreateBookDialog(),
-    );
+    final response = await CreateBookDialog.openDialog(context);
 
     if (response?.isEmpty ?? true) return;
 

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 
 import 'device.dart';
@@ -10,12 +10,11 @@ Device iPadProM513InchBuilder(AssetBundle assets) => Device(
     resolution: const Size(3000, 2300),
     pixelRatio: 2,
     goldenSubFolder: 'ipad_pro_m5_13/',
-    frameBuilder:
-        ({
-          required device,
-          frameColors,
-          required child,
-        }) => _IPadFrame(device: device, assets: assets, child: child),
+    frameBuilder: ({
+      required device,
+      frameColors,
+      required child,
+    }) => _IPadFrame(device: device, assets: assets, child: child),
   ),
 );
 
@@ -29,8 +28,7 @@ class _IPadFrame extends StatelessWidget {
     required this.device,
     required this.assets,
     required this.child,
-    this.frameColors,
-  });
+  }) : frameColors = null;
 
   double get pixelRatio => device.pixelRatio;
 

@@ -6,9 +6,9 @@ import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart'
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/features/administration/account_management/enums/administration_account_management_actions.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AdministrationAccountManagementActionsDialog extends StatelessWidget {
   final AccountFullDto account;
@@ -19,6 +19,20 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
     required this.account,
     required this.isCurrent,
   });
+
+  static Future<AdministrationAccountManagementActions?> openDialog(
+    BuildContext context, {
+    required AccountFullDto account,
+    required bool isCurrent,
+  }) async {
+    return await openAlertDialog(
+      context,
+      dialog: AdministrationAccountManagementActionsDialog(
+        account: account,
+        isCurrent: isCurrent,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +51,7 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
                     .l10n
                     .administration_account_management_actions_dialog__actions_open,
                 subLabel: null,
-                leading: const FTileIcon(icon: MdiIcons.account),
+                leading: const FTileIcon(icon: Symbols.person_rounded),
                 onTap: () => pop(context, .Open),
               ),
             ],
@@ -49,7 +63,7 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
                     .l10n
                     .administration_account_management_actions_dialog__actions_avatar,
                 subLabel: null,
-                leading: const FTileIcon(icon: MdiIcons.image),
+                leading: const FTileIcon(icon: Symbols.image_rounded),
                 onTap: () => pop(context, .Avatar),
                 disabled: account.avatar == null,
               ),
@@ -58,7 +72,9 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
                     .l10n
                     .administration_account_management_actions_dialog__actions_avatar_change,
                 subLabel: null,
-                leading: const FTileIcon(icon: MdiIcons.imageEdit),
+                leading: const FTileIcon(
+                  icon: Symbols.add_photo_alternate_rounded,
+                ),
                 onTap: () => pop(context, .AvatarChange),
               ),
             ],
@@ -74,7 +90,11 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
                           .l10n
                           .administration_account_management_actions_dialog__actions_enable,
                 subLabel: null,
-                leading: const FTileIcon(icon: MdiIcons.accountCheck),
+                leading: FTileIcon(
+                  icon: account.enabled
+                      ? Symbols.person_remove_rounded
+                      : Symbols.person_check_rounded,
+                ),
                 onTap: () => pop(context, .Enable),
                 disabled: isCurrent,
               ),
@@ -83,7 +103,7 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
                     .l10n
                     .administration_account_management_actions_dialog__actions_set_password,
                 subLabel: null,
-                leading: const FTileIcon(icon: MdiIcons.lockReset),
+                leading: const FTileIcon(icon: Symbols.lock_reset_rounded),
                 onTap: () => pop(context, .ResetPassword),
               ),
               FTile(
@@ -91,7 +111,7 @@ class AdministrationAccountManagementActionsDialog extends StatelessWidget {
                     .l10n
                     .administration_account_management_actions_dialog__actions_delete,
                 subLabel: null,
-                leading: const FTileIcon(icon: MdiIcons.delete),
+                leading: const FTileIcon(icon: Symbols.delete_rounded),
                 onTap: () => pop(context, .Delete),
                 disabled: isCurrent,
               ),

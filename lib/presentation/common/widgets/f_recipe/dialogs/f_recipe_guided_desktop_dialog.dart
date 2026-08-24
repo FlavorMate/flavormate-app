@@ -8,8 +8,9 @@ import 'package:flavormate/presentation/common/widgets/f_recipe/dialogs/f_recipe
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_durations_table.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ingredient_group_list.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeGuidedDesktopDialog extends StatelessWidget {
   final FGuideCard currentStep;
@@ -75,9 +76,9 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
                               context.l10n.f_recipe_durations,
                               style: .titleLarge,
                             ),
-                            IconButton(
+                            M3EIconButton(
                               onPressed: onDurationCard,
-                              icon: const Icon(MdiIcons.close),
+                              icon: const Icon(Symbols.close_rounded),
                             ),
                           ],
                         ),
@@ -102,9 +103,9 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
                                 context.l10n.f_recipe_ingredients,
                                 style: .titleLarge,
                               ),
-                              IconButton(
+                              M3EIconButton(
                                 onPressed: onIngredientCard,
-                                icon: const Icon(MdiIcons.close),
+                                icon: const Icon(Symbols.close_rounded),
                               ),
                             ],
                           ),

@@ -2,7 +2,7 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_tag.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeTags extends StatelessWidget {
   final bool readOnly;
@@ -28,6 +28,7 @@ class FRecipeTags extends StatelessWidget {
           children: [
             for (final tag in tags)
               ActionChip(
+                mouseCursor: readOnly ? null : SystemMouseCursors.click,
                 label: Text('#${tag.label}'),
                 onPressed: readOnly
                     ? () {}

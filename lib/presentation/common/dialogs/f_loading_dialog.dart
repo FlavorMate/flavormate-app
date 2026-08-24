@@ -2,7 +2,8 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_3_expressive/components/loading_indicator/m3e_loading_indicator.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FLoadingDialog extends StatelessWidget {
   final bool hint;
@@ -23,11 +24,7 @@ class FLoadingDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const CircularProgressIndicator(),
-                FText(
-                  context.l10n.f_loading_dialog__loading,
-                  style: FTextStyle.titleLarge,
-                ),
+                const M3ELoadingIndicator(),
                 if (hint)
                   FText(
                     context.l10n.f_loading_dialog__loading_hint,

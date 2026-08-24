@@ -51,8 +51,8 @@ class PRestStoryDraftsId extends _$PRestStoryDraftsId {
     await setForm({'content': content.trimToNull});
   }
 
-  Future<void> setRecipe(String recipe) async {
-    await setForm({'recipe': recipe.trimToNull});
+  Future<void> setRecipe(String? recipe) async {
+    await setForm({'recipe': recipe?.trimToNull});
   }
 
   Future<void> setForm(Map<String, dynamic> form) async {

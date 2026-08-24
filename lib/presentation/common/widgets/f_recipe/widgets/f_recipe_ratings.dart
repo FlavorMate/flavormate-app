@@ -1,12 +1,13 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
-import 'package:flavormate/data/repositories/extension/ratings/p_rest_ratings_id.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/data/repositories/extension/ratings/p_rest_ratings_id.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeRatings extends StatelessWidget {
   final String recipeId;
@@ -52,6 +53,7 @@ class FRecipeRatings extends StatelessWidget {
                                 data.average.toStringAsFixed(1),
                                 style: .headlineMedium,
                                 fontWeight: .bold,
+                                fontRoundness: 100,
                               ),
                             ),
                             const SizedBox(width: PADDING * 2),
@@ -107,19 +109,19 @@ class FRecipeRatings extends StatelessWidget {
                           mainAxisAlignment: .center,
                           children: [
                             for (double i = 1; i <= 5; i++)
-                              IconButton(
+                              M3EIconButton(
                                 icon: Icon(
-                                  (data?.ownRating ?? 0) >= i
-                                      ? MdiIcons.star
-                                      : MdiIcons.starOutline,
+                                  Symbols.star_rounded,
+                                  fill: (data?.ownRating ?? 0) >= i ? 1 : 0,
                                 ),
                                 onPressed: () => onRatingTap(i),
                               ),
                             if (data?.ownRating != null) ...[
                               const SizedBox(width: PADDING),
-                              IconButton(
-                                icon: const Icon(
-                                  MdiIcons.trashCanOutline,
+                              M3EIconButton(
+                                icon: Icon(
+                                  Symbols.delete_rounded,
+                                  color: context.blendedColors.error,
                                 ),
                                 onPressed: () => onRatingTap(null),
                               ),
@@ -132,7 +134,7 @@ class FRecipeRatings extends StatelessWidget {
                 },
                 onError: FEmptyMessage(
                   title: context.l10n.f_recipe_ratings__on_error,
-                  icon: StateIconConstants.reviews.errorIcon,
+                  icon: IconConstants.errorIcon,
                 ),
               ),
             ),
@@ -166,7 +168,8 @@ class _StarBar extends StatelessWidget {
             children: [
               for (int i = 0; i < level; i++)
                 const Icon(
-                  MdiIcons.star,
+                  Symbols.star_rounded,
+                  fill: 1,
                   size: 16,
                 ),
             ],

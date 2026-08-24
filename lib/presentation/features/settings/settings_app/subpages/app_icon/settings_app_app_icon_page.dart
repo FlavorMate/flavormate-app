@@ -11,9 +11,9 @@ import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppAppIconPage extends StatelessWidget {
   const SettingsAppAppIconPage({super.key});
@@ -39,7 +39,7 @@ class SettingsAppAppIconPage extends StatelessWidget {
                   child: Row(
                     spacing: PADDING,
                     children: [
-                      const Icon(MdiIcons.alertCircle),
+                      const Icon(Symbols.error_rounded),
                       Expanded(
                         child: FText(
                           context.l10n.settings_app_app_icon_page__hint,
@@ -64,6 +64,20 @@ class SettingsAppAppIconPage extends StatelessWidget {
                         .l10n
                         .settings_app_app_icon_page__icon_winter_2025,
                     onTap: () => setIcon(context, .winter2025),
+                  ),
+                  _buildTile(
+                    imagePath: Assets.appIcons.spring2026.path,
+                    label: context
+                        .l10n
+                        .settings_app_app_icon_page__icon_spring_2026,
+                    onTap: () => setIcon(context, .spring2026),
+                  ),
+                  _buildTile(
+                    imagePath: Assets.appIcons.summer2026.path,
+                    label: context
+                        .l10n
+                        .settings_app_app_icon_page__icon_summer_2026,
+                    onTap: () => setIcon(context, .summer2026),
                   ),
                 ],
               ),
@@ -105,16 +119,12 @@ class SettingsAppAppIconPage extends StatelessWidget {
     required String imagePath,
     required VoidCallback onTap,
   }) {
-    const iconHeight = 56.0;
-
     return FTile(
-      height: iconHeight + 2 * PADDING,
       leading: ClipRRect(
         borderRadius: .circular(BORDER_RADIUS),
-        child: Image.asset(imagePath, height: iconHeight),
+        child: Image.asset(imagePath, height: 48),
       ),
       label: label,
-      subLabel: null,
       onTap: onTap,
     );
   }

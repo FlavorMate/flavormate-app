@@ -1,8 +1,8 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
-class FTextFormField extends StatelessWidget {
+class FTextFormField extends StatefulWidget {
   final String? label;
   final TextEditingController controller;
   final Widget? suffix;
@@ -43,35 +43,67 @@ class FTextFormField extends StatelessWidget {
   });
 
   @override
+  State<FTextFormField> createState() => _FTextFormFieldState();
+}
+
+class _FTextFormFieldState extends State<FTextFormField> {
+  final focusNode = FocusNode();
+
+  FocusNode get activeFocusNode => widget.focusNode ?? focusNode;
+
+  void update() => setState(() {});
+
+  @override
+  void initState() {
+    activeFocusNode.addListener(update);
+    widget.controller.addListener(update);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    activeFocusNode.removeListener(update);
+    widget.controller.removeListener(update);
+    focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final showClear =
+        activeFocusNode.hasFocus && widget.controller.text.isNotEmpty;
+
+    final suffix = widget.suffix ?? _ClearButton(clear: clearField);
+
     return TextFormField(
-      focusNode: focusNode,
-      controller: controller,
-      autocorrect: autocorrect,
+      focusNode: widget.focusNode ?? focusNode,
+      controller: widget.controller,
+      autocorrect: widget.autocorrect,
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
-        label: label != null ? Text(label!) : null,
-        suffix: suffix ?? _ClearButton(clear: clearField),
-        prefixIcon: prefix,
+        label: widget.label != null ? Text(widget.label!) : null,
+        suffixIcon: showClear ? suffix : null,
+        prefixIcon: widget.prefix,
       ),
-      autofillHints: autofillHints,
-      maxLines: maxLines,
-      expands: expands,
-      validator: validators,
-      keyboardType: keyboardType,
-      readOnly: readOnly,
-      enabled: !readOnly,
-      onChanged: onChanged,
-      onFieldSubmitted: onFieldSubmitted,
-      onTapOutside: onTapOutside,
-      obscureText: obscureText,
+      autofillHints: widget.autofillHints,
+      maxLines: widget.maxLines,
+      expands: widget.expands,
+      validator: widget.validators,
+      keyboardType: widget.keyboardType,
+      readOnly: widget.readOnly,
+      enabled: !widget.readOnly,
+      onChanged: widget.onChanged,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      onTapOutside: widget.onTapOutside,
+      obscureText: widget.obscureText,
       textAlignVertical: TextAlignVertical.top,
     );
   }
 
   void clearField() {
-    clear?.call();
-    controller.clear();
+    widget.clear?.call();
+    widget.controller.clear();
   }
 }
 
@@ -86,7 +118,7 @@ class _ClearButton extends StatelessWidget {
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: clear,
-        child: Icon(MdiIcons.delete, color: context.blendedColors.error),
+        child: Icon(Symbols.delete_rounded, color: context.blendedColors.error),
       ),
     );
   }

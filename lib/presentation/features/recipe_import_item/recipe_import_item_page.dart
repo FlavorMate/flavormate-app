@@ -1,7 +1,10 @@
 import 'package:file_selector/file_selector.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
+import 'package:flavormate/core/extensions/e_x_type_group.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_import_type.dart';
 import 'package:flavormate/data/models/extensions/importExport/ie_import_wrapper.dart';
@@ -10,7 +13,6 @@ import 'package:flavormate/data/repositories/extension/import_export/p_ie_import
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_page_introduction.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
@@ -19,10 +21,11 @@ import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart'
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flavormate/presentation/features/recipe_import_item/recipe_import_item_url_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:path/path.dart' as path;
 
 class RecipeImportItemPage extends ConsumerStatefulWidget {
   final String id;
@@ -37,8 +40,6 @@ class RecipeImportItemPage extends ConsumerStatefulWidget {
 }
 
 class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
-  static const _width = 125.0;
-
   final _scrollController = ScrollController();
 
   final List<String> urls = [];
@@ -58,7 +59,7 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
       provider: widget.provider,
       onError: FEmptyMessage(
         title: context.l10n.recipe_import_item_page__on_error,
-        icon: MdiIcons.download,
+        icon: IconConstants.errorIcon,
       ),
       appBarBuilder: (_, data) => FAppBar(
         title: data.name,
@@ -71,44 +72,28 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
           FWrap(
             children: [
               if (data.import.contains(IEImportType.FileImport))
-                SizedBox(
-                  width: _width,
-                  child: FCard(
-                    color: context.colorScheme.primaryContainer,
-                    onTap: () => addFile(data),
-                    child: Row(
-                      children: [
-                        const Icon(MdiIcons.filePlus),
-                        Expanded(
-                          child: Center(child: Text(context.l10n.btn_file)),
-                        ),
-                      ],
-                    ),
-                  ),
+                FButton(
+                  leading: const Icon(Symbols.attach_file_add_rounded),
+                  tonal: true,
+                  width: BUTTON_WIDTH / 2,
+                  onPressed: () => addFile(data),
+                  label: context.l10n.btn_file,
                 ),
 
               if (data.import.contains(IEImportType.UrlImport))
-                SizedBox(
-                  width: _width,
-                  child: FCard(
-                    color: context.colorScheme.primaryContainer,
-                    onTap: addUrl,
-                    child: Row(
-                      children: [
-                        const Icon(MdiIcons.webPlus),
-                        Expanded(
-                          child: Center(child: Text(context.l10n.btn_web)),
-                        ),
-                      ],
-                    ),
-                  ),
+                FButton(
+                  leading: const Icon(Symbols.add_link_rounded),
+                  tonal: true,
+                  width: BUTTON_WIDTH / 2,
+                  onPressed: addUrl,
+                  label: context.l10n.btn_web,
                 ),
             ],
           ),
 
           FButton(
-            width: _width * 2 + PADDING,
-            leading: const Icon(MdiIcons.upload),
+            width: BUTTON_WIDTH + PADDING,
+            leading: const Icon(Symbols.upload_rounded),
             label: context.l10n.btn_import,
             onPressed: _importValid ? () => import(data.id) : null,
           ),
@@ -121,8 +106,8 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
             spacing: PADDING,
             children: [
               FPageIntroduction(
-                shape: .sunny,
-                icon: MdiIcons.cloudUpload,
+                shape: ShapeConstants.secondLevel,
+                icon: Symbols.cloud_upload_rounded,
                 description: data.importLongDescription,
               ),
 
@@ -131,7 +116,6 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
                   items: [
                     FTile(
                       label: context.l10n.recipe_import_item_page__on_empty,
-                      subLabel: null,
                       onTap: null,
                     ),
                   ],
@@ -144,11 +128,16 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
                     for (final (index, url) in urls.indexed)
                       FTile(
                         label: url,
-                        subLabel: null,
                         onTap: null,
-                        trailing: IconButton(
-                          onPressed: () => removeUrl(index),
-                          icon: const Icon(MdiIcons.close),
+                        trailing: Padding(
+                          padding: const .only(right: 8.0),
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => removeUrl(index),
+                              child: const Icon(Symbols.close_rounded),
+                            ),
+                          ),
                         ),
                       ),
                   ],
@@ -162,9 +151,15 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
                         label: file.name,
                         subLabel: null,
                         onTap: null,
-                        trailing: IconButton(
-                          onPressed: () => removeFile(index),
-                          icon: const Icon(MdiIcons.close),
+                        trailing: Padding(
+                          padding: const .only(right: 8),
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => removeFile(index),
+                              child: const Icon(Symbols.close_rounded),
+                            ),
+                          ),
                         ),
                       ),
                   ],
@@ -180,6 +175,9 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
     final typeGroup = XTypeGroup(
       extensions: importer.importExtensions,
       mimeTypes: importer.importMimeTypes,
+      uniformTypeIdentifiers: importer.importExtensions
+          .map(EXTypeGroup.toUniformTypeIdentifier)
+          .toList(),
     );
 
     final selectedFiles = await openFiles(
@@ -187,7 +185,12 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
     );
 
     setState(() {
-      files.addAll(selectedFiles);
+      final allowedItems = selectedFiles.where(
+        (it) => importer.importExtensions
+            .map((it) => it.toLowerCase())
+            .contains(path.extension(it.path).toLowerCase()),
+      );
+      files.addAll(allowedItems);
     });
   }
 
@@ -198,10 +201,7 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
   }
 
   void addUrl() async {
-    final url = await showDialog<String>(
-      context: context,
-      builder: (context) => const RecipeImportItemUrlDialog(),
-    );
+    final url = await RecipeImportItemUrlDialog.openDialog(context);
 
     if (!context.mounted || url.isBlank) return;
 

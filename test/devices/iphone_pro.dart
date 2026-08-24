@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 
 import 'device.dart';
@@ -10,12 +10,11 @@ Device iPhone17ProBuilder(AssetBundle assets) => Device(
     resolution: const Size(1350, 2760),
     pixelRatio: 3,
     goldenSubFolder: 'iphone_17_pro/',
-    frameBuilder:
-        ({
-          required device,
-          frameColors,
-          required child,
-        }) => _IPhoneFrame(device: device, assets: assets, child: child),
+    frameBuilder: ({
+      required device,
+      frameColors,
+      required child,
+    }) => _IPhoneFrame(device: device, assets: assets, child: child),
   ),
 );
 
@@ -29,8 +28,7 @@ class _IPhoneFrame extends StatelessWidget {
     required this.device,
     required this.assets,
     required this.child,
-    this.frameColors,
-  });
+  }) : frameColors = null;
 
   double get pixelRatio => device.pixelRatio;
 

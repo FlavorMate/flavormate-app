@@ -16,7 +16,9 @@ class UAppIcon {
 
 enum AppIcon {
   appIcon('AppIcon'),
-  winter2025('Winter2025Icon')
+  winter2025('Winter2025Icon'),
+  spring2026('Spring2026Icon'),
+  summer2026('Summer2026Icon'),
   ;
 
   final String value;

@@ -1,6 +1,5 @@
-import 'package:flavormate/presentation/common/widgets/f_input_type/f_input_type_aware_app.dart';
-import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_3_expressive/components/buttons/m3e_buttons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FTextButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -14,22 +13,6 @@ class FTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTouch = FInputTypeAwareApp.of(context).isTouch;
-
-    if (isTouch) {
-      return TextButton(onPressed: onPressed, child: Text(value));
-    } else {
-      return GestureDetector(
-        onTap: onPressed,
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: FText(
-            value,
-            style: .bodyMedium,
-            color: .onPrimaryContainer,
-          ),
-        ),
-      );
-    }
+    return M3EButton(style: .text, onPressed: onPressed, child: Text(value));
   }
 }

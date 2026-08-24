@@ -1,19 +1,21 @@
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_error.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class FProviderStruct<T> extends ConsumerWidget {
   final ProviderListenable<AsyncValue<T>> provider;
   final Widget Function(BuildContext, T) builder;
+  final Widget? onLoading;
   final FEmptyMessage onError;
 
   const FProviderStruct({
     required this.provider,
     required this.builder,
     required this.onError,
+    this.onLoading,
     super.key,
   });
 
@@ -25,8 +27,8 @@ class FProviderStruct<T> extends ConsumerWidget {
         context,
         value,
       ),
-      AsyncError() => Material(child: FError(onError: onError)),
-      _ => const Material(child: FLoading()),
+      AsyncError() => FError(onError: onError),
+      _ => onLoading ?? const FLoading(),
     };
   }
 }

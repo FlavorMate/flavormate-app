@@ -5,7 +5,7 @@ import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
 import 'package:flavormate/presentation/features/library/library_page.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../test_data/accounts/accounts.dart';

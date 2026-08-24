@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_object.dart';
@@ -8,8 +6,9 @@ import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FContentFullCard extends ConsumerWidget {
   final String title;
@@ -19,6 +18,8 @@ class FContentFullCard extends ConsumerWidget {
   final VoidCallback onTap;
   final bool first;
   final bool last;
+
+  bool get single => first && last;
 
   final double height;
 
@@ -36,10 +37,22 @@ class FContentFullCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = M3ETheme.of(context).listTheme.cardList;
     final imageMode = ref.watch(pSettingsImageModeProvider);
 
-    final top = first ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
-    final bottom = last ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
+    final M3ECardPosition position = single
+        ? .single
+        : first
+        ? .first
+        : last
+        ? .last
+        : .middle;
+
+    final borderRadius = calculateCardRadius(
+      position: position,
+      outerRadius: theme.outerRadius,
+      innerRadius: theme.innerRadius,
+    );
 
     return SizedBox(
       height: height,
@@ -52,34 +65,21 @@ class FContentFullCard extends ConsumerWidget {
             constraints.maxWidth,
           );
 
-          return ClipRRect(
-            borderRadius: .only(
-              topLeft: .circular(top),
-              topRight: .circular(top),
-              bottomLeft: .circular(bottom),
-              bottomRight: .circular(bottom),
-            ),
+          return M3ECard(
+            variant: .filled,
+            borderRadius: borderRadius,
+            padding: .zero,
+            onPressed: onTap,
             child: Stack(
               fit: .expand,
               children: [
-                Transform.scale(
-                  scale: 1.05,
-                  child: ImageFiltered(
-                    imageFilter: ImageFilter.blur(
-                      sigmaX: blurRadius,
-                      sigmaY: blurRadius,
-                    ),
-                    child: FImage(
-                      imageSrc: imageSelector?.call(resolution),
-                      type: .secure,
-                      fit: .cover,
-                      onError: Container(
-                        color: Color.lerp(
-                          context.colorScheme.inversePrimary,
-                          Colors.black,
-                          0.15,
-                        ),
-                      ),
+                FImage.blur(
+                  imageSrc: imageSelector?.call(resolution),
+                  onError: Container(
+                    color: Color.lerp(
+                      context.colorScheme.inversePrimary,
+                      Colors.black,
+                      0.15,
                     ),
                   ),
                 ),
@@ -95,9 +95,11 @@ class FContentFullCard extends ConsumerWidget {
                     children: [
                       FText(
                         title,
-                        style: .titleLarge,
+                        style: .bodyLarge,
                         color: .white,
-                        maxLines: subtitle == null ? 2 : 1,
+                        maxLines: 2,
+                        fontWeight: .w500,
+                        fontRoundness: 100,
                         textOverflow: .ellipsis,
                       ),
 
@@ -111,15 +113,6 @@ class FContentFullCard extends ConsumerWidget {
                         ),
                       ),
                     ],
-                  ),
-                ),
-
-                Positioned.fill(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: onTap,
-                    ),
                   ),
                 ),
               ],

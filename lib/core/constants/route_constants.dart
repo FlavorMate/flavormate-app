@@ -219,11 +219,11 @@ abstract class RouteConstants {
         '/recipe-editor/:draftId/ingredient-groups/:ingredientGroupId',
         'recipe-editor_item_ingredient-groups_item',
       );
-  static const RouteConstant
-  RecipeEditorItemIngredientGroupsItemIngredient = RouteConstant(
-    '/recipe-editor/:draftId/ingredient-groups/:ingredientGroupId/ingredient/:ingredientId',
-    'recipe-editor_item_ingredient-groups_item_ingredient',
-  );
+  static const RouteConstant RecipeEditorItemIngredientGroupsItemIngredient =
+      RouteConstant(
+        '/recipe-editor/:draftId/ingredient-groups/:ingredientGroupId/ingredient/:ingredientId',
+        'recipe-editor_item_ingredient-groups_item_ingredient',
+      );
 
   static const RouteConstant RecipeEditorItemInstructionGroups = RouteConstant(
     '/recipe-editor/:draftId/instruction-groups',
@@ -234,10 +234,18 @@ abstract class RouteConstants {
         '/recipe-editor/:draftId/instruction-groups/:instructionGroupId',
         'recipe-editor_item_instruction-groups_item',
       );
-  static const RouteConstant
-  RecipeEditorItemInstructionGroupsItemInstruction = RouteConstant(
-    '/recipe-editor/:draftId/instruction-groups/:instructionGroupId/instruction/:instructionId',
-    'recipe-editor_item_instruction-groups_item_instruction',
+  static const RouteConstant RecipeEditorItemInstructionGroupsItemInstruction =
+      RouteConstant(
+        '/recipe-editor/:draftId/instruction-groups/:instructionGroupId/instruction/:instructionId',
+        'recipe-editor_item_instruction-groups_item_instruction',
+      );
+  static const RouteConstant RecipeEditorItemCourse = RouteConstant(
+    '/recipe-editor/:draftId/course',
+    'recipe-editor_item_course',
+  );
+  static const RouteConstant RecipeEditorItemDiet = RouteConstant(
+    '/recipe-editor/:draftId/diet',
+    'recipe-editor_item_diet',
   );
   static const RouteConstant RecipeEditorItemTags = RouteConstant(
     '/recipe-editor/:draftId/tags',

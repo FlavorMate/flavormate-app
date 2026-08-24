@@ -14,16 +14,15 @@ import 'package:flavormate/core/theme/providers/p_theme.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flavormate/presentation/common/widgets/f_input_type/f_input_type_aware_app.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide ImageCache;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:system_theme/system_theme.dart';
+import 'package:material_3_expressive/foundations/foundations.dart';
+import 'package:material_ui/material_ui.dart' hide ImageCache;
 
 void main() async {
   AppLinks();
   WidgetsFlutterBinding.ensureInitialized();
   registerManualLicenses();
-  await SystemTheme.accentColor.load();
   MapperContainer.globals.useAll(customMappers);
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
@@ -52,12 +51,26 @@ class MyApp extends ConsumerWidget {
     final tone = ref.watch(pSPThemeToneProvider);
     final color = ref.watch(pThemeProvider).requireValue;
 
+    final lightTheme = FTheme.createTheme(color, .light, tone.tone);
+    final darkTheme = FTheme.createTheme(color, .dark, tone.tone);
+
     return MaterialApp.router(
+      builder: (context, child) {
+        final theme = Theme.of(context);
+
+        return M3ETheme(
+          data: M3EThemeData.fromMaterial(theme),
+          child: MaterialUiCompatibilityBridge(child: child!),
+        );
+      },
       onGenerateTitle: (context) => context.l10n.flavormate,
-      theme: FTheme.createTheme(color, .light, tone.tone),
-      darkTheme: FTheme.createTheme(color, .dark, tone.tone),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      localizationsDelegates: L10n.localizationsDelegates,
+      localizationsDelegates: const [
+        L10n.delegate,
+        ...GlobalMaterialLocalizations.delegates,
+      ],
       supportedLocales: L10n.supportedLocales,
       routerConfig: provider,
       debugShowCheckedModeBanner: false,

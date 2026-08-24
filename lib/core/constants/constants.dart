@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const double PADDING = 16.0;
 const double BORDER_RADIUS = 12;

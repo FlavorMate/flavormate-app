@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'recipe_draft_file_dto.mapper.dart';
 

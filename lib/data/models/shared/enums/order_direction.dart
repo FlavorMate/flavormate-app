@@ -1,15 +1,14 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'order_direction.mapper.dart';
 
 @MappableEnum()
 enum OrderDirection {
-  Ascending(MdiIcons.sortAscending),
-  Descending(MdiIcons.sortDescending)
-  ;
+  Ascending(Symbols.arrow_downward_rounded),
+  Descending(Symbols.arrow_upward_rounded);
 
   final IconData icon;
 

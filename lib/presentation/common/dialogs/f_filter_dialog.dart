@@ -4,8 +4,9 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FFilterDialog extends StatefulWidget {
   final OrderBy? currentOrderBy;
@@ -24,6 +25,26 @@ class FFilterDialog extends StatefulWidget {
     required this.setOrderBy,
     required this.setOrderDirection,
   });
+
+  static Future<(OrderDirection, OrderBy)?> openDialog(
+    BuildContext context, {
+    required OrderBy? currentOrderBy,
+    required OrderDirection? currentOrderDirection,
+    required List<OrderBy> allowedOrderBys,
+    required Function(OrderBy) setOrderBy,
+    required Function(OrderDirection) setOrderDirection,
+  }) async {
+    return await M3EDialog.show(
+      context,
+      dialog: FFilterDialog(
+        currentOrderBy: currentOrderBy,
+        currentOrderDirection: currentOrderDirection,
+        allowedOrderBys: allowedOrderBys,
+        setOrderBy: setOrderBy,
+        setOrderDirection: setOrderDirection,
+      ),
+    );
+  }
 
   @override
   State<StatefulWidget> createState() => _FFilterDialogState();

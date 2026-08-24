@@ -1,6 +1,6 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FResponsive extends StatelessWidget {
   final ScrollBehavior? scrollBehavior;

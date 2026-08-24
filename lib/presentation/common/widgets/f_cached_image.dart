@@ -1,5 +1,5 @@
 import 'package:flavormate/presentation/common/widgets/f_image/f_image_error.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FCachedImage extends StatelessWidget {
   final ImageProvider imageProvider;

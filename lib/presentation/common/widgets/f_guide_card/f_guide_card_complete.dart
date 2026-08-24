@@ -4,8 +4,8 @@ import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_animation.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FGuideCardComplete extends FGuideCard {
   final String? label;
@@ -32,7 +32,7 @@ class FGuideCardComplete extends FGuideCard {
         mainAxisAlignment: .center,
         spacing: PADDING,
         children: [
-          const FGuideCardAnimation(icon: MdiIcons.checkCircleOutline),
+          const FGuideCardAnimation(icon: Symbols.check_circle_rounded),
           FText(
             text,
             style: .titleMedium,

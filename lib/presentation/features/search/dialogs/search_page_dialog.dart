@@ -3,10 +3,10 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/features/search/search_dto.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_m3shapes/flutter_m3shapes.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/foundations/foundations.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SearchPageFilterDialog extends StatefulWidget {
   final Set<SearchDtoSource> currentFilters;
@@ -15,6 +15,16 @@ class SearchPageFilterDialog extends StatefulWidget {
     super.key,
     required this.currentFilters,
   });
+
+  static Future<Set<SearchDtoSource>?> openDialog(
+    BuildContext context, {
+    required Set<SearchDtoSource> currentFilters,
+  }) async {
+    return await openAlertDialog(
+      context,
+      dialog: SearchPageFilterDialog(currentFilters: currentFilters),
+    );
+  }
 
   @override
   State<StatefulWidget> createState() => _SearchPageFilterDialogState();
@@ -56,19 +66,19 @@ class _SearchPageFilterDialogState extends State<SearchPageFilterDialog> {
   ChoiceChip _buildChoiceChip(BuildContext context, SearchDtoSource source) {
     final isSelected = filters.contains(source);
     return ChoiceChip(
-      avatar: M3Container(
-        source.shape,
+      avatar: M3EShapeContainer(
+        kind: source.shape,
         width: 20,
         height: 20,
         color: context.colorScheme.onPrimaryContainer,
         child: isSelected
             ? Icon(
-                MdiIcons.checkBold,
+                Symbols.check_rounded,
                 color: context.colorScheme.primaryContainer,
                 size: 14,
               )
-            : M3Container(
-                source.shape,
+            : M3EShapeContainer(
+                kind: source.shape,
                 width: 18,
                 height: 18,
                 color: context.colorScheme.surfaceContainer,

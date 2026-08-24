@@ -2,11 +2,11 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_badge.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_m3shapes/flutter_m3shapes.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FPageIntroductionSliver extends StatelessWidget {
-  final Shapes shape;
+  final M3EShapeKind shape;
   final IconData icon;
 
   final String description;

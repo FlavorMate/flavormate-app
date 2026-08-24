@@ -1,24 +1,26 @@
 import 'package:flavormate/core/auth/oidc/p_oidc.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/route_constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/extensions/e_ref.dart';
+import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
+import 'package:flavormate/presentation/common/layouts/auth_page_template.dart';
 import 'package:flavormate/presentation/common/widgets/f_logo.dart';
 import 'package:flavormate/presentation/common/widgets/f_oidc/f_oidc_icon.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
-import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
+import 'package:flavormate/presentation/common/widgets/f_responsive_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_button.dart';
+import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/features/auth/dialogs/login_oidc_link_dialog.dart';
+import 'package:flavormate/presentation/features/auth/providers/p_auth_username.dart';
 import 'package:flavormate/presentation/features/auth/providers/p_login_page.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});
@@ -30,8 +32,21 @@ class AuthPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<AuthPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
+    ref.listenOnce(pAuthUsernameProvider, (data) {
+      _usernameController.text = data;
+    });
+
     ref.listenManual(widget.provider, (_, data) async {
       if (data.isLoading) {
         return;
@@ -52,81 +67,38 @@ class _LoginPageState extends ConsumerState<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FProviderPage(
-      provider: widget.provider,
-      builder: (_, data) => Center(
-        child: FResponsive(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const FLogo(size: 128),
-              FText(
-                context.l10n.flavormate,
-                style: FTextStyle.headlineLarge,
-              ),
-              const SizedBox(height: PADDING * 2),
-              FButton(
-                width: BUTTON_WIDTH,
-                label: context.l10n.auth_page__login,
-                onPressed: () =>
-                    context.pushNamed(RouteConstants.AuthLogin.name),
-              ),
+    final provider = ref.watch(widget.provider);
 
-              if (data.enableRegistration) ...[
-                const SizedBox(height: PADDING),
-                FButton(
-                  tonal: true,
-                  width: BUTTON_WIDTH,
-                  label: context.l10n.auth_page__register,
-                  onPressed: () =>
-                      context.pushNamed(RouteConstants.AuthRegister.name),
-                ),
-              ],
-              if (data.oidcProviders.isNotEmpty) ...[
-                const SizedBox(height: PADDING),
-                Row(
-                  spacing: PADDING / 4,
-                  children: [
-                    const Expanded(child: Divider()),
-                    Text(context.l10n.auth_page__or),
-                    const Expanded(child: Divider()),
-                  ],
-                ),
-                const SizedBox(height: PADDING),
-                FText(
-                  context.l10n.auth_page__login_with,
-                  style: FTextStyle.bodyMedium,
-                ),
-                const SizedBox(height: PADDING),
-                SizedBox(
-                  width: BUTTON_WIDTH,
-                  child: FTileGroup(
-                    items: [
-                      for (final provider in data.oidcProviders)
-                        FTile(
-                          label: provider.label,
-                          subLabel: null,
-                          leading: FOidcIcon(
-                            data: provider.icon,
-                            label: provider.label,
-                          ),
-                          onTap: () => openOIDC(provider),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
+    if (provider.hasError) {
+      return Material(child: _buildErrorWidget(context));
+    }
+
+    if (!provider.hasValue) {
+      return const Material(child: Center(child: M3ELoadingIndicator()));
+    }
+
+    final data = provider.requireValue;
+
+    return AuthPageTemplate(
+      title: context.l10n.auth_login_page__title,
+      subtitle: context.l10n.auth_page__hint,
+      bottomChild: Column(
+        spacing: PADDING / 4,
+        mainAxisSize: .min,
+        children: [
+          Row(
+            spacing: PADDING / 2,
+            mainAxisAlignment: .center,
+            children: [
+              Icon(
+                Symbols.cloud_rounded,
+                size: 16,
+                fill: 1,
+                color: context.colorScheme.primary,
+              ),
+              Text(data.server),
             ],
           ),
-        ),
-      ),
-      loadingShowAppBar: false,
-      bottomNavigationBarBuilder: (_, data) => Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: PADDING / 4,
-        children: [
-          Text('☁️ ${data.server}'),
           if (!data.isStatic)
             FTextButton(
               onPressed: changeServer,
@@ -134,13 +106,117 @@ class _LoginPageState extends ConsumerState<AuthPage> {
             ),
         ],
       ),
+      children: [
+        Form(
+          key: _formKey,
+          child: AutofillGroup(
+            child: FTextFormField(
+              label: context.l10n.login_username_text_field__label,
+              controller: _usernameController,
+              onFieldSubmitted: (_) => openLoginPage(),
+              onChanged: ref.read(pAuthUsernameProvider.notifier).set,
+              validators: (input) =>
+                  UValidatorPresets.isNotEmpty(context, input),
+              autofillHints: const [AutofillHints.username],
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: .spaceBetween,
+          children: [
+            if (data.enableRegistration)
+              M3EButton(
+                style: .text,
+                onPressed: () => context.routes.registration(),
+                child: Text(context.l10n.auth_page__register),
+              ),
+            const SizedBox.shrink(),
+            M3EButton(
+              onPressed: openLoginPage,
+              child: Text(context.l10n.btn_continue),
+            ),
+          ],
+        ),
+        if (data.oidcProviders.isNotEmpty)
+          Column(
+            mainAxisSize: .min,
+            children: [
+              const SizedBox(height: PADDING),
+              Row(
+                spacing: PADDING / 4,
+                children: [
+                  const Expanded(child: Divider()),
+                  Text(context.l10n.auth_page__or),
+                  const Expanded(child: Divider()),
+                ],
+              ),
+              const SizedBox(height: PADDING),
+              FText(
+                context.l10n.auth_page__login_with,
+                style: FTextStyle.bodyMedium,
+              ),
+              const SizedBox(height: PADDING),
+              SizedBox(
+                width: BUTTON_WIDTH,
+                child: FTileGroup(
+                  backgroundColor: context.colorScheme.primaryContainer,
+                  items: [
+                    for (final provider in data.oidcProviders)
+                      FTile(
+                        label: provider.label,
+                        leading: FOidcIcon(
+                          data: provider.icon,
+                          label: provider.label,
+                        ),
+                        onTap: () => openOIDC(provider),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+      ],
+    );
+  }
 
-      onError: FEmptyMessage(
-        title: context.l10n.login_page__on_error,
-        icon: StateIconConstants.login.errorIcon,
-        showLogoutButton: true,
+  Widget _buildErrorWidget(BuildContext context) {
+    return Center(
+      child: FResponsiveCard(
+        child: Column(
+          crossAxisAlignment: .start,
+          spacing: PADDING * 1.5,
+          children: [
+            FLogo.sm,
+            FText(
+              context.l10n.auth_page__no_connection,
+              style: FTextStyle.headlineMedium,
+              fontRoundness: 100,
+            ),
+            FText(
+              context.l10n.splash_page__on_error,
+              style: FTextStyle.bodyMedium,
+            ),
+            Row(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                const SizedBox.shrink(),
+                M3EButton(
+                  style: .tonal,
+                  onPressed: changeServer,
+                  child: Text(context.l10n.login_page__change_server),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  void openLoginPage() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    await context.routes.login();
   }
 
   void changeServer() async {

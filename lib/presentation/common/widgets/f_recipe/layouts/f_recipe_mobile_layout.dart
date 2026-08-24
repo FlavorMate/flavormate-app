@@ -17,8 +17,8 @@ import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_ratings.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_tags.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/widgets/f_recipe_title.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeMobileLayout extends StatelessWidget {
   final CommonRecipe recipe;
@@ -101,7 +101,7 @@ class FRecipeMobileLayout extends StatelessWidget {
               FIconButton(
                 width: BUTTON_WIDTH,
                 onPressed: addBookmark!,
-                icon: MdiIcons.bookmark,
+                icon: Symbols.bookmark_rounded,
                 label: context.l10n.f_recipe_layout__save_recipe,
               ),
 
@@ -119,7 +119,7 @@ class FRecipeMobileLayout extends StatelessWidget {
                   ),
                 );
               },
-              icon: MdiIcons.playCircleOutline,
+              icon: Symbols.play_circle_rounded,
             ),
 
             const Divider(),

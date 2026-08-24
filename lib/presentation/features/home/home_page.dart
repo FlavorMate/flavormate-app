@@ -9,7 +9,7 @@ import 'package:flavormate/presentation/features/home/widgets/home_highlights_ca
 import 'package:flavormate/presentation/features/home/widgets/home_latest_recipes_carousel.dart';
 import 'package:flavormate/presentation/features/home/widgets/home_quick_actions.dart';
 import 'package:flavormate/presentation/features/home/widgets/home_stories_carousel.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerWidget {

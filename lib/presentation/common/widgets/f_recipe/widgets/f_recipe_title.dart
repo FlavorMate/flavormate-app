@@ -1,5 +1,5 @@
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeTitle extends StatelessWidget {
   final String title;
@@ -10,9 +10,10 @@ class FRecipeTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return FText(
       title,
-      style: FTextStyle.displaySmall,
+      style: FTextStyle.headlineMedium,
       textAlign: TextAlign.center,
       fontWeight: FontWeight.bold,
+      fontRoundness: 100,
     );
   }
 }

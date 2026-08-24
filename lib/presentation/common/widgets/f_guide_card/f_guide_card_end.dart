@@ -3,8 +3,8 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card_animation.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FGuideCardEnd extends FGuideCard {
   final String label;
@@ -25,7 +25,7 @@ class FGuideCardEnd extends FGuideCard {
         mainAxisAlignment: .center,
         spacing: PADDING,
         children: [
-          const FGuideCardAnimation(icon: MdiIcons.silverwareClean),
+          const FGuideCardAnimation(icon: Symbols.heart_check_rounded),
           FText(
             context.l10n.f_guide_card_end__label(label),
             style: .titleMedium,

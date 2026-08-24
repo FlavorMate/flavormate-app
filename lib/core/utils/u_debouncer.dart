@@ -6,8 +6,7 @@ class UDebouncer {
 
   UDebouncerState state = UDebouncerState.idle;
 
-  UDebouncer({Duration duration = const Duration(seconds: 1)})
-    : _duration = duration;
+  UDebouncer({this._duration = const Duration(seconds: 1)});
 
   void run(void Function() action) {
     state = UDebouncerState.pending;

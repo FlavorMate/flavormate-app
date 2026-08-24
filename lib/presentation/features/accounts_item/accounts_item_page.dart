@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/features/accounts/account_file_dto.dart';
@@ -15,8 +15,8 @@ import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AccountsItemPage extends ConsumerStatefulWidget {
   final String id;
@@ -102,7 +102,7 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
                     : const SizedBox.shrink(),
                 onError: FEmptyMessage(
                   title: context.l10n.accounts_item_page__stories_on_error,
-                  icon: StateIconConstants.stories.errorIcon,
+                  icon: IconConstants.errorIcon,
                 ),
               ),
 
@@ -123,7 +123,7 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
 
                 onError: FEmptyMessage(
                   title: context.l10n.accounts_item_page__books_on_error,
-                  icon: StateIconConstants.books.errorIcon,
+                  icon: IconConstants.errorIcon,
                 ),
               ),
 
@@ -144,7 +144,7 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
                     : const SizedBox.shrink(),
                 onError: FEmptyMessage(
                   title: context.l10n.accounts_item_page__recipes_on_error,
-                  icon: StateIconConstants.recipes.errorIcon,
+                  icon: IconConstants.errorIcon,
                 ),
               ),
             ],
@@ -153,7 +153,7 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
       ),
       onError: FEmptyMessage(
         title: context.l10n.accounts_item_page__on_error,
-        icon: StateIconConstants.authors.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
     );
   }

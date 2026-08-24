@@ -9,7 +9,7 @@ import 'package:flavormate/data/models/features/recipes/recipe_serving_dto.dart'
 import 'package:flavormate/data/models/features/tags/tag_dto.dart';
 import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'recipe_dto.mapper.dart';
 

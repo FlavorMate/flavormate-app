@@ -1,6 +1,7 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
@@ -13,9 +14,10 @@ import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struc
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_tags/providers/p_recipe_editor_item_tags.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemTagsPage extends ConsumerStatefulWidget {
   final String draftId;
@@ -69,8 +71,8 @@ class _RecipeEditorItemTagsPageState
               sliver: SliverMainAxisGroup(
                 slivers: [
                   FPageIntroductionSliver(
-                    shape: .c7_sided_cookie,
-                    icon: MdiIcons.tagMultiple,
+                    shape: ShapeConstants.editor,
+                    icon: Symbols.sell_rounded,
                     description:
                         context.l10n.recipe_editor_item_tags__description,
                   ),
@@ -87,7 +89,7 @@ class _RecipeEditorItemTagsPageState
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
                             onTap: addTag,
-                            child: const Icon(MdiIcons.plus),
+                            child: const Icon(Symbols.add_rounded),
                           ),
                         ),
                         onFieldSubmitted: (_) => addTag(),
@@ -105,15 +107,16 @@ class _RecipeEditorItemTagsPageState
                       builder: (_, data) => FWrap(
                         children: [
                           for (final tag in data)
-                            Chip(
-                              label: Text('#$tag'),
+                            M3EChip(
+                              type: .input,
+                              label: ('#$tag'),
                               onDeleted: () => deleteTag(tag),
                             ),
                         ],
                       ),
                       onError: FEmptyMessage(
                         title: context.l10n.recipe_editor_item_tags__on_error,
-                        icon: StateIconConstants.tags.errorIcon,
+                        icon: IconConstants.errorIcon,
                       ),
                     ),
                   ),

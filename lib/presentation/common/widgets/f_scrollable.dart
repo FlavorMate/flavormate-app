@@ -1,5 +1,5 @@
 import 'package:flavormate/presentation/common/widgets/f_input_type/f_input_type_aware_app.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FScrollable extends StatefulWidget {
   final Widget child;

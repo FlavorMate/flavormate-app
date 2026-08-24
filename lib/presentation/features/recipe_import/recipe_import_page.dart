@@ -1,6 +1,7 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/repositories/extension/import_export/p_ie_importers.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
@@ -10,9 +11,9 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeImportPage extends ConsumerStatefulWidget {
   const RecipeImportPage({super.key});
@@ -43,7 +44,7 @@ class _RecipeImportPageState extends ConsumerState<RecipeImportPage> {
           provider: pIeImportersProvider,
           onError: FEmptyMessage(
             title: context.l10n.recipe_import_page__on_error,
-            icon: StateIconConstants.importExport.errorIcon,
+            icon: IconConstants.errorIcon,
           ),
           builder: (context, data) {
             return CustomScrollView(
@@ -55,8 +56,8 @@ class _RecipeImportPageState extends ConsumerState<RecipeImportPage> {
                   sliver: SliverMainAxisGroup(
                     slivers: [
                       FPageIntroductionSliver(
-                        shape: .c9_sided_cookie,
-                        icon: MdiIcons.databaseImport,
+                        shape: ShapeConstants.firstLevel,
+                        icon: Symbols.cloud_upload_rounded,
                         description:
                             context.l10n.recipe_import_page__description,
                       ),
@@ -66,7 +67,7 @@ class _RecipeImportPageState extends ConsumerState<RecipeImportPage> {
                       if (data.isEmpty)
                         FEmptyMessage(
                           title: context.l10n.recipe_import_page__on_empty,
-                          icon: StateIconConstants.importExport.emptyIcon,
+                          icon: IconConstants.emptyIcon,
                         )
                       else
                         SliverList.separated(
@@ -78,6 +79,7 @@ class _RecipeImportPageState extends ConsumerState<RecipeImportPage> {
                             return FTile.manual(
                               first: index == 0,
                               last: index == data.length - 1,
+                              context: context,
                               tile: FTile(
                                 label: importer.name,
                                 subLabel: importer.importShortDescription,

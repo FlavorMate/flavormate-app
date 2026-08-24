@@ -1,6 +1,6 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FImageError extends StatelessWidget {
   const FImageError({super.key});
@@ -15,7 +15,7 @@ class FImageError extends StatelessWidget {
       ),
 
       child: const Icon(
-        MdiIcons.cameraOffOutline,
+        Symbols.no_photography_rounded,
         size: 64,
         color: Colors.white,
       ),

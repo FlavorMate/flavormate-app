@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_list.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
@@ -7,12 +7,14 @@ import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_search
 import 'package:flavormate/data/models/features/search/search_dto.dart';
 import 'package:flavormate/data/repositories/features/search/p_search.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
+import 'package:flavormate/presentation/common/widgets/f_search/f_search_no_result.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/features/home/widgets/search/providers/p_search_bar_value.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HomeSearchBar extends ConsumerStatefulWidget {
   final double elevation;
@@ -26,7 +28,7 @@ class HomeSearchBar extends ConsumerStatefulWidget {
 }
 
 class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
-  final SearchController _controller = SearchController();
+  final M3ESearchController _controller = M3ESearchController();
 
   PSearchProvider get provider =>
       pSearchProvider(_controller.text, filter: SearchDtoSource.values.toSet());
@@ -41,23 +43,29 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
   Widget build(BuildContext context) {
     final searchHint = _randomSearchHint(context);
 
-    return SearchAnchor(
+    return M3ESearchAnchor(
       keyboardType: TextInputType.visiblePassword,
       searchController: _controller,
       builder: (_, controller) => SearchBar(
         elevation: .all(widget.elevation),
         readOnly: true,
-        leading: const Icon(MdiIcons.magnify),
+        leading: const Icon(Symbols.search_rounded),
         padding: .all(const .symmetric(horizontal: PADDING)),
         hintText: searchHint,
         onTap: controller.openView,
       ),
       viewOnSubmitted: _openSuggestion,
       viewHintText: context.l10n.home_search_bar__search_hint,
-      viewLeading: IconButton(
+      viewLeading: M3EIconButton(
         onPressed: _close,
-        icon: const Icon(MdiIcons.arrowLeft),
+        icon: const Icon(Symbols.arrow_back_rounded),
       ),
+      viewTrailing: [
+        M3EIconButton(
+          onPressed: _reset,
+          icon: const Icon(Symbols.close_rounded),
+        ),
+      ],
       viewBuilder: (_) => Consumer(
         builder: (_, ref, _) {
           final searchTerm = ref.watch(widget.searchTermProvider);
@@ -69,20 +77,26 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
 
           return FProviderStruct(
             provider: provider,
-            builder: (context, data) => ListView.builder(
-              itemCount: data.data.length,
-              itemBuilder: (_, index) {
-                final suggestion = data.data[index];
-                return ListTile(
-                  leading: const Icon(MdiIcons.magnify),
-                  title: Text(suggestion.label),
-                  onTap: () => _openSuggestion(suggestion.label),
+            builder: (context, data) {
+              if (data.data.isEmpty) {
+                return const FSearchNoResult();
+              } else {
+                return ListView.builder(
+                  itemCount: data.data.length,
+                  itemBuilder: (_, index) {
+                    final suggestion = data.data[index];
+                    return ListTile(
+                      leading: const Icon(Symbols.search_rounded),
+                      title: Text(suggestion.label),
+                      onTap: () => _openSuggestion(suggestion.label),
+                    );
+                  },
                 );
-              },
-            ),
+              }
+            },
             onError: FEmptyMessage(
               title: context.l10n.home_search_bar__search_on_error,
-              icon: StateIconConstants.search.errorIcon,
+              icon: IconConstants.errorIcon,
             ),
           );
         },
@@ -108,12 +122,12 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
 
         return ListTile(
           title: Text(historyItem),
-          trailing: IconButton(
+          trailing: M3EIconButton(
             onPressed: () {
               ref.read(pSPSearchHistoryProvider.notifier).remove(historyItem);
             },
             icon: Icon(
-              MdiIcons.delete,
+              Symbols.delete_rounded,
               color: context.blendedColors.error,
             ),
           ),
@@ -148,6 +162,11 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
 
   void _close() {
     _controller.closeView(null);
+    _controller.clear();
+    ref.read(pSearchBarValueProvider.notifier).set('');
+  }
+
+  void _reset() {
     _controller.clear();
     ref.read(pSearchBarValueProvider.notifier).set('');
   }

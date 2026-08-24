@@ -1,7 +1,8 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -16,9 +17,10 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_full_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CategoriesPage extends ConsumerStatefulWidget {
   const CategoriesPage({super.key});
@@ -54,9 +56,9 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
         scrollController: _scrollController,
         title: context.l10n.categories_page__title,
         actions: [
-          IconButton(
+          M3EIconButton(
             onPressed: handleFilterDialog,
-            icon: const Icon(MdiIcons.filter),
+            icon: const Icon(Symbols.filter_alt_rounded),
           ),
         ],
       ),
@@ -65,11 +67,11 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
           provider: provider,
           onEmpty: FEmptyMessage(
             title: context.l10n.categories_page__on_empty,
-            icon: StateIconConstants.categories.emptyIcon,
+            icon: IconConstants.emptyIcon,
           ),
           onError: FEmptyMessage(
             title: context.l10n.categories_page__on_error,
-            icon: StateIconConstants.categories.errorIcon,
+            icon: IconConstants.errorIcon,
           ),
           child: CustomScrollView(
             controller: _scrollController,
@@ -80,8 +82,8 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     FPageIntroductionSliver(
-                      shape: .very_sunny,
-                      icon: MdiIcons.package,
+                      shape: ShapeConstants.firstLevel,
+                      icon: Symbols.inventory_2_rounded,
                       description: context.l10n.categories_page__description,
                     ),
 

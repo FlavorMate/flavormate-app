@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/data/models/local/common_recipe/common_nutrition.dart';
 import 'package:flavormate/data/models/shared/enums/nutrition_type.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeNutritionChart extends StatefulWidget {
   final double space;
