@@ -15,8 +15,8 @@ class FOidcIcon extends ConsumerWidget {
     super.key,
     required this.data,
     required this.label,
-    this.height = 25,
-    this.width = 25,
+    this.height = 30,
+    this.width = 30,
   });
 
   @override

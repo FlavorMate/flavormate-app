@@ -91,35 +91,40 @@ class FRecipeMobileLayout extends StatelessWidget {
 
             const Divider(),
 
-            if (enableBring)
-              FRecipeBringButton(
-                width: BUTTON_WIDTH,
-                onPressed: addToBring!,
-              ),
-
-            if (enableBookmark)
-              FIconButton(
-                width: BUTTON_WIDTH,
-                onPressed: addBookmark!,
-                icon: Symbols.bookmark_rounded,
-                label: context.l10n.f_recipe_layout__save_recipe,
-              ),
-
-            FIconButton(
-              key: const ValueKey('guided-cooking-btn'),
-              width: BUTTON_WIDTH,
-              label: context.l10n.f_recipe_layout__guided_cooking,
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  useSafeArea: false,
-                  builder: (_) => FRecipeGuidedDialog(
-                    recipe: recipe,
-                    amountFactor: amountFactor,
+            Column(
+              spacing: PADDING / 2,
+              children: [
+                if (enableBring)
+                  FRecipeBringButton(
+                    width: BUTTON_WIDTH,
+                    onPressed: addToBring!,
                   ),
-                );
-              },
-              icon: Symbols.play_circle_rounded,
+
+                if (enableBookmark)
+                  FIconButton(
+                    width: BUTTON_WIDTH,
+                    onPressed: addBookmark!,
+                    icon: Symbols.bookmark_rounded,
+                    label: context.l10n.f_recipe_layout__save_recipe,
+                  ),
+
+                FIconButton(
+                  key: const ValueKey('guided-cooking-btn'),
+                  width: BUTTON_WIDTH,
+                  label: context.l10n.f_recipe_layout__guided_cooking,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      useSafeArea: false,
+                      builder: (_) => FRecipeGuidedDialog(
+                        recipe: recipe,
+                        amountFactor: amountFactor,
+                      ),
+                    );
+                  },
+                  icon: Symbols.play_circle_rounded,
+                ),
+              ],
             ),
 
             const Divider(),

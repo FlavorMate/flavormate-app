@@ -11,7 +11,9 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/foundations/foundations.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -34,6 +36,7 @@ class _RecipeImportPageState extends ConsumerState<RecipeImportPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = M3ETheme.of(context).listTheme.cardList;
     return Scaffold(
       appBar: FAppBar(
         title: context.l10n.recipe_import_page__title,
@@ -73,7 +76,7 @@ class _RecipeImportPageState extends ConsumerState<RecipeImportPage> {
                         SliverList.separated(
                           itemCount: data.length,
                           separatorBuilder: (_, _) =>
-                              const SizedBox(height: PADDING / 4),
+                              SizedBox(height: theme.gap),
                           itemBuilder: (context, index) {
                             final importer = data[index];
                             return FTile.manual(
@@ -81,6 +84,9 @@ class _RecipeImportPageState extends ConsumerState<RecipeImportPage> {
                               last: index == data.length - 1,
                               context: context,
                               tile: FTile(
+                                leading: const FTileIcon(
+                                  icon: Symbols.extension_rounded,
+                                ),
                                 label: importer.name,
                                 subLabel: importer.importShortDescription,
                                 onTap: () {

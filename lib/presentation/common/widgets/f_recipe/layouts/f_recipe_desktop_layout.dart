@@ -115,6 +115,8 @@ class FRecipeDesktopLayout extends StatelessWidget {
                         ),
 
                         FWrap(
+                          spacing: PADDING / 2,
+                          runSpacing: PADDING / 2,
                           children: [
                             if (enableBring)
                               FRecipeBringButton(

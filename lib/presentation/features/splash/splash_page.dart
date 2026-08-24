@@ -84,17 +84,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: FResponsiveCard(
-            child: SizedBox(
-              width: double.infinity,
-              child: AnimatedSwitcher(
-                duration: const .new(milliseconds: 250),
-                child: compatibilityState.when(
-                  data: (_) => _buildLoadingWidget(context),
-                  error: (error, _) => _buildErrorWidget(context, error),
-                  loading: () => _buildLoadingWidget(context),
-                ),
-              ),
+          child: AnimatedSwitcher(
+            duration: const .new(milliseconds: 250),
+            child: compatibilityState.when(
+              data: (_) => _buildLoadingWidget(context),
+              error: (error, _) => _buildErrorWidget(context, error),
+              loading: () => _buildLoadingWidget(context),
             ),
           ),
         ),
@@ -107,33 +102,35 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   }
 
   Widget _buildErrorWidget(BuildContext context, dynamic error) {
-    return Column(
-      crossAxisAlignment: .start,
-      spacing: PADDING * 1.5,
-      children: [
-        FLogo.sm,
-        // TODO: L10n
-        const FText(
-          'Keine Verbindung',
-          style: FTextStyle.headlineMedium,
-          fontRoundness: 100,
-        ),
-        FText(
-          context.l10n.splash_page__on_error,
-          style: FTextStyle.bodyMedium,
-        ),
-        Row(
-          mainAxisAlignment: .spaceBetween,
-          children: [
-            const SizedBox.shrink(),
-            M3EButton(
-              style: .tonal,
-              onPressed: logout,
-              child: Text(context.l10n.btn_logout),
-            ),
-          ],
-        ),
-      ],
+    return FResponsiveCard(
+      child: Column(
+        crossAxisAlignment: .start,
+        spacing: PADDING * 1.5,
+        children: [
+          FLogo.sm,
+          // TODO: L10n
+          const FText(
+            'Keine Verbindung',
+            style: FTextStyle.headlineMedium,
+            fontRoundness: 100,
+          ),
+          FText(
+            context.l10n.splash_page__on_error,
+            style: FTextStyle.bodyMedium,
+          ),
+          Row(
+            mainAxisAlignment: .spaceBetween,
+            children: [
+              const SizedBox.shrink(),
+              M3EButton(
+                style: .tonal,
+                onPressed: logout,
+                child: Text(context.l10n.btn_logout),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

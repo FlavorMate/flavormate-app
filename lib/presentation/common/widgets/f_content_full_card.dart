@@ -92,7 +92,6 @@ class FContentFullCard extends ConsumerWidget {
                     mainAxisSize: .max,
                     mainAxisAlignment: .spaceEvenly,
                     crossAxisAlignment: .start,
-                    spacing: PADDING / 2,
                     children: [
                       FText(
                         title,

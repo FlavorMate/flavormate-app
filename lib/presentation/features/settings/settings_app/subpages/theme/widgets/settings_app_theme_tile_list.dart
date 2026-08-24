@@ -1,6 +1,7 @@
 import 'package:flavormate/core/constants/color_constants.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:material_3_expressive/material_3_expressive.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
@@ -51,11 +52,12 @@ class SettingsAppThemeTileList extends StatelessWidget {
 
               tile: FTile(
                 foregroundColor: foregroundColor,
-                leading: Icon(
-                  value.isSelected
+                leading: FTileIcon(
+                  icon: value.isSelected
                       ? Symbols.check_circle_rounded
                       : Symbols.circle_rounded,
-                  color: foregroundColor.getThemeColor(context),
+                  iconBackgroundColor: Colors.transparent,
+                  iconForegroundColor: foregroundColor.getThemeColor(context),
                 ),
                 label: value.label,
                 onTap: () => value.onTap(value.color),

@@ -21,6 +21,7 @@ import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_expressive/material_3_expressive.dart';
@@ -132,10 +133,12 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
                         last: last,
                         context: context,
                         tile: FTile(
-                          leading: Icon(
-                            selected
+                          leading: FTileIcon(
+                            icon: selected
                                 ? Symbols.check_circle_rounded
                                 : Symbols.circle_rounded,
+                            iconBackgroundColor: Colors.transparent,
+                            iconForegroundColor: context.colorScheme.primary,
                           ),
                           label: data.label,
                           subLabel: null,

@@ -136,7 +136,7 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
               SizedBox(
                 height: contentHeight,
                 child: AnimatedSwitcher(
-                  duration: const .new(milliseconds: 150),
+                  duration: const .new(milliseconds: 250),
                   child: widget.loading
                       ? const Center(
                           key: ValueKey('first'),
