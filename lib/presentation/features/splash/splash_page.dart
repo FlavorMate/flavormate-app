@@ -108,9 +108,8 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         spacing: PADDING * 1.5,
         children: [
           FLogo.sm,
-          // TODO: L10n
-          const FText(
-            'Keine Verbindung',
+          FText(
+            context.l10n.splash_page__no_connection,
             style: FTextStyle.headlineMedium,
             fontRoundness: 100,
           ),

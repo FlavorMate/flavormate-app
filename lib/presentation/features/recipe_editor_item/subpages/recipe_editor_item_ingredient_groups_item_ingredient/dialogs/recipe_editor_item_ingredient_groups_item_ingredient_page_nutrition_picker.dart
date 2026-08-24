@@ -20,7 +20,6 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// TODO: own page
 class RecipeEditorItemIngredientGroupsItemIngredientPageNutritionPicker
     extends ConsumerStatefulWidget {
   final RecipeDraftIngredientGroupItemNutritionDto nutrition;
@@ -221,8 +220,9 @@ class _DNutritionState
           ),
           data: [
             M3EExpandableData(
-              // TODO: L10n
-              title: 'Whats OFF?',
+              title: context
+                  .l10n
+                  .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__whats_off,
               body: Column(
                 mainAxisSize: .min,
                 spacing: PADDING,
