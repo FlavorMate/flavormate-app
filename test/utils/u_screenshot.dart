@@ -2,9 +2,10 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/theme/models/f_theme.dart';
 import 'package:flavormate/generated/l10n/l10n.dart';
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
+import 'package:material_3_expressive/foundations/foundations.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../devices/ipad_pro.dart';
 import '../devices/iphone_pro.dart';
@@ -20,6 +21,24 @@ class UScreenshot {
     ThemeMode themeMode = .light,
     Future<void> Function(WidgetTester tester)? beforeScreenshot,
   }) {
+    final lightTheme = FTheme.createTheme(
+      primaryColor,
+      .light,
+      FlexTones.material,
+    );
+
+    final darkTheme = FTheme.createTheme(
+      primaryColor,
+      .dark,
+      FlexTones.material,
+    );
+
+    final m3eTheme = switch (themeMode) {
+      .light => M3EThemeData.fromMaterial(lightTheme),
+      .dark => M3EThemeData.fromMaterial(darkTheme),
+      _ => throw UnimplementedError(),
+    };
+
     final devices = [
       iPhone17ProBuilder(assets),
       iPadProM513InchBuilder(assets),
@@ -31,23 +50,18 @@ class UScreenshot {
         testGoldens('for ${device.label}', (tester) async {
           await tester.pumpWidget(
             ScreenshotApp.withConditionalTitlebar(
-              localizationsDelegates: L10n.localizationsDelegates,
+              localizationsDelegates: const [
+                L10n.delegate,
+                ...GlobalMaterialLocalizations.delegates,
+              ],
               supportedLocales: L10n.supportedLocales,
-              theme: FTheme.createTheme(
-                primaryColor,
-                .light,
-                FlexTones.material,
-              ),
-              darkTheme: FTheme.createTheme(
-                primaryColor,
-                .dark,
-                FlexTones.material,
-              ),
+              theme: lightTheme,
+              darkTheme: darkTheme,
               themeMode: themeMode,
               locale: locale,
               device: device.device,
               title: 'FlavorMate',
-              home: home,
+              home: M3ETheme(data: m3eTheme, child: home),
             ),
           );
 
