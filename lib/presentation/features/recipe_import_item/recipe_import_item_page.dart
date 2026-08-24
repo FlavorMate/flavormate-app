@@ -67,9 +67,10 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
       ),
       bottomNavigationBarBuilder: (_, data) => Column(
         mainAxisSize: .min,
-        spacing: PADDING,
+        spacing: PADDING / 2,
         children: [
           FWrap(
+            spacing: PADDING / 2,
             children: [
               if (data.import.contains(IEImportType.FileImport))
                 FButton(
@@ -92,7 +93,7 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
           ),
 
           FButton(
-            width: BUTTON_WIDTH + PADDING,
+            width: BUTTON_WIDTH + PADDING / 2,
             leading: const Icon(Symbols.upload_rounded),
             label: context.l10n.btn_import,
             onPressed: _importValid ? () => import(data.id) : null,
