@@ -31,24 +31,32 @@ class FProgressColor extends StatelessWidget {
             : Icon(Symbols.error_rounded, color: color),
 
       1 => Icon(Symbols.check_circle_rounded, color: color),
-      _ => Stack(
-        children: [
-          M3EProgressIndicator.circular(
-            value: state,
-            strokeWidth: 3,
-            trackColor: Colors.transparent,
-          ),
-          Center(
-            child: Text(
-              (state * 100).toInt().toString(),
-              style: const TextStyle(fontSize: 12),
+      _ => SizedBox(
+        height: 24,
+        width: 24,
+        child: Stack(
+          children: [
+            M3EProgressIndicator.circular(
+              value: state,
+              strokeWidth: 2,
+              trackColor: Colors.transparent,
             ),
-          ),
-        ],
+            Center(
+              child: Text(
+                (state * 100).toInt().toString(),
+                style: const TextStyle(fontSize: 12),
+              ),
+            ),
+          ],
+        ),
       ),
     };
 
-    return SizedBox(height: 24, width: 24, child: child);
+    return SizedBox(
+      height: 40,
+      width: 40,
+      child: Center(child: child),
+    );
   }
 
   Color _getProgressColor(double value, Brightness brightness) {
