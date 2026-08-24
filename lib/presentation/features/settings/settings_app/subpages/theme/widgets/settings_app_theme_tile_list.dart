@@ -58,7 +58,7 @@ class SettingsAppThemeTileList extends StatelessWidget {
                   color: foregroundColor.getThemeColor(context),
                 ),
                 label: value.label,
-                onTap: () => value.onTap,
+                onTap: () => value.onTap(value.color),
               ),
             );
           },
