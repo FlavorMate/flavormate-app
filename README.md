@@ -5,10 +5,9 @@
 </p>
 
 FlavorMate is your personal, self-hosted, open-source recipe management app, available on iOS, macOS, Android, Windows
-and as a
-web application. You can also build it from source for Linux. Organize your culinary creations by
-categorizing and tagging them to suit your needs. Whether you’re crafting a recipe from scratch or importing one from
-the web, FlavorMate makes it easy.
+and as a web application. You can also build it from source for Linux. Organize your culinary creations by categorizing
+and tagging them to suit your needs. Whether you’re crafting a recipe from scratch or importing one from the web,
+FlavorMate makes it easy.
 
 Stuck on what to cook or bake? Let FlavorMate inspire you with the Recipe of the Day or choose a dish at random. For
 those following vegetarian or vegan lifestyles, simply set your preference in your profile, and you'll receive recipes
@@ -20,12 +19,20 @@ tailored just for you.
 
 ## Features & Screenshots
 
+<details>
+<summary>OIDC</summary>
+
 ### OIDC
 
 FlavorMate supports OpenID Connect authentication. [^1]
 
 <img src="docs/features/oidc/phone.webp" alt="OIDC phone screenshot" height="200px">
 <img src="docs/features/oidc/tablet.webp" alt="OIDC tablet screenshot" height="200px">
+
+</details>
+
+<details>
+<summary>Dashboard</summary>
 
 ### Dashboard
 
@@ -38,12 +45,22 @@ Get inspired by a selection of your recipes.
 <img src="docs/features/dashboard/phone.webp" alt="Dashboard phone screenshot" height="200px">
 <img src="docs/features/dashboard/tablet.webp" alt="Dashboard tablet screenshot" height="200px">
 
+</details>
+
+<details>
+<summary>Search</summary>
+
 ### Search
 
 Search for and filter by recipes, books, authors, tags and categories
 
 <img src="docs/features/search/phone.webp" alt="Search phone screenshot" height="200px">
 <img src="docs/features/search/tablet.webp" alt="Search tablet screenshot" height="200px">
+
+</details>
+
+<details>
+<summary>Recipe view</summary>
 
 ### Recipe view
 
@@ -62,12 +79,22 @@ Manage your recipes in a beautiful and easy way.
 <img src="docs/features/recipe/phone-3.webp" alt="Recipe phone screenshot" height="200px">
 <img src="docs/features/recipe/tablet-3.webp" alt="Recipe tablet screenshot" height="200px">
 
+</details>
+
+<details>
+<summary>Guided cooking</summary>
+
 ### Guided cooking
 
 Guided cooking gives you step-by-step directions to cook the recipe.
 
 <img src="docs/features/guided-cooking/phone.webp" alt="Guided cooking phone screenshot" height="200px">
 <img src="docs/features/guided-cooking/tablet.webp" alt="Guided cooking tablet screenshot" height="200px">
+
+</details>
+
+<details>
+<summary>Library</summary>
 
 ### Library
 
@@ -78,6 +105,11 @@ Create a book and save your favorite recipes
 
 <img src="docs/features/library/phone.webp" alt="Library phone screenshot" height="200px">
 <img src="docs/features/library/tablet.webp" alt="Library tablet screenshot" height="200px">
+
+</details>
+
+<details>
+<summary>Recipe editor</summary>
 
 ### Recipe editor
 
@@ -91,13 +123,23 @@ Easily create or edit your recipes.
 <img src="docs/features/editor/phone.webp" alt="Editor phone screenshot" height="200px">
 <img src="docs/features/editor/tablet.webp" alt="Editor tablet screenshot" height="200px">
 
+</details>
+
+<details>
+<summary>Diet preference</summary>
+
 ### Diet preference
 
-Choose your diet preference and get your preferred recipes.
-You can choose between `meat`, `fish`, `vegetarian` and `vegan`.
+Choose your diet preference and get your preferred recipes. You can choose between `meat`, `fish`, `vegetarian` and
+`vegan`.
 
 <img src="docs/features/diet/phone.webp" alt="Diet phone screenshot" height="200px">
 <img src="docs/features/diet/tablet.webp" alt="Diet tablet screenshot" height="200px">
+
+</details>
+
+<details>
+<summary>Theme</summary>
 
 ### Theme
 
@@ -108,6 +150,11 @@ Adapt the app to your liking by choosing your favorite color.
 
 <img src="docs/features/theme/phone.webp" alt="Theme phone screenshot" height="200px">
 <img src="docs/features/theme/tablet.webp" alt="Theme tablet screenshot" height="200px">
+
+</details>
+
+<details>
+<summary>Import / Export</summary>
 
 ### Import / Export
 
@@ -131,6 +178,8 @@ found [here](https://github.com/FlavorMate/flavormate-server#import--export-plug
 <br>
 <img src="docs/features/import-export/phone-4.webp" alt="Export detail page phone screenshot" height="200px">
 <img src="docs/features/import-export/tablet-4.webp" alt="Export detail page tablet screenshot" height="200px">
+
+</details>
 
 ## Getting Started
 
