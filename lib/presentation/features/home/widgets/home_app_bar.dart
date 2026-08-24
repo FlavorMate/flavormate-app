@@ -4,7 +4,7 @@ import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/features/home/widgets/home_account_dialog.dart';
 import 'package:flavormate/presentation/features/home/widgets/search/home_search_bar.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HomeAppBar extends StatelessWidget {
   final AccountFullDto? account;

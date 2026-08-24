@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FButton extends StatelessWidget {
   final Widget? trailing;
@@ -17,7 +18,7 @@ class FButton extends StatelessWidget {
     this.tonal = false,
     this.trailing,
     this.leading,
-    this.height = 48,
+    this.height = 40,
     this.width = double.infinity,
     super.key,
   });
@@ -27,18 +28,22 @@ class FButton extends StatelessWidget {
     return SizedBox(
       width: width,
       child: tonal
-          ? FilledButton.tonal(
+          ? M3EButton.tonal(
               onPressed: onPressed,
-              style: .new(minimumSize: .all(Size.fromHeight(height))),
+              decoration: .styleFrom(
+                minimumSize: .new(width, height),
+              ),
               child: _FButtonInternal(
                 label: label,
                 leading: leading,
                 trailing: trailing,
               ),
             )
-          : FilledButton(
+          : M3EButton(
               onPressed: onPressed,
-              style: .new(minimumSize: .all(Size.fromHeight(height))),
+              decoration: .styleFrom(
+                minimumSize: .new(width, height),
+              ),
               child: _FButtonInternal(
                 label: label,
                 leading: leading,

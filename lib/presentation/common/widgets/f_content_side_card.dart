@@ -6,8 +6,9 @@ import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FContentSideCard extends ConsumerWidget {
   final String title;
@@ -19,6 +20,8 @@ class FContentSideCard extends ConsumerWidget {
 
   final bool first;
   final bool last;
+
+  bool get single => first && last;
 
   static const double _imageWidth = 128;
 
@@ -34,10 +37,23 @@ class FContentSideCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = M3ETheme.of(context).listTheme.cardList;
+
     final imageMode = ref.watch(pSettingsImageModeProvider);
 
-    final top = first ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
-    final bottom = last ? BORDER_RADIUS_OUT : BORDER_RADIUS_IN;
+    final M3ECardPosition position = single
+        ? .single
+        : first
+        ? .first
+        : last
+        ? .last
+        : .middle;
+
+    final borderRadius = calculateCardRadius(
+      position: position,
+      outerRadius: theme.outerRadius,
+      innerRadius: theme.innerRadius,
+    );
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -50,72 +66,57 @@ class FContentSideCard extends ConsumerWidget {
 
         return SizedBox(
           height: 96,
-          child: ClipRRect(
-            borderRadius: .only(
-              topLeft: .circular(top),
-              topRight: .circular(top),
-              bottomLeft: .circular(bottom),
-              bottomRight: .circular(bottom),
-            ),
-            child: Material(
-              color: context.colorScheme.surfaceContainer,
-              child: Stack(
-                fit: .expand,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: _imageWidth,
-                        height: double.infinity,
-                        child: FImage(
-                          imageSrc: imageSelector?.call(resolution),
-                          type: .secure,
-                          fit: .cover,
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const .all(PADDING),
-                          child: Column(
-                            mainAxisAlignment: .center,
-                            crossAxisAlignment: .start,
-                            children: [
-                              Expanded(
-                                child: Align(
-                                  alignment: .centerLeft,
-                                  child: FText(
-                                    title,
-                                    style: .titleMedium,
-                                    textOverflow: .ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                ),
-                              ),
-                              ?subtitle?.let(
-                                (it) => FText(
-                                  it,
-                                  style: .bodySmall,
-                                  color: .onPrimaryContainer,
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ],
+          child: M3ECard(
+            variant: .filled,
+            borderRadius: borderRadius,
+            color: context.colorScheme.surfaceContainer,
+            onPressed: onTap,
+            padding: .zero,
+            child: Row(
+              children: [
+                SizedBox(
+                  width: _imageWidth,
+                  height: double.infinity,
+                  child: FImage(
+                    imageSrc: imageSelector?.call(resolution),
+                    type: .secure,
+                    fit: .cover,
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const .all(PADDING),
+                    child: Column(
+                      mainAxisAlignment: .center,
+                      crossAxisAlignment: .start,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: .centerLeft,
+                            child: FText(
+                              title,
+                              style: .bodyLarge,
+                              color: .onPrimaryContainer,
+                              fontRoundness: subtitle == null ? 0 : 100,
+                              fontWeight: subtitle == null ? .normal : .w500,
+                              textOverflow: .ellipsis,
+                              maxLines: 2,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-
-                  Positioned.fill(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: onTap,
-                      ),
+                        ?subtitle?.let(
+                          (it) => FText(
+                            it,
+                            style: .bodyMedium,
+                            color: .grey,
+                            maxLines: 1,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );

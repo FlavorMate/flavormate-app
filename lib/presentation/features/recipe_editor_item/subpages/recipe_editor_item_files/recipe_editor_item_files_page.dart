@@ -1,6 +1,7 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -19,11 +20,12 @@ import 'package:flavormate/presentation/common/widgets/f_content_image_card.dart
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemFilesPage extends ConsumerStatefulWidget {
   final String draftId;
@@ -74,20 +76,20 @@ class _RecipeEditorItemFilesPageState
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: M3EFab(
         onPressed: () => addImage(),
-        child: const Icon(MdiIcons.plus),
+        icon: const Icon(Symbols.add_rounded),
       ),
       body: SafeArea(
         child: FProviderState(
           provider: provider,
           onError: FEmptyMessage(
             title: context.l10n.recipe_editor_item_files_page__on_error,
-            icon: StateIconConstants.files.errorIcon,
+            icon: IconConstants.errorIcon,
           ),
           onEmpty: FEmptyMessage(
             title: context.l10n.recipe_editor_item_files_page__on_empty,
-            icon: StateIconConstants.files.emptyIcon,
+            icon: IconConstants.emptyIcon,
           ),
           child: CustomScrollView(
             controller: _scrollController,
@@ -98,8 +100,8 @@ class _RecipeEditorItemFilesPageState
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     FPageIntroductionSliver(
-                      shape: .c7_sided_cookie,
-                      icon: MdiIcons.imageMultiple,
+                      shape: ShapeConstants.editor,
+                      icon: Symbols.photo_library_rounded,
                       description: context
                           .l10n
                           .recipe_editor_item_files_page__description,
@@ -125,9 +127,9 @@ class _RecipeEditorItemFilesPageState
                               top: PADDING,
                               right: PADDING,
                               child: CircleAvatar(
-                                child: IconButton(
+                                child: M3EIconButton(
                                   onPressed: () => deleteImage(item.id),
-                                  icon: const Icon(MdiIcons.delete),
+                                  icon: const Icon(Symbols.delete_rounded),
                                 ),
                               ),
                             ),
@@ -186,11 +188,9 @@ class _RecipeEditorItemFilesPageState
   void deleteImage(
     String id,
   ) async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.recipe_editor_item_files_page__delete,
-      ),
+    final result = await openConfirmDialog(
+      context,
+      title: context.l10n.recipe_editor_item_files_page__delete,
     );
 
     if (!mounted || result != true) return;

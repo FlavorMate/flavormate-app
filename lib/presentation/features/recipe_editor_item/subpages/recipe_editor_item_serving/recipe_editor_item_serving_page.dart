@@ -1,5 +1,6 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/core/utils/u_debouncer.dart';
@@ -13,9 +14,9 @@ import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dar
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_serving/providers/p_recipe_editor_item_serving.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemServingPage extends ConsumerStatefulWidget {
   const RecipeEditorItemServingPage({super.key, required this.draftId});
@@ -95,8 +96,8 @@ class _RecipeEditorItemServingPageState
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     FPageIntroductionSliver(
-                      shape: .c7_sided_cookie,
-                      icon: MdiIcons.silverwareForkKnife,
+                      shape: ShapeConstants.editor,
+                      icon: Symbols.restaurant_rounded,
                       description: context
                           .l10n
                           .recipe_editor_item_serving_page__description,

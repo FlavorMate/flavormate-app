@@ -1,9 +1,11 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/destination.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/components/navigation_bar/models/m3e_navigation_bar_destination.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key, required this.navigationShell});
@@ -40,19 +42,24 @@ class MainLayoutState extends State<MainLayout> {
   }
 
   List<Destination> buildDestinations(BuildContext context) => [
-    Destination(icon: MdiIcons.home, label: context.l10n.main_layout__home),
     Destination(
-      icon: MdiIcons.bookshelf,
+      icon: Symbols.home_rounded,
+      label: context.l10n.main_layout__home,
+    ),
+    Destination(
+      icon: Symbols.newsstand_rounded,
       label: context.l10n.main_layout__library,
     ),
     Destination(
-      icon: MdiIcons.shape,
+      icon: Symbols.shapes_rounded,
       label: context.l10n.main_layout__more,
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final theme = M3ETheme.of(context).listTheme.cardList;
+
     final destinations = buildDestinations(context);
     return Scaffold(
       body: SafeArea(
@@ -61,17 +68,22 @@ class MainLayoutState extends State<MainLayout> {
             if (wideScreen)
               SizedBox(
                 width: _drawerWidth,
-                child: NavigationDrawer(
-                  onDestinationSelected: _goBranch,
-                  selectedIndex: widget.navigationShell.currentIndex,
-                  children: [
-                    const SizedBox(height: 12),
-                    for (var destination in destinations)
-                      NavigationDrawerDestination(
-                        icon: Icon(destination.icon),
-                        label: Text(destination.label),
-                      ),
-                  ],
+                child: ClipRRect(
+                  borderRadius: .only(
+                    topRight: .circular(theme.outerRadius),
+                    bottomRight: .circular(theme.outerRadius),
+                  ),
+                  child: M3ENavigationDrawer(
+                    onDestinationSelected: _goBranch,
+                    selectedIndex: widget.navigationShell.currentIndex,
+                    destinations: [
+                      for (var destination in destinations)
+                        M3ENavigationDestination(
+                          icon: Icon(destination.icon),
+                          label: destination.label,
+                        ),
+                    ],
+                  ),
                 ),
               ),
             Expanded(child: widget.navigationShell),
@@ -80,12 +92,12 @@ class MainLayoutState extends State<MainLayout> {
       ),
       bottomNavigationBar: wideScreen
           ? null
-          : NavigationBar(
+          : M3ENavigationBar(
               selectedIndex: widget.navigationShell.currentIndex,
-              labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+              labelBehavior: .alwaysHide,
               destinations: [
                 for (var destination in destinations)
-                  NavigationDestination(
+                  M3ENavigationBarDestination(
                     label: destination.label,
                     icon: Icon(destination.icon),
                   ),

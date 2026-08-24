@@ -1,6 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -19,10 +21,12 @@ import 'package:flavormate/presentation/common/widgets/f_button.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeExportItemPage extends ConsumerStatefulWidget {
   final String id;
@@ -43,8 +47,6 @@ class RecipeExportItemPage extends ConsumerStatefulWidget {
 
 class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
     with FOrderMixin {
-  static const _width = 125.0;
-
   final _scrollController = ScrollController();
 
   final List<String> _selected = [];
@@ -61,7 +63,7 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
       provider: widget.provider,
       onError: FEmptyMessage(
         title: context.l10n.recipe_export_item_page__on_error,
-        icon: MdiIcons.download,
+        icon: IconConstants.errorIcon,
       ),
       appBarBuilder: (_, data) => FAppBar(
         title: data.name,
@@ -72,8 +74,8 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
         child: Align(
           heightFactor: 1,
           child: FButton(
-            width: _width * 2 + PADDING,
-            leading: const Icon(MdiIcons.download),
+            width: BUTTON_WIDTH + PADDING,
+            leading: const Icon(Symbols.download_rounded),
             label: '${context.l10n.btn_download} (${_selected.length})',
             onPressed: _selected.isNotEmpty ? () => export(data.id) : null,
           ),
@@ -89,8 +91,8 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
               sliver: SliverMainAxisGroup(
                 slivers: [
                   FPageIntroductionSliver(
-                    shape: .sunny,
-                    icon: MdiIcons.cloudDownload,
+                    shape: ShapeConstants.secondLevel,
+                    icon: Symbols.cloud_download_rounded,
                     description: data.exportLongDescription,
                   ),
 
@@ -101,11 +103,11 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
                       spacing: PADDING,
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        TextButton(
+                        M3EButton.text(
                           onPressed: addAll,
                           child: Text(context.l10n.btn_add_all),
                         ),
-                        TextButton(
+                        M3EButton.text(
                           onPressed: removeAll,
                           child: Text(context.l10n.btn_remove_all),
                         ),
@@ -129,11 +131,14 @@ class _RecipeExportItemPageState extends ConsumerState<RecipeExportItemPage>
                       return FTile.manual(
                         first: first,
                         last: last,
+                        context: context,
                         tile: FTile(
-                          leading: Icon(
-                            selected
-                                ? MdiIcons.checkCircle
-                                : MdiIcons.circleOutline,
+                          leading: FTileIcon(
+                            icon: selected
+                                ? Symbols.check_circle_rounded
+                                : Symbols.circle_rounded,
+                            iconBackgroundColor: Colors.transparent,
+                            iconForegroundColor: context.colorScheme.primary,
                           ),
                           label: data.label,
                           subLabel: null,

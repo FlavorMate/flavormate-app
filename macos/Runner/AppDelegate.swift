@@ -3,7 +3,7 @@ import FlutterMacOS
 
 @main
 class AppDelegate: FlutterAppDelegate {
-  static let aliases = ["AppIcon", "Winter2025Icon"]
+  static let aliases = ["AppIcon", "Winter2025Icon", "Spring2026Icon", "Summer2026Icon"]
 
   override func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
     return true

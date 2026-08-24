@@ -4,12 +4,12 @@ enum FTextColor {
   primary,
   surfaceContainerHighest,
   onPrimaryContainer,
+  onTertiaryContainer,
   onInverseSurface,
   filledButton,
   white,
   grey,
-  black
-  ;
+  black;
 
   Color? getThemeColor(BuildContext context) {
     final colorScheme = context.colorScheme;
@@ -23,6 +23,8 @@ enum FTextColor {
       FTextColor.onInverseSurface => colorScheme.inverseSurface,
 
       FTextColor.onPrimaryContainer => colorScheme.onPrimaryContainer,
+
+      FTextColor.onTertiaryContainer => colorScheme.onTertiaryContainer,
 
       FTextColor.filledButton =>
         isBright ? Colors.white : colorScheme.onPrimary,

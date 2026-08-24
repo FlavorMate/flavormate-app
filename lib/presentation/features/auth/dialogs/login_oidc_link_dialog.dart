@@ -6,17 +6,16 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_duration.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_provider.dart';
 import 'package:flavormate/presentation/common/layouts/f_bottom_navigation_back_bar.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
-import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_oidc/f_oidc_icon.dart';
-import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
+import 'package:flavormate/presentation/common/widgets/f_responsive_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/features/auth/widgets/login_password_text_field.dart';
 import 'package:flavormate/presentation/features/auth/widgets/login_username_text_field.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class LoginOIDCLinkDialog extends ConsumerStatefulWidget {
   final OIDCProvider provider;
@@ -91,77 +90,74 @@ class _LoginOIDCLinkDialogState extends ConsumerState<LoginOIDCLinkDialog> {
     return Dialog.fullscreen(
       child: Scaffold(
         bottomNavigationBar: const FBottomNavigationBackBar(),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          actionsPadding: const .only(right: PADDING),
+          actions: [Chip(label: Text(_expiresIn.beautify(context)))],
+        ),
         body: SafeArea(
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Positioned(
-                right: PADDING / 2,
-                top: PADDING / 2,
-                child: Chip(label: Text(_expiresIn.beautify(context))),
-              ),
-              Center(
-                child: FResponsive(
-                  child: FCard(
-                    child: Column(
-                      spacing: PADDING,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FOidcIcon(
-                          data: widget.provider.icon,
-                          label: widget.provider.label,
-                          width: 92,
-                          height: 92,
+          child: Center(
+            child: FResponsiveCard(
+              child: Column(
+                spacing: PADDING,
+                crossAxisAlignment: .start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  FOidcIcon(
+                    data: widget.provider.icon,
+                    label: widget.provider.label,
+                    width: 76,
+                    height: 76,
+                  ),
+                  Column(
+                    spacing: PADDING / 4,
+                    crossAxisAlignment: .start,
+                    children: [
+                      FText(
+                        context.l10n.login_oidc_link_dialog__hint_1(
+                          widget.displayName ?? '',
                         ),
-                        Column(
-                          spacing: PADDING / 4,
-                          crossAxisAlignment: .start,
-                          children: [
-                            FText(
-                              context.l10n.login_oidc_link_dialog__hint_1(
-                                widget.displayName ?? '',
-                              ),
-                              style: FTextStyle.headlineMedium,
-                              textAlign: TextAlign.start,
-                            ),
-                            FText(
-                              context.l10n.login_oidc_link_dialog__hint_2(
-                                widget.provider.label,
-                              ),
-                              style: FTextStyle.bodyMedium,
-                              textAlign: TextAlign.start,
-                            ),
-                          ],
+                        style: FTextStyle.headlineMedium,
+                        textAlign: TextAlign.start,
+                        fontRoundness: 100,
+                      ),
+                      FText(
+                        context.l10n.login_oidc_link_dialog__hint_2(
+                          widget.provider.label,
                         ),
+                        style: FTextStyle.bodyMedium,
+                        textAlign: TextAlign.start,
+                      ),
+                    ],
+                  ),
 
-                        AutofillGroup(
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              spacing: PADDING,
-                              children: [
-                                LoginUsernameTextField(
-                                  usernameController: _usernameController,
-                                ),
-                                LoginPasswordTextField(
-                                  passwordController: _passwordController,
-                                  onFieldSubmitted: linkAccount,
-                                ),
-                              ],
-                            ),
+                  AutofillGroup(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        spacing: PADDING,
+                        children: [
+                          LoginUsernameTextField(
+                            usernameController: _usernameController,
                           ),
-                        ),
-                        FButton(
-                          width: BUTTON_WIDTH,
-                          onPressed: linkAccount,
-                          label: context.l10n.btn_link_account,
-                        ),
-                      ],
+                          LoginPasswordTextField(
+                            passwordController: _passwordController,
+                            onFieldSubmitted: linkAccount,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                  Align(
+                    alignment: .centerRight,
+                    child: M3EButton(
+                      onPressed: linkAccount,
+                      child: Text(context.l10n.btn_link_account),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

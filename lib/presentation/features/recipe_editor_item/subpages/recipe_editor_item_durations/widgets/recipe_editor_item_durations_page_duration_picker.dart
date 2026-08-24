@@ -1,12 +1,12 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/u_int.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
-import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemDurationsPageDurationPicker extends StatefulWidget {
   final Duration duration;
@@ -19,6 +19,16 @@ class RecipeEditorItemDurationsPageDurationPicker extends StatefulWidget {
   @override
   State<StatefulWidget> createState() =>
       _RecipeEditorItemDurationsPageDurationPickerState();
+
+  static Future<Duration?> openDialog(
+    BuildContext context, {
+    required Duration duration,
+  }) async {
+    return await openAlertDialog(
+      context,
+      dialog: RecipeEditorItemDurationsPageDurationPicker(duration: duration),
+    );
+  }
 }
 
 class _RecipeEditorItemDurationsPageDurationPickerState

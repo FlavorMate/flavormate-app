@@ -26,9 +26,9 @@ class TC11AuthPage extends TC {
           enableRegistration: true,
           enableRecovery: true,
           oidcProviders: [
-            OIDCProvider('Authentik', '', '', '', 'auth', null),
-            OIDCProvider('Goolge', '', '', '', 'google', null),
-            OIDCProvider('PocketID', '', '', '', 'pid', null),
+            const OIDCProvider('Authentik', '', '', '', 'auth', null),
+            const OIDCProvider('Goolge', '', '', '', 'google', null),
+            const OIDCProvider('PocketID', '', '', '', 'pid', null),
           ],
         ),
       ),

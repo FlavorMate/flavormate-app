@@ -9,8 +9,8 @@ import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FImageCard extends ConsumerWidget {
   static const double fadeRange = 40;
@@ -150,15 +150,13 @@ class FImageCard extends ConsumerWidget {
                     ),
                   ),
                 ),
-              Positioned.fill(
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(BORDER_RADIUS),
-                    onTap: onTap,
+              if (onTap != null)
+                GestureDetector(
+                  onTap: onTap,
+                  child: const MouseRegion(
+                    cursor: SystemMouseCursors.click,
                   ),
                 ),
-              ),
             ],
           ),
         );

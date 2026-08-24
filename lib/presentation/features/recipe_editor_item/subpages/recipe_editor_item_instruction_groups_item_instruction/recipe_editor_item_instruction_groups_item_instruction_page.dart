@@ -9,10 +9,11 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_loading_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_instruction_groups_item_instruction/providers/p_recipe_editor_item_instruction_groups_item_instruction.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemInstructionGroupsItemInstructionPage
     extends ConsumerStatefulWidget {
@@ -85,10 +86,12 @@ class _RecipeEditorItemInstructionGroupsItemInstructionPageState
               color: context.colorScheme.onSurface,
               getProgress: (ingredient) => ingredient.validPercent,
             ),
-            IconButton(
+            M3EIconButton(
               onPressed: deleteInstruction,
-              icon: const Icon(MdiIcons.delete),
-              color: context.blendedColors.error,
+              icon: Icon(
+                Symbols.delete_rounded,
+                color: context.blendedColors.error,
+              ),
             ),
           ],
         ),
@@ -124,13 +127,11 @@ class _RecipeEditorItemInstructionGroupsItemInstructionPageState
   }
 
   void deleteInstruction() async {
-    final response = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context
-            .l10n
-            .recipe_editor_item_instruction_groups_item_instruction_page__delete,
-      ),
+    final response = await openConfirmDialog(
+      context,
+      title: context
+          .l10n
+          .recipe_editor_item_instruction_groups_item_instruction_page__delete,
     );
 
     if (response != true || !mounted) return;

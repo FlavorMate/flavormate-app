@@ -6,9 +6,9 @@ import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_s
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_random.dart';
 import 'package:flavormate/presentation/common/widgets/f_icon_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_scrollable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HomeQuickActions extends ConsumerWidget {
   static const double _size = 125;
@@ -29,14 +29,14 @@ class HomeQuickActions extends ConsumerWidget {
                   children: [
                     FIconCard(
                       width: _size,
-                      icon: MdiIcons.pasta,
+                      icon: Symbols.lunch_dining_rounded,
                       label: context.l10n.home_quick_actions__cooking,
                       onTap: () =>
                           openSuggestion(context, course: Course.MainDish),
                     ),
                     FIconCard(
                       width: _size,
-                      icon: MdiIcons.cupcake,
+                      icon: Symbols.bakery_dining_rounded,
                       label: context.l10n.home_quick_actions__baking,
                       onTap: () =>
                           openSuggestion(context, course: Course.Bakery),
@@ -44,13 +44,13 @@ class HomeQuickActions extends ConsumerWidget {
 
                     FIconCard(
                       width: _size,
-                      icon: MdiIcons.diceMultiple,
+                      icon: Symbols.casino_rounded,
                       label: context.l10n.home_quick_actions__random,
                       onTap: () => openRecipe(context, ref),
                     ),
                     FIconCard(
                       width: _size,
-                      icon: MdiIcons.bookOpen,
+                      icon: Symbols.chrome_reader_mode_rounded,
                       label: context.l10n.home_quick_actions__all_recipes,
                       onTap: () => context.routes.recipes(),
                     ),

@@ -1,16 +1,17 @@
-import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FTile extends StatelessWidget {
+  final FTextColor? foregroundColor;
+
   final String label;
   final String? subLabel;
 
   final Widget? leading;
   final Widget? trailing;
-
-  final double? height;
 
   final bool disabled;
 
@@ -19,67 +20,64 @@ class FTile extends StatelessWidget {
   const FTile({
     super.key,
     required this.label,
-    required this.subLabel,
+    this.subLabel,
     this.leading,
     this.trailing,
-    this.height,
     this.disabled = false,
+    this.foregroundColor,
     required this.onTap,
   });
 
   static Widget manual({
     Key? key,
+    required BuildContext context,
     required bool first,
     required bool last,
-    double borderRadius = 16,
     required FTile tile,
+    Color? backgroundColor,
+    bool disabled = false,
   }) {
-    final topLeft = first ? borderRadius : 4.0;
-    final topRight = first ? borderRadius : 4.0;
-    final bottomLeft = last ? borderRadius : 4.0;
-    final bottomRight = last ? borderRadius : 4.0;
-    return ClipRRect(
-      key: key,
-      borderRadius: .only(
-        topLeft: .circular(topLeft),
-        topRight: .circular(topRight),
-        bottomLeft: .circular(bottomLeft),
-        bottomRight: .circular(bottomRight),
-      ),
-      child: tile,
+    return FTileGroup.buildTile(
+      context: context,
+      first: first,
+      last: last,
+      backgroundColor: backgroundColor,
+      item: tile,
+      disabled: disabled,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: context.colorScheme.surfaceContainer,
-      child: ListTile(
-        visualDensity: .standard,
-        minTileHeight: height,
-        onTap: disabled ? null : onTap,
-        leading: leading,
-        trailing: trailing,
-        title: subLabel == null
-            ? FText(
-                label,
-                style: .bodyMedium,
-                color: disabled ? .grey : null,
-              )
-            : FText(
+    return Row(
+      spacing: PADDING,
+      children: [
+        ?leading,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: .start,
+            children: [
+              FText(
                 label,
                 style: .bodyLarge,
-                fontWeight: .w600,
-                color: disabled ? .grey : null,
+                color: disabled
+                    ? .grey
+                    : (foregroundColor ?? .onPrimaryContainer),
+                fontRoundness: subLabel == null ? 0 : 100,
+                fontWeight: subLabel == null ? .normal : .w500,
               ),
-        subtitle: subLabel?.let(
-          (it) => FText(
-            it,
-            style: .bodyMedium,
-            color: .grey,
+              ?subLabel?.let(
+                (it) => FText(
+                  it,
+                  style: .bodyMedium,
+                  color: foregroundColor ?? .grey,
+                ),
+              ),
+            ],
           ),
         ),
-      ),
+        ?trailing,
+      ],
     );
   }
 }

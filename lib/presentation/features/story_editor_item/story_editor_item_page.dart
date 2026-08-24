@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/timer/p_timer.dart';
 import 'package:flavormate/core/riverpod/timer/timer_state.dart';
@@ -18,9 +18,10 @@ import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
 import 'package:flavormate/presentation/features/story_editor_item/widgets/story_editor_item_recipe_search.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class StoryEditorItemPage extends ConsumerStatefulWidget {
   final String id;
@@ -90,12 +91,9 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
         title: context.l10n.story_editor_item_page__title,
         actions: [FSaveState(provider: widget.autosaveProvider)],
       ),
-      floatingActionButtonBuilder: (_, data) => FloatingActionButton(
+      floatingActionButtonBuilder: (_, data) => M3EFab(
         onPressed: () => showPreview(context, data),
-        child: Icon(
-          MdiIcons.contentSave,
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
-        ),
+        icon: const Icon(Symbols.arrow_forward_rounded),
       ),
       builder: (_, data) => FResponsive(
         controller: _scrollController,
@@ -119,18 +117,24 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
                       Positioned(
                         top: 8,
                         right: 8,
-                        child: IconButton(
-                          onPressed: () => setRecipe(''),
-                          icon: const CircleAvatar(
-                            child: Icon(MdiIcons.delete),
+                        child: M3EIconButton(
+                          decoration: .new(
+                            backgroundColor: .all(
+                              context.colorScheme.primaryContainer,
+                            ),
+                            foregroundColor: .all(
+                              context.colorScheme.onPrimaryContainer,
+                            ),
                           ),
+                          onPressed: () => setRecipe(null),
+                          icon: const Icon(Symbols.delete_rounded),
                         ),
                       ),
                     ],
                   ),
                   onError: FEmptyMessage(
                     title: context.l10n.story_editor_item_page__recipe_on_error,
-                    icon: StateIconConstants.recipes.errorIcon,
+                    icon: IconConstants.errorIcon,
                   ),
                 ),
 
@@ -168,7 +172,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
       ),
       onError: FEmptyMessage(
         title: context.l10n.story_editor_item_page__recipe_on_error,
-        icon: StateIconConstants.recipes.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
     );
   }
@@ -184,7 +188,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
     await context.routes.storyEditorItemPreview(widget.id);
   }
 
-  void setRecipe(String recipe) {
+  void setRecipe(String? recipe) {
     ref.read(widget.provider.notifier).setRecipe(recipe);
   }
 

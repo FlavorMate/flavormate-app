@@ -1,15 +1,15 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract class CustomColor {
   Color get color;
+
   String l10n(BuildContext context);
 }
 
 enum MiscColor implements CustomColor {
   flavormate,
-  device
-  ;
+  device;
 
   @override
   String l10n(BuildContext context) => switch (this) {
@@ -26,17 +26,22 @@ enum MiscColor implements CustomColor {
 }
 
 enum EventColor implements CustomColor {
-  christmas2025
-  ;
+  christmas2025,
+  spring2026,
+  summer2026;
 
   @override
   String l10n(BuildContext context) => switch (this) {
     .christmas2025 => context.l10n.color__event__winter_2025,
+    .spring2026 => context.l10n.color__event__spring_2026,
+    .summer2026 => context.l10n.color__event__summer_2026,
   };
 
   @override
   Color get color => switch (this) {
     .christmas2025 => const Color(0xFFD6001C),
+    .spring2026 => const Color(0xFF52B788),
+    .summer2026 => const Color(0xFF4F7CFF),
   };
 }
 
@@ -59,8 +64,7 @@ enum DefaultColor implements CustomColor {
   deepOrange,
   brown,
   grey,
-  blueGrey
-  ;
+  blueGrey;
 
   @override
   String l10n(BuildContext context) => switch (this) {
@@ -143,32 +147,6 @@ enum DefaultColor implements CustomColor {
 
     DefaultColor.blueGrey => Colors.blueGrey,
   };
-}
-
-abstract class ColorConstants {
-  static const themeColors = <Color>[
-    Colors.red,
-    Colors.pink,
-    Colors.purple,
-    Colors.deepPurple,
-    Colors.indigo,
-    Colors.blue,
-    Colors.lightBlue,
-    Colors.cyan,
-    Colors.teal,
-    Colors.green,
-    Colors.lightGreen,
-    Colors.lime,
-    Colors.yellow,
-    Colors.amber,
-    Colors.orange,
-    Colors.deepOrange,
-    Colors.brown,
-    Colors.grey,
-    Colors.blueGrey,
-  ];
-
-  static const eventColors = <String, Color>{'winter2025': Color(0xFFD6001C)};
 }
 
 Color calcColorForText(Color input) {

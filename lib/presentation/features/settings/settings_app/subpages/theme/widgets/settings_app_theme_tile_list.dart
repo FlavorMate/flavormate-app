@@ -1,12 +1,14 @@
+import 'package:flavormate/core/constants/color_constants.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flavormate/presentation/features/settings/settings_app/subpages/theme/widgets/settings_app_theme_tile.dart';
-import 'package:flutter/material.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppThemeTileList extends StatelessWidget {
   final String title;
   final List<SettingsAppThemeTileData> values;
-
-  final double borderRadius = 16;
 
   const SettingsAppThemeTileList({
     super.key,
@@ -16,8 +18,10 @@ class SettingsAppThemeTileList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = M3ETheme.of(context).listTheme.cardList;
+
     return Column(
-      spacing: 2,
+      spacing: theme.gap,
       crossAxisAlignment: .start,
       children: [
         FText(
@@ -26,30 +30,37 @@ class SettingsAppThemeTileList extends StatelessWidget {
           fontWeight: .w500,
           color: .primary,
         ),
-        const SizedBox(height: 4),
-
         ....generate(
           values.length,
           (index) {
+            final first = index == 0;
+            final last = index == values.length - 1;
+
             final value = values[index];
 
-            final topLeft = index == 0 ? borderRadius : 4.0;
-            final topRight = index == 0 ? borderRadius : 4.0;
-            final bottomLeft = index == values.length - 1 ? borderRadius : 4.0;
-            final bottomRight = index == values.length - 1 ? borderRadius : 4.0;
+            final foregroundColor = switch (calcColorForText(value.color)) {
+              Colors.white => FTextColor.white,
+              Colors.black => FTextColor.black,
+              _ => throw UnimplementedError(),
+            };
 
-            return ClipRRect(
-              borderRadius: .only(
-                topLeft: .circular(topLeft),
-                topRight: .circular(topRight),
-                bottomLeft: .circular(bottomLeft),
-                bottomRight: .circular(bottomRight),
-              ),
-              child: SettingsAppThemeTile(
-                isSelected: value.isSelected,
-                color: value.color,
+            return FTile.manual(
+              context: context,
+              first: first,
+              last: last,
+              backgroundColor: value.color,
+
+              tile: FTile(
+                foregroundColor: foregroundColor,
+                leading: FTileIcon(
+                  icon: value.isSelected
+                      ? Symbols.check_circle_rounded
+                      : Symbols.circle_rounded,
+                  iconBackgroundColor: Colors.transparent,
+                  iconForegroundColor: foregroundColor.getThemeColor(context),
+                ),
                 label: value.label,
-                onTap: value.onTap,
+                onTap: () => value.onTap(value.color),
               ),
             );
           },
@@ -57,4 +68,18 @@ class SettingsAppThemeTileList extends StatelessWidget {
       ],
     );
   }
+}
+
+class SettingsAppThemeTileData {
+  final bool isSelected;
+  final Color color;
+  final String label;
+  final void Function(Color) onTap;
+
+  const SettingsAppThemeTileData({
+    required this.isSelected,
+    required this.color,
+    required this.label,
+    required this.onTap,
+  });
 }

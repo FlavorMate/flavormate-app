@@ -1,9 +1,9 @@
-import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class EditBookDialog extends StatefulWidget {
   final String label;
@@ -12,6 +12,13 @@ class EditBookDialog extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _EditBookDialogState();
+
+  static Future<String?> openDialog(
+    BuildContext context, {
+    required String label,
+  }) async {
+    return await openAlertDialog(context, dialog: EditBookDialog(label: label));
+  }
 }
 
 class _EditBookDialogState extends State<EditBookDialog> {

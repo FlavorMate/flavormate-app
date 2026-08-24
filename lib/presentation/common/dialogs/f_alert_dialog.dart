@@ -1,7 +1,7 @@
-import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FAlertDialog extends StatelessWidget {
   final bool scrollable;
@@ -33,27 +33,39 @@ class FAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      scrollable: scrollable,
-      constraints: const BoxConstraints(
-        minWidth: 560,
-        maxWidth: 560,
-      ),
-      insetPadding: const .all(PADDING),
-      title: Text(title),
-      actions: [
-        ...?actions,
-        TextButton(
-          onPressed: () => context.pop(),
-          child: Text(negativeLabel ?? context.l10n.btn_cancel),
-        ),
-        if (submit != null)
-          FilledButton(
-            onPressed: submit,
-            child: Text(positiveLabel ?? context.l10n.btn_save),
+    return Material(
+      color: Colors.transparent,
+      child: M3EDialog(
+        title: title,
+        topDivider: true,
+        bottomDivider: true,
+        content: child,
+        actions: [
+          ...?actions,
+          M3EButton.text(
+            onPressed: () => context.pop(),
+            child: Text(negativeLabel ?? context.l10n.btn_cancel),
           ),
-      ],
-      content: SizedBox(width: width, height: height, child: child),
+          if (submit != null)
+            M3EButton(
+              onPressed: submit,
+              child: Text(positiveLabel ?? context.l10n.btn_save),
+            ),
+        ],
+      ),
     );
   }
+}
+
+Future<T?> openAlertDialog<T>(
+  BuildContext context, {
+  required Widget dialog,
+  // required String title,
+  // required Widget child,
+  // List<Widget>? actions,
+  // VoidCallback? submit,
+  // String? negativeLabel,
+  // String? positiveLabel,
+}) async {
+  return M3EDialog.show<T>(context, dialog: dialog);
 }

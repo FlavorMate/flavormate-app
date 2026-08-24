@@ -1,7 +1,7 @@
 import 'package:flavormate/core/constants/color_constants.dart';
 import 'package:flavormate/core/storage/shared_preferences/enums/sp_key.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p_sp_theme_custom_color.g.dart';

@@ -4,12 +4,22 @@ import 'package:flavormate/core/extensions/e_date_time.dart';
 import 'package:flavormate/data/models/core/auth/oidc/oidc_link_dto.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAccountOidcLinkInfoDialog extends StatelessWidget {
   final OidcLinkDto link;
 
   const SettingsAccountOidcLinkInfoDialog({super.key, required this.link});
+
+  static Future<void> openDialog(
+    BuildContext context, {
+    required OidcLinkDto link,
+  }) async {
+    await openAlertDialog(
+      context,
+      dialog: SettingsAccountOidcLinkInfoDialog(link: link),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

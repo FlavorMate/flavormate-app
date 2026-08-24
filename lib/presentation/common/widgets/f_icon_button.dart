@@ -1,6 +1,8 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FIconButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -14,7 +16,7 @@ class FIconButton extends StatelessWidget {
     required this.onPressed,
     required this.icon,
     this.label,
-    this.height = 48,
+    this.height = 40,
     this.width,
     super.key,
   });
@@ -22,20 +24,22 @@ class FIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (label == null) {
-      return CircleAvatar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: IconButton(
+      return M3EIconButton(
+        variant: .filled,
+        icon: Icon(
+          icon,
           color: FTextColor.filledButton.getThemeColor(context),
-          icon: Icon(icon),
-          onPressed: onPressed,
         ),
+        onPressed: onPressed,
       );
     } else {
       return SizedBox(
         width: width,
-        child: FilledButton(
+        child: M3EButton(
           onPressed: onPressed,
-          style: FilledButton.styleFrom(minimumSize: .fromHeight(height)),
+          decoration: width?.let(
+            (it) => .styleFrom(minimumSize: .new(it, height)),
+          ),
           child: Row(
             spacing: PADDING / 2,
             children: [

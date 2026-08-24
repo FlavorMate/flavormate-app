@@ -1,4 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/features/accounts/account_update_dto.dart';
@@ -7,10 +8,11 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_page_introduction.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAccountEmailPage extends ConsumerStatefulWidget {
   const SettingsAccountEmailPage({super.key});
@@ -52,9 +54,9 @@ class _SettingsAccountEmailPageState
         title: context.l10n.settings_account_email_page__title,
         scrollController: _scrollController,
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: M3EFab(
         onPressed: updateValue,
-        child: const Icon(MdiIcons.contentSave),
+        icon: const Icon(Symbols.save_rounded),
       ),
       body: SafeArea(
         child: FResponsive(
@@ -63,8 +65,8 @@ class _SettingsAccountEmailPageState
             spacing: PADDING,
             children: [
               FPageIntroduction(
-                shape: .c4_sided_cookie,
-                icon: MdiIcons.email,
+                shape: ShapeConstants.settings,
+                icon: Symbols.mail_rounded,
                 description:
                     context.l10n.settings_account_email_page__description,
               ),

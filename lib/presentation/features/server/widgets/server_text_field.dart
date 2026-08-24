@@ -1,7 +1,7 @@
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ServerTextField extends StatelessWidget {
   final TextEditingController controller;

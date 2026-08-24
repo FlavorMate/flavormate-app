@@ -1,16 +1,15 @@
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_date_time.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
+import 'package:flavormate/core/utils/avatar_utils.dart';
 import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
-import 'package:flavormate/data/models/shared/models/account_create_form.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/admin/p_rest_admin_accounts.dart';
-import 'package:flavormate/presentation/common/dialogs/avatar/avatar_utils.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/widgets/f_2d_table.dart';
@@ -24,10 +23,11 @@ import 'package:flavormate/presentation/features/administration/account_manageme
 import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_new_account_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/dialogs/administration_account_management_password_dialog.dart';
 import 'package:flavormate/presentation/features/administration/account_management/enums/administration_account_management_actions.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AdministrationAccountManagementPage extends ConsumerStatefulWidget {
   const AdministrationAccountManagementPage({super.key});
@@ -69,28 +69,28 @@ class _AccountManagementPageState
         scrollController: _scrollController,
         title: context.l10n.administration_account_management_page__title,
         actions: [
-          IconButton(
+          M3EIconButton(
             onPressed: handleFilterDialog,
-            icon: const Icon(MdiIcons.filter),
+            icon: const Icon(Symbols.filter_alt_rounded),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: M3EFab(
         onPressed: createAccount,
-        child: const Icon(MdiIcons.plus),
+        icon: const Icon(Symbols.add_rounded),
       ),
       body: SafeArea(
         child: FProviderState(
           provider: provider,
           // This state should never happen
-          onEmpty: FEmptyMessage(
+          onEmpty: const FEmptyMessage(
             title: '',
-            icon: StateIconConstants.authors.emptyIcon,
+            icon: IconConstants.emptyIcon,
           ),
           onError: FEmptyMessage(
             title:
                 context.l10n.administration_account_management_page__on_error,
-            icon: StateIconConstants.authors.errorIcon,
+            icon: IconConstants.errorIcon,
           ),
           child: FLazyTable<AccountFullDto>(
             key: orderKey,
@@ -115,7 +115,7 @@ class _AccountManagementPageState
               ),
               FExpressiveTableColumn(
                 fixedWidth: 64,
-                header: const Center(child: Icon(MdiIcons.account)),
+                header: const Center(child: Icon(Symbols.person)),
                 cellBuilder: (context, item, rowIndex) => FCircleAvatar(
                   account: item,
                   radius: 32 - 16,
@@ -155,8 +155,8 @@ class _AccountManagementPageState
                 ),
                 cellBuilder: (context, item, rowIndex) => Icon(
                   item.enabled
-                      ? MdiIcons.checkCircleOutline
-                      : MdiIcons.circleOutline,
+                      ? Symbols.check_circle_rounded
+                      : Symbols.circle_rounded,
                 ),
               ),
               FExpressiveTableColumn(
@@ -169,8 +169,8 @@ class _AccountManagementPageState
                 ),
                 cellBuilder: (context, item, rowIndex) => Icon(
                   item.verified
-                      ? MdiIcons.checkCircleOutline
-                      : MdiIcons.circleOutline,
+                      ? Symbols.check_circle_rounded
+                      : Symbols.circle_rounded,
                 ),
               ),
               FExpressiveTableColumn(
@@ -211,13 +211,12 @@ class _AccountManagementPageState
   }
 
   void showOptions(AccountFullDto account, bool isCurrent) async {
-    final result = await showDialog<AdministrationAccountManagementActions>(
-      context: context,
-      builder: (_) => AdministrationAccountManagementActionsDialog(
-        account: account,
-        isCurrent: isCurrent,
-      ),
-    );
+    final result =
+        await AdministrationAccountManagementActionsDialog.openDialog(
+          context,
+          account: account,
+          isCurrent: isCurrent,
+        );
 
     if (!mounted || result == null) return;
 
@@ -248,16 +247,14 @@ class _AccountManagementPageState
   }
 
   Future<void> deleteAccount(AccountFullDto account) async {
-    final confirmation = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context
-            .l10n
-            .administration_account_management_page__delete_account_title,
-        content: context
-            .l10n
-            .administration_account_management_page__delete_account_hint_1,
-      ),
+    final confirmation = await openConfirmDialog(
+      context,
+      title: context
+          .l10n
+          .administration_account_management_page__delete_account_title,
+      content: context
+          .l10n
+          .administration_account_management_page__delete_account_hint_1,
     );
 
     if (confirmation != true || !mounted) return;
@@ -282,10 +279,8 @@ class _AccountManagementPageState
   }
 
   Future<void> setPassword(AccountFullDto account) async {
-    final newPassword = await showDialog<String>(
-      context: context,
-      builder: (_) => const AdministrationAccountManagementPasswordDialog(),
-    );
+    final newPassword =
+        await AdministrationAccountManagementPasswordDialog.openDialog(context);
 
     if (EString.isEmpty(newPassword) || !mounted) return;
 
@@ -319,10 +314,10 @@ class _AccountManagementPageState
   }
 
   Future<void> createAccount() async {
-    final form = await showDialog<AccountCreateForm>(
-      context: context,
-      builder: (_) => const AdministrationAccountManagementNewAccountDialog(),
-    );
+    final form =
+        await AdministrationAccountManagementNewAccountDialog.openDialog(
+          context,
+        );
 
     if (form == null || !mounted) return;
 

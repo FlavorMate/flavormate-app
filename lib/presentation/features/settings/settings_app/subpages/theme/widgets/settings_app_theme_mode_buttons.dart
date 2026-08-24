@@ -1,8 +1,9 @@
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/theme/enums/f_theme_tone.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppThemeModeButtons extends StatelessWidget {
   final FThemeTone selected;
@@ -32,23 +33,24 @@ class SettingsAppThemeModeButtons extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            child: SegmentedButton(
+            child: M3ESegmentedButton(
               onSelectionChanged: setTone,
+              showSelectedIcon: false,
               segments: [
-                ButtonSegment(
+                M3ESegment(
                   value: FThemeTone.material,
-                  label: Text(FThemeTone.material.l10n(context)),
-                  icon: const Icon(MdiIcons.brush),
+                  label: FThemeTone.material.l10n(context),
+                  icon: const Icon(Symbols.brush_rounded),
                 ),
-                ButtonSegment(
+                M3ESegment(
                   value: FThemeTone.vivid,
-                  label: Text(FThemeTone.vivid.l10n(context)),
-                  icon: const Icon(MdiIcons.paletteSwatch),
+                  label: FThemeTone.vivid.l10n(context),
+                  icon: const Icon(Symbols.imagesearch_roller_rounded),
                 ),
-                ButtonSegment(
+                M3ESegment(
                   value: FThemeTone.chroma,
-                  label: Text(FThemeTone.chroma.l10n(context)),
-                  icon: const Icon(MdiIcons.palette),
+                  label: FThemeTone.chroma.l10n(context),
+                  icon: const Icon(Symbols.palette_rounded),
                 ),
               ],
               selected: _selected,

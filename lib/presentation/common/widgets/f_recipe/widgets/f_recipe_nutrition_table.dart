@@ -5,7 +5,7 @@ import 'package:flavormate/data/models/local/common_recipe/common_nutrition.dart
 import 'package:flavormate/data/models/shared/enums/nutrition_type.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/presentation/common/widgets/f_data_table.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeNutritionTable extends StatelessWidget {
   final double amountFactor;

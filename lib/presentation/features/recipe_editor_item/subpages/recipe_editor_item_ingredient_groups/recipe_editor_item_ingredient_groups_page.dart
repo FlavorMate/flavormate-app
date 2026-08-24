@@ -1,5 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
@@ -10,10 +10,11 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_rounded_list_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_ingredient_groups/providers/p_recipe_editor_item_instruction_groups.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemIngredientGroupsPage extends ConsumerStatefulWidget {
   const RecipeEditorItemIngredientGroupsPage({
@@ -55,11 +56,9 @@ class _RecipeEditorItemIngredientGroupsPageState
           ),
         ],
       ),
-      floatingActionButtonBuilder: (_, _) => FloatingActionButton.extended(
-        icon: const Icon(MdiIcons.plus),
-        label: Text(
-          context.l10n.recipe_editor_item_ingredient_groups_page__create,
-        ),
+      floatingActionButtonBuilder: (_, _) => M3EExtendedFab(
+        icon: const Icon(Symbols.add_rounded),
+        label: context.l10n.recipe_editor_item_ingredient_groups_page__create,
         onPressed: createGroup,
       ),
       builder: (_, data) => FFixedResponsive(
@@ -87,14 +86,14 @@ class _RecipeEditorItemIngredientGroupsPageState
                           ),
                           ReorderableDragStartListener(
                             index: index,
-                            child: const Icon(MdiIcons.reorderHorizontal),
+                            child: const Icon(Symbols.reorder_rounded),
                           ),
                         ],
                       ),
                     );
                   },
                   itemCount: data.length,
-                  onReorder: reorder,
+                  onReorderItem: reorder,
                 ),
               ),
             ),
@@ -106,7 +105,7 @@ class _RecipeEditorItemIngredientGroupsPageState
       ),
       onError: FEmptyMessage(
         title: context.l10n.recipe_editor_item_ingredient_groups_page__on_empty,
-        icon: StateIconConstants.drafts.emptyIcon,
+        icon: IconConstants.emptyIcon,
       ),
     );
   }

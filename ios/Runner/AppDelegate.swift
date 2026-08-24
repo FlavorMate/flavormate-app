@@ -4,7 +4,7 @@ import UIKit
 @main
 @objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
 
-    static let aliases = ["AppIcon", "Winter2025Icon"]
+    static let aliases = ["AppIcon", "Winter2025Icon", "Spring2026Icon", "Summer2026Icon"]
 
     override func application(
         _ application: UIApplication,

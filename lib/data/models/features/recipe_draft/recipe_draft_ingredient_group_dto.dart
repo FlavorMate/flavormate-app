@@ -3,7 +3,7 @@ import 'package:flavormate/core/extensions/e_number.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/data/models/features/unit/unit_dto.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:uuid/uuid.dart';
 
 part 'recipe_draft_ingredient_group_dto.mapper.dart';

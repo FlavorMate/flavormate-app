@@ -1,8 +1,8 @@
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FAdmonition extends StatelessWidget {
   final Color color;
@@ -34,7 +34,7 @@ class FAdmonition extends StatelessWidget {
     return FAdmonition(
       color: Colors.orange,
       content: content,
-      icon: MdiIcons.alertCircleOutline,
+      icon: Symbols.error_rounded,
     );
   }
 
@@ -42,7 +42,7 @@ class FAdmonition extends StatelessWidget {
     return FAdmonition(
       color: Colors.red,
       content: content,
-      icon: MdiIcons.closeOctagonOutline,
+      icon: Symbols.release_alert_rounded,
     );
   }
 }

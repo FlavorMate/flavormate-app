@@ -2,7 +2,7 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_string.dart';
 import 'package:flavormate/presentation/common/widgets/f_guide_card/f_guide_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FGuideCardInstruction extends FGuideCard {
   final String? currentStepLabel;

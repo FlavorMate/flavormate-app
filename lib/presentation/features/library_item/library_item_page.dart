@@ -1,7 +1,7 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -21,10 +21,11 @@ import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struc
 import 'package:flavormate/presentation/features/library_item/dialogs/edit_book_dialog.dart';
 import 'package:flavormate/presentation/features/library_item/providers/p_library_item.dart';
 import 'package:flavormate/presentation/features/library_item/widgets/library_item_info_header.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class LibraryItemPage extends ConsumerStatefulWidget {
   final String id;
@@ -65,51 +66,66 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
       provider: widget.provider,
       onError: FEmptyMessage(
         title: context.l10n.library_item_page__on_error,
-        icon: StateIconConstants.books.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
       builder: (context, data) => Scaffold(
         appBar: FAppBar(
           title: data.book.label,
           scrollController: _scrollController,
           actions: [
-            IconButton(
-              icon: const Icon(MdiIcons.filter),
+            M3EIconButton(
+              icon: const Icon(Symbols.filter_alt_rounded),
               onPressed: handleFilterDialog,
             ),
 
             if (data.isOwner || data.isAdmin)
               FMenuAnchor(
                 children: [
-                  MenuItemButton(
-                    child: Text(
-                      data.book.visible
-                          ? context.l10n.library_item_page__unshare
-                          : context.l10n.library_item_page__share,
-                    ),
+                  M3EMenuEntry(
+                    leading: const Icon(Symbols.share_rounded),
+                    label: data.book.visible
+                        ? context.l10n.library_item_page__unshare
+                        : context.l10n.library_item_page__share,
                     onPressed: () =>
                         toggleVisibility(context, ref, !data.book.visible),
                   ),
-                  MenuItemButton(
-                    child: Text(context.l10n.btn_edit),
+                  M3EMenuEntry(
+                    leading: const Icon(Symbols.edit_rounded),
+                    label: context.l10n.btn_edit,
                     onPressed: () => changeLabel(context, ref, data.book.label),
                   ),
-                  MenuItemButton(
-                    child: Text(context.l10n.btn_delete),
+                  M3EMenuEntry(
+                    leading: const Icon(Symbols.delete_rounded),
+                    label: context.l10n.btn_delete,
                     onPressed: () => deleteBook(context, ref),
+                    isDestructive: true,
                   ),
                 ],
               ),
           ],
         ),
+        floatingActionButton: data.isOwner
+            ? null
+            : M3EExtendedFab(
+                label: data.isSubscribed
+                    ? context.l10n.library_item_page__unsubscribe
+                    : context.l10n.library_item_page__subscribe,
+                icon: Icon(
+                  data.isSubscribed
+                      ? Symbols.heart_minus_rounded
+                      : Symbols.heart_plus_rounded,
+                ),
+                onPressed: () => toggleSubscription(context, ref),
+              ),
         body: SafeArea(
           child: FProviderState(
             onEmpty: FEmptyMessage(
               title: context.l10n.library_item_page__recipes_on_empty,
-              icon: StateIconConstants.recipes.emptyIcon,
+              icon: IconConstants.emptyIcon,
             ),
             onError: FEmptyMessage(
               title: context.l10n.library_item_page__recipes_on_error,
-              icon: StateIconConstants.recipes.errorIcon,
+              icon: IconConstants.errorIcon,
             ),
             provider: recipeProvider,
             child: CustomScrollView(
@@ -141,6 +157,10 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
                               last: last,
                             ),
                       ),
+
+                      // Padding to prevent fab hiding items
+                      if (!data.isOwner)
+                        const FSizedBoxSliver(height: kFabHeight + PADDING),
                     ],
                   ),
                 ),
@@ -179,10 +199,7 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
     WidgetRef ref,
     String current,
   ) async {
-    final response = await showDialog<String>(
-      context: context,
-      builder: (_) => EditBookDialog(label: current),
-    );
+    final response = await EditBookDialog.openDialog(context, label: current);
 
     if (!context.mounted || response == null || response == current) return;
 
@@ -205,11 +222,9 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
   }
 
   Future<void> deleteBook(BuildContext context, WidgetRef ref) async {
-    final response = await showDialog<bool>(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.library_item_page__delete_book,
-      ),
+    final response = await openConfirmDialog(
+      context,
+      title: context.l10n.library_item_page__delete_book,
     );
 
     if (!context.mounted || response != true) return;

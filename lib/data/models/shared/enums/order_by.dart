@@ -1,29 +1,29 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'order_by.mapper.dart';
 
 @MappableEnum()
 enum OrderBy {
-  CreatedOn(MdiIcons.calendar),
-  Label(MdiIcons.label),
+  CreatedOn(Symbols.calendar_month_rounded),
+  Label(Symbols.label_rounded),
 
   // Only used for BookEntity
-  Visible(MdiIcons.eye),
+  Visible(Symbols.visibility_rounded),
 
   // Only used for AccountEntity
-  DisplayName(MdiIcons.label),
-  Username(MdiIcons.account),
+  DisplayName(Symbols.label_rounded),
+  Username(Symbols.person_rounded),
 
   // Only used for AccountEntity (Admin view)
-  EMail(MdiIcons.email),
-  LastActivity(MdiIcons.clock),
+  EMail(Symbols.email),
+  LastActivity(Symbols.nest_clock_farsight_analog_rounded),
 
   // Only used for TokenEntity
-  ExpiresAt(MdiIcons.clockEnd),
-  Revoked(MdiIcons.lockReset),
+  ExpiresAt(Symbols.alarm_rounded),
+  Revoked(Symbols.lock_rounded),
   ;
 
   final IconData icon;

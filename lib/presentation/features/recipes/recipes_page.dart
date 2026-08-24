@@ -1,7 +1,8 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -16,9 +17,10 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_side_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipesPage extends ConsumerStatefulWidget {
   const RecipesPage({super.key});
@@ -54,9 +56,9 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
         scrollController: _scrollController,
         title: context.l10n.recipes_page__title,
         actions: [
-          IconButton(
+          M3EIconButton(
             onPressed: handleFilterDialog,
-            icon: const Icon(MdiIcons.filter),
+            icon: const Icon(Symbols.filter_alt_rounded),
           ),
         ],
       ),
@@ -64,11 +66,11 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
         child: FProviderState(
           provider: provider,
           onEmpty: FEmptyMessage(
-            icon: StateIconConstants.recipes.emptyIcon,
+            icon: IconConstants.emptyIcon,
             title: context.l10n.recipes_page__on_empty,
           ),
           onError: FEmptyMessage(
-            icon: StateIconConstants.recipes.errorIcon,
+            icon: IconConstants.errorIcon,
             title: context.l10n.recipes_page__on_error,
           ),
           child: CustomScrollView(
@@ -80,8 +82,8 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     FPageIntroductionSliver(
-                      shape: .c9_sided_cookie,
-                      icon: MdiIcons.food,
+                      shape: ShapeConstants.firstLevel,
+                      icon: Symbols.fastfood_rounded,
                       description: context.l10n.recipes_page__description,
                     ),
 
@@ -92,7 +94,6 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
                       provider: provider,
                       pageProvider: widget.pageProvider,
                       scrollController: _scrollController,
-
                       itemBuilder: (item, index, first, last) =>
                           FContentSideCard(
                             title: item.label,

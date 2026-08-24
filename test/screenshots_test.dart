@@ -4,9 +4,21 @@
 /// or `flutter test` to compare the screenshots to the golden files.
 library;
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
+import 'test_cases/tc_00_recipe_item_page.dart';
+import 'test_cases/tc_01_home_page.dart';
+import 'test_cases/tc_02_library_page.dart';
+import 'test_cases/tc_03_recipe_editor_page.dart';
+import 'test_cases/tc_04_settings_account_diet_page.dart';
+import 'test_cases/tc_05_settings_app_theme_page.dart';
+import 'test_cases/tc_06_import_page.dart';
+import 'test_cases/tc_07_import_item_page.dart';
+import 'test_cases/tc_08_export_page.dart';
+import 'test_cases/tc_09_export_item_page.dart';
+import 'test_cases/tc_10_search_page.dart';
+import 'test_cases/tc_11_auth_page.dart';
 import 'test_cases/tc_12_recipe_guided_cooking.dart';
 import 'utils/disk_asset_bundle.dart';
 
@@ -17,35 +29,35 @@ void main() async {
 
   group('Screenshot ENG:', () {
     const locale = Locale('en');
-    // TC00RecipeItemPage(locale: locale, assets: assets).run();
-    // TC01HomePage(locale: locale, assets: assets).run();
-    // TC02LibraryPage(locale: locale, assets: assets).run();
-    // TC03RecipeEditorPage(locale: locale, assets: assets).run();
-    // TC04SettingsAccountDietPage(locale: locale, assets: assets).run();
-    // TC05SettingsAppThemePage(locale: locale, assets: assets).run();
-    // TC06ImportPage(locale: locale, assets: assets).run();
-    // TC07ImportItemPage(locale: locale, assets: assets).run();
-    // TC08ExportPage(locale: locale, assets: assets).run();
-    // TC09ExportItemPage(locale: locale, assets: assets).run();
-    // TC10SearchPage(locale: locale, assets: assets).run();
-    // TC11AuthPage(locale: locale, assets: assets).run();
+    TC00RecipeItemPage(locale: locale, assets: assets).run();
+    TC01HomePage(locale: locale, assets: assets).run();
+    TC02LibraryPage(locale: locale, assets: assets).run();
+    TC03RecipeEditorPage(locale: locale, assets: assets).run();
+    TC04SettingsAccountDietPage(locale: locale, assets: assets).run();
+    TC05SettingsAppThemePage(locale: locale, assets: assets).run();
+    TC06ImportPage(locale: locale, assets: assets).run();
+    TC07ImportItemPage(locale: locale, assets: assets).run();
+    TC08ExportPage(locale: locale, assets: assets).run();
+    TC09ExportItemPage(locale: locale, assets: assets).run();
+    TC10SearchPage(locale: locale, assets: assets).run();
+    TC11AuthPage(locale: locale, assets: assets).run();
     TC12RecipeGuidedCooking(locale: locale, assets: assets).run();
   });
 
   group('Screenshot DE:', () {
     const locale = Locale('de');
-    // TC00RecipeItemPage(locale: locale, assets: assets).run();
-    // TC01HomePage(locale: locale, assets: assets).run();
-    // TC02LibraryPage(locale: locale, assets: assets).run();
-    // TC03RecipeEditorPage(locale: locale, assets: assets).run();
-    // TC04SettingsAccountDietPage(locale: locale, assets: assets).run();
-    // TC05SettingsAppThemePage(locale: locale, assets: assets).run();
-    // TC06ImportPage(locale: locale, assets: assets).run();
-    // TC07ImportItemPage(locale: locale, assets: assets).run();
-    // TC08ExportPage(locale: locale, assets: assets).run();
-    // TC09ExportItemPage(locale: locale, assets: assets).run();
-    // TC10SearchPage(locale: locale, assets: assets).run();
-    // TC11AuthPage(locale: locale, assets: assets).run();
+    TC00RecipeItemPage(locale: locale, assets: assets).run();
+    TC01HomePage(locale: locale, assets: assets).run();
+    TC02LibraryPage(locale: locale, assets: assets).run();
+    TC03RecipeEditorPage(locale: locale, assets: assets).run();
+    TC04SettingsAccountDietPage(locale: locale, assets: assets).run();
+    TC05SettingsAppThemePage(locale: locale, assets: assets).run();
+    TC06ImportPage(locale: locale, assets: assets).run();
+    TC07ImportItemPage(locale: locale, assets: assets).run();
+    TC08ExportPage(locale: locale, assets: assets).run();
+    TC09ExportItemPage(locale: locale, assets: assets).run();
+    TC10SearchPage(locale: locale, assets: assets).run();
+    TC11AuthPage(locale: locale, assets: assets).run();
     TC12RecipeGuidedCooking(locale: locale, assets: assets).run();
   });
 }

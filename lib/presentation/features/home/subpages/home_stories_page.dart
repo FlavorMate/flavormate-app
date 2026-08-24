@@ -1,7 +1,8 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -17,9 +18,10 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_side_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HomeStoriesPage extends ConsumerStatefulWidget {
   const HomeStoriesPage({super.key});
@@ -56,9 +58,9 @@ class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
         scrollController: _scrollController,
         title: context.l10n.home_stories_page__title,
         actions: [
-          IconButton(
+          M3EIconButton(
             onPressed: handleFilterDialog,
-            icon: const Icon(MdiIcons.filter),
+            icon: const Icon(Symbols.filter_alt_rounded),
           ),
         ],
       ),
@@ -67,11 +69,11 @@ class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
           provider: provider,
           onEmpty: FEmptyMessage(
             title: context.l10n.home_stories_page__on_empty,
-            icon: StateIconConstants.stories.emptyIcon,
+            icon: IconConstants.emptyIcon,
           ),
           onError: FEmptyMessage(
             title: context.l10n.home_stories_page__on_error,
-            icon: StateIconConstants.stories.errorIcon,
+            icon: IconConstants.errorIcon,
           ),
           child: CustomScrollView(
             controller: _scrollController,
@@ -82,8 +84,8 @@ class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
                 sliver: SliverMainAxisGroup(
                   slivers: [
                     FPageIntroductionSliver(
-                      shape: .l4_leaf_clover,
-                      icon: MdiIcons.forum,
+                      shape: ShapeConstants.firstLevel,
+                      icon: Symbols.chat_rounded,
                       description: context.l10n.home_stories_page__description,
                     ),
 

@@ -5,7 +5,7 @@ import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FRecipeCategories extends StatelessWidget {
   final bool readOnly;
@@ -35,7 +35,10 @@ class FRecipeCategories extends StatelessWidget {
 
         FWrap(
           children: [
-            Chip(avatar: Icon(diet.icon), label: Text(diet.getName(context))),
+            Chip(
+              avatar: Icon(diet.icon),
+              label: Text(diet.getName(context)),
+            ),
             Chip(
               avatar: Icon(course.icon),
               label: Text(course.getName(context)),
@@ -47,6 +50,7 @@ class FRecipeCategories extends StatelessWidget {
           children: [
             for (final category in categories)
               ActionChip(
+                mouseCursor: SystemMouseCursors.click,
                 label: Text(category.label),
                 onPressed: readOnly
                     ? () {}

@@ -1,6 +1,7 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/extensions/e_list.dart';
 import 'package:flavormate/core/extensions/e_number.dart';
@@ -18,9 +19,10 @@ import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_categories/providers/p_recipe_editor_item_categories.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecipeEditorItemCategoriesPage extends ConsumerStatefulWidget {
   final String draftId;
@@ -71,6 +73,16 @@ class _RecipeEditorItemCategoriesPageState
 
   @override
   Widget build(BuildContext context) {
+    final theme = M3ETheme.of(context).listTheme.expandable;
+    final style = M3EExpandableStyle.fromTheme(theme).copyWith(
+      headerPadding: const .symmetric(
+        vertical: PADDING / 2,
+        horizontal: PADDING,
+      ),
+      headerAlignment: .center,
+      useInkWell: false,
+    );
+
     return Scaffold(
       appBar: FAppBar(
         scrollController: _scrollController,
@@ -94,8 +106,8 @@ class _RecipeEditorItemCategoriesPageState
               sliver: SliverMainAxisGroup(
                 slivers: [
                   FPageIntroductionSliver(
-                    shape: .c7_sided_cookie,
-                    icon: MdiIcons.package,
+                    shape: ShapeConstants.editor,
+                    icon: Symbols.inventory_2_rounded,
                     description: context
                         .l10n
                         .recipe_editor_item_categories_page__description,
@@ -110,11 +122,38 @@ class _RecipeEditorItemCategoriesPageState
                         title: context
                             .l10n
                             .recipe_editor_item_categories_page__on_error,
-                        icon: StateIconConstants.recipes.errorIcon,
+                        icon: IconConstants.errorIcon,
                       ),
                       builder: (_, data) {
-                        return Card.outlined(
-                          child: Column(children: _buildTiles(data.data)),
+                        return M3EExpandableList(
+                          style: style,
+                          data: [
+                            for (final categoryGroup in data.data)
+                              M3EExpandableData(
+                                title: categoryGroup.label,
+                                trailing: Text(
+                                  '(${countCategories(categoryGroup).trailingZeros()} / ${categoryGroup.categories.length.trailingZeros()})',
+                                ),
+                                body: Column(
+                                  children: [
+                                    for (final category
+                                        in categoryGroup.categories)
+                                      M3EListItem(
+                                        headline: category.label,
+                                        leading: Icon(
+                                          _categories.any(
+                                                (c) => c.id == category.id,
+                                              )
+                                              ? Symbols.check_circle_rounded
+                                              : Symbols.circle_rounded,
+                                          color: context.colorScheme.primary,
+                                        ),
+                                        onTap: () => toggleCategory(category),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                          ],
                         );
                       },
                     ),
@@ -126,39 +165,6 @@ class _RecipeEditorItemCategoriesPageState
         ),
       ),
     );
-  }
-
-  List<Widget> _buildTiles(List<CategoryGroupDto> groups) {
-    final elements = groups
-        .expand(
-          (categoryGroup) => [
-            ExpansionTile(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(categoryGroup.label),
-                  Text(
-                    '(${countCategories(categoryGroup).trailingZeros()} / ${categoryGroup.categories.length.trailingZeros()})',
-                  ),
-                ],
-              ),
-              shape: const Border(),
-              children: [
-                for (final category in categoryGroup.categories)
-                  CheckboxListTile(
-                    value: _categories.any((c) => c.id == category.id),
-                    onChanged: (_) => toggleCategory(category),
-                    title: Text(category.label),
-                  ),
-              ],
-            ),
-            const Divider(height: 0),
-          ],
-        )
-        .toList();
-    elements.removeLast();
-
-    return elements;
   }
 
   Future<void> toggleCategory(CategoryDto category) async {

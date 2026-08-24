@@ -7,9 +7,10 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/storage/shared_preferences/providers/p_sp_current_server.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class NoConnectionPage extends ConsumerStatefulWidget {
   const NoConnectionPage({super.key});
@@ -50,7 +51,7 @@ class _NoConnectionPageState extends ConsumerState<NoConnectionPage> {
                 spacing: PADDING,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(MdiIcons.cloudOffOutline, size: 128),
+                  const Icon(Symbols.cloud_off_rounded, size: 128),
                   FText(
                     context.l10n.no_connection_page__hint_1,
                     style: FTextStyle.titleLarge,
@@ -60,7 +61,7 @@ class _NoConnectionPageState extends ConsumerState<NoConnectionPage> {
                     style: FTextStyle.titleSmall,
                     textAlign: TextAlign.center,
                   ),
-                  FilledButton(
+                  M3EButton(
                     onPressed: logout,
                     child: Text(context.l10n.btn_logout),
                   ),

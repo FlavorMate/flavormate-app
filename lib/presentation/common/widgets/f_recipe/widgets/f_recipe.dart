@@ -7,7 +7,7 @@ import 'package:flavormate/data/models/local/common_recipe/common_recipe.dart';
 import 'package:flavormate/data/repositories/features/units/p_rest_unit_conversions.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/layouts/f_recipe_desktop_layout.dart';
 import 'package:flavormate/presentation/common/widgets/f_recipe/layouts/f_recipe_mobile_layout.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 

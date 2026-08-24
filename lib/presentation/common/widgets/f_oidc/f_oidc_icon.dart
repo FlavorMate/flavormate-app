@@ -2,8 +2,8 @@ import 'dart:typed_data';
 
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FOidcIcon extends ConsumerWidget {
   final Uint8List? data;
@@ -15,8 +15,8 @@ class FOidcIcon extends ConsumerWidget {
     super.key,
     required this.data,
     required this.label,
-    this.height = 40,
-    this.width = 40,
+    this.height = 30,
+    this.width = 30,
   });
 
   @override

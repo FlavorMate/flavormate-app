@@ -1,6 +1,6 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/constants/state_icon_constants.dart';
+import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -13,9 +13,10 @@ import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_account_section.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_info_section.dart';
 import 'package:flavormate/presentation/features/home/widgets/account_dialog/home_account_dialog_settings_section.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeAccountDialog extends StatelessWidget {
@@ -29,7 +30,7 @@ class HomeAccountDialog extends StatelessWidget {
       provider: provider,
       onError: FEmptyMessage(
         title: context.l10n.home_account_dialog__on_error,
-        icon: StateIconConstants.authors.errorIcon,
+        icon: IconConstants.errorIcon,
       ),
       builder: (context, account) {
         final size = MediaQuery.sizeOf(context);
@@ -54,9 +55,9 @@ class HomeAccountDialog extends StatelessWidget {
                       scrollController: null,
                       title: account.username,
                       actions: [
-                        IconButton(
+                        M3EIconButton(
                           onPressed: () => context.pop(),
-                          icon: const Icon(MdiIcons.close),
+                          icon: const Icon(Symbols.close_rounded),
                         ),
                       ],
                     ),
@@ -77,7 +78,7 @@ class HomeAccountDialog extends StatelessWidget {
                                       .l10n
                                       .home_account_dialog__my_profile_hint,
                                   leading: const FTileIcon(
-                                    icon: MdiIcons.account,
+                                    icon: Symbols.person_rounded,
                                   ),
                                   onTap: () => openAccount(context, account.id),
                                 ),
@@ -91,12 +92,14 @@ class HomeAccountDialog extends StatelessWidget {
                             Row(
                               mainAxisAlignment: .center,
                               children: [
-                                TextButton(
+                                M3EButton(
+                                  style: .text,
                                   onPressed: openGitHub,
                                   child: const Text('GitHub'),
                                 ),
                                 const Text('-'),
-                                TextButton(
+                                M3EButton(
+                                  style: .text,
                                   onPressed: () => openLicenses(context),
                                   child: Text(
                                     context.l10n.home_account_dialog__licenses,

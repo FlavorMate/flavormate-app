@@ -1,7 +1,7 @@
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_error.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class FProviderState2Sliver<T> extends ConsumerWidget {
@@ -38,7 +38,6 @@ class FProviderState2Sliver<T> extends ConsumerWidget {
       return SliverToBoxAdapter(
         child: FError(onError: onEmpty),
       );
-      return builder(state.value!);
     }
   }
 }

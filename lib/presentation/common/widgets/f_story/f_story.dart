@@ -7,7 +7,7 @@ import 'package:flavormate/presentation/common/widgets/f_message/f_message_link.
 import 'package:flavormate/presentation/common/widgets/f_message/f_message_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FStory extends StatelessWidget {
   final ScrollController controller;

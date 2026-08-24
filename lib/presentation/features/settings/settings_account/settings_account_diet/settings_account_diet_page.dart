@@ -1,4 +1,5 @@
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/features/accounts/account_update_dto.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
@@ -9,10 +10,10 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAccountDietPage extends ConsumerStatefulWidget {
   const SettingsAccountDietPage({super.key});
@@ -54,8 +55,8 @@ class _SettingsAccountDietPageState
             spacing: PADDING,
             children: [
               FPageIntroduction(
-                shape: .soft_burst,
-                icon: MdiIcons.leaf,
+                shape: ShapeConstants.settings,
+                icon: Symbols.eco_rounded,
                 description:
                     context.l10n.settings_account_diet_page__description,
               ),
@@ -70,8 +71,8 @@ class _SettingsAccountDietPageState
                       leading: FTileIcon(
                         iconBackgroundColor: Colors.transparent,
                         icon: currentDiet == item
-                            ? MdiIcons.checkCircleOutline
-                            : MdiIcons.circleOutline,
+                            ? Symbols.check_circle_rounded
+                            : Symbols.circle_rounded,
                       ),
                       onTap: () => updateValue(item),
                     );

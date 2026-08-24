@@ -8,7 +8,7 @@ import 'package:flavormate/data/repositories/extension/ratings/p_rest_ratings_id
 import 'package:flavormate/presentation/features/recipes_item/models/p_recipe_wrapper.dart';
 import 'package:flavormate/presentation/features/recipes_item/providers/p_recipes_item_page.dart';
 import 'package:flavormate/presentation/features/recipes_item/recipes_item_page.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

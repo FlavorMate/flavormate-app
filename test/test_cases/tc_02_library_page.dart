@@ -5,7 +5,6 @@ import 'package:flavormate/core/storage/shared_preferences/providers/settings/p_
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_self.dart';
 import 'package:flavormate/data/repositories/features/books/p_rest_books.dart';
 import 'package:flavormate/presentation/features/library/library_page.dart';
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../test_data/accounts/accounts.dart';
@@ -19,9 +18,6 @@ class TC02LibraryPage extends TC {
     required super.locale,
     required super.assets,
   });
-
-  @override
-  ThemeMode get themeMode => .dark;
 
   @override
   List<Override> get overrides {

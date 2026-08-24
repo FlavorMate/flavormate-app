@@ -1,13 +1,20 @@
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
+import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/presentation/common/dialogs/f_alert_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AdministrationAccountManagementPasswordDialog extends StatefulWidget {
   const AdministrationAccountManagementPasswordDialog({super.key});
+
+  static Future<String?> openDialog(BuildContext context) async {
+    return await openAlertDialog<String>(
+      context,
+      dialog: const AdministrationAccountManagementPasswordDialog(),
+    );
+  }
 
   @override
   State<StatefulWidget> createState() =>

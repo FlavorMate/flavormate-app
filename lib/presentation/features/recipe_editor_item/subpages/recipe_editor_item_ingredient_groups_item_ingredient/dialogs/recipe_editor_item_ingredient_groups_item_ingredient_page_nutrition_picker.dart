@@ -7,15 +7,17 @@ import 'package:flavormate/core/utils/u_double.dart';
 import 'package:flavormate/core/utils/u_validator.dart';
 import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_ingredient_group_dto.dart';
 import 'package:flavormate/data/models/features/unit/unit_dto.dart';
-import 'package:flavormate/presentation/common/dialogs/f_full_dialog.dart';
-import 'package:flavormate/presentation/common/widgets/f_button.dart';
+import 'package:flavormate/data/models/shared/enums/nutrition_type.dart';
+import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_card.dart';
+import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flavormate/presentation/common/widgets/f_text_form_field.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RecipeEditorItemIngredientGroupsItemIngredientPageNutritionPicker
@@ -40,7 +42,7 @@ class _DNutritionState
         ConsumerState<
           RecipeEditorItemIngredientGroupsItemIngredientPageNutritionPicker
         > {
-  final double _dividerWidth = 250;
+  final _pageController = PageController(initialPage: 1);
 
   final _formKey = GlobalKey<FormState>();
 
@@ -78,6 +80,7 @@ class _DNutritionState
 
     if (_nutrition.openFoodFactsId?.isNotEmpty ?? false) {
       _mode = 0;
+      _pageController.jumpToPage(0);
     }
 
     super.initState();
@@ -85,6 +88,8 @@ class _DNutritionState
 
   @override
   void dispose() {
+    _pageController.dispose();
+
     _openFoodFactsIdController.dispose();
 
     _carbohydratesController.dispose();
@@ -102,255 +107,321 @@ class _DNutritionState
   @override
   Widget build(BuildContext context) {
     final offFeature = ref.watch(pFeatureOpenFoodFactsProvider);
-    return FFullDialog(
-      title: context
-          .l10n
-          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__title,
-      submit: submit,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          spacing: PADDING,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SegmentedButton<int>(
-              showSelectedIcon: false,
-              segments: [
-                ButtonSegment(
-                  value: 0,
-                  label: Text(
-                    context
-                        .l10n
-                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_title,
-                  ),
+
+    return Dialog.fullscreen(
+      child: Scaffold(
+        appBar: FAppBar(
+          title: context
+              .l10n
+              .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__title,
+          scrollController: null,
+        ),
+        floatingActionButton: M3EFab(
+          icon: const Icon(Symbols.save_rounded),
+          onPressed: submit,
+        ),
+        body: SafeArea(
+          child: FFixedResponsive(
+            child: Column(
+              spacing: PADDING,
+              children: [
+                M3ESegmentedButton<int>(
+                  showSelectedIcon: false,
+                  segments: [
+                    M3ESegment(
+                      value: 0,
+                      label: context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_title,
+                    ),
+                    M3ESegment(
+                      value: 1,
+                      label: context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_title,
+                    ),
+                  ],
+                  selected: {_mode},
+                  onSelectionChanged: (selected) {
+                    setState(() {
+                      _mode = selected.first;
+                      _pageController.animateToPage(
+                        selected.first,
+                        duration: const .new(milliseconds: 250),
+                        curve: Curves.ease,
+                      );
+                    });
+                  },
                 ),
-                ButtonSegment(
-                  value: 1,
-                  label: Text(
-                    context
-                        .l10n
-                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_title,
+                Expanded(
+                  child: Form(
+                    key: _formKey,
+                    child: PageView(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        offSection(offFeature),
+                        manualSection(),
+                      ],
+                    ),
                   ),
                 ),
               ],
-              selected: {_mode},
-              onSelectionChanged: (selected) {
-                setState(() {
-                  _mode = selected.first;
-                });
-              },
             ),
-            if (_mode == 0)
-              if (!offFeature)
-                FCard(
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
-                  child: Row(
-                    spacing: PADDING,
-                    children: [
-                      const Icon(MdiIcons.alertCircle),
-                      Expanded(
-                        child: FText(
-                          context
-                              .l10n
-                              .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_disabled,
-                          style: FTextStyle.titleSmall,
-                          color: FTextColor.onPrimaryContainer,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              else
-                Column(
-                  spacing: PADDING,
-                  children: [
-                    FCard(
-                      child: Column(
-                        spacing: PADDING,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FText(
-                            context
-                                .l10n
-                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_1,
-                            style: FTextStyle.bodyMedium,
-                            color: FTextColor.onPrimaryContainer,
-                          ),
-                          FText(
-                            context
-                                .l10n
-                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_2,
-                            style: FTextStyle.bodyMedium,
-                            color: FTextColor.onPrimaryContainer,
-                          ),
-                          FText(
-                            context
-                                .l10n
-                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_3,
-                            style: FTextStyle.bodyMedium,
-                            color: FTextColor.onPrimaryContainer,
-                          ),
-                          FText(
-                            context
-                                .l10n
-                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_4,
-                            style: FTextStyle.bodyMedium,
-                            color: FTextColor.onPrimaryContainer,
-                          ),
-                          FButton(
-                            onPressed: launchOFF,
-                            label: context
-                                .l10n
-                                .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_launch,
-                          ),
-                        ],
-                      ),
-                    ),
-                    // if widget is null or not convertable
-                    if (!convertableUnit)
-                      FCard(
-                        color: Theme.of(context).colorScheme.tertiaryContainer,
-                        child: Row(
-                          spacing: PADDING,
-                          children: [
-                            const Icon(MdiIcons.alertCircle),
-                            Expanded(
-                              child: FText(
-                                context
-                                    .l10n
-                                    .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_unavailable,
-                                style: FTextStyle.titleSmall,
-                                color: FTextColor.onPrimaryContainer,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    FTextFormField(
-                      controller: _openFoodFactsIdController,
-                      label: context
-                          .l10n
-                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_ean,
-                      prefix: const Icon(MdiIcons.barcodeScan),
-                      readOnly: !convertableUnit,
-                    ),
-                  ],
-                ),
-            if (_mode == 1)
-              Column(
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget offSection(bool offFeature) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          if (!offFeature) offSectionDisabled() else offSectionEnabled(),
+
+          // Padding for FAB Button
+          const SizedBox(height: kFabHeight + PADDING),
+        ],
+      ),
+    );
+  }
+
+  Widget offSectionDisabled() {
+    return FCard(
+      color: Theme.of(context).colorScheme.tertiaryContainer,
+      child: Row(
+        spacing: PADDING,
+        children: [
+          const Icon(Symbols.error_rounded),
+          Expanded(
+            child: FText(
+              context
+                  .l10n
+                  .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_disabled,
+              style: FTextStyle.titleSmall,
+              color: FTextColor.onPrimaryContainer,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget offSectionEnabled() {
+    return Column(
+      spacing: PADDING,
+      children: [
+        M3EExpandableList(
+          style: const .new(
+            useInkWell: false,
+            headerAlignment: .center,
+            headerPadding: .symmetric(horizontal: 16, vertical: 8),
+          ),
+          data: [
+            M3EExpandableData(
+              title: context
+                  .l10n
+                  .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__whats_off,
+              body: Column(
+                mainAxisSize: .min,
                 spacing: PADDING,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (!enableCustom)
-                    FCard(
-                      color: Theme.of(context).colorScheme.tertiaryContainer,
-                      child: Row(
-                        spacing: PADDING,
-                        children: [
-                          const Icon(MdiIcons.alertCircle),
-                          Expanded(
-                            child: FText(
-                              context
-                                  .l10n
-                                  .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_unavailable,
-                              style: FTextStyle.titleSmall,
-                              color: FTextColor.onPrimaryContainer,
-                            ),
-                          ),
-                        ],
+                  FText(
+                    context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_1,
+                    style: FTextStyle.bodyMedium,
+                    color: FTextColor.onPrimaryContainer,
+                  ),
+                  FText(
+                    context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_2,
+                    style: FTextStyle.bodyMedium,
+                    color: FTextColor.onPrimaryContainer,
+                  ),
+                  FText(
+                    context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_3,
+                    style: FTextStyle.bodyMedium,
+                    color: FTextColor.onPrimaryContainer,
+                  ),
+                  FText(
+                    context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_4,
+                    style: FTextStyle.bodyMedium,
+                    color: FTextColor.onPrimaryContainer,
+                  ),
+                  Center(
+                    child: M3EButton(
+                      onPressed: launchOFF,
+                      child: Text(
+                        context
+                            .l10n
+                            .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_launch,
                       ),
                     ),
-                  FCard(
-                    child: FText(
-                      context.l10n
-                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_hint_1(
-                            [
-                              widget.amount?.beautify,
-                              widget.unit?.getLabel(widget.amount),
-                            ].nonNulls.join(' '),
-                          ),
-                      style: FTextStyle.bodyMedium,
-                      color: FTextColor.onPrimaryContainer,
-                    ),
-                  ),
-                  FTextFormField(
-                    controller: _energyKcalController,
-                    label: context.l10n.nutrition__kcal,
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.fire),
-                  ),
-                  SizedBox(width: _dividerWidth, child: const Divider()),
-                  FTextFormField(
-                    controller: _carbohydratesController,
-                    label: '${context.l10n.nutrition__carbohydrates} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.corn),
-                  ),
-                  FTextFormField(
-                    controller: _sugarsController,
-                    label: '${context.l10n.nutrition__sugars} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.cube),
-                  ),
-                  SizedBox(width: _dividerWidth, child: const Divider()),
-                  FTextFormField(
-                    controller: _fatController,
-                    label: '${context.l10n.nutrition__fats} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.water),
-                  ),
-                  FTextFormField(
-                    controller: _saturatedFatController,
-                    label: '${context.l10n.nutrition__fats_saturated} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.foodDrumstick),
-                  ),
-                  SizedBox(width: _dividerWidth, child: const Divider()),
-                  FTextFormField(
-                    controller: _fiberController,
-                    label: '${context.l10n.nutrition__fibers} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.leaf),
-                  ),
-                  FTextFormField(
-                    controller: _proteinsController,
-                    label: '${context.l10n.nutrition__proteins} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.peanut),
-                  ),
-                  FTextFormField(
-                    controller: _saltController,
-                    label: '${context.l10n.nutrition__salt} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.shaker),
-                  ),
-                  FTextFormField(
-                    controller: _sodiumController,
-                    label: '${context.l10n.nutrition__sodium} (g)',
-                    keyboardType: TextInputType.number,
-                    readOnly: !enableCustom,
-                    validators: validate,
-                    prefix: const Icon(MdiIcons.flask),
                   ),
                 ],
               ),
+            ),
           ],
         ),
+        // if widget is null or not convertable
+        if (!convertableUnit)
+          FCard(
+            color: Theme.of(context).colorScheme.tertiaryContainer,
+            child: Row(
+              spacing: PADDING,
+              children: [
+                Icon(
+                  Symbols.error_rounded,
+                  color: context.colorScheme.onTertiaryContainer,
+                ),
+                Expanded(
+                  child: FText(
+                    context
+                        .l10n
+                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_unavailable,
+                    style: FTextStyle.titleSmall,
+                    color: FTextColor.onTertiaryContainer,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        FTextFormField(
+          controller: _openFoodFactsIdController,
+          label: context
+              .l10n
+              .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_ean,
+          prefix: const Icon(Symbols.barcode_scanner_rounded),
+          readOnly: !convertableUnit,
+        ),
+      ],
+    );
+  }
+
+  Widget manualSection() {
+    return SingleChildScrollView(
+      child: Column(
+        spacing: PADDING,
+        children: [
+          if (!enableCustom)
+            FCard(
+              color: Theme.of(context).colorScheme.tertiaryContainer,
+              child: Row(
+                spacing: PADDING,
+                children: [
+                  const Icon(Symbols.error_rounded),
+                  Expanded(
+                    child: FText(
+                      context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_unavailable,
+                      style: FTextStyle.titleSmall,
+                      color: FTextColor.onPrimaryContainer,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          FCard(
+            child: FText(
+              context.l10n
+                  .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__custom_hint_1(
+                    [
+                      widget.amount?.beautify,
+                      widget.unit?.getLabel(widget.amount),
+                    ].nonNulls.join(' '),
+                  ),
+              style: FTextStyle.bodyMedium,
+              color: FTextColor.onPrimaryContainer,
+            ),
+          ),
+          FTextFormField(
+            controller: _energyKcalController,
+            label: context.l10n.nutrition__kcal,
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.energyKcal.icon),
+          ),
+          const SizedBox(width: BUTTON_WIDTH, child: Divider()),
+          FTextFormField(
+            controller: _carbohydratesController,
+            label: '${context.l10n.nutrition__carbohydrates} (g)',
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.carbohydrates.icon),
+          ),
+          FTextFormField(
+            controller: _sugarsController,
+            label: '${context.l10n.nutrition__sugars} (g)',
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.sugars.icon),
+          ),
+          const SizedBox(width: BUTTON_WIDTH, child: Divider()),
+          FTextFormField(
+            controller: _fatController,
+            label: '${context.l10n.nutrition__fats} (g)',
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.fat.icon),
+          ),
+          FTextFormField(
+            controller: _saturatedFatController,
+            label: '${context.l10n.nutrition__fats_saturated} (g)',
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.saturatedFat.icon),
+          ),
+          const SizedBox(width: BUTTON_WIDTH, child: Divider()),
+          FTextFormField(
+            controller: _fiberController,
+            label: '${context.l10n.nutrition__fibers} (g)',
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.fiber.icon),
+          ),
+          FTextFormField(
+            controller: _proteinsController,
+            label: '${context.l10n.nutrition__proteins} (g)',
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.proteins.icon),
+          ),
+          FTextFormField(
+            controller: _saltController,
+            label: '${context.l10n.nutrition__salt} (g)',
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.salt.icon),
+          ),
+          FTextFormField(
+            controller: _sodiumController,
+            label: '${context.l10n.nutrition__sodium} (g)',
+            keyboardType: TextInputType.number,
+            readOnly: !enableCustom,
+            validators: validate,
+            prefix: Icon(NutritionType.sodium.icon),
+          ),
+
+          // Padding for FAB Button
+          const SizedBox(height: kFabHeight),
+        ],
       ),
     );
   }

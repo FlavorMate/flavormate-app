@@ -5,7 +5,8 @@ import 'package:flavormate/data/models/features/accounts/account_dto.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FRecipePublished extends StatelessWidget {
@@ -36,14 +37,11 @@ class FRecipePublished extends StatelessWidget {
           style: FTextStyle.headlineMedium,
           fontWeight: FontWeight.w500,
         ),
-        OutlinedButton(
+        M3EButton.outlined(
           onPressed: readOnly
               ? () {}
               : () => context.routes.accountsItem(account.id),
-          style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(BORDER_RADIUS),
-            ),
+          decoration: .styleFrom(
             padding: const EdgeInsets.all(PADDING / 1.25),
             minimumSize: const Size(_buttonWidth, 48),
             maximumSize: const Size(_buttonWidth, double.infinity),
@@ -53,25 +51,33 @@ class FRecipePublished extends StatelessWidget {
             mainAxisAlignment: .start,
             children: [
               FCircleAvatar(account: account),
-              Column(
-                crossAxisAlignment: .start,
-                children: [
-                  FText(
-                    account.displayName,
-                    style: .titleMedium,
-                    color: .primary,
-                    fontWeight: .bold,
-                  ),
-                  Text(createdOn.formatter.date.yyyyMMMMdd(context)),
-                ],
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    FText(
+                      account.displayName,
+                      style: .titleMedium,
+                      color: .primary,
+                      fontWeight: .bold,
+                      maxLines: 1,
+                      textOverflow: .ellipsis,
+                    ),
+                    Text(
+                      createdOn.formatter.date.yyyyMMMMdd(context),
+                      overflow: .ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
 
         if (url != null)
-          OutlinedButton(
-            style: OutlinedButton.styleFrom(
+          M3EButton.outlined(
+            decoration: .styleFrom(
               minimumSize: const Size(_buttonWidth, 48),
               maximumSize: const Size(_buttonWidth, double.infinity),
             ),
@@ -83,12 +89,9 @@ class FRecipePublished extends StatelessWidget {
   }
 
   void _openRecipeSource(BuildContext context) async {
-    final response = await showDialog(
-      context: context,
-      builder: (_) => FConfirmDialog(
-        title: context.l10n.f_recipe_published__open_original_warning_title,
-        content: context.l10n.f_recipe_published__open_original_warning(url!),
-      ),
+    final response = await openConfirmDialog(
+      context,
+      title: context.l10n.f_recipe_published__open_original_warning_title,
     );
 
     if (response != true) return;
