@@ -58,6 +58,8 @@ class MainLayoutState extends State<MainLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = M3ETheme.of(context).listTheme.cardList;
+
     final destinations = buildDestinations(context);
     return Scaffold(
       body: SafeArea(
@@ -66,16 +68,22 @@ class MainLayoutState extends State<MainLayout> {
             if (wideScreen)
               SizedBox(
                 width: _drawerWidth,
-                child: M3ENavigationDrawer(
-                  onDestinationSelected: _goBranch,
-                  selectedIndex: widget.navigationShell.currentIndex,
-                  destinations: [
-                    for (var destination in destinations)
-                      M3ENavigationDestination(
-                        icon: Icon(destination.icon),
-                        label: destination.label,
-                      ),
-                  ],
+                child: ClipRRect(
+                  borderRadius: .only(
+                    topRight: .circular(theme.outerRadius),
+                    bottomRight: .circular(theme.outerRadius),
+                  ),
+                  child: M3ENavigationDrawer(
+                    onDestinationSelected: _goBranch,
+                    selectedIndex: widget.navigationShell.currentIndex,
+                    destinations: [
+                      for (var destination in destinations)
+                        M3ENavigationDestination(
+                          icon: Icon(destination.icon),
+                          label: destination.label,
+                        ),
+                    ],
+                  ),
                 ),
               ),
             Expanded(child: widget.navigationShell),
