@@ -56,7 +56,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
       appBar: FAppBar(
         scrollController: _scrollController,
         title: context.l10n.flavormate,
-        showHome: false,
+        automaticallyImplyLeading: false,
         actions: [
           M3EIconButton(
             onPressed: openFilterDialog,
