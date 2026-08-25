@@ -6,12 +6,6 @@
     {
       "layers" : [
         {
-          "blend-mode" : "normal",
-          "glass" : true,
-          "image-name" : "winter2025.png",
-          "name" : "winter2025"
-        },
-        {
           "fill" : {
             "solid" : "extended-gray:1.00000,1.00000"
           },

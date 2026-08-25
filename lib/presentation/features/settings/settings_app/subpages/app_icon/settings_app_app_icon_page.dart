@@ -50,6 +50,7 @@ class SettingsAppAppIconPage extends StatelessWidget {
                   ),
                 ),
               FTileGroup(
+                title: context.l10n.settings_app_app_icon_page__default_icons,
                 items: [
                   _buildTile(
                     imagePath: Assets.appIcons.flavormate.path,
@@ -58,6 +59,11 @@ class SettingsAppAppIconPage extends StatelessWidget {
                         .settings_app_app_icon_page__icon_flavormate,
                     onTap: () => setIcon(context, .appIcon),
                   ),
+                ],
+              ),
+              FTileGroup(
+                title: context.l10n.settings_app_app_icon_page__event_icons,
+                items: [
                   _buildTile(
                     imagePath: Assets.appIcons.winter2025.path,
                     label: context

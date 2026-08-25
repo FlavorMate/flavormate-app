@@ -28,23 +28,6 @@
               0
             ]
           }
-        },
-        {
-          "fill-specializations" : [
-            {
-              "value" : {
-                "solid" : "extended-gray:1.00000,1.00000"
-              }
-            },
-            {
-              "appearance" : "dark",
-              "value" : {
-                "solid" : "srgb:0.32157,0.71765,0.53333,1.00000"
-              }
-            }
-          ],
-          "image-name" : "spring2026.png",
-          "name" : "spring2026"
         }
       ],
       "lighting" : "combined",

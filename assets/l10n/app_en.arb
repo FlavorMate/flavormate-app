@@ -721,6 +721,8 @@
   "settings_account_sessions_page__hint": "See all devices where you're logged in and end sessions if needed.",
   "settings_account_sessions_page__on_error": "Sessions couldn't be loaded.",
   "settings_account_sessions_page__title": "Sessions",
+  "settings_app_app_icon_page__default_icons": "Default icons",
+  "settings_app_app_icon_page__event_icons": "Event Icons",
   "settings_app_app_icon_page__hint": "This feature is only supported on Android, iOS, and macOS.",
   "settings_app_app_icon_page__icon_flavormate": "FlavorMate",
   "settings_app_app_icon_page__icon_spring_2026": "Spring 2026",

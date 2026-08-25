@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:flavormate/core/extensions/e_object.dart';
 import 'package:flavormate/core/theme/utils/u_theme.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,6 +12,14 @@ class PDynamicColor extends _$PDynamicColor {
   Future<Color?> build() async {
     if (!UTheme.supportAccentColor()) return null;
 
-    return await DynamicColorPlugin.getAccentColor();
+    final colorDesktop = await DynamicColorPlugin.getAccentColor();
+    final schemeAndroid = await DynamicColorPlugin.getCorePalette();
+    final colorAndroid = schemeAndroid?.let(
+      (it) => Color(it.primary.keyColor.toInt()),
+    );
+
+    ref.keepAlive();
+
+    return colorDesktop ?? colorAndroid;
   }
 }
