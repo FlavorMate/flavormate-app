@@ -721,6 +721,8 @@
   "settings_account_sessions_page__hint": "Hier siehst du alle Geräte, auf denen du angemeldet bist, und kannst Sitzungen bei Bedarf beenden.",
   "settings_account_sessions_page__on_error": "Sitzungen konnten nicht geladen werden.",
   "settings_account_sessions_page__title": "Sitzungen",
+  "settings_app_app_icon_page__default_icons": "Standard Icons",
+  "settings_app_app_icon_page__event_icons": "Event Icons",
   "settings_app_app_icon_page__hint": "Diese Funktion wird nur von Android, iOS und macOS unterstützt.",
   "settings_app_app_icon_page__icon_flavormate": "FlavorMate",
   "settings_app_app_icon_page__icon_spring_2026": "Frühling 2026",
