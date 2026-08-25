@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-  <background android:drawable="@color/ic_winter_2025_background"/>
-  <foreground android:drawable="@mipmap/ic_winter_2025_foreground"/>
-  <monochrome android:drawable="@mipmap/ic_winter_2025_monochrome"/>
+    <background android:drawable="@color/ic_winter_2025_background"/>
+    <foreground android:drawable="@drawable/ic_winter_2025_foreground"/>
+    <monochrome android:drawable="@drawable/ic_winter_2025_monochrome"/>
 </adaptive-icon>

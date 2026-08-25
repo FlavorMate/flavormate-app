@@ -19,23 +19,6 @@
               }
             }
           ],
-          "image-name" : "summer2026.png",
-          "name" : "summer2026"
-        },
-        {
-          "fill-specializations" : [
-            {
-              "value" : {
-                "solid" : "extended-gray:1.00000,1.00000"
-              }
-            },
-            {
-              "appearance" : "dark",
-              "value" : {
-                "solid" : "srgb:0.30980,0.48627,1.00000,1.00000"
-              }
-            }
-          ],
           "image-name" : "logo_dynamic.svg",
           "name" : "logo_dynamic",
           "position" : {
