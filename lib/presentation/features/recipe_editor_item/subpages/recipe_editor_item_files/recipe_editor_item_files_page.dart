@@ -124,13 +124,16 @@ class _RecipeEditorItemFilesPageState
                           ),
                           children: [
                             Positioned(
-                              top: PADDING,
-                              right: PADDING,
-                              child: CircleAvatar(
-                                child: M3EIconButton(
-                                  onPressed: () => deleteImage(item.id),
-                                  icon: const Icon(Symbols.delete_rounded),
+                              top: PADDING / 2,
+                              right: PADDING / 2,
+                              child: M3EIconButton(
+                                decoration: .new(
+                                  backgroundColor: .all(
+                                    context.colorScheme.primaryContainer,
+                                  ),
                                 ),
+                                onPressed: () => deleteImage(item.id),
+                                icon: const Icon(Symbols.delete_rounded),
                               ),
                             ),
                           ],
