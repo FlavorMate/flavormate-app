@@ -71,14 +71,14 @@ class FContentImageCard extends ConsumerWidget {
                   type: .secure,
                 ),
 
-                ...?children,
-
                 GestureDetector(
                   onTap: onTap,
                   child: const MouseRegion(
                     cursor: SystemMouseCursors.click,
                   ),
                 ),
+
+                ...?children,
               ],
             ),
           );
