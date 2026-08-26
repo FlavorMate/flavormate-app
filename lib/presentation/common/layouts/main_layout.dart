@@ -3,6 +3,8 @@ import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/destination.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_expressive/components/navigation_bar/models/m3e_navigation_bar_destination.dart';
+import 'package:material_3_expressive/components/navigation_rail/models/m3e_navigation_rail_destination.dart';
+import 'package:material_3_expressive/components/navigation_rail/models/m3e_navigation_rail_section.dart';
 import 'package:material_3_expressive/material_3_expressive.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
@@ -58,32 +60,37 @@ class MainLayoutState extends State<MainLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = M3ETheme.of(context).listTheme.cardList;
+    final cardTheme = M3ETheme.of(context).listTheme.cardList;
 
     final destinations = buildDestinations(context);
+
     return Scaffold(
       body: SafeArea(
         child: Row(
           children: [
             if (wideScreen)
-              SizedBox(
-                width: _drawerWidth,
-                child: ClipRRect(
-                  borderRadius: .only(
-                    topRight: .circular(theme.outerRadius),
-                    bottomRight: .circular(theme.outerRadius),
-                  ),
-                  child: M3ENavigationDrawer(
-                    onDestinationSelected: _goBranch,
-                    selectedIndex: widget.navigationShell.currentIndex,
-                    destinations: [
-                      for (var destination in destinations)
-                        M3ENavigationDestination(
-                          icon: Icon(destination.icon),
-                          label: destination.label,
-                        ),
-                    ],
-                  ),
+              ClipRRect(
+                borderRadius: .only(
+                  topRight: .circular(cardTheme.outerRadius),
+                  bottomRight: .circular(cardTheme.outerRadius),
+                ),
+                child: M3ENavigationRail(
+                  background: context.colorScheme.surfaceContainerLow,
+                  type: .alwaysExpand,
+
+                  onDestinationSelected: _goBranch,
+                  selectedIndex: widget.navigationShell.currentIndex,
+                  sections: [
+                    M3ENavigationRailSection(
+                      destinations: [
+                        for (var destination in destinations)
+                          M3ENavigationRailDestination(
+                            icon: Icon(destination.icon),
+                            label: destination.label,
+                          ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             Expanded(child: widget.navigationShell),
