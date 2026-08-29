@@ -1,7 +1,8 @@
 import 'package:flavormate/core/storage/shared_preferences/enums/image_mode.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_3_expressive/material_3_expressive.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract class UImage {
   /// Determines the appropriate [ImageResolution] based on the provided image
@@ -77,5 +78,21 @@ abstract class UImage {
       bestMatch = resolution;
     }
     return bestMatch;
+  }
+
+  static Widget buildLoadingWidget({required ImageChunkEvent? chunk}) {
+    final progress = _calcProgress(chunk);
+    return Center(
+      child: progress == null
+          ? const M3ELoadingIndicator()
+          : M3EProgressIndicator.circularWavy(value: progress),
+    );
+  }
+
+  static double? _calcProgress(ImageChunkEvent? progress) {
+    if (progress == null || progress.expectedTotalBytes == null) return null;
+
+    return progress.cumulativeBytesLoaded.toDouble() /
+        progress.expectedTotalBytes!.toDouble();
   }
 }
