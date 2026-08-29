@@ -1,5 +1,6 @@
 import 'package:flavormate/core/cache/provider/p_cached_image.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_expressive/material_3_expressive.dart';
@@ -26,14 +27,8 @@ class FFullscreenImage extends ConsumerWidget {
             children: [
               PhotoView(
                 imageProvider: imageProvider,
-                loadingBuilder: (_, chunk) {
-                  final progress = _calcProgress(chunk);
-                  return Center(
-                    child: progress == null
-                        ? const M3ELoadingIndicator()
-                        : M3EProgressIndicator.circularWavy(value: progress),
-                  );
-                },
+                loadingBuilder: (_, chunk) =>
+                    UImage.buildLoadingWidget(chunk: chunk),
               ),
               Positioned(
                 top: PADDING,
@@ -48,12 +43,5 @@ class FFullscreenImage extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  double? _calcProgress(ImageChunkEvent? progress) {
-    if (progress == null || progress.expectedTotalBytes == null) return null;
-
-    return progress.cumulativeBytesLoaded.toDouble() /
-        progress.expectedTotalBytes!.toDouble();
   }
 }

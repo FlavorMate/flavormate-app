@@ -3,6 +3,7 @@ import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/features/accounts/account_file_dto.dart';
+import 'package:flavormate/data/models/features/stories/story_dto.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_id.dart';
 import 'package:flavormate/data/repositories/features/accounts/p_rest_accounts_id_books.dart';
@@ -12,8 +13,8 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_carousel/f_carousel.dart';
 import 'package:flavormate/presentation/common/widgets/f_circle_avatar.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
+import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
-import 'package:flavormate/presentation/common/widgets/f_states/f_provider_struct.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
@@ -59,96 +60,81 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
 
   @override
   Widget build(BuildContext context) {
+    final storyListenable = ref.watch(storiesProvider);
+    final bookListenable = ref.watch(booksProvider);
+    final recipeListenable = ref.watch(recipesProvider);
+
+    final storyData = storyListenable.value;
+    final bookData = bookListenable.value;
+    final recipeData = recipeListenable.value;
+
     return FProviderPage(
       provider: provider,
       appBarBuilder: (_, data) => FAppBar(
         title: data.displayName,
         scrollController: _scrollController,
       ),
-      builder: (context, data) => SingleChildScrollView(
+      builder: (context, data) => FResponsive(
         controller: _scrollController,
-        child: Padding(
-          padding: const EdgeInsets.all(PADDING),
-          child: Column(
-            spacing: PADDING,
-            children: [
-              FCircleAvatar(
-                account: data,
-                radius: 80,
-                onTap: () => showAvatar(context, data.avatar!),
+        child: Column(
+          spacing: PADDING,
+          children: [
+            FCircleAvatar(
+              account: data,
+              radius: 56,
+              onTap: () => showAvatar(context, data.avatar!),
+            ),
+            Center(
+              child: FText(
+                data.displayName,
+                style: FTextStyle.headlineMedium,
+                fontRoundness: 100,
               ),
-              Center(
-                child: FText(
-                  data.displayName,
-                  style: FTextStyle.displayMedium,
-                ),
-              ),
+            ),
 
-              const Divider(),
+            const Divider(),
 
-              FProviderStruct(
-                provider: storiesProvider,
-                builder: (_, data) => data.data.isNotEmpty
-                    ? FCarousel(
-                        title: context.l10n.accounts_item_page__stories,
-                        data: data.data.toList(),
-                        onTap: (story) => context.routes.storiesItem(story.id),
-                        labelSelector: (story) => story.label,
-                        coverSelector: (story, resolution) =>
-                            story.cover?.url(resolution),
-                        onShowAll: () =>
-                            context.routes.accountsItemStories(widget.id),
-                      )
-                    : const SizedBox.shrink(),
-                onError: FEmptyMessage(
-                  title: context.l10n.accounts_item_page__stories_on_error,
-                  icon: IconConstants.errorIcon,
-                ),
-              ),
+            FCarousel<StoryPreviewDto>(
+              title: context.l10n.accounts_item_page__stories,
+              data: storyData?.data ?? [],
+              loading: storyListenable.isLoading,
+              error: storyListenable.hasError
+                  ? context.l10n.accounts_item_page__stories_on_error
+                  : null,
+              onTap: (story) => context.routes.storiesItem(story.id),
+              labelSelector: (story) => story.label,
+              coverSelector: (story, resolution) =>
+                  story.cover?.url(resolution),
+              onShowAll: () => context.routes.accountsItemStories(widget.id),
+            ),
 
-              FProviderStruct(
-                provider: booksProvider,
-                builder: (_, data) => data.data.isNotEmpty
-                    ? FCarousel(
-                        title: context.l10n.accounts_item_page__books,
-                        data: data.data.toList(),
-                        onTap: (book) => context.routes.libraryItem(book.id),
-                        labelSelector: (book) => book.label,
-                        coverSelector: (book, resolution) =>
-                            book.cover?.url(resolution),
-                        onShowAll: () =>
-                            context.routes.accountsItemBooks(widget.id),
-                      )
-                    : const SizedBox.shrink(),
+            FCarousel(
+              title: context.l10n.accounts_item_page__books,
+              data: bookData?.data ?? [],
+              loading: bookListenable.isLoading,
+              error: bookListenable.hasError
+                  ? context.l10n.accounts_item_page__books_on_error
+                  : null,
+              onTap: (book) => context.routes.libraryItem(book.id),
+              labelSelector: (book) => book.label,
+              coverSelector: (book, resolution) => book.cover?.url(resolution),
+              onShowAll: () => context.routes.accountsItemBooks(widget.id),
+            ),
 
-                onError: FEmptyMessage(
-                  title: context.l10n.accounts_item_page__books_on_error,
-                  icon: IconConstants.errorIcon,
-                ),
-              ),
-
-              FProviderStruct(
-                provider: recipesProvider,
-                builder: (_, data) => data.data.isNotEmpty
-                    ? FCarousel(
-                        title: context.l10n.accounts_item_page__recipes,
-                        data: data.data,
-                        onTap: (recipe) =>
-                            context.routes.recipesItem(recipe.id),
-                        labelSelector: (recipe) => recipe.label,
-                        coverSelector: (recipe, resolution) =>
-                            recipe.cover?.url(resolution),
-                        onShowAll: () =>
-                            context.routes.accountsItemRecipes(widget.id),
-                      )
-                    : const SizedBox.shrink(),
-                onError: FEmptyMessage(
-                  title: context.l10n.accounts_item_page__recipes_on_error,
-                  icon: IconConstants.errorIcon,
-                ),
-              ),
-            ],
-          ),
+            FCarousel(
+              title: context.l10n.accounts_item_page__recipes,
+              data: recipeData?.data ?? [],
+              loading: recipeListenable.isLoading,
+              error: recipeListenable.hasError
+                  ? context.l10n.accounts_item_page__recipes_on_error
+                  : null,
+              onTap: (recipe) => context.routes.recipesItem(recipe.id),
+              labelSelector: (recipe) => recipe.label,
+              coverSelector: (recipe, resolution) =>
+                  recipe.cover?.url(resolution),
+              onShowAll: () => context.routes.accountsItemRecipes(widget.id),
+            ),
+          ],
         ),
       ),
       onError: FEmptyMessage(
