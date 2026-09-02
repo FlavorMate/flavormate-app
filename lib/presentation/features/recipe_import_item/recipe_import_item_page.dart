@@ -19,6 +19,7 @@ import 'package:flavormate/presentation/common/widgets/f_responsive.dart';
 import 'package:flavormate/presentation/common/widgets/f_states/f_provider_page.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/common/widgets/f_wrap.dart';
 import 'package:flavormate/presentation/features/recipe_import_item/recipe_import_item_url_dialog.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -129,6 +130,9 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
                     for (final (index, url) in urls.indexed)
                       FTile(
                         label: url,
+                        leading: const FTileIcon(
+                          icon: Symbols.language_rounded,
+                        ),
                         onTap: null,
                         trailing: Padding(
                           padding: const .only(right: 8.0),
@@ -150,8 +154,8 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
                     for (final (index, file) in files.indexed)
                       FTile(
                         label: file.name,
-                        subLabel: null,
                         onTap: null,
+                        leading: const FTileIcon(icon: Symbols.draft_rounded),
                         trailing: Padding(
                           padding: const .only(right: 8),
                           child: MouseRegion(
@@ -189,7 +193,7 @@ class _RecipeImportItemPageState extends ConsumerState<RecipeImportItemPage> {
       final allowedItems = selectedFiles.where(
         (it) => importer.importExtensions
             .map((it) => it.toLowerCase())
-            .contains(path.extension(it.path).toLowerCase()),
+            .contains(path.extension(it.path).substring(1).toLowerCase()),
       );
       files.addAll(allowedItems);
     });
