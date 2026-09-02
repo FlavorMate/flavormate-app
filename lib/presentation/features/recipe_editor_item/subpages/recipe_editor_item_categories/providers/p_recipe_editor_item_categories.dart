@@ -11,9 +11,11 @@ class PRecipeEditorItemCategories extends _$PRecipeEditorItemCategories {
 
   @override
   Future<List<CategoryDto>> build(String draftId) async {
-    return await ref.watch(
+    final c = await ref.watch(
       _parentProvider.selectAsync((data) => data.categories),
     );
+
+    return c;
   }
 
   Future<void> setCategories(List<CategoryDto> categories) async {

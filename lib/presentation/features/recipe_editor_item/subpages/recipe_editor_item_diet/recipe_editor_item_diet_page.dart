@@ -10,6 +10,7 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_diet/providers/p_recipe_editor_item_diet.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -78,11 +79,11 @@ class _RecipeEditorItemDietPageState
                       items: [
                         for (final diet in Diet.values)
                           FTile(
-                            leading: Icon(
-                              selectedDiet == diet
+                            leading: FTileIcon(
+                              iconBackgroundColor: Colors.transparent,
+                              icon: selectedDiet == diet
                                   ? Symbols.check_circle_rounded
                                   : Symbols.circle_rounded,
-                              color: context.colorScheme.primary,
                             ),
                             label: diet.getName(context),
                             onTap: () => set(diet),

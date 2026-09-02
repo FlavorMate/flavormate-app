@@ -10,6 +10,7 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile.dart';
 import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_group.dart';
+import 'package:flavormate/presentation/common/widgets/f_tile_group/f_tile_icon.dart';
 import 'package:flavormate/presentation/features/recipe_editor_item/subpages/recipe_editor_item_course/providers/p_recipe_editor_item_course.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -79,11 +80,11 @@ class _RecipeEditorItemCoursePageState
                       items: [
                         for (final course in Course.values)
                           FTile(
-                            leading: Icon(
-                              selectedCourse == course
+                            leading: FTileIcon(
+                              iconBackgroundColor: Colors.transparent,
+                              icon: selectedCourse == course
                                   ? Symbols.check_circle_rounded
                                   : Symbols.circle_rounded,
-                              color: context.colorScheme.primary,
                             ),
                             label: course.getName(context),
                             onTap: () => set(course),
