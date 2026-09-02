@@ -16,10 +16,10 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 6.2.3+131
+version: 6.2.4+132
 
 environment:
-  sdk: ">=3.13.1 <4.0.0"
+  sdk: ">=3.13.2 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,7 +38,7 @@ dependencies:
   device_info_plus: ^13.2.0
   dio: ^5.11.0
   fl_chart: ^1.2.0
-  flex_seed_scheme: ^5.0.0
+  flex_seed_scheme: ^5.0.1
   flutter_markdown_plus: ^1.0.12
   flutter_material_design_icons: ^3.1.0+7447
   flutter_secure_storage: ^11.0.0
@@ -65,11 +65,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   sliding_panel_kit: ^0.4.0
-  wakelock_plus: ^1.7.0
+  wakelock_plus: ^1.8.0
   file_selector: ^1.1.0
-  file_picker: ^12.1.1
+  file_picker: ^12.1.3
   websocket_universal: ^1.3.0
-  material_3_expressive: ^1.1.0
+  material_3_expressive: ^1.1.1
   dynamic_color: ^2.1.0
   material_symbols_icons: ^4.2960.0
   material_ui: ^1.1.0
@@ -77,13 +77,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.16.0
+  build_runner: ^2.16.1
   dart_mappable_builder: ^4.9.0
   flutter_gen_runner: ^5.15.0
   flutter_lints: ^6.0.0
   riverpod_generator: ^4.0.8
   golden_screenshot: ^12.0.0
-  glob: ^2.1.3
+  glob: ^2.2.0
 
 flutter_gen:
   output: lib/generated/flutter_gen
