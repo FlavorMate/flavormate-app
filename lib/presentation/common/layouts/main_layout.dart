@@ -2,9 +2,6 @@ import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/data/models/local/destination.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_3_expressive/components/navigation_bar/models/m3e_navigation_bar_destination.dart';
-import 'package:material_3_expressive/components/navigation_rail/models/m3e_navigation_rail_destination.dart';
-import 'package:material_3_expressive/components/navigation_rail/models/m3e_navigation_rail_section.dart';
 import 'package:material_3_expressive/material_3_expressive.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
@@ -66,6 +63,9 @@ class MainLayoutState extends State<MainLayout> {
 
     return Scaffold(
       body: SafeArea(
+        // prevent clipping issues with search bar dialog
+        top: false,
+        bottom: false,
         child: Row(
           children: [
             if (wideScreen)

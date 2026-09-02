@@ -94,46 +94,50 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
 
             const Divider(),
 
-            FCarousel<StoryPreviewDto>(
-              title: context.l10n.accounts_item_page__stories,
-              data: storyData?.data ?? [],
-              loading: storyListenable.isLoading,
-              error: storyListenable.hasError
-                  ? context.l10n.accounts_item_page__stories_on_error
-                  : null,
-              onTap: (story) => context.routes.storiesItem(story.id),
-              labelSelector: (story) => story.label,
-              coverSelector: (story, resolution) =>
-                  story.cover?.url(resolution),
-              onShowAll: () => context.routes.accountsItemStories(widget.id),
-            ),
+            if (storyData?.data.isNotEmpty ?? true)
+              FCarousel<StoryPreviewDto>(
+                title: context.l10n.accounts_item_page__stories,
+                data: storyData?.data ?? [],
+                loading: storyListenable.isLoading,
+                error: storyListenable.hasError
+                    ? context.l10n.accounts_item_page__stories_on_error
+                    : null,
+                onTap: (story) => context.routes.storiesItem(story.id),
+                labelSelector: (story) => story.label,
+                coverSelector: (story, resolution) =>
+                    story.cover?.url(resolution),
+                onShowAll: () => context.routes.accountsItemStories(widget.id),
+              ),
 
-            FCarousel(
-              title: context.l10n.accounts_item_page__books,
-              data: bookData?.data ?? [],
-              loading: bookListenable.isLoading,
-              error: bookListenable.hasError
-                  ? context.l10n.accounts_item_page__books_on_error
-                  : null,
-              onTap: (book) => context.routes.libraryItem(book.id),
-              labelSelector: (book) => book.label,
-              coverSelector: (book, resolution) => book.cover?.url(resolution),
-              onShowAll: () => context.routes.accountsItemBooks(widget.id),
-            ),
+            if (bookData?.data.isNotEmpty ?? true)
+              FCarousel(
+                title: context.l10n.accounts_item_page__books,
+                data: bookData?.data ?? [],
+                loading: bookListenable.isLoading,
+                error: bookListenable.hasError
+                    ? context.l10n.accounts_item_page__books_on_error
+                    : null,
+                onTap: (book) => context.routes.libraryItem(book.id),
+                labelSelector: (book) => book.label,
+                coverSelector: (book, resolution) =>
+                    book.cover?.url(resolution),
+                onShowAll: () => context.routes.accountsItemBooks(widget.id),
+              ),
 
-            FCarousel(
-              title: context.l10n.accounts_item_page__recipes,
-              data: recipeData?.data ?? [],
-              loading: recipeListenable.isLoading,
-              error: recipeListenable.hasError
-                  ? context.l10n.accounts_item_page__recipes_on_error
-                  : null,
-              onTap: (recipe) => context.routes.recipesItem(recipe.id),
-              labelSelector: (recipe) => recipe.label,
-              coverSelector: (recipe, resolution) =>
-                  recipe.cover?.url(resolution),
-              onShowAll: () => context.routes.accountsItemRecipes(widget.id),
-            ),
+            if (recipeData?.data.isNotEmpty ?? true)
+              FCarousel(
+                title: context.l10n.accounts_item_page__recipes,
+                data: recipeData?.data ?? [],
+                loading: recipeListenable.isLoading,
+                error: recipeListenable.hasError
+                    ? context.l10n.accounts_item_page__recipes_on_error
+                    : null,
+                onTap: (recipe) => context.routes.recipesItem(recipe.id),
+                labelSelector: (recipe) => recipe.label,
+                coverSelector: (recipe, resolution) =>
+                    recipe.cover?.url(resolution),
+                onShowAll: () => context.routes.accountsItemRecipes(widget.id),
+              ),
           ],
         ),
       ),
