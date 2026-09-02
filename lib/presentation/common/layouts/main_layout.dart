@@ -63,35 +63,28 @@ class MainLayoutState extends State<MainLayout> {
 
     return Scaffold(
       body: SafeArea(
-        // prevent clipping issues with search bar dialog
+        // prevent clipping issues with search bar dialog and navigation rail
         top: false,
         bottom: false,
         child: Row(
           children: [
             if (wideScreen)
-              ClipRRect(
-                borderRadius: .only(
-                  topRight: .circular(cardTheme.outerRadius),
-                  bottomRight: .circular(cardTheme.outerRadius),
-                ),
-                child: M3ENavigationRail(
-                  background: context.colorScheme.surfaceContainerLow,
-                  type: .alwaysExpand,
-
-                  onDestinationSelected: _goBranch,
-                  selectedIndex: widget.navigationShell.currentIndex,
-                  sections: [
-                    M3ENavigationRailSection(
-                      destinations: [
-                        for (var destination in destinations)
-                          M3ENavigationRailDestination(
-                            icon: Icon(destination.icon),
-                            label: destination.label,
-                          ),
-                      ],
-                    ),
-                  ],
-                ),
+              M3ENavigationRail(
+                background: context.colorScheme.surfaceContainerLow,
+                type: .alwaysExpand,
+                onDestinationSelected: _goBranch,
+                selectedIndex: widget.navigationShell.currentIndex,
+                sections: [
+                  M3ENavigationRailSection(
+                    destinations: [
+                      for (var destination in destinations)
+                        M3ENavigationRailDestination(
+                          icon: Icon(destination.icon),
+                          label: destination.label,
+                        ),
+                    ],
+                  ),
+                ],
               ),
             Expanded(child: widget.navigationShell),
           ],
