@@ -134,23 +134,25 @@ class _RecipeEditorItemCategoriesPageState
                                 trailing: Text(
                                   '(${countCategories(categoryGroup).trailingZeros()} / ${categoryGroup.categories.length.trailingZeros()})',
                                 ),
-                                body: Column(
-                                  children: [
-                                    for (final category
-                                        in categoryGroup.categories)
-                                      M3EListItem(
-                                        headline: category.label,
-                                        leading: Icon(
-                                          _categories.any(
-                                                (c) => c.id == category.id,
-                                              )
-                                              ? Symbols.check_circle_rounded
-                                              : Symbols.circle_rounded,
-                                          color: context.colorScheme.primary,
+                                expanded: .content(
+                                  Column(
+                                    children: [
+                                      for (final category
+                                          in categoryGroup.categories)
+                                        M3EListItem(
+                                          headline: category.label,
+                                          leading: Icon(
+                                            _categories.any(
+                                                  (c) => c.id == category.id,
+                                                )
+                                                ? Symbols.check_circle_rounded
+                                                : Symbols.circle_rounded,
+                                            color: context.colorScheme.primary,
+                                          ),
+                                          onTap: () => toggleCategory(category),
                                         ),
-                                        onTap: () => toggleCategory(category),
-                                      ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                           ],
