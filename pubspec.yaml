@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 6.2.6+134
+version: 6.2.7+135
 
 environment:
   sdk: ">=3.13.2 <4.0.0"
@@ -34,17 +34,17 @@ dependencies:
   app_links: ^7.2.1
   crypto: ^3.0.7
   collection: ^1.19.1
-  dart_mappable: ^4.8.0
+  dart_mappable: ^4.10.0
   device_info_plus: ^13.2.0
-  dio: ^5.11.0
+  dio: ^5.11.1
   fl_chart: ^1.2.0
   flex_seed_scheme: ^5.0.1
   flutter_markdown_plus: ^1.0.12
   flutter_material_design_icons: ^3.1.0+7447
-  flutter_secure_storage: ^11.0.0
+  flutter_secure_storage: ^11.1.0
   flutter_svg: ^2.3.0
-  flutter_riverpod: ^3.4.2
-  go_router: ^18.0.0
+  flutter_riverpod: ^3.4.3
+  go_router: ^18.0.1
   http: ^1.6.0
   image_picker: ^1.2.3
   intl: ^0.20.3
@@ -53,8 +53,8 @@ dependencies:
   path: ^1.9.1
   path_provider: ^2.1.6
   photo_view: ^0.15.0
-  riverpod_annotation: ^4.0.6
-  sembast: ^3.8.9+1
+  riverpod_annotation: ^4.0.7
+  sembast: ^3.8.10
   shared_preferences: ^2.5.5
   share_plus: ^13.3.0
   two_dimensional_scrollables: ^0.5.4
@@ -67,22 +67,22 @@ dependencies:
   sliding_panel_kit: ^0.4.0
   wakelock_plus: ^1.8.0
   file_selector: ^1.1.0
-  file_picker: ^12.1.3
+  file_picker: ^12.2.0
   websocket_universal: ^1.3.0
-  material_3_expressive: ^1.1.1
+  material_3_expressive: ^1.1.2
   dynamic_color: ^2.1.0
   material_symbols_icons: ^4.2960.0
-  material_ui: ^1.1.0
+  material_ui: ^1.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^2.16.1
-  dart_mappable_builder: ^4.9.0
+  dart_mappable_builder: ^4.10.0
   flutter_gen_runner: ^5.15.0
   flutter_lints: ^6.0.0
-  riverpod_generator: ^4.0.8
-  golden_screenshot: ^12.0.0
+  riverpod_generator: ^4.0.9
+  golden_screenshot: ^12.1.0
   glob: ^2.2.0
 
 flutter_gen:
