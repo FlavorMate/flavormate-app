@@ -223,50 +223,52 @@ class _DNutritionState
               title: context
                   .l10n
                   .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__whats_off,
-              body: Column(
-                mainAxisSize: .min,
-                spacing: PADDING,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FText(
-                    context
-                        .l10n
-                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_1,
-                    style: FTextStyle.bodyMedium,
-                    color: FTextColor.onPrimaryContainer,
-                  ),
-                  FText(
-                    context
-                        .l10n
-                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_2,
-                    style: FTextStyle.bodyMedium,
-                    color: FTextColor.onPrimaryContainer,
-                  ),
-                  FText(
-                    context
-                        .l10n
-                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_3,
-                    style: FTextStyle.bodyMedium,
-                    color: FTextColor.onPrimaryContainer,
-                  ),
-                  FText(
-                    context
-                        .l10n
-                        .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_4,
-                    style: FTextStyle.bodyMedium,
-                    color: FTextColor.onPrimaryContainer,
-                  ),
-                  Center(
-                    child: M3EButton(
-                      onPressed: launchOFF,
-                      child: Text(
-                        context
-                            .l10n
-                            .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_launch,
+              expanded: .content(
+                Column(
+                  mainAxisSize: .min,
+                  spacing: PADDING,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FText(
+                      context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_1,
+                      style: FTextStyle.bodyMedium,
+                      color: FTextColor.onPrimaryContainer,
+                    ),
+                    FText(
+                      context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_2,
+                      style: FTextStyle.bodyMedium,
+                      color: FTextColor.onPrimaryContainer,
+                    ),
+                    FText(
+                      context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_3,
+                      style: FTextStyle.bodyMedium,
+                      color: FTextColor.onPrimaryContainer,
+                    ),
+                    FText(
+                      context
+                          .l10n
+                          .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_hint_4,
+                      style: FTextStyle.bodyMedium,
+                      color: FTextColor.onPrimaryContainer,
+                    ),
+                    Center(
+                      child: M3EButton(
+                        onPressed: launchOFF,
+                        child: Text(
+                          context
+                              .l10n
+                              .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__off_launch,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
