@@ -124,40 +124,41 @@ class _RecipeEditorItemCategoriesPageState
                             .recipe_editor_item_categories_page__on_error,
                         icon: IconConstants.errorIcon,
                       ),
-                      builder: (_, data) {
-                        return M3EExpandableList(
-                          style: style,
-                          data: [
-                            for (final categoryGroup in data.data)
-                              M3EExpandableData(
-                                title: categoryGroup.label,
-                                trailing: Text(
-                                  '(${countCategories(categoryGroup).trailingZeros()} / ${categoryGroup.categories.length.trailingZeros()})',
+                      builder: (_, data) => M3EList(
+                        itemCount: data.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final categoryGroup = data.data[index];
+                          return M3EListItem(
+                            headline: categoryGroup.label,
+                            trailingText:
+                                '(${countCategories(categoryGroup).trailingZeros()} / ${categoryGroup.categories.length.trailingZeros()})',
+                            expanded: M3EExpandableExpanded.list(
+                              M3EList(
+                                itemCount: categoryGroup.categories.length,
+                                onTap: (index) => toggleCategory(
+                                  categoryGroup.categories[index],
                                 ),
-                                expanded: .content(
-                                  Column(
-                                    children: [
-                                      for (final category
-                                          in categoryGroup.categories)
-                                        M3EListItem(
-                                          headline: category.label,
-                                          leading: Icon(
-                                            _categories.any(
-                                                  (c) => c.id == category.id,
-                                                )
-                                                ? Symbols.check_circle_rounded
-                                                : Symbols.circle_rounded,
-                                            color: context.colorScheme.primary,
-                                          ),
-                                          onTap: () => toggleCategory(category),
-                                        ),
-                                    ],
-                                  ),
-                                ),
+                                itemBuilder: (BuildContext context, int index) {
+                                  final category =
+                                      categoryGroup.categories[index];
+
+                                  return M3EListItem(
+                                    headline: category.label,
+                                    leading: Icon(
+                                      _categories.any(
+                                            (c) => c.id == category.id,
+                                          )
+                                          ? Symbols.check_circle_rounded
+                                          : Symbols.circle_rounded,
+                                      color: context.colorScheme.primary,
+                                    ),
+                                  );
+                                },
                               ),
-                          ],
-                        );
-                      },
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
