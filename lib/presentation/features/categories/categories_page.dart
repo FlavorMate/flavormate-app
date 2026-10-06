@@ -57,6 +57,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
         title: context.l10n.categories_page__title,
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: handleFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),

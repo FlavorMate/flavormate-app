@@ -61,6 +61,7 @@ class _ServerPageState extends ConsumerState<ServerPage> {
           children: [
             if (recentServers.isNotEmpty)
               M3EIconButton(
+                variant: .standard,
                 onPressed: () => pickServer(recentServers),
                 icon: const Icon(Symbols.history_rounded),
               ),

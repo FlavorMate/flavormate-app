@@ -70,6 +70,7 @@ class _AccountManagementPageState
         title: context.l10n.administration_account_management_page__title,
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: handleFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),

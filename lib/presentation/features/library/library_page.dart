@@ -59,6 +59,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
         automaticallyImplyLeading: false,
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: openFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),

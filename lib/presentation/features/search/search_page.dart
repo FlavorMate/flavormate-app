@@ -108,6 +108,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                             onChanged: _onSearchChange,
                             trailing: [
                               M3EIconButton(
+                                variant: .standard,
                                 onPressed: _openFilterDialog,
                                 icon: const Icon(Symbols.filter_alt_rounded),
                               ),

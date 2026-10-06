@@ -110,6 +110,7 @@ class FRecipeRatings extends StatelessWidget {
                           children: [
                             for (double i = 1; i <= 5; i++)
                               M3EIconButton(
+                                variant: .standard,
                                 icon: Icon(
                                   Symbols.star_rounded,
                                   fill: (data?.ownRating ?? 0) >= i ? 1 : 0,
@@ -119,6 +120,7 @@ class FRecipeRatings extends StatelessWidget {
                             if (data?.ownRating != null) ...[
                               const SizedBox(width: PADDING),
                               M3EIconButton(
+                                variant: .standard,
                                 icon: Icon(
                                   Symbols.delete_rounded,
                                   color: context.blendedColors.error,

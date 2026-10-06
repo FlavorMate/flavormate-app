@@ -73,16 +73,6 @@ class _RecipeEditorItemCategoriesPageState
 
   @override
   Widget build(BuildContext context) {
-    final theme = M3ETheme.of(context).listTheme.expandable;
-    final style = M3EExpandableStyle.fromTheme(theme).copyWith(
-      headerPadding: const .symmetric(
-        vertical: PADDING / 2,
-        horizontal: PADDING,
-      ),
-      headerAlignment: .center,
-      useInkWell: false,
-    );
-
     return Scaffold(
       appBar: FAppBar(
         scrollController: _scrollController,

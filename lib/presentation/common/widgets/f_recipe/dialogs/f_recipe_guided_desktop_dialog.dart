@@ -77,6 +77,7 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
                               style: .titleLarge,
                             ),
                             M3EIconButton(
+                              variant: .standard,
                               onPressed: onDurationCard,
                               icon: const Icon(Symbols.close_rounded),
                             ),
@@ -104,6 +105,7 @@ class FRecipeGuidedDesktopDialog extends StatelessWidget {
                                 style: .titleLarge,
                               ),
                               M3EIconButton(
+                                variant: .standard,
                                 onPressed: onIngredientCard,
                                 icon: const Icon(Symbols.close_rounded),
                               ),

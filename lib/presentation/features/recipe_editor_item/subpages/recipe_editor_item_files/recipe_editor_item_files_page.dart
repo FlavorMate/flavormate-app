@@ -127,6 +127,7 @@ class _RecipeEditorItemFilesPageState
                               top: PADDING / 2,
                               right: PADDING / 2,
                               child: M3EIconButton(
+                                variant: .standard,
                                 decoration: .new(
                                   backgroundColor: .all(
                                     context.colorScheme.primaryContainer,

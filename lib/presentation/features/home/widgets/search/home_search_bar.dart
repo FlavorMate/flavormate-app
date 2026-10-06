@@ -57,11 +57,13 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
       viewOnSubmitted: _openSuggestion,
       viewHintText: context.l10n.home_search_bar__search_hint,
       viewLeading: M3EIconButton(
+        variant: .standard,
         onPressed: _close,
         icon: const Icon(Symbols.arrow_back_rounded),
       ),
       viewTrailing: [
         M3EIconButton(
+          variant: .standard,
           onPressed: _reset,
           icon: const Icon(Symbols.close_rounded),
         ),
@@ -123,6 +125,7 @@ class _HomeSearchBarState extends ConsumerState<HomeSearchBar> {
         return ListTile(
           title: Text(historyItem),
           trailing: M3EIconButton(
+            variant: .standard,
             onPressed: () {
               ref.read(pSPSearchHistoryProvider.notifier).remove(historyItem);
             },

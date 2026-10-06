@@ -118,6 +118,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
                         top: 8,
                         right: 8,
                         child: M3EIconButton(
+                          variant: .standard,
                           decoration: .new(
                             backgroundColor: .all(
                               context.colorScheme.primaryContainer,

@@ -101,6 +101,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
                 alignment: Alignment.center,
                 header: const SizedBox.shrink(),
                 cellBuilder: (context, item, rowIndex) => M3EIconButton(
+                  variant: .standard,
                   onPressed: () => deleteDraft(item.id),
                   icon: Icon(
                     Symbols.delete_rounded,

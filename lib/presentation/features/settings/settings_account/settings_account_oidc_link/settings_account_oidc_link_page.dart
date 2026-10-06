@@ -74,6 +74,7 @@ class _SettingsAccountOidcLinkPageState
         title: context.l10n.settings_account_oidc_link_page__title,
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: handleFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),
@@ -129,6 +130,7 @@ class _SettingsAccountOidcLinkPageState
 
                             onTap: () => openInfoDialog(context, link),
                             trailing: M3EIconButton(
+                              variant: .standard,
                               onPressed: () => deleteLink(context, ref, link),
                               icon: Icon(
                                 Symbols.delete_rounded,

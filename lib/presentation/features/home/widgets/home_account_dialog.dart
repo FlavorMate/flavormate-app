@@ -56,6 +56,7 @@ class HomeAccountDialog extends StatelessWidget {
                       title: account.username,
                       actions: [
                         M3EIconButton(
+                          variant: .standard,
                           onPressed: () => context.pop(),
                           icon: const Icon(Symbols.close_rounded),
                         ),
