@@ -86,6 +86,7 @@ class _SettingsAccountSessionsPageState
         ],
       ),
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: () => deleteAllSessionsButCurrent(),
         icon: const Icon(Symbols.logout_rounded),
       ),

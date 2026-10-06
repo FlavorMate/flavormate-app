@@ -54,6 +54,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
       ),
 
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: createDraft,
         icon: const Icon(Symbols.add_rounded),
       ),

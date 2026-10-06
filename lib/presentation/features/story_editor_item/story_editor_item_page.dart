@@ -92,6 +92,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
         actions: [FSaveState(provider: widget.autosaveProvider)],
       ),
       floatingActionButtonBuilder: (_, data) => M3EFab(
+        size: .regular,
         onPressed: () => showPreview(context, data),
         icon: const Icon(Symbols.arrow_forward_rounded),
       ),

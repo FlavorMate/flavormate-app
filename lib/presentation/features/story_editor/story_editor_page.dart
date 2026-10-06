@@ -54,6 +54,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage>
         scrollController: _scrollController,
       ),
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: () => createDraft(context),
         icon: const Icon(Symbols.add_rounded),
       ),

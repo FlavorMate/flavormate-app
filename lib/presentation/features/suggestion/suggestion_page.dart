@@ -74,6 +74,7 @@ class _SuggestionPageState extends ConsumerState<SuggestionPage> {
         title: _title,
       ),
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: () => reset(ref),
         icon: const Icon(Symbols.refresh_rounded),
       ),

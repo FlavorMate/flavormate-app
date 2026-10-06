@@ -77,6 +77,7 @@ class _AccountManagementPageState
         ],
       ),
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: createAccount,
         icon: const Icon(Symbols.add_rounded),
       ),

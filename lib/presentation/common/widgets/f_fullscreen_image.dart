@@ -34,6 +34,7 @@ class FFullscreenImage extends ConsumerWidget {
                 top: PADDING,
                 right: PADDING,
                 child: M3EFab(
+                  size: .regular,
                   onPressed: () => context.pop(),
                   icon: const Icon(Symbols.close_rounded),
                 ),

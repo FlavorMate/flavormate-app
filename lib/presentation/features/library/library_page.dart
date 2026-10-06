@@ -66,6 +66,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
         ],
       ),
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: () => addBook(context, ref),
         icon: const Icon(Symbols.add_rounded),
       ),

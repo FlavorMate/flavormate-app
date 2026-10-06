@@ -117,6 +117,7 @@ class _DNutritionState
           scrollController: null,
         ),
         floatingActionButton: M3EFab(
+          size: .regular,
           icon: const Icon(Symbols.save_rounded),
           onPressed: submit,
         ),

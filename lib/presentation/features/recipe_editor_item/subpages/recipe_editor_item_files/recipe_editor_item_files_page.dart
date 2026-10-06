@@ -77,6 +77,7 @@ class _RecipeEditorItemFilesPageState
         ],
       ),
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: () => addImage(),
         icon: const Icon(Symbols.add_rounded),
       ),

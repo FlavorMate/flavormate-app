@@ -53,6 +53,7 @@ class _RecipeEditorItemPageState extends ConsumerState<RecipeEditorItemPage> {
         actions: [FSaveState(provider: widget.timerProvider)],
       ),
       floatingActionButtonBuilder: (context, data) => M3EFab(
+        size: .regular,
         onPressed: () => openPreview(context, data),
         icon: const Icon(Symbols.chevron_right_rounded),
       ),
