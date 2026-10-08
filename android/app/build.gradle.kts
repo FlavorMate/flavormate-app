@@ -1,6 +1,6 @@
 import com.android.build.api.dsl.ApplicationExtension
-import java.util.Properties
 import java.io.FileInputStream
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -14,7 +14,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-extensions.configure<ApplicationExtension>{
+extensions.configure<ApplicationExtension> {
     namespace = "de.flavormate"
     compileSdk = 37
     ndkVersion = "29.0.14206865"
@@ -26,8 +26,8 @@ extensions.configure<ApplicationExtension>{
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_25
+        targetCompatibility = JavaVersion.VERSION_25
     }
 
     defaultConfig {
@@ -58,7 +58,7 @@ extensions.configure<ApplicationExtension>{
 
 kotlin {
     compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_25
     }
 }
 
