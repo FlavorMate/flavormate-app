@@ -8,7 +8,6 @@ import 'package:flavormate/presentation/common/widgets/f_image/f_image.dart';
 import 'package:flavormate/presentation/common/widgets/f_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:material_3_expressive/components/carousel/components/m3e_carousel_view.dart';
 import 'package:material_3_expressive/material_3_expressive.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
@@ -127,6 +126,7 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
                         fontWeight: .w500,
                       ),
                       M3EIconButton(
+                        variant: .standard,
                         onPressed: widget.onShowAll,
                         icon: const Icon(Symbols.arrow_forward_rounded),
                       ),

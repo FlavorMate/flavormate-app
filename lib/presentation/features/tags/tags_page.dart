@@ -57,6 +57,7 @@ class _TagsPageState extends ConsumerState<TagsPage>
         title: context.l10n.tags_page__title,
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: handleFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),

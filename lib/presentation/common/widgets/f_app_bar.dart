@@ -71,6 +71,7 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget? _maybeBackButton(BuildContext context, {bool showHome = false}) {
     if (kIsTest) {
       return M3EIconButton(
+        variant: .standard,
         onPressed: () {},
         icon: const Icon(Symbols.arrow_back_rounded),
       );
@@ -80,6 +81,7 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (!canPop) {
       return showHome
           ? M3EIconButton(
+              variant: .standard,
               onPressed: () => context.routes.home(replace: true),
               icon: const Icon(Symbols.home_rounded),
             )
@@ -87,6 +89,7 @@ class FAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return M3EIconButton(
+      variant: .standard,
       icon: const BackButtonIcon(),
       onPressed: () => Navigator.maybeOf(context)?.maybePop(),
       tooltip: MaterialLocalizations.of(context).backButtonTooltip,

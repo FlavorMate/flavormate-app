@@ -905,10 +905,10 @@ packages:
     dependency: "direct main"
     description:
       name: material_3_expressive
-      sha256: "6bbe64da7692cfbe6b922415c4fae40a15e210036df7ab26baf05d63f8b667d7"
+      sha256: b61ffed1c8614320921a685499b6f91fedfff550d29988a02daf68824954f798
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.2"
+    version: "1.1.5"
   material_color_utilities:
     dependency: transitive
     description:

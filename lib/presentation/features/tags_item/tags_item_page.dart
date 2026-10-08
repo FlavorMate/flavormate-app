@@ -1,8 +1,8 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/icon_constants.dart';
-import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -65,6 +65,7 @@ class _TagsItemPageState extends ConsumerState<TagsItemPage>
         title: tag.value?.label ?? '',
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: handleFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),

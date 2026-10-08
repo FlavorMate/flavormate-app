@@ -117,6 +117,7 @@ class _DNutritionState
           scrollController: null,
         ),
         floatingActionButton: M3EFab(
+          size: .regular,
           icon: const Icon(Symbols.save_rounded),
           onPressed: submit,
         ),
@@ -212,18 +213,14 @@ class _DNutritionState
     return Column(
       spacing: PADDING,
       children: [
-        M3EExpandableList(
-          style: const .new(
-            useInkWell: false,
-            headerAlignment: .center,
-            headerPadding: .symmetric(horizontal: 16, vertical: 8),
-          ),
-          data: [
-            M3EExpandableData(
-              title: context
+        M3EList(
+          itemCount: 1,
+          itemBuilder: (context, index) {
+            return M3EListItem(
+              headline: context
                   .l10n
                   .recipe_editor_item_ingredient_groups_item_ingredient_page_nutrition_picker__whats_off,
-              expanded: .content(
+              expanded: M3EExpandableExpanded.content(
                 Column(
                   mainAxisSize: .min,
                   spacing: PADDING,
@@ -270,8 +267,8 @@ class _DNutritionState
                   ],
                 ),
               ),
-            ),
-          ],
+            );
+          },
         ),
         // if widget is null or not convertable
         if (!convertableUnit)

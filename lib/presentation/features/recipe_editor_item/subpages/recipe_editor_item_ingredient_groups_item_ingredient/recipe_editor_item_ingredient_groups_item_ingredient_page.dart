@@ -107,6 +107,7 @@ class _RecipeEditorIngredientPageState
               getProgress: (instruction) => instruction.validPercent,
             ),
             M3EIconButton(
+              variant: .standard,
               onPressed: deleteInstruction,
               icon: Icon(
                 Symbols.delete_rounded,

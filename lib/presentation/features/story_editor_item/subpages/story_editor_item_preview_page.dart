@@ -44,6 +44,7 @@ class _StoryEditorItemPreviewPageState
         title: data.label!,
       ),
       floatingActionButtonBuilder: (context, _) => M3EFab(
+        size: .regular,
         onPressed: () => uploadStory(context, ref),
         icon: const Icon(Symbols.upload_rounded),
       ),

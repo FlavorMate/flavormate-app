@@ -156,6 +156,7 @@ class _FRecipeGuidedDialog extends ConsumerState<FRecipeGuidedDialog> {
           scrollController: null,
           actions: [
             M3EIconButton(
+              variant: .standard,
               onPressed: showOptions,
               icon: const Icon(Symbols.more_vert_rounded),
             ),

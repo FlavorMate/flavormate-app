@@ -1,8 +1,8 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/icon_constants.dart';
-import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/constants/order_by_constants.dart';
+import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
@@ -65,6 +65,7 @@ class _AccountsItemRecipesPageState
         title: context.l10n.accounts_item_recipe_page__title,
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: handleFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),

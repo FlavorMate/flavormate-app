@@ -74,6 +74,7 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
           scrollController: _scrollController,
           actions: [
             M3EIconButton(
+              variant: .standard,
               icon: const Icon(Symbols.filter_alt_rounded),
               onPressed: handleFilterDialog,
             ),

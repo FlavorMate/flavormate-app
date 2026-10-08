@@ -96,6 +96,7 @@ class _RecipeEditorItemInstructionGroupsItemPageState
               getProgress: (group) => group.validPercent,
             ),
             M3EIconButton(
+              variant: .standard,
               onPressed: deleteIngredientGroup,
               icon: Icon(
                 Symbols.delete_rounded,

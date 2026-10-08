@@ -83,6 +83,7 @@ class _SettingsAppThemePageState extends ConsumerState<SettingsAppThemePage> {
             title: context.l10n.settings_app_theme_page__title,
           ),
           floatingActionButton: M3EFab(
+            size: .regular,
             onPressed: setTheme,
             icon: const Icon(Symbols.save_rounded),
           ),

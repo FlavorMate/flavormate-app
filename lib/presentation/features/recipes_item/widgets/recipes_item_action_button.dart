@@ -25,6 +25,7 @@ class RecipesItemActionButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return M3EMenu.entries(
       anchorBuilder: (_, open) => M3EIconButton(
+        variant: .standard,
         icon: const Icon(Symbols.more_vert_rounded),
         onPressed: open,
       ),
