@@ -5,8 +5,8 @@ on:
       - main
 
 env:
-  FLUTTER_VERSION: 3.47.2
-  RUBY_VERSION: 4.0.6
+  FLUTTER_VERSION: 3.47.6
+  RUBY_VERSION: 4.0.7
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
 
@@ -17,12 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # Using JDK 21 until https://github.com/flutter/flutter/issues/181383 is fixed
-      - name: Set up JDK 21
+      - name: Set up JDK 25
         uses: actions/setup-java@v6
         with:
-          java-version: "21"
-          distribution: "temurin"
+          java-version: "25"
+          distribution: "zulu"
           cache: "gradle"
 
       - name: Set Up Ruby

@@ -24,13 +24,17 @@ class FIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (label == null) {
-      return M3EIconButton(
-        variant: .filled,
-        icon: Icon(
-          icon,
-          color: FTextColor.filledButton.getThemeColor(context),
+      return SizedBox(
+        height: height,
+        width: height,
+        child: M3EIconButton(
+          variant: .filled,
+          icon: Icon(
+            icon,
+            color: FTextColor.filledButton.getThemeColor(context),
+          ),
+          onPressed: onPressed,
         ),
-        onPressed: onPressed,
       );
     } else {
       return SizedBox(

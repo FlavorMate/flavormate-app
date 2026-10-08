@@ -67,6 +67,7 @@ class _RecipePageState extends ConsumerState<RecipesItemPage> {
         actions: [
           if (data.isShareEnabled)
             M3EIconButton(
+              variant: .standard,
               onPressed: () => share(data.recipe),
               icon: const Icon(Symbols.share_rounded),
             ),

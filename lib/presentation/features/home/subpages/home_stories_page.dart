@@ -59,6 +59,7 @@ class _HomeStoriesPageState extends ConsumerState<HomeStoriesPage>
         title: context.l10n.home_stories_page__title,
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: handleFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),

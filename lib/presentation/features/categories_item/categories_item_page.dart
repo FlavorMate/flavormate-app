@@ -66,6 +66,7 @@ class _CategoriesItemPageState extends ConsumerState<CategoriesItemPage>
         title: category.value?.label ?? '',
         actions: [
           M3EIconButton(
+            variant: .standard,
             onPressed: handleFilterDialog,
             icon: const Icon(Symbols.filter_alt_rounded),
           ),

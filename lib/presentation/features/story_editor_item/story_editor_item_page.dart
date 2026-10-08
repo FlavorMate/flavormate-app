@@ -92,6 +92,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
         actions: [FSaveState(provider: widget.autosaveProvider)],
       ),
       floatingActionButtonBuilder: (_, data) => M3EFab(
+        size: .regular,
         onPressed: () => showPreview(context, data),
         icon: const Icon(Symbols.arrow_forward_rounded),
       ),
@@ -118,6 +119,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorItemPage> {
                         top: 8,
                         right: 8,
                         child: M3EIconButton(
+                          variant: .standard,
                           decoration: .new(
                             backgroundColor: .all(
                               context.colorScheme.primaryContainer,

@@ -57,8 +57,6 @@ class MainLayoutState extends State<MainLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final cardTheme = M3ETheme.of(context).listTheme.cardList;
-
     final destinations = buildDestinations(context);
 
     return Scaffold(
@@ -94,7 +92,7 @@ class MainLayoutState extends State<MainLayout> {
           ? null
           : M3ENavigationBar(
               selectedIndex: widget.navigationShell.currentIndex,
-              labelBehavior: .alwaysHide,
+              layout: .wide,
               destinations: [
                 for (var destination in destinations)
                   M3ENavigationBarDestination(

@@ -139,6 +139,7 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
                                           style: .titleLarge,
                                         ),
                                         M3EIconButton(
+                                          variant: .standard,
                                           onPressed: onDurationCard,
                                           icon: const Icon(
                                             Symbols.close_rounded,
@@ -167,6 +168,7 @@ class FRecipeGuidedMobileDialog extends StatelessWidget {
                                           style: .titleLarge,
                                         ),
                                         M3EIconButton(
+                                          variant: .standard,
                                           onPressed: onIngredientCard,
                                           icon: const Icon(
                                             Symbols.close_rounded,

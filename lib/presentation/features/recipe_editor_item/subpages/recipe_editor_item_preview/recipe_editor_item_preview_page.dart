@@ -58,6 +58,7 @@ class _RecipeEditorPreviewPageState
         title: context.l10n.recipe_editor_item_preview_page__title,
       ),
       floatingActionButtonBuilder: (_, _) => M3EFab(
+        size: .regular,
         onPressed: uploadRecipe,
         icon: const Icon(Symbols.upload_rounded),
       ),

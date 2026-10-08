@@ -54,6 +54,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage>
         scrollController: _scrollController,
       ),
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: () => createDraft(context),
         icon: const Icon(Symbols.add_rounded),
       ),
@@ -100,6 +101,7 @@ class _StoryEditorPageState extends ConsumerState<StoryEditorPage>
                 alignment: Alignment.center,
                 header: const SizedBox.shrink(),
                 cellBuilder: (context, item, rowIndex) => M3EIconButton(
+                  variant: .standard,
                   onPressed: () => deleteDraft(context, item.id),
                   icon: Icon(
                     Symbols.delete_rounded,

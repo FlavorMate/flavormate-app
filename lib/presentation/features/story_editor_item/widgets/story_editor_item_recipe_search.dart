@@ -54,11 +54,13 @@ class _RecipeSearchState extends ConsumerState<StoryEditorItemRecipeSearch> {
       ),
       viewHintText: context.l10n.story_editor_item_recipe_search__search_hint,
       viewLeading: M3EIconButton(
+        variant: .standard,
         onPressed: close,
         icon: const Icon(Symbols.arrow_back_rounded),
       ),
       viewTrailing: [
         M3EIconButton(
+          variant: .standard,
           onPressed: _reset,
           icon: const Icon(Symbols.close_rounded),
         ),

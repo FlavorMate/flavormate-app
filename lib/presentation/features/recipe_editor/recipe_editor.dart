@@ -54,6 +54,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
       ),
 
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: createDraft,
         icon: const Icon(Symbols.add_rounded),
       ),
@@ -101,6 +102,7 @@ class _RecipeEditorPageState extends ConsumerState<RecipeEditorPage>
                 alignment: Alignment.center,
                 header: const SizedBox.shrink(),
                 cellBuilder: (context, item, rowIndex) => M3EIconButton(
+                  variant: .standard,
                   onPressed: () => deleteDraft(item.id),
                   icon: Icon(
                     Symbols.delete_rounded,

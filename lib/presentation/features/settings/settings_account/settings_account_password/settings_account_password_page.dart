@@ -62,6 +62,7 @@ class _SettingsAccountPasswordPageState
         scrollController: _scrollController,
       ),
       floatingActionButton: M3EFab(
+        size: .regular,
         onPressed: updateValue,
         icon: const Icon(Symbols.save_rounded),
       ),

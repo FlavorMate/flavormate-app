@@ -22,6 +22,7 @@ class StoriesItemActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return M3EMenu.entries(
       anchorBuilder: (_, open) => M3EIconButton(
+        variant: .standard,
         icon: const Icon(Symbols.more_vert_rounded),
         onPressed: open,
       ),
