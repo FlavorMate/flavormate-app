@@ -109,23 +109,31 @@ class FRecipeRatings extends StatelessWidget {
                           mainAxisAlignment: .center,
                           children: [
                             for (double i = 1; i <= 5; i++)
-                              M3EIconButton(
-                                variant: .standard,
-                                icon: Icon(
-                                  Symbols.star_rounded,
-                                  fill: (data?.ownRating ?? 0) >= i ? 1 : 0,
+                              SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: M3EIconButton(
+                                  variant: .standard,
+                                  icon: Icon(
+                                    Symbols.star_rounded,
+                                    fill: (data?.ownRating ?? 0) >= i ? 1 : 0,
+                                  ),
+                                  onPressed: () => onRatingTap(i),
                                 ),
-                                onPressed: () => onRatingTap(i),
                               ),
                             if (data?.ownRating != null) ...[
                               const SizedBox(width: PADDING),
-                              M3EIconButton(
-                                variant: .standard,
-                                icon: Icon(
-                                  Symbols.delete_rounded,
-                                  color: context.blendedColors.error,
+                              SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: M3EIconButton(
+                                  variant: .standard,
+                                  icon: Icon(
+                                    Symbols.delete_rounded,
+                                    color: context.blendedColors.error,
+                                  ),
+                                  onPressed: () => onRatingTap(null),
                                 ),
-                                onPressed: () => onRatingTap(null),
                               ),
                             ],
                           ],
