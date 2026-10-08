@@ -72,7 +72,7 @@ dependencies:
   material_3_expressive: ^1.1.5
   dynamic_color: ^2.1.0
   material_symbols_icons: ^4.2960.0
-  material_ui: ^1.5.0
+  material_ui: ^1.6.0
 
 dev_dependencies:
   flutter_test:
