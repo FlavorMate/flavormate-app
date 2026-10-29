@@ -95,6 +95,7 @@ class FTileGroup extends StatelessWidget {
 
     return M3ECard(
       variant: .filled,
+      elevation: 0,
       color: disabled
           ? context.colorScheme.surfaceContainerHighest
           : backgroundColor ?? context.colorScheme.surfaceContainer,

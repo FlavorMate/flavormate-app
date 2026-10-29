@@ -74,6 +74,7 @@ class _FCarouselState<T> extends ConsumerState<FCarousel<T>> {
       return SizedBox(
         height: widget.height,
         child: M3ECard(
+          elevation: 0,
           variant: .outlined,
           child: Center(
             child: FText(widget.error!, style: .bodyMedium),

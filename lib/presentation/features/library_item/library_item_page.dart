@@ -154,8 +154,6 @@ class _LibraryItemPageState extends ConsumerState<LibraryItemPage>
                               title: item.label,
                               imageSelector: item.cover?.url,
                               onTap: () => context.routes.recipesItem(item.id),
-                              first: first,
-                              last: last,
                             ),
                       ),
 

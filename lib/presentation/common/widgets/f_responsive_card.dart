@@ -24,6 +24,7 @@ class FResponsiveCard extends StatelessWidget {
     if (showCard) {
       return M3ECard(
         variant: .filled,
+        elevation: 0,
         padding: const .all(PADDING * 1.5),
         color: context.colorScheme.surfaceContainer,
         child: child,

@@ -68,6 +68,7 @@ class FContentFullCard extends ConsumerWidget {
           return M3ECard(
             variant: .filled,
             borderRadius: borderRadius,
+            elevation: 0,
             padding: .zero,
             onPressed: onTap,
             child: Stack(
