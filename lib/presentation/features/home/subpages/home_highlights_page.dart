@@ -12,7 +12,7 @@ import 'package:flavormate/data/models/shared/enums/order_direction.dart';
 import 'package:flavormate/data/repositories/features/highlights/p_rest_highlights.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
+import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_grid.dart';
 import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -73,7 +73,7 @@ class _HomeHighlightsPageState extends ConsumerState<HomeHighlightsPage>
             controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
-                maxWidth: FBreakpoint.smValue,
+                maxWidth: FBreakpoint.mdValue,
                 padding: const .all(PADDING),
                 sliver: SliverMainAxisGroup(
                   slivers: [
@@ -86,14 +86,21 @@ class _HomeHighlightsPageState extends ConsumerState<HomeHighlightsPage>
 
                     const FSizedBoxSliver(height: PADDING),
 
-                    FLazySliverList(
+                    FLazySliverGrid(
                       key: orderKey,
                       provider: provider,
                       pageProvider: widget.pageProvider,
                       scrollController: _scrollController,
-
-                      itemBuilder: (item, index, first, last) =>
-                          FContentSideCard(
+                      rowHeight: 96,
+                      itemBuilder:
+                          (
+                            item, {
+                            required index,
+                            required topLeft,
+                            required topRight,
+                            required bottomLeft,
+                            required bottomRight,
+                          }) => FContentSideCard(
                             title: item.recipe.label,
                             subtitle: item.date.formatter.date.yyyyMMMMdd(
                               context,
@@ -101,8 +108,10 @@ class _HomeHighlightsPageState extends ConsumerState<HomeHighlightsPage>
                             imageSelector: item.cover?.url,
                             onTap: () =>
                                 context.routes.recipesItem(item.recipe.id),
-                            first: first,
-                            last: last,
+                            topLeft: topLeft,
+                            topRight: topRight,
+                            bottomLeft: bottomLeft,
+                            bottomRight: bottomRight,
                           ),
                     ),
                   ],

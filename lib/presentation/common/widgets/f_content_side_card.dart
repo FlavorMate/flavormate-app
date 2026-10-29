@@ -18,10 +18,10 @@ class FContentSideCard extends ConsumerWidget {
 
   final VoidCallback onTap;
 
-  final bool first;
-  final bool last;
-
-  bool get single => first && last;
+  final bool topLeft;
+  final bool topRight;
+  final bool bottomLeft;
+  final bool bottomRight;
 
   static const double _imageWidth = 128;
 
@@ -31,8 +31,10 @@ class FContentSideCard extends ConsumerWidget {
     this.subtitle,
     required this.imageSelector,
     required this.onTap,
-    this.first = false,
-    this.last = false,
+    this.topLeft = false,
+    this.topRight = false,
+    this.bottomLeft = false,
+    this.bottomRight = false,
   });
 
   @override
@@ -41,18 +43,17 @@ class FContentSideCard extends ConsumerWidget {
 
     final imageMode = ref.watch(pSettingsImageModeProvider);
 
-    final M3ECardPosition position = single
-        ? .single
-        : first
-        ? .first
-        : last
-        ? .last
-        : .middle;
-
-    final borderRadius = calculateCardRadius(
-      position: position,
-      outerRadius: theme.outerRadius,
-      innerRadius: theme.innerRadius,
+    final borderRadius = BorderRadius.only(
+      topLeft: Radius.circular(topLeft ? theme.outerRadius : theme.innerRadius),
+      topRight: Radius.circular(
+        topRight ? theme.outerRadius : theme.innerRadius,
+      ),
+      bottomLeft: Radius.circular(
+        bottomLeft ? theme.outerRadius : theme.innerRadius,
+      ),
+      bottomRight: Radius.circular(
+        bottomRight ? theme.outerRadius : theme.innerRadius,
+      ),
     );
 
     return LayoutBuilder(
@@ -67,6 +68,7 @@ class FContentSideCard extends ConsumerWidget {
         return SizedBox(
           height: 96,
           child: M3ECard(
+            elevation: 0,
             variant: .filled,
             borderRadius: borderRadius,
             color: context.colorScheme.surfaceContainer,
