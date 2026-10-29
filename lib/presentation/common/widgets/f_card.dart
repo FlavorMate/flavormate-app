@@ -23,6 +23,7 @@ class FCard extends StatelessWidget {
       color: color ?? context.colorScheme.surfaceContainer,
       variant: .filled,
       onPressed: onTap,
+      elevation: 0,
       padding: EdgeInsets.all(padding),
       child: SizedBox(
         width: double.infinity,
