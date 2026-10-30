@@ -102,7 +102,8 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
                 error: storyListenable.hasError
                     ? context.l10n.accounts_item_page__stories_on_error
                     : null,
-                onTap: (story) => context.routes.storiesItem(story.id),
+                onTap: (stories, index) =>
+                    context.routes.storiesItem(stories[index].id),
                 labelSelector: (story) => story.label,
                 coverSelector: (story, resolution) =>
                     story.cover?.url(resolution),
@@ -117,7 +118,8 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
                 error: bookListenable.hasError
                     ? context.l10n.accounts_item_page__books_on_error
                     : null,
-                onTap: (book) => context.routes.libraryItem(book.id),
+                onTap: (books, index) =>
+                    context.routes.libraryItem(books[index].id),
                 labelSelector: (book) => book.label,
                 coverSelector: (book, resolution) =>
                     book.cover?.url(resolution),
@@ -132,7 +134,8 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
                 error: recipeListenable.hasError
                     ? context.l10n.accounts_item_page__recipes_on_error
                     : null,
-                onTap: (recipe) => context.routes.recipesItem(recipe.id),
+                onTap: (recipes, index) =>
+                    context.routes.recipesItem(recipes[index].id),
                 labelSelector: (recipe) => recipe.label,
                 coverSelector: (recipe, resolution) =>
                     recipe.cover?.url(resolution),
@@ -153,7 +156,8 @@ class _AccountsItemPageState extends ConsumerState<AccountsItemPage> {
     AccountFileDto avatar,
   ) {
     return context.showFullscreenImage(
-      avatar.url(ImageResolution.Original),
+      urls: [avatar.url(ImageResolution.Original)],
+      index: 0,
     );
   }
 }

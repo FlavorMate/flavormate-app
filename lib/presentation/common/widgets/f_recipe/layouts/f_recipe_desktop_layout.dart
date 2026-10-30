@@ -91,8 +91,11 @@ class FRecipeDesktopLayout extends StatelessWidget {
                           data: recipe.files,
                           coverSelector: (image, resolution) =>
                               image.url(resolution),
-                          onTap: (s) => context.showFullscreenImage(
-                            s.url(ImageResolution.Original),
+                          onTap: (items, index) => context.showFullscreenImage(
+                            urls: items
+                                .map((it) => it.url(ImageResolution.Original))
+                                .toList(),
+                            index: index,
                           ),
                           onShowAll: showAllFiles,
                         ),
