@@ -228,7 +228,10 @@ class _AccountManagementPageState
         break;
       case .Avatar:
         if (account.avatar != null) {
-          context.showFullscreenImage(account.avatar!.url(.Original));
+          context.showFullscreenImage(
+            urls: [account.avatar!.url(.Original)],
+            index: 0,
+          );
         }
         break;
       case .AvatarChange:

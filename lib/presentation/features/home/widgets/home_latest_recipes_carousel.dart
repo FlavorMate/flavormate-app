@@ -32,7 +32,7 @@ class HomeLatestRecipesCarousel extends ConsumerWidget {
       error: listenable.hasError
           ? context.l10n.home_latest_recipe_carousel__on_error
           : null,
-      onTap: (recipe) => context.routes.recipesItem(recipe.id),
+      onTap: (recipes, index) => context.routes.recipesItem(recipes[index].id),
       coverSelector: (recipe, resolution) => recipe.cover?.url(resolution),
       labelSelector: (recipe) => recipe.label,
       subLabelSelector: (recipe) =>

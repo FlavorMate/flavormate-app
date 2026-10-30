@@ -3,7 +3,6 @@ import 'package:flavormate/core/constants/constants.dart';
 import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
-import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
 import 'package:flavormate/data/models/shared/enums/course.dart';
 import 'package:flavormate/data/models/shared/enums/diet.dart';
@@ -107,11 +106,7 @@ class _SuggestionPageState extends ConsumerState<SuggestionPage> {
 
                     FSliverGrid(
                       provider: provider,
-                      pageProvider: pPageableStateProvider(
-                        PageableState.unused.name,
-                      ),
-                      scrollController: _scrollController,
-                      rowHeight: 96,
+                      rowHeight: FContentSideCard.HEIGHT,
                       itemBuilder:
                           (
                             item, {

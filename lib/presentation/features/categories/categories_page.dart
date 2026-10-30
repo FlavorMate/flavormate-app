@@ -10,7 +10,7 @@ import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/categories/p_rest_categories.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
+import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_grid.dart';
 import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -78,7 +78,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
             controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
-                maxWidth: FBreakpoint.smValue,
+                maxWidth: FBreakpoint.mdValue,
                 padding: const .all(PADDING),
                 sliver: SliverMainAxisGroup(
                   slivers: [
@@ -90,16 +90,21 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
 
                     const FSizedBoxSliver(height: PADDING),
 
-                    FLazySliverList(
+                    FLazySliverGrid(
                       key: orderKey,
                       provider: provider,
                       pageProvider: widget.pageProvider,
                       scrollController: _scrollController,
-
-                      itemBuilder: (item, index, first, last) =>
-                          FContentFullCard(
-                            first: first,
-                            last: last,
+                      rowHeight: FContentFullCard.HEIGHT,
+                      itemBuilder:
+                          (
+                            item, {
+                            required index,
+                            required topLeft,
+                            required topRight,
+                            required bottomLeft,
+                            required bottomRight,
+                          }) => FContentFullCard(
                             title: item.label,
                             subtitle: context.l10n
                                 .categories_page__recipe_counter(
@@ -108,6 +113,10 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage>
                             blurRadius: 2,
                             imageSelector: item.cover?.url,
                             onTap: () => context.routes.categoriesItem(item.id),
+                            topLeft: topLeft,
+                            topRight: topRight,
+                            bottomLeft: bottomLeft,
+                            bottomRight: bottomRight,
                           ),
                     ),
                   ],

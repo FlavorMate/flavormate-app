@@ -105,7 +105,7 @@ class _TagsItemPageState extends ConsumerState<TagsItemPage>
                       provider: recipeProvider,
                       pageProvider: widget.pageProvider,
                       scrollController: _scrollController,
-                      rowHeight: 96,
+                      rowHeight: FContentSideCard.HEIGHT,
                       itemBuilder:
                           (
                             item, {

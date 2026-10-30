@@ -32,11 +32,14 @@ extension EBuildContext on BuildContext {
     String text,
   ) => showTextSnackBar(text, color: blendedColors.error);
 
-  Future<void> showFullscreenImage(String url) {
+  Future<void> showFullscreenImage({
+    required List<String> urls,
+    required int index,
+  }) {
     return showDialog(
       context: this,
       useSafeArea: false,
-      builder: (_) => FFullscreenImage(imageSrc: url),
+      builder: (_) => FFullscreenImage(urls: urls, index: index),
     );
   }
 

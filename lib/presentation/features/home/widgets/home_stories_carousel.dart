@@ -31,7 +31,7 @@ class HomeStoriesCarousel extends ConsumerWidget {
       error: listenable.hasError
           ? context.l10n.home_stories_carousel__on_error
           : null,
-      onTap: (story) => context.routes.storiesItem(story.id),
+      onTap: (stories, index) => context.routes.storiesItem(stories[index].id),
       coverSelector: (story, resolution) => story.cover?.url(resolution),
       labelSelector: (story) => story.label,
       onShowAll: () => context.routes.homeStories(),

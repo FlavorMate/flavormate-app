@@ -11,6 +11,9 @@ import 'package:material_3_expressive/material_3_expressive.dart';
 import 'package:material_ui/material_ui.dart';
 
 class FContentSideCard extends ConsumerWidget {
+  static const double HEIGHT = 96;
+  static const double _imageWidth = 128;
+
   final String title;
   final String? subtitle;
 
@@ -23,7 +26,7 @@ class FContentSideCard extends ConsumerWidget {
   final bool bottomLeft;
   final bool bottomRight;
 
-  static const double _imageWidth = 128;
+  final double height;
 
   const FContentSideCard({
     super.key,
@@ -31,6 +34,7 @@ class FContentSideCard extends ConsumerWidget {
     this.subtitle,
     required this.imageSelector,
     required this.onTap,
+    this.height = HEIGHT,
     this.topLeft = false,
     this.topRight = false,
     this.bottomLeft = false,
@@ -56,18 +60,18 @@ class FContentSideCard extends ConsumerWidget {
       ),
     );
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final resolution = UImage.getResolution(
-          ref,
-          context,
-          imageMode,
-          _imageWidth,
-        );
+    return SizedBox(
+      height: height,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final resolution = UImage.getResolution(
+            ref,
+            context,
+            imageMode,
+            _imageWidth,
+          );
 
-        return SizedBox(
-          height: 96,
-          child: M3ECard(
+          return M3ECard(
             elevation: 0,
             variant: .filled,
             borderRadius: borderRadius,
@@ -120,9 +124,9 @@ class FContentSideCard extends ConsumerWidget {
                 ),
               ],
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
