@@ -11,28 +11,33 @@ import 'package:material_3_expressive/material_3_expressive.dart';
 import 'package:material_ui/material_ui.dart';
 
 class FContentFullCard extends ConsumerWidget {
+  static const double HEIGHT = 96 - 16 + 4;
+
   final String title;
   final String? subtitle;
   final double blurRadius;
   final String? Function(ImageResolution)? imageSelector;
   final VoidCallback onTap;
-  final bool first;
-  final bool last;
 
-  bool get single => first && last;
+  final bool topLeft;
+  final bool topRight;
+  final bool bottomLeft;
+  final bool bottomRight;
 
   final double height;
 
   const FContentFullCard({
     super.key,
-    this.first = false,
-    this.last = false,
     required this.title,
     this.subtitle,
     this.blurRadius = 4,
     this.imageSelector,
     required this.onTap,
-    this.height = 96 - 16 + 4,
+    this.height = HEIGHT,
+    this.topLeft = false,
+    this.topRight = false,
+    this.bottomLeft = false,
+    this.bottomRight = false,
   });
 
   @override
@@ -40,18 +45,17 @@ class FContentFullCard extends ConsumerWidget {
     final theme = M3ETheme.of(context).listTheme.cardList;
     final imageMode = ref.watch(pSettingsImageModeProvider);
 
-    final M3ECardPosition position = single
-        ? .single
-        : first
-        ? .first
-        : last
-        ? .last
-        : .middle;
-
-    final borderRadius = calculateCardRadius(
-      position: position,
-      outerRadius: theme.outerRadius,
-      innerRadius: theme.innerRadius,
+    final borderRadius = BorderRadius.only(
+      topLeft: Radius.circular(topLeft ? theme.outerRadius : theme.innerRadius),
+      topRight: Radius.circular(
+        topRight ? theme.outerRadius : theme.innerRadius,
+      ),
+      bottomLeft: Radius.circular(
+        bottomLeft ? theme.outerRadius : theme.innerRadius,
+      ),
+      bottomRight: Radius.circular(
+        bottomRight ? theme.outerRadius : theme.innerRadius,
+      ),
     );
 
     return SizedBox(

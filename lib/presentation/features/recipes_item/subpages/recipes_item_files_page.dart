@@ -9,7 +9,7 @@ import 'package:flavormate/data/models/features/recipes/recipe_file_dto.dart';
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/repositories/features/recipes/p_rest_recipes_id_files.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
+import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_grid.dart';
 import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
@@ -70,7 +70,7 @@ class _RecipesItemFilesPageState extends ConsumerState<RecipesItemFilesPage> {
             controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
-                maxWidth: FBreakpoint.smValue,
+                maxWidth: FBreakpoint.mdValue,
                 padding: const .all(PADDING),
                 sliver: SliverMainAxisGroup(
                   slivers: [
@@ -83,19 +83,28 @@ class _RecipesItemFilesPageState extends ConsumerState<RecipesItemFilesPage> {
 
                     const FSizedBoxSliver(height: PADDING),
 
-                    FLazySliverList(
+                    FLazySliverGrid(
                       key: null,
                       provider: provider,
                       pageProvider: widget.pageProvider,
                       scrollController: _scrollController,
-                      itemBuilder: (item, index, first, last) {
-                        return FContentImageCard(
-                          imageSelector: item.url,
-                          onTap: () => openFile(item),
-                          first: first,
-                          last: last,
-                        );
-                      },
+                      rowHeight: FContentImageCard.HEIGHT,
+                      itemBuilder:
+                          (
+                            item, {
+                            required index,
+                            required topLeft,
+                            required topRight,
+                            required bottomLeft,
+                            required bottomRight,
+                          }) => FContentImageCard(
+                            imageSelector: item.url,
+                            onTap: () => openFile(item),
+                            topLeft: topLeft,
+                            topRight: topRight,
+                            bottomLeft: bottomLeft,
+                            bottomRight: bottomRight,
+                          ),
                     ),
                   ],
                 ),

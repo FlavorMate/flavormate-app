@@ -12,9 +12,9 @@ import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recip
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
 import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_grid.dart';
 import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_sliver_list.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -96,7 +96,7 @@ class _RecipeEditorItemFilesPageState
             controller: _scrollController,
             slivers: [
               FConstrainedBoxSliver(
-                maxWidth: FBreakpoint.smValue,
+                maxWidth: FBreakpoint.mdValue,
                 padding: const .all(PADDING),
                 sliver: SliverMainAxisGroup(
                   slivers: [
@@ -110,37 +110,48 @@ class _RecipeEditorItemFilesPageState
 
                     const FSizedBoxSliver(height: PADDING),
 
-                    FSliverList(
+                    FLazySliverGrid(
+                      key: null,
                       provider: provider,
                       pageProvider: widget.pageProvider,
-                      scrollController: _scrollController,
-                      itemBuilder: (item, index, first, last) {
-                        return FContentImageCard(
-                          key: ValueKey(item.id),
-                          first: first,
-                          last: last,
-                          imageSelector: item.url,
-                          onTap: () => context.showFullscreenImage(
-                            item.url(.Original),
-                          ),
-                          children: [
-                            Positioned(
-                              top: PADDING / 2,
-                              right: PADDING / 2,
-                              child: M3EIconButton(
-                                variant: .standard,
-                                decoration: .new(
-                                  backgroundColor: .all(
-                                    context.colorScheme.primaryContainer,
-                                  ),
-                                ),
-                                onPressed: () => deleteImage(item.id),
-                                icon: const Icon(Symbols.delete_rounded),
-                              ),
+                      rowHeight: FContentImageCard.HEIGHT,
+                      itemBuilder:
+                          (
+                            item, {
+                            required index,
+                            required topLeft,
+                            required topRight,
+                            required bottomLeft,
+                            required bottomRight,
+                          }) => FContentImageCard(
+                            key: ValueKey(item.id),
+                            topLeft: topLeft,
+                            topRight: topRight,
+                            bottomLeft: bottomLeft,
+                            bottomRight: bottomRight,
+                            imageSelector: item.url,
+                            onTap: () => context.showFullscreenImage(
+                              item.url(.Original),
                             ),
-                          ],
-                        );
-                      },
+                            children: [
+                              Positioned(
+                                top: PADDING / 2,
+                                right: PADDING / 2,
+                                child: M3EIconButton(
+                                  variant: .standard,
+                                  decoration: .new(
+                                    backgroundColor: .all(
+                                      context.colorScheme.primaryContainer,
+                                    ),
+                                  ),
+                                  onPressed: () => deleteImage(item.id),
+                                  icon: const Icon(Symbols.delete_rounded),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                      scrollController: _scrollController,
                     ),
                   ],
                 ),

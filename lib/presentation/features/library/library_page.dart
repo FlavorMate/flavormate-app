@@ -11,6 +11,7 @@ import 'package:flavormate/presentation/common/mixins/f_order_mixin.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_page_introduction_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_sized_box_sliver.dart';
+import 'package:flavormate/presentation/common/slivers/f_sliver_grid.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_full_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_text/f_text.dart';
@@ -75,7 +76,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
           controller: _scrollController,
           slivers: [
             FConstrainedBoxSliver(
-              maxWidth: FBreakpoint.smValue,
+              maxWidth: FBreakpoint.mdValue,
               padding: const .all(PADDING),
               sliver: SliverMainAxisGroup(
                 slivers: [
@@ -130,36 +131,41 @@ class _LibraryPageState extends ConsumerState<LibraryPage>
                         ),
                       )
                     else
-                      SliverList.separated(
-                        separatorBuilder: (_, _) =>
-                            const SizedBox(height: PADDING / 4),
-                        itemCount: books.value!.data.length,
-                        itemBuilder: (context, index) {
-                          final item = books.value!.data[index];
+                      FSliverGrid(
+                        provider: provider,
+                        rowHeight: FContentFullCard.HEIGHT,
+                        itemBuilder:
+                            (
+                              item, {
+                              required index,
+                              required topLeft,
+                              required topRight,
+                              required bottomLeft,
+                              required bottomRight,
+                            }) {
+                              final stateLabel = item.visible
+                                  ? context.l10n.library_page__book_public
+                                  : context.l10n.library_page__book_private;
 
-                          final first = index == 0;
-                          final last = index == books.value!.data.length - 1;
+                              final recipeCountLabel = context.l10n
+                                  .tags_page__recipe_counter(
+                                    item.recipeCount,
+                                  );
 
-                          final stateLabel = item.visible
-                              ? context.l10n.library_page__book_public
-                              : context.l10n.library_page__book_private;
+                              return FContentFullCard(
+                                title: item.label,
+                                subtitle: '$stateLabel   -   $recipeCountLabel',
 
-                          final recipeCountLabel = context.l10n
-                              .tags_page__recipe_counter(
-                                item.recipeCount,
+                                blurRadius: 2,
+                                imageSelector: item.cover?.url,
+                                onTap: () =>
+                                    context.routes.libraryItem(item.id),
+                                topLeft: topLeft,
+                                topRight: topRight,
+                                bottomLeft: bottomLeft,
+                                bottomRight: bottomRight,
                               );
-
-                          return FContentFullCard(
-                            first: first,
-                            last: last,
-                            title: item.label,
-                            subtitle: '$stateLabel   -   $recipeCountLabel',
-
-                            blurRadius: 2,
-                            imageSelector: item.cover?.url,
-                            onTap: () => context.routes.libraryItem(item.id),
-                          );
-                        },
+                            },
                       ),
                   ],
 

@@ -95,7 +95,7 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
                       provider: provider,
                       pageProvider: widget.pageProvider,
                       scrollController: _scrollController,
-                      rowHeight: 96,
+                      rowHeight: FContentSideCard.HEIGHT,
                       itemBuilder:
                           (
                             item, {
