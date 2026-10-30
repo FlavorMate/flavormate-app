@@ -142,12 +142,22 @@ class _FLazySliverGrid<T> extends ConsumerState<FLazySliverGrid<T>> {
               ),
               itemCount: _data.length,
               itemBuilder: (context, index) {
-                final single = _data.length == 1;
-                final topLeft = single || index == 0;
-                final topRight = single || index == crossAxisCount - 1;
-                final bottomLeft =
-                    single || index == _data.length - crossAxisCount - 1;
-                final bottomRight = single || index == _data.length - 1;
+                final effectiveCrossAxisCount = _data.length == 1
+                    ? 1
+                    : crossAxisCount;
+
+                final columnIndex = index % effectiveCrossAxisCount;
+                final isFirstRow = index < effectiveCrossAxisCount;
+                final hasItemBelow =
+                    index + effectiveCrossAxisCount < _data.length;
+                final hasItemToRight =
+                    columnIndex < effectiveCrossAxisCount - 1 &&
+                    index + 1 < _data.length;
+
+                final topLeft = index == 0;
+                final topRight = isFirstRow && !hasItemToRight;
+                final bottomLeft = !hasItemBelow && columnIndex == 0;
+                final bottomRight = !hasItemBelow && !hasItemToRight;
 
                 return widget.itemBuilder.call(
                   _data[index],
