@@ -138,7 +138,7 @@ class _FLazySliverGrid<T> extends ConsumerState<FLazySliverGrid<T>> {
                 crossAxisCount: _data.length == 1 ? 1 : crossAxisCount,
                 mainAxisExtent: widget.rowHeight,
                 mainAxisSpacing: theme.gap,
-                crossAxisSpacing: PADDING / 2,
+                crossAxisSpacing: theme.gap,
               ),
               itemCount: _data.length,
               itemBuilder: (context, index) {

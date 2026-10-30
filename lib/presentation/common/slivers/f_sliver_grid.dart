@@ -1,6 +1,5 @@
 import 'package:flavormate/core/constants/breakpoint_constants.dart';
 import 'package:flavormate/core/constants/constants.dart';
-import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/data/models/local/pageable_dto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_3_expressive/components/loading_indicator/m3e_loading_indicator.dart';
@@ -10,9 +9,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class FSliverGrid<T> extends ConsumerStatefulWidget {
   final $AsyncNotifierProvider<dynamic, PageableDto<T>> provider;
-  final PPageableStateProvider pageProvider;
-
-  final ScrollController scrollController;
 
   final double rowHeight;
 
@@ -29,8 +25,6 @@ class FSliverGrid<T> extends ConsumerStatefulWidget {
   const FSliverGrid({
     super.key,
     required this.provider,
-    required this.pageProvider,
-    required this.scrollController,
     required this.rowHeight,
     required this.itemBuilder,
   });
@@ -80,7 +74,7 @@ class _FSliverGrid<T> extends ConsumerState<FSliverGrid<T>> {
                 crossAxisCount: _data.length == 1 ? 1 : crossAxisCount,
                 mainAxisExtent: widget.rowHeight,
                 mainAxisSpacing: theme.gap,
-                crossAxisSpacing: PADDING / 2,
+                crossAxisSpacing: theme.gap,
               ),
               itemCount: _data.length,
               itemBuilder: (context, index) {
