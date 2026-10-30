@@ -4,15 +4,13 @@ import 'package:flavormate/core/constants/icon_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
-import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_file_dto.dart';
-import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id_files.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
 import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_grid.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
-import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
+import 'package:flavormate/presentation/common/widgets/f_states/f_provider_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -40,6 +38,13 @@ class _RecipeEditorItemPreviewFilesPageState
         pageProviderId: widget.pageKey,
       );
 
+  PRestRecipeDraftsIdFilesProvider get allProvider =>
+      pRestRecipeDraftsIdFilesProvider(
+        recipeDraftId: widget.draftId,
+        pageProviderId: widget.pageKey,
+        pageSize: -1,
+      );
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -54,8 +59,8 @@ class _RecipeEditorItemPreviewFilesPageState
         title: context.l10n.recipe_editor_item_preview_files_page__title,
       ),
       body: SafeArea(
-        child: FProviderState(
-          provider: provider,
+        child: FProviderBuilder(
+          provider: allProvider,
           onEmpty: FEmptyMessage(
             title: context.l10n.recipe_editor_item_preview_files_page__on_empty,
             icon: IconConstants.emptyIcon,
@@ -64,52 +69,55 @@ class _RecipeEditorItemPreviewFilesPageState
             title: context.l10n.recipe_editor_item_preview_files_page__on_error,
             icon: IconConstants.errorIcon,
           ),
-          child: CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              FConstrainedBoxSliver(
-                maxWidth: FBreakpoint.smValue,
-                padding: const .all(PADDING),
-                sliver: SliverMainAxisGroup(
-                  slivers: [
-                    FLazySliverGrid(
-                      key: null,
-                      provider: provider,
-                      pageProvider: widget.pageProvider,
-                      scrollController: _scrollController,
-                      rowHeight: FContentImageCard.HEIGHT,
-                      itemBuilder:
-                          (
-                            item, {
-                            required index,
-                            required topLeft,
-                            required topRight,
-                            required bottomLeft,
-                            required bottomRight,
-                          }) {
-                            return FContentImageCard(
-                              imageSelector: item.url,
-                              onTap: () => context.showFullscreenImage(
-                                item.url(.Original),
-                              ),
-                              topLeft: topLeft,
-                              topRight: topRight,
-                              bottomLeft: bottomLeft,
-                              bottomRight: bottomRight,
-                            );
-                          },
-                    ),
-                  ],
+          builder: (allFiles) {
+            final allUrls = allFiles.data
+                .map((it) => it.url(.Original))
+                .toList();
+
+            return CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                FConstrainedBoxSliver(
+                  maxWidth: FBreakpoint.mdValue,
+                  padding: const .all(PADDING),
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      FLazySliverGrid(
+                        key: null,
+                        provider: provider,
+                        pageProvider: widget.pageProvider,
+                        scrollController: _scrollController,
+                        rowHeight: FContentImageCard.HEIGHT,
+                        itemBuilder:
+                            (
+                              item, {
+                              required index,
+                              required topLeft,
+                              required topRight,
+                              required bottomLeft,
+                              required bottomRight,
+                            }) {
+                              return FContentImageCard(
+                                imageSelector: item.url,
+                                onTap: () => context.showFullscreenImage(
+                                  urls: allUrls,
+                                  index: index,
+                                ),
+                                topLeft: topLeft,
+                                topRight: topRight,
+                                bottomLeft: bottomLeft,
+                                bottomRight: bottomRight,
+                              );
+                            },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            );
+          },
         ),
       ),
     );
-  }
-
-  Future openFile(BuildContext context, RecipeDraftFileDto file) {
-    return context.showFullscreenImage(file.url(ImageResolution.Original));
   }
 }

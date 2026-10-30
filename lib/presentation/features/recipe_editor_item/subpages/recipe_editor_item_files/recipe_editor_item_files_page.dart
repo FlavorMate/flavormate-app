@@ -5,8 +5,6 @@ import 'package:flavormate/core/constants/shape_constants.dart';
 import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/riverpod/pageable_state/p_pageable_state.dart';
 import 'package:flavormate/core/riverpod/pageable_state/pageable_state.dart';
-import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_file_dto.dart';
-import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/models/shared/enums/order_by.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id_files.dart';
 import 'package:flavormate/presentation/common/dialogs/f_confirm_dialog.dart';
@@ -19,7 +17,7 @@ import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
 import 'package:flavormate/presentation/common/widgets/f_progress/f_progress.dart';
-import 'package:flavormate/presentation/common/widgets/f_states/f_provider_state.dart';
+import 'package:flavormate/presentation/common/widgets/f_states/f_provider_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -55,6 +53,15 @@ class _RecipeEditorItemFilesPageState
         orderDirection: orderDirection,
       );
 
+  PRestRecipeDraftsIdFilesProvider get allProvider =>
+      pRestRecipeDraftsIdFilesProvider(
+        pageProviderId: widget.pageProviderId,
+        recipeDraftId: widget.draftId,
+        orderBy: orderBy,
+        orderDirection: orderDirection,
+        pageSize: -1,
+      );
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -82,8 +89,8 @@ class _RecipeEditorItemFilesPageState
         icon: const Icon(Symbols.add_rounded),
       ),
       body: SafeArea(
-        child: FProviderState(
-          provider: provider,
+        child: FProviderBuilder(
+          provider: allProvider,
           onError: FEmptyMessage(
             title: context.l10n.recipe_editor_item_files_page__on_error,
             icon: IconConstants.errorIcon,
@@ -92,74 +99,80 @@ class _RecipeEditorItemFilesPageState
             title: context.l10n.recipe_editor_item_files_page__on_empty,
             icon: IconConstants.emptyIcon,
           ),
-          child: CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              FConstrainedBoxSliver(
-                maxWidth: FBreakpoint.mdValue,
-                padding: const .all(PADDING),
-                sliver: SliverMainAxisGroup(
-                  slivers: [
-                    FPageIntroductionSliver(
-                      shape: ShapeConstants.editor,
-                      icon: Symbols.photo_library_rounded,
-                      description: context
-                          .l10n
-                          .recipe_editor_item_files_page__description,
-                    ),
+          builder: (allFiles) {
+            final allUrls = allFiles.data
+                .map((it) => it.url(.Original))
+                .toList();
 
-                    const FSizedBoxSliver(height: PADDING),
+            return CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                FConstrainedBoxSliver(
+                  maxWidth: FBreakpoint.mdValue,
+                  padding: const .all(PADDING),
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      FPageIntroductionSliver(
+                        shape: ShapeConstants.editor,
+                        icon: Symbols.photo_library_rounded,
+                        description: context
+                            .l10n
+                            .recipe_editor_item_files_page__description,
+                      ),
 
-                    FLazySliverGrid(
-                      key: null,
-                      provider: provider,
-                      pageProvider: widget.pageProvider,
-                      rowHeight: FContentImageCard.HEIGHT,
-                      itemBuilder:
-                          (
-                            item, {
-                            required index,
-                            required topLeft,
-                            required topRight,
-                            required bottomLeft,
-                            required bottomRight,
-                          }) => FContentImageCard(
-                            key: ValueKey(item.id),
-                            topLeft: topLeft,
-                            topRight: topRight,
-                            bottomLeft: bottomLeft,
-                            bottomRight: bottomRight,
-                            imageSelector: item.url,
-                            onTap: () => context.showFullscreenImage(
-                              item.url(.Original),
-                            ),
-                            children: [
-                              Positioned(
-                                top: PADDING / 2,
-                                right: PADDING / 2,
-                                child: M3EIconButton(
-                                  variant: .standard,
-                                  decoration: .new(
-                                    backgroundColor: .all(
-                                      context.colorScheme.primaryContainer,
-                                    ),
-                                  ),
-                                  onPressed: () => deleteImage(item.id),
-                                  icon: const Icon(Symbols.delete_rounded),
-                                ),
+                      const FSizedBoxSliver(height: PADDING),
+
+                      FLazySliverGrid(
+                        key: null,
+                        provider: provider,
+                        pageProvider: widget.pageProvider,
+                        rowHeight: FContentImageCard.HEIGHT,
+                        itemBuilder:
+                            (
+                              item, {
+                              required index,
+                              required topLeft,
+                              required topRight,
+                              required bottomLeft,
+                              required bottomRight,
+                            }) => FContentImageCard(
+                              key: ValueKey(item.id),
+                              imageSelector: item.url,
+                              onTap: () => context.showFullscreenImage(
+                                urls: allUrls,
+                                index: index,
                               ),
-                            ],
-                          ),
-
-                      scrollController: _scrollController,
-                    ),
-                  ],
+                              topLeft: topLeft,
+                              topRight: topRight,
+                              bottomLeft: bottomLeft,
+                              bottomRight: bottomRight,
+                              children: [
+                                Positioned(
+                                  top: PADDING / 2,
+                                  right: PADDING / 2,
+                                  child: M3EIconButton(
+                                    variant: .standard,
+                                    decoration: .new(
+                                      backgroundColor: .all(
+                                        context.colorScheme.primaryContainer,
+                                      ),
+                                    ),
+                                    onPressed: () => deleteImage(item.id),
+                                    icon: const Icon(Symbols.delete_rounded),
+                                  ),
+                                ),
+                              ],
+                            ),
+                        scrollController: _scrollController,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const FSizedBoxSliver(height: PADDING),
-              const FSizedBoxSliver(height: kFabHeight),
-            ],
-          ),
+                const FSizedBoxSliver(height: PADDING),
+                const FSizedBoxSliver(height: kFabHeight),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -226,10 +239,6 @@ class _RecipeEditorItemFilesPageState
         context.l10n.recipe_editor_item_files_page__file_delete_on_success,
       );
     }
-  }
-
-  Future openFile(BuildContext context, RecipeDraftFileDto file) {
-    return context.showFullscreenImage(file.url(ImageResolution.Original));
   }
 
   @override

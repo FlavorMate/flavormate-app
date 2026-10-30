@@ -18,7 +18,7 @@ class FCarousel<T> extends ConsumerStatefulWidget {
   final String? title;
   final void Function() onShowAll;
   final List<T> data;
-  final void Function(T)? onTap;
+  final void Function(List<T>, int)? onTap;
   final String? Function(T, ImageResolution) coverSelector;
   final String Function(T)? labelSelector;
   final String Function(T)? subLabelSelector;
@@ -45,7 +45,7 @@ class FCarousel<T> extends ConsumerStatefulWidget {
     if (onTap == null) {
       return null;
     } else {
-      return (i) => onTap!(data.elementAt(i));
+      return (i) => onTap!(data, i);
     }
   }
 

@@ -32,7 +32,8 @@ class HomeHighlightsCarousel extends ConsumerWidget {
       error: listenable.hasError
           ? context.l10n.home_highlights_carousel__on_error
           : null,
-      onTap: (highlight) => context.routes.recipesItem(highlight.recipe.id),
+      onTap: (highlights, index) =>
+          context.routes.recipesItem(highlights[index].recipe.id),
       coverSelector: (highlight, resolution) =>
           highlight.cover?.url(resolution),
       labelSelector: (highlight) => highlight.recipe.label,
