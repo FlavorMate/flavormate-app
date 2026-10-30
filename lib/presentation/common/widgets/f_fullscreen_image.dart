@@ -1,5 +1,6 @@
 import 'package:flavormate/core/cache/provider/p_cached_image.dart';
 import 'package:flavormate/core/constants/constants.dart';
+import 'package:flavormate/core/extensions/e_build_context.dart';
 import 'package:flavormate/core/utils/u_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,12 +25,26 @@ class FFullscreenImage extends ConsumerStatefulWidget {
 }
 
 class _FFullscreenImageState extends ConsumerState<FFullscreenImage> {
+  static const Curve _scrollCurve = Curves.ease;
+  static const Duration _scrollDuration = Duration(milliseconds: 250);
+
   late final PageController _controller;
+
+  int _currentPage = 0;
 
   @override
   void initState() {
     _controller = PageController(initialPage: widget.index);
+    _currentPage = widget.index;
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -51,6 +66,7 @@ class _FFullscreenImageState extends ConsumerState<FFullscreenImage> {
                   final imageProvider = ref.watch(
                     pCachedImageProvider(imageSrc),
                   );
+
                   return PhotoViewGalleryPageOptions(
                     imageProvider: imageProvider,
                     initialScale: PhotoViewComputedScale.contained,
@@ -69,40 +85,39 @@ class _FFullscreenImageState extends ConsumerState<FFullscreenImage> {
               ),
               Positioned(
                 bottom: PADDING,
-                child: SizedBox(
-                  width: MediaQuery.sizeOf(context).width,
-                  child: Row(
-                    mainAxisAlignment: .center,
-                    children: [
-                      M3EButtonGroup(
-                        type: .connected,
-                        onSelectedIndexChanged: (index) {
-                          switch (index) {
-                            case 0:
-                              _controller.previousPage(
-                                duration: const Duration(milliseconds: 250),
-                                curve: Curves.ease,
-                              );
-                              return;
-                            case 1:
-                              _controller.nextPage(
-                                duration: const Duration(milliseconds: 250),
-                                curve: Curves.ease,
-                              );
-                              return;
-                          }
-                        },
-                        actions: const [
-                          M3EButtonGroupAction(
-                            icon: Icon(Symbols.arrow_back_rounded),
+                left: 0,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: .center,
+                  children: [
+                    M3EButtonGroup(
+                      type: .connected,
+                      onSelectedIndexChanged: (index) {
+                        switch (index) {
+                          case 0:
+                            previousPage();
+                            return;
+                          case 1:
+                            nextPage();
+                            return;
+                        }
+                      },
+                      actions: [
+                        M3EButtonGroupAction(
+                          decoration: getDecoration(_currentPage > 0),
+                          enabled: _currentPage > 0,
+                          icon: const Icon(Symbols.arrow_back_rounded),
+                        ),
+                        M3EButtonGroupAction(
+                          decoration: getDecoration(
+                            _currentPage < widget.urls.length - 1,
                           ),
-                          M3EButtonGroupAction(
-                            icon: Icon(Symbols.arrow_forward_rounded),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          enabled: _currentPage < widget.urls.length - 1,
+                          icon: const Icon(Symbols.arrow_forward_rounded),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -110,5 +125,42 @@ class _FFullscreenImageState extends ConsumerState<FFullscreenImage> {
         ),
       ),
     );
+  }
+
+  M3EButtonDecoration getDecoration(bool enabled) {
+    return M3EButtonDecoration(
+      backgroundColor: .all(
+        enabled
+            ? context.colorScheme.primaryContainer
+            : Color.lerp(
+                context.colorScheme.primaryContainer,
+                Colors.grey,
+                0.75,
+              ),
+      ),
+      foregroundColor: .all(
+        enabled
+            ? context.colorScheme.onPrimaryContainer
+            : Color.lerp(
+                context.colorScheme.onPrimaryContainer,
+                Colors.grey,
+                0.25,
+              ),
+      ),
+    );
+  }
+
+  void previousPage() {
+    if (_currentPage > 0) {
+      setState(() => _currentPage--);
+      _controller.previousPage(duration: _scrollDuration, curve: _scrollCurve);
+    }
+  }
+
+  void nextPage() {
+    if (_currentPage < widget.urls.length - 1) {
+      setState(() => _currentPage++);
+      _controller.nextPage(duration: _scrollDuration, curve: _scrollCurve);
+    }
   }
 }
