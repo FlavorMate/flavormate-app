@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 6.3.2+141
+version: 6.3.3+142
 
 environment:
   sdk: ">=3.13.7 <4.0.0"
@@ -44,7 +44,7 @@ dependencies:
   flutter_secure_storage: ^11.2.0
   flutter_svg: ^2.3.2
   flutter_riverpod: ^3.4.3
-  go_router: ^18.1.1
+  go_router: ^18.1.2
   http: ^1.6.0
   image_picker: ^1.2.4
   intl: ^0.20.3
@@ -60,7 +60,7 @@ dependencies:
   two_dimensional_scrollables: ^0.5.5
   url_launcher: ^6.3.3
   uuid: ^4.6.0
-  vector_graphics: ^1.2.4
+  vector_graphics: ^1.2.5
   # no strict version because these depend on the SDK version:
   flutter_localizations:
     sdk: flutter
@@ -68,11 +68,11 @@ dependencies:
   wakelock_plus: ^1.8.2
   file_selector: ^1.1.0
   file_picker: ^13.3.0
-  websocket_universal: ^1.3.0
+  websocket_universal: ^1.4.0
   material_3_expressive: ^1.2.0
   dynamic_color: ^2.1.0
   material_symbols_icons: ^4.2960.0
-  material_ui: ^1.8.0
+  material_ui: ^1.9.0
 
 dev_dependencies:
   flutter_test:
