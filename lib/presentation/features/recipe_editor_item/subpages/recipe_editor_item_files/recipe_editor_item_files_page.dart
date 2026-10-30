@@ -122,48 +122,48 @@ class _RecipeEditorItemFilesPageState
 
                       const FSizedBoxSliver(height: PADDING),
 
-              FLazySliverGrid(
-                  key: null,
-                  provider: provider,
-                  pageProvider: widget.pageProvider,
-                  rowHeight: FContentImageCard.HEIGHT,
-                  itemBuilder:
-                  (
-                  item, {
-                    required index,
-                    required topLeft,
-                    required topRight,
-                    required bottomLeft,
-                    required bottomRight,
-                  })  => FContentImageCard(
-                            key: ValueKey(item.id),
-                            imageSelector: item.url,
-                            onTap: () => context.showFullscreenImage(
-                              urls: allUrls,
-                              index: index,
-                            ),
-                    topLeft: topLeft,
-                    topRight: topRight,
-                    bottomLeft: bottomLeft,
-                    bottomRight: bottomRight,
-                            children: [
-                              Positioned(
-                                top: PADDING / 2,
-                                right: PADDING / 2,
-                                child: M3EIconButton(
-                                  variant: .standard,
-                                  decoration: .new(
-                                    backgroundColor: .all(
-                                      context.colorScheme.primaryContainer,
-                                    ),
-                                  ),
-                                  onPressed: () => deleteImage(item.id),
-                                  icon: const Icon(Symbols.delete_rounded),
-                                ),
+                      FLazySliverGrid(
+                        key: null,
+                        provider: provider,
+                        pageProvider: widget.pageProvider,
+                        rowHeight: FContentImageCard.HEIGHT,
+                        itemBuilder:
+                            (
+                              item, {
+                              required index,
+                              required topLeft,
+                              required topRight,
+                              required bottomLeft,
+                              required bottomRight,
+                            }) => FContentImageCard(
+                              key: ValueKey(item.id),
+                              imageSelector: item.url,
+                              onTap: () => context.showFullscreenImage(
+                                urls: allUrls,
+                                index: index,
                               ),
-                            ],
-                          ), scrollController: _scrollController
-                        ,
+                              topLeft: topLeft,
+                              topRight: topRight,
+                              bottomLeft: bottomLeft,
+                              bottomRight: bottomRight,
+                              children: [
+                                Positioned(
+                                  top: PADDING / 2,
+                                  right: PADDING / 2,
+                                  child: M3EIconButton(
+                                    variant: .standard,
+                                    decoration: .new(
+                                      backgroundColor: .all(
+                                        context.colorScheme.primaryContainer,
+                                      ),
+                                    ),
+                                    onPressed: () => deleteImage(item.id),
+                                    icon: const Icon(Symbols.delete_rounded),
+                                  ),
+                                ),
+                              ],
+                            ),
+                        scrollController: _scrollController,
                       ),
                     ],
                   ),

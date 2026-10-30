@@ -78,7 +78,7 @@ class _RecipeEditorItemPreviewFilesPageState
               controller: _scrollController,
               slivers: [
                 FConstrainedBoxSliver(
-                  maxWidth: FBreakpoint.smValue,
+                  maxWidth: FBreakpoint.mdValue,
                   padding: const .all(PADDING),
                   sliver: SliverMainAxisGroup(
                     slivers: [
@@ -90,25 +90,25 @@ class _RecipeEditorItemPreviewFilesPageState
                         rowHeight: FContentImageCard.HEIGHT,
                         itemBuilder:
                             (
-                            item, {
-                          required index,
-                          required topLeft,
-                          required topRight,
-                          required bottomLeft,
-                          required bottomRight,
-                        }) {
-                          return FContentImageCard(
-                            imageSelector: item.url,
-                            onTap: () => context.showFullscreenImage(
-                              urls: allUrls,
-                              index: index,
-                            ),
-                            topLeft: topLeft,
-                            topRight: topRight,
-                            bottomLeft: bottomLeft,
-                            bottomRight: bottomRight,
-                          );
-                        },
+                              item, {
+                              required index,
+                              required topLeft,
+                              required topRight,
+                              required bottomLeft,
+                              required bottomRight,
+                            }) {
+                              return FContentImageCard(
+                                imageSelector: item.url,
+                                onTap: () => context.showFullscreenImage(
+                                  urls: allUrls,
+                                  index: index,
+                                ),
+                                topLeft: topLeft,
+                                topRight: topRight,
+                                bottomLeft: bottomLeft,
+                                bottomRight: bottomRight,
+                              );
+                            },
                       ),
                     ],
                   ),

@@ -90,39 +90,40 @@ class _RecipesItemFilesPageState extends ConsumerState<RecipesItemFilesPage> {
                             context.l10n.recipes_item_files_page__description,
                       ),
 
-                    const FSizedBoxSliver(height: PADDING),
+                      const FSizedBoxSliver(height: PADDING),
 
-FLazySliverGrid(
-key: null,
-provider: provider,
-pageProvider: widget.pageProvider,
-scrollController: _scrollController,
-rowHeight: FContentImageCard.HEIGHT,
-itemBuilder:
-(
-item, {
-required index,
-required topLeft,
-required topRight,
-required bottomLeft,
-required bottomRight,
-}) {
-                        return FContentImageCard(
-                          imageSelector: item.url,
-onTap: () => openFile(allUrls, index),
-topLeft: topLeft,
-topRight: topRight,
-bottomLeft: bottomLeft,
-bottomRight: bottomRight,
-                        );
-                      },
-                    ),
-                  ],
+                      FLazySliverGrid(
+                        key: null,
+                        provider: provider,
+                        pageProvider: widget.pageProvider,
+                        scrollController: _scrollController,
+                        rowHeight: FContentImageCard.HEIGHT,
+                        itemBuilder:
+                            (
+                              item, {
+                              required index,
+                              required topLeft,
+                              required topRight,
+                              required bottomLeft,
+                              required bottomRight,
+                            }) {
+                              return FContentImageCard(
+                                imageSelector: item.url,
+                                onTap: () => openFile(allUrls, index),
+                                topLeft: topLeft,
+                                topRight: topRight,
+                                bottomLeft: bottomLeft,
+                                bottomRight: bottomRight,
+                              );
+                            },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          );}
-
+              ],
+            );
+          },
+        ),
       ),
     );
   }
