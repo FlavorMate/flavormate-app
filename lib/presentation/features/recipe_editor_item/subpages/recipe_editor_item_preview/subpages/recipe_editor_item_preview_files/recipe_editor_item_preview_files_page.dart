@@ -8,7 +8,7 @@ import 'package:flavormate/data/models/features/recipe_draft/recipe_draft_file_d
 import 'package:flavormate/data/models/shared/enums/image_resolution.dart';
 import 'package:flavormate/data/repositories/features/recipe_drafts/p_rest_recipe_drafts_id_files.dart';
 import 'package:flavormate/presentation/common/slivers/f_constrained_box_sliver.dart';
-import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_list.dart';
+import 'package:flavormate/presentation/common/slivers/f_lazy_sliver_grid.dart';
 import 'package:flavormate/presentation/common/widgets/f_app_bar.dart';
 import 'package:flavormate/presentation/common/widgets/f_content_image_card.dart';
 import 'package:flavormate/presentation/common/widgets/f_empty_message.dart';
@@ -72,48 +72,33 @@ class _RecipeEditorItemPreviewFilesPageState
                 padding: const .all(PADDING),
                 sliver: SliverMainAxisGroup(
                   slivers: [
-                    FLazySliverList(
+                    FLazySliverGrid(
                       key: null,
                       provider: provider,
                       pageProvider: widget.pageProvider,
                       scrollController: _scrollController,
-                      itemBuilder: (item, index, first, last) {
-                        return FContentImageCard(
-                          first: first,
-                          last: last,
-                          imageSelector: item.url,
-                          onTap: () =>
-                              context.showFullscreenImage(item.url(.Original)),
-                        );
-                      },
+                      rowHeight: FContentImageCard.HEIGHT,
+                      itemBuilder:
+                          (
+                            item, {
+                            required index,
+                            required topLeft,
+                            required topRight,
+                            required bottomLeft,
+                            required bottomRight,
+                          }) {
+                            return FContentImageCard(
+                              imageSelector: item.url,
+                              onTap: () => context.showFullscreenImage(
+                                item.url(.Original),
+                              ),
+                              topLeft: topLeft,
+                              topRight: topRight,
+                              bottomLeft: bottomLeft,
+                              bottomRight: bottomRight,
+                            );
+                          },
                     ),
-                    // FPageable(
-                    //   provider: provider,
-                    //   pageProvider: widget.pageProvider,
-                    //   builder: (_, data) => FWrap(
-                    //     children: [
-                    //       for (final image in data)
-                    //         FImageCard.maximized(
-                    //           coverSelector: (resolution) =>
-                    //               image.url(resolution),
-                    //           width: 400,
-                    //           onTap: () => openFile(context, image),
-                    //         ),
-                    //     ],
-                    //   ),
-                    //   onEmpty: FEmptyMessage(
-                    //     title: context
-                    //         .l10n
-                    //         .recipe_editor_item_preview_files_page__on_empty,
-                    //     icon: StateIconConstants.emptyIcon,
-                    //   ),
-                    //   onError: FEmptyMessage(
-                    //     title: context
-                    //         .l10n
-                    //         .recipe_editor_item_preview_files_page__on_error,
-                    //     icon: StateIconConstants.errorIcon,
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
