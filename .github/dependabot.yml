@@ -15,19 +15,6 @@ updates:
     schedule:
       interval: "weekly"
 
-  - package-ecosystem: "bundler"
-    directories:
-      - "/android/"
-      - "/ios/"
-      - "/macos/"
-    groups:
-      all:
-        patterns:
-          - "*"
-    target-branch: "dev"
-    schedule:
-      interval: "weekly"
-
   - package-ecosystem: "pub"
     directory: "/"
     groups:
