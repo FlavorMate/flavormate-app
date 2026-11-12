@@ -38,6 +38,12 @@ class _FFullscreenImageState extends ConsumerState<FFullscreenImage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
     _controller = PageController(initialPage: widget.index);
+    _controller.addListener(() {
+      final num page = _controller.page ?? _controller.initialPage;
+
+      setState(() => _currentPage = page.round());
+    });
+
     _currentPage = widget.index;
 
     super.initState();
@@ -74,6 +80,8 @@ class _FFullscreenImageState extends ConsumerState<FFullscreenImage> {
                 return PhotoViewGalleryPageOptions(
                   imageProvider: imageProvider,
                   initialScale: PhotoViewComputedScale.contained,
+                  minScale: PhotoViewComputedScale.contained,
+                  maxScale: 5.0,
                   heroAttributes: PhotoViewHeroAttributes(tag: imageSrc),
                 );
               },
