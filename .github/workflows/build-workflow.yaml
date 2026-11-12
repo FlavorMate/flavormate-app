@@ -4,7 +4,7 @@ on:
     tags: [ v* ]
 
 env:
-  FLUTTER_VERSION: 3.47.9
+  FLUTTER_VERSION: 3.50.0
   RUBY_VERSION: 4.0.9
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/flavormate-webapp
@@ -249,7 +249,7 @@ jobs:
         run: dart run build_runner build -d
 
       - name: Build Web
-        run: flutter build web --wasm --release
+        run: flutter build web --wasm --release --web-content-hash --no-deprecated-js-interop
 
       - name: Prepare web archive
         run: |
@@ -353,7 +353,7 @@ jobs:
           get-content build_assets/windows/setup_builder.iss.tmpl | %{$_ -replace "APP_VERSION","$version"}  | set-content build_assets/windows/setup_builder.iss
 
       - name: Compile .ISS to .EXE Installer
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.9
+        uses: Minionguyjpro/Inno-Setup-Action@v1.3.0
         with:
           path: build_assets/windows/setup_builder.iss
           options: /O+
