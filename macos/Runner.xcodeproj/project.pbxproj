@@ -28,6 +28,7 @@
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
 		78A318202AECB46A00862997 /* FlutterGeneratedPluginSwiftPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 78A3181F2AECB46A00862997 /* FlutterGeneratedPluginSwiftPackage */; };
+		F11CBBF930AA0A6D0058D2E8 /* Autumn2026Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F11CBBF830AA0A6D0058D2E8 /* Autumn2026Icon.icon */; };
 		F14686F22C6FAF13005E92ED /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F14686F12C6FAF13005E92ED /* InfoPlist.xcstrings */; };
 		F1A519FC2F1423BD0017017A /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1A519FA2F1423BD0017017A /* AppIcon.icon */; };
 		F1A519FD2F1423BD0017017A /* Winter2025Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F1A519FB2F1423BD0017017A /* Winter2025Icon.icon */; };
@@ -85,6 +86,7 @@
 		78E0A7A72DC9AD7400C4905E /* FlutterGeneratedPluginSwiftPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FlutterGeneratedPluginSwiftPackage; path = ephemeral/Packages/FlutterGeneratedPluginSwiftPackage; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		F11CBBF830AA0A6D0058D2E8 /* Autumn2026Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Autumn2026Icon.icon; sourceTree = "<group>"; };
 		F14686F12C6FAF13005E92ED /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		F18586BC2C6D1373008FB24E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F1A519FA2F1423BD0017017A /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
@@ -139,7 +141,6 @@
 				33FAB671232836740065AC1E /* Runner */,
 				331C80D6294CF71000263BE5 /* RunnerTests */,
 				33CC10EE2044A3C60003C045 /* Products */,
-				EECF3BADA5D520B94C124501 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,15 +189,9 @@
 				F1A519FB2F1423BD0017017A /* Winter2025Icon.icon */,
 				F1DA45623038AFA5001606EA /* Summer2026Icon.icon */,
 				F1DA45643038AFAD001606EA /* Spring2026Icon.icon */,
+				F11CBBF830AA0A6D0058D2E8 /* Autumn2026Icon.icon */,
 			);
 			path = Runner;
-			sourceTree = "<group>";
-		};
-		EECF3BADA5D520B94C124501 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +311,7 @@
 				F1A519FC2F1423BD0017017A /* AppIcon.icon in Resources */,
 				F1A519FD2F1423BD0017017A /* Winter2025Icon.icon in Resources */,
 				F14686F22C6FAF13005E92ED /* InfoPlist.xcstrings in Resources */,
+				F11CBBF930AA0A6D0058D2E8 /* Autumn2026Icon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

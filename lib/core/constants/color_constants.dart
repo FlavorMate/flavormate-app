@@ -28,13 +28,15 @@ enum MiscColor implements CustomColor {
 enum EventColor implements CustomColor {
   christmas2025,
   spring2026,
-  summer2026;
+  summer2026,
+  autumn2026;
 
   @override
   String l10n(BuildContext context) => switch (this) {
     .christmas2025 => context.l10n.color__event__winter_2025,
     .spring2026 => context.l10n.color__event__spring_2026,
     .summer2026 => context.l10n.color__event__summer_2026,
+    .autumn2026 => context.l10n.color__event__autumn_2026,
   };
 
   @override
@@ -42,6 +44,7 @@ enum EventColor implements CustomColor {
     .christmas2025 => const Color(0xFFD6001C),
     .spring2026 => const Color(0xFF52B788),
     .summer2026 => const Color(0xFF4F7CFF),
+    .autumn2026 => const Color(0xFFE6B745),
   };
 }
 

@@ -107,6 +107,7 @@ flutter:
     - assets/app-icons/winter_2025.png
     - assets/app-icons/spring_2026.png
     - assets/app-icons/summer_2026.png
+    - assets/app-icons/autumn_2026.png
     # Licenses
     - assets/fonts/Google_Sans_Code/OFL.txt
     - assets/fonts/Google_Sans_Flex/OFL.txt

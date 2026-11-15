@@ -85,6 +85,13 @@ class SettingsAppAppIconPage extends StatelessWidget {
                         .settings_app_app_icon_page__icon_summer_2026,
                     onTap: () => setIcon(context, .summer2026),
                   ),
+                  _buildTile(
+                    imagePath: Assets.appIcons.autumn2026.path,
+                    label: context
+                        .l10n
+                        .settings_app_app_icon_page__icon_autumn_2026,
+                    onTap: () => setIcon(context, .autumn2026),
+                  ),
                 ],
               ),
             ],

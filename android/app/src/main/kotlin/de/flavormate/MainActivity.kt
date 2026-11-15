@@ -9,7 +9,7 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
 
-    val aliases = listOf("AppIcon", "Winter2025Icon", "Spring2026Icon", "Summer2026Icon")
+    val aliases = listOf("AppIcon", "Winter2025Icon", "Spring2026Icon", "Summer2026Icon", "Autumn2026Icon")
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)

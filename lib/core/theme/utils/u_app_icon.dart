@@ -19,6 +19,7 @@ enum AppIcon {
   winter2025('Winter2025Icon'),
   spring2026('Spring2026Icon'),
   summer2026('Summer2026Icon'),
+  autumn2026('Autumn2026Icon'),
   ;
 
   final String value;
