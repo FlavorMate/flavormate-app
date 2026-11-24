@@ -237,10 +237,10 @@ packages:
     dependency: transitive
     description:
       name: cupertino_ui
-      sha256: "369e39a1c5c030a6212589c3da1809920b1c2cfade7b02aade7695bfa4b88c3a"
+      sha256: c3eaf7f5bdfee36deb0b14a4cbf7602f1b6b8d8b8576b81f38fc08c25881c94c
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.6"
+    version: "1.1.7"
   dart_mappable:
     dependency: "direct main"
     description:
@@ -253,10 +253,10 @@ packages:
     dependency: "direct dev"
     description:
       name: dart_mappable_builder
-      sha256: "30c48c842a616011c691af4993031b7ea7a9ff3230690af871a3bf803cc59a48"
+      sha256: cc71352e6dbdf5c9a7b2d201f6c33624cb6baf0c3b052b4f776e5859d07c5d7a
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.0"
+    version: "4.10.1"
   dart_style:
     dependency: transitive
     description:
@@ -607,10 +607,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: bce4a000275c0d0ac42f3fdcf0a6162fb95ac30983ba7ee6cffcf60f6ad33611
+      sha256: "4565a66f0a968f2e1ab4197854686990258aadab9572eb80a7655053a01dc302"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.4"
+    version: "2.5.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -905,10 +905,10 @@ packages:
     dependency: "direct main"
     description:
       name: material_3_expressive
-      sha256: "34241ba9930dd3e6d401f8e0062c62281a0538562575a7d2b9318303fed460e5"
+      sha256: "9df0b005c204362849309c34ca5d612bb3a22eedc7642249047aee37d0534ce9"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.3"
   material_color_utilities:
     dependency: transitive
     description:
@@ -937,10 +937,10 @@ packages:
     dependency: "direct main"
     description:
       name: material_ui
-      sha256: "474c135fd46b56ff1d35ca982155e8863d28fbc6464d1192acf4ee53a738680e"
+      sha256: a6b19012df437a356cbc01f8ea22a105e07194c47c9a6009da0032a0ce35c4ab
       url: "https://pub.dev"
     source: hosted
-    version: "1.11.0"
+    version: "1.11.1"
   meta:
     dependency: transitive
     description:
